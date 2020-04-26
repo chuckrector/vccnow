@@ -69,7 +69,7 @@ int lines = 1;
 char inevent = 0, iex = 0;
 const char *scripttoken;
 int funcidx;
-char numlabels = 0, numgotos = 0;
+int numlabels = 0, numgotos = 0;
 
 // ================================ Code =================================
 
@@ -117,8 +117,6 @@ TokenIs(const char *str)
 void
 ParseWhitespace()
 {
-  char c;
-
   // ParseWhitespace() does what you'd expect - sifts through any white
   // space and advances the file pointer accordingly. Additionally, it
   // handles // style comments as well as /* and */ comments.
@@ -284,7 +282,7 @@ GetIdentifier()
   // will need to be made afterward to see if it's a reserved word.
 
   i = 0;
-  while ((chr_table[*src] == LETTER) || (chr_table[*src] == DIGIT))
+  while ((chr_table[(int)*src] == LETTER) || (chr_table[(int)*src] == DIGIT))
   {
     token[i] = *src;
     src++;
@@ -305,7 +303,7 @@ GetNumber()
   // version is placed in token_nvalue.
 
   i = 0;
-  while (chr_table[*src] == DIGIT)
+  while (chr_table[(int)*src] == DIGIT)
   {
     token[i] = *src;
     src++;
@@ -517,15 +515,11 @@ GetString()
 void
 GetToken()
 {
-  int i;
-  char c;
-
   // simply reads in the next statement and places it in the
   // token buffer.
 
   ParseWhitespace();
-  i = 0;
-  switch (chr_table[*src])
+  switch (chr_table[(int)*src])
   {
     case LETTER:
     {
@@ -556,21 +550,23 @@ GetToken()
 char
 NextIs(const char *str)
 {
-  char *ptr, tt, tst, i;
+  char *ptr;
+  // char tt, tst;
+  char i;
   int olines, nv;
 
   ptr = src;
   olines = lines;
-  tt = token_type;
-  tst = token_subtype;
+  // tt = token_type;
+  // tst = token_subtype;
   nv = token_nvalue;
   memcpy(lasttoken, token, 2048);
   GetToken();
   src = ptr;
   lines = olines;
   token_nvalue = nv;
-  tst = token_subtype;
-  tt = token_type;
+  // tst = token_subtype; // TODO(chuck): Is this a bug? Intended to restore?
+  // tt = token_type;
   if (!strcmp(str, token))
   {
     i = 1;
@@ -990,7 +986,7 @@ ProcessVar2Assign()
 void
 ProcessIf()
 {
-  unsigned char numargs = 0, excl = 0, varidx;
+  unsigned char numargs = 0, excl = 0;
   char *returnptr, *buf;
 
   // The general opcode form of an IF is:
@@ -1216,7 +1212,7 @@ ProcessFor()
 void
 ProcessWhile()
 {
-  unsigned char numargs = 0, excl = 0, varidx;
+  unsigned char numargs = 0, excl = 0;
   char *buf, *start, *returnptr;
 
   // The WHILE statement is actually pretty easy to do. It basically has an IF
@@ -1547,10 +1543,6 @@ ResolveGotos()
 char
 Parse()
 {
-  char c;
-
-  // Eh.. Parse doesn't really do hardly anything. It's just the script loop.
-
   token[0] = 0;      // clear token-buffer
   ParseWhitespace(); // Sift through any whitespace.
   if (!*src)

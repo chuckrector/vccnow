@@ -20,10 +20,8 @@ int NumIdentifiers;
 void
 ParseWhiteSpaceBeta()
 {
-  char c;
-
-  if (chr_tablebeta[*DataPtr] == LETTER || chr_tablebeta[*DataPtr] == DIGIT ||
-      *DataPtr == '@')
+  if (chr_tablebeta[(int)*DataPtr] == LETTER ||
+      chr_tablebeta[(int)*DataPtr] == DIGIT || *DataPtr == '@')
   {
     return;
   }
@@ -104,8 +102,8 @@ GetIdentifierBeta()
 
   memset(tokenbeta, 0, 41);
   i = 0;
-  while ((chr_tablebeta[*DataPtr] == LETTER) ||
-         (chr_tablebeta[*DataPtr] == DIGIT))
+  while ((chr_tablebeta[(int)*DataPtr] == LETTER) ||
+         (chr_tablebeta[(int)*DataPtr] == DIGIT))
   {
     tokenbeta[i] = *DataPtr;
     DataPtr++;
@@ -126,8 +124,8 @@ GetIdentifierDelta()
 
   while (*DataPtr != '@' && *DataPtr != ',' && *DataPtr != ')')
   {
-    if ((chr_tablebeta[*DataPtr] == LETTER ||
-         chr_tablebeta[*DataPtr] == DIGIT) ||
+    if ((chr_tablebeta[(int)*DataPtr] == LETTER ||
+         chr_tablebeta[(int)*DataPtr] == DIGIT) ||
         FoundFirstChar == 1)
     {
       FoundFirstChar = 1;
@@ -206,10 +204,9 @@ FirstPass()
                          //#include text i nthe src file
   char tc[41];
   char tc2[512];
-  char gross[50];
   char *MagicNumber;
-  int x, z, i, bob;
-  int x2, z2;
+  int x, z, i;
+  int x2;
   char *IRemember;
   char SehrGut;
 
@@ -309,8 +306,9 @@ FirstPass()
                     DataPtr++;
                     ParseWhiteSpaceBeta();
                     x = 0;
-                    while (chr_tablebeta[*DataPtr] == LETTER ||
-                           chr_tablebeta[*DataPtr] == DIGIT || *DataPtr == '.')
+                    while (chr_tablebeta[(int)*DataPtr] == LETTER ||
+                           chr_tablebeta[(int)*DataPtr] == DIGIT ||
+                           *DataPtr == '.')
                     {
                       IncludeString[x] = *DataPtr;
                       x++;
@@ -382,8 +380,8 @@ FirstPass()
   {
     IRemember = DataPtr;
     z = 0;
-    while (chr_tablebeta[*DataPtr] == LETTER ||
-           chr_tablebeta[*DataPtr] == DIGIT)
+    while (chr_tablebeta[(int)*DataPtr] == LETTER ||
+           chr_tablebeta[(int)*DataPtr] == DIGIT)
     {
       tc[z] = *DataPtr;
       z++;
@@ -409,8 +407,8 @@ FirstPass()
         i = 0;
         while (*TempPtr != 0)
         {
-          if (chr_tablebeta[*TempPtr] == LETTER ||
-              chr_tablebeta[*TempPtr] == DIGIT)
+          if (chr_tablebeta[(int)*TempPtr] == LETTER ||
+              chr_tablebeta[(int)*TempPtr] == DIGIT)
           {
             tc2[i] = *TempPtr;
             i++;
@@ -435,7 +433,6 @@ FirstPass()
           TempPtr++;
         }
         SehrGut = 1;
-        DataPtr;
       }
     }
     if (SehrGut == 0)

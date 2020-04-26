@@ -14,6 +14,7 @@
 // **********************************************************************
 
 #include "compile.h"
+#include "preproc.h"
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,10 +38,6 @@ char magic = 0;
 char *source; // ptr -> source file in memory.
 char chr_tablebeta[256];
 char tokenbeta[512];
-
-extern void FirstPass();
-extern void InitCompileSystem();
-extern void Compile();
 
 // ================================ Code =================================
 
@@ -69,7 +66,7 @@ PostStartupFiles()
 void
 PreStartupFiles()
 {
-  char i;
+  int i;
 
   // Open input and output files; make sure filenames are correct.
 
@@ -83,7 +80,7 @@ PreStartupFiles()
   {
     if (!quiet)
     {
-      printf("*error* Could not open input file. \n");
+      printf("*error* Could not open input file\n");
     }
     exit(-1);
   }
@@ -154,7 +151,7 @@ WriteOutput()
   int a;
 
   i = strlen(fname);
-  memcpy(strbuf, &fname, i);
+  memcpy(strbuf, fname, i);
   strcpy(strbuf + i, ".map");
 
   f = fopen(strbuf, "rb+");
@@ -186,7 +183,7 @@ WriteOutput()
 int
 main(int argc, char *argv[])
 {
-  char i;
+  int i;
 
   // Test the command line and set any necessary flags.
 
