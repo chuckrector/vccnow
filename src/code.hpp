@@ -1,5 +1,5 @@
-#ifndef CODE_H
-#define CODE_H
+#ifndef CODE_HPP
+#define CODE_HPP
 
 // Single-byte opcode descriptors
 
@@ -51,4 +51,4 @@
 #define MOD 5
 #define OP_END 255
 
-#endif // CODE_H
+#endif // CODE_HPP

@@ -1,0 +1,24 @@
+event {
+  if (1) vgadump();
+  vgadump();
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+05            .if
+01            .args
+0f 00 00 00   .else
+01            .literal
+  01 00 00 00
+  ff          .end (operand)
+01            .sign
+01 45
+01 45
+ff            .end (event)
+
+//
+
+event{if(1){vgadump();}vgadump();}

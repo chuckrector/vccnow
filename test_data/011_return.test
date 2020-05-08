@@ -1,0 +1,16 @@
+event {
+  return;
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+  ff .end (return)
+
+ff   .end (event)
+
+//
+
+event{return;}

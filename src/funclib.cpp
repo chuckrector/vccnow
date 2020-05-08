@@ -12,9 +12,9 @@
 // *                                                                    *
 // **********************************************************************
 
-#include "funclib.h"
-#include "code.h"
-#include "compile.h"
+#include "funclib.hpp"
+#include "code.hpp"
+#include "compile.hpp"
 
 /*  --  Added by Ric --
  * Added functions:
@@ -44,15 +44,15 @@
  *       PlayVAS("filename",speed);                    (04/May/98):NichG
  *       VCMagicImage(x, y, items.dat index, greyflag);(04/May/98)
  */
-#include "nichgvc.h"
-#include "ricvc.h"
+#include "nichgvc.hpp"
+#include "ricvc.hpp"
 
 /* -- -- */
 
 void
-GenericFunc(unsigned char idcode, int numargs)
+GenericFunc(u64 idcode, u64 numargs)
 {
-  char i;
+  u64 i;
 
   EmitC(EXEC);
   EmitC(idcode);
@@ -220,12 +220,14 @@ Prompt()
 void
 ChainEvent()
 {
-  char *ptr, *optr, varctr = 0;
+  u8 *ptr, *optr;
+  u64 varctr = 0;
 
   EmitC(EXEC);
   EmitC(23);
   Expect("(");
-  ptr = cpos;
+  CompileGuy_t *CG = &CompileGuy;
+  ptr = CG->GeneratedCodeLocation;
   EmitC(varctr);
   EmitOperand();
   while (!NextIs(")"))
@@ -234,10 +236,10 @@ ChainEvent()
     EmitOperand();
     varctr++;
   }
-  optr = cpos;
-  cpos = ptr;
+  optr = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = ptr;
   EmitC(varctr);
-  cpos = optr;
+  CG->GeneratedCodeLocation = optr;
   Expect(")");
   Expect(";");
 }
@@ -245,12 +247,14 @@ ChainEvent()
 void
 CallEvent()
 {
-  char *ptr, *optr, varctr = 0;
+  u8 *ptr, *optr;
+  u64 varctr = 0;
 
   EmitC(EXEC);
   EmitC(24);
   Expect("(");
-  ptr = cpos;
+  CompileGuy_t *CG = &CompileGuy;
+  ptr = CG->GeneratedCodeLocation;
   EmitC(varctr);
   EmitOperand();
   while (!NextIs(")"))
@@ -259,10 +263,10 @@ CallEvent()
     EmitOperand();
     varctr++;
   }
-  optr = cpos;
-  cpos = ptr;
+  optr = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = ptr;
   EmitC(varctr);
-  cpos = optr;
+  CG->GeneratedCodeLocation = optr;
   Expect(")");
   Expect(";");
 }
@@ -290,12 +294,14 @@ SText()
 void
 Shop()
 {
-  char *ptr, *optr, varctr = 1;
+  u8 *ptr, *optr;
+  u64 varctr = 1;
 
   EmitC(EXEC);
   EmitC(47);
   Expect("(");
-  ptr = cpos;
+  CompileGuy_t *CG = &CompileGuy;
+  ptr = CG->GeneratedCodeLocation;
   EmitC(varctr);
   EmitOperand();
   while (!NextIs(")"))
@@ -304,10 +310,10 @@ Shop()
     EmitOperand();
     varctr++;
   }
-  optr = cpos;
-  cpos = ptr;
+  optr = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = ptr;
   EmitC(varctr);
-  cpos = optr;
+  CG->GeneratedCodeLocation = optr;
   Expect(")");
   Expect(";");
 }
@@ -479,302 +485,108 @@ VCLoadRaw()
 }
 
 void
-OutputCode(int idx)
+OutputCode(u64 idx)
 {
   switch (idx)
   {
-    case 0:
-      MapSwitch();
-      break;
-    case 1:
-      GenericFunc(2, 3);
-      break;
-    case 2:
-      GenericFunc(3, 1);
-      break;
-    case 3:
-      GenericFunc(4, 1);
-      break;
-    case 4:
-      GenericFunc(5, 1);
-      break;
-    case 5:
-      Text();
-      break;
-    case 6:
-      GenericFunc(7, 4);
-      break;
-    case 7:
-      GenericFunc(8, 4);
-      break;
-    case 8:
-      GenericFunc(9, 0);
-      break;
-    case 9:
-      DoReturn();
-      break;
-    case 10:
-      PlayMusic();
-      break;
-    case 11:
-      GenericFunc(12, 0);
-      break;
-    case 12:
-      GenericFunc(13, 0);
-      break;
-    case 13:
-      GenericFunc(14, 3);
-      break;
-    case 14:
-      GenericFunc(15, 1);
-      break;
-    case 15:
-      GenericFunc(16, 1);
-      break;
-    case 16:
-      GenericFunc(17, 1);
-      break;
-    case 17:
-      Banner();
-      break;
-    case 18:
-      GenericFunc(19, 0);
-      break;
-    case 19:
-      GenericFunc(20, 0);
-      break;
-    case 20:
-      GenericFunc(21, 2);
-      break;
-    case 21:
-      Prompt();
-      break;
-    case 22:
-      ChainEvent();
-      break;
-    case 23:
-      CallEvent();
-      break;
-    case 24:
-      GenericFunc(25, 2);
-      break;
-    case 25:
-      GenericFunc(26, 3);
-      break;
-    case 26:
-      GenericFunc(27, 0);
-      break;
-    case 27:
-      GenericFunc(28, 0);
-      break;
-    case 28:
-      GenericFunc(29, 0);
-      break;
-    case 29:
-      GenericFunc(30, 1);
-      break;
-    case 30:
-      GenericFunc(31, 2);
-      break;
-    case 31:
-      GenericFunc(32, 0);
-      break;
-    case 32:
-      SText();
-      break;
-    case 33:
-      GenericFunc(34, 0);
-      break;
-    case 34:
-      GenericFunc(35, 0);
-      break;
-    case 35:
-      GenericFunc(36, 1);
-      break;
-    case 36:
-      GenericFunc(37, 2);
-      break;
-    case 37:
-      GenericFunc(38, 4);
-      break;
-    case 38:
-      GenericFunc(39, 1);
-      break;
-    case 39:
-      GenericFunc(40, 1);
-      break;
-    case 40:
-      GenericFunc(41, 1);
-      break;
-    case 41:
-      GenericFunc(42, 1);
-      break;
-    case 42:
-      GenericFunc(43, 3);
-      break;
-    case 43:
-      GenericFunc(44, 2);
-      break;
-    case 44:
-      GenericFunc(45, 2);
-      break;
-    case 45:
-      GenericFunc(46, 2);
-      break;
-    case 46:
-      Shop();
-      break;
-    case 47:
-      GenericFunc(48, 5);
-      break;
-    case 48:
-      ChangeCHR();
-      break;
-    case 49:
-      GenericFunc(50, 0);
-      break;
-    case 50:
-      VCPutPCX();
-      break;
-    case 51:
-      GenericFunc(52, 1);
-      break;
-    case 52:
-      GenericFunc(53, 1);
-      break;
-    case 53:
-      VCLoadPCX();
-      break;
-    case 54:
-      GenericFunc(55, 5);
-      break;
-    case 55:
-      PlayFLI();
-      break;
-    case 56:
-      GenericFunc(57, 0);
-      break;
-    case 57:
-      GenericFunc(58, 4);
-      break;
-    case 58:
-      VCText();
-      break;
-    case 59:
-      GenericFunc(60, 5);
-      break;
-    case 60:
-      GenericFunc(61, 0);
-      break;
-    case 61:
-      Quit();
-      break;
-    case 62:
-      VCCenterText();
-      break;
-    case 63:
-      GenericFunc(64, 0);
-      break;
-    case 64:
-      GenericFunc(65, 3);
-      break;
-    case 65:
-      GenericFunc(66, 0);
-      break;
-    case 66:
-      Sys_DisplayPCX();
-      break;
-    case 67:
-      GenericFunc(68, 0);
-      break;
-    case 68:
-      GenericFunc(69, 0);
-      break;
-    case 69:
-      NewGame();
-      break;
-    case 70:
-      GenericFunc(71, 0);
-      break;
-    case 71:
-      GenericFunc(72, 1);
-      break;
-    case 72:
-      PartyMove();
-      break;
-    case 73:
-      EntityMove();
-      break;
-    case 74:
-      GenericFunc(75, 0);
-      break;
-    case 75:
-      GenericFunc(76, 0);
-      break;
-    case 76:
-      GenericFunc(77, 2);
-      break;
-    case 77:
-      GenericFunc(78, 3);
-      break;
-    case 78:
-      VCLoadRaw();
-      break;
+    case 0: MapSwitch(); break;
+    case 1: GenericFunc(2, 3); break; // warp
+    case 2: GenericFunc(3, 1); break; // addcharacter
+    case 3: GenericFunc(4, 1); break; // soundeffect
+    case 4: GenericFunc(5, 1); break; // giveitem
+    case 5: Text(); break;
+    case 6: GenericFunc(7, 4); break; // alter F tile
+    case 7: GenericFunc(8, 4); break; // alter B tile
+    case 8: GenericFunc(9, 0); break; // fakebattle
+    case 9: DoReturn(); break;
+    case 10: PlayMusic(); break;
+    case 11: GenericFunc(12, 0); break; // stopmusic
+    case 12: GenericFunc(13, 0); break; // healall
+    case 13: GenericFunc(14, 3); break; // alterparallax
+    case 14: GenericFunc(15, 1); break; // fadein
+    case 15: GenericFunc(16, 1); break; // fadeout
+    case 16: GenericFunc(17, 1); break; // removecharacter
+    case 17: Banner(); break;
+    case 18: GenericFunc(19, 0); break; // enforceanimation
+    case 19: GenericFunc(20, 0); break; // waitkeyup
+    case 20: GenericFunc(21, 2); break; // destroyitem
+    case 21: Prompt(); break;
+    case 22: ChainEvent(); break;
+    case 23: CallEvent(); break;
+    case 24: GenericFunc(25, 2); break; // heal
+    case 25: GenericFunc(26, 3); break; // earthquake
+    case 26: GenericFunc(27, 0); break; // savemenu
+    case 27: GenericFunc(28, 0); break; // enablesave
+    case 28: GenericFunc(29, 0); break; // disablesave
+    case 29: GenericFunc(30, 1); break; // revivechar
+    case 30: GenericFunc(31, 2); break; // restoremp
+    case 31: GenericFunc(32, 0); break; // redraw
+    case 32: SText(); break;
+    case 33: GenericFunc(34, 0); break; // disablemenu
+    case 34: GenericFunc(35, 0); break; // enablemenu
+    case 35: GenericFunc(36, 1); break; // wait
+    case 36: GenericFunc(37, 2); break; // setface
+    case 37: GenericFunc(38, 4); break; // mappalettegradient
+    case 38: GenericFunc(39, 1); break; // boxfadeout
+    case 39: GenericFunc(40, 1); break; // boxfadein
+    case 40: GenericFunc(41, 1); break; // givegp
+    case 41: GenericFunc(42, 1); break; // takegp
+    case 42: GenericFunc(43, 3); break; // changezone
+    case 43: GenericFunc(44, 2); break; // getitem
+    case 44: GenericFunc(45, 2); break; // forceequip
+    case 45: GenericFunc(46, 2); break; // givexp
+    case 46: Shop(); break;
+    case 47: GenericFunc(48, 5); break; // palettemorph
+    case 48: ChangeCHR(); break;
+    case 49: GenericFunc(50, 0); break; // readcontrols
+    case 50: VCPutPCX(); break;
+    case 51: GenericFunc(52, 1); break; // hooktimer
+    case 52: GenericFunc(53, 1); break; // hookretrace
+    case 53: VCLoadPCX(); break;
+    case 54: GenericFunc(55, 5); break; // vcblitimage
+    case 55: PlayFLI(); break;
+    case 56: GenericFunc(57, 0); break; // vcclear
+    case 57: GenericFunc(58, 4); break; // vcclearregion
+    case 58: VCText(); break;
+    case 59: GenericFunc(60, 5); break; // vctblitimage
+    case 60: GenericFunc(61, 0); break; // exit
+    case 61: Quit(); break;
+    case 62: VCCenterText(); break;
+    case 63: GenericFunc(64, 0); break; // resettimer
+    case 64: GenericFunc(65, 3); break; // vcblittile
+    case 65: GenericFunc(66, 0); break; // sys_clearscreen
+    case 66: Sys_DisplayPCX(); break;
+    case 67: GenericFunc(68, 0); break; // oldstartupmenu
+    case 68: GenericFunc(69, 0); break; // vgadump
+    case 69: NewGame(); break;
+    case 70: GenericFunc(71, 0); break; // loadmenu
+    case 71: GenericFunc(72, 1); break; // delay
+    case 72: PartyMove(); break;
+    case 73: EntityMove(); break;
+    case 74: GenericFunc(75, 0); break; // autoon
+    case 75: GenericFunc(76, 0); break; // autooff
+    case 76: GenericFunc(77, 2); break; // entitymovescript
+    case 77: GenericFunc(78, 3); break; // vctextnum
+    case 78: VCLoadRaw(); break;
 
-    case 79:
-      GenericFunc(80, 4);
-      break; /* -- ric:21/Apr/98 - VCBox       -- */
-    case 80:
-      GenericFunc(81, 4);
-      break; /* -- ric:21/Apr/98 - VCCharName  -- */
-    case 81:
-      GenericFunc(82, 4);
-      break; /* -- ric:21/Apr/98 - VCItemName  -- */
-    case 82:
-      GenericFunc(83, 4);
-      break; /* -- ric:21/Apr/98 - VCItemDesc  -- */
-    case 83:
-      GenericFunc(84, 4);
-      break; /* -- ric:22/Apr/98 - VCItemImage -- */
-    case 84:
-      GenericFunc(85, 4);
-      break; /* -- ric:24/Apr/98 - VCATextNum  -- */
-    case 85:
-      GenericFunc(86, 4);
-      break; /* -- ric:24/Apr/98 - VCSpc       -- */
-    case 86:
-      CallVCScript(87);
-      break; /* -- ric:25/Apr/98 - CallEffect  -- */
-    case 87:
-      CallVCScript(88);
-      break; /* -- ric:25/Apr/98 - CallScript  -- */
-    case 88:
-      GenericFunc(89, 5);
-      break; /* -- NichG:??/??/?? - VCLine     -- */
-    case 89:
-      GenericFunc(90, 2);
-      break; /* -- NichG:??/??/?? - GetMagic   -- */
-    case 90:
-      GenericFunc(91, 2);
-      break; /* -- ric:03/May/98 - BindKey     -- */
-    case 91:
-      TextMenu(92);
-      break; /* -- ric:04/May/98 - TextMenu    -- */
-    case 92:
-      GenericFunc(93, 1);
-      break; /* -- ric:03/May/98 - ItemMenu    -- */
-    case 93:
-      GenericFunc(94, 1);
-      break; /* -- ric:03/May/98 - EquipMenu   -- */
-    case 94:
-      GenericFunc(95, 1);
-      break; /* -- ric:03/May/98 - MagicMenu   -- */
-    case 95:
-      GenericFunc(96, 1);
-      break; /* -- ric:03/May/98 - StatusScreen -- */
-    case 96:
-      GenericFunc(97, 4);
-      break; /* -- ric:24/Apr/98 - VCCr2       -- */
+    case 79: GenericFunc(80, 4); break; /* -- ric:21/Apr/98 - VCBox       -- */
+    case 80: GenericFunc(81, 4); break; /* -- ric:21/Apr/98 - VCCharName  -- */
+    case 81: GenericFunc(82, 4); break; /* -- ric:21/Apr/98 - VCItemName  -- */
+    case 82: GenericFunc(83, 4); break; /* -- ric:21/Apr/98 - VCItemDesc  -- */
+    case 83: GenericFunc(84, 4); break; /* -- ric:22/Apr/98 - VCItemImage -- */
+    case 84: GenericFunc(85, 4); break; /* -- ric:24/Apr/98 - VCATextNum  -- */
+    case 85: GenericFunc(86, 4); break; /* -- ric:24/Apr/98 - VCSpc       -- */
+    case 86: CallVCScript(87); break;   /* -- ric:25/Apr/98 - CallEffect  -- */
+    case 87: CallVCScript(88); break;   /* -- ric:25/Apr/98 - CallScript  -- */
+    case 88: GenericFunc(89, 5); break; /* -- NichG:??/??/?? - VCLine     -- */
+    case 89: GenericFunc(90, 2); break; /* -- NichG:??/??/?? - GetMagic   -- */
+    case 90: GenericFunc(91, 2); break; /* -- ric:03/May/98 - BindKey     -- */
+    case 91: TextMenu(92); break;       /* -- ric:04/May/98 - TextMenu    -- */
+    case 92: GenericFunc(93, 1); break; /* -- ric:03/May/98 - ItemMenu    -- */
+    case 93: GenericFunc(94, 1); break; /* -- ric:03/May/98 - EquipMenu   -- */
+    case 94: GenericFunc(95, 1); break; /* -- ric:03/May/98 - MagicMenu   -- */
+    case 95: GenericFunc(96, 1); break; /* -- ric:03/May/98 - StatusScreen -- */
+    case 96: GenericFunc(97, 4); break; /* -- ric:24/Apr/98 - VCCr2       -- */
     case 97:
       GenericFunc(98, 4);
       break; /* -- NichG\Ric: ??/??/?? - VCSpellName -- */
@@ -783,13 +595,9 @@ OutputCode(int idx)
       break; /* -- NichG\Ric: ??/??/?? - VCSpellDesc -- */
     case 99:
       GenericFunc(100, 4);
-      break; /* -- NichG\Ric: ??/??/?? - VCSpellImage -- */
-    case 100:
-      MagicShop();
-      break; /* -- NichG: ??/??/?? - MagicShop -- */
-    case 101:
-      VCTextBox(102);
-      break; /* -- ric:04/May/98 - VCTextBox   -- */
+      break;                      /* -- NichG\Ric: ??/??/?? - VCSpellImage -- */
+    case 100: MagicShop(); break; /* -- NichG: ??/??/?? - MagicShop -- */
+    case 101: VCTextBox(102); break; /* -- ric:04/May/98 - VCTextBox   -- */
     case 102:
       PlayVAS();
       break; /* -- NichG: ??/??/?? - PlayVAS   -- */
@@ -797,7 +605,6 @@ OutputCode(int idx)
       //           VCMagicImage -- */ case 104: GenericFunc(105,1); break;/* --
       //           xBig_D:05/May/98 - VCLayerWrite -- */
 
-    default:
-      err("*error* Internal error: Unknown std function.");
+    default: err("*error* Internal error: Unknown std function.");
   }
 }

@@ -1,0 +1,23 @@
+#define Foo(Bar) @flags[Bar]@
+event
+{
+  a=Foo(123);
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+02 00       .var0 a
+  01          .set
+  03 00       .var1 flags
+    01          .literal
+    7b 00 00 00 .123
+    ff          .end (operand - literal)
+  ff          .end (operand - flags)
+ff          .end (event)
+
+//
+
+event{a=flags(123);}

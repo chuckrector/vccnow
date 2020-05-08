@@ -1,5 +1,5 @@
-#include "code.h"
-#include "compile.h"
+#include "code.hpp"
+#include "compile.hpp"
 
 /*  -- Ric's extensions to VCLIB.C --
  * Copyright (C)1998 Richard Lau
@@ -10,14 +10,15 @@
  */
 
 void
-CallVCScript(unsigned char idcode) /* -- ric: 25/Apr/98 -- */
+CallVCScript(u64 idcode)
 {
-  char *ptr, *optr, varctr = 0;
+  u8 *ptr, *optr;
+  u64 varctr = 0;
 
   EmitC(EXEC);
   EmitC(idcode);
   Expect("(");
-  ptr = cpos;
+  ptr = CompileGuy.GeneratedCodeLocation;
   EmitC(varctr);
   EmitOperand();
   while (!NextIs(")"))
@@ -26,18 +27,19 @@ CallVCScript(unsigned char idcode) /* -- ric: 25/Apr/98 -- */
     EmitOperand();
     varctr++;
   }
-  optr = cpos;
-  cpos = ptr;
+  optr = CompileGuy.GeneratedCodeLocation;
+  CompileGuy.GeneratedCodeLocation = ptr;
   EmitC(varctr);
-  cpos = optr;
+  CompileGuy.GeneratedCodeLocation = optr;
   Expect(")");
   Expect(";");
 }
 
 void
-TextMenu(unsigned char idcode) /* -- ric: 04/May/98 -- */
+TextMenu(u64 idcode)
 {
-  char *ptr, *optr, varctr = 1;
+  u8 *ptr, *optr;
+  u64 varctr = 1;
 
   EmitC(EXEC);
   EmitC(idcode);
@@ -51,7 +53,7 @@ TextMenu(unsigned char idcode) /* -- ric: 04/May/98 -- */
   EmitOperand(); // ptr
   Expect(",");
 
-  ptr = cpos;
+  ptr = CompileGuy.GeneratedCodeLocation;
   EmitC(varctr);
   GetString();
   EmitString(token);
@@ -62,18 +64,19 @@ TextMenu(unsigned char idcode) /* -- ric: 04/May/98 -- */
     EmitString(token);
     varctr++;
   }
-  optr = cpos;
-  cpos = ptr;
+  optr = CompileGuy.GeneratedCodeLocation;
+  CompileGuy.GeneratedCodeLocation = ptr;
   EmitC(varctr);
-  cpos = optr;
+  CompileGuy.GeneratedCodeLocation = optr;
   Expect(")");
   Expect(";");
 }
 
 void
-VCTextBox(unsigned char idcode) /* -- ric: 04/May/98 -- */
+VCTextBox(u64 idcode)
 {
-  char *ptr, *optr, varctr = 1;
+  u8 *ptr, *optr;
+  u64 varctr = 1;
 
   EmitC(EXEC);
   EmitC(idcode);
@@ -85,7 +88,7 @@ VCTextBox(unsigned char idcode) /* -- ric: 04/May/98 -- */
   EmitOperand(); // ptr
   Expect(",");
 
-  ptr = cpos;
+  ptr = CompileGuy.GeneratedCodeLocation;
   EmitC(varctr);
   GetString();
   EmitString(token);
@@ -96,10 +99,10 @@ VCTextBox(unsigned char idcode) /* -- ric: 04/May/98 -- */
     EmitString(token);
     varctr++;
   }
-  optr = cpos;
-  cpos = ptr;
+  optr = CompileGuy.GeneratedCodeLocation;
+  CompileGuy.GeneratedCodeLocation = ptr;
   EmitC(varctr);
-  cpos = optr;
+  CompileGuy.GeneratedCodeLocation = optr;
   Expect(")");
   Expect(";");
 }

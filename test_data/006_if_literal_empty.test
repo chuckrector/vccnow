@@ -1,0 +1,24 @@
+event {
+  if (1) {
+    // empty
+  }
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+  05            .if
+  01            .args
+  0d 00 00 00   .else
+  01            .literal
+    01 00 00 00
+    ff          .end (operand)
+  01            .sign
+
+ff              .end (event)
+
+//
+
+event{if(1){}}

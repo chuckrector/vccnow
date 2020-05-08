@@ -1,0 +1,47 @@
+event {
+  for (flags[0], 1, b, 1) {
+    if (c) return;
+  }
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+.event0
+  09            .for1
+
+  00            .var1 flags (implicit end)
+
+  01            .literal
+  00 00 00 00
+  ff            .end (literal)
+
+  01            .literal
+  01 00 00 00
+  ff            .end (literal)
+
+  02 01         .var0 b
+  ff            .end (var0)
+
+  01            .sign
+  01            .literal
+  01 00 00 00
+  ff            .end (literal)
+
+  05            .if
+  01            .terms
+  23 00 00 00   .else
+  02 02         .var0 b
+  ff            .end (var0)
+  01            .sign
+
+  ff            .end (return)
+
+  ff            .end (for0)
+ff              .end (event0)
+
+//
+
+event{for(flags(0),1,b,1){if(c){return;}}}

@@ -6,6 +6,8 @@ BinPackParameters: false
 AlignAfterOpenBracket: AlwaysBreak
 ExperimentalAutoDetectBinPacking: false
 AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
 AlwaysBreakAfterDefinitionReturnType: All
 IndentCaseLabels: true
 BraceWrapping:

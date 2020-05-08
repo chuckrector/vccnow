@@ -1,272 +1,190 @@
 
-// **********************************************************************
-// *                                                                    *
-// *                     The Verge-C Compiler v.0.10                    *
-// *                     Copyright (C)1997 BJ Eirich                    *
-// *                                                                    *
-// * Module: VCC.C                                                      *
-// *                                                                    *
-// * Description: Handles setup, command line parsing, determines       *
-// * compilation target / mode, other misc things.                      *
-// *                                                                    *
-// * Portability: ANSI C - should compile on any compiler.              *
-// *                                                                    *
-// **********************************************************************
-
-#include "compile.h"
-#include "preproc.h"
+#include "vcc.hpp"
+#include "compile.hpp"
+#include "preproc.hpp"
+#include "util.hpp"
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define LETTER 1
-#define DIGIT 2
-#define SPECIAL 3
-
-// ============================== Variables ==============================
-
-char quiet, verbose;        // output modes for VCC
-char *strbuf, fname[100];   // string buffers (mostly temporary)
-FILE *inf, *outf;           // input/output file handles.
-char effect = 0, scrpt = 0; // compiling events/effects/misc scripts
-
-// NEW CODE
-char magic = 0;
-// END NEW CODE
-
-char *source; // ptr -> source file in memory.
-char chr_tablebeta[256];
-char tokenbeta[512];
-
-// ================================ Code =================================
-
 void
 PostStartupFiles()
 {
-  if (!(inf = fopen("$$tmep$$.ma_", "rb")))
-  {
-    if (!quiet)
-    {
-      printf("*error* Could not open input file. \n");
-    }
-    exit(-1);
-  }
-
-  if (verbose)
-  {
+  if (CompileGuy.IsVerbose)
     printf("Reading source file into memory... \n");
-  }
-  memset(source, 0, 100000);
-  memset(code, 0, 100000);
-  fread(source, 1, 100000, inf);
-  fclose(inf);
+
+  CompileGuy.Data = CompileGuy.DataPreproc;
 }
 
 void
-PreStartupFiles()
+PreStartupFiles(const char *FilenameWithoutExtension)
 {
-  int i;
+  // printf("!!! PreStartupFiles %s\n", FilenameWithoutExtension);
+  strcpy_s(TempBuffer, TEMP_BUFFER_SIZE, FilenameWithoutExtension);
+  u64 L = strlen(TempBuffer);
+  if (L > 3 && !strcmp(".vc", FilenameWithoutExtension + (L - 3))) {}
+  else
+    strcpy_s(TempBuffer + strlen(TempBuffer), TEMP_BUFFER_SIZE, ".vc");
+  CompileGuy.BasePath = new char[TEMP_BUFFER_SIZE];
+  strcpy_s(CompileGuy.BasePath, TEMP_BUFFER_SIZE, TempBuffer);
 
-  // Open input and output files; make sure filenames are correct.
+  u8 *P = new u8[WORKING_MEMORY_TOTAL_SIZE];
+  // memset(P, 0, WORKING_MEMORY_TOTAL_SIZE);
+  CompileGuy.WorkingMemory = P;
+  CompileGuy.Data = P + 0;
+  CompileGuy.GeneratedCode = P + WORKING_MEMORY_BLOCK_SIZE;
+  CompileGuy.DataPreproc = P + (WORKING_MEMORY_BLOCK_SIZE * 2);
 
-  i = strlen(strbuf);
-  strbuf[i] = '.';
-  strbuf[i + 1] = 'v';
-  strbuf[i + 2] = 'c';
-  strbuf[i + 3] = 0;
-
-  if (!(inf = fopen(strbuf, "rb")))
+  FILE *File;
+  fopen_s(&File, TempBuffer, "rb");
+  if (!File)
   {
-    if (!quiet)
-    {
-      printf("*error* Could not open input file\n");
-    }
+    if (!CompileGuy.IsQuiet)
+      printf("*error* Could not open input file: %s\n", TempBuffer);
     exit(-1);
   }
 
-  if (verbose)
-  {
+  if (CompileGuy.IsVerbose)
     printf("Reading source file into memory... \n");
-  }
-  source = (char *)malloc(100000);
-  code = (char *)malloc(100000);
-  memset(source, 0, 100000);
-  memset(code, 0, 100000);
-  fread(source, 1, 100000, inf);
-  fclose(inf);
+
+  CompileGuy.Length = FileSize(File);
+  fread(CompileGuy.Data, 1, CompileGuy.Length, File);
+  CompileGuy.Data[CompileGuy.Length] = 0;
+  fclose(File);
+}
+
+// NOTE(aen): Returns # of bytes written.
+void
+WriteScriptOffsetTableToBuffer(Buffer_t *Output)
+{
+  // Log("WriteScriptOffsetTableToBuffer\n");
+  u32 *P = (u32 *)Output->Data;
+  *P++ = (u32)numscripts;
+  memcpy(P, scriptofstbl, 4 * numscripts);
+  Output->Length = 4 + (4 * numscripts);
 }
 
 void
 WriteMagicOutput()
 {
+  printf("WriteMagicOutput\n");
   FILE *f;
 
-  f = fopen("magic.vcs", "wb");
+  fopen_s(&f, "magic.vcs", "wb");
   fwrite(&numscripts, 1, 4, f);
-  fwrite(&scriptofstbl, 4, numscripts, f);
-  fwrite(code, 1, (cpos - code), f);
+  fwrite(scriptofstbl, 4, numscripts, f);
+  fwrite(
+      CompileGuy.GeneratedCode,
+      1,
+      (CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode),
+      f);
   fclose(f);
 
-  remove("error.txt");
-  remove("$$tmep$$.ma_");
+  if (Exist("error.txt"))
+    remove("error.txt");
 }
 
 void
 WriteEffectOutput()
 {
+  printf("WriteEffectOutput\n");
   FILE *f;
 
-  f = fopen("effects.vcs", "wb");
+  fopen_s(&f, "effects.vcs", "wb");
   fwrite(&numscripts, 1, 4, f);
-  fwrite(&scriptofstbl, 4, numscripts, f);
-  fwrite(code, 1, (cpos - code), f);
+  fwrite(scriptofstbl, 4, numscripts, f);
+  fwrite(
+      CompileGuy.GeneratedCode,
+      1,
+      (CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode),
+      f);
   fclose(f);
 
-  remove("error.txt");
-  remove("$$tmep$$.ma_");
+  if (Exist("error.txt"))
+    remove("error.txt");
 }
 
 void
 WriteScriptOutput()
 {
+  printf("WriteScriptOutput\n");
   FILE *f;
 
-  f = fopen("startup.vcs", "wb");
+  fopen_s(&f, "startup.vcs", "wb");
   fwrite(&numscripts, 1, 4, f);
   fwrite(&scriptofstbl, 4, numscripts, f);
-  fwrite(code, 1, (cpos - code), f);
+  fwrite(
+      CompileGuy.GeneratedCode,
+      1,
+      (CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode),
+      f);
   fclose(f);
 
-  remove("error.txt");
-  remove("$$tmep$$.ma_");
+  if (Exist("error.txt"))
+    remove("error.txt");
 }
 
 void
-WriteOutput()
+WriteOutput(const char *FilenameWithoutExtension)
 {
+  // printf("WriteOutput %s\n", FilenameWithoutExtension);
+  ASSERT(FilenameWithoutExtension);
+
   FILE *f;
   char i;
   short int mx, my;
   int a;
 
-  i = strlen(fname);
-  memcpy(strbuf, fname, i);
-  strcpy(strbuf + i, ".map");
+  char NoExt[1024];
+  char VcFilename[1024];
+  char MapFilename[1024];
 
-  f = fopen(strbuf, "rb+");
-  if (f == 0)
+  strcpy_s(NoExt, 1024, FilenameWithoutExtension);
+  u64 L = strlen(NoExt);
+  if (L > 3 && !strcmp(".vc", NoExt + (L - 3)))
   {
-    strcpy(strbuf + i, ".map");
-    f = fopen(strbuf, "rb+");
+    NoExt[L - 3] = 0;
   }
+  sprintf_s(VcFilename, "%s.vc", NoExt);
+  sprintf_s(MapFilename, "%s.map", NoExt);
 
-  fseek(f, 68, 0);
-  fread(&mx, 1, 2, f);
-  fread(&my, 1, 2, f);
-  fseek(f, 100 + (mx * my * 5) + 7956, 0);
-  fread(&a, 1, 4, f);
-  fseek(f, 88 * a, 1);
-  fread(&i, 1, 1, f);
-  fread(&a, 1, 4, f);
-  fseek(f, (i * 4) + a, 1);
-
-  fwrite(&numscripts, 1, 4, f);
-  fwrite(&scriptofstbl, 4, numscripts, f);
-  fwrite(code, 1, (cpos - code), f);
-  fclose(f);
-
-  remove("error.txt");
-  remove("$$tmep$$.ma_");
-}
-
-int
-main(int argc, char *argv[])
-{
-  int i;
-
-  // Test the command line and set any necessary flags.
-
-  strbuf = (char *)malloc(100);
-  switch (argc)
+  if (Exist(MapFilename))
   {
-    case 1:
-    {
-      printf("vcc v.04.Jun.98 Copyright (C)1997 BJ Eirich \n");
-      printf("Usage: vcc <vc file> [flag] \n");
-      printf("Where [flag] is one of the following: \n");
-      printf("        q   Quiet mode - no output. \n");
-      printf(
-          "        v   Super-Verbose mode - more output than you want. \n \n");
-      exit(-1);
-    }
-    case 3:
-    {
-      strbuf = argv[2];
-      if (strbuf[0] == 'q')
-      {
-        quiet = 1;
-      }
-      if (strbuf[0] == 'v')
-      {
-        verbose = 1;
-      }
-    }
-    case 2:
-    {
-      strbuf = argv[1];
-      for (i = 0; i < 100; i++)
-      {
-        fname[i] = strbuf[i];
-      }
-      //  strupr (fname);
-      if (!strcmp(fname, "effects"))
-      {
-        effect = 1;
-      }
-      // NEW CODE
-      if (!strcmp(fname, "magic"))
-      {
-        magic = 1;
-      }
-      // END NEW CODE
-      if (!strcmp(fname, "startup"))
-      {
-        scrpt = 1;
-      }
-      break;
-    }
-    default:
-    {
-      printf("vcc: Too many parameters. \n");
-      exit(-1);
-    }
-  }
-
-  if (!quiet)
-  {
-    printf("vcc v.04.Jun.98 Copyright (C)1997 BJ Eirich \n");
-  }
-  PreStartupFiles();  // startup for preprocessing
-  FirstPass();        // preprocessing
-  PostStartupFiles(); // startup for postprocessing? no,
-                      // that doesn't make sense...
-  InitCompileSystem();
-  Compile();
-  if (effect)
-  {
-    WriteEffectOutput();
-  }
-  else if (magic)
-  {
-    WriteMagicOutput();
-  }
-  else if (scrpt)
-  {
-    WriteScriptOutput();
+    fopen_s(&f, MapFilename, "rb+");
+    fseek(f, 68, 0);
+    fread(&mx, 1, 2, f);
+    fread(&my, 1, 2, f);
+    fseek(f, 100 + (mx * my * 5) + 7956, 0);
+    fread(&a, 1, 4, f);
+    fseek(f, 88 * a, 1);
+    fread(&i, 1, 1, f);
+    fread(&a, 1, 4, f);
+    fseek(f, (i * 4) + a, 1);
   }
   else
   {
-    WriteOutput();
+    char Temp[1024];
+    sprintf_s(Temp, 1024, "%s.compiled", NoExt);
+    printf("%s not found, falling back to %s\n", MapFilename, Temp);
+
+    fopen_s(&f, Temp, "wb+");
   }
+
+  u64 NumCompiledBytes =
+      CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode;
+  Log("Writing %lld scripts, %lld compiled bytes...",
+      numscripts,
+      NumCompiledBytes);
+  fwrite(&numscripts, 1, 4, f);
+  fwrite(scriptofstbl, 4, numscripts, f);
+  fwrite(CompileGuy.GeneratedCode, 1, NumCompiledBytes, f);
+  Log("OK\n");
+  fclose(f);
+
+  // if (Exist("error.txt")) {
+  //   printf("error.txt exists, removing...\n");
+  // int Result = remove("error.txt");
+  //   printf("result %d\n", Result);
+  // }
 }

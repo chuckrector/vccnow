@@ -1,0 +1,26 @@
+event {
+  if (1) return;
+  return;
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+.event0
+  05            .if
+  01            .terms
+  0e 00 00 00   .else
+    01            .literal
+    01 00 00 00
+    ff            .end (literal)
+  01            .sign
+  ff            .end (return)
+
+  ff            .end (return)
+ff              .end (event0)
+
+//
+
+event{if(1){return;}return;}

@@ -1,0 +1,26 @@
+event {
+  for (a, 1, b, 1) {}
+}
+
+//
+
+01 00 00 00       .1 script
+00 00 00 00       .offset 0
+
+.event0
+  08              .for0
+  00              .var0 a
+    01            .literal
+    01 00 00 00
+    ff            .end (literal)
+  02 01 ff        .var0 b
+  01              .sign
+    01            .literal
+    01 00 00 00
+    ff            .end (literal)
+  ff              .end (for0)
+ff                .end (event0)
+
+//
+
+event{for(a,1,b,1){}}

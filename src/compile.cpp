@@ -11,165 +11,128 @@
 // *                                                                    *
 // **********************************************************************
 
-#include "compile.h"
-#include "code.h"
-#include "funclib.h"
-#include "libfuncs.h"
-#include "util.h"
-#include "vcc.h"
+#include "compile.hpp"
+#include "code.hpp"
+#include "funclib.hpp"
+#include "libfuncs.hpp"
+#include "log.hpp"
+#include "util.hpp"
+#include "vcc.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// ============================== Constants ===============================
-
-// Character types
-
-#define LETTER 1
-#define DIGIT 2
-#define SPECIAL 3
-
-// Token types
-
-#define IDENTIFIER 1
-#define DIGIT 2
-#define CONTROL 3
-#define RESERVED 4
-#define FUNCTION 5
-#define VAR0 5
-#define VAR1 6
-#define VAR2 7
-
 // ============================== Variables ==============================
 
-struct label // goto labels
-{
-  char ident[40];
-  char *pos;
-};
+struct label labels[200]; // goto labels
+struct label gotos[200];  // goto occurence records
+char token[2048];         // current token buffer
+char lasttoken[2048];     // restorebuf for NextIs
+u64 token_nvalue;         // int value of token if it's type DIGIT
+u64 token_type;           // type of current token.
+u64 token_subtype;        // This is just crap.
+u8 *numargsptr;           // number of arguements to IF ptr
+u32 scriptofstbl[1024];   // script offset table
 
-struct label labels[200];        // goto labels
-struct label gotos[200];         // goto occurence records
-char token[2048];                // current token buffer
-char lasttoken[2048];            // restorebuf for NextIs
-unsigned int token_nvalue;       // int value of token if it's type DIGIT
-char token_type;                 // type of current token.
-char token_subtype;              // This is just crap.
-char *src;                       // ptr -> current location in sourcefile
-char *code;                      // ptr -> generated output code buffer
-char *cpos;                      // ptr -> current code buffer location
-char chr_table[256];             // character-types lookup table
-char *numargsptr;                // number of arguements to IF ptr
-unsigned int scriptofstbl[1024]; // script offset table
-
-int numscripts = 0; // number of scripts in the VC file
-int lines = 1;
+u64 numscripts = 0; // number of scripts in the VC file
+u64 lines = 1;
 
 // Compilation-state flags
-char inevent = 0, iex = 0;
+bool64 inevent = 0;
+bool64 iex = 0;
 const char *scripttoken;
-int funcidx;
-int numlabels = 0, numgotos = 0;
+u64 funcidx;
+u64 numlabels = 0;
+u64 numgotos = 0;
 
 // ================================ Code =================================
-
-void ProcessFor();
-void ProcessSwitch();
-void ProcessWhile();
-void ProcessVar0Assign();
-void ProcessVar1Assign();
-void ProcessVar2Assign();
-void ProcessIf();
-void Expect(char *);
 
 void
 err(const char *str)
 {
   FILE *f;
 
-  if (!quiet)
+  if (!CompileGuy.IsQuiet)
+    printf("%s (%lld) \n", str, lines);
+  if (CompileGuy.IsQuiet)
   {
-    printf("%s (%d) \n", str, lines);
-  }
-  if (quiet)
-  {
-    f = fopen("error.txt", "w");
-    fprintf(f, "%s (%d)\n", str, lines);
+    fopen_s(&f, "error.txt", "w");
+    fprintf(f, "%s (%lld)\n", str, lines);
     fclose(f);
   }
-  remove("$$tmep$$.ma_");
+  if (Exist("$$tmep$$.ma_"))
+    remove("$$tmep$$.ma_");
   exit(-1);
 }
 
-char
+bool64
 TokenIs(const char *str)
 {
   if (!strcmp(str, token))
-  {
     return 1;
-  }
   else
-  {
     return 0;
-  }
 }
 
 void
 ParseWhitespace()
 {
+  // printf("ParseWhitespace\n");
   // ParseWhitespace() does what you'd expect - sifts through any white
   // space and advances the file pointer accordingly. Additionally, it
   // handles // style comments as well as /* and */ comments.
 
   while (1)
   {
-    while (*src <= ' ')
+    while (*CompileGuy.C <= ' ')
     {
-      if (!*src)
+      if (!*CompileGuy.C)
       {
+        // printf("ParseWhitespace BUST OUT #1\n");
         return; // EOF reached
       }
-      if (*src == '\n')
-      {
+      if (*CompileGuy.C == '\n')
         lines++;
-      }
-      src++;
+      CompileGuy.C++;
     }
 
-    if (src[0] == '/' && src[1] == '/') // Skip // comments
+    if (CompileGuy.C[0] == '/' && CompileGuy.C[1] == '/') // Skip // comments
     {
-      while (*src && (*src != '\n'))
+      while (*CompileGuy.C && (*CompileGuy.C != '\n'))
       {
-        src++; // Skip to next line
+        CompileGuy.C++; // Skip to next line
       }
       continue;
     }
 
-    if (src[0] == '/' && src[1] == '*') // Skip /* until */
+    if (CompileGuy.C[0] == '/' && CompileGuy.C[1] == '*') // Skip /* until */
     {
-      while (!(src[0] == '*' && src[1] == '/'))
+      while (!(CompileGuy.C[0] == '*' && CompileGuy.C[1] == '/'))
       {
-        if (*src == '\n')
+        if (*CompileGuy.C == '\n')
         {
           lines++;
         }
-        src++;
-        if (!*src)
+        CompileGuy.C++;
+        if (!*CompileGuy.C)
         {
+          printf("ParseWhitespace BUST OUT #2\n");
           return;
         }
       }
-      src += 2;
+      CompileGuy.C += 2;
       continue;
     }
 
     break; // end of whitespace
   }
+  // printf("ParseWhitespace END\n");
 }
 
 void
 CheckLibFunc()
 {
+  // printf("CheckLibFunc...\n");
   int i;
 
   // If the current token is a recognized library function, sets
@@ -205,30 +168,27 @@ CheckLibFunc()
   while (i < numfuncs)
   {
     if (!strcmp(funcs[i], token))
-    {
       break;
-    }
     i++;
   }
   if (i != numfuncs)
   {
     token_type = FUNCTION;
+    // printf("CheckLibFunc: Found %lld (%s)\n", i, funcs[i]);
   }
   funcidx = i;
 }
 
-unsigned char
+u64
 SearchVarList()
 {
-  unsigned char i;
+  u64 i;
 
   i = 0;
   while (i < numvars0)
   {
     if (!strcmp(vars0[i], token))
-    {
       break;
-    }
     i++;
   }
   if (i != numvars0)
@@ -242,9 +202,7 @@ SearchVarList()
   while (i < numvars1)
   {
     if (!strcmp(vars1[i], token))
-    {
       break;
-    }
     i++;
   }
   if (i != numvars1)
@@ -258,9 +216,7 @@ SearchVarList()
   while (i < numvars2)
   {
     if (!strcmp(vars2[i], token))
-    {
       break;
-    }
     i++;
   }
   if (i != numvars2)
@@ -275,6 +231,7 @@ SearchVarList()
 void
 GetIdentifier()
 {
+  // printf("GetIdentifier\n");
   int i;
 
   // Retrieves an identifier from the source buffer. Before calling this,
@@ -282,14 +239,15 @@ GetIdentifier()
   // will need to be made afterward to see if it's a reserved word.
 
   i = 0;
-  while ((chr_table[(int)*src] == LETTER) || (chr_table[(int)*src] == DIGIT))
+  while ((CharTypeLookup[(int)*CompileGuy.C] == LETTER) ||
+         (CharTypeLookup[(int)*CompileGuy.C] == DIGIT))
   {
-    token[i] = *src;
-    src++;
+    token[i] = *CompileGuy.C;
+    CompileGuy.C++;
     i++;
   }
   token[i] = 0;
-  strupr(token);
+  _strupr_s(token, 2048);
   CheckLibFunc();
   SearchVarList();
 }
@@ -297,16 +255,17 @@ GetIdentifier()
 void
 GetNumber()
 {
+  // printf("GetNumber\n");
   int i;
 
   // Grabs the next number. String version remains in token[], numerical
   // version is placed in token_nvalue.
 
   i = 0;
-  while (chr_table[(int)*src] == DIGIT)
+  while (CharTypeLookup[(int)*CompileGuy.C] == DIGIT)
   {
-    token[i] = *src;
-    src++;
+    token[i] = *CompileGuy.C;
+    CompileGuy.C++;
     i++;
   }
   token[i] = 0;
@@ -316,96 +275,97 @@ GetNumber()
 void
 GetPunctuation()
 {
-  char c;
+  // printf("GetPunctuation\n");
+  u64 c;
 
   // Grabs the next recognized punctuation type. If a double-char punctuation
   // type is recognized, it will be returned. Ie, differentiate b/w = and ==.
 
-  c = *src;
+  c = *CompileGuy.C;
   switch (c)
   {
     case '(':
       token[0] = '(';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case ')':
       token[0] = ')';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '{':
       token[0] = '{';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '}':
       token[0] = '}';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '[':
       token[0] = '(';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case ']':
       token[0] = ')';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case ',':
       token[0] = ',';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case ':':
       token[0] = ':';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case ';':
       token[0] = ';';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '/':
       token[0] = '/';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '*':
       token[0] = '*';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '%':
       token[0] = '%';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '\"':
       token[0] = '\"';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '\'':
       token[0] = '\'';
       token[1] = 0;
-      src++;
+      CompileGuy.C++;
       break;
     case '+':
       token[0] = '+'; // Is it ++ or += or +?
-      src++;
-      if (*src == '+')
+      CompileGuy.C++;
+      if (*CompileGuy.C == '+')
       {
         token[1] = '+';
-        src++;
+        CompileGuy.C++;
       }
-      else if (*src == '=')
+      else if (*CompileGuy.C == '=')
       {
         token[1] = '=';
-        src++;
+        CompileGuy.C++;
       }
       else
       {
@@ -415,16 +375,16 @@ GetPunctuation()
       break;
     case '-':
       token[0] = '-'; // Is it -- or -= or -?
-      src++;
-      if (*src == '-')
+      CompileGuy.C++;
+      if (*CompileGuy.C == '-')
       {
         token[1] = '-';
-        src++;
+        CompileGuy.C++;
       }
-      else if (*src == '=')
+      else if (*CompileGuy.C == '=')
       {
         token[1] = '=';
-        src++;
+        CompileGuy.C++;
       }
       else
       {
@@ -434,47 +394,47 @@ GetPunctuation()
       break;
     case '>':
       token[0] = '>'; // Is it > or >=?
-      src++;
-      if (*src == '=') // It's >=
+      CompileGuy.C++;
+      if (*CompileGuy.C == '=') // It's >=
       {
         token[1] = '=';
         token[2] = 0;
-        src++;
+        CompileGuy.C++;
         break;
       }
       token[1] = 0; // It's >
       break;
     case '<':
       token[0] = '<'; // Is it < or <=?
-      src++;
-      if (*src == '=') // It's <=
+      CompileGuy.C++;
+      if (*CompileGuy.C == '=') // It's <=
       {
         token[1] = '=';
         token[2] = 0;
-        src++;
+        CompileGuy.C++;
         break;
       }
       token[1] = 0; // It's <
       break;
     case '!':
       token[0] = '!';
-      src++;           // Is it just ! or is it != ?
-      if (*src == '=') // It's !=
+      CompileGuy.C++;           // Is it just ! or is it != ?
+      if (*CompileGuy.C == '=') // It's !=
       {
         token[1] = '=';
         token[2] = 0;
-        src++;
+        CompileGuy.C++;
         break;
       }
       token[1] = 0; // It's just !
       break;
     case '=':
       token[0] = '=';
-      src++;           // is = or == ?
-      if (*src == '=') // Doesn't really matter,
+      CompileGuy.C++;           // is = or == ?
+      if (*CompileGuy.C == '=') // Doesn't really matter,
       {
         token[1] = 0; // just skip the last byte
-        src++;
+        CompileGuy.C++;
       }
       else
       {
@@ -485,16 +445,16 @@ GetPunctuation()
       token[0] = '&';
       token[1] = '&';
       token[2] = 0;
-      src += 2;
+      CompileGuy.C += 2;
       break;
-    default:
-      src++; // This should be an error.
+    default: CompileGuy.C++; // This should be an error.
   }
 }
 
 void
 GetString()
 {
+  // printf("GetString\n");
   int i;
 
   // Expects a "quoted" string. Places the contents of the string in
@@ -502,70 +462,77 @@ GetString()
 
   Expect("\"");
   i = 0;
-  while (*src != '\"')
+  while (*CompileGuy.C != '\"')
   {
-    token[i] = *src;
-    src++;
+    token[i] = *CompileGuy.C;
+    CompileGuy.C++;
     i++;
   }
-  src++;
+  CompileGuy.C++;
   token[i] = 0;
 }
 
 void
 GetToken()
 {
+  // printf("GetToken\n");
   // simply reads in the next statement and places it in the
   // token buffer.
 
   ParseWhitespace();
-  switch (chr_table[(int)*src])
+  switch (CharTypeLookup[(int)*CompileGuy.C])
   {
     case LETTER:
     {
+      // printf("GetToken: LETTER\n");
       token_type = IDENTIFIER;
       GetIdentifier();
       break;
     }
     case DIGIT:
     {
+      // printf("GetToken: DIGIT\n");
       token_type = DIGIT;
       GetNumber();
       break;
     }
     case SPECIAL:
     {
+      // printf("GetToken: SPECIAL\n");
       token_type = CONTROL;
       GetPunctuation();
       break;
     }
   }
 
-  if (!*src && inevent)
+  // NOTE(aen): event{} without newline at EOF shouldn't explode.
+  bool IsClosingEvent = inevent && token[0] == '}';
+  if (!*CompileGuy.C && !IsClosingEvent)
   {
-    err("Unexpected end of file");
+    err("Unexpected end of file!");
   }
+  // printf("GetToken END\n");
 }
 
-char
+bool64
 NextIs(const char *str)
 {
-  char *ptr;
+  u8 *ptr;
   // char tt, tst;
-  char i;
-  int olines, nv;
+  u64 i;
+  u64 olines, nv;
 
-  ptr = src;
+  ptr = CompileGuy.C;
   olines = lines;
   // tt = token_type;
   // tst = token_subtype;
   nv = token_nvalue;
   memcpy(lasttoken, token, 2048);
   GetToken();
-  src = ptr;
+  CompileGuy.C = ptr;
   lines = olines;
   token_nvalue = nv;
-  // tst = token_subtype; // TODO(chuck): Is this a bug? Intended to restore?
+  // tst = token_subtype; // TODO(aen): Is this a bug? Intended to restore?
   // tt = token_type;
   if (!strcmp(str, token))
   {
@@ -582,27 +549,29 @@ NextIs(const char *str)
 void
 Expect(const char *str)
 {
+  // printf("Expect %s\n", str);
   FILE *f;
 
   GetToken();
   if (!strcmp(str, token))
   {
+    // printf("Expect END %s\n", str);
     return;
   }
-  if (!quiet)
+  if (!CompileGuy.IsQuiet)
   {
-    printf("error: %s expected, %s got (%d)", str, token, lines);
+    printf("error: %s expected, %s got (%lld)", str, token, lines);
   }
-  if (quiet)
+  if (CompileGuy.IsQuiet)
   {
-    f = fopen("error.txt", "w");
-    fprintf(f, "error: %s expected, %s got (%d) \n", str, token, lines);
+    fopen_s(&f, "error.txt", "w");
+    fprintf(f, "error: %s expected, %s got (%lld) \n", str, token, lines);
     fclose(f);
   }
   exit(-1);
 }
 
-int
+u64
 ExpectNumber()
 {
   GetToken();
@@ -614,64 +583,67 @@ ExpectNumber()
 }
 
 void
-EmitC(char c)
+EmitC(u64 c)
 {
-  *cpos = c;
-  cpos++;
+  // printf("EmitC %lld\n", c);
+  *CompileGuy.GeneratedCodeLocation = (u8)c;
+  CompileGuy.GeneratedCodeLocation++;
 }
 
 void
-EmitW(short int w)
+EmitW(u64 w)
 {
-  char *ptr;
+  // printf("EmitW %lld\n", w);
+  u8 *ptr;
 
-  ptr = (char *)&w;
-  *cpos = *ptr;
-  cpos++;
+  ptr = (u8 *)&w;
+  *CompileGuy.GeneratedCodeLocation = *ptr;
+  CompileGuy.GeneratedCodeLocation++;
   ptr++;
-  *cpos = *ptr;
-  cpos++;
+  *CompileGuy.GeneratedCodeLocation = *ptr;
+  CompileGuy.GeneratedCodeLocation++;
 }
 
 void
-EmitD(int w)
+EmitD(u64 w)
 {
-  char *ptr;
+  // printf("EmitD %lld\n", w);
+  u8 *ptr;
 
-  ptr = (char *)&w;
-  *cpos = *ptr;
-  cpos++;
+  ptr = (u8 *)&w;
+  *CompileGuy.GeneratedCodeLocation = *ptr;
+  CompileGuy.GeneratedCodeLocation++;
   ptr++;
-  *cpos = *ptr;
-  cpos++;
+  *CompileGuy.GeneratedCodeLocation = *ptr;
+  CompileGuy.GeneratedCodeLocation++;
   ptr++;
-  *cpos = *ptr;
-  cpos++;
+  *CompileGuy.GeneratedCodeLocation = *ptr;
+  CompileGuy.GeneratedCodeLocation++;
   ptr++;
-  *cpos = *ptr;
-  cpos++;
+  *CompileGuy.GeneratedCodeLocation = *ptr;
+  CompileGuy.GeneratedCodeLocation++;
 }
 
 void
 EmitString(const char *str)
 {
-  int i;
+  u64 i;
 
   i = 0;
   while (str[i])
   {
-    *cpos = str[i];
-    cpos++;
+    *CompileGuy.GeneratedCodeLocation = str[i];
+    CompileGuy.GeneratedCodeLocation++;
     i++;
   }
-  *cpos = 0;
-  cpos++;
+  *CompileGuy.GeneratedCodeLocation = 0;
+  CompileGuy.GeneratedCodeLocation++;
 }
 
 void
 HandleOperand()
 {
-  unsigned char varidx;
+  u64 varidx;
 
   GetToken();
   if (token_type == DIGIT)
@@ -774,7 +746,7 @@ EmitOperand()
   }
 }
 
-char
+bool64
 HandleExpression()
 {
   // Parses one single "expression". Can be anything short of a new script.
@@ -828,14 +800,16 @@ HandleExpression()
   if (NextIs(":"))
   {
     memcpy(labels[numlabels].ident, lasttoken, 40);
-    labels[numlabels].pos = (char *)(cpos - code);
-    if (verbose)
+    labels[numlabels].pos =
+        (u8 *)(CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
+    if (CompileGuy.IsVerbose)
     {
       printf(
-          "label %s found on line %d, cpos: %ld. \n",
+          "label %s found on line %lld, "
+          "CompileGuy.GeneratedCodeLocation: %lld. \n",
           lasttoken,
           lines,
-          cpos - code);
+          CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
     }
     numlabels++;
     Expect(":");
@@ -847,15 +821,13 @@ HandleExpression()
 void
 ProcessVar0Assign()
 {
-  int a;
+  u64 a;
 
   EmitC(VAR0_ASSIGN);
   a = SearchVarList();
   EmitC(a);
   if (!write0[a])
-  {
     err("error: Variable is read-only.");
-  }
 
   GetToken(); // Find relational operator
   if (TokenIs("="))
@@ -890,7 +862,7 @@ ProcessVar0Assign()
 void
 ProcessVar1Assign()
 {
-  int a;
+  u64 a;
 
   EmitC(VAR1_ASSIGN);
   a = SearchVarList();
@@ -937,7 +909,7 @@ ProcessVar1Assign()
 void
 ProcessVar2Assign()
 {
-  int a;
+  u64 a;
 
   EmitC(VAR2_ASSIGN);
   a = SearchVarList();
@@ -986,8 +958,10 @@ ProcessVar2Assign()
 void
 ProcessIf()
 {
-  unsigned char numargs = 0, excl = 0;
-  char *returnptr, *buf;
+  u64 numargs = 0;
+  bool64 excl = 0;
+  u8 *returnptr;
+  u8 *buf;
 
   // The general opcode form of an IF is:
   // <BYTE: GENERAL_IF>
@@ -997,9 +971,9 @@ ProcessIf()
 
   EmitC(GENERAL_IF);
   Expect("(");
-  numargsptr = cpos;
+  numargsptr = CompileGuy.GeneratedCodeLocation;
   EmitC(0); // We'll come back and fix this. <numargs>
-  returnptr = cpos;
+  returnptr = CompileGuy.GeneratedCodeLocation;
   EmitD(0); // This too.                     <elseofs>
 
   // Here we begin the loop to write out IF arguements.
@@ -1033,9 +1007,7 @@ ProcessIf()
         EmitC(NONZERO);
       }
       if (TokenIs("&&"))
-      {
         continue;
-      }
       break;
     }
     if (TokenIs("="))
@@ -1064,6 +1036,7 @@ ProcessIf()
     }
     else
     {
+      printf("IF %s\n", token);
       err("error: Unknown IF relational operator");
     }
 
@@ -1071,13 +1044,9 @@ ProcessIf()
 
     GetToken(); // See if there are more arguements
     if (TokenIs("&&"))
-    {
       continue;
-    }
     if (TokenIs(")"))
-    {
       break;
-    }
 
     err("error: &&, AND, or ) expected");
   }
@@ -1085,10 +1054,10 @@ ProcessIf()
   // Now that we've parsed the conditional arguements of the IF, go back to
   // the IF header and set the correct number of arguements.
 
-  buf = cpos;
-  cpos = numargsptr;
+  buf = CompileGuy.GeneratedCodeLocation;
+  CompileGuy.GeneratedCodeLocation = numargsptr;
   EmitC(numargs);
-  cpos = buf;
+  CompileGuy.GeneratedCodeLocation = buf;
 
   if (NextIs("{")) // It's a compound statement.
   {
@@ -1101,19 +1070,19 @@ ProcessIf()
     {
       err("error: } expected, or unknown identifier");
     }
-    buf = cpos;
-    cpos = returnptr;
-    EmitD(buf - code);
-    cpos = buf;
+    buf = CompileGuy.GeneratedCodeLocation;
+    CompileGuy.GeneratedCodeLocation = returnptr;
+    EmitD(buf - CompileGuy.GeneratedCode);
+    CompileGuy.GeneratedCodeLocation = buf;
     return;
   }
   else // Just a single statement.
   {
     HandleExpression();
-    buf = cpos;
-    cpos = returnptr;
-    EmitD(buf - code);
-    cpos = buf;
+    buf = CompileGuy.GeneratedCodeLocation;
+    CompileGuy.GeneratedCodeLocation = returnptr;
+    EmitD(buf - CompileGuy.GeneratedCode);
+    CompileGuy.GeneratedCodeLocation = buf;
   }
 }
 
@@ -1212,20 +1181,21 @@ ProcessFor()
 void
 ProcessWhile()
 {
-  unsigned char numargs = 0, excl = 0;
-  char *buf, *start, *returnptr;
+  u64 numargs = 0;
+  bool64 excl = 0;
+  u8 *buf, *start, *returnptr;
 
   // The WHILE statement is actually pretty easy to do. It basically has an IF
   // header, and then at the bottom of the IF processing, is a GOTO back to the
   // top. So essentially it will continuously loop until the IF is false.
   // It in fact uses an IF opcode.
 
-  start = cpos;
+  start = CompileGuy.GeneratedCodeLocation;
   EmitC(GENERAL_IF);
   Expect("(");
-  numargsptr = cpos;
+  numargsptr = CompileGuy.GeneratedCodeLocation;
   EmitC(0); // We'll come back and fix this. <numargs>
-  returnptr = cpos;
+  returnptr = CompileGuy.GeneratedCodeLocation;
   EmitD(0); // This too.                     <elseofs>
 
   // Here we begin the loop to write out WHILE arguements.
@@ -1259,9 +1229,7 @@ ProcessWhile()
         EmitC(NONZERO);
       }
       if (TokenIs("&&"))
-      {
         continue;
-      }
       break;
     }
     if (TokenIs("="))
@@ -1290,6 +1258,7 @@ ProcessWhile()
     }
     else
     {
+      printf("WHILE %s\n", token);
       err("error: Unknown IF relational operator");
     }
 
@@ -1297,13 +1266,9 @@ ProcessWhile()
 
     GetToken(); // See if there are more arguements
     if (TokenIs("&&"))
-    {
       continue;
-    }
     if (TokenIs(")"))
-    {
       break;
-    }
 
     err("error: &&, AND, or ) expected");
   }
@@ -1311,10 +1276,10 @@ ProcessWhile()
   // Now that we've parsed the conditional arguements of the WHILE, go back to
   // the WHILE header and set the correct number of arguements.
 
-  buf = cpos;
-  cpos = numargsptr;
+  buf = CompileGuy.GeneratedCodeLocation;
+  CompileGuy.GeneratedCodeLocation = numargsptr;
   EmitC(numargs);
-  cpos = buf;
+  CompileGuy.GeneratedCodeLocation = buf;
 
   if (NextIs("{")) // It's a compound statement.
   {
@@ -1328,29 +1293,29 @@ ProcessWhile()
       err("error: } expected, or unknown identifier");
     }
     EmitC(GOTO);
-    EmitD(start - code);
-    buf = cpos;
-    cpos = returnptr;
-    EmitD(buf - code);
-    cpos = buf;
+    EmitD(start - CompileGuy.GeneratedCode);
+    buf = CompileGuy.GeneratedCodeLocation;
+    CompileGuy.GeneratedCodeLocation = returnptr;
+    EmitD(buf - CompileGuy.GeneratedCode);
+    CompileGuy.GeneratedCodeLocation = buf;
     return;
   }
   else // Just a single statement.
   {
     HandleExpression();
     EmitC(GOTO);
-    EmitD(start - code);
-    buf = cpos;
-    cpos = returnptr;
-    EmitD(buf - code);
-    cpos = buf;
+    EmitD(start - CompileGuy.GeneratedCode);
+    buf = CompileGuy.GeneratedCodeLocation;
+    CompileGuy.GeneratedCodeLocation = returnptr;
+    EmitD(buf - CompileGuy.GeneratedCode);
+    CompileGuy.GeneratedCodeLocation = buf;
   }
 }
 
 void
 ProcessSwitch()
 {
-  char *buf, *retrptr;
+  u8 *buf, *retrptr;
 
   // Special thanks for Zeromus for giving me a good idea on how to implement
   // this... Even tho I changed his idea around a bit :)
@@ -1369,17 +1334,17 @@ ProcessSwitch()
     EmitC(CASE);
     EmitOperand();
     Expect(":");
-    retrptr = cpos;
+    retrptr = CompileGuy.GeneratedCodeLocation;
     EmitD(0);
     while (!NextIs("CASE") && !NextIs("}"))
     {
       HandleExpression();
     }
     EmitC(ENDSCRIPT);
-    buf = cpos;
-    cpos = retrptr;
-    EmitD(buf - code);
-    cpos = buf;
+    buf = CompileGuy.GeneratedCodeLocation;
+    CompileGuy.GeneratedCodeLocation = retrptr;
+    EmitD(buf - CompileGuy.GeneratedCode);
+    CompileGuy.GeneratedCodeLocation = buf;
   }
   Expect("}");
   EmitC(ENDSCRIPT);
@@ -1391,15 +1356,16 @@ ProcessGoto()
   EmitC(GOTO);
   GetToken();
   memcpy(&gotos[numgotos].ident, token, 40);
-  if (verbose)
+  if (CompileGuy.IsVerbose)
   {
     printf(
-        "GOTO tagged on line %d at cpos %ld, label %s. \n",
+        "GOTO tagged on line %lld at "
+        "CompileGuy.GeneratedCodeLocation %lld, label %s. \n",
         lines,
-        cpos - code,
+        CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode,
         token);
   }
-  gotos[numgotos].pos = cpos;
+  gotos[numgotos].pos = CompileGuy.GeneratedCodeLocation;
   EmitD(0);
   numgotos++;
   Expect(";");
@@ -1408,9 +1374,11 @@ ProcessGoto()
 void
 ProcessEvent()
 {
+  // printf("*** ProcessEvent\n");
   Expect("{");
   inevent = 1;
-  scriptofstbl[numscripts] = (cpos - code);
+  scriptofstbl[numscripts] =
+      (u32)(CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
   numscripts++;
 
   while (1)
@@ -1476,14 +1444,16 @@ ProcessEvent()
     if (token_type != FUNCTION && NextIs(":"))
     {
       memcpy(labels[numlabels].ident, lasttoken, 40);
-      labels[numlabels].pos = (char *)(cpos - code);
-      if (verbose)
+      labels[numlabels].pos =
+          (u8 *)(CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
+      if (CompileGuy.IsVerbose)
       {
         printf(
-            "label %s found on line %d, cpos: %ld. \n",
+            "label %s found on line %lld, "
+            "CompileGuy.GeneratedCodeLocation: %lld. \n",
             lasttoken,
             lines,
-            cpos - code);
+            CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
       }
       numlabels++;
       Expect(":");
@@ -1497,10 +1467,10 @@ ProcessEvent()
   }
 }
 
-char *
+u8 *
 GetLabelAddr(char *str)
 {
-  int i;
+  u64 i;
 
   for (i = 0; i < numlabels; i++)
   {
@@ -1510,7 +1480,7 @@ GetLabelAddr(char *str)
     }
   }
 
-  sprintf(token, "Undefined label %s.", str);
+  sprintf_s(token, 2048, "Undefined label %s.", str);
   err(token);
   return 0;
 }
@@ -1518,35 +1488,40 @@ GetLabelAddr(char *str)
 void
 ResolveGotos()
 {
-  char *a, *ocp;
-  int i;
+  // printf("ResolveGotos\n");
+  u8 *a, *ocp;
+  u64 i;
 
-  ocp = cpos;
+  ocp = CompileGuy.GeneratedCodeLocation;
   for (i = 0; i < numgotos; i++)
   {
     a = GetLabelAddr(gotos[i].ident);
-    if (verbose)
+    if (CompileGuy.IsVerbose)
     {
       printf(
-          "resolving goto %d (%s) as %s at cpos %ld. \n",
+          "resolving goto %lld (%s) as %s at "
+          "CompileGuy.GeneratedCodeLocation %lld. \n",
           i,
           gotos[i].ident,
           a,
-          gotos[i].pos - code);
+          gotos[i].pos - CompileGuy.GeneratedCode);
     }
-    cpos = gotos[i].pos;
-    EmitD((int)(size_t)a);
+    CompileGuy.GeneratedCodeLocation = gotos[i].pos;
+    EmitD((u64)a);
   }
-  cpos = ocp;
+  CompileGuy.GeneratedCodeLocation = ocp;
 }
 
-char
+bool64
 Parse()
 {
+  // printf("Parse\n");
+
   token[0] = 0;      // clear token-buffer
   ParseWhitespace(); // Sift through any whitespace.
-  if (!*src)
+  if (!*CompileGuy.C)
   {
+    // printf("Parse: EOF\n");
     return 1; // EOF
   }
   GetToken(); // Grab next token
@@ -1556,88 +1531,130 @@ Parse()
     ProcessEvent();
   }
   ParseWhitespace();
-  if (!*src)
+  if (!*CompileGuy.C)
   {
     return 1;
   }
   if (!NextIs(scripttoken) && !iex)
   {
-    if (!quiet)
+    if (!CompileGuy.IsQuiet)
     {
       printf(
-          "warning: Unknown token '%s' outside scripts (%d) \n", token, lines);
+          "warning: Unknown token '%s' outside scripts (%lld) \n",
+          token,
+          lines);
     }
     iex = 1;
   }
   return 0;
 }
 
+// NOTE(aen): Does not include # scripts and script offset table prefix.
 void
-Compile()
+CompileToBuffer(
+    u64 Type,
+    const char *Input,
+    u8 *Output,
+    u64 OutputLimit,
+    u64 *GeneratedByteCount)
 {
-  src = source;
-  cpos = code;
+  switch (Type)
+  {
+    case COMPILE_TYPE_MAP:
+    case COMPILE_TYPE_STARTUP:
+    case COMPILE_TYPE_EFFECT:
+    case COMPILE_TYPE_MAGIC: break;
+    default: Fail("Unknown Type: %d\n", Type);
+  }
+  ASSERT(Input);
+  ASSERT(Output);
 
-  if (effect)
-  {
-    scripttoken = "EFFECT";
-  }
-  else if (scrpt)
-  {
-    scripttoken = "SCRIPT";
-  }
-  else if (magic)
-  {
-    scripttoken = "EFFECT";
-  }
-  else
-  {
-    scripttoken = "EVENT";
-  }
+  // Log("CompileToBuffer: Type %d, Input: %s\n", Type, Input);
 
-  while (!Parse())
-  {
-    ;
-  }
+  Compile(Type, (u8 *)Input, Output);
 
-  ResolveGotos();
+  u64 GeneratedLength =
+      CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode;
+  // Log("GeneratedLength %d\n", GeneratedLength);
+  *GeneratedByteCount = GeneratedLength;
 
-  if (!quiet)
-  {
-    printf(
-        "%d scripts successfully compiled. (%d lines) \n", numscripts, lines);
-  }
+  if (GeneratedLength > OutputLimit)
+    Fail(
+        "Generated %d bytes byte output buffer only has room for %d bytes\n",
+        GeneratedLength,
+        OutputLimit);
+
+  memcpy(Output, CompileGuy.GeneratedCode, GeneratedLength);
+  Output[GeneratedLength] = 0;
 }
 
 void
-InitCompileSystem()
+Compile(u64 Type, u8 *Input, u8 *Output)
 {
-  int i;
+  // Log("Compile\n");
 
-  if (verbose)
+  // NOTE(aen): Very important when compiling a lot, like in tests.
+  numscripts = 0;
+  lines = 1;
+  inevent = 0;
+  iex = 0;
+  funcidx = 0;
+  numlabels = 0;
+  numgotos = 0;
+
+  if (!Input)
+    Input = CompileGuy.Data;
+  if (!Output)
+    Output = CompileGuy.GeneratedCode;
+
+  CompileGuy.Data = Input;
+  CompileGuy.C = Input;
+  CompileGuy.GeneratedCode = Output;
+  CompileGuy.GeneratedCodeLocation = Output;
+
+  switch (Type)
   {
-    printf("Building chr_table[]. \n");
+    case COMPILE_TYPE_MAP: scripttoken = "EVENT"; break;
+    case COMPILE_TYPE_STARTUP: scripttoken = "SCRIPT"; break;
+    case COMPILE_TYPE_EFFECT: scripttoken = "EFFECT"; break;
+    case COMPILE_TYPE_MAGIC: scripttoken = "EFFECT"; break;
   }
+
+  while (!Parse()) {}
+
+  ResolveGotos();
+
+  // if (!CompileGuy.IsQuiet) {
+  //   printf("%lld scripts successfully compiled. (%lld lines) \n", numscripts,
+  //       lines);
+  // }
+}
+
+void
+InitCharTypeLookup()
+{
+  u64 i;
+
+  if (CompileGuy.IsVerbose)
+    printf("Building CharTypeLookup[]. \n");
   for (i = 0; i < 256; i++)
-  {
-    chr_table[i] = SPECIAL;
-  }
+    CharTypeLookup[i] = SPECIAL;
   for (i = '0'; i <= '9'; i++)
-  {
-    chr_table[i] = DIGIT;
-  }
+    CharTypeLookup[i] = DIGIT;
   for (i = 'A'; i <= 'Z'; i++)
-  {
-    chr_table[i] = LETTER;
-  }
+    CharTypeLookup[i] = LETTER;
   for (i = 'a'; i <= 'z'; i++)
-  {
-    chr_table[i] = LETTER;
-  }
+    CharTypeLookup[i] = LETTER;
 
-  chr_table[10] = 0;
-  chr_table[13] = 0;
-  chr_table[' '] = 0;
-  chr_table['_'] = LETTER;
-  chr_table['.'] = LETTER;
+  CharTypeLookup[10] = 0;
+  CharTypeLookup[13] = 0;
+  CharTypeLookup[' '] = 0;
+  CharTypeLookup['_'] = LETTER;
+  CharTypeLookup['.'] = LETTER;
+}
+
+bool64
+IsCharType(u64 C, u64 Type)
+{
+  return CharTypeLookup[C] == Type;
 }

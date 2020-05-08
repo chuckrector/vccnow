@@ -1,0 +1,43 @@
+#include event005.vc event{#include var1005.vc
+#include var2005.vc#include var3005.vc
+Quit(#include str005.vc)#include semi005.vc
+}#include event005.vc
+
+//
+
+03 00 00 00
+00 00 00 00
+03 00 00 00
+26 00 00 00
+
+.event0
+  01 3d           .exec exit
+ff                .end (event0)
+
+.event1
+  02 00           .var0 a
+    01            .set
+    01            .literal
+    01 00 00 00
+    ff            .end (literal)
+  02 01           .var0 b
+  01              .set
+    01            .literal
+    02 00 00 00
+    ff            .end (literal)
+  02 02           .var0 c
+    01            .set
+    01            .literal
+    9a 02 00 00   .666
+    ff            .end (literal)
+  01 3e           .exec quit
+  42 79 65 21 00  .Bye!
+ff                .end (event1)
+
+.event2
+  01 3d           .exec exit
+ff                .end (event2)
+
+//
+
+event{exit();}event{a=1;b=2;c=666;quit("Bye!");}event{exit();}

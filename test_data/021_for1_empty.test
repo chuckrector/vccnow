@@ -1,0 +1,28 @@
+event {
+  for (flags[0], 1, b, 1) {}
+}
+
+//
+
+01 00 00 00       .1 script
+00 00 00 00       .offset 0
+
+.event0
+
+  09              .for1
+  00              .var1 flags
+    01            .literal
+    00 00 00 00
+    ff            .end (literal)
+  01 01 00 00 00 ff
+  02 01 ff        .var0 b
+  01              .sign
+    01            .literal
+    01 00 00 00
+    ff            .end (literal)
+  ff              .end (for0)
+ff                .end (event0)
+
+//
+
+event{for(flags(0),1,b,1){}}

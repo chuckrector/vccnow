@@ -1,0 +1,28 @@
+event {
+  while (1)
+    return;
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+.event0
+  05            .if
+  01            .terms
+  13 00 00 00   .else
+    01            .literal
+    01 00 00 00
+    ff            .end (literal)
+  01            .sign
+  ff            .end (return)
+
+  07            .goto
+  00 00 00 00
+
+ff              .end (event0)
+
+//
+
+event{while(1){return;}}

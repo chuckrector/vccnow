@@ -1,17 +1,18 @@
-#include "code.h"
-#include "compile.h"
+#include "code.hpp"
+#include "compile.hpp"
 
 void
 MagicShop()
 {
-  char *ptr;
-  char *optr;
-  char varctr = 1;
+  u8 *ptr;
+  u8 *optr;
+  u64 varctr = 1;
 
   EmitC(EXEC);
   EmitC(101);
   Expect("(");
-  ptr = cpos;
+  CompileGuy_t *CG = &CompileGuy;
+  ptr = CG->GeneratedCodeLocation;
   EmitC(varctr);
   EmitOperand();
   while (!NextIs(")"))
@@ -20,10 +21,10 @@ MagicShop()
     EmitOperand();
     varctr++;
   }
-  optr = cpos;
-  cpos = ptr;
+  optr = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = ptr;
   EmitC(varctr);
-  cpos = optr;
+  CG->GeneratedCodeLocation = optr;
   Expect(")");
   Expect(";");
 }
