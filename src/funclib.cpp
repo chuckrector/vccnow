@@ -13,8 +13,8 @@
 // **********************************************************************
 
 #include "funclib.hpp"
-#include "code.hpp"
 #include "compile.hpp"
+#include "op_codes.hpp"
 
 /*  --  Added by Ric --
  * Added functions:
@@ -50,20 +50,18 @@
 /* -- -- */
 
 void
-GenericFunc(u64 idcode, u64 numargs)
+GenericFunc(u64 IdCode, u64 NumArgs)
 {
-  u64 i;
-
   EmitC(EXEC);
-  EmitC(idcode);
-  if (!numargs)
+  EmitC(IdCode);
+  if (!NumArgs)
   {
     Expect("(");
     Expect(")");
     Expect(";");
     return;
   }
-  if (numargs == 1)
+  if (NumArgs == 1)
   {
     Expect("(");
     EmitOperand();
@@ -71,8 +69,8 @@ GenericFunc(u64 idcode, u64 numargs)
     Expect(";");
     return;
   }
-  Expect("("); // numargs is greater than 1
-  for (i = 1; i < numargs; i++)
+  Expect("("); // NumArgs is greater than 1
+  for (u64 Index = 1; Index < NumArgs; Index++)
   {
     EmitOperand();
     Expect(",");
@@ -89,7 +87,7 @@ MapSwitch()
   EmitC(1);    // Emit which function code to exec.
   Expect("(");
   GetString();
-  EmitString(token); // Emit the map filename.
+  EmitString(GlobalToken); // Emit the map filename.
   Expect(",");
   EmitOperand();
   Expect(",");
@@ -145,13 +143,13 @@ Text()
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -170,7 +168,7 @@ PlayMusic()
   EmitC(11);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -182,7 +180,7 @@ Banner()
   EmitC(18);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   EmitOperand();
   Expect(")");
@@ -198,21 +196,21 @@ Prompt()
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -220,26 +218,25 @@ Prompt()
 void
 ChainEvent()
 {
-  u8 *ptr, *optr;
-  u64 varctr = 0;
+  u64 NumArgs = 0;
 
   EmitC(EXEC);
   EmitC(23);
   Expect("(");
-  CompileGuy_t *CG = &CompileGuy;
-  ptr = CG->GeneratedCodeLocation;
-  EmitC(varctr);
+  compile_guy *CG = &CompileGuy;
+  u8 *NumArgsPointer = CG->GeneratedCodeLocation;
+  EmitC(NumArgs);
   EmitOperand();
   while (!NextIs(")"))
   {
     Expect(",");
     EmitOperand();
-    varctr++;
+    NumArgs++;
   }
-  optr = CG->GeneratedCodeLocation;
-  CG->GeneratedCodeLocation = ptr;
-  EmitC(varctr);
-  CG->GeneratedCodeLocation = optr;
+  u8 *SavePointer = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = NumArgsPointer;
+  EmitC(NumArgs);
+  CG->GeneratedCodeLocation = SavePointer;
   Expect(")");
   Expect(";");
 }
@@ -247,26 +244,25 @@ ChainEvent()
 void
 CallEvent()
 {
-  u8 *ptr, *optr;
-  u64 varctr = 0;
+  u64 NumArgs = 0;
 
   EmitC(EXEC);
   EmitC(24);
   Expect("(");
-  CompileGuy_t *CG = &CompileGuy;
-  ptr = CG->GeneratedCodeLocation;
-  EmitC(varctr);
+  compile_guy *CG = &CompileGuy;
+  u8 *NumArgsPointer = CG->GeneratedCodeLocation;
+  EmitC(NumArgs);
   EmitOperand();
   while (!NextIs(")"))
   {
     Expect(",");
     EmitOperand();
-    varctr++;
+    NumArgs++;
   }
-  optr = CG->GeneratedCodeLocation;
-  CG->GeneratedCodeLocation = ptr;
-  EmitC(varctr);
-  CG->GeneratedCodeLocation = optr;
+  u8 *SavePointer = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = NumArgsPointer;
+  EmitC(NumArgs);
+  CG->GeneratedCodeLocation = SavePointer;
   Expect(")");
   Expect(";");
 }
@@ -280,13 +276,13 @@ SText()
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -294,26 +290,25 @@ SText()
 void
 Shop()
 {
-  u8 *ptr, *optr;
-  u64 varctr = 1;
+  u64 NumArgs = 1;
 
   EmitC(EXEC);
   EmitC(47);
   Expect("(");
-  CompileGuy_t *CG = &CompileGuy;
-  ptr = CG->GeneratedCodeLocation;
-  EmitC(varctr);
+  compile_guy *CG = &CompileGuy;
+  u8 *NumArgsPointer = CG->GeneratedCodeLocation;
+  EmitC(NumArgs);
   EmitOperand();
   while (!NextIs(")"))
   {
     Expect(",");
     EmitOperand();
-    varctr++;
+    NumArgs++;
   }
-  optr = CG->GeneratedCodeLocation;
-  CG->GeneratedCodeLocation = ptr;
-  EmitC(varctr);
-  CG->GeneratedCodeLocation = optr;
+  u8 *SavePointer = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = NumArgsPointer;
+  EmitC(NumArgs);
+  CG->GeneratedCodeLocation = SavePointer;
   Expect(")");
   Expect(";");
 }
@@ -327,7 +322,7 @@ ChangeCHR()
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -339,7 +334,7 @@ VCPutPCX()
   EmitC(51);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   EmitOperand();
   Expect(",");
@@ -355,7 +350,7 @@ VCLoadPCX()
   EmitC(54);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   EmitOperand();
   Expect(")");
@@ -369,7 +364,7 @@ PlayFLI()
   EmitC(56);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -385,7 +380,7 @@ VCText()
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -397,7 +392,7 @@ Quit()
   EmitC(62);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -411,7 +406,7 @@ VCCenterText()
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -423,7 +418,7 @@ Sys_DisplayPCX()
   EmitC(67);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -435,7 +430,7 @@ NewGame()
   EmitC(70);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -447,7 +442,7 @@ PartyMove()
   EmitC(73);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -461,7 +456,7 @@ EntityMove()
   EmitOperand();
   Expect(",");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(")");
   Expect(";");
 }
@@ -473,7 +468,7 @@ VCLoadRaw()
   EmitC(79);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   EmitOperand();
   Expect(",");
@@ -485,9 +480,9 @@ VCLoadRaw()
 }
 
 void
-OutputCode(u64 idx)
+OutputCode(u64 FunctionIndex)
 {
-  switch (idx)
+  switch (FunctionIndex)
   {
     case 0: MapSwitch(); break;
     case 1: GenericFunc(2, 3); break; // warp

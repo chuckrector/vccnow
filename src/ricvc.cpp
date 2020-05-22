@@ -1,5 +1,5 @@
-#include "code.hpp"
 #include "compile.hpp"
+#include "op_codes.hpp"
 
 /*  -- Ric's extensions to VCLIB.C --
  * Copyright (C)1998 Richard Lau
@@ -10,13 +10,13 @@
  */
 
 void
-CallVCScript(u64 idcode)
+CallVCScript(u64 IdCode)
 {
   u8 *ptr, *optr;
   u64 varctr = 0;
 
   EmitC(EXEC);
-  EmitC(idcode);
+  EmitC(IdCode);
   Expect("(");
   ptr = CompileGuy.GeneratedCodeLocation;
   EmitC(varctr);
@@ -36,13 +36,12 @@ CallVCScript(u64 idcode)
 }
 
 void
-TextMenu(u64 idcode)
+TextMenu(u64 IdCode)
 {
-  u8 *ptr, *optr;
-  u64 varctr = 1;
+  u64 NumArgs = 1;
 
   EmitC(EXEC);
-  EmitC(idcode);
+  EmitC(IdCode);
   Expect("(");
   EmitOperand(); // x
   Expect(",");
@@ -50,59 +49,58 @@ TextMenu(u64 idcode)
   Expect(",");
   EmitOperand(); // flagidx
   Expect(",");
-  EmitOperand(); // ptr
+  EmitOperand(); // NumArgsPointer
   Expect(",");
 
-  ptr = CompileGuy.GeneratedCodeLocation;
-  EmitC(varctr);
+  u8 *NumArgsPointer = CompileGuy.GeneratedCodeLocation;
+  EmitC(NumArgs);
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   while (!NextIs(")"))
   {
     Expect(",");
     GetString();
-    EmitString(token);
-    varctr++;
+    EmitString(GlobalToken);
+    NumArgs++;
   }
-  optr = CompileGuy.GeneratedCodeLocation;
-  CompileGuy.GeneratedCodeLocation = ptr;
-  EmitC(varctr);
-  CompileGuy.GeneratedCodeLocation = optr;
+  u8 *SavePointer = CompileGuy.GeneratedCodeLocation;
+  CompileGuy.GeneratedCodeLocation = NumArgsPointer;
+  EmitC(NumArgs);
+  CompileGuy.GeneratedCodeLocation = SavePointer;
   Expect(")");
   Expect(";");
 }
 
 void
-VCTextBox(u64 idcode)
+VCTextBox(u64 IdCode)
 {
-  u8 *ptr, *optr;
-  u64 varctr = 1;
+  u64 NumArgs = 1;
 
   EmitC(EXEC);
-  EmitC(idcode);
+  EmitC(IdCode);
   Expect("(");
   EmitOperand(); // x
   Expect(",");
   EmitOperand(); // y
   Expect(",");
-  EmitOperand(); // ptr
+  EmitOperand(); // NumArgsPointer
   Expect(",");
 
-  ptr = CompileGuy.GeneratedCodeLocation;
-  EmitC(varctr);
+  u8 *NumArgsPointer = CompileGuy.GeneratedCodeLocation;
+  EmitC(NumArgs);
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   while (!NextIs(")"))
   {
     Expect(",");
     GetString();
-    EmitString(token);
-    varctr++;
+    EmitString(GlobalToken);
+    NumArgs++;
   }
-  optr = CompileGuy.GeneratedCodeLocation;
-  CompileGuy.GeneratedCodeLocation = ptr;
-  EmitC(varctr);
-  CompileGuy.GeneratedCodeLocation = optr;
+  u8 *SavePointer = CompileGuy.GeneratedCodeLocation;
+  CompileGuy.GeneratedCodeLocation = NumArgsPointer;
+  EmitC(NumArgs);
+  CompileGuy.GeneratedCodeLocation = SavePointer;
   Expect(")");
   Expect(";");
 }

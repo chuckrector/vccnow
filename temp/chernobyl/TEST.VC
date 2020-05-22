@@ -1,0 +1,174 @@
+#include globals.h
+
+Event //0
+{
+ SavPMode()=0;
+ SavPMult()=1;
+ SavPDiv()=1;
+
+ DrawParty=0;
+ LayerVC=1;
+ Layer1Trans=1;
+ CameraTracking=0;
+ TimerAnimate=1;
+ XWin=0;
+ YWin=4;
+ ReDraw();
+
+ CurMusic()=32;
+ Flags[6007]=32;
+ FadeIn(20);
+
+ GetMagic(4,1);
+ For (x,3,4,1) {GiveXP(x,19);}
+ GiveXP(1,71);
+ For (x,1,4,1) {GiveXP(x,1);} // there's a goofy bug if a character has 0XP
+
+ for (x,1,3,1)
+  {GetItem(1,2); GetItem(1,1);}
+ GetItem(1,20);
+ ForceEquip(1,14);
+ ForceEquip(1,15);
+ ForceEquip(3,14);
+ ForceEquip(4,14);
+ ForceEquip(3,11);
+ ForceEquip(4,11);
+
+ ForceEquip(2,17);
+
+ ChainEvent(1);
+}
+
+Event //1
+{
+ ReadControls(); if (b1) goto SkipIt;
+ VCClear();
+
+ VCCenterText(0,"This is the world that Andy built.");
+ Wait(100);
+ VCCenterText(9,"In this world, Andy reigns supreme.");
+ Wait(150);
+ VCCenterText(18,"This is the story Andy wrote.");
+ Wait(150);       
+ VCCenterText(27,"It is set in the world that Andy built.");
+ Wait(200);
+
+ VCClear();
+
+ VCCenterText(0,"The west is a paradise.Everyone is");
+ Wait(100);
+ VCCenterText(9,"smart, there is no poverty or famine,");
+ Wait(100);
+ VCCenterText(18,"nobody smokes and shooting JW's is");
+ for(x,0,50,1)
+  {
+  XWin++;
+  ReDraw();
+  }
+ VCCenterText(27,"based upon a point system.");
+ For (x,0,150,1)
+   {
+   XWin++;
+   ReDraw();
+   }
+
+ VCClear();
+ VCCenterText(0,"Further to the East lies the Great");
+ VCCenterText(9,"Wall.  It was put there to keep the");
+ VCCenterText(18,"`undesirable element' out and to");
+ VCCenterText(27,"serve as a waystation for registered");
+ VCCenterText(36,"hunters.");
+
+ For (x,0,150,1)
+   {
+   XWin++;
+   ReDraw();
+   }
+
+ Wait(200);
+
+ VCClear();
+ For (x,0,25,1)
+   {
+   XWin++;
+   ReDraw();
+   }
+
+ y=0; x=0; z=0;
+ 
+ VCCenterText(0,"No one knows why they are the way they");
+ For (x,0,20,1)
+   {
+   XWin++;
+   ReDraw();
+   y++;
+   z=(y*2)/3;
+   PaletteMorph(0,0,0,z,63);
+   }
+
+ VCCenterText(9,"are, but everyone has accepted the fact");
+ For (x,0,20,1)
+   {
+   XWin++;
+   Wait(3);
+   y++;
+   z=(y*2)/3;
+   PaletteMorph(0,0,0,z,63);
+   }
+
+ VCCenterText(18,"that that's the way they are. Unfit");
+ For (x,0,20,1)
+   {
+   XWin++;
+   Wait(3);
+   y++;
+   z=(y*2)/3;
+   PaletteMorph(0,0,0,z,63);
+   }
+//                         1111111111222222222233333333334444444444
+//                1234567890123456789012345678901234567890123456789
+ VCCenterText(27,"for the high society in the West,");
+ For (x,0,20,1)
+   {
+   XWin++;
+   Wait(4);
+   y++;
+   z=(y*2)/3;
+   PaletteMorph(0,0,0,z,63);
+   }
+
+ VCCenterText(36,"these `defects' were sealed up in...");
+ For (x,0,20,1)
+   {
+   XWin++;
+   Wait(4);
+   y++;
+   z=(y*2)/3;
+   PaletteMorph(0,0,0,z,63);          
+   }
+
+ VCClear();
+ FontColor=36;
+ VCCenterText(0,"Chernobyl");
+ FontColor=31;
+ For (x,25,50,1)
+   {
+   XWin++;
+   Wait(4);
+   y++;
+   z=(y*2)/3;
+   PaletteMorph(0,0,0,z,63);
+   }
+
+SkipIt:
+ TimerAnimate=0;
+ CameraTracking=1;
+ LayerVC=0;
+ DrawParty=1;
+ EnableMenu();
+ Layer1Trans=0;
+
+ FadeOut(1);
+ GlobalX()=29; GlobalY()=19;
+ MapSwitch("factory.map",0,0,1);
+}

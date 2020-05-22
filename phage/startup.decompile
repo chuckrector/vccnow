@@ -1,0 +1,291 @@
+
+.event 0
+* 00 00 00 00               01 0b .exec PlayMusic
+  02 00 00 00                     "ZOOLRAVE.MOD"
+
+              5a 4f 4f 4c 52 41 56 45 
+              2e 4d 4f 44 00 
+  0f 00 00 00               01 43 .exec Sys_DisplayPcx
+  11 00 00 00                     "verge320.pcx"
+
+              76 65 72 67 65 33 32 30 
+              2e 70 63 78 00 
+  1e 00 00 00               01 45 .exec VgaDump
+  20 00 00 00               01 0f .exec FadeIn
+  22 00 00 00                  01 .literal
+  23 00 00 00         64 00 00 00 100
+  27 00 00 00                  ff .end (operand)
+  28 00 00 00               01 48 .exec Delay
+  2a 00 00 00                  01 .literal
+  2b 00 00 00         64 00 00 00 100
+  2f 00 00 00                  ff .end (operand)
+  30 00 00 00               01 10 .exec FadeOut
+  32 00 00 00                  01 .literal
+  33 00 00 00         64 00 00 00 100
+  37 00 00 00                  ff .end (operand)
+  38 00 00 00               01 43 .exec Sys_DisplayPcx
+  3a 00 00 00                     "phagblnk.pcx"
+
+              70 68 61 67 62 6c 6e 6b 
+              2e 70 63 78 00 
+  47 00 00 00               01 45 .exec VgaDump
+  49 00 00 00               01 0f .exec FadeIn
+  4b 00 00 00                  01 .literal
+  4c 00 00 00         64 00 00 00 100
+  50 00 00 00                  ff .end (operand)
+  51 00 00 00               01 48 .exec Delay
+  53 00 00 00                  01 .literal
+  54 00 00 00         64 00 00 00 100
+  58 00 00 00                  ff .end (operand)
+  59 00 00 00               01 43 .exec Sys_DisplayPcx
+  5b 00 00 00                     "phageanx.pcx"
+
+              70 68 61 67 65 61 6e 78 
+              2e 70 63 78 00 
+  68 00 00 00               01 45 .exec VgaDump
+  6a 00 00 00               01 48 .exec Delay
+  6c 00 00 00                  01 .literal
+  6d 00 00 00         0a 00 00 00 10
+  71 00 00 00                  ff .end (operand)
+  72 00 00 00               01 43 .exec Sys_DisplayPcx
+  74 00 00 00                     "phageany.pcx"
+
+              70 68 61 67 65 61 6e 79 
+              2e 70 63 78 00 
+  81 00 00 00               01 45 .exec VgaDump
+  83 00 00 00               01 48 .exec Delay
+  85 00 00 00                  01 .literal
+  86 00 00 00         0a 00 00 00 10
+  8a 00 00 00                  ff .end (operand)
+  8b 00 00 00               01 43 .exec Sys_DisplayPcx
+  8d 00 00 00                     "phageanz.pcx"
+
+              70 68 61 67 65 61 6e 7a 
+              2e 70 63 78 00 
+  9a 00 00 00               01 45 .exec VgaDump
+  9c 00 00 00               01 48 .exec Delay
+  9e 00 00 00                  01 .literal
+  9f 00 00 00         0a 00 00 00 10
+  a3 00 00 00                  ff .end (operand)
+  a4 00 00 00               01 43 .exec Sys_DisplayPcx
+  a6 00 00 00                     "phagean0.pcx"
+
+              70 68 61 67 65 61 6e 30 
+              2e 70 63 78 00 
+  b3 00 00 00               01 45 .exec VgaDump
+  b5 00 00 00               01 48 .exec Delay
+  b7 00 00 00                  01 .literal
+  b8 00 00 00         64 00 00 00 100
+  bc 00 00 00                  ff .end (operand)
+  bd 00 00 00               01 43 .exec Sys_DisplayPcx
+  bf 00 00 00                     "phagean1.pcx"
+
+              70 68 61 67 65 61 6e 31 
+              2e 70 63 78 00 
+  cc 00 00 00               01 45 .exec VgaDump
+  ce 00 00 00               01 48 .exec Delay
+  d0 00 00 00                  01 .literal
+  d1 00 00 00         0a 00 00 00 10
+  d5 00 00 00                  ff .end (operand)
+  d6 00 00 00               01 43 .exec Sys_DisplayPcx
+  d8 00 00 00                     "phagean2.pcx"
+
+              70 68 61 67 65 61 6e 32 
+              2e 70 63 78 00 
+  e5 00 00 00               01 45 .exec VgaDump
+  e7 00 00 00               01 48 .exec Delay
+  e9 00 00 00                  01 .literal
+  ea 00 00 00         0a 00 00 00 10
+  ee 00 00 00                  ff .end (operand)
+  ef 00 00 00               01 43 .exec Sys_DisplayPcx
+  f1 00 00 00                     "phagean3.pcx"
+
+              70 68 61 67 65 61 6e 33 
+              2e 70 63 78 00 
+  fe 00 00 00               01 45 .exec VgaDump
+  00 01 00 00               01 48 .exec Delay
+  02 01 00 00                  01 .literal
+  03 01 00 00         0a 00 00 00 10
+  07 01 00 00                  ff .end (operand)
+  08 01 00 00               01 43 .exec Sys_DisplayPcx
+  0a 01 00 00                     "phagean4.pcx"
+
+              70 68 61 67 65 61 6e 34 
+              2e 70 63 78 00 
+  17 01 00 00               01 45 .exec VgaDump
+  19 01 00 00               01 48 .exec Delay
+  1b 01 00 00                  01 .literal
+  1c 01 00 00         0a 00 00 00 10
+  20 01 00 00                  ff .end (operand)
+  21 01 00 00               01 43 .exec Sys_DisplayPcx
+  23 01 00 00                     "phagean5.pcx"
+
+              70 68 61 67 65 61 6e 35 
+              2e 70 63 78 00 
+  30 01 00 00               01 45 .exec VgaDump
+  32 01 00 00               01 48 .exec Delay
+  34 01 00 00                  01 .literal
+  35 01 00 00         0a 00 00 00 10
+  39 01 00 00                  ff .end (operand)
+  3a 01 00 00               01 43 .exec Sys_DisplayPcx
+  3c 01 00 00                     "phagean6.pcx"
+
+              70 68 61 67 65 61 6e 36 
+              2e 70 63 78 00 
+  49 01 00 00               01 45 .exec VgaDump
+  4b 01 00 00               01 48 .exec Delay
+  4d 01 00 00                  01 .literal
+  4e 01 00 00         0a 00 00 00 10
+  52 01 00 00                  ff .end (operand)
+  53 01 00 00               01 43 .exec Sys_DisplayPcx
+  55 01 00 00                     "phagean7.pcx"
+
+              70 68 61 67 65 61 6e 37 
+              2e 70 63 78 00 
+  62 01 00 00               01 45 .exec VgaDump
+  64 01 00 00               01 48 .exec Delay
+  66 01 00 00                  01 .literal
+  67 01 00 00         0a 00 00 00 10
+  6b 01 00 00                  ff .end (operand)
+  6c 01 00 00               01 43 .exec Sys_DisplayPcx
+  6e 01 00 00                     "phagean8.pcx"
+
+              70 68 61 67 65 61 6e 38 
+              2e 70 63 78 00 
+  7b 01 00 00               01 45 .exec VgaDump
+  7d 01 00 00               01 48 .exec Delay
+  7f 01 00 00                  01 .literal
+  80 01 00 00         0a 00 00 00 10
+  84 01 00 00                  ff .end (operand)
+  85 01 00 00               01 43 .exec Sys_DisplayPcx
+  87 01 00 00                     "phageop3.pcx"
+
+              70 68 61 67 65 6f 70 33 
+              2e 70 63 78 00 
+  94 01 00 00               01 45 .exec VgaDump
+  96 01 00 00               01 48 .exec Delay
+  98 01 00 00                  01 .literal
+  99 01 00 00         64 00 00 00 100
+  9d 01 00 00                  ff .end (operand)
+  9e 01 00 00               01 5b .exec BindKey
+  a0 01 00 00                  01 .literal
+  a1 01 00 00         30 00 00 00 48
+  a5 01 00 00                  ff .end (operand)
+  a6 01 00 00                  01 .literal
+  a7 01 00 00         01 00 00 00 1
+  ab 01 00 00                  ff .end (operand)
+  ac 01 00 00               01 44 .exec OldStartupMenu
+  ae 01 00 00                  ff .end (return)
+  af 01 00 00                  ff .end (return)
+if0
+ :b0 01 00 00               05 01 .if [terms=1]
+  b2 01 00 00         21 02 00 00 .else
+ParseIfTerm: C >= CurrentScriptEnd after parsing operand, bailing...
+  b6 01 00 00               03 00 .var1 FLAGS
+  b8 01 00 00                  01 .set
+[ParseFailure] NewParseExpression: Illegal opcode 32
+Parse failure. Attempting to recover...
+Negative bytes left: -3. Skipping to next event...
+
+.event 1
+* b6 01 00 00               03 00 .var1 FLAGS
+  b8 01 00 00                  01 .literal
+  b9 01 00 00         20 03 00 00 800
+  bd 01 00 00                     
+Parse failure. Attempting to recover...
+ParseFailure: Skipping past next 0xff byte
+Skipped Bytes
+	ff 
+Retry parsing the rest of event 1
+
+.event 1
+* bf 01 00 00               03 01 .var1 FACING
+  c1 01 00 00                  01 .literal
+  c2 01 00 00         00 00 00 ff -16777216
+  c6 01 00 00                  02 .sub -
+[ParseFailure] ParseOperandArg: Unknown op 47
+  c7 01 00 00                     
+Parse failure. Attempting to recover...
+ParseFailure: Skipping past next 0xff byte
+Skipped Bytes
+	01 01 01 00 00 00 ff 
+Retry parsing the rest of event 1
+
+.event 1
+* cf 01 00 00               01 50 .exec VcBox
+  d1 01 00 00                  01 .literal
+  d2 01 00 00         9b 00 00 00 155
+  d6 01 00 00                  ff .end (operand)
+  d7 01 00 00                  01 .literal
+  d8 01 00 00         01 00 00 00 1
+  dc 01 00 00                  ff .end (operand)
+  dd 01 00 00                  01 .literal
+  de 01 00 00         09 01 00 00 265
+  e2 01 00 00                  ff .end (operand)
+  e3 01 00 00                  01 .literal
+  e4 01 00 00         28 00 00 00 40
+  e8 01 00 00                  ff .end (operand)
+  e9 01 00 00               01 3b .exec VcText
+  eb 01 00 00                  01 .literal
+  ec 01 00 00         a0 00 00 00 160
+  f0 01 00 00                  ff .end (operand)
+  f1 01 00 00                  01 .literal
+  f2 01 00 00         0a 00 00 00 10
+  f6 01 00 00                  ff .end (operand)
+  f7 01 00 00                     "Spell Points"
+
+              53 70 65 6c 6c 20 50 6f 
+              69 6e 74 73 00 
+  04 02 00 00               01 4e .exec VcTextNum
+  06 02 00 00                  01 .literal
+  07 02 00 00         a0 00 00 00 160
+  0b 02 00 00                  ff .end (operand)
+  0c 02 00 00                  01 .literal
+  0d 02 00 00         19 00 00 00 25
+  11 02 00 00                  ff .end (operand)
+  12 02 00 00               03 00 .var1 FLAGS
+  14 02 00 00                  01 .literal
+  15 02 00 00         bf 02 00 00 703
+  19 02 00 00                  ff .end (operand)
+  1a 02 00 00                  ff .end (operand)
+  1b 02 00 00               01 5c .exec TextMenu
+  1d 02 00 00                  01 .literal
+  1e 02 00 00         04 00 00 00 4
+  22 02 00 00                  ff .end (operand)
+  23 02 00 00                  01 .literal
+  24 02 00 00         04 00 00 00 4
+  28 02 00 00                  ff .end (operand)
+  29 02 00 00                  01 .literal
+  2a 02 00 00         c8 00 00 00 200
+  2e 02 00 00                  ff .end (operand)
+  2f 02 00 00                  01 .literal
+  30 02 00 00         01 00 00 00 1
+  34 02 00 00                  ff .end (operand)
+  36 02 00 00                     "No Battles"
+
+              4e 6f 20 42 61 74 74 6c 
+              65 73 00 
+  41 02 00 00                     "Battles"
+
+              42 61 74 74 6c 65 73 00 
+if1
+ :49 02 00 00               05 01 .if [terms=1]
+  4b 02 00 00         70 02 00 00 .else
+  4f 02 00 00               03 00 .var1 FLAGS
+  51 02 00 00                  01 .literal
+  52 02 00 00         20 03 00 00 800
+  56 02 00 00                  ff .end (operand)
+  57 02 00 00                  ff .end (operand)
+  59 02 00 00                  03 .if-sign-nonzero
+  59 02 00 00                  01 .literal
+  5a 02 00 00         01 00 00 00 1
+  5e 02 00 00                  ff .end (operand)
+  5f 02 00 00               01 39 .exec VcClear
+  61 02 00 00               02 2f .var0 LAYERVC
+  63 02 00 00                  01 .set
+  64 02 00 00                  01 .literal
+  65 02 00 00         00 00 00 00 0
+  69 02 00 00                  ff .end (operand)
+  6a 02 00 00                  ff .end (return)
+[ParseFailure] NewParseExpression: Illegal opcode 0
+Parse failure. Attempting to recover...

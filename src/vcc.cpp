@@ -26,10 +26,10 @@ PreStartupFiles(const char *FilenameWithoutExtension)
   if (L > 3 && !strcmp(".vc", FilenameWithoutExtension + (L - 3))) {}
   else
     strcpy_s(TempBuffer + strlen(TempBuffer), TEMP_BUFFER_SIZE, ".vc");
-  CompileGuy.BasePath = new char[TEMP_BUFFER_SIZE];
+  CompileGuy.BasePath = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
   strcpy_s(CompileGuy.BasePath, TEMP_BUFFER_SIZE, TempBuffer);
 
-  u8 *P = new u8[WORKING_MEMORY_TOTAL_SIZE];
+  u8 *P = (u8 *)NewTempBuffer(WORKING_MEMORY_TOTAL_SIZE);
   // memset(P, 0, WORKING_MEMORY_TOTAL_SIZE);
   CompileGuy.WorkingMemory = P;
   CompileGuy.Data = P + 0;
@@ -56,13 +56,13 @@ PreStartupFiles(const char *FilenameWithoutExtension)
 
 // NOTE(aen): Returns # of bytes written.
 void
-WriteScriptOffsetTableToBuffer(Buffer_t *Output)
+WriteScriptOffsetTableToBuffer(buffer *Output)
 {
   // Log("WriteScriptOffsetTableToBuffer\n");
   u32 *P = (u32 *)Output->Data;
-  *P++ = (u32)numscripts;
-  memcpy(P, scriptofstbl, 4 * numscripts);
-  Output->Length = 4 + (4 * numscripts);
+  *P++ = (u32)GlobalNumScripts;
+  memcpy(P, GlobalScriptOffsetTable, 4 * GlobalNumScripts);
+  Output->Length = 4 + (4 * GlobalNumScripts);
 }
 
 void
@@ -72,8 +72,8 @@ WriteMagicOutput()
   FILE *f;
 
   fopen_s(&f, "magic.vcs", "wb");
-  fwrite(&numscripts, 1, 4, f);
-  fwrite(scriptofstbl, 4, numscripts, f);
+  fwrite(&GlobalNumScripts, 1, 4, f);
+  fwrite(GlobalScriptOffsetTable, 4, GlobalNumScripts, f);
   fwrite(
       CompileGuy.GeneratedCode,
       1,
@@ -92,8 +92,8 @@ WriteEffectOutput()
   FILE *f;
 
   fopen_s(&f, "effects.vcs", "wb");
-  fwrite(&numscripts, 1, 4, f);
-  fwrite(scriptofstbl, 4, numscripts, f);
+  fwrite(&GlobalNumScripts, 1, 4, f);
+  fwrite(GlobalScriptOffsetTable, 4, GlobalNumScripts, f);
   fwrite(
       CompileGuy.GeneratedCode,
       1,
@@ -112,8 +112,8 @@ WriteScriptOutput()
   FILE *f;
 
   fopen_s(&f, "startup.vcs", "wb");
-  fwrite(&numscripts, 1, 4, f);
-  fwrite(&scriptofstbl, 4, numscripts, f);
+  fwrite(&GlobalNumScripts, 1, 4, f);
+  fwrite(&GlobalScriptOffsetTable, 4, GlobalNumScripts, f);
   fwrite(
       CompileGuy.GeneratedCode,
       1,
@@ -129,12 +129,14 @@ void
 WriteOutput(const char *FilenameWithoutExtension)
 {
   // printf("WriteOutput %s\n", FilenameWithoutExtension);
-  ASSERT(FilenameWithoutExtension);
+  Assert(FilenameWithoutExtension);
 
-  FILE *f;
-  char i;
-  short int mx, my;
-  int a;
+  FILE *File;
+  u16 MapWidth;
+  u16 MapHeight;
+  u32 NumEntities;
+  u8 NumMovementScripts;
+  u32 MovementScriptBufferSize;
 
   char NoExt[1024];
   char VcFilename[1024];
@@ -151,16 +153,16 @@ WriteOutput(const char *FilenameWithoutExtension)
 
   if (Exist(MapFilename))
   {
-    fopen_s(&f, MapFilename, "rb+");
-    fseek(f, 68, 0);
-    fread(&mx, 1, 2, f);
-    fread(&my, 1, 2, f);
-    fseek(f, 100 + (mx * my * 5) + 7956, 0);
-    fread(&a, 1, 4, f);
-    fseek(f, 88 * a, 1);
-    fread(&i, 1, 1, f);
-    fread(&a, 1, 4, f);
-    fseek(f, (i * 4) + a, 1);
+    fopen_s(&File, MapFilename, "rb+");
+    fseek(File, 68, 0);
+    fread(&MapWidth, 1, 2, File);
+    fread(&MapHeight, 1, 2, File);
+    fseek(File, 100 + (MapWidth * MapHeight * 5) + 7956, 0);
+    fread(&NumEntities, 1, 4, File);
+    fseek(File, 88 * NumEntities, 1);
+    fread(&NumMovementScripts, 1, 1, File);
+    fread(&MovementScriptBufferSize, 1, 4, File);
+    fseek(File, (NumMovementScripts * 4) + MovementScriptBufferSize, 1);
   }
   else
   {
@@ -168,19 +170,19 @@ WriteOutput(const char *FilenameWithoutExtension)
     sprintf_s(Temp, 1024, "%s.compiled", NoExt);
     printf("%s not found, falling back to %s\n", MapFilename, Temp);
 
-    fopen_s(&f, Temp, "wb+");
+    fopen_s(&File, Temp, "wb+");
   }
 
   u64 NumCompiledBytes =
       CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode;
   Log("Writing %lld scripts, %lld compiled bytes...",
-      numscripts,
+      GlobalNumScripts,
       NumCompiledBytes);
-  fwrite(&numscripts, 1, 4, f);
-  fwrite(scriptofstbl, 4, numscripts, f);
-  fwrite(CompileGuy.GeneratedCode, 1, NumCompiledBytes, f);
+  fwrite(&GlobalNumScripts, 1, 4, File);
+  fwrite(GlobalScriptOffsetTable, 4, GlobalNumScripts, File);
+  fwrite(CompileGuy.GeneratedCode, 1, NumCompiledBytes, File);
   Log("OK\n");
-  fclose(f);
+  fclose(File);
 
   // if (Exist("error.txt")) {
   //   printf("error.txt exists, removing...\n");

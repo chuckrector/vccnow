@@ -1,0 +1,176 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  for (x, 141, 144, 1)
+  {
+    flags(x) = 0;
+  }
+}
+event
+{
+  if (flags(141) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(141) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 491, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (flags(142) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(142) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 493, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (flags(143) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(143) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 495, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (flags(144) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(144) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 497, 1);
+    changezone(x, y, 0);
+  }
+}
+event { callevent(1, 1); }
+event { callevent(1, 2); }
+event { callevent(1, 50); }
+event { callevent(2, 38); }
+event { callevent(2, 39); }
+event { callevent(2, 65); }
+event { callevent(3, 66); }
+event { callevent(3, 69); }
+event { callevent(3, 53); }
+event { callevent(4, 77); }
+event { mapswitch("greatfor.map", 150, 104, 0); }

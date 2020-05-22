@@ -8,7 +8,7 @@ event {
 00 00 00 00
 
   05            .if
-  01            .args
+  01            .terms
   0f 00 00 00   .else
   01            .literal
     01 00 00 00
@@ -20,4 +20,4 @@ ff              .end (event)
 
 //
 
-event{if(1){vgadump();}}
+event/*0*/{if(1){vgadump();}}

@@ -1,0 +1,510 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(801) = 1;
+  if (flags(280) == 1)
+  {
+    alterbtile(29, 18, 701, 2);
+    changezone(29, 18, 0);
+  }
+  if (flags(281) == 1)
+  {
+    alterbtile(46, 37, 701, 2);
+    changezone(46, 37, 0);
+  }
+  if (flags(282) == 1)
+  {
+    alterbtile(48, 37, 701, 2);
+    changezone(48, 37, 0);
+  }
+  if (flags(283) == 1)
+  {
+    alterbtile(50, 37, 701, 2);
+    changezone(50, 37, 0);
+  }
+}
+event
+{
+  callevent(2);
+  alterftile(48, 46, 0, 0);
+  alterftile(49, 47, 0, 0);
+  alterftile(48, 47, 0, 0);
+  alterftile(49, 46, 0, 0);
+  alterftile(48, 48, 0, 0);
+  alterftile(49, 48, 0, 0);
+  alterbtile(38, 49, 352, 1);
+  changezone(38, 49, 0);
+}
+event
+{
+  soundeffect(18);
+  changezone(17, 52, 0);
+  alterbtile(17, 52, 352, 1);
+  alterftile(25, 52, 0, 0);
+  alterftile(26, 53, 0, 0);
+  alterftile(25, 53, 0, 0);
+  alterftile(26, 52, 0, 0);
+  alterftile(25, 54, 0, 0);
+  alterftile(26, 54, 0, 0);
+  alterftile(28, 55, 0, 0);
+  alterftile(28, 56, 0, 0);
+}
+event { warp(34, 75, 0); }
+event { warp(26, 99, 0); }
+event { mapswitch("overland.map", 41, 90, 0); }
+event { mapswitch("sewer2.map", 29, 35, 0); }
+event
+{
+  banner("Battle!", 1);
+  banner("1 Mini-Whale", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 25;
+    flags(503) = 15;
+    flags(504) = 0;
+    flags(505) = 43;
+    flags(506) = 43;
+    flags(507) = 16;
+    flags(508) = 16;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 38;
+    flags(513) = 39;
+    flags(540) = 5;
+    flags(541) = 15;
+    flags(1009) = 0;
+    flags(514) = 1;
+    flags(515) = 150;
+    flags(516) = 80;
+    flags(517) = 800;
+    flags(518) = 70;
+    flags(519) = 70;
+    flags(520) = 70;
+    flags(521) = 70;
+    flags(522) = 650;
+    flags(523) = 50;
+    flags(524) = 4;
+    flags(525) = 38;
+    flags(526) = 39;
+    flags(542) = 150;
+    flags(543) = 80;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 25;
+    flags(529) = 15;
+    flags(530) = 0;
+    flags(531) = 43;
+    flags(532) = 43;
+    flags(533) = 16;
+    flags(534) = 16;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 38;
+    flags(539) = 39;
+    flags(544) = 5;
+    flags(545) = 15;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("sewerbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("1 Moby", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 25;
+    flags(503) = 15;
+    flags(504) = 0;
+    flags(505) = 43;
+    flags(506) = 43;
+    flags(507) = 16;
+    flags(508) = 16;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 38;
+    flags(513) = 39;
+    flags(540) = 5;
+    flags(541) = 15;
+    flags(1009) = 0;
+    flags(514) = 2;
+    flags(515) = 250;
+    flags(516) = 120;
+    flags(517) = 1200;
+    flags(518) = 70;
+    flags(519) = 70;
+    flags(520) = 71;
+    flags(521) = 71;
+    flags(522) = 870;
+    flags(523) = 50;
+    flags(524) = 8;
+    flags(525) = 38;
+    flags(526) = 39;
+    flags(542) = 150;
+    flags(543) = 80;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 25;
+    flags(529) = 15;
+    flags(530) = 0;
+    flags(531) = 43;
+    flags(532) = 43;
+    flags(533) = 16;
+    flags(534) = 16;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 38;
+    flags(539) = 39;
+    flags(544) = 5;
+    flags(545) = 15;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("sewerbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("2 Trippyweeds", 1);
+  banner("and 1 B.Squirrel", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 5;
+    flags(502) = 5;
+    flags(503) = 30;
+    flags(504) = 1200;
+    flags(505) = 72;
+    flags(506) = 72;
+    flags(507) = 46;
+    flags(508) = 39;
+    flags(509) = 300;
+    flags(510) = 15;
+    flags(511) = 0;
+    flags(512) = 38;
+    flags(513) = 38;
+    flags(540) = 60;
+    flags(541) = 200;
+    flags(1009) = 13;
+    flags(514) = 3;
+    flags(515) = 150;
+    flags(516) = 80;
+    flags(517) = 600;
+    flags(518) = 31;
+    flags(519) = 31;
+    flags(520) = 73;
+    flags(521) = 73;
+    flags(522) = 300;
+    flags(523) = 50;
+    flags(524) = 0;
+    flags(525) = 2;
+    flags(526) = 41;
+    flags(542) = 5;
+    flags(543) = 25;
+    flags(1010) = 0;
+    flags(527) = 5;
+    flags(528) = 5;
+    flags(529) = 30;
+    flags(530) = 1200;
+    flags(531) = 72;
+    flags(532) = 72;
+    flags(533) = 46;
+    flags(534) = 39;
+    flags(535) = 300;
+    flags(536) = 15;
+    flags(537) = 0;
+    flags(538) = 38;
+    flags(539) = 38;
+    flags(544) = 60;
+    flags(545) = 200;
+    flags(1011) = 13;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("sewerbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("2 B.Squirrels", 1);
+  banner("and 1 Trippyweed", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 3;
+    flags(502) = 150;
+    flags(503) = 80;
+    flags(504) = 600;
+    flags(505) = 73;
+    flags(506) = 73;
+    flags(507) = 31;
+    flags(508) = 31;
+    flags(509) = 300;
+    flags(510) = 50;
+    flags(511) = 0;
+    flags(512) = 2;
+    flags(513) = 41;
+    flags(540) = 5;
+    flags(541) = 25;
+    flags(1009) = 0;
+    flags(514) = 5;
+    flags(515) = 5;
+    flags(516) = 30;
+    flags(517) = 1200;
+    flags(518) = 72;
+    flags(519) = 72;
+    flags(520) = 46;
+    flags(521) = 39;
+    flags(522) = 300;
+    flags(523) = 15;
+    flags(524) = 0;
+    flags(525) = 38;
+    flags(526) = 38;
+    flags(542) = 60;
+    flags(543) = 200;
+    flags(1010) = 13;
+    flags(527) = 3;
+    flags(528) = 150;
+    flags(529) = 80;
+    flags(530) = 600;
+    flags(531) = 73;
+    flags(532) = 73;
+    flags(533) = 31;
+    flags(534) = 31;
+    flags(535) = 300;
+    flags(536) = 50;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 41;
+    flags(544) = 5;
+    flags(545) = 25;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("sewerbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("3 Mediocre Gels", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 6;
+    flags(502) = 100;
+    flags(503) = 60;
+    flags(504) = 800;
+    flags(505) = 31;
+    flags(506) = 31;
+    flags(507) = 74;
+    flags(508) = 74;
+    flags(509) = 280;
+    flags(510) = 10;
+    flags(511) = 0;
+    flags(512) = 2;
+    flags(513) = 1;
+    flags(540) = 100;
+    flags(541) = 60;
+    flags(1009) = 0;
+    flags(514) = 6;
+    flags(515) = 100;
+    flags(516) = 60;
+    flags(517) = 800;
+    flags(518) = 74;
+    flags(519) = 74;
+    flags(520) = 31;
+    flags(521) = 31;
+    flags(522) = 280;
+    flags(523) = 10;
+    flags(524) = 0;
+    flags(525) = 2;
+    flags(526) = 1;
+    flags(542) = 100;
+    flags(543) = 60;
+    flags(1010) = 0;
+    flags(527) = 6;
+    flags(528) = 100;
+    flags(529) = 60;
+    flags(530) = 800;
+    flags(531) = 74;
+    flags(532) = 74;
+    flags(533) = 31;
+    flags(534) = 31;
+    flags(535) = 280;
+    flags(536) = 10;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 100;
+    flags(545) = 60;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("sewerbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  stext(
+      0,
+      "In recent years, we decided to",
+      "extend the Kreegah sewer",
+      "system out away from the city.");
+  stext(
+      0,
+      "This cave was the perfect",
+      "place to extend it through,",
+      "because otherwise we'd have");
+  stext(0, "had to dig the sewer system", "out ourselves!", "");
+  stext(
+      0,
+      "Still, the cave is a bit",
+      "dangerous, so we got pulled",
+      "for guard duty. We make sure");
+  stext(
+      0,
+      "that kids don't go exploring",
+      "in here. You can go in,",
+      "though, if you want.");
+}
+event
+{
+  giveitem(53);
+  flags(280) = 1;
+  alterbtile(29, 18, 701, 2);
+  changezone(29, 18, 0);
+}
+event
+{
+  giveitem(86);
+  flags(281) = 1;
+  alterbtile(46, 37, 701, 2);
+  changezone(46, 37, 0);
+}
+event
+{
+  giveitem(57);
+  flags(282) = 1;
+  alterbtile(48, 37, 701, 2);
+  changezone(48, 37, 0);
+}
+event
+{
+  giveitem(87);
+  flags(283) = 1;
+  alterbtile(50, 37, 701, 2);
+  changezone(50, 37, 0);
+}
+event
+{
+  stext(
+      0,
+      "Ya know, when they were",
+      "installing these here sewers,",
+      "they had to navigate around");
+  stext(
+      0,
+      "all these strongboxes marked",
+      "'Property of Mayor Bovus:",
+      "Thieves Beware the Curse!'");
+  stext(0, "I figure it's a sham, but", "better safe than sorry, right?", "");
+}
+event
+{
+  stext(
+      0,
+      "Some of the nastier monsters",
+      "in the deep sewers love the",
+      "dark, and related magic. To");
+  stext(
+      0,
+      "keep them away, we've built",
+      "a huge bonfire! Of course,",
+      "someone with a Water Ring");
+  stext(
+      0,
+      "could put it out and face",
+      "the nasties, but who'd want",
+      "to do that?");
+}
+event
+{
+  stext(
+      0,
+      "I once had to drag a kid out",
+      "of these sewers... He'd gone",
+      "way in after the treasure,");
+  stext(
+      0,
+      "and even managed to evade the",
+      "whales and other monsters!",
+      "But just as I got to him,");
+  stext(
+      0,
+      "this robed guy came walking",
+      "right out of the wall! One",
+      "of the other monsters attacked");
+  stext(
+      0,
+      "him, and he blasted it into",
+      "smithereens! But he never",
+      "harmed us... We weren't any");
+  stext(
+      0,
+      "threat, I guess... Huh? Oh,",
+      "I saw him in the passage after",
+      "the bonfire, before it turns");
+  stext(
+      0,
+      "into the cave... Just avoid",
+      "getting him angry, and you",
+      "should be OK.");
+}

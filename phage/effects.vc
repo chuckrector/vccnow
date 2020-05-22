@@ -1,0 +1,2686 @@
+event /*0*/
+{
+  if (curhp(var(0) + 1) > 0)
+  {
+    heal(var(0), 45);
+  }
+  soundeffect(10);
+  if (flags(800) == 1)
+  {
+    callevent(18);
+  }
+}
+event /*1*/
+{
+  restoremp(var(0), 100);
+  soundeffect(10);
+}
+event /*2*/
+{
+  if (curhp(var(0) + 1) > 0)
+  {
+    heal(var(0), 245);
+  }
+  soundeffect(10);
+  if (flags(800) == 1)
+  {
+    callevent(18);
+  }
+}
+event /*3*/
+{
+  heal(var(0), 100);
+  soundeffect(10);
+  if (flags(800) == 1)
+  {
+    callevent(18);
+  }
+}
+event /*4*/ {}
+event /*5*/
+{
+  givegp(1);
+  soundeffect(14);
+}
+event /*6*/
+{
+  if (curhp(var(0) + 1) > 0)
+  {
+    heal(var(0), 3);
+  }
+  soundeffect(10);
+  banner("Brain freeze!", 1);
+  if (flags(800) == 1)
+  {
+    callevent(18);
+  }
+}
+event /*7*/
+{
+  heal(var(0), 1);
+  soundeffect(10);
+  if (flags(800) == 1)
+  {
+    callevent(18);
+  }
+}
+event /*8*/
+{
+  healall();
+  soundeffect(10);
+  banner("Squawk!", 2);
+  if (flags(800) == 1)
+  {
+    callevent(18);
+  }
+}
+event /*9*/
+{
+  flags(141) = 1;
+  stext(0, "You sprinkle some pollen into", "your hands...", "");
+}
+event /*10*/
+{
+  flags(142) = 1;
+  stext(0, "You sprinkle some pollen into", "your hands...", "");
+}
+event /*11*/
+{
+  flags(143) = 1;
+  stext(0, "You sprinkle some pollen into", "your hands...", "");
+}
+event /*12*/
+{
+  flags(144) = 1;
+  stext(0, "You sprinkle some pollen into", "your hands...", "");
+}
+event /*13*/
+{
+  flags(163) = 1;
+  soundeffect(9);
+  stext(
+      0,
+      "The Ring of Fire flares up!",
+      "(This flame will go out unless",
+      "you are directly facing the");
+  stext(0, "spot you wish to burn and", "hit enter without moving", "again.)");
+}
+event /*14*/
+{
+  banner("Beak", 1);
+  calleffect(30, 1, 3);
+}
+event /*15*/
+{
+  banner("Stench", 1);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624); flags(107) = flags(540);
+    case (2): flags(112) = flags(626); flags(107) = flags(542);
+    case (3): flags(112) = flags(628); flags(107) = flags(544);
+  }
+  switch (flags(112))
+  {
+    case (1):
+      if (flags(601) < flags(107))
+      {
+        flags(601) = 0;
+      }
+      if (flags(601) >= flags(107))
+      {
+        flags(601) -= flags(107);
+      }
+      stext(0, "Sam is nauseated!", "", "");
+    case (2):
+      if (flags(603) < flags(107))
+      {
+        flags(603) = 0;
+      }
+      if (flags(603) >= flags(107))
+      {
+        flags(603) -= flags(107);
+      }
+      stext(0, "Webb is nauseated!", "", "");
+    case (3):
+      if (flags(605) < flags(107))
+      {
+        flags(605) = 0;
+      }
+      if (flags(605) >= flags(107))
+      {
+        flags(605) -= flags(107);
+      }
+      stext(0, "Feng is nauseated!", "", "");
+    case (4):
+      if (flags(607) < flags(107))
+      {
+        flags(607) = 0;
+      }
+      if (flags(607) >= flags(107))
+      {
+        flags(607) -= flags(107);
+      }
+      stext(0, "Rikk is nauseated!", "", "");
+    case (5):
+      if (flags(609) < flags(107))
+      {
+        flags(609) = 0;
+      }
+      if (flags(609) >= flags(107))
+      {
+        flags(609) -= flags(107);
+      }
+      stext(0, "Dingo is nauseated!", "", "");
+    case (6):
+      if (flags(611) < flags(107))
+      {
+        flags(611) = 0;
+      }
+      if (flags(611) >= flags(107))
+      {
+        flags(611) -= flags(107);
+      }
+      stext(0, "Jeemdub is nauseated!", "", "");
+    case (7):
+      if (flags(613) < flags(107))
+      {
+        flags(613) = 0;
+      }
+      if (flags(613) >= flags(107))
+      {
+        flags(613) -= flags(107);
+      }
+      stext(0, "Bull is nauseated!", "", "");
+    case (8):
+      if (flags(615) < flags(107))
+      {
+        flags(615) = 0;
+      }
+      if (flags(615) >= flags(107))
+      {
+        flags(615) -= flags(107);
+      }
+      stext(0, "Lumin is nauseated!", "", "");
+  }
+  wait(50);
+}
+event /*16*/
+{
+  banner("Barrier", 1);
+  calleffect(53);
+  flags(601) = 0;
+  flags(603) = 0;
+  flags(605) = 0;
+  flags(607) = 0;
+  flags(609) = 0;
+  flags(611) = 0;
+  flags(613) = 0;
+  flags(615) = 0;
+  vcclear();
+  vcputpcx("barrier.pcx", 75, 60);
+  wait(100);
+  vcclear();
+  callevent(18);
+}
+event /*17*/
+{
+  banner("Scavenger", 1);
+  calleffect(53);
+  while (gp < 10)
+  {
+    givegp(1);
+  }
+  goto ? ? ? ;
+  takegp(10);
+  banner("Stole 10 gp!", 1);
+}
+event /*18*/
+{
+  banner("Banana!", 1);
+  calleffect(53);
+  vcclear();
+  soundeffect(22);
+  vcloadpcx("Banana.pcx", 0);
+  for (z, 1, 113, 2)
+  {
+    vctblitimage(200, z, 20, 20, 0);
+    wait(1);
+    vcclear();
+  }
+  soundeffect(12);
+  vcputpcx("Explo1.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo2.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo3.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo4.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo5.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo6.pcx", 104, 16);
+  wait(10);
+  calleffect(32, 1, 7);
+}
+event /*19*/
+{
+  banner("Kettlefication", 1);
+  calleffect(54);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1):
+      curhp(1) -= curhp(1);
+      flags(740) = 1;
+      stext(0, "Sam is transformed!", "", "");
+    case (2):
+      curhp(2) -= curhp(2);
+      flags(740) = 2;
+      stext(0, "Webb is transformed!", "", "");
+    case (3):
+      curhp(3) -= curhp(3);
+      flags(740) = 3;
+      stext(0, "Feng is transformed!", "", "");
+    case (4):
+      curhp(4) -= curhp(4);
+      flags(740) = 4;
+      stext(0, "Rikk is transformed!", "", "");
+    case (5):
+      curhp(5) -= curhp(5);
+      flags(740) = 5;
+      stext(0, "Dingo is transformed!", "", "");
+    case (6):
+      curhp(6) -= curhp(6);
+      flags(740) = 6;
+      stext(0, "Jeemdub is transformed!", "", "");
+    case (7):
+      curhp(7) -= curhp(7);
+      flags(740) = 7;
+      stext(0, "Bull is transformed!", "", "");
+    case (8):
+      curhp(8) -= curhp(8);
+      flags(740) = 8;
+      stext(0, "Lumin is transformed!", "", "");
+  }
+  wait(50);
+  callevent(17);
+  callevent(16);
+}
+event /*20*/
+{
+  if (flags(800) == 0)
+  {
+    banner("Combat only!", 1);
+  }
+  if (flags(800) == 1)
+  {
+    soundeffect(10);
+    switch (var(0))
+    {
+      case (0):
+        stext(0, "Sam is Enraged!", "", "");
+        if (curhp(1) > 0)
+        {
+          specialframe(8) = 28;
+        }
+        callevent(14);
+        flags(1001) += maxhp(1);
+        flags(1001) += fer(1);
+        flags(630) = 1;
+        flags(601) += random(7, 10);
+        flags(601) += 100;
+        flags(602) += random(7, 10);
+      case (1):
+        stext(0, "Webb is Enraged!", "", "");
+        if (curhp(2) > 0)
+        {
+          specialframe(13) = 28;
+        }
+        callevent(14);
+        flags(1002) += maxhp(2);
+        flags(1002) += fer(2);
+        flags(631) = 1;
+        flags(603) += random(7, 10);
+        flags(603) += 100;
+        flags(604) += random(7, 10);
+      case (2):
+        stext(0, "Feng is Enraged!", "", "");
+        if (curhp(3) > 0)
+        {
+          specialframe(10) = 28;
+        }
+        callevent(14);
+        flags(1003) += maxhp(3);
+        flags(1003) += fer(3);
+        flags(632) = 1;
+        flags(605) += random(7, 10);
+        flags(605) += 100;
+        flags(606) += random(7, 10);
+      case (3):
+        stext(0, "Rikk is Enraged!", "", "");
+        if (curhp(4) > 0)
+        {
+          specialframe(9) = 28;
+        }
+        callevent(14);
+        flags(1004) += maxhp(4);
+        flags(1004) += fer(4);
+        flags(633) = 1;
+        flags(607) += random(7, 10);
+        flags(607) += 100;
+        flags(608) += random(7, 10);
+      case (4):
+        stext(0, "Dingo is Enraged!", "", "");
+        if (curhp(5) > 0)
+        {
+          specialframe(14) = 28;
+        }
+        callevent(14);
+        flags(1005) += maxhp(5);
+        flags(1005) += fer(5);
+        flags(634) = 1;
+        flags(609) += random(7, 10);
+        flags(609) += 100;
+        flags(610) += random(7, 10);
+      case (5):
+        stext(0, "Jeemdub is Enraged!", "", "");
+        if (curhp(6) > 0)
+        {
+          specialframe(15) = 28;
+        }
+        callevent(14);
+        flags(1006) += maxhp(6);
+        flags(1006) += fer(6);
+        flags(635) = 1;
+        flags(611) += random(7, 10);
+        flags(611) += 100;
+        flags(612) += random(7, 10);
+      case (6):
+        stext(0, "Bull is Enraged!", "", "");
+        if (curhp(7) > 0)
+        {
+          specialframe(12) = 28;
+        }
+        callevent(14);
+        flags(1007) += maxhp(7);
+        flags(1007) += fer(7);
+        flags(636) = 1;
+        flags(613) += random(7, 10);
+        flags(613) += 100;
+        flags(614) += random(7, 10);
+      case (7):
+        stext(0, "Lumin is Enraged!", "", "");
+        if (curhp(8) > 0)
+        {
+          specialframe(11) = 28;
+        }
+        callevent(14);
+        flags(1008) += maxhp(8);
+        flags(1008) += fer(8);
+        flags(637) = 1;
+        flags(615) += random(7, 10);
+        flags(615) += 100;
+        flags(616) += random(7, 10);
+    }
+  }
+}
+event /*21*/
+{
+  banner("Mad Blade", 1);
+  calleffect(30, 4, 10);
+}
+event /*22*/
+{
+  banner("Booster", 1);
+  flags(598) += 50;
+  flags(502) += 5;
+  flags(503) += 5;
+  flags(540) += 5;
+  flags(541) += 5;
+  vcputpcx("boost1.pcx", 40, 65);
+  calleffect(53);
+  wait(50);
+  callevent(18);
+}
+event /*23*/
+{
+  banner("Booster", 1);
+  flags(600) += 50;
+  flags(528) += 5;
+  flags(529) += 5;
+  flags(544) += 5;
+  flags(545) += 5;
+  vcputpcx("boost1.pcx", 40, 129);
+  calleffect(53);
+  wait(50);
+  callevent(18);
+}
+event /*24*/
+{
+  banner("Booster", 1);
+  flags(598) += 25;
+  flags(502) += 3;
+  flags(503) += 3;
+  flags(540) += 3;
+  flags(541) += 3;
+  flags(600) += 25;
+  flags(528) += 3;
+  flags(529) += 3;
+  flags(544) += 3;
+  flags(545) += 3;
+  vcputpcx("boost1.pcx", 40, 65);
+  vcputpcx("boost1.pcx", 40, 129);
+  calleffect(53);
+  wait(50);
+  callevent(18);
+}
+event /*25*/
+{
+  banner("Howling Sword", 1);
+  calleffect(54);
+  vcclear();
+  vcloadpcx("Beam1.pcx", 0);
+  for (z, 65, 226, 2)
+  {
+    vctblitimage(z, 65, 32, 100, 0);
+    wait(1);
+    vcclear();
+  }
+  wait(10);
+  calleffect(32, 2, 7);
+}
+event /*26*/
+{
+  banner("Swarmnado", 1);
+  calleffect(54);
+  vcclear();
+  vcloadpcx("Swarm1.pcx", 0);
+  vcloadpcx("Swarm2.pcx", 6400);
+  vcloadpcx("Swarm3.pcx", 12800);
+  for (z, 65, 226, 8)
+  {
+    vctblitimage(z, 65, 64, 100, 0);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 2, 65, 64, 100, 6400);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 4, 65, 64, 100, 12800);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 6, 65, 64, 100, 6400);
+    wait(1);
+    vcclear();
+  }
+  wait(10);
+  entity.chrindex(7) = 21;
+  entity.chrindex(6) = 21;
+  flags(598) = 100;
+  flags(502) = 105;
+  flags(503) = 55;
+  flags(540) = 10;
+  flags(541) = 10;
+  flags(505) = 28;
+  flags(506) = 28;
+  flags(507) = 27;
+  flags(508) = 27;
+  flags(600) = 100;
+  flags(528) = 105;
+  flags(529) = 55;
+  flags(544) = 10;
+  flags(545) = 10;
+  flags(531) = 28;
+  flags(532) = 28;
+  flags(533) = 27;
+  flags(534) = 27;
+  specialframe(7) = 0;
+  calleffect(32, 2, 7);
+  vcclear();
+  callevent(16);
+}
+event /*27*/
+{
+  banner("HoneyBind", 1);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1): flags(630) = 0; stext(0, "Sam is stuck!", "", "");
+    case (2): flags(631) = 0; stext(0, "Webb is stuck!", "", "");
+    case (3): flags(632) = 0; stext(0, "Feng is stuck!", "", "");
+    case (4): flags(633) = 0; stext(0, "Rikk is stuck!", "", "");
+    case (5): flags(634) = 0; stext(0, "Dingo is stuck!", "", "");
+    case (6): flags(635) = 0; stext(0, "Jeemdub is stuck!", "", "");
+    case (7): flags(636) = 0; stext(0, "Bull is stuck!", "", "");
+    case (8): flags(637) = 0; stext(0, "Lumin is stuck!", "", "");
+  }
+  wait(50);
+}
+event /*28*/
+{
+  banner("Swarm Sting", 1);
+  calleffect(30, 1, 15);
+}
+event /*29*/
+{
+  banner("Osmosis", 1);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1):
+      if (flags(599) == 0)
+      {
+        flags(599) = flags(598);
+        entity.chrindex(5) = entity.chrindex(7);
+        specialframe(5) = 0;
+        flags(515) = flags(502);
+        flags(516) = flags(503);
+        flags(542) = flags(540);
+        flags(543) = flags(541);
+        flags(518) = flags(505);
+        flags(519) = flags(506);
+        flags(520) = flags(507);
+        flags(521) = flags(508);
+      }
+    case (2):
+      if (flags(600) == 0)
+      {
+        flags(600) = flags(599);
+        entity.chrindex(6) = entity.chrindex(5);
+        specialframe(6) = 0;
+        flags(528) = flags(515);
+        flags(529) = flags(516);
+        flags(544) = flags(542);
+        flags(545) = flags(543);
+        flags(531) = flags(518);
+        flags(532) = flags(519);
+        flags(533) = flags(520);
+        flags(534) = flags(521);
+      }
+    case (3):
+      if (flags(598) == 0)
+      {
+        flags(598) = flags(600);
+        entity.chrindex(7) = entity.chrindex(6);
+        specialframe(7) = 0;
+        flags(502) = flags(528);
+        flags(503) = flags(529);
+        flags(540) = flags(544);
+        flags(541) = flags(545);
+        flags(505) = flags(531);
+        flags(506) = flags(532);
+        flags(507) = flags(533);
+        flags(508) = flags(534);
+      }
+  }
+  wait(50);
+}
+event /*30*/
+{
+  calleffect(54);
+  switch (flags(629))
+  {
+    case (1):
+      switch (flags(624))
+      {
+        case (1): flags(112) = flags(602);
+        case (2): flags(112) = flags(604);
+        case (3): flags(112) = flags(606);
+        case (4): flags(112) = flags(608);
+        case (5): flags(112) = flags(610);
+        case (6): flags(112) = flags(612);
+        case (7): flags(112) = flags(614);
+        case (8): flags(112) = flags(616);
+      }
+      flags(107) = flags(617);
+      flags(1099) = flags(624);
+    case (2):
+      switch (flags(626))
+      {
+        case (1): flags(112) = flags(602);
+        case (2): flags(112) = flags(604);
+        case (3): flags(112) = flags(606);
+        case (4): flags(112) = flags(608);
+        case (5): flags(112) = flags(610);
+        case (6): flags(112) = flags(612);
+        case (7): flags(112) = flags(614);
+        case (8): flags(112) = flags(616);
+      }
+      flags(107) = flags(619);
+      flags(1099) = flags(626);
+    case (3):
+      switch (flags(628))
+      {
+        case (1): flags(112) = flags(602);
+        case (2): flags(112) = flags(604);
+        case (3): flags(112) = flags(606);
+        case (4): flags(112) = flags(608);
+        case (5): flags(112) = flags(610);
+        case (6): flags(112) = flags(612);
+        case (7): flags(112) = flags(614);
+        case (8): flags(112) = flags(616);
+      }
+      flags(107) = flags(621);
+      flags(1099) = flags(628);
+  }
+  flags(107) += random(var(0), var(1));
+  if (flags(107) < flags(112))
+  {
+    flags(112) = flags(107);
+  }
+  flags(107) -= flags(112);
+  if (curhp(flags(1099)) < flags(107))
+  {
+    flags(107) = curhp(flags(1099));
+  }
+  curhp(flags(1099)) -= flags(107);
+  switch (flags(1099))
+  {
+    case (1): flags(1001) += flags(107);
+    case (2): flags(1002) += flags(107);
+    case (3): flags(1003) += flags(107);
+    case (4): flags(1004) += flags(107);
+    case (5): flags(1005) += flags(107);
+    case (6): flags(1006) += flags(107);
+    case (7): flags(1007) += flags(107);
+    case (8): flags(1008) += flags(107);
+  }
+  switch (flags(629))
+  {
+    case (1): flags(617) = flags(107);
+    case (2): flags(619) = flags(107);
+    case (3): flags(621) = flags(107);
+  }
+  callevent(16);
+  if (curhp(1) == 0)
+  {
+    flags(1001) = 0;
+  }
+  if (curhp(2) == 0)
+  {
+    flags(1002) = 0;
+  }
+  if (curhp(3) == 0)
+  {
+    flags(1003) = 0;
+  }
+  if (curhp(4) == 0)
+  {
+    flags(1004) = 0;
+  }
+  if (curhp(5) == 0)
+  {
+    flags(1005) = 0;
+  }
+  if (curhp(6) == 0)
+  {
+    flags(1006) = 0;
+  }
+  if (curhp(7) == 0)
+  {
+    flags(1007) = 0;
+  }
+  if (curhp(8) == 0)
+  {
+    flags(1008) = 0;
+  }
+}
+event /*31*/
+{
+  banner("Gnaw", 1);
+  calleffect(30, 1, 3);
+}
+event /*32*/
+{
+  switch (flags(629))
+  {
+    case (1):
+      flags(710) += random(var(0), var(1));
+      flags(617) = flags(710);
+      if (char(1) && curhp(1) + flags(717) <= flags(710))
+      {
+        curhp(1) -= curhp(1);
+      }
+      if (char(2) && curhp(2) + flags(719) <= flags(710))
+      {
+        curhp(2) -= curhp(2);
+      }
+      if (char(3) && curhp(3) + flags(721) <= flags(710))
+      {
+        curhp(3) -= curhp(3);
+      }
+      if (char(4) && curhp(4) + flags(723) <= flags(710))
+      {
+        curhp(4) -= curhp(4);
+      }
+      if (char(5) && curhp(5) + flags(725) <= flags(710))
+      {
+        curhp(5) -= curhp(5);
+      }
+      if (char(6) && curhp(6) + flags(727) <= flags(710))
+      {
+        curhp(6) -= curhp(6);
+      }
+      if (char(7) && curhp(7) + flags(729) <= flags(710))
+      {
+        curhp(7) -= curhp(7);
+      }
+      if (char(8) && curhp(8) + flags(731) <= flags(710))
+      {
+        curhp(8) -= curhp(8);
+      }
+      if (char(1) && curhp(1) > 0 && flags(717) < flags(710))
+      {
+        curhp(1) -= flags(710) - flags(717);
+      }
+      if (char(2) && curhp(2) > 0 && flags(719) < flags(710))
+      {
+        curhp(2) -= flags(710) - flags(719);
+      }
+      if (char(3) && curhp(3) > 0 && flags(721) < flags(710))
+      {
+        curhp(3) -= flags(710) - flags(721);
+      }
+      if (char(4) && curhp(4) > 0 && flags(723) < flags(710))
+      {
+        curhp(4) -= flags(710) - flags(723);
+      }
+      if (char(5) && curhp(5) > 0 && flags(725) < flags(710))
+      {
+        curhp(5) -= flags(710) - flags(725);
+      }
+      if (char(6) && curhp(6) > 0 && flags(727) < flags(710))
+      {
+        curhp(6) -= flags(710) - flags(727);
+      }
+      if (char(7) && curhp(7) > 0 && flags(729) < flags(710))
+      {
+        curhp(7) -= flags(710) - flags(729);
+      }
+      if (char(8) && curhp(8) > 0 && flags(731) < flags(710))
+      {
+        curhp(8) -= flags(710) - flags(731);
+      }
+      if (char(1))
+      {
+        flags(1001) += flags(710);
+      }
+      if (char(2))
+      {
+        flags(1002) += flags(710);
+      }
+      if (char(3))
+      {
+        flags(1003) += flags(710);
+      }
+      if (char(4))
+      {
+        flags(1004) += flags(710);
+      }
+      if (char(5))
+      {
+        flags(1005) += flags(710);
+      }
+      if (char(6))
+      {
+        flags(1006) += flags(710);
+      }
+      if (char(7))
+      {
+        flags(1007) += flags(710);
+      }
+      if (char(8))
+      {
+        flags(1008) += flags(710);
+      }
+      flags(624) = 9;
+    case (2):
+      flags(712) += random(var(0), var(1));
+      flags(619) = flags(712);
+      if (char(1) && curhp(1) + flags(717) <= flags(712))
+      {
+        curhp(1) -= curhp(1);
+      }
+      if (char(2) && curhp(2) + flags(719) <= flags(712))
+      {
+        curhp(2) -= curhp(2);
+      }
+      if (char(3) && curhp(3) + flags(721) <= flags(712))
+      {
+        curhp(3) -= curhp(3);
+      }
+      if (char(4) && curhp(4) + flags(723) <= flags(712))
+      {
+        curhp(4) -= curhp(4);
+      }
+      if (char(5) && curhp(5) + flags(725) <= flags(712))
+      {
+        curhp(5) -= curhp(5);
+      }
+      if (char(6) && curhp(6) + flags(727) <= flags(712))
+      {
+        curhp(6) -= curhp(6);
+      }
+      if (char(7) && curhp(7) + flags(729) <= flags(712))
+      {
+        curhp(7) -= curhp(7);
+      }
+      if (char(8) && curhp(8) + flags(731) <= flags(712))
+      {
+        curhp(8) -= curhp(8);
+      }
+      if (char(1) && curhp(1) > 0 && flags(717) < flags(712))
+      {
+        curhp(1) -= flags(712) - flags(717);
+      }
+      if (char(2) && curhp(2) > 0 && flags(719) < flags(712))
+      {
+        curhp(2) -= flags(712) - flags(719);
+      }
+      if (char(3) && curhp(3) > 0 && flags(721) < flags(712))
+      {
+        curhp(3) -= flags(712) - flags(721);
+      }
+      if (char(4) && curhp(4) > 0 && flags(723) < flags(712))
+      {
+        curhp(4) -= flags(712) - flags(723);
+      }
+      if (char(5) && curhp(5) > 0 && flags(725) < flags(712))
+      {
+        curhp(5) -= flags(712) - flags(725);
+      }
+      if (char(6) && curhp(6) > 0 && flags(727) < flags(712))
+      {
+        curhp(6) -= flags(712) - flags(727);
+      }
+      if (char(7) && curhp(7) > 0 && flags(729) < flags(712))
+      {
+        curhp(7) -= flags(712) - flags(729);
+      }
+      if (char(8) && curhp(8) > 0 && flags(731) < flags(712))
+      {
+        curhp(8) -= flags(712) - flags(731);
+      }
+      if (char(1))
+      {
+        flags(1001) += flags(712);
+      }
+      if (char(2))
+      {
+        flags(1002) += flags(712);
+      }
+      if (char(3))
+      {
+        flags(1003) += flags(712);
+      }
+      if (char(4))
+      {
+        flags(1004) += flags(712);
+      }
+      if (char(5))
+      {
+        flags(1005) += flags(712);
+      }
+      if (char(6))
+      {
+        flags(1006) += flags(712);
+      }
+      if (char(7))
+      {
+        flags(1007) += flags(712);
+      }
+      if (char(8))
+      {
+        flags(1008) += flags(712);
+      }
+      flags(626) = 9;
+    case (3):
+      flags(714) += random(var(0), var(1));
+      flags(621) = flags(714);
+      if (char(1) && curhp(1) + flags(717) <= flags(714))
+      {
+        curhp(1) -= curhp(1);
+      }
+      if (char(2) && curhp(2) + flags(719) <= flags(714))
+      {
+        curhp(2) -= curhp(2);
+      }
+      if (char(3) && curhp(3) + flags(721) <= flags(714))
+      {
+        curhp(3) -= curhp(3);
+      }
+      if (char(4) && curhp(4) + flags(723) <= flags(714))
+      {
+        curhp(4) -= curhp(4);
+      }
+      if (char(5) && curhp(5) + flags(725) <= flags(714))
+      {
+        curhp(5) -= curhp(5);
+      }
+      if (char(6) && curhp(6) + flags(727) <= flags(714))
+      {
+        curhp(6) -= curhp(6);
+      }
+      if (char(7) && curhp(7) + flags(729) <= flags(714))
+      {
+        curhp(7) -= curhp(7);
+      }
+      if (char(8) && curhp(8) + flags(731) <= flags(714))
+      {
+        curhp(8) -= curhp(8);
+      }
+      if (char(1) && curhp(1) > 0 && flags(717) < flags(714))
+      {
+        curhp(1) -= flags(714) - flags(717);
+      }
+      if (char(2) && curhp(2) > 0 && flags(719) < flags(714))
+      {
+        curhp(2) -= flags(714) - flags(719);
+      }
+      if (char(3) && curhp(3) > 0 && flags(721) < flags(714))
+      {
+        curhp(3) -= flags(714) - flags(721);
+      }
+      if (char(4) && curhp(4) > 0 && flags(723) < flags(714))
+      {
+        curhp(4) -= flags(714) - flags(723);
+      }
+      if (char(5) && curhp(5) > 0 && flags(725) < flags(714))
+      {
+        curhp(5) -= flags(714) - flags(725);
+      }
+      if (char(6) && curhp(6) > 0 && flags(727) < flags(714))
+      {
+        curhp(6) -= flags(714) - flags(727);
+      }
+      if (char(7) && curhp(7) > 0 && flags(729) < flags(714))
+      {
+        curhp(7) -= flags(714) - flags(729);
+      }
+      if (char(8) && curhp(8) > 0 && flags(731) < flags(714))
+      {
+        curhp(8) -= flags(714) - flags(731);
+      }
+      if (char(1))
+      {
+        flags(1001) += flags(714);
+      }
+      if (char(2))
+      {
+        flags(1002) += flags(714);
+      }
+      if (char(3))
+      {
+        flags(1003) += flags(714);
+      }
+      if (char(4))
+      {
+        flags(1004) += flags(714);
+      }
+      if (char(5))
+      {
+        flags(1005) += flags(714);
+      }
+      if (char(6))
+      {
+        flags(1006) += flags(714);
+      }
+      if (char(7))
+      {
+        flags(1007) += flags(714);
+      }
+      if (char(8))
+      {
+        flags(1008) += flags(714);
+      }
+      flags(628) = 9;
+  }
+  vcclear();
+  callevent(20);
+  if (curhp(1) == 0)
+  {
+    flags(1001) = 0;
+  }
+  if (curhp(2) == 0)
+  {
+    flags(1002) = 0;
+  }
+  if (curhp(3) == 0)
+  {
+    flags(1003) = 0;
+  }
+  if (curhp(4) == 0)
+  {
+    flags(1004) = 0;
+  }
+  if (curhp(5) == 0)
+  {
+    flags(1005) = 0;
+  }
+  if (curhp(6) == 0)
+  {
+    flags(1006) = 0;
+  }
+  if (curhp(7) == 0)
+  {
+    flags(1007) = 0;
+  }
+  if (curhp(8) == 0)
+  {
+    flags(1008) = 0;
+  }
+}
+event /*33*/
+{
+  banner("Knife", 1);
+  calleffect(30, 1, 6);
+}
+event /*34*/
+{
+  banner("Ra Beam", 1);
+  calleffect(35, 5, 15);
+}
+event /*35*/
+{
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1):
+      switch (flags(624))
+      {
+        case (1): flags(112) = flags(717);
+        case (2): flags(112) = flags(719);
+        case (3): flags(112) = flags(721);
+        case (4): flags(112) = flags(723);
+        case (5): flags(112) = flags(725);
+        case (6): flags(112) = flags(727);
+        case (7): flags(112) = flags(729);
+        case (8): flags(112) = flags(731);
+      }
+      flags(107) = flags(710);
+      flags(1099) = flags(624);
+    case (2):
+      switch (flags(626))
+      {
+        case (1): flags(112) = flags(717);
+        case (2): flags(112) = flags(719);
+        case (3): flags(112) = flags(721);
+        case (4): flags(112) = flags(723);
+        case (5): flags(112) = flags(725);
+        case (6): flags(112) = flags(727);
+        case (7): flags(112) = flags(729);
+        case (8): flags(112) = flags(731);
+      }
+      flags(107) = flags(712);
+      flags(1099) = flags(626);
+    case (3):
+      switch (flags(628))
+      {
+        case (1): flags(112) = flags(717);
+        case (2): flags(112) = flags(719);
+        case (3): flags(112) = flags(721);
+        case (4): flags(112) = flags(723);
+        case (5): flags(112) = flags(725);
+        case (6): flags(112) = flags(727);
+        case (7): flags(112) = flags(729);
+        case (8): flags(112) = flags(731);
+      }
+      flags(107) = flags(714);
+      flags(1099) = flags(628);
+  }
+  flags(107) += random(var(0), var(1));
+  if (flags(107) < flags(112))
+  {
+    flags(112) = flags(107);
+  }
+  flags(107) -= flags(112);
+  if (curhp(flags(1099)) < flags(107))
+  {
+    flags(107) = curhp(flags(1099));
+  }
+  curhp(flags(1099)) -= flags(107);
+  switch (flags(1099))
+  {
+    case (1): flags(1001) += flags(107);
+    case (2): flags(1002) += flags(107);
+    case (3): flags(1003) += flags(107);
+    case (4): flags(1004) += flags(107);
+    case (5): flags(1005) += flags(107);
+    case (6): flags(1006) += flags(107);
+    case (7): flags(1007) += flags(107);
+    case (8): flags(1008) += flags(107);
+  }
+  switch (flags(629))
+  {
+    case (1): flags(710) = flags(107);
+    case (2): flags(712) = flags(107);
+    case (3): flags(714) = flags(107);
+  }
+  callevent(20);
+  if (curhp(1) == 0)
+  {
+    flags(1001) = 0;
+  }
+  if (curhp(2) == 0)
+  {
+    flags(1002) = 0;
+  }
+  if (curhp(3) == 0)
+  {
+    flags(1003) = 0;
+  }
+  if (curhp(4) == 0)
+  {
+    flags(1004) = 0;
+  }
+  if (curhp(5) == 0)
+  {
+    flags(1005) = 0;
+  }
+  if (curhp(6) == 0)
+  {
+    flags(1006) = 0;
+  }
+  if (curhp(7) == 0)
+  {
+    flags(1007) = 0;
+  }
+  if (curhp(8) == 0)
+  {
+    flags(1008) = 0;
+  }
+}
+event /*36*/
+{
+  banner("Tail Slap", 1);
+  calleffect(30, 1, 5);
+}
+event /*37*/
+{
+  banner("Tail Slap", 1);
+  banner("Critical Blow!", 1);
+  calleffect(30, 5, 7);
+}
+event /*38*/
+{
+  banner("Flamethrower", 1);
+  vcclear();
+  vcputpcx("fthrow1.pcx", 64, 97);
+  wait(10);
+  vcclear();
+  vcputpcx("fthrow2.pcx", 64, 97);
+  wait(10);
+  vcclear();
+  vcputpcx("fthrow3.pcx", 64, 97);
+  wait(100);
+  vcclear();
+  calleffect(35, 5, 7);
+}
+event /*39*/
+{
+  banner("Love Tornado", 1);
+  vcclear();
+  vcloadpcx("lovet1.pcx", 0);
+  vcloadpcx("lovet2.pcx", 6400);
+  vcloadpcx("lovet3.pcx", 12800);
+  for (z, 65, 226, 8)
+  {
+    vctblitimage(z, 65, 64, 100, 0);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 2, 65, 64, 100, 6400);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 4, 65, 64, 100, 12800);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 6, 65, 64, 100, 6400);
+    wait(1);
+    vcclear();
+  }
+  wait(10);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1): flags(630) = 0; stext(0, "Sam is charmed!", "", "");
+    case (2): flags(631) = 0; stext(0, "Webb is charmed!", "", "");
+    case (3): flags(632) = 0; stext(0, "Feng is charmed!", "", "");
+    case (4): flags(633) = 0; stext(0, "Rikk is charmed!", "", "");
+    case (5): flags(634) = 0; stext(0, "Dingo is charmed!", "", "");
+    case (6): flags(635) = 0; stext(0, "Jeemdub is charmed!", "", "");
+    case (7): flags(636) = 0; stext(0, "Bull is charmed!", "", "");
+    case (8): flags(637) = 0; stext(0, "Lumin is charmed!", "", "");
+  }
+  calleffect(32, 1, 3);
+  wait(50);
+}
+event /*40*/
+{
+  banner("Mass Heal!", 1);
+  flags(598) = flags(504);
+  flags(599) = flags(517);
+  flags(600) = flags(530);
+  calleffect(53);
+  wait(50);
+}
+event /*41*/
+{
+  if (flags(250) == 0)
+  {
+    getmagic(4, 7);
+  }
+  flags(250) += 10;
+}
+event /*42*/
+{
+  banner("Spit Pearl", 1);
+  givegp(50);
+  calleffect(30, 16, 22);
+  if (char(2) && curhp(2) > 0)
+  {
+    getmagic(2, 27);
+  }
+}
+event /*43*/
+{
+  banner("Tentacle Shrug", 1);
+  calleffect(30, 1, 10);
+}
+event /*44*/
+{
+  banner("Flying Leap", 1);
+  calleffect(35, 6, 17);
+}
+event /*45*/
+{
+  banner("Cancerous Hump", 1);
+  calleffect(30, 10, 30);
+}
+event /*46*/
+{
+  banner("Smoke Breath", 1);
+  switch (flags(629))
+  {
+    case (1):
+      vcclear();
+      vcputpcx("smoke.pcx", 64, 65);
+      wait(100);
+      vcclear();
+    case (2):
+      vcclear();
+      vcputpcx("smoke.pcx", 64, 97);
+      wait(100);
+      vcclear();
+    case (3):
+      vcclear();
+      vcputpcx("smoke.pcx", 64, 129);
+      wait(100);
+      vcclear();
+  }
+  calleffect(35, 5, 9);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624); flags(107) = flags(540);
+    case (2): flags(112) = flags(626); flags(107) = flags(542);
+    case (3): flags(112) = flags(628); flags(107) = flags(544);
+  }
+  switch (flags(112))
+  {
+    case (1):
+      if (flags(601) < flags(107))
+      {
+        flags(601) = 0;
+      }
+      if (flags(601) >= flags(107))
+      {
+        flags(601) -= flags(107);
+      }
+      flags(1021) += 3;
+      stext(0, "Sam is nauseated!", "", "");
+    case (2):
+      if (flags(603) < flags(107))
+      {
+        flags(603) = 0;
+      }
+      if (flags(603) >= flags(107))
+      {
+        flags(603) -= flags(107);
+      }
+      flags(1022) += 3;
+      stext(0, "Webb is nauseated!", "", "");
+    case (3):
+      if (flags(605) < flags(107))
+      {
+        flags(605) = 0;
+      }
+      if (flags(605) >= flags(107))
+      {
+        flags(605) -= flags(107);
+      }
+      flags(1023) += 3;
+      stext(0, "Feng is nauseated!", "", "");
+    case (4):
+      if (flags(607) < flags(107))
+      {
+        flags(607) = 0;
+      }
+      if (flags(607) >= flags(107))
+      {
+        flags(607) -= flags(107);
+      }
+      flags(1024) += 3;
+      stext(0, "Rikk is nauseated!", "", "");
+    case (5):
+      if (flags(609) < flags(107))
+      {
+        flags(609) = 0;
+      }
+      if (flags(609) >= flags(107))
+      {
+        flags(609) -= flags(107);
+      }
+      flags(1025) += 3;
+      stext(0, "Dingo is nauseated!", "", "");
+    case (6):
+      if (flags(611) < flags(107))
+      {
+        flags(611) = 0;
+      }
+      if (flags(611) >= flags(107))
+      {
+        flags(611) -= flags(107);
+      }
+      flags(1026) += 3;
+      stext(0, "Jeemdub is nauseated!", "", "");
+    case (7):
+      if (flags(613) < flags(107))
+      {
+        flags(613) = 0;
+      }
+      if (flags(613) >= flags(107))
+      {
+        flags(613) -= flags(107);
+      }
+      flags(1027) += 3;
+      stext(0, "Bull is nauseated!", "", "");
+    case (8):
+      if (flags(615) < flags(107))
+      {
+        flags(615) = 0;
+      }
+      if (flags(615) >= flags(107))
+      {
+        flags(615) -= flags(107);
+      }
+      flags(1028) += 3;
+      stext(0, "Lumin is nauseated!", "", "");
+  }
+  wait(50);
+}
+event /*47*/
+{
+  banner("Randomizer", 1);
+  calleffect(53);
+  flags(112) = random(1, 6);
+  if (flags(112) == 1)
+  {
+    banner("Got a One!", 1);
+    banner("MAG is bad!", 1);
+    flags(540) = 5;
+    flags(542) = 5;
+    flags(544) = 5;
+  }
+  if (flags(112) == 2)
+  {
+    banner("Got a Two!", 1);
+    banner("ATK is bad!", 1);
+    flags(502) = 25;
+    flags(515) = 25;
+    flags(528) = 25;
+  }
+  if (flags(112) == 3)
+  {
+    banner("Got a Three!", 1);
+    banner("DEF is bad!", 1);
+    flags(503) = 10;
+    flags(516) = 10;
+    flags(529) = 10;
+  }
+  if (flags(112) == 4)
+  {
+    banner("Got a Four!", 1);
+    banner("DEF is great!", 1);
+    flags(503) = 80;
+    flags(516) = 80;
+    flags(529) = 80;
+  }
+  if (flags(112) == 5)
+  {
+    banner("Got a Five!", 1);
+    banner("ATK is great!", 1);
+    flags(502) = 90;
+    flags(515) = 90;
+    flags(528) = 90;
+  }
+  if (flags(112) == 6)
+  {
+    banner("Got a Six!", 1);
+    banner("MAG is great!", 1);
+    flags(540) = 100;
+    flags(542) = 100;
+    flags(544) = 100;
+  }
+}
+event /*48*/
+{
+  banner("DiceRoll", 1);
+  calleffect(30, 1, 36);
+}
+event /*49*/
+{
+  banner("DiceRoll", 1);
+  calleffect(35, 1, 36);
+}
+event /*50*/
+{
+  banner("Thunderblast", 1);
+  calleffect(53);
+  vcclear();
+  vcloadpcx("Bolt1.pcx", 0);
+  vcloadpcx("Bolt2.pcx", 3200);
+  for (z, 65, 226, 4)
+  {
+    vctblitimage(z, 65, 32, 100, 0);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 2, 65, 32, 100, 3200);
+    wait(1);
+    vcclear();
+  }
+  wait(10);
+  calleffect(32, 7, 9);
+}
+event /*51*/
+{
+  banner("Bonk Hammer!", 1);
+  calleffect(30, 20, 130);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1):
+      curmp(1) = 0;
+      flags(1001) = 0;
+      stext(0, "Sam is Bonked!", "", "");
+    case (2):
+      curmp(2) = 0;
+      flags(1002) = 0;
+      stext(0, "Webb is Bonked!", "", "");
+    case (3):
+      curmp(3) = 0;
+      flags(1003) = 0;
+      stext(0, "Feng is Bonked!", "", "");
+    case (4):
+      curmp(4) = 0;
+      flags(1004) = 0;
+      stext(0, "Rikk is Bonked!", "", "");
+    case (5):
+      curmp(5) = 0;
+      flags(1005) = 0;
+      stext(0, "Dingo is Bonked!", "", "");
+    case (6):
+      curmp(6) = 0;
+      flags(1006) = 0;
+      stext(0, "Jeemdub is Bonked!", "", "");
+    case (7):
+      curmp(7) = 0;
+      flags(1007) = 0;
+      stext(0, "Bull is Bonked!", "", "");
+    case (8):
+      curmp(8) = 0;
+      flags(1008) = 0;
+      stext(0, "Lumin is Bonked!", "", "");
+  }
+  wait(50);
+}
+event /*52*/
+{
+  flags(266) = 1;
+  soundeffect(10);
+  stext(
+      0,
+      "The Ring of Water sparkles!",
+      "(This magic will go out unless",
+      "you are directly facing the");
+  stext(
+      0, "spot you wish to quench and", "hit enter without moving", "again.)");
+}
+event /*53*/
+{
+  switch (flags(629))
+  {
+    case (1):
+      specialframe(7) = 10;
+      wait(10);
+      specialframe(7) = 11;
+      wait(10);
+      specialframe(7) = 12;
+      wait(10);
+      specialframe(7) = 13;
+      wait(10);
+      specialframe(7) = 14;
+      wait(10);
+      specialframe(7) = 0;
+    case (2):
+      specialframe(5) = 10;
+      wait(10);
+      specialframe(5) = 11;
+      wait(10);
+      specialframe(5) = 12;
+      wait(10);
+      specialframe(5) = 13;
+      wait(10);
+      specialframe(5) = 14;
+      wait(10);
+      specialframe(5) = 0;
+    case (3):
+      specialframe(6) = 10;
+      wait(10);
+      specialframe(6) = 11;
+      wait(10);
+      specialframe(6) = 12;
+      wait(10);
+      specialframe(6) = 13;
+      wait(10);
+      specialframe(6) = 14;
+      wait(10);
+      specialframe(6) = 0;
+  }
+}
+event /*54*/
+{
+  switch (flags(629))
+  {
+    case (1):
+      specialframe(7) = 5;
+      wait(10);
+      specialframe(7) = 6;
+      wait(10);
+      specialframe(7) = 7;
+      wait(10);
+      specialframe(7) = 8;
+      wait(10);
+      specialframe(7) = 9;
+      wait(10);
+      specialframe(7) = 0;
+    case (2):
+      specialframe(5) = 5;
+      wait(10);
+      specialframe(5) = 6;
+      wait(10);
+      specialframe(5) = 7;
+      wait(10);
+      specialframe(5) = 8;
+      wait(10);
+      specialframe(5) = 9;
+      wait(10);
+      specialframe(5) = 0;
+    case (3):
+      specialframe(6) = 5;
+      wait(10);
+      specialframe(6) = 6;
+      wait(10);
+      specialframe(6) = 7;
+      wait(10);
+      specialframe(6) = 8;
+      wait(10);
+      specialframe(6) = 9;
+      wait(10);
+      specialframe(6) = 0;
+  }
+}
+event /*55*/
+{
+  banner("Poison Sting", 1);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624); flags(107) = flags(617);
+    case (2): flags(112) = flags(626); flags(107) = flags(619);
+    case (3): flags(112) = flags(628); flags(107) = flags(621);
+  }
+  switch (flags(112))
+  {
+    case (1): flags(1021) += flags(107); stext(0, "Sam is poisoned!", "", "");
+    case (2): flags(1022) += flags(107); stext(0, "Webb is poisoned!", "", "");
+    case (3): flags(1023) += flags(107); stext(0, "Feng is poisoned!", "", "");
+    case (4): flags(1024) += flags(107); stext(0, "Rikk is poisoned!", "", "");
+    case (5): flags(1025) += flags(107); stext(0, "Dingo is poisoned!", "", "");
+    case (6):
+      flags(1026) += flags(107);
+      stext(0, "Jeemdub is poisoned!", "", "");
+    case (7): flags(1027) += flags(107); stext(0, "Bull is poisoned!", "", "");
+    case (8): flags(1028) += flags(107); stext(0, "Lumin is poisoned!", "", "");
+  }
+  wait(50);
+}
+event /*56*/
+{
+  banner("Caber Toss", 1);
+  calleffect(54);
+  vcloadpcx("log1.pcx", 0);
+  vcloadpcx("log3.pcx", 512);
+  vcloadpcx("log4.pcx", 1024);
+  vcloadpcx("log5.pcx", 1536);
+  switch (flags(629))
+  {
+    case (1): flags(107) = flags(624);
+    case (2): flags(107) = flags(626);
+    case (3): flags(107) = flags(628);
+  }
+  switch (flags(107))
+  {
+    case (1): flags(112) = entity.locy(8);
+    case (2): flags(112) = entity.locy(13);
+    case (3): flags(112) = entity.locy(10);
+    case (4): flags(112) = entity.locy(9);
+    case (5): flags(112) = entity.locy(14);
+    case (6): flags(112) = entity.locy(15);
+    case (7): flags(112) = entity.locy(12);
+    case (8): flags(112) = entity.locy(11);
+  }
+  for (z, 1, 4, 1)
+  {
+    flags(112) += flags(112);
+  }
+  flags(112) -= 16;
+  switch (flags(629))
+  {
+    case (1): flags(107) = entity.locy(7);
+    case (2): flags(107) = entity.locy(5);
+    case (3): flags(107) = entity.locy(6);
+  }
+  for (z, 1, 4, 1)
+  {
+    flags(107) += flags(107);
+  }
+  if (flags(107) < flags(112))
+  {
+    for (z, flags(107), flags(112), 8)
+    {
+      vctblitimage(48, z, 16, 32, 0);
+      wait(5);
+      vcclear();
+      vctblitimage(48, z + 2, 16, 32, 512);
+      wait(5);
+      vcclear();
+      vctblitimage(48, z + 4, 16, 32, 1024);
+      wait(5);
+      vcclear();
+      vctblitimage(48, z + 6, 16, 32, 1536);
+      wait(5);
+      vcclear();
+    }
+  }
+  if (flags(107) > flags(112))
+  {
+    for (z, flags(107), flags(112), -8)
+    {
+      vctblitimage(48, z, 16, 32, 0);
+      wait(5);
+      vcclear();
+      vctblitimage(48, z - 2, 16, 32, 512);
+      wait(5);
+      vcclear();
+      vctblitimage(48, z - 4, 16, 32, 1024);
+      wait(5);
+      vcclear();
+      vctblitimage(48, z - 6, 16, 32, 1536);
+      wait(5);
+      vcclear();
+    }
+  }
+  wait(10);
+  switch (flags(629))
+  {
+    case (1): flags(107) = flags(624);
+    case (2): flags(107) = flags(626);
+    case (3): flags(107) = flags(628);
+  }
+  switch (flags(107))
+  {
+    case (1): flags(107) = entity.locx(8);
+    case (2): flags(107) = entity.locx(13);
+    case (3): flags(107) = entity.locx(10);
+    case (4): flags(107) = entity.locx(9);
+    case (5): flags(107) = entity.locx(14);
+    case (6): flags(107) = entity.locx(15);
+    case (7): flags(107) = entity.locx(12);
+    case (8): flags(107) = entity.locx(11);
+  }
+  for (z, 1, 4, 1)
+  {
+    flags(107) += flags(107);
+  }
+  soundeffect(22);
+  for (z, 48, flags(107), 2)
+  {
+    vctblitimage(z, flags(112), 16, 32, 0);
+    wait(1);
+    vcclear();
+  }
+  vcputpcx("log2.pcx", flags(107), flags(112));
+  wait(25);
+  vcclear();
+  calleffect(30, 20, 56);
+}
+event /*57*/
+{
+  banner("Eliminator", 1);
+  banner("Boomerang", 1);
+  calleffect(54);
+  vcclear();
+  vcputpcx("EBRang.pcx", 112, 54);
+  soundeffect(8);
+  wait(100);
+  for (x, 1, 8, 1)
+  {
+    flags(112) = curhp(x);
+    if (char(x))
+    {
+      curhp(x) = 0;
+    }
+    if (x == flags(626))
+    {
+      curhp(x) = flags(112);
+    }
+  }
+  flags(626) = 9;
+  flags(619) = 1000;
+  callevent(16);
+  flags(521) = 59;
+}
+event /*58*/
+{
+  banner("Triple 'Rang", 1);
+  calleffect(54);
+  vcloadpcx("trirang.pcx", 0);
+  vcloadpcx("trirang2.pcx", 3200);
+  vcloadpcx("trirang3.pcx", 6400);
+  vcloadpcx("trirang4.pcx", 9600);
+  for (z, 65, 226, 8)
+  {
+    vctblitimage(z, 65, 32, 100, 0);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 2, 65, 32, 100, 3200);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 4, 65, 32, 100, 6400);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 6, 65, 32, 100, 9600);
+    wait(1);
+    vcclear();
+  }
+  calleffect(30, 30, 90);
+  wait(50);
+  for (z, 226, 65, -8)
+  {
+    vctblitimage(z, 65, 32, 100, 0);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 2, 65, 32, 100, 3200);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 4, 65, 32, 100, 6400);
+    wait(1);
+    vcclear();
+    vctblitimage(z + 6, 65, 32, 100, 9600);
+    wait(1);
+    vcclear();
+  }
+  flags(619) = flags(515);
+  calleffect(30, 10, 30);
+}
+event /*59*/
+{
+  banner("UberDrive!", 1);
+  calleffect(53);
+  flags(515) += 200;
+  flags(516) += 200;
+  flags(542) += 200;
+  flags(543) += 200;
+  entity.chrindex(5) = 19;
+  flags(521) = 58;
+  callevent(18);
+}
+event /*60*/
+{
+  banner("Impale!", 1);
+  switch (flags(629))
+  {
+    case (1):
+      switch (flags(624))
+      {
+        case (1): flags(617) += flags(602);
+        case (2): flags(617) += flags(604);
+        case (3): flags(617) += flags(606);
+        case (4): flags(617) += flags(608);
+        case (5): flags(617) += flags(610);
+        case (6): flags(617) += flags(612);
+        case (7): flags(617) += flags(614);
+        case (8): flags(617) += flags(616);
+      }
+    case (2):
+      switch (flags(626))
+      {
+        case (1): flags(619) += flags(602);
+        case (2): flags(619) += flags(604);
+        case (3): flags(619) += flags(606);
+        case (4): flags(619) += flags(608);
+        case (5): flags(619) += flags(610);
+        case (6): flags(619) += flags(612);
+        case (7): flags(619) += flags(614);
+        case (8): flags(619) += flags(616);
+      }
+    case (3):
+      switch (flags(628))
+      {
+        case (1): flags(621) += flags(602);
+        case (2): flags(621) += flags(604);
+        case (3): flags(621) += flags(606);
+        case (4): flags(621) += flags(608);
+        case (5): flags(621) += flags(610);
+        case (6): flags(621) += flags(612);
+        case (7): flags(621) += flags(614);
+        case (8): flags(621) += flags(616);
+      }
+  }
+  calleffect(30, 100, 250);
+}
+event /*61*/
+{
+  switch (flags(638))
+  {
+    case (1):
+      flags(107) = flags(640);
+      flags(1099) = flags(601);
+      flags(112) = flags(601);
+    case (2):
+      flags(107) = flags(641);
+      flags(1099) = flags(603);
+      flags(112) = flags(603);
+    case (3):
+      flags(107) = flags(642);
+      flags(1099) = flags(605);
+      flags(112) = flags(605);
+    case (4):
+      flags(107) = flags(643);
+      flags(1099) = flags(607);
+      flags(112) = flags(607);
+    case (5):
+      flags(107) = flags(644);
+      flags(1099) = flags(609);
+      flags(112) = flags(609);
+    case (6):
+      flags(107) = flags(645);
+      flags(1099) = flags(611);
+      flags(112) = flags(611);
+    case (7):
+      flags(107) = flags(646);
+      flags(1099) = flags(613);
+      flags(112) = flags(613);
+    case (8):
+      flags(107) = flags(647);
+      flags(1099) = flags(615);
+      flags(112) = flags(615);
+  }
+  switch (flags(107))
+  {
+    case (1):
+      if (flags(1099) < flags(618))
+      {
+        flags(618) = flags(1099);
+      }
+      flags(1099) -= flags(618);
+      if (flags(598) < flags(1099))
+      {
+        flags(1099) = flags(598);
+      }
+      flags(598) -= flags(1099);
+    case (2):
+      if (flags(1099) < flags(620))
+      {
+        flags(620) = flags(1099);
+      }
+      flags(1099) -= flags(620);
+      if (flags(599) < flags(1099))
+      {
+        flags(1099) = flags(599);
+      }
+      flags(599) -= flags(1099);
+    case (3):
+      if (flags(1099) < flags(622))
+      {
+        flags(622) = flags(1099);
+      }
+      flags(1099) -= flags(622);
+      if (flags(600) < flags(1099))
+      {
+        flags(1099) = flags(600);
+      }
+      flags(600) -= flags(1099);
+    case (7):
+      flags(1099) = flags(112);
+      if (flags(1099) < flags(618))
+      {
+        flags(618) = flags(1099);
+      }
+      flags(1099) -= flags(618);
+      if (flags(598) < flags(1099))
+      {
+        flags(1099) = flags(598);
+      }
+      flags(598) -= flags(1099);
+      flags(1099) = flags(112);
+      if (flags(1099) < flags(620))
+      {
+        flags(620) = flags(1099);
+      }
+      flags(1099) -= flags(620);
+      if (flags(599) < flags(1099))
+      {
+        flags(1099) = flags(599);
+      }
+      flags(599) -= flags(1099);
+      flags(1099) = flags(112);
+      if (flags(1099) < flags(622))
+      {
+        flags(622) = flags(1099);
+      }
+      flags(1099) -= flags(622);
+      if (flags(600) < flags(1099))
+      {
+        flags(1099) = flags(600);
+      }
+      flags(600) -= flags(1099);
+  }
+  switch (flags(638))
+  {
+    case (1): flags(601) = flags(1099);
+    case (2): flags(603) = flags(1099);
+    case (3): flags(605) = flags(1099);
+    case (4): flags(607) = flags(1099);
+    case (5): flags(609) = flags(1099);
+    case (6): flags(611) = flags(1099);
+    case (7): flags(613) = flags(1099);
+    case (8): flags(615) = flags(1099);
+  }
+}
+event /*62*/
+{
+  switch (flags(638))
+  {
+    case (1):
+      flags(107) = flags(640);
+      flags(1099) = flags(716);
+      flags(112) = flags(716);
+    case (2):
+      flags(107) = flags(641);
+      flags(1099) = flags(718);
+      flags(112) = flags(718);
+    case (3):
+      flags(107) = flags(642);
+      flags(1099) = flags(720);
+      flags(112) = flags(720);
+    case (4):
+      flags(107) = flags(643);
+      flags(1099) = flags(722);
+      flags(112) = flags(722);
+    case (5):
+      flags(107) = flags(644);
+      flags(1099) = flags(724);
+      flags(112) = flags(724);
+    case (6):
+      flags(107) = flags(645);
+      flags(1099) = flags(726);
+      flags(112) = flags(726);
+    case (7):
+      flags(107) = flags(646);
+      flags(1099) = flags(728);
+      flags(112) = flags(728);
+    case (8):
+      flags(107) = flags(647);
+      flags(1099) = flags(730);
+      flags(112) = flags(730);
+  }
+  switch (flags(107))
+  {
+    case (1):
+      if (flags(1099) < flags(711))
+      {
+        flags(711) = flags(1099);
+      }
+      flags(1099) -= flags(711);
+      if (flags(598) < flags(1099))
+      {
+        flags(1099) = flags(598);
+      }
+      flags(598) -= flags(1099);
+    case (2):
+      if (flags(1099) < flags(713))
+      {
+        flags(713) = flags(1099);
+      }
+      flags(1099) -= flags(713);
+      if (flags(599) < flags(1099))
+      {
+        flags(1099) = flags(599);
+      }
+      flags(599) -= flags(1099);
+    case (3):
+      if (flags(1099) < flags(715))
+      {
+        flags(715) = flags(1099);
+      }
+      flags(1099) -= flags(715);
+      if (flags(600) < flags(1099))
+      {
+        flags(1099) = flags(600);
+      }
+      flags(600) -= flags(1099);
+    case (7):
+      flags(1099) = flags(112);
+      if (flags(1099) < flags(711))
+      {
+        flags(711) = flags(1099);
+      }
+      flags(1099) -= flags(711);
+      if (flags(598) < flags(1099))
+      {
+        flags(1099) = flags(598);
+      }
+      flags(598) -= flags(1099);
+      flags(1099) = flags(112);
+      if (flags(1099) < flags(713))
+      {
+        flags(713) = flags(1099);
+      }
+      flags(1099) -= flags(713);
+      if (flags(599) < flags(1099))
+      {
+        flags(1099) = flags(599);
+      }
+      flags(599) -= flags(1099);
+      flags(1099) = flags(112);
+      if (flags(1099) < flags(715))
+      {
+        flags(715) = flags(1099);
+      }
+      flags(1099) -= flags(715);
+      if (flags(600) < flags(1099))
+      {
+        flags(1099) = flags(600);
+      }
+      flags(600) -= flags(1099);
+  }
+  switch (flags(638))
+  {
+    case (1): flags(716) = flags(1099);
+    case (2): flags(718) = flags(1099);
+    case (3): flags(720) = flags(1099);
+    case (4): flags(722) = flags(1099);
+    case (5): flags(724) = flags(1099);
+    case (6): flags(726) = flags(1099);
+    case (7): flags(728) = flags(1099);
+    case (8): flags(730) = flags(1099);
+  }
+}
+event /*63*/
+{
+  flags(112) = random(2, 5);
+  switch (flags(112))
+  {
+    case (2): banner("2-hit combo!", 1);
+    case (3): banner("3-hit combo!", 1);
+    case (4): banner("4-hit combo!", 1);
+    case (5): banner("5-hit combo!", 1);
+  }
+  switch (flags(629))
+  {
+    case (1):
+      flags(617) = 0;
+      for (x, 1, flags(112), 1)
+      {
+        flags(617) += flags(502);
+      }
+    case (2):
+      flags(619) = 0;
+      for (x, 1, flags(112), 1)
+      {
+        flags(619) += flags(515);
+      }
+    case (3):
+      flags(621) = 0;
+      for (x, 1, flags(112), 1)
+      {
+        flags(621) += flags(528);
+      }
+  }
+  calleffect(30, 1, 3);
+}
+event /*64*/
+{
+  banner("Big Foot!", 1);
+  soundeffect(22);
+  vcloadpcx("footfall.pcx", 0);
+  for (x, 1, 96, 1)
+  {
+    vctblitimage(160, x, 48, 32, 0);
+    wait(1);
+    vcclear();
+  }
+  earthquake(5, 5, 50);
+  calleffect(32, 10, 140);
+  if (char(4) && curhp(4) > 0)
+  {
+    if (!spell(31))
+    {
+      banner("Rikk learns:", 1);
+      banner("Drop: Big Foot!", 1);
+      getmagic(4, 31);
+    }
+  }
+}
+event /*65*/
+{
+  banner("Unfold", 1);
+  calleffect(53);
+  entity.chrindex(5) = 22;
+  flags(515) = 500;
+  flags(516) = 210;
+  flags(517) = 12000;
+  flags(599) = 12000;
+  flags(518) = 31;
+  flags(519) = 43;
+  flags(520) = 33;
+  flags(521) = 43;
+  flags(522) = 390;
+  flags(525) = 54;
+  flags(526) = 54;
+  flags(542) = 500;
+  flags(543) = 210;
+  flags(1010) = 5;
+  for (x, 1, 15, 1)
+  {
+    flags(107) = random(0, 19);
+    flags(112) = random(5, 12);
+    n = random(682, 689);
+    if (n == 689)
+    {
+      flags(517) += 150;
+      flags(599) += 150;
+    }
+    alterbtile(flags(107), flags(112), n, 2);
+  }
+  banner("Bud-D becomes:", 1);
+  banner("Bloome!", 1);
+}
+event /*66*/
+{
+  stext(0, "Aardvark changes his spell", "list!", "");
+  flags(112) = random(1, 5);
+  if (flags(112) == 1)
+  {
+    flags(519) = 69;
+    flags(520) = 38;
+    flags(521) = 18;
+  }
+  if (flags(112) == 2)
+  {
+    flags(519) = 16;
+    flags(520) = 50;
+    flags(521) = 39;
+  }
+  if (flags(112) == 3)
+  {
+    flags(519) = 25;
+    flags(520) = 51;
+    flags(521) = 40;
+  }
+  if (flags(112) == 4)
+  {
+    flags(519) = 56;
+    flags(520) = 55;
+    flags(521) = 46;
+  }
+  if (flags(112) == 5)
+  {
+    flags(519) = 19;
+    flags(520) = 27;
+    flags(521) = 42;
+  }
+}
+event /*67*/
+{
+  if (flags(517) <= flags(599))
+  {
+    stext(0, "Aardvark seems peaceful.", "", "");
+  }
+  if (flags(517) > flags(599))
+  {
+    stext(0, "Aardvark has become annoyed!", "", "");
+    flags(518) = 66;
+    flags(519) = 64;
+    flags(520) = 15;
+    flags(521) = 63;
+  }
+}
+event /*68*/
+{
+  if (flags(517) <= flags(599))
+  {
+    stext(0, "OddBall is asleep!", "", "");
+  }
+  if (flags(517) > flags(599))
+  {
+    stext(0, "OddBall awakens!", "", "");
+    flags(518) = 1;
+    flags(519) = 1;
+    flags(520) = 1;
+    flags(521) = 1;
+  }
+}
+event /*69*/ {}
+event /*70*/
+{
+  banner("Irradiated", 1);
+  banner("Ambergris", 1);
+  calleffect(53);
+  vcclear();
+  vcputpcx("Biohaz.pcx", 104, 0);
+  wait(75);
+  vcclear();
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1): curhp(1) -= curhp(1);
+    case (2): curhp(2) -= curhp(2);
+    case (3): curhp(3) -= curhp(3);
+    case (4): curhp(4) -= curhp(4);
+    case (5): curhp(5) -= curhp(5);
+    case (6): curhp(6) -= curhp(6);
+    case (7): curhp(7) -= curhp(7);
+    case (8): curhp(8) -= curhp(8);
+  }
+  if (char(1))
+  {
+    curmp(1) -= curmp(1);
+  }
+  if (char(2))
+  {
+    curmp(2) -= curmp(2);
+  }
+  if (char(3))
+  {
+    curmp(3) -= curmp(3);
+  }
+  if (char(4))
+  {
+    curmp(4) -= curmp(4);
+  }
+  if (char(5))
+  {
+    curmp(5) -= curmp(5);
+  }
+  if (char(6))
+  {
+    curmp(6) -= curmp(6);
+  }
+  if (char(7))
+  {
+    curmp(7) -= curmp(7);
+  }
+  if (char(8))
+  {
+    curmp(8) -= curmp(8);
+  }
+  wait(50);
+  callevent(16);
+}
+event /*71*/
+{
+  banner("The Voice of", 1);
+  banner("Herman Melville", 1);
+  calleffect(32, 1, 20);
+}
+event /*72*/
+{
+  banner("PsychoTrip", 1);
+  palettemorph(63, 0, 0, 50, 63);
+  wait(20);
+  palettemorph(63, 32, 0, 50, 63);
+  wait(20);
+  palettemorph(63, 63, 0, 50, 63);
+  wait(20);
+  palettemorph(0, 63, 0, 50, 63);
+  wait(20);
+  palettemorph(0, 0, 63, 50, 63);
+  wait(20);
+  palettemorph(32, 0, 63, 50, 63);
+  wait(20);
+  palettemorph(63, 0, 63, 50, 63);
+  wait(20);
+  palettemorph(0, 0, 0, 0, 63);
+  calleffect(32, 1, 69);
+  for (x, 1, 8, 1)
+  {
+    curmp(x) = maxmp(x);
+  }
+}
+event /*73*/
+{
+  banner("Berserkergang", 1);
+  palettemorph(63, 0, 0, 50, 63);
+  flags(112) = 0;
+  if (flags(598) > 0)
+  {
+    flags(112) += flags(617);
+  }
+  if (flags(599) > 0)
+  {
+    flags(112) += flags(619);
+  }
+  if (flags(600) > 0)
+  {
+    flags(112) += flags(621);
+  }
+  for (x, 1, 4, 1)
+  {
+    for (y, 5, 9, 1)
+    {
+      if (flags(598) > 0)
+      {
+        specialframe(7) = y;
+      }
+      if (flags(599) > 0)
+      {
+        specialframe(5) = y;
+      }
+      if (flags(600) > 0)
+      {
+        specialframe(6) = y;
+      }
+      wait(10);
+    }
+  }
+  if (flags(598) > 0)
+  {
+    specialframe(7) = 0;
+  }
+  if (flags(599) > 0)
+  {
+    specialframe(5) = 0;
+  }
+  if (flags(600) > 0)
+  {
+    specialframe(6) = 0;
+  }
+  switch (flags(629))
+  {
+    case (1): flags(617) = flags(112); flags(618) += 50;
+    case (2): flags(619) = flags(112); flags(620) += 50;
+    case (3): flags(621) = flags(112); flags(622) += 50;
+  }
+  calleffect(30, 1, 12);
+  palettemorph(0, 0, 0, 0, 63);
+}
+event /*74*/
+{
+  banner("Mediocre Attack", 1);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1):
+      curhp(1) = 80;
+      flags(601) = 80;
+      flags(602) = 80;
+      stext(0, "Sam is boring!", "", "");
+    case (2):
+      curhp(2) = 80;
+      flags(603) = 80;
+      flags(604) = 80;
+      stext(0, "Webb is boring!", "", "");
+    case (3):
+      curhp(3) = 80;
+      flags(605) = 80;
+      flags(606) = 80;
+      stext(0, "Feng is boring!", "", "");
+    case (4):
+      curhp(4) = 80;
+      flags(607) = 80;
+      flags(608) = 80;
+      stext(0, "Rikk is boring!", "", "");
+    case (5):
+      curhp(5) = 80;
+      flags(609) = 80;
+      flags(610) = 80;
+      stext(0, "Dingo is boring!", "", "");
+    case (6):
+      curhp(6) = 80;
+      flags(611) = 80;
+      flags(612) = 80;
+      stext(0, "Jeemdub is boring!", "(Gasp! Never!)", "");
+    case (7):
+      curhp(7) = 80;
+      flags(613) = 80;
+      flags(614) = 80;
+      stext(0, "Bull is boring!", "", "");
+    case (8):
+      curhp(8) = 80;
+      flags(615) = 80;
+      flags(616) = 80;
+      stext(0, "Lumin is boring!", "", "");
+  }
+  wait(50);
+  callevent(18);
+}
+event /*75*/
+{
+  banner("Evilshock", 1);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1):
+      vcclear();
+      vcputpcx("eshock1.pcx", 64, 65);
+      wait(10);
+      vcclear();
+      vcputpcx("eshock2.pcx", 64, 65);
+      wait(10);
+      vcclear();
+      vcputpcx("eshock3.pcx", 64, 65);
+      wait(100);
+      vcclear();
+    case (2):
+      vcclear();
+      vcputpcx("eshock1.pcx", 64, 97);
+      wait(10);
+      vcclear();
+      vcputpcx("eshock2.pcx", 64, 97);
+      wait(10);
+      vcclear();
+      vcputpcx("eshock3.pcx", 64, 97);
+      wait(100);
+      vcclear();
+    case (3):
+      vcclear();
+      vcputpcx("eshock1.pcx", 64, 129);
+      wait(10);
+      vcclear();
+      vcputpcx("eshock2.pcx", 64, 129);
+      wait(10);
+      vcclear();
+      vcputpcx("eshock3.pcx", 64, 129);
+      wait(100);
+      vcclear();
+  }
+  calleffect(35, 25, 200);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  if (flags(112) == 2)
+  {
+    getmagic(2, 35);
+  }
+}
+event /*76*/
+{
+  banner("Vile Wave", 1);
+  vcclear();
+  vcputpcx("eshock1.pcx", 64, 65);
+  vcputpcx("eshock1.pcx", 64, 97);
+  vcputpcx("eshock1.pcx", 64, 129);
+  wait(10);
+  vcclear();
+  vcputpcx("eshock2.pcx", 64, 65);
+  vcputpcx("eshock2.pcx", 64, 97);
+  vcputpcx("eshock2.pcx", 64, 129);
+  wait(10);
+  vcclear();
+  vcputpcx("eshock3.pcx", 64, 65);
+  vcputpcx("eshock3.pcx", 64, 97);
+  vcputpcx("eshock3.pcx", 64, 129);
+  wait(100);
+  vcclear();
+  if (char(1) && curhp(1) > 0)
+  {
+    flags(1021) += 12;
+  }
+  if (char(2) && curhp(2) > 0)
+  {
+    flags(1022) += 12;
+  }
+  if (char(3) && curhp(3) > 0)
+  {
+    flags(1023) += 12;
+  }
+  if (char(4) && curhp(4) > 0)
+  {
+    flags(1024) += 12;
+  }
+  if (char(5) && curhp(1) > 5)
+  {
+    flags(1025) += 12;
+  }
+  if (char(6) && curhp(1) > 6)
+  {
+    flags(1026) += 12;
+  }
+  if (char(7) && curhp(1) > 7)
+  {
+    flags(1027) += 12;
+  }
+  if (char(8) && curhp(1) > 8)
+  {
+    flags(1028) += 12;
+  }
+  calleffect(32, 35, 70);
+}
+event /*77*/
+{
+  banner("Crypt Storm", 1);
+  vcclear();
+  vcputpcx("eshock1.pcx", 64, 65);
+  vcputpcx("eshock1.pcx", 64, 97);
+  vcputpcx("eshock1.pcx", 64, 129);
+  wait(10);
+  vcclear();
+  vcputpcx("eshock2.pcx", 64, 65);
+  vcputpcx("eshock2.pcx", 64, 97);
+  vcputpcx("eshock2.pcx", 64, 129);
+  wait(10);
+  vcclear();
+  vcputpcx("eshock3.pcx", 64, 65);
+  vcputpcx("eshock3.pcx", 64, 97);
+  vcputpcx("eshock3.pcx", 64, 129);
+  wait(100);
+  vcclear();
+  calleffect(32, 25, 100);
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  if (flags(112) == 2) {}
+}
+event /*78*/
+{
+  if (flags(800) == 0)
+  {
+    stext(0, "You just wasted a Mayfly.", "", "");
+  }
+  if (flags(800) == 1 && flags(251) == 1)
+  {
+    stext(0, "Ineffective!", "", "");
+  }
+  if (flags(800) == 1 && flags(251) == 0)
+  {
+    flags(598) = 0;
+    flags(599) = 0;
+    flags(600) = 0;
+    specialframe(5) = 29;
+    specialframe(6) = 29;
+    specialframe(7) = 29;
+    stext(0, "Withered the enemy!", "", "");
+  }
+}
+event /*79*/
+{
+  stext(0, "Sam's appetite is whet!", "", "");
+  flags(1001) = maxhp(1);
+  flags(1001) += maxhp(1);
+  flags(1001) += fer(1);
+}

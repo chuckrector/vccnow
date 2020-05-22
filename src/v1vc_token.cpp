@@ -1,35 +1,25 @@
 #include "v1vc_token.hpp"
 #include "log.hpp"
+#include "mem.hpp"
 #include <stdlib.h>
 #include <string.h>
 
 // -----------------------------------------------------------------------------
 
-Token_t *TokenSlab = 0;
 void
-InitTokenSlab()
+InitTokenPool()
 {
-  if (IsTokenSlabReady)
-    return;
-  TokenSlab = new Token_t[TOKEN_SLAB_SIZE];
-  IsTokenSlabReady = true;
-}
-void
-FreeTokenSlab()
-{
-  delete[] TokenSlab;
+  Assert(!TokenPool.Base);
+  InitMemPool(&TokenPool, PoolBase(TOKEN_POOL_INDEX), TOKEN_POOL_SIZE);
 }
 
-// NOTE(aen): Never dealloc. Use what we got or boom
-Token_t *
+token *
 NewToken()
 {
-  if (!IsTokenSlabReady)
-    Fail("Error: Must call InitTokenSlab before using NewToken\n");
-  if (TokenSlabResidents >= TOKEN_SLAB_SIZE)
-    Fail("Too many heap tokens! Over %d, exiting...\n", TOKEN_SLAB_SIZE);
-  // Log("<<<NewToken %d>>>\n", TokenSlabResidents);
-  return TokenSlab + TokenSlabResidents++;
+  // Log("<<<NewToken %d>>>\n", TokenPool.Residents);
+  Assert(TokenPool.Base);
+  token *Result = NewItem(&TokenPool, token);
+  return Result;
 }
 
 // -----------------------------------------------------------------------------
@@ -49,30 +39,30 @@ DebugTokenType(TokenType_e Type)
 
 // -----------------------------------------------------------------------------
 
-bool64
-Token_t::IsIdent()
+b64
+token::IsIdent()
 {
   return Type == TT_IDENT;
 }
-bool64
-Token_t::IsNumber()
+b64
+token::IsNumber()
 {
   return Type == TT_NUMBER;
 }
-bool64
-Token_t::IsMatch(const char *S, u64 SLength)
+b64
+token::IsMatch(const char *S, u64 SLength)
 {
   return SLength == Length && !memcmp(S, Text, Length);
 }
-bool64
-Token_t::IsMatch(Token_t *Token)
+b64
+token::IsMatch(token *Token)
 {
   return Type == Token->Type && Length == Token->Length &&
          !memcmp(Text, Token->Text, Length);
 }
 
 void
-Token_t::ToString(char *Output, u64 OutputLength, u64 MaxTextLength)
+token::ToString(char *Output, u64 OutputLength, u64 MaxTextLength)
 {
   u64 L = Length;
   char *Ellipsis = "";
@@ -92,7 +82,7 @@ Token_t::ToString(char *Output, u64 OutputLength, u64 MaxTextLength)
 }
 
 void
-Token_t::Debug()
+token::Debug()
 {
   if (Length < 0)
     Fail("Token length is negative! %d Exiting...\n", Length);
@@ -101,30 +91,42 @@ Token_t::Debug()
 
 // -----------------------------------------------------------------------------
 
-// NOTE(aen): Alloc/free pointer list only. Fine cz underlying tokens in slab
-TokenList_t::TokenList_t(u64 N) { Reset(N); }
-TokenList_t::~TokenList_t() { delete[] Data; }
-Token_t *
-TokenList_t::Get(u64 TokenIndex)
+token *
+token_list::Get(u64 TokenIndex)
 {
-  return Data[TokenIndex];
+  return Data + TokenIndex;
 }
 
 void
-TokenList_t::Reset(u64 N)
+token_list::Reset()
 {
-  if (MaxTokens != N)
-  {
-    if (Data)
-      delete[] Data;
-    Data = new Token_t *[MaxTokens = N];
-  }
   NumTokens = 0;
   Index = 0;
 }
 
 void
-TokenList_t::Debug()
+token_list::SetMaxTokens(u64 NewMaxTokens)
+{
+  DebugLog(MEDIUM, "TokenList.SetMaxTokens %d\n", NewMaxTokens);
+  if (MaxTokens != NewMaxTokens)
+  {
+    // NOTE(aen): Dumbly create a new list and copy items over. Don't bother
+    // freeing anything. Bump allocation all the way until it's a problem.
+    token *OldData = Data;
+    u64 OldMaxTokens = MaxTokens;
+    Data = NewList(&TokenPool, MaxTokens = NewMaxTokens, token);
+    for (int N = 0; N < MaxTokens && N < OldMaxTokens; N++)
+      Data[N] = OldData[N];
+    DebugLog(
+        MEDIUM,
+        "TokenList.SetMaxTokens: Realloc from %lld to %lld\n",
+        OldMaxTokens,
+        MaxTokens);
+  }
+}
+
+void
+token_list::Debug()
 {
   for (u64 T = 0; T < NumTokens; T++)
   {
@@ -133,19 +135,31 @@ TokenList_t::Debug()
   }
 }
 
-Token_t *
-TokenList_t::AddToken(Token_t *Token)
+token *
+token_list::AddToken(token *Token)
 {
+  if (!MaxTokens)
+    SetMaxTokens(DEFAULT_NUM_TOKENS_PER_LIST);
   if (NumTokens >= MaxTokens)
     Fail("Too many tokens! Over %d, exiting...\n", MaxTokens);
-  return Data[NumTokens++] = Token;
+
+  token *Result = Data + NumTokens++;
+
+  // NOTE(aen): Text will point to original memory. Minification results can
+  // be incorrect (e.g. event/*0*/{} markers) if folks adding tokens don't
+  // allocate new memory for each new token's text. For tokens that point
+  // directly into the memory for a file loaded from disk, no new allocation
+  // is needed.
+  *Result = *Token;
+
+  return Result;
 }
 
 // NOTE(aen): Mostly for tests
-Token_t *
-TokenList_t::AddToken(char *Text, u64 L, TokenType_e T, u64 S, u64 E)
+token *
+token_list::AddToken(char *Text, u64 L, TokenType_e T, u64 S, u64 E)
 {
-  Token_t *Token = NewToken();
+  token *Token = NewToken();
   Token->Text = Text;
   Token->Length = L;
   Token->Type = T;
@@ -155,49 +169,53 @@ TokenList_t::AddToken(char *Text, u64 L, TokenType_e T, u64 S, u64 E)
 }
 
 void
-TokenList_t::NextToken(s64 Delta)
+token_list::NextToken(s64 Delta)
 {
   Index += Delta;
 }
-Token_t *
-TokenList_t::AtToken()
+
+token *
+token_list::AtToken()
 {
-  return Data[Index];
+  return Data + Index;
 }
-bool64
-TokenList_t::AtEnd()
+
+b64
+token_list::AtEnd()
 {
   return Index >= NumTokens;
 }
-bool64
-TokenList_t::IsToken(char Char)
+
+b64
+token_list::IsToken(char Char)
 {
   return AtToken()->Text[0] == Char;
 }
 
-bool64
-TokenList_t::IsToken(const char *CheckText, u64 Length)
+b64
+token_list::IsToken(const char *CheckText, u64 Length)
 {
   return Length == AtToken()->Length &&
          !memcmp(CheckText, AtToken()->Text, Length);
 }
 
-bool64
-TokenList_t::IsIdent()
+b64
+token_list::IsIdent()
 {
   return AtToken()->IsIdent();
 }
-bool64
-TokenList_t::IsNumber()
+
+b64
+token_list::IsNumber()
 {
   return AtToken()->IsNumber();
 }
 
 // NOTE(aen): Backup is mainly for [] versus (). V1 uses them interchangeably.
 void
-TokenList_t::ExpectToken(char Char, char Backup)
+token_list::ExpectToken(char Char, char Backup)
 {
-  Token_t *Token = AtToken();
+  token *Token = AtToken();
   if (Token->Text[0] == Char || (Backup && Token->Text[0] == Backup))
   {
     NextToken();
@@ -211,9 +229,9 @@ TokenList_t::ExpectToken(char Char, char Backup)
 }
 
 void
-TokenList_t::ExpectToken(const char *CheckText, u64 Length)
+token_list::ExpectToken(const char *CheckText, u64 Length)
 {
-  Token_t *Token = AtToken();
+  token *Token = AtToken();
   if (Length == Token->Length && !memcmp(Token->Text, CheckText, Length))
   {
     NextToken();
@@ -226,9 +244,9 @@ TokenList_t::ExpectToken(const char *CheckText, u64 Length)
 }
 
 void
-TokenList_t::ExpectTokenType(TokenType_e Type)
+token_list::ExpectTokenType(TokenType_e Type)
 {
-  Token_t *Token = AtToken();
+  token *Token = AtToken();
   if (Token->Type == Type)
   {
     NextToken();
@@ -244,33 +262,49 @@ TokenList_t::ExpectTokenType(TokenType_e Type)
 }
 
 u64
-TokenList_t::Minify(u8 *Out, bool64 ForceSpaces)
+token_list::Minify(u8 *Out, b64 ForceSpaces, b64 DryRun)
 {
-  u8 *Start = Out;
+  u64 N = 0;
 
+  // int outer = 0;
   while (!AtEnd())
   {
-    Token_t *Token = AtToken();
-    memcpy(Out, Token->Text, Token->Length);
-    if (Token->IsIdent())
+    // Log("Minify outer %d\n", outer++);
+    token *Token = AtToken();
+    // Token->Debug();
+    if (!DryRun)
     {
-      for (u8 *P = Out, *PEnd = P + Token->Length; P < PEnd; P++)
-        if (*P >= 'A' && *P <= 'Z')
-          *P += 32;
+      memcpy(Out + N, Token->Text, Token->Length);
+      if (Token->IsIdent())
+      {
+        // int inner = 0;
+        for (u8 *P = Out + N, *PEnd = P + Token->Length; P < PEnd; P++)
+        {
+          // Log("  inner %d\n", inner++);
+          if (*P >= 'A' && *P <= 'Z')
+            *P += 32;
+        }
+      }
     }
-    Out += Token->Length;
+    N += Token->Length;
 
     TokenType_e PrevType = Token->Type;
     NextToken();
-    bool64 IsFlushIdentifiers = !AtEnd() && IsIdent() && PrevType == TT_IDENT;
-    bool64 IsFlushIdentNum = !AtEnd() && IsNumber() && PrevType == TT_IDENT;
-    bool64 IsFlushNumIdent = !AtEnd() && IsIdent() && PrevType == TT_NUMBER;
+    b64 IsFlushIdentifiers = !AtEnd() && IsIdent() && PrevType == TT_IDENT;
+    b64 IsFlushIdentNum = !AtEnd() && IsNumber() && PrevType == TT_IDENT;
+    b64 IsFlushNumIdent = !AtEnd() && IsIdent() && PrevType == TT_NUMBER;
     if (!AtEnd() && (IsFlushIdentifiers || IsFlushIdentNum || IsFlushNumIdent ||
                      ForceSpaces))
-      *Out++ = ' ';
+    {
+      if (!DryRun)
+        Out[N] = ' ';
+      N++;
+    }
   }
 
-  *Out++ = 0;
+  // if (!DryRun)
+  //   Out[N] = 0;
+  // N++;
 
-  return Out - Start;
+  return N;
 }

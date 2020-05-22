@@ -1,0 +1,76 @@
+event
+{
+  changechr(1, "gren.chr");
+  redraw();
+  if (flags(145) == 2)
+  {
+    specialframe((5)) = 29;
+    entity.locx((5)) = 11;
+    entity.locy((5)) = 3;
+    alterbtile(11, 5, 581, 1);
+    alterbtile(12, 5, 582, 1);
+    changezone(11, 5, 9);
+    changezone(12, 5, 9);
+  }
+}
+event { calleffect(3); }
+event { calleffect(4); }
+event { calleffect(5); }
+event { calleffect(6); }
+event { warp(39, 11, 0); }
+event
+{
+  warp(9, 4, 0);
+  partymove("D1");
+}
+event { mapswitch("ovrworld.map", 33, 37, 0); }
+event
+{
+  text(
+      4,
+      "Civilians are not allowed in",
+      "Twilight outposts.",
+      "    You have no business here.");
+}
+event
+{
+  if (flags(145) > 1)
+  {
+    return;
+  }
+  face((5)) = 3;
+  text(4, "Hey you! You're not allowed in", "there!", "");
+  text(1, "Oh, sorry -", "", "");
+  if (!flags(145))
+  {
+    partymove("D1 F2");
+    text(1, "        it won't happen again.", "", "");
+    text(4, "Not on MY shift, it won't.", "", "");
+    face((5)) = 0;
+  }
+  if (flags(145) == 1)
+  {
+    partymove("D1 F2");
+    text(1, "            but I insist.", "", "");
+    flags(145) = 2;
+    specialframe((5)) = 29;
+    entity.locx((5)) = 11;
+    entity.locy((5)) = 3;
+    banner("BATTLE", 1);
+    alterbtile(11, 5, 581, 1);
+    alterbtile(12, 5, 582, 1);
+    changezone(11, 5, 9);
+    changezone(12, 5, 9);
+  }
+}
+event { text(0, "This outpost guard is dead.", "", ""); }
+event
+{
+  face((0)) = 0;
+  mapswitch("twop.map", 196, 192, 0);
+}
+event
+{
+  text(0, "This portcullis is shut tight.", "", "");
+  text(1, "This leads outside, to the", "land north of the mountains.", "");
+}

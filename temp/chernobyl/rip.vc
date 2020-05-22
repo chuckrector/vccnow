@@ -1,0 +1,14 @@
+Event // 0
+{
+ DrawParty=0;
+ LayerVC=1;
+ VCClear();
+ FontColor=31;
+ VCCenterText(100,"You Suck!");
+ VCCenterText(110,"Better luck next time!");
+ ReDraw();
+ FadeIn(30);
+ While (!b1) ReadControls();
+ CancelFade++;
+ Exit();
+}

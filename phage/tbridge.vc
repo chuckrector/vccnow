@@ -1,0 +1,115 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+}
+event
+{
+  stext(
+      0,
+      "Hello! I'm George the troll,",
+      "and this is my bridge! I",
+      "built it, ya know, and I");
+  stext(
+      0,
+      "try to ensure that it stays",
+      "in good shape. Thus, I am",
+      "collecting contributions");
+  prompt(
+      0,
+      "from passers-by. Would you",
+      "be willing to give me 50 gp?",
+      "",
+      112,
+      "No.",
+      "Sure.");
+  flags(107) = random(1, 10);
+  if (flags(112) > 0 && gp < 50)
+  {
+    stext(0, "Not enough money... I see...", "Well, maybe later.", "");
+  }
+  if (flags(112) > 0 && flags(107) != 3 && gp > 49)
+  {
+    takegp(50);
+    stext(0, "Hey, thanks a lot!", "", "");
+    stext(
+        1,
+        "You're welcome. But I didn't",
+        "know that such things as",
+        "trolls existed in this");
+    stext(1, "world.", "", "");
+    stext(
+        0,
+        "Oh, that's because we aren't",
+        "really trolls, exactly. My",
+        "species is highly evolved");
+    stext(
+        0,
+        "from the hamster. We are",
+        "possibly the most intelligent",
+        "species on Ieval. We also");
+    stext(
+        0,
+        "have gained a species memory.",
+        "Thus I can remember things",
+        "that happened to my father.");
+    stext(
+        0,
+        "Anyway, we call ourselves",
+        "trolls because of our fancy",
+        "for bridges...");
+    stext(
+        1,
+        "I see... But tell me: How",
+        "far back does this memory",
+        "of yours go?");
+    stext(
+        0,
+        "Actually, it goes back about",
+        "a thousand or so years!",
+        "I've been trying to send");
+    stext(
+        0,
+        "messages to my brethren on",
+        "the northern continent, as",
+        "my memory holds nothing from");
+    stext(
+        0,
+        "those parts for the last",
+        "two hundred years, and I'd",
+        "like my offspring to have");
+    stext(0, "some knowledge of the area.", "", "");
+    stext(
+        1,
+        "Well, from what I've heard,",
+        "nobody knows what's up there",
+        "anymore. Since the BPC");
+    stext(1, "disappeared, the only one", "who's been there is Lumin!", "");
+    stext(
+        0,
+        "Yes, so I'd heard. Well,",
+        "it's been nice chatting,",
+        "but I'd better collect more");
+    stext(0, "money...", "", "");
+  }
+  if (flags(112) > 0 && flags(107) == 3 && gp > 49)
+  {
+    takegp(50);
+    stext(
+        0,
+        "Hurrah! You guys have helped",
+        "me out a lot! Here, take",
+        "this! It's my secret!");
+    giveitem(80);
+  }
+  if (flags(112) == 0)
+  {
+    stext(0, "Alas, I cannot depend upon", "the kindness of strangers...", "");
+  }
+}
+event { mapswitch("overland.map", 100, 56, 0); }
+event { mapswitch("overland.map", 103, 56, 0); }
+event { playmusic("harmoniz.xm"); }
+event { playmusic("t-bach.xm"); }
+event { playmusic("seashore.xm"); }
+event { playmusic("ocean.xm"); }

@@ -1,0 +1,692 @@
+event
+{
+  fadein(1);
+  flags(801) = 1;
+  if (flags(185) == 8)
+  {
+    flags(251) = 0;
+    flags(185) = 9;
+    entity.locx(6) = 53;
+    entity.locy(6) = 16;
+    face(6) = 2;
+    face(0) = 3;
+    face(1) = 3;
+    face(2) = 3;
+    face(3) = 3;
+    autoon();
+    entity.locy(96) -= 1;
+    entity.locx(97) += 1;
+    entity.locy(98) += 1;
+    stext(
+        10,
+        "Uggh! You... tougher than I",
+        "expected! Unbelievable! But",
+        "you still know too little");
+    stext(
+        10,
+        "to threaten our plans!",
+        "Next time, I shall have",
+        "the upper hand!");
+    entitymove(6, "L6L6");
+    wait(230);
+    entity.locx(6) = 0;
+    entity.locy(6) = 0;
+    stext(1, "Wait!", "", "");
+    partymove("L4");
+    entitymove(95, "L4");
+    entitymove(96, "D1L3");
+    entitymove(97, "L3");
+    entitymove(98, "U1L1");
+    wait(150);
+    stext(1, "Darn, too late!", "", "");
+    autooff();
+  }
+  if (flags(185) > 9)
+  {
+    alterbtile(86, 65, 1, 0);
+  }
+  if (flags(289) > 0)
+  {
+    alterbtile(59, 33, 1, 0);
+  }
+  if (flags(185) == 11)
+  {
+    givexp(2, 3000);
+    forceequip(2, 4);
+    forceequip(2, 21);
+    getmagic(2, 33);
+    flags(185) = 12;
+    addcharacter(4);
+    addcharacter(5);
+    addcharacter(3);
+    addcharacter(2);
+    autoon();
+    entity.locx(96) -= 1;
+    entity.locy(96) -= 1;
+    entity.locx(97) -= 3;
+    entity.locy(97) += 2;
+    entity.locx(98) -= 4;
+    entity.locy(98) += 1;
+    entity.locx(99) -= 6;
+    entity.chrindex(95) = 9;
+    specialframe(95) = 29;
+    entity.chrindex(96) = 10;
+    specialframe(96) = 29;
+    entity.chrindex(97) = 11;
+    specialframe(97) = 29;
+    entity.chrindex(98) = 12;
+    specialframe(98) = 29;
+    entity.chrindex(99) = 13;
+    specialframe(99) = 29;
+    wait(150);
+    entity.chrindex(98) = 3;
+    specialframe(98) = 0;
+    wait(30);
+    face(98) = 3;
+    wait(50);
+    face(98) = 2;
+    wait(50);
+    stext(
+        3,
+        "Hnnh. Well, that was certainly",
+        "embarrassing... Beaten twice",
+        "in less than a week by frogs!");
+    wait(25);
+    stext(
+        3,
+        "Have I really become so weak",
+        "in my solitude? Damn... One",
+        "more in a long string of");
+    stext(3, "stupid mistakes... But one", "I can remedy...", "");
+    wait(10);
+    entitymove(98, "U1R3");
+    wait(100);
+    stext(
+        3,
+        "Sam! Get up, boy! We've got to",
+        "get moving if we're going to",
+        "catch up to Bull and reclaim");
+    stext(3, "your town's Seed!", "", "");
+    entity.chrindex(95) = 0;
+    face(95) = 3;
+    specialframe(95) = 0;
+    stext(1, "Mnn? Oh! Feng! Umm... Did you", "just have a weird dream?", "");
+    stext(
+        3,
+        "What are you blathering about",
+        "dreams for, kid? We've got",
+        "important things to do!");
+    stext(1, "Right! We've got to go get", "that Seed back, and fast!", "");
+    entity.chrindex(99) = 4;
+    face(99) = 2;
+    specialframe(99) = 0;
+    stext(
+        2,
+        "Well, I'd been keeping an eye",
+        "on the fat one as well... He'd",
+        "been meeting with the tycoon,");
+    stext(
+        2,
+        "Vultris... And they were going",
+        "to meet again at Vultris's",
+        "factory in Dactylis... So, we");
+    stext(2, "should head that way if we", "hope to intercept him.", "");
+    face(98) = 3;
+    stext(3, "We?", "", "");
+    stext(
+        2,
+        "Well, yeah! I mean... I'd",
+        "like to come along and help,",
+        "if you'd have me... This is");
+    stext(
+        2,
+        "the most interesting stuff",
+        "I've ever spied on, and I'm",
+        "not going to let my report");
+    stext(2, "be incomplete! So I want to", "see this through!", "");
+    stext(4, "Mmmm... Ice cream...", "...", "Nnh! Huh?");
+    entity.chrindex(96) = 1;
+    face(96) = 0;
+    specialframe(96) = 0;
+    stext(
+        4,
+        "Well, I gotta say, I'd trust",
+        "this guy more than I trust",
+        "'Sleeping Beauty' over there!");
+    entity.chrindex(97) = 2;
+    specialframe(97) = 23;
+    stext(5, "Huh? Who're you talking", "about?", "");
+    specialframe(95) = 20;
+    specialframe(96) = 20;
+    specialframe(98) = 20;
+    specialframe(99) = 20;
+    wait(150);
+    specialframe(95) = 0;
+    specialframe(96) = 0;
+    specialframe(98) = 0;
+    specialframe(99) = 0;
+    wait(100);
+    stext(5, "What? What'd I say?", "", "");
+    specialframe(95) = 20;
+    specialframe(96) = 20;
+    specialframe(98) = 20;
+    specialframe(99) = 20;
+    wait(150);
+    specialframe(95) = 0;
+    specialframe(96) = 0;
+    specialframe(97) = 0;
+    specialframe(98) = 0;
+    specialframe(99) = 0;
+    stext(
+        1,
+        "Well, I guess we can use all",
+        "the help we can get right now!",
+        "Not to say that I wouldn't've");
+    stext(1, "accepted you otherwise,", "though!", "");
+    stext(
+        2,
+        "Great! I promise I'll do my",
+        "best to help! My secret arts",
+        "allow me to learn all sorts");
+    stext(
+        2,
+        "of abilities from the beasts",
+        "of the wild, so don't be shy",
+        "about fighting!");
+    stext(2, "Oh, yeah! And you can call me", "Webb!", "");
+    banner("Webb joins!", 2);
+    partymove("L5");
+    entitymove(95, "L5");
+    entitymove(96, "D1L3");
+    entitymove(97, "U2F3");
+    entitymove(98, "L1");
+    entitymove(99, "R5F3");
+    wait(175);
+    autooff();
+    enablemenu();
+  }
+}
+event
+{
+  if (flags(185) < 10)
+  {
+    flags(185) = 10;
+    partymove("R6");
+    stext(
+        1, "We... We made it! Look! It's", "the Seed! Frog Pond is saved!", "");
+    stext(
+        4,
+        "Ha! We got here before that",
+        "stupid Bull did, too! We sure",
+        "showed him! Yeehaw!");
+    stext(
+        3,
+        "So that's the Seed... Who",
+        "would have thought that such",
+        "a small life could be so");
+    stext(3, "important?", "", "");
+    specialframe(char(5) - 1) = 20;
+    stext(
+        5,
+        "We... We *found* it? Um...",
+        "Does that mean your quest is",
+        "over? You'll... go home?");
+    specialframe(char(5) - 1) = 0;
+    stext(
+        1,
+        "Well... yeah! Of course! I",
+        "mean, how else would we save",
+        "the town?");
+    stext(5, "But... But now what will I", "do? *I've* nowhere to go...", "");
+    stext(
+        1,
+        "Well, you can come stay with",
+        "me in Frog Pond! After all,",
+        "you *did* help find the seed,");
+    stext(1, "so you'll be welcomed as a", "hero! We all will!", "");
+    specialframe(char(5) - 1) = 21;
+    stext(5, "I'm a... hero? I guess I am!", "I'm a hero!!!", "");
+    specialframe(char(4) - 1) = 21;
+    stext(
+        4,
+        "You're just a cowardly thief",
+        "who's getting a swelled head!",
+        "I'm keeping an eye on you to");
+    stext(
+        4,
+        "make sure you don't try to",
+        "swipe that thing while we",
+        "take it back!");
+    specialframe(char(5) - 1) = 22;
+    stext(5, "Grrrr! Why you...", "", "");
+    for (x, 0, 3, 1)
+    {
+      specialframe(x) = 21;
+    }
+    stext(
+        7,
+        "Haw! Sorry to break up your",
+        "li'l celebration, but *I'm*",
+        "takin' this Seed, and none");
+    stext(7, "a ya better try an' stop me!", "", "");
+    for (x, 0, 3, 1)
+    {
+      specialframe(x) = 0;
+    }
+    entity.locx(5) = 90;
+    entity.locy(5) = 65;
+    entitymove(5, "L5");
+    wait(150);
+    stext(1, "Bull?!? How did you get here?", "", "");
+    stext(
+        7,
+        "I tunneled through three",
+        "miles a solid rock with my",
+        "tongue! An' it was worth it");
+    stext(
+        7,
+        "just to see the expression",
+        "on all a yer faces! Now I'm",
+        "gonna take this Seed, and");
+    stext(7, "trade it in for my reward!", "", "");
+    stext(
+        1,
+        "Reward? Bull, what are you",
+        "*talking* about? Who's",
+        "offering a reward for the");
+    stext(1, "Seed?", "", "");
+    stext(
+        7,
+        "Haw! Don't act as if ya",
+        "didn't know! You were",
+        "gonna do the same thing!");
+    stext(
+        7,
+        "Don't pretend ya weren't!",
+        "But now *I'm* gonna be",
+        "the one who brings this");
+    stext(
+        7,
+        "puppy in to Vultris, and",
+        "I'm gonna be the one who",
+        "gets the reward money!");
+    stext(1, "What? Vultris? Why would", "he want the Seed?", "");
+    stext(
+        7,
+        "Why should I care? All I",
+        "know is that he's handin'",
+        "out the big bucks for");
+    stext(7, "this thing an' I'm gonna", "claim it!", "");
+    stext(1, "But... What about Frog", "Pond? It'll *die!*", "");
+    stext(
+        7,
+        "Aww, I'm cryin' my li'l",
+        "eyes out! With that",
+        "money, I can buy a big");
+    stext(
+        7,
+        "ol' mansion, and all the",
+        "folks in Frog Pond can",
+        "move in an' be my servants!");
+    stext(7, "I don't *need* Frog Pond!", "", "");
+    autoon();
+    specialframe(char(1) + 94) = 27;
+    stext(
+        1,
+        "I can't let you do this,",
+        "Bull! Give up your mad",
+        "dream, and we can stay");
+    stext(
+        1,
+        "on friendly terms! The",
+        "four of us outnumber you!",
+        "You've got no chance!");
+    stext(
+        7,
+        "'Friendly terms!?!' Ya've",
+        "got ta be kiddin' me! Why",
+        "would I wanna be friends");
+    stext(
+        7,
+        "with a li'l twerp like",
+        "*you?!?* Prepare to taste",
+        "the cave floor, tadpole!");
+    entitymove(char(3) + 94, "U2R2");
+    wait(100);
+    specialframe(char(3) + 94) = 27;
+    stext(
+        3,
+        "Hmmf! Brave words from",
+        "an overweight puffweed!",
+        "Don't forget you have");
+    stext(
+        3,
+        "to face all of us! Do",
+        "you really think you can",
+        "take on the Storm God?");
+    entitymove(char(5) + 94, "D1R1");
+    wait(75);
+    specialframe(char(5) + 94) = 27;
+    stext(
+        5,
+        "Yeah! There's no way I'm",
+        "letting you escape with",
+        "a single possession!");
+    entitymove(char(4) + 94, "U1R1");
+    wait(75);
+    specialframe(char(4) + 94) = 27;
+    stext(
+        4,
+        "For once I agree with",
+        "Dingo! When I was in",
+        "trouble, Sam helped me!");
+    stext(
+        4,
+        "All you did was laugh!",
+        "There's no way I'm gonna",
+        "let him down!");
+    stext(
+        7,
+        "Haw! All yer li'l friends",
+        "think that they can take",
+        "me on! Maybe if I was");
+    stext(
+        7,
+        "unarmed, but I've got",
+        "a weapon given to me",
+        "by Vultris himself, an'");
+    stext(7, "I'm unbeatable with it!", "", "");
+    stext(3, "We'll see about that!", "RAAAARR!!!", "");
+    banner("Boss Battle:", 1);
+    banner("1 Bull", 1);
+    givexp(7, 6000);
+    flags(251) = 1;
+    flags(501) = 0;
+    flags(502) = 25;
+    flags(503) = 15;
+    flags(504) = 0;
+    flags(505) = 43;
+    flags(506) = 43;
+    flags(507) = 16;
+    flags(508) = 16;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 38;
+    flags(513) = 39;
+    flags(540) = 5;
+    flags(541) = 15;
+    flags(1009) = 0;
+    flags(514) = 1;
+    flags(515) = 350;
+    flags(516) = 10000;
+    flags(517) = 10000;
+    flags(518) = 70;
+    flags(519) = 70;
+    flags(520) = 70;
+    flags(521) = 70;
+    flags(522) = 0;
+    flags(523) = 0;
+    flags(524) = 0;
+    flags(525) = 38;
+    flags(526) = 39;
+    flags(542) = 350;
+    flags(543) = 10000;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 25;
+    flags(529) = 15;
+    flags(530) = 0;
+    flags(531) = 43;
+    flags(532) = 43;
+    flags(533) = 16;
+    flags(534) = 16;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 38;
+    flags(539) = 39;
+    flags(544) = 5;
+    flags(545) = 15;
+    flags(1011) = 0;
+    autooff();
+    mapswitch("Bullbat.map", 1, 1, 0);
+  }
+}
+event { mapswitch("sewer2.map", 29, 2, 0); }
+event
+{
+  enablesave();
+  banner("Save Point!", 1);
+}
+event { disablesave(); }
+event
+{
+  if (flags(289) == 0)
+  {
+    flags(289) += 1;
+    alterbtile(59, 33, 1, 0);
+    changezone(59, 33, 0);
+    stext(1, "Hmmm... Some sort of bell.", "", "");
+    banner("Found cow bell!", 1);
+  }
+}
+event
+{
+  if (flags(185) < 8)
+  {
+    flags(185) = 8;
+    stext(1, "Huh? Did you hear that?", "", "");
+    stext(3, "It sounded like someone in", "that passage over there...", "");
+    entity.locx(6) = 55;
+    entity.locy(6) = 18;
+    entity.locx(7) = 56;
+    entity.locy(7) = 23;
+    cameratracking = 0;
+    xwin += 160;
+    ywin += 160;
+    playmusic("terminal.mod");
+    wait(100);
+    entitymove(6, "D4");
+    entitymove(7, "F1");
+    wait(100);
+    stext(
+        0,
+        "Well, well, well! If it isn't",
+        "my old brother! Have you",
+        "chosen to abandon your duties");
+    stext(0, "in order to interfere in mine?", "", "");
+    stext(
+        10,
+        "No, I've come of my own",
+        "accord, but I no longer must",
+        "guard the princess. I've made");
+    stext(
+        10,
+        "arrangements with father...",
+        "and I'm here to make sure",
+        "*you* don't jump the gun, and");
+    stext(
+        10,
+        "break our cover, 'dead man.'",
+        "Or have you forgotten your",
+        "humiliating defeat at the");
+    stext(10, "hands of three puny little", "mortals?", "");
+    stext(
+        0,
+        "Hrmmf! You know as well as I",
+        "do that those three would be",
+        "carrion, if I had but chosen");
+    stext(
+        0,
+        "to reveal my true",
+        "capabilities... It was to",
+        "their fortune that we were in");
+    stext(
+        0,
+        "such a crowded area. You will",
+        "notice, however, the total",
+        "lack of witnesses in this");
+    stext(
+        0,
+        "desolate cave... Now, my",
+        "impudent brother, I shall",
+        "prove my worth to both our");
+    stext(
+        0,
+        "father, and to you! And I",
+        "*know* how it will grate at",
+        "your nerves, when *I* destroy");
+    stext(
+        0,
+        "them, as you fear to even",
+        "attempt, for fear of father's",
+        "displeasure!");
+    stext(
+        10,
+        "Fool! You risk father's wrath!",
+        "And for what? Vengeance? No,",
+        "I've chosen to wait, for you");
+    stext(
+        10,
+        "may not have heard, but",
+        "father is engaged in the",
+        "decision... Whether these");
+    stext(
+        10,
+        "presumtuous ones are worth",
+        "the 'artistic death,'  or",
+        "possibly even of being taken");
+    stext(
+        10,
+        "as 'we' once were... Should",
+        "you choose to disobey him in",
+        "this matter, he would not be");
+    stext(10, "lenient!", "... ...", "...And, neither would I!");
+    stext(
+        0,
+        "Hmmm, well then, if you *must*",
+        "be a bother, perhaps I should",
+        "give you something to stop!");
+    entitymove(7, "U3L1U3");
+    partymove("D1R5R5");
+    face(0) = 0;
+    face(1) = 0;
+    face(2) = 0;
+    face(3) = 0;
+    specialframe(6) = 21;
+    wait(100);
+    specialframe(6) = 0;
+    entity.locx(7) = 0;
+    entity.locy(7) = 0;
+    stext(10, "You fool! Come back here!", "You'll ruin everything!", "");
+    entitymove(6, "U4");
+    wait(100);
+    cameratracking = 1;
+    stext(10, "Prepare to be annihalated!", "", "");
+    specialframe(6) = 20;
+    wait(175);
+    stext(10, "... ... ...", "", "");
+    stext(4, "We heard everything.", "", "");
+    stext(3, "Every word.", "", "");
+    stext(1, "Mauser, I don't know what's", "going on, but...", "");
+    stext(
+        5,
+        "That was Garm's voice! Why",
+        "have you allied with that",
+        "murderer? No! It doesn't");
+    stext(
+        5, "matter! Any ally of Garm's", "must see the folly of his", "path!");
+    specialframe(6) = 21;
+    stext(
+        10,
+        "Gott in Himmel! The fool's",
+        "led me into a trap! Now it",
+        "is I who must destroy them,");
+    stext(
+        10,
+        "and incur father's wrath!",
+        "Well, so be it! But dear",
+        "brother's treachery will");
+    stext(10, "be repaid tenfold!", "", "");
+    specialframe(6) = 0;
+    stext(
+        10,
+        "I regret that I must do",
+        "this, for I had such",
+        "plans! Now shall the");
+    stext(
+        10,
+        "true face of death be",
+        "etched in your memories,",
+        "as it shall be the last");
+    stext(10, "sight to grace your eyes!", "", "");
+    banner("Boss battle:", 1);
+    banner("1 Mauser", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+      mapswitch("seedcave.map", entity.locx(0), entity.locy(0), 0);
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+      mapswitch("seedcave.map", entity.locx(0), entity.locy(0), 0);
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 0;
+      flags(502) = 25;
+      flags(503) = 15;
+      flags(504) = 0;
+      flags(505) = 43;
+      flags(506) = 43;
+      flags(507) = 16;
+      flags(508) = 16;
+      flags(509) = 0;
+      flags(510) = 0;
+      flags(511) = 0;
+      flags(512) = 38;
+      flags(513) = 39;
+      flags(540) = 5;
+      flags(541) = 15;
+      flags(1009) = 0;
+      flags(514) = 4;
+      flags(515) = 123;
+      flags(516) = 145;
+      flags(517) = 3000;
+      flags(518) = 58;
+      flags(519) = 58;
+      flags(520) = 60;
+      flags(521) = 57;
+      flags(522) = 3000;
+      flags(523) = 1200;
+      flags(524) = 5;
+      flags(525) = 38;
+      flags(526) = 39;
+      flags(542) = 100;
+      flags(543) = 130;
+      flags(1010) = 0;
+      flags(527) = 0;
+      flags(528) = 25;
+      flags(529) = 15;
+      flags(530) = 0;
+      flags(531) = 43;
+      flags(532) = 43;
+      flags(533) = 16;
+      flags(534) = 16;
+      flags(535) = 0;
+      flags(536) = 0;
+      flags(537) = 0;
+      flags(538) = 38;
+      flags(539) = 39;
+      flags(544) = 5;
+      flags(545) = 15;
+      flags(1011) = 0;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      flags(251) = 1;
+      mapswitch("cavebat.map", 1, 1, 0);
+    }
+  }
+}

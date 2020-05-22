@@ -1,0 +1,166 @@
+event { fadein(1); }
+event
+{
+  if (flags(113) == 0)
+  {
+    stext(
+        0, "Other ghosts like to play", "tag, but I prefer hide-", "and-seek.");
+    stext(
+        0,
+        "If you find me fast enough",
+        "three times in one sitting,",
+        "I'll give you something.");
+    prompt(0, "Wanna try?", "", "", 112, "No.", "Yeah.");
+  }
+  if (flags(113) > 0 && flags(113) < 3)
+  {
+    prompt(0, "Wanna go again?", "", "", 112, "No.", "Yeah.");
+  }
+  if (flags(113) == 3)
+  {
+    stext(
+        0,
+        "You're really good! I don't",
+        "have anything else to give",
+        "to you...");
+  }
+  if (flags(112) == 0 && flags(113) < 3)
+  {
+    stext(0, "I want to play!", "", "");
+  }
+  if (flags(112) == 1 && flags(113) < 3)
+  {
+    for (z, 35, 41, 1)
+    {
+      alterbtile(z, 35, 1, 1);
+    }
+    if (flags(113) == 0)
+    {
+      entity.locx(6) = 39;
+      entity.locy(6) = 14;
+    }
+    if (flags(113) == 1)
+    {
+      entity.locx(7) = 49;
+      entity.locy(7) = 19;
+    }
+    if (flags(113) == 2)
+    {
+      entity.locx(8) = 15;
+      entity.locy(8) = 10;
+      layer0 = 0;
+      layer1 = 0;
+    }
+    entity.locx(5) = 74;
+    entity.locy(5) = 1;
+    timer = 0;
+  }
+}
+event
+{
+  flags(112) = timer;
+  if (flags(112) < 1000)
+  {
+    stext(0, "Good! You found me in under", "ten seconds!", "");
+    flags(113) = 1;
+  }
+  if (flags(112) > 999 && flags(112) < 3000)
+  {
+    specialframe(6) = 20;
+    wait(50);
+    stext(
+        0,
+        "That was all right, but not",
+        "fast enough to qualify.",
+        "Try again.");
+    specialframe(6) = 0;
+  }
+  if (flags(112) > 2999)
+  {
+    specialframe(6) = 20;
+    wait(50);
+    stext(0, "That was pathetic!", "Try again!", "");
+    specialframe(6) = 0;
+  }
+  for (z, 35, 41, 1)
+  {
+    alterbtile(z, 35, 26, 0);
+  }
+  entity.locx(5) = 37;
+  entity.locy(5) = 28;
+  entity.locx(6) = 75;
+  entity.locy(6) = 1;
+  warp(37, 30, 0);
+}
+event
+{
+  flags(112) = timer;
+  if (flags(112) < 1500)
+  {
+    stext(0, "Good! You found me in under", "fifteen seconds!", "");
+    flags(113) = 2;
+  }
+  if (flags(112) > 1499 && flags(112) < 3000)
+  {
+    specialframe(7) = 20;
+    wait(50);
+    stext(0, "That wasn't fast enough to", "qualify. Try again.", "");
+    specialframe(7) = 0;
+  }
+  if (flags(112) > 2999)
+  {
+    specialframe(7) = 20;
+    wait(50);
+    stext(0, "That was pathetic!", "Try again!", "");
+    specialframe(7) = 0;
+  }
+  for (z, 35, 41, 1)
+  {
+    alterbtile(z, 35, 26, 0);
+  }
+  entity.locx(5) = 37;
+  entity.locy(5) = 28;
+  entity.locx(7) = 76;
+  entity.locy(7) = 1;
+  warp(37, 30, 0);
+}
+event
+{
+  flags(112) = timer;
+  if (flags(112) < 2000)
+  {
+    specialframe(8) = 21;
+    wait(50);
+    stext(
+        0,
+        "Wow! You beat the invisible",
+        "race in under twenty! I know",
+        "when I'm outmatched! Here!");
+    giveitem(37);
+    flags(113) = 3;
+  }
+  if (flags(112) > 1999)
+  {
+    stext(
+        0, "Well, don't feel bad. That's", "a hard course. Try it again.", "");
+  }
+  for (z, 35, 41, 1)
+  {
+    alterbtile(z, 35, 26, 0);
+  }
+  entity.locx(5) = 37;
+  entity.locy(5) = 28;
+  entity.locx(8) = 77;
+  entity.locy(8) = 1;
+  layer0 = 1;
+  layer1 = 1;
+  warp(37, 30, 0);
+}
+event
+{
+  if (flags(113) < 3)
+  {
+    flags(113) = 0;
+  }
+  mapswitch("overland.map", 39, 75, 0);
+}

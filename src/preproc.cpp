@@ -21,18 +21,21 @@
 void
 FirstPass()
 {
-  Parser_t Parser(NewBuffer(CompileGuy.Data, CompileGuy.Length));
+  parser Parser(NewBuffer(CompileGuy.Data, CompileGuy.Length));
   Parser.CalcPath(CompileGuy.BasePath); // NOTE(aen): For in-mem #include error
-  TokenList_t TokenList;
+  token_list TokenList;
+  TokenList.SetMaxTokens(PRODUCTION_MAX_TOKENS);
   Parser.ToTokenList(&TokenList);
 
-  MacroList_t MacroList;
-  TokenList_t TokenListWithoutMacros;
+  macro_list MacroList;
+  token_list TokenListWithoutMacros;
+  TokenListWithoutMacros.SetMaxTokens(PRODUCTION_MAX_TOKENS);
   ParseMacros(&Parser, &TokenList, &TokenListWithoutMacros, &MacroList);
 
   if (CompileGuy.IsVerbose)
     Log("Expanding macros...\n");
-  TokenList_t TokenListExpanded;
+  token_list TokenListExpanded;
+  TokenListExpanded.SetMaxTokens(PRODUCTION_MAX_TOKENS);
   ExpandMacros(&MacroList, &TokenListWithoutMacros, &TokenListExpanded);
   TokenListExpanded.Minify(CompileGuy.DataPreproc);
 

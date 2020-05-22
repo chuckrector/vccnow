@@ -20,4 +20,4 @@ ff              .end (event)
 
 //
 
-event{if(1){return;}}
+event/*0*/{if(1){return;}}

@@ -1,0 +1,101 @@
+#include globals.h
+
+event // 0
+{
+ Fade=0;
+ CameraTracking=0;
+ XWin=0; YWin=0;
+ ReDraw();
+ if (Flags[3]) ChainEvent(1);
+
+ FadeIn(30);
+
+ PartyMove("U2");
+ Text(1,"I'm here to see Mr. Conglomo","","");
+ Text(0,"Do you have an appointment?","","");
+ Text(1,"No.","","");
+ PartyMove("R3 U3");
+ SetFace(5,FaceRight());
+ Text(0,"Hey, wait!","","");
+ SetFace(1,FaceLeft()); ReDraw();
+ Wait(40);
+ SText(1,"Shut up bitch!","","");
+ SText(0,"ulp!","","");
+ Speed(5)=5;
+ EntityMove(5,"L3 D10");
+ Partymove("U1");
+ FadeOut(100);
+ Entity.LocX(5)=80;
+ Warp(10,24,1);
+ YWin=13*16;
+ Wait(100);
+ FadeIn(100);
+ Text(1,"Hey, Fatass!","Remember me!","");
+ Text(0,"You!","What happened to my","guys?");
+ Text(1,"Fucked 'em up, them brought","your factory down on 'em","");
+ Text(0,"ergh...","Security!","");
+ Flags[3]=1;
+
+ MapMusicPos()=ModPosition;
+ SoundEffect(30);
+ BoxFadeOut(30); BoxFadeOut(30);
+ FadeOut(1); BoxFadeIn(1);
+ SavX()=LocX; SavY()=LocY;
+ MapNum()=4;
+ BattleBG()=2; // change this later
+ 
+ Flags[7100]=6;
+ Flags[7101]=6;
+ Flags[7102]=6;
+ Flags[7103]=0;
+ Flags[7104]=0;
+ RunChance()=0;
+ PlayMusic("FF7boss.s3m");
+ MapSwitch("Battle.Map",0,0,1);
+}
+
+Event // 1
+{
+ YWin=208;
+ ReDraw();
+ FadeIn(30);
+ Text(1,"HAHAHAHAhA!","Die fatass!","");
+ Text(0,"Those guys were just","the janitors.","here comes security!");
+ fadeout(10);
+ LayerVC=1; for (y,0,200,1) {vcline(0,y,320,y,247);}
+ FadeIn(1);
+ for (i,1,50,1)
+  {
+   a=random(1,8);
+   Switch(a)
+    {
+     case 1:soundeffect(20);
+     case 2:soundeffect(9);
+/*     case 3:soundeffect(14);
+     case 4:soundeffect(24);*/
+    }
+   Wait(10);
+  }
+ Text(1,"Big.. cough.. hack...","fatass.... gaack!","");
+ for (i,1,50,1)
+  {
+   a=random(1,3);
+   Switch(a)
+    {
+     case 1:soundeffect(20);
+     case 2:soundeffect(9);
+/*     case 3:soundeffect(14);
+     case 4:soundeffect(24);*/
+    }
+   Wait(10);
+  }
+ SText(1,".............",".......owwww.......",".....fuck.....");
+ SText(0,"Recycle him...","no wait. Send him to","the research facility.");
+ FadeOut(1);
+ VCClear(); LayerVC=0;
+ Flags[1]=0; Flags[3]=0;
+ Fade=1; CancelFade++;
+ CameraTracking=1;
+ CurHP[1]=MaxHP[1]/10;
+ MapSwitch("beach.map",0,0,0);
+}

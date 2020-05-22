@@ -1,30 +1,28 @@
-#include "code.hpp"
 #include "compile.hpp"
+#include "op_codes.hpp"
 
 void
 MagicShop()
 {
-  u8 *ptr;
-  u8 *optr;
-  u64 varctr = 1;
+  u64 NumArgs = 1;
 
   EmitC(EXEC);
   EmitC(101);
   Expect("(");
-  CompileGuy_t *CG = &CompileGuy;
-  ptr = CG->GeneratedCodeLocation;
-  EmitC(varctr);
+  compile_guy *CG = &CompileGuy;
+  u8 *NumArgsPointer = CG->GeneratedCodeLocation;
+  EmitC(NumArgs);
   EmitOperand();
   while (!NextIs(")"))
   {
     Expect(",");
     EmitOperand();
-    varctr++;
+    NumArgs++;
   }
-  optr = CG->GeneratedCodeLocation;
-  CG->GeneratedCodeLocation = ptr;
-  EmitC(varctr);
-  CG->GeneratedCodeLocation = optr;
+  u8 *SavePointer = CG->GeneratedCodeLocation;
+  CG->GeneratedCodeLocation = NumArgsPointer;
+  EmitC(NumArgs);
+  CG->GeneratedCodeLocation = SavePointer;
   Expect(")");
   Expect(";");
 }
@@ -36,7 +34,7 @@ PlayVAS()
   EmitC(103);
   Expect("(");
   GetString();
-  EmitString(token);
+  EmitString(GlobalToken);
   Expect(",");
   EmitOperand(); // speed
   Expect(",");

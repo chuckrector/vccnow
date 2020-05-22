@@ -1,0 +1,76 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  flags(801) = 3;
+}
+event { mapswitch("overland.map", 37, 47, 0); }
+event { mapswitch("farm.map", 47, 1, 0); }
+event
+{
+  banner("Battle!", 1);
+  banner("3 Skunkravens", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 1;
+    flags(502) = 15;
+    flags(503) = 5;
+    flags(504) = 50;
+    flags(505) = 14;
+    flags(506) = 14;
+    flags(507) = 15;
+    flags(508) = 15;
+    flags(509) = 2;
+    flags(510) = 3;
+    flags(511) = 0;
+    flags(512) = 2;
+    flags(513) = 1;
+    flags(540) = 5;
+    flags(541) = 5;
+    flags(1009) = 0;
+    flags(514) = 1;
+    flags(515) = 15;
+    flags(516) = 5;
+    flags(517) = 50;
+    flags(518) = 14;
+    flags(519) = 14;
+    flags(520) = 15;
+    flags(521) = 15;
+    flags(522) = 2;
+    flags(523) = 3;
+    flags(524) = 0;
+    flags(525) = 2;
+    flags(526) = 1;
+    flags(542) = 5;
+    flags(543) = 5;
+    flags(1010) = 0;
+    flags(527) = 1;
+    flags(528) = 15;
+    flags(529) = 5;
+    flags(530) = 50;
+    flags(531) = 14;
+    flags(532) = 14;
+    flags(533) = 15;
+    flags(534) = 15;
+    flags(535) = 2;
+    flags(536) = 3;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 5;
+    flags(545) = 5;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("skravbat.map", 1, 1, 0);
+  }
+}
+event { stext(0, "This is a filler spot.", "", ""); }

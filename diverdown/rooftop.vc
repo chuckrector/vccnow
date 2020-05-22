@@ -1,0 +1,90 @@
+event
+{
+  face((0)) = 0;
+  specialframe((5)) = 29;
+  specialframe((6)) = 29;
+  wait(50);
+  enforceanimation();
+  redraw();
+  screengradient = 0;
+  fadein(150);
+  soundeffect(15);
+  wait(100);
+  palettemorph(63, 63, 63, 100, 60);
+  warp(9, 19, 1);
+  drawparty = 1;
+  for (a, 1, 100, 1)
+  {
+    wait(3);
+    palettemorph(63, 63, 63, 100 - a, 60);
+  }
+  partymove("D4");
+  text(1, "Hmm. . .", "", "");
+  partymove("R1");
+  text(1, "Well, the Royal Guard", "succeeded in trapping me.", "");
+  partymove("L1 F1");
+  entity.locx((5)) = 9;
+  entity.locy((5)) = 19;
+  specialframe((5)) = 0;
+  entitymove((5), "L1 F0");
+  while (movecode(5))
+  {
+    wait(10);
+  }
+  entity.locx((6)) = 9;
+  entity.locy((6)) = 19;
+  specialframe((6)) = 0;
+  entitymove((6), "R1 F0");
+  wait(150);
+  text(
+      3,
+      "Okay, it's wet, it's cold - No",
+      "one wants to drag this out any",
+      "further. So come on in!");
+  speed((0)) = 2;
+  changechr(1, "backgren.chr");
+  entitymove((5), "D6");
+  entitymove((6), "D6");
+  partymove("D2");
+  changechr(1, "gren.chr");
+  wait(50);
+  text(1, "Fly like a bird, huh?", "", "");
+  soundeffect(15);
+  palettemorph(63, 63, 63, 100, 60);
+  wait(15);
+  palettemorph(63, 63, 63, 0, 60);
+  wait(10);
+  palettemorph(63, 63, 63, 100, 60);
+  partymove("D1");
+  wait(100);
+  specialframe((0)) = 23;
+  for (a, 1, 60, 1)
+  {
+    wait(1);
+    warp(locx, locy + 1, 1);
+    palettemorph(63, 63, 63, 60 - a, 60);
+  }
+  for (a, 1, 57, 1)
+  {
+    wait(1);
+    warp(locx, locy + 1, 1);
+  }
+  changechr(1, "SubGren.chr");
+  speed((0)) = 7;
+  partymove("D1");
+  wait(20);
+  specialframe((0)) = 0;
+  speed((0)) = 4;
+  text(
+      1,
+      "Ugh. Isn't there something",
+      "symbolic about building a",
+      "castle in a swamp?");
+  text(
+      1,
+      "I need to get as far away",
+      "from Twilight influence as",
+      "I can and sort things out.");
+  partymove("D5");
+  mapswitch("swamp.map", 0, 0, 0);
+}

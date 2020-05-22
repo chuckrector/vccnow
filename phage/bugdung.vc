@@ -1,0 +1,796 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(801) = 1;
+  for (x, 141, 144, 1)
+  {
+    flags(x) = 0;
+  }
+  flags(251) = 0;
+  if (entity.locx(0) == 96)
+  {
+    playmusic("fairy.mod");
+  }
+  if (flags(4079) == 1)
+  {
+    entity.locx(5) = 1;
+    entity.locy(5) = 1;
+  }
+  if (flags(4080) == 1)
+  {
+    entity.locx(6) = 1;
+    entity.locy(6) = 1;
+  }
+  if (flags(4081) == 1)
+  {
+    entity.locx(7) = 1;
+    entity.locy(7) = 1;
+  }
+  if (flags(4082) == 1)
+  {
+    entity.locx(8) = 1;
+    entity.locy(8) = 1;
+  }
+  if (flags(4083) == 1)
+  {
+    entity.locx(9) = 1;
+    entity.locy(9) = 1;
+  }
+  if (flags(4084) == 1)
+  {
+    entity.locx(10) = 1;
+    entity.locy(10) = 1;
+  }
+  if (flags(4085) == 1)
+  {
+    entity.locx(11) = 1;
+    entity.locy(11) = 1;
+  }
+  if (flags(4086) == 1)
+  {
+    entity.locx(12) = 1;
+    entity.locy(12) = 1;
+  }
+  if (flags(4087) == 1)
+  {
+    entity.locx(13) = 1;
+    entity.locy(13) = 1;
+  }
+  if (flags(4088) == 1)
+  {
+    entity.locx(14) = 1;
+    entity.locy(14) = 1;
+  }
+  if (flags(4089) == 1)
+  {
+    entity.locx(15) = 1;
+    entity.locy(15) = 1;
+  }
+  if (flags(4090) == 1)
+  {
+    entity.locx(16) = 1;
+    entity.locy(16) = 1;
+  }
+  if (flags(4078) >= 12)
+  {
+    alterbtile(40, 26, 55, 0);
+    alterftile(40, 25, 0, 0);
+  }
+  if (flags(4078) >= 13)
+  {
+    entity.locx(17) = 1;
+    entity.locy(17) = 1;
+  }
+  if (flags(4078) == 14)
+  {
+    changezone(41, 23, 0);
+    alterbtile(41, 23, 734, 2);
+    alterbtile(47, 11, 56, 0);
+    alterbtile(48, 11, 55, 0);
+    alterftile(47, 10, 0, 2);
+    alterftile(48, 10, 0, 2);
+  }
+  if (flags(4091) > 0)
+  {
+    entity.locx(18) = 1;
+    entity.locy(18) = 1;
+  }
+  if (flags(4091) == 2)
+  {
+    alterbtile(47, 8, 1, 0);
+    alterbtile(48, 8, 2, 0);
+    alterftile(47, 7, 0, 0);
+    alterftile(48, 7, 0, 0);
+    changezone(47, 8, 7);
+    changezone(48, 8, 7);
+  }
+}
+event
+{
+  flags(110) = entity.locy(0) + 37;
+  warp(entity.locx(0), flags(110), 0);
+}
+event
+{
+  flags(110) = entity.locy(0) - 37;
+  warp(entity.locx(0), flags(110), 0);
+}
+event { mapswitch("cragpass.map", 28, 53, 0); }
+event
+{
+  flags(109) = entity.locx(var(1));
+  flags(110) = entity.locy(var(1));
+  entity.locx(var(1)) = 1;
+  entity.locy(var(1)) = 1;
+  alterbtile(flags(109), flags(110), 353, 2);
+  changezone(flags(109), flags(110), 5);
+  stext(1, "Die roach! *Stomp!*", "", "");
+  flags(var(0)) = 1;
+  flags(4078) += 1;
+  switch (flags(4078))
+  {
+    case (1): banner("Roaches: 1", 1);
+    case (2): banner("Roaches: 2", 1);
+    case (3): banner("Roaches: 3", 1);
+    case (4): banner("Roaches: 4", 1);
+    case (5): banner("Roaches: 5", 1);
+    case (6): banner("Roaches: 6", 1);
+    case (7): banner("Roaches: 7", 1);
+    case (8): banner("Roaches: 8", 1);
+    case (9): banner("Roaches: 9", 1);
+    case (10): banner("Roaches: 10", 1);
+    case (11): banner("Roaches: 11", 1);
+    case (12): banner("Roaches: 12", 1);
+  }
+  if (flags(4078) == 12)
+  {
+    stext(1, "I think something opened!", "", "");
+    stext(0, "My babies!", "", "");
+    alterbtile(40, 26, 55, 0);
+    alterftile(40, 25, 0, 0);
+  }
+}
+event { stext(1, "Ick!", "", ""); }
+event { callevent(4, 4079, 5); }
+event { callevent(4, 4080, 6); }
+event { callevent(4, 4081, 7); }
+event { callevent(4, 4082, 8); }
+event { callevent(4, 4083, 9); }
+event { callevent(4, 4084, 10); }
+event { callevent(4, 4085, 11); }
+event { callevent(4, 4086, 12); }
+event { callevent(4, 4087, 13); }
+event { callevent(4, 4088, 14); }
+event { callevent(4, 4089, 15); }
+event { callevent(4, 4090, 16); }
+event
+{
+  flags(4078) = 14;
+  changezone(41, 23, 0);
+  alterbtile(41, 23, 734, 2);
+  alterbtile(47, 11, 56, 0);
+  alterbtile(48, 11, 55, 0);
+  alterftile(47, 10, 0, 2);
+  alterftile(48, 10, 0, 2);
+}
+event
+{
+  stext(
+      1,
+      "If only there was some way to",
+      "blast through this rubble!",
+      "There's got to be something");
+  stext(1, "behind it!", "", "");
+  if (flags(4091) == 1)
+  {
+    flags(4091) = 2;
+    stext(1, "Hmmm... Let's use the", "dynamite!", "");
+    banner("Dynamite used!", 1);
+    cameratracking = 0;
+    ywin -= 0;
+    layervc = 1;
+    flags(112) = random(128, 192);
+    flags(107) = random(48, 96);
+    vcputpcx("spore.pcx", flags(112) + 14, flags(107) + 14);
+    for (x, 1, 24, 1)
+    {
+      vcclear();
+      vcputpcx("boost1.pcx", flags(112), flags(107));
+      flags(112) = random(128, 192);
+      flags(107) = random(48, 96);
+      vcputpcx("spore.pcx", flags(112) + 14, flags(107) + 14);
+      soundeffect(9);
+      wait(10);
+    }
+    vcclear();
+    wait(10);
+    vcputpcx("boost1.pcx", flags(112), flags(107));
+    vcclear();
+    earthquake(1, 1, 30);
+    soundeffect(21);
+    vcputpcx("Explo1.pcx", 64, 0);
+    earthquake(1, 1, 10);
+    vcclear();
+    vcputpcx("Explo2.pcx", 64, 0);
+    earthquake(1, 1, 10);
+    vcclear();
+    vcputpcx("Explo3.pcx", 64, 0);
+    earthquake(1, 1, 10);
+    vcclear();
+    vcputpcx("Explo4.pcx", 64, 0);
+    earthquake(2, 2, 10);
+    vcclear();
+    vcputpcx("Explo5.pcx", 64, 0);
+    earthquake(2, 2, 10);
+    vcclear();
+    vcputpcx("Explo6.pcx", 64, 0);
+    wait(100);
+    vcclear();
+    layervc = 0;
+    cameratracking = 1;
+    alterbtile(47, 8, 1, 0);
+    alterbtile(48, 8, 2, 0);
+    alterftile(47, 7, 0, 0);
+    alterftile(48, 7, 0, 0);
+    changezone(47, 8, 7);
+    changezone(48, 8, 7);
+  }
+}
+event { mapswitch("overland.map", 40, 81, 0); }
+event
+{
+  stext(
+      0,
+      "*You* killed my babies! I",
+      "shall let your rotting flesh",
+      "nourish my next brood!");
+  flags(4078) = 13;
+  entity.locx(17) = 1;
+  entity.locy(17) = 1;
+  banner("Boss Battle!", 1);
+  banner("1 Roach Queen!", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 300;
+    flags(503) = 300;
+    flags(504) = 0;
+    flags(505) = 22;
+    flags(506) = 24;
+    flags(507) = 25;
+    flags(508) = 26;
+    flags(509) = 500;
+    flags(510) = 3000;
+    flags(511) = 2;
+    flags(512) = 2;
+    flags(513) = 1;
+    flags(540) = 305;
+    flags(541) = 305;
+    flags(1009) = 0;
+    flags(514) = 2;
+    flags(515) = 300;
+    flags(516) = 300;
+    flags(517) = 5000;
+    flags(518) = 23;
+    flags(519) = 24;
+    flags(520) = 22;
+    flags(521) = 26;
+    flags(522) = 5000;
+    flags(523) = 3000;
+    flags(524) = 5;
+    flags(525) = 2;
+    flags(526) = 1;
+    flags(542) = 305;
+    flags(543) = 305;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 300;
+    flags(529) = 300;
+    flags(530) = 0;
+    flags(531) = 23;
+    flags(532) = 22;
+    flags(533) = 24;
+    flags(534) = 26;
+    flags(535) = 500;
+    flags(536) = 3000;
+    flags(537) = 2;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 305;
+    flags(545) = 305;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    flags(251) = 1;
+    mapswitch("roachbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  stext(
+      0,
+      "I have a hidden garden!",
+      "If you can guess the order",
+      "and color of the seeds I");
+  stext(0, "planted a minute ago, I'll", "give you something neat!", "");
+  entity.locx(18) = 1;
+  entity.locy(18) = 1;
+  flags(5011) = random(1, 4);
+  flags(5012) = random(1, 4);
+  flags(5013) = random(1, 4);
+  flags(5014) = random(1, 4);
+  flags(5015) = 1;
+  flags(5016) = 1;
+  flags(5017) = 1;
+  flags(5018) = 1;
+  if (flags(4091) < 1)
+  {
+    warp(120, 31, 0);
+  }
+}
+event
+{
+  flags(5015) += 1;
+  switch (flags(5015))
+  {
+    case (1): alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+    case (2): alterbtile(entity.locx(0), entity.locy(0) - 2, 492, 2);
+    case (3): alterbtile(entity.locx(0), entity.locy(0) - 2, 494, 2);
+    case (4): alterbtile(entity.locx(0), entity.locy(0) - 2, 496, 2);
+    case (5):
+      alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+      flags(5015) = 1;
+  }
+  waitkeyup();
+}
+event
+{
+  flags(5016) += 1;
+  switch (flags(5016))
+  {
+    case (1): alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+    case (2): alterbtile(entity.locx(0), entity.locy(0) - 2, 492, 2);
+    case (3): alterbtile(entity.locx(0), entity.locy(0) - 2, 494, 2);
+    case (4): alterbtile(entity.locx(0), entity.locy(0) - 2, 496, 2);
+    case (5):
+      alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+      flags(5016) = 1;
+  }
+  waitkeyup();
+}
+event
+{
+  flags(5017) += 1;
+  switch (flags(5017))
+  {
+    case (1): alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+    case (2): alterbtile(entity.locx(0), entity.locy(0) - 2, 492, 2);
+    case (3): alterbtile(entity.locx(0), entity.locy(0) - 2, 494, 2);
+    case (4): alterbtile(entity.locx(0), entity.locy(0) - 2, 496, 2);
+    case (5):
+      alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+      flags(5017) = 1;
+  }
+  waitkeyup();
+}
+event
+{
+  flags(5018) += 1;
+  switch (flags(5018))
+  {
+    case (1): alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+    case (2): alterbtile(entity.locx(0), entity.locy(0) - 2, 492, 2);
+    case (3): alterbtile(entity.locx(0), entity.locy(0) - 2, 494, 2);
+    case (4): alterbtile(entity.locx(0), entity.locy(0) - 2, 496, 2);
+    case (5):
+      alterbtile(entity.locx(0), entity.locy(0) - 2, 490, 2);
+      flags(5018) = 1;
+  }
+  waitkeyup();
+}
+event
+{
+  prompt(0, "Is this the pattern you", "want to pick?", "", 112, "No", "Yes");
+  if (flags(112) == 1)
+  {
+    for (x, 5015, 5018, 1)
+    {
+      if (flags(x) != flags(x - 4) && flags(x) == flags(5011) &&
+          flags(5015) != flags(5011))
+      {
+        flags(x + 6) += 1;
+      }
+      if (flags(x) != flags(x - 4) && flags(x) == flags(5012) &&
+          flags(5016) != flags(5012))
+      {
+        flags(x + 6) += 1;
+      }
+      if (flags(x) != flags(x - 4) && flags(x) == flags(5013) &&
+          flags(5017) != flags(5013))
+      {
+        flags(x + 6) += 1;
+      }
+      if (flags(x) != flags(x - 4) && flags(x) == flags(5014) &&
+          flags(5018) != flags(5014))
+      {
+        flags(x + 6) += 1;
+      }
+      if (flags(x) == flags(x - 4))
+      {
+        flags(5019) += 1;
+      }
+      if (flags(x + 6) > 0)
+      {
+        flags(5020) += 1;
+      }
+      if (flags(5019) == 4)
+      {
+        alterbtile(133, entity.locy(0) - 1, 497, 2);
+        alterbtile(133, entity.locy(0) - 2, 497, 2);
+        alterbtile(134, entity.locy(0) - 1, 497, 2);
+        alterbtile(134, entity.locy(0) - 2, 497, 2);
+        alterbtile(120, entity.locy(0), 210, 2);
+        changezone(120, entity.locy(0), 13);
+        alterbtile(121, entity.locy(0) - 1, 706, 0);
+        alterbtile(124, entity.locy(0) - 1, 706, 0);
+        alterbtile(127, entity.locy(0) - 1, 706, 0);
+        alterbtile(130, entity.locy(0) - 1, 706, 0);
+        changezone(121, entity.locy(0) - 1, 0);
+        changezone(124, entity.locy(0) - 1, 0);
+        changezone(127, entity.locy(0) - 1, 0);
+        changezone(130, entity.locy(0) - 1, 0);
+        changezone(121, entity.locy(0) - 2, flags(5011) + 13);
+        changezone(124, entity.locy(0) - 2, flags(5012) + 13);
+        changezone(127, entity.locy(0) - 2, flags(5013) + 13);
+        changezone(130, entity.locy(0) - 2, flags(5014) + 13);
+        specialframe(19) = 21;
+        stext(0, "You got all four correct!", "", "");
+        stext(0, "Wow! You won!", "", "");
+        stext(0, "Here, take this!", "", "");
+        entity.locx(18) = 1;
+        entity.locy(18) = 1;
+        entity.locx(19) = 1;
+        entity.locy(19) = 1;
+        flags(4091) = 1;
+        banner("Got Dynamite!", 1);
+      }
+      specialframe(19) = 20;
+      if (flags(5019) == 3)
+      {
+        stext(0, "You got three in the right", "place...", "");
+        alterbtile(133, entity.locy(0) - 1, 497, 2);
+        alterbtile(133, entity.locy(0) - 2, 497, 2);
+        alterbtile(134, entity.locy(0) - 2, 497, 2);
+      }
+      if (flags(5019) == 2)
+      {
+        stext(0, "You got two in the right", "place...", "");
+        alterbtile(133, entity.locy(0) - 2, 497, 2);
+        alterbtile(134, entity.locy(0) - 2, 497, 2);
+      }
+      if (flags(5019) == 1)
+      {
+        stext(0, "You got one in the right", "place...", "");
+        alterbtile(133, entity.locy(0) - 2, 497, 2);
+      }
+      if (flags(5019) == 0)
+      {
+        stext(0, "You got none in the right", "place...", "");
+      }
+      if (flags(5020) == 4)
+      {
+        stext(
+            0,
+            "...and four in the wrong",
+            "place, but with correct",
+            "colors!");
+        alterbtile(133, entity.locy(0) - 1, 495, 2);
+        alterbtile(133, entity.locy(0) - 2, 495, 2);
+        alterbtile(134, entity.locy(0) - 1, 495, 2);
+        alterbtile(134, entity.locy(0) - 2, 495, 2);
+      }
+      if (flags(5020) == 3)
+      {
+        stext(
+            0,
+            "...and three that match",
+            "a correct color, but are",
+            "in the wrong place!");
+        alterbtile(133, entity.locy(0) - 1, 495, 2);
+        alterbtile(134, entity.locy(0) - 1, 495, 2);
+        alterbtile(134, entity.locy(0) - 2, 495, 2);
+      }
+      if (flags(5020) == 2)
+      {
+        stext(
+            0,
+            "...and two that match",
+            "a correct color, but are",
+            "in the wrong place!");
+        alterbtile(133, entity.locy(0) - 1, 495, 2);
+        alterbtile(134, entity.locy(0) - 1, 495, 2);
+      }
+      if (flags(5020) == 1)
+      {
+        stext(
+            0,
+            "...and one that matches",
+            "a correct color, but is",
+            "in the wrong place!");
+        alterbtile(134, entity.locy(0) - 1, 495, 2);
+      }
+      if (flags(5019) != 4 && entity.locy(0) == 19)
+      {
+        stext(
+            0,
+            "Well, that's all the chances",
+            "you get for this session!",
+            "Buh-bye now!");
+        entity.locy(19) = 31;
+        entity.locx(18) = 98;
+        entity.locy(18) = 24;
+        flags(5011) = 0;
+        flags(5012) = 0;
+        flags(5013) = 0;
+        flags(5014) = 0;
+        flags(5015) = 1;
+        flags(5016) = 1;
+        flags(5017) = 1;
+        flags(5018) = 1;
+        flags(5019) = 0;
+        flags(5020) = 0;
+        flags(5021) = 0;
+        flags(5022) = 0;
+        flags(5023) = 0;
+        flags(5024) = 0;
+        mapswitch("bugdung.map", 96, 24, 0);
+        return;
+      }
+      if (flags(5019) != 4 && entity.locy(0) > 19)
+      {
+        specialframe(19) = 0;
+        stext(0, "Here, have another go,", "why dontcha?", "");
+        entity.locy(19) -= 4;
+        warp(entity.locx(0), entity.locy(0) - 4, 1);
+        flags(5015) = 1;
+        flags(5016) = 1;
+        flags(5017) = 1;
+        flags(5018) = 1;
+        flags(5019) = 0;
+        flags(5020) = 0;
+        flags(5021) = 0;
+        flags(5022) = 0;
+        flags(5023) = 0;
+        flags(5024) = 0;
+      }
+      if (flags(112) == 0)
+      {
+        stext(0, "Oh, okay! Just tell me when", "you're ready!", "");
+      }
+    }
+  }
+}
+event { warp(96, 24, 0); }
+event
+{
+  if (flags(141) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(141) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 491, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (flags(142) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(142) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 493, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (flags(143) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(143) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 495, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (flags(144) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(144) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 497, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (entity.locy(0) != 30)
+  {
+    callevent(29, 1);
+  }
+  if (entity.locy(0) == 30)
+  {
+    callevent(29, 39);
+  }
+}
+event
+{
+  if (entity.locy(0) != 30)
+  {
+    callevent(30, 49);
+  }
+  if (entity.locy(0) == 30)
+  {
+    callevent(30, 53);
+  }
+}
+event
+{
+  if (entity.locy(0) != 30)
+  {
+    callevent(31, 89);
+  }
+  if (entity.locy(0) == 30)
+  {
+    callevent(31, 79);
+  }
+}
+event
+{
+  if (entity.locy(0) != 30)
+  {
+    callevent(32, 93);
+  }
+  if (entity.locy(0) == 30)
+  {
+    callevent(32, 90);
+  }
+}
+event
+{
+  if (face(0) == 3)
+  {
+    playmusic("xeqtion.mod");
+  }
+}
+event
+{
+  if (face(0) == 2)
+  {
+    playmusic("fairy.mod");
+  }
+}

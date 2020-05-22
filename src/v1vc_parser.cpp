@@ -3,13 +3,13 @@
 #include "v1vc_token.hpp"
 #include <stdlib.h>
 
-Parser_t::Parser_t() {}
-Parser_t::Parser_t(const char *S) { Reset(NewBuffer(S)); }
-Parser_t::Parser_t(Buffer_t *B) { Reset(B); }
+parser::parser() {}
+parser::parser(const char *S) { Reset(NewBuffer(S)); }
+parser::parser(buffer *B) { Reset(B); }
 
 // NOTE(aen): Tokenizes from the current C, wherever that lies
 void
-Parser_t::ToTokenList(TokenList_t *TokenList)
+parser::ToTokenList(token_list *TokenList)
 {
   // NOTE(aen): If T=Token and W=Whitespace, all code is a series of WTW.
   // W flavors coalesce, so WWWTWWTW == WTWTW. You can loop WT or TW to avoid
@@ -17,7 +17,7 @@ Parser_t::ToTokenList(TokenList_t *TokenList)
   SkipWhite();
   while (!AtEnd())
   {
-    Token_t *Token = NewToken();
+    token *Token = NewToken();
     Token->Start = CurrentOffset();
     Token->Text = (char *)Data + Token->Start;
     Token->Line = Line;
@@ -62,6 +62,7 @@ Parser_t::ToTokenList(TokenList_t *TokenList)
           AtText("--", 2) || AtText("&&", 2) || AtText("||", 2))
       {
         Next(2);
+        Token->Type = TT_SYMBOL;
       }
       else if (
           *C == '{' || *C == '}' || *C == '(' || *C == ')' || *C == ',' ||
@@ -103,17 +104,17 @@ Parser_t::ToTokenList(TokenList_t *TokenList)
 }
 
 void
-Parser_t::CalcPath(const char *Filename)
+parser::CalcPath(const char *Filename)
 {
   // Log("CalcPath: %s\n", Filename);
   if (!Path)
-    Path = new char[TEMP_BUFFER_SIZE];
+    Path = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
   SetPath(Filename, Path, TEMP_BUFFER_SIZE);
   // Log("CalcPath: Path %s\n", Path);
 }
 
 void
-Parser_t::Load(const char *Filename)
+parser::Load(const char *Filename)
 {
   CalcPath(Filename);
 
@@ -129,12 +130,12 @@ Parser_t::Load(const char *Filename)
 }
 
 void
-Parser_t::Reset(const char *S)
+parser::Reset(const char *S)
 {
   Reset(NewBuffer(S));
 }
 void
-Parser_t::Reset(Buffer_t *B)
+parser::Reset(buffer *B)
 {
   this->Data = B->Data;
   this->Length = B->Length;
@@ -144,28 +145,28 @@ Parser_t::Reset(Buffer_t *B)
 }
 
 u64
-Parser_t::CurrentOffset()
+parser::CurrentOffset()
 {
   return C - Data;
 }
 u8 *
-Parser_t::End()
+parser::End()
 {
   return Data + this->Length;
 };
-bool64
-Parser_t::AtEnd()
+b64
+parser::AtEnd()
 {
   return C >= Data + Length;
 }
 void
-Parser_t::Debug()
+parser::Debug()
 {
   Log("Parser: @%ld c='%c'\n", CurrentOffset(), *C);
 }
 
 void
-Parser_t::Next(s64 Delta)
+parser::Next(s64 Delta)
 {
   s64 Direction = 1;
   if (Delta < 0)
@@ -186,50 +187,53 @@ Parser_t::Next(s64 Delta)
   }
 }
 
-bool64
-Parser_t::IsWhite()
+b64
+parser::IsWhite()
 {
   return *C <= ' ';
 }
-bool64
-Parser_t::IsLetter()
+b64
+parser::IsLetter()
 {
   return IsCharType(*C, LETTER);
 }
-bool64
-Parser_t::IsDigit()
+b64
+parser::IsDigit()
 {
   return IsCharType(*C, DIGIT);
 }
-bool64
-Parser_t::IsSpecial()
+b64
+parser::IsSpecial()
 {
   return IsCharType(*C, SPECIAL);
 }
-bool64
-Parser_t::IsIdent()
+b64
+parser::IsIdent()
 {
   return IsLetter() || IsDigit();
 }
 
-bool64
-Parser_t::AtText(char Char)
+b64
+parser::AtText(char Char)
 {
   return !AtEnd() && *C == Char;
 }
-bool64
-Parser_t::AtText(const char *Text, u64 L)
+b64
+parser::AtText(const char *Text, u64 L)
 {
   return !AtEnd() && C + L <= End() && !memcmp(C, Text, L);
 }
 
 void
-Parser_t::SkipPast(const char *Text, u64 L)
+parser::SkipPast(const char *Text, u64 L)
 {
   u8 *Head = C;
 
   while (!AtEnd() && !AtText(Text, L))
     Next();
+
+  if (AtEnd())
+    return;
 
   if (!AtText(Text, L))
     Fail(
@@ -243,7 +247,7 @@ Parser_t::SkipPast(const char *Text, u64 L)
 }
 
 void
-Parser_t::SkipWhite()
+parser::SkipWhite()
 {
   if (!IsWhite() && !AtText("//", 2) && !AtText("/*", 2))
     return;
@@ -268,7 +272,7 @@ Parser_t::SkipWhite()
 }
 
 void
-Parser_t::Expect(char Char)
+parser::Expect(char Char)
 {
   if (AtText(Char))
     Next();
@@ -283,7 +287,7 @@ Parser_t::Expect(char Char)
 }
 
 void
-Parser_t::Expect(const char *Text, u64 L)
+parser::Expect(const char *Text, u64 L)
 {
   if (AtText(Text, L))
     Next(L);

@@ -1,0 +1,106 @@
+event
+{
+  fadein(45);
+  enforceanimation();
+  disablemenu();
+  if (flags(128) == 0)
+  {
+    stext(1, "Where am I?", "", "");
+    stext(1, "", "How did I get here?", "");
+    stext(1, "", "", "When have I said this before?");
+    stext(
+        1,
+        "Oh well... I'd better see what",
+        "I can do about getting out of",
+        "here...");
+    flags(128) = 1;
+  }
+}
+event
+{
+  if (entity.locy(0) == 82)
+  {
+    warp(180, 14, 0);
+  }
+  if (entity.locy(0) == 81)
+  {
+    warp(180, 13, 0);
+  }
+}
+event
+{
+  if (entity.locy(0) == 14)
+  {
+    warp(120, 82, 0);
+  }
+  if (entity.locy(0) == 13)
+  {
+    warp(120, 81, 0);
+  }
+}
+event { warp(79, 4, 1); }
+event { warp(80, 4, 1); }
+event { warp(48, 26, 1); }
+event { warp(48, 27, 1); }
+event { warp(170, 24, 1); }
+event { warp(148, 6, 1); }
+event { warp(149, 6, 1); }
+event
+{
+  enablesave();
+  banner("Save Point!", 2);
+}
+event { disablesave(); }
+event { warp(169, 82, 0); }
+event
+{
+  if (flags(127) == 0)
+  {
+    flags(127) = 1;
+    warp(45, 16, 0);
+    return;
+  }
+  if (flags(127) == 1)
+  {
+    flags(127) = 0;
+    warp(125, 3, 0);
+  }
+}
+event { warp(27, 80, 0); }
+event
+{
+  x = entity.locx(var(0));
+  y = entity.locy(var(0));
+  alterbtile(x, y, 210, 0);
+  entity.locx(var(0)) = var(0);
+  entity.locy(var(0)) = var(0);
+}
+event { chainevent(15, 5); }
+event { chainevent(15, 6); }
+event { chainevent(15, 7); }
+event { chainevent(15, 8); }
+event { chainevent(15, 9); }
+event { chainevent(15, 10); }
+event { chainevent(15, 11); }
+event { chainevent(15, 12); }
+event { chainevent(15, 13); }
+event { chainevent(15, 14); }
+event { chainevent(15, 15); }
+event { chainevent(15, 16); }
+event
+{
+  stext(0, "Greetings, Sam.", "", "");
+  stext(1, "Who are you? What's your name?", "", "");
+  stext(0, "I have been called many", "things, Sam...", "");
+  stext(0, "But my true name is Morpheos.", "", "");
+  stext(0, "Remember that, Sam, for we", "will meet again.", "");
+  stext(1, "What? Why are you haunting me?", "", "");
+  stext(
+      0,
+      "Your quest is greater than you",
+      "think, Sam. There is one who",
+      "wants the Giant Lily Seed...");
+  stext(0, "", "      Phage is coming.", "");
+  enablemenu();
+  mapswitch("docktown.map", 81, 86, 0);
+}

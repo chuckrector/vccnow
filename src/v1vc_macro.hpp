@@ -4,38 +4,35 @@
 #include "v1vc_parser.hpp"
 #include "v1vc_token.hpp"
 
-struct Macro_t
+struct macro
 {
-  Token_t *Token = 0;
-  struct TokenList_t ParamList;
-  TokenList_t Expansion;
+  token *Token = 0;
+  token_list ParamList;
+  token_list Expansion; // NOTE(aen): Must call SetMaxTokens() when needed
 
-  void ParseFrom(TokenList_t *TokenList); // From current iteration index
+  void ParseFrom(token_list *TokenList); // From current iteration index
   void Debug();
 };
 
-#define MACRO_SLAB_SIZE 1000
-bool64 IsMacroSlabReady = false;
-void InitMacroSlab();
-void FreeMacroSlab();
-Macro_t *NewMacro();
-u64 MacroSlabResidents = 0;
+mem_pool MacroPool;
+void InitMacroPool();
+macro *NewMacro();
 
-struct MacroList_t
+#define DEFAULT_NUM_MACROS_PER_LIST 1000
+
+struct macro_list
 {
-  Macro_t **Data = 0;
+  macro *Data = 0;
   u64 MaxMacros = 0;
   u64 NumMacros = 0;
 
-  MacroList_t(u64 N = MACRO_SLAB_SIZE);
-  ~MacroList_t();
+  macro *Get(u64 MacroIndex);
 
-  Macro_t *Get(u64 MacroIndex);
-
-  void Reset(u64 N = MACRO_SLAB_SIZE);
+  void Reset();
+  void SetMaxMacros(u64 N);
   void Debug();
 
-  void AddMacro(Macro_t *Macro);
+  void AddMacro(macro *Macro);
 };
 
 // NOTE(aen): Builds a new token list with all macro definitions removed.
@@ -44,10 +41,10 @@ struct MacroList_t
 // Pass the path directly? #includes from in-memory parsing should prolly be
 // relative to the CWD.
 void ParseMacros(
-    Parser_t *Parent,
-    TokenList_t *In,
-    TokenList_t *Out,
-    MacroList_t *MacroList);
-void ExpandMacros(MacroList_t *MacroList, TokenList_t *In, TokenList_t *Out);
+    parser *Parent,
+    token_list *In,
+    token_list *Out,
+    macro_list *MacroList);
+void ExpandMacros(macro_list *MacroList, token_list *In, token_list *Out);
 
 #endif // V1VC_MACRO_HPP

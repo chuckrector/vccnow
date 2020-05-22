@@ -1,0 +1,148 @@
+event
+{
+  fadein(1);
+  flags(156) = 0;
+  flags(157) = 1;
+  flags(801) = 4;
+  if (flags(161) == 1)
+  {
+    alterbtile(35, 54, 34, 1);
+    changezone(35, 54, 12);
+  }
+  if (flags(162) == 1)
+  {
+    alterbtile(25, 54, 34, 1);
+    changezone(35, 54, 12);
+  }
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0);
+  cameratracking = 0;
+  autoon();
+  for (flags(159), 3, 48, 1)
+  {
+    for (flags(160), 3, 34, 1)
+    {
+      warp(flags(159), flags(160), 1);
+      flags(158) = tileb;
+      callevent(2);
+    }
+  }
+  autooff();
+  cameratracking = 1;
+  warp(flags(109), flags(110), 1);
+  if (flags(156) == 0)
+  {
+    flags(156) = 1;
+    flags(157) = 0;
+    return;
+  }
+  flags(156) = 0;
+  flags(157) = 1;
+}
+event
+{
+  switch (flags(158))
+  {
+    case (30): alterbtile(flags(159), flags(160), flags(158), flags(157));
+    case (31): alterbtile(flags(159), flags(160), flags(158), flags(156));
+  }
+}
+event { warp(5, 5, 0); }
+event { warp(45, 24, 0); }
+event { warp(49, 8, 0); }
+event { warp(36, 16, 0); }
+event { warp(43, 32, 0); }
+event { warp(13, 6, 0); }
+event { warp(30, 58, 0); }
+event { warp(27, 2, 0); }
+event
+{
+  flags(161) = 1;
+  giveitem(24);
+  alterbtile(35, 54, 34, 1);
+  changezone(35, 54, 12);
+}
+event
+{
+  flags(162) = 1;
+  givegp(1000);
+  banner("1000 gp inside!", 1);
+  alterbtile(25, 54, 34, 1);
+  changezone(25, 54, 12);
+}
+event { banner("Empty!", 1); }
+event { mapswitch("farm.map", 13, 71, 0); }
+event
+{
+  banner("Battle!", 1);
+  banner("1 Ankhteapot", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    flags(703) += 1;
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    flags(703) += 1;
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 20;
+    flags(503) = 7;
+    flags(504) = 0;
+    flags(505) = 17;
+    flags(506) = 17;
+    flags(507) = 33;
+    flags(508) = 33;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 2;
+    flags(513) = 2;
+    flags(540) = 5;
+    flags(541) = 5;
+    flags(1009) = 0;
+    flags(514) = 1;
+    flags(515) = 25;
+    flags(516) = 10;
+    flags(517) = 100;
+    flags(518) = 19;
+    flags(519) = 19;
+    flags(520) = 34;
+    flags(521) = 34;
+    flags(522) = 8;
+    flags(523) = 35;
+    flags(524) = 2;
+    flags(525) = 2;
+    flags(526) = 63;
+    flags(542) = 25;
+    flags(543) = 25;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 15;
+    flags(529) = 5;
+    flags(530) = 0;
+    flags(531) = 14;
+    flags(532) = 14;
+    flags(533) = 15;
+    flags(534) = 15;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 5;
+    flags(545) = 5;
+    flags(1011) = 0;
+    flags(109) = 30;
+    flags(110) = 57;
+    mapswitch("underbat.map", 1, 1, 0);
+  }
+}

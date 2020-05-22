@@ -1,0 +1,934 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  volume = 50;
+  if (flags(140) != 1)
+  {
+    warp(25, 9, 0);
+    givegp(100);
+    alterbtile(21, 24, 86, 1);
+    alterbtile(22, 24, 86, 1);
+    alterftile(21, 23, 86, 2);
+    alterftile(22, 23, 86, 2);
+    alterftile(21, 22, 87, 2);
+    alterftile(22, 22, 87, 2);
+  }
+  if (flags(136) > 0)
+  {
+    alterbtile(19, 8, flags(136), 2);
+    alterbtile(21, 8, flags(137), 2);
+    alterbtile(23, 8, flags(138), 2);
+  }
+}
+event
+{
+  x = 0;
+  y = 0;
+  z = 0;
+  if (gp < 20)
+  {
+    stext(0, "Not enough money!", "", "");
+  }
+  if (gp > 19)
+  {
+    takegp(20);
+    for (p, 88, 96, 1)
+    {
+      if (p == 96)
+      {
+        p = 88;
+      }
+      r = random(1, 40);
+      if (x < 2)
+      {
+        alterbtile(19, 8, p, 0);
+      }
+      if (y < 2)
+      {
+        alterbtile(21, 8, p, 0);
+      }
+      alterbtile(23, 8, p, 0);
+      if (r == 8 && z == 1)
+      {
+        z = p;
+        p = 96;
+      }
+      if (r == 19 && y == 1)
+      {
+        y = p;
+        z = 1;
+      }
+      if (r == 14 && x == 0)
+      {
+        x = p;
+        y = 1;
+      }
+      wait(10);
+    }
+  }
+}
+event
+{
+  if (flags(140) != 1)
+  {
+    stext(0, "I'm here to refuel your", "funds!", "");
+    banner("Got 100 gp!", 2);
+    givegp(100);
+  }
+  if (flags(140) == 1)
+  {
+    stext(0, "We ghosts just love games!", "", "");
+  }
+}
+event
+{
+  x = random(1, 20);
+  y = random(1, 20) + x;
+  z = random(1, 20) + y;
+  if (gp < 20)
+  {
+    stext(0, "Not enough money!", "", "");
+  }
+  if (gp > 19)
+  {
+    alterbtile(25, 8, 110, 1);
+    takegp(20);
+    for (p, 1, z, 1)
+    {
+      q = 87 + p;
+      while (q > 95)
+      {
+        q -= 8;
+      }
+      if (p < x + 1)
+      {
+        alterbtile(19, 8, q, 0);
+        flags(136) = q;
+      }
+      if (p < y + 1)
+      {
+        alterbtile(21, 8, q, 0);
+        flags(137) = q;
+      }
+      if (p < z + 1)
+      {
+        alterbtile(23, 8, q, 0);
+        flags(138) = q;
+      }
+      wait(10);
+    }
+    if (flags(136) == 94 && flags(138) != 94)
+    {
+      banner("Evil Eye!:", 1);
+      banner("Pay up!", 1);
+      if (gp > 19)
+      {
+        takegp(20);
+      }
+    }
+    if (flags(136) == 89)
+    {
+      banner("First Cherry:", 1);
+      banner("10 gp!", 1);
+      givegp(10);
+    }
+    if (flags(136) == 89 && flags(137) == 89)
+    {
+      banner("Second Cherry:", 1);
+      banner("20 gp!", 1);
+      givegp(20);
+    }
+    if (flags(136) == 89 && flags(137) == 89 && flags(138) == 89)
+    {
+      banner("Third Cherry!:", 1);
+      banner("70 gp!", 1);
+      givegp(70);
+    }
+    if (flags(136) == 93)
+    {
+      banner("Money!:", 1);
+      banner("10 gp!", 1);
+      givegp(10);
+    }
+    if (flags(137) == 93)
+    {
+      banner("Money!:", 1);
+      banner("10 gp!", 1);
+      givegp(10);
+    }
+    if (flags(138) == 93)
+    {
+      banner("Money!:", 1);
+      banner("10 gp!", 1);
+      givegp(10);
+    }
+    if (flags(138) == 94 && flags(136) != 94)
+    {
+      banner("Blind Eye!:", 1);
+      banner("20 gp!", 1);
+      givegp(20);
+    }
+    if (flags(136) == 94 && flags(138) == 94)
+    {
+      banner("Seeing eyes!:", 1);
+      banner("125 gp!", 1);
+      givegp(125);
+    }
+    if (flags(136) == 94 && flags(137) == 94 && flags(138) == 94)
+    {
+      banner("Third eye!:", 1);
+      banner("2275 gp!", 1);
+      givegp(2275);
+    }
+    if (flags(138) == 89 && flags(137) != 89)
+    {
+      banner("Last Cherry:", 1);
+      banner("Pay up!", 1);
+      if (gp > 9)
+      {
+        takegp(10);
+      }
+    }
+    if (flags(138) == 89 && flags(137) == 89 && flags(136) != 89)
+    {
+      banner("Last Cherry:", 1);
+      banner("Pay up!", 1);
+      if (gp > 9)
+      {
+        takegp(10);
+      }
+    }
+    if (flags(136) == flags(137) && flags(136) == flags(138))
+    {
+      if (flags(136) == 88)
+      {
+        banner("Three Frogs!:", 1);
+        banner("1000 gp!", 1);
+        banner("and...", 1);
+        givegp(1000);
+        giveitem(1);
+        giveitem(2);
+        giveitem(38);
+        giveitem(39);
+      }
+      if (flags(136) == 90)
+      {
+        banner("Three Gs:", 1);
+        banner("600 gp!", 1);
+        givegp(600);
+      }
+      if (flags(136) == 91)
+      {
+        banner("Three Ms:", 1);
+        banner("600 gp!", 1);
+        givegp(600);
+      }
+      if (flags(136) == 92)
+      {
+        banner("Three Ws:", 1);
+        banner("600 gp!", 1);
+        givegp(600);
+      }
+      if (flags(136) == 93)
+      {
+        banner("MoneyMoneyMoney:", 1);
+        banner("5000 gp!", 1);
+        givegp(5000);
+      }
+      if (flags(136) == 95)
+      {
+        banner("The Holy Grail!:", 1);
+        banner("2500 gp!", 1);
+        banner("Healed!", 1);
+        healall();
+        givegp(2500);
+      }
+    }
+    if (flags(136) == 92 && flags(137) == 94 && flags(138) == 92)
+    {
+      banner("WOW!:", 1);
+      banner("3000 gp!", 1);
+      givegp(3000);
+    }
+    if (flags(136) == 92 && flags(137) == 91 && flags(138) == 90)
+    {
+      banner("...", 1);
+      banner("Booby Prize!", 1);
+      banner("1 gp!?!", 3);
+      givegp(1);
+      giveitem(54);
+    }
+    if (flags(136) == 90 && flags(137) == 91 && flags(138) == 92)
+    {
+      banner("GMW's Blessing!:", 1);
+      banner("Jackpot!", 1);
+      banner("50000 gp!", 3);
+      givegp(50000);
+      giveitem(57);
+      giveitem(57);
+      giveitem(57);
+    }
+    alterbtile(25, 8, 109, 1);
+  }
+}
+event
+{
+  volume = 100;
+  mapswitch("avis.map", 48, 24, 0);
+}
+event
+{
+  face(6) = 0;
+  prompt(
+      0,
+      "Would you care to play a game",
+      "of Smackjack?",
+      "",
+      107,
+      "No.",
+      "Yes.");
+  if (flags(107) == 0)
+  {
+    stext(0, "Please enjoy your time here", "at the casino!", "");
+    return;
+  }
+  if (flags(154) == 0 && gp < 10)
+  {
+    stext(0, "You need at least 10 gp to", "play!", "");
+    return;
+  }
+  if (flags(154) == 0 && gp > 9)
+  {
+    takegp(10);
+    flags(154) = 10;
+  }
+  switch (flags(154))
+  {
+    case (10): stext(0, "The pot has 20 gp in it!", "", "");
+    case (20): stext(0, "The pot has 40 gp in it!", "", "");
+    case (40): stext(0, "The pot has 80 gp in it!", "", "");
+    case (80): stext(0, "The pot has 160 gp in it!", "", "");
+    case (160): stext(0, "The pot has 320 gp in it!", "", "");
+    case (320): stext(0, "The pot has 640 gp in it!", "", "");
+    case (640): stext(0, "The pot has 1280 gp in it!", "", "");
+    case (1280):
+      stext(
+          0,
+          "The maximum is 1280.",
+          "Here's 1270. The pot has 20 gp",
+          "in it!");
+      givegp(1270);
+      flags(154) = 10;
+  }
+  flags(150) = random(1, 10);
+  switch (flags(150))
+  {
+    case (1): banner("Card 1: Ace", 3);
+    case (2): banner("Card 1: Two", 3);
+    case (3): banner("Card 1: Three", 3);
+    case (4): banner("Card 1: Four", 3);
+    case (5): banner("Card 1: Five", 3);
+    case (6): banner("Card 1: Six", 3);
+    case (7): banner("Card 1: Seven", 3);
+    case (8): banner("Card 1: Eight", 3);
+    case (9): banner("Card 1: Nine", 3);
+    case (10): banner("Card 1: Ten", 3);
+  }
+  flags(151) = random(1, 10);
+  switch (flags(151))
+  {
+    case (1): banner("Card 2: Ace", 3);
+    case (2): banner("Card 2: Two", 3);
+    case (3): banner("Card 2: Three", 3);
+    case (4): banner("Card 2: Four", 3);
+    case (5): banner("Card 2: Five", 3);
+    case (6): banner("Card 2: Six", 3);
+    case (7): banner("Card 2: Seven", 3);
+    case (8): banner("Card 2: Eight", 3);
+    case (9): banner("Card 2: Nine", 3);
+    case (10): banner("Card 2: Ten", 3);
+  }
+  flags(150) += flags(151);
+  switch (flags(150))
+  {
+    case (2): stext(0, "Your total is: Two.", "", "");
+    case (3): stext(0, "Your total is: Three.", "", "");
+    case (4): stext(0, "Your total is: Four.", "", "");
+    case (5): stext(0, "Your total is: Five.", "", "");
+    case (6): stext(0, "Your total is: Six.", "", "");
+    case (7): stext(0, "Your total is: Seven.", "", "");
+    case (8): stext(0, "Your total is: Eight.", "", "");
+    case (9): stext(0, "Your total is: Nine.", "", "");
+    case (10): stext(0, "Your total is: Ten.", "", "");
+    case (11): stext(0, "Your total is: Eleven.", "", "");
+    case (12): stext(0, "Your total is: Twelve.", "", "");
+    case (13): stext(0, "Your total is: Thirteen.", "", "");
+    case (14): stext(0, "Your total is: Fourteen.", "", "");
+    case (15): stext(0, "Your total is: Fifteen.", "", "");
+    case (16): stext(0, "Your total is: Sixteen.", "", "");
+    case (17): stext(0, "Your total is: Seventeen.", "", "");
+    case (18): stext(0, "Your total is: Eighteen.", "", "");
+    case (19): stext(0, "Your total is: Nineteen.", "", "");
+    case (20): stext(0, "Your total is: Twenty.", "", "");
+  }
+  while (flags(153) == 0)
+  {
+    prompt(0, "Do you want to draw another", "card?", "", 153, "Yes.", "No.");
+    if (flags(153) == 0)
+    {
+      flags(151) = random(1, 10);
+      switch (flags(151))
+      {
+        case (1): banner("Card: Ace", 3);
+        case (2): banner("Card: Two", 3);
+        case (3): banner("Card: Three", 3);
+        case (4): banner("Card: Four", 3);
+        case (5): banner("Card: Five", 3);
+        case (6): banner("Card: Six", 3);
+        case (7): banner("Card: Seven", 3);
+        case (8): banner("Card: Eight", 3);
+        case (9): banner("Card: Nine", 3);
+        case (10): banner("Card: Ten", 3);
+      }
+      flags(150) += flags(151);
+      switch (flags(150))
+      {
+        case (2): stext(0, "Your total is: Two.", "", "");
+        case (3): stext(0, "Your total is: Three.", "", "");
+        case (4): stext(0, "Your total is: Four.", "", "");
+        case (5): stext(0, "Your total is: Five.", "", "");
+        case (6): stext(0, "Your total is: Six.", "", "");
+        case (7): stext(0, "Your total is: Seven.", "", "");
+        case (8): stext(0, "Your total is: Eight.", "", "");
+        case (9): stext(0, "Your total is: Nine.", "", "");
+        case (10): stext(0, "Your total is: Ten.", "", "");
+        case (11): stext(0, "Your total is: Eleven.", "", "");
+        case (12): stext(0, "Your total is: Twelve.", "", "");
+        case (13): stext(0, "Your total is: Thirteen.", "", "");
+        case (14): stext(0, "Your total is: Fourteen.", "", "");
+        case (15): stext(0, "Your total is: Fifteen.", "", "");
+        case (16): stext(0, "Your total is: Sixteen.", "", "");
+        case (17): stext(0, "Your total is: Seventeen.", "", "");
+        case (18): stext(0, "Your total is: Eighteen.", "", "");
+        case (19): stext(0, "Your total is: Nineteen.", "", "");
+        case (20): stext(0, "Your total is: Twenty.", "", "");
+        case (21): stext(0, "Your total is: Twenty One!", "", "");
+      }
+      if (flags(150) > 21)
+      {
+        stext(
+            0,
+            "You went over 21! You sure",
+            "have a lot to learn about",
+            "this game!");
+        flags(154) = 0;
+        return;
+      }
+    }
+  }
+  flags(153) = 0;
+  flags(152) = random(17, 20);
+  switch (flags(152))
+  {
+    case (17): stext(0, "My total is: Seventeen.", "", "");
+    case (18): stext(0, "My total is: Eighteen.", "", "");
+    case (19): stext(0, "My total is: Nineteen.", "", "");
+    case (20): stext(0, "My total is: Twenty.", "", "");
+  }
+  if (flags(152) > flags(150))
+  {
+    stext(0, "I win!", "Would you care to play again?", "");
+    flags(154) = 0;
+  }
+  if (flags(150) == 21)
+  {
+    stext(0, "You got 21! Please accept", "this!", "");
+    giveitem(56);
+  }
+  if (flags(152) < flags(150))
+  {
+    prompt(
+        0,
+        "You win! Do you want to take",
+        "your money now?",
+        "",
+        107,
+        "No.",
+        "Yes.");
+    flags(154) += flags(154);
+    if (flags(107) == 1)
+    {
+      givegp(flags(154));
+      flags(154) = 0;
+    }
+  }
+  if (flags(152) == flags(150))
+  {
+    stext(0, "We're tied! I win all ties!", "", "");
+    flags(154) = 0;
+  }
+}
+event
+{
+  stext(
+      0,
+      "Hi! This is the Smackjack",
+      "table! If you'd like to play,",
+      "just go to the other side!");
+}
+event
+{
+  face(7) = 0;
+  prompt(
+      0,
+      "Would you like to throw the",
+      "dice? If you get pairs, you",
+      "win! Don't total 7 or 11!",
+      107,
+      "No.",
+      "Yes.");
+  if (flags(107) == 0)
+  {
+    stext(0, "Please enjoy your time here", "at the casino!", "");
+    return;
+  }
+  if (gp < 40)
+  {
+    stext(0, "I'm sorry, but you need to", "have at least 40 gp to play!", "");
+    return;
+  }
+  flags(150) = random(1, 6);
+  switch (flags(150))
+  {
+    case (1): banner("Roll one: One.", 3);
+    case (2): banner("Roll one: Two.", 3);
+    case (3): banner("Roll one: Three.", 3);
+    case (4): banner("Roll one: Four.", 3);
+    case (5): banner("Roll one: Five.", 3);
+    case (6): banner("Roll one: Six.", 3);
+  }
+  flags(151) = random(1, 6);
+  switch (flags(151))
+  {
+    case (1): banner("Roll two: One.", 3);
+    case (2): banner("Roll two: Two.", 3);
+    case (3): banner("Roll two: Three.", 3);
+    case (4): banner("Roll two: Four.", 3);
+    case (5): banner("Roll two: Five.", 3);
+    case (6): banner("Roll two: Six.", 3);
+  }
+  if (flags(150) == flags(151))
+  {
+    switch (flags(151))
+    {
+      case (1): givegp(20); stext(0, "Pair of ones!", "Here's 20 gp!", "");
+      case (2): givegp(40); stext(0, "Pair of twos!", "Here's 40 gp!", "");
+      case (3): givegp(60); stext(0, "Pair of threes!", "Here's 60 gp!", "");
+      case (4): givegp(80); stext(0, "Pair of fours!", "Here's 80 gp!", "");
+      case (5): givegp(100); stext(0, "Pair of fives!", "Here's 100 gp!", "");
+      case (6):
+        givegp(120);
+        stext(0, "Pair of sixes!", "Here's 120 gp!", "And a bonus!");
+        giveitem(1);
+    }
+    return;
+  }
+  flags(150) += flags(151);
+  if (flags(150) == 7)
+  {
+    takegp(40);
+    stext(0, "You totalled seven!", "You lose double!", "");
+    banner("Lost 40 gp!", 2);
+  }
+  if (flags(150) == 11)
+  {
+    takegp(40);
+    stext(0, "You totalled eleven!", "You lose double!", "");
+    banner("Lost 40 gp!", 2);
+  }
+  if (flags(150) != 11 && flags(150) != 7)
+  {
+    takegp(20);
+    stext(0, "Too bad! You didn't get", "anything!", "");
+    banner("Lost 20 gp!", 2);
+  }
+}
+event
+{
+  stext(
+      0,
+      "If you would like to play dice",
+      "with me, just go to the other",
+      "end of the table!");
+}
+event
+{
+  stext(0, "May I take your order?", "", "");
+  textmenu(
+      4,
+      4,
+      4098,
+      0,
+      "Flied Rice            50gp",
+      "Fried Skunkraven     100gp",
+      "Spam, Eggs, and Spam 100gp",
+      "Thunder Platter      200gp",
+      "BBQ Beetalope        200gp",
+      "Schveintestes        250gp",
+      "Lake Calimari      1,000gp",
+      "Cheeseburger       1,000gp");
+  if (flags(4098) == 1 && gp < 50)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 1 && gp > 49)
+  {
+    takegp(50);
+    stext(1, "Yes, it's rice.", "", "");
+    stext(
+        1,
+        "But it's cooked with juicy",
+        "and ginseng flies as a Frog",
+        "Pond delicacy! I'm getting");
+    stext(1, "homesick!", "", "");
+    flags(5000) = 1;
+  }
+  if (flags(4098) == 2 && gp < 100)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 2 && gp > 99)
+  {
+    takegp(100);
+    stext(
+        1,
+        "Yum! Fried skunkraven is the",
+        "easy solution to the problem",
+        "of skunkraven overpopulation.");
+    stext(
+        1,
+        "The breading is extra-flaky,",
+        "and the meat surprisingly",
+        "succulent... Mmm mm!");
+    flags(5001) = 1;
+  }
+  if (flags(4098) == 3 && gp < 100)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 3 && gp > 99)
+  {
+    takegp(100);
+    stext(1, "It's the house special.", "But I don't like Spam!", "");
+    for (x, 5, 9, 1)
+    {
+      specialframe(20) = x;
+      specialframe(21) = x;
+      specialframe(22) = x;
+      specialframe(23) = x;
+      wait(10);
+    }
+    for (x, 5, 9, 1)
+    {
+      specialframe(20) = x;
+      specialframe(21) = x;
+      specialframe(22) = x;
+      specialframe(23) = x;
+      wait(10);
+    }
+    for (x, 5, 9, 1)
+    {
+      specialframe(20) = x;
+      specialframe(21) = x;
+      specialframe(22) = x;
+      specialframe(23) = x;
+      wait(10);
+    }
+    specialframe(20) = 0;
+    specialframe(21) = 0;
+    specialframe(22) = 0;
+    specialframe(23) = 0;
+    stext(
+        0,
+        "Spam spam spam spam! Spam",
+        "spam spam spam! Spammity",
+        "spam! Wonderful spam!");
+    for (x, 5, 9, 1)
+    {
+      specialframe(20) = x;
+      specialframe(21) = x;
+      specialframe(22) = x;
+      specialframe(23) = x;
+      wait(10);
+    }
+    for (x, 5, 9, 1)
+    {
+      specialframe(20) = x;
+      specialframe(21) = x;
+      specialframe(22) = x;
+      specialframe(23) = x;
+      wait(10);
+    }
+    for (x, 5, 9, 1)
+    {
+      specialframe(20) = x;
+      specialframe(21) = x;
+      specialframe(22) = x;
+      specialframe(23) = x;
+      wait(10);
+    }
+    specialframe(20) = 0;
+    specialframe(21) = 0;
+    specialframe(22) = 0;
+    specialframe(23) = 0;
+    stext(
+        1, "It seems to be a hit among", "the Berserk Squirrels,", "though...");
+    flags(5002) = 1;
+  }
+  if (flags(4098) == 4 && gp < 200)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 4 && gp > 199)
+  {
+    takegp(200);
+    stext(
+        1,
+        "Wow! Roast thunderbunny and",
+        "thunderduck l'orange!",
+        "These are both difficult to");
+    stext(
+        1,
+        "acquire foods! For such a",
+        "low price, this is an",
+        "incredible bargain! Dee-lish!");
+    flags(5003) = 1;
+  }
+  if (flags(4098) == 5 && gp < 200)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 5 && gp > 199)
+  {
+    takegp(200);
+    stext(
+        1,
+        "Whoa! A whole beetalope shell",
+        "full of meat, liberally",
+        "slathered with barbecue sauce!");
+    stext(
+        1,
+        "Beetalope is a common dish",
+        "around here because the",
+        "savannah's wide stretches of");
+    stext(1, "plains are the ideal grounds", "for beetalope ranches.", "");
+    flags(5004) = 1;
+  }
+  if (flags(4098) == 6 && gp < 250)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 6 && gp > 249)
+  {
+    takegp(250);
+    stext(
+        1,
+        "Yurg! Supposedly, eating",
+        "these things increases your",
+        "stamina, but I don't know");
+    stext(1, "if it's worth it...", "", "");
+    flags(5005) = 1;
+  }
+  if (flags(4098) == 7 && gp < 1000)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 7 && gp > 999)
+  {
+    takegp(1000);
+    stext(
+        1,
+        "I'm pretty sure that this is",
+        "in fact Barrier Squid, and",
+        "not actually a Lake Kraken.");
+    stext(
+        1,
+        "Less scrupulous restaurants",
+        "will sometimes sell Barrier",
+        "Calimari under this name so");
+    stext(
+        1,
+        "they can jack up the price.",
+        "In reality, I'm not sure if",
+        "Lake Krakens are edible...");
+    stext(
+        1,
+        "Still, the incredibly",
+        "delicate taste of the squid",
+        "covered in butter makes the");
+    stext(1, "exhorbitant cost worthwhile.", "", "");
+    flags(5006) = 1;
+  }
+  if (flags(4098) == 8 && gp < 1000)
+  {
+    stext(0, "You don't have enough money!", "", "");
+  }
+  if (flags(4098) == 8 && gp > 999)
+  {
+    takegp(1000);
+    stext(
+        1,
+        "Well, it took a lot of cash,",
+        "but I can finally eat some",
+        "cheese...");
+    stext(
+        1,
+        "Hey! There's no cheese on",
+        "this! It's a hamburger!",
+        "What a gyp!");
+    flags(5007) = 1;
+  }
+  if (flags(5000) == 1 && flags(5001) == 1 && flags(5002) == 1 &&
+      flags(5003) == 1)
+  {
+    if (flags(5004) == 1 && flags(5005) == 1 && flags(5006) == 1 &&
+        flags(5007) == 1)
+    {
+      if (flags(5008) == 0)
+      {
+        flags(5008) = 1;
+        stext(
+            0,
+            "Oh! You've eaten everything",
+            "on our menu! Take this, for",
+            "being such a good customer!");
+        giveitem(98);
+      }
+    }
+  }
+}
+event
+{
+  face(12) = 1;
+  stext(0, "Hit me!", "", "");
+  face(8) = 0;
+  wait(15);
+  specialframe(8) = 22;
+  wait(10);
+  soundeffect(11);
+  specialframe(8) = 29;
+  wait(25);
+  specialframe(8) = 0;
+  face(13) = 3;
+  wait(10);
+  stext(0, "Ow! What was that for?", "", "");
+  stext(0, "    But you said...", "", "");
+  stext(0, "I meant gimme a card! Don't", "you know anything?", "");
+  specialframe(8) = 20;
+  stext(
+      0,
+      "    I'm terribly sorry! I'm",
+      "    new here, so please",
+      "    forgive me!");
+  specialframe(8) = 0;
+  stext(0, "I oughta talk to the manager!", "", "");
+  entitymove(13, "U1L1");
+  wait(50);
+  stext(
+      0,
+      " Hey buddy, don't knock it! I",
+      " pay a girl 50 gp to do that",
+      " back where I come from!");
+  specialframe(8) = 20;
+  specialframe(12) = 20;
+  entitymove(13, "R1D1F3");
+  wait(100);
+  specialframe(8) = 0;
+  specialframe(12) = 0;
+}
+event { stext(0, "I'm really not cut out for", "this job!", ""); }
+event
+{
+  stext(0, "That guy just doesn't know", "when he's found a bargain!", "");
+}
+event
+{
+  for (x, 23, 28, 1)
+  {
+    specialframe(14) = x;
+    wait(10);
+  }
+  for (x, 0, 5, 1)
+  {
+    specialframe(14) = 28 - x;
+    wait(10);
+  }
+  stext(0, "Please enjoy your time here", "at the casino!", "");
+}
+event
+{
+  stext(
+      0,
+      "I mostly pick up the litter",
+      "our customers leave on the",
+      "tables. But I'm really here");
+  stext(0, "to spy on the players and make", "sure they're not cheating!", "");
+  if (char(5))
+  {
+    stext(5, "Heh heh heh!", "Thanks for the advance notice.", "");
+  }
+}
+event
+{
+  stext(0, "Are they girls dressed as", "bunnies?", "");
+  stext(0, "   or are they bunnies dressed", "   as girls?", "");
+  if (char(4))
+  {
+    stext(4, "Maybe they're girl bunnies", "dressed as bunny girls!", "");
+    specialframe(16) = 21;
+    specialframe(17) = 21;
+    wait(100);
+    stext(0, "That's gotta be it!", "   That's gotta be it!", "");
+    specialframe(16) = 0;
+    specialframe(17) = 0;
+  }
+}
+event
+{
+  stext(0, "I'm a little busy right now!", "", "");
+  face(18) = 0;
+  specialframe(18) = 21;
+  stext(0, "I got 21 again! You lose!", "", "");
+  specialframe(18) = 0;
+}
+event
+{
+  stext(
+      0,
+      "Aw man! You haven't gotten",
+      "anything but 21 since I",
+      "started playing! If I hadn't");
+  stext(0, "broken up with you, we'd be", "rich!", "");
+  specialframe(18) = 20;
+  wait(50);
+  specialframe(18) = 0;
+}
+event
+{
+  stext(
+      0,
+      "Ja, you ban not making",
+      "fun of my height, by",
+      "Yimini! Else you ban");
+  stext(0, "tasting cold steel!", "", "");
+  for (x, 5, 9, 1)
+  {
+    specialframe(20) = x;
+    wait(10);
+  }
+  specialframe(20) = 0;
+}
+event { stext(0, "Yngvie is a louse!", "", ""); }
+event { stext(0, "Pfaug! The beer here is weaker", "than goat-piss!", ""); }
+event { stext(0, "...", "", ""); }

@@ -1,0 +1,407 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  if (flags(180) == 0)
+  {
+    flags(180) = 1;
+    partymove("U2");
+    stext(4, "We're here! Graciere! If", "anyone can help us, it's", "Lumin!");
+    stext(1, "Lumin? We're going to see", "Saint Lumin? But why?", "");
+    stext(5, "Yeah, why?", "", "");
+    stext(
+        4,
+        "'Cause Lumin's ancient! He's",
+        "over a thousand years old!",
+        "He might've been there when");
+    stext(
+        4,
+        "that Bovus fellow came",
+        "through! And even if he has",
+        "no clue where the Seed is, he");
+    stext(
+        4,
+        "can get all of the sages in",
+        "the empire, and see if they",
+        "know where it is!");
+    stext(1, "I guess Lumin is the guy to", "ask, isn't he?", "");
+  }
+  if (flags(171) == 2)
+  {
+    flags(171) = 3;
+    addcharacter(4);
+    addcharacter(5);
+    autoon();
+    specialframe(96) = 24;
+    specialframe(97) = 24;
+    entity.locx(96) = 36;
+    entity.locy(96) = 122;
+    entity.locx(97) = 36;
+    entity.locy(97) = 126;
+    stext(
+        1,
+        "Urg... What a bad night's",
+        "sleep that was... I... I",
+        "dreamt that there was this...");
+    stext(1, "island... with Morpheos on it,", "and it was weird...", "");
+    entitymove(95, "L2");
+    partymove("L2");
+    wait(50);
+    stext(0, "Get up, Rikk!", "", "");
+    specialframe(96) = 0;
+    stext(4, "Uggg! I hate mornings!", "", "");
+    entitymove(95, "D3F3");
+    entitymove(96, "R1D2");
+    partymove("D3");
+    wait(100);
+    stext(1, "Wake up, Dingo!", "", "");
+    specialframe(97) = 0;
+    stext(5, ">Yawn< What a wonderful", "morning!", "");
+    entitymove(95, "U1");
+    entitymove(96, "D1");
+    entitymove(97, "R1");
+    partymove("U1");
+    wait(25);
+    entitymove(95, "L4");
+    entitymove(96, "U1L3");
+    entitymove(97, "U2L2");
+    partymove("L4");
+    wait(100);
+    autooff();
+  }
+}
+event
+{
+  stext(
+      0,
+      "This is the palace-city of",
+      "Graciere, the capital of all",
+      "the Savannah Empire!");
+  stext(1, "What are you doing here?", "", "");
+  stext(
+      0,
+      "I'm going to petition Lumin!",
+      "I want him to lend me a ship",
+      "so that I can get to other");
+  stext(
+      0, "towns all over the world, and", "tell people their town names!", "");
+}
+event
+{
+  stext(
+      0,
+      "This city is built like a huge",
+      "fortress in the shape of a",
+      "staircase. The highest part");
+  stext(
+      0,
+      "faces north, since it was made",
+      "to block incursions from the",
+      "Horse Nomads back in the last");
+  stext(
+      0,
+      "war. Its great height makes it",
+      "virtually impregnable!",
+      "Conversely, the lowest part is");
+  stext(
+      0,
+      "to the south, which means that",
+      "one would think it to be very",
+      "vulnerable to assault from");
+  stext(
+      0,
+      "that side. Nothing would be",
+      "further from the truth! The",
+      "city has all kinds of hidden");
+  stext(
+      0,
+      "weaponry facing that way, to",
+      "lull the enemy into thinking",
+      "it a safe avenue of attack!");
+  stext(0, "Then, before they know it,", "Wham!", "");
+  stext(1, "Why are you telling us all", "this?", "");
+  stext(
+      0,
+      "I'm bored, and I heard that",
+      "wandering hero-types'll just",
+      "sit there and listen to you");
+  stext(
+      0,
+      "for as long as it takes to say",
+      "something to them. So as I was",
+      "saying...");
+  stext(0, "Hey! Where are you going?", "", "");
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(var(0), var(1), 0);
+}
+event { warp(flags(109), flags(110), 0); }
+event { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event
+{
+  flags(170) = 1;
+  chainevent(3, 29, 105);
+}
+event
+{
+  flags(170) = 0;
+  chainevent(3, 30, 105);
+}
+event
+{
+  if (flags(170) == 1)
+  {
+    stext(
+        0,
+        "I have the best wares around,",
+        "unlike that heathen across",
+        "town!");
+    shop(5, 25, 61, 14, 62, 7, 63);
+    stext(
+        0,
+        "Please, spread the word:",
+        "Abdul's shop is the place to",
+        "go when you need weapons!");
+    stext(
+        0,
+        "Dirk's shop is the place to",
+        "go if you want to get ripped",
+        "off!");
+    return;
+  }
+  stext(
+      0,
+      "You won't find stuff like this",
+      "at that Abdul fella's across",
+      "town!");
+  shop(40, 41, 64, 12, 20, 60);
+  stext(
+      0,
+      "We at Dirk's recognize that",
+      "you, the modern warrior, need",
+      "protection in combat, unlike");
+  stext(0, "that oaf, Abdul!", "", "");
+  if (char(4))
+  {
+    stext(4, "Abdul doesn't need protection", "in combat? Cool!", "");
+    stext(
+        0,
+        "No! I mean he doesn't care",
+        "about his customers' well-",
+        "being, like I do!");
+  }
+}
+event
+{
+  stext(0, "Welcome! We stock many kinds", "of useful items!", "");
+  shop(1, 2, 38, 39, 54, 55, 53);
+  stext(
+      0,
+      "Nine years of apprenticeship",
+      "to a merchant, and this is",
+      "what I end up doing for a");
+  stext(0, "living! I don't even like", "items!", "");
+}
+event { chainevent(3, 51, 105); }
+event
+{
+  if (entity.locx(0) == 13)
+  {
+    face(10) = 0;
+  }
+  if (entity.locx(0) == 16)
+  {
+    face(11) = 0;
+  }
+  prompt(
+      0,
+      "Stay here at the Sheraton",
+      "Graciere Inn? Only 25 gp!",
+      "",
+      112,
+      "No.",
+      "Yes.");
+  if (flags(112))
+  {
+    if (gp < 25)
+    {
+      stext(0, "You don't have enough money!", "", "");
+    }
+    if (gp > 24 && flags(171) == 1)
+    {
+      takegp(25);
+      healall();
+      chainevent(13);
+    }
+    if (gp > 24)
+    {
+      takegp(25);
+      banner("We're healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(0, "Stay here again real soon!", "", "");
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "Our beds are as soft as any", "in the land!", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "Sir! Only staff are allowed",
+      "back here! Please go to the",
+      "front of the counter!");
+}
+event
+{
+  flags(171) = 2;
+  if (entity.locx(0) == 13)
+  {
+    partymove("R3");
+  }
+  partymove("R5R5R5R6");
+  alterbtile(36, 126, 560, 0);
+  autoon();
+  entitymove(96, "R1");
+  entitymove(97, "R2");
+  wait(50);
+  autooff();
+  removecharacter(4);
+  removecharacter(5);
+  addcharacter(4);
+  addcharacter(5);
+  autoon();
+  entitymove(95, "U2R2F0");
+  entitymove(96, "U2L1F0");
+  entitymove(97, "D2L1F0");
+  wait(100);
+  stext(
+      1,
+      "Good night Rikk!",
+      "Good night Dingo!",
+      "I guess tomorrow we ask Lumin");
+  stext(
+      1,
+      "if he can help us find someone",
+      "who can locate the Great Seed.",
+      "");
+  stext(5, "I... I still don't think we", "should...", "");
+  stext(
+      1,
+      "Don't worry Dingo! Lumin's",
+      "supposed to be a living saint!",
+      "He's not going to have you");
+  stext(1, "killed or anything! Try and", "sleep, OK?", "");
+  stext(5, "Zzzzzz...", "", "");
+  stext(1, "Uh... right.", ">Yawn<", "G'night... Zzzzzz...");
+  removecharacter(4);
+  removecharacter(5);
+  autooff();
+  mapswitch("dreamgrs.map", 10, 15, 0);
+}
+event { chainevent(3, 12, 128); }
+event
+{
+  if (flags(171) == 0)
+  {
+    flags(171) = 1;
+  }
+  if (flags(171) == 3)
+  {
+    stext(0, "You may enter.", "", "");
+    if (entity.locx(0) == 70 && entity.locy(0) == 24)
+    {
+      entitymove(12, "L1F0");
+      wait(25);
+    }
+    if (entity.locx(0) == 71 && entity.locy(0) == 24)
+    {
+      entitymove(13, "R1F0");
+      wait(25);
+    }
+  }
+  stext(0, "Today's petitioning is over.", "Come back tomorrow.", "");
+}
+event
+{
+  stext(0, "I just love these old cannons!", "", "");
+  if (char(4))
+  {
+    stext(4, "Um, are those matches you've", "got?", "");
+    stext(0, "Yup!", "", "");
+  }
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(
+      1,
+      "No! I don't care what silly",
+      "name you have! Don't even try",
+      "to tell me! I won't listen!");
+  stext(0, "I be--", "", "");
+  stext(1, "DUM-DE-DUM!!! I CAN'T HEAR", "YOU! LA-DE-DA!!! HMM HMM HMM!", "");
+  stext(0, "I be wonderin', do you have", "any Grey Mustard?", "");
+  stext(
+      1, "Wha? Oh, um, sorry about that.", "I'm afraid I don't. Sorry...", "");
+}
+event
+{
+  if (char(4))
+  {
+    specialframe(char(4) - 1) = 15;
+    stext(4, "Hey! I can see the dam from", "here!", "");
+    specialframe(char(4) - 1) = 0;
+  }
+}
+event { mapswitch("overland.map", 83, 80, 0); }
+event
+{
+  stext(0, "Psst! Buddy! Wanna buy a large", "heavy object?", "");
+  magicshop(3, 5);
+  stext(0, "Remember, you never met me!", "", "");
+}
+event
+{
+  stext(
+      0,
+      "I'm here to petition Lumin.",
+      "I want to send a group of",
+      "miners out to the BPC and");
+  stext(0, "reopen the mines there...", "", "");
+}
+event
+{
+  stext(
+      0,
+      "I own the Avis Casino, and I",
+      "came here to petition Lumin to",
+      "let me set one up here!");
+}
+event
+{
+  face(19) = 0;
+  stext(0, "I love the view from up here!", "", "");
+  face(19) = 1;
+}
+event { chainevent(3, 9, 105); }
+event
+{
+  stext(
+      0,
+      "Most of the citizens of this",
+      "city work inside the palace,",
+      "so they don't have a lot of");
+  stext(0, "time to wander about out here!", "", "");
+}
+event { mapswitch("palace.map", 23, 18, 0); }

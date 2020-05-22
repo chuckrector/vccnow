@@ -1,6 +1,5 @@
 .rdbg
 .vscode
 build/
-sully/
-temp/
+#temp/
 $$tmep$$.ma_

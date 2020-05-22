@@ -1,0 +1,516 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(801) = 1;
+  if (flags(185) > 15)
+  {
+    entity.locx(5) = 59;
+    entity.locx(6) = 59;
+    entity.locx(7) = 59;
+  }
+  if (flags(185) == 15)
+  {
+    entity.locx(6) = 59;
+    entity.locx(7) = 59;
+    specialframe(5) = 29;
+    flags(185) = 16;
+    autoon();
+    face(95) = 1;
+    entity.locx(96) += 1;
+    entity.locy(96) += 1;
+    face(96) = 1;
+    entity.locx(97) -= 1;
+    entity.locy(97) += 1;
+    face(97) = 1;
+    entity.locy(98) += 2;
+    face(98) = 1;
+    entity.locy(99) += 2;
+    entity.locx(99) += 1;
+    face(99) = 1;
+    flags(251) = 0;
+    stext(
+        9,
+        "WAAAAHH!! N... no fair! I",
+        "didn't even get to *use*",
+        "my Lagome persona! And...");
+    stext(9, "and now, I'm in danger of", "exposing everything!", "");
+    specialframe(5) = 22;
+    stext(9, "I have only one choice...", "", "");
+    fadeout(100);
+    drawparty = 0;
+    drawentities = 0;
+    layer0 = 0;
+    layer1 = 0;
+    layervc = 1;
+    fadein(1);
+    vccentertext(15, "Father! My cover is going to be blown!");
+    redraw();
+    wait(100);
+    vccentertext(25, "I'm going to use the 'Pyrrhus Gambit!'");
+    redraw();
+    wait(100);
+    vccentertext(35, "Please, I need you to upload me, so");
+    redraw();
+    wait(100);
+    vccentertext(45, "that I may be reborn later!");
+    redraw();
+    wait(300);
+    vcclear();
+    redraw();
+    wait(100);
+    vccentertext(15, "No! Whatever you do, you must not use");
+    redraw();
+    wait(100);
+    vccentertext(25, "the 'Pyrrhus Gambit.' There will be no");
+    redraw();
+    wait(100);
+    vccentertext(35, "doubt of their suspicions once you");
+    redraw();
+    wait(100);
+    vccentertext(45, "use it! I will not upload you. Thus,");
+    redraw();
+    wait(100);
+    vccentertext(55, "to survive, you will have to try");
+    redraw();
+    wait(100);
+    vccentertext(65, "something else. Do not bother me");
+    redraw();
+    wait(100);
+    vccentertext(75, "again with this.");
+    redraw();
+    wait(300);
+    vcclear();
+    redraw();
+    wait(100);
+    vccentertext(15, "Father, I cannot take Garm's way out!");
+    redraw();
+    wait(100);
+    vccentertext(25, "I have taken far more damage than he");
+    redraw();
+    wait(100);
+    vccentertext(35, "did, and I can not play dead now!");
+    redraw();
+    wait(100);
+    vccentertext(45, "I *have* to do this, father!");
+    redraw();
+    wait(200);
+    vccentertext(65, "Father...? Are you still there?");
+    redraw();
+    wait(300);
+    vcclear();
+    redraw();
+    fadeout(1);
+    drawentities = 1;
+    layer0 = 1;
+    layer1 = 1;
+    layervc = 0;
+    fadein(100);
+    stext(
+        9,
+        "Damn! How, like, totally",
+        "unfair! Oh... pooh! But it",
+        "looks like no way out, so...");
+    cameratracking = 0;
+    ywin -= 32;
+    specialframe(5) = 27;
+    wait(50);
+    specialframe(5) = 28;
+    wait(50);
+    layervc = 1;
+    palettemorph(63, 63, 63, 90, 63);
+    soundeffect(8);
+    earthquake(1, 1, 30);
+    entity.locx(5) = 59;
+    palettemorph(0, 0, 63, 50, 63);
+    stext(1, "No!", "", "");
+    soundeffect(12);
+    vcputpcx("Explo1.pcx", 32, 16);
+    earthquake(1, 1, 10);
+    vcclear();
+    vcputpcx("Explo2.pcx", 32, 16);
+    earthquake(1, 1, 10);
+    vcclear();
+    vcputpcx("Explo3.pcx", 32, 16);
+    earthquake(1, 1, 10);
+    vcclear();
+    vcputpcx("Explo4.pcx", 32, 16);
+    earthquake(2, 2, 10);
+    vcclear();
+    vcputpcx("Explo5.pcx", 32, 16);
+    earthquake(2, 2, 10);
+    vcclear();
+    vcputpcx("Explo6.pcx", 32, 16);
+    wait(100);
+    vcclear();
+    wait(100);
+    layervc = 0;
+    palettemorph(63, 63, 63, 0, 63);
+    stext(1, "Wha...?", "", "");
+    stext(4, "We're still alive!", "", "");
+    stext(1, "But who, or what, saved us?", "", "");
+    stext(3, "Hmmmm...", "", "");
+    stext(
+        4,
+        "Does it really matter? We've",
+        "got a bunch of stuff to do!",
+        "We've got to get your seed");
+    stext(
+        4,
+        "back! Then my obligations",
+        "will be fulfilled, and we",
+        "can go rescue Lagome!");
+    stext(
+        3,
+        "Hrrm. Somehow I have the",
+        "feeling that it will not",
+        "be all so easy as that,");
+    stext(3, "boy. Something is dreadfully", "wrong.", "");
+    stext(5, "Um... This place is creeping", "me out... Can we go now?", "");
+    partymove("D4");
+    entitymove(95, "D4");
+    entitymove(96, "L1D2");
+    entitymove(97, "R1D1");
+    entitymove(98, "U1F0");
+    entitymove(99, "U2L1F0");
+    wait(50);
+    autooff();
+    ywin += 32;
+    cameratracking = 1;
+  }
+}
+event { mapswitch("warren2.map", 85, 1, 0); }
+event { stext(0, ".........", "", ""); }
+event
+{
+  stext(0, "Mauser's diary. -- Keep out!", "", "");
+  stext(1, "Hmmm... This is dated a few", "days ago...", "");
+  stext(
+      0,
+      "Yesterday, my contact in",
+      "Carbera disappeared. This is a",
+      "good sign. His friends must've");
+  stext(
+      0,
+      "escaped. Soon, my plan will be",
+      "executed, and I'll be a hero",
+      "in these parts...");
+  stext(1, "This is the next entry...", "", "");
+  stext(
+      0,
+      "Blast! She waited too long!",
+      "I couldn't let them escape,",
+      "but father won't let me kill");
+  stext(
+      0,
+      "them! He says it's not",
+      "'artistic' enough... whatever",
+      "that means... Anyway, then");
+  stext(
+      0,
+      "*They* showed up, and my plan",
+      "was ruined! Now they're heroes",
+      "and I look like an incompetent");
+  stext(
+      0,
+      "bungler! Father is interested",
+      "in this development. He says",
+      "that Garm fared badly against");
+  stext(
+      0,
+      "them earlier, and lost his",
+      "cover identity. But Garm's",
+      "a weakling... I won't lose...");
+  stext(1, "This is the final entry...", "", "");
+  stext(
+      0,
+      "Garm showed up. I missed him,",
+      "but I know where he's headed.",
+      "I believe he's going to try");
+  stext(
+      0,
+      "to get his revenge on those",
+      "interfering heroes... He'd",
+      "grown far too attached to");
+  stext(
+      0,
+      "that cover identity of his.",
+      "I told father I needed to go",
+      "to the cave and observe, but");
+  stext(
+      0,
+      "he told me he already had an",
+      "agent on the job. Still, I",
+      "got him to agree to let me go.");
+  stext(
+      0,
+      "Lagome will not make decisions",
+      "contrary to our purpose while",
+      "I'm gone, now... Another agent");
+  stext(0, "will see to that...", "", "");
+}
+event
+{
+  stext(0, "Lagome's diary.", "", "");
+  stext(1, "Here's a recent entry...", "", "");
+  stext(
+      0,
+      "Today was really neat! I saw",
+      "the cutest guy! He helped us",
+      "out against these three dorks");
+  stext(
+      0,
+      "who wanted to kidnap me! I",
+      "wonder: if I kiss him, will",
+      "he turn into a prince?");
+  stext(1, "Here's the latest entry...", "", "");
+  stext(
+      0,
+      "Today was kind of boring.",
+      "Mauser's off on some trip, but",
+      "he says he may come back with");
+  stext(
+      0,
+      "those guys who helped us out",
+      "a few days ago. I can't wait!",
+      "Something's wrong. I've");
+  stext(1, "Huh? It ends there.", "", "");
+}
+event
+{
+  if (flags(185) < 15)
+  {
+    specialframe(9) = 21;
+    stext(
+        9,
+        "Mr. Sam! You're back!",
+        "Have you decided to become one",
+        "of my guards after all?");
+    stext(1, "No, I'm afraid not... Um, what", "happened out there?", "");
+    stext(4, "Are you all right?", "", "");
+    stext(3, "Sniff... Hmmmm...", "", "");
+    stext(
+        9,
+        "Oh, I'm quite all right! There",
+        "was a monster attack, and most",
+        "of the town had to evacuate,");
+    stext(9, "but I holed up in here, and", "eventually they left!", "");
+    stext(3, "You're lying.", "", "");
+    specialframe(char(4) - 1) = 21;
+    stext(4, "WHAAAAAT! Why... How dare you", "accuse Lagome of...", "");
+    stext(
+        3,
+        "I smelled the same scent on",
+        "Mauser, and he turned out to",
+        "be... bad. You weren't the");
+    stext(
+        3,
+        "source then, though at first I",
+        "thought you were. But now you",
+        "are. What actually happened?");
+    stext(4, "That doesn't prove anything!", "You're just...", "");
+    stext(
+        9,
+        "Well, there's no getting past",
+        "you, now is there, you old",
+        "fart?");
+    specialframe(char(4) - 1) = 23;
+    stext(4, "See, I tol... Huh?", "", "");
+    specialframe(char(4) - 1) = 0;
+    stext(
+        9,
+        "Now *I* am Lagome. But you",
+        "don't understand what I mean",
+        "by that, do you? Let me tell");
+    stext(
+        9,
+        "you a story... Once upon a",
+        "time, there was a princess.",
+        "Everyone in her kingdom");
+    stext(
+        9,
+        "loved her for her beauty and",
+        "charm, but never noticed her",
+        "brains and good sense. So in");
+    stext(
+        9,
+        "order to fool them into",
+        "thinking her to be simple, she",
+        "adopted a false demeanor, and");
+    stext(
+        9,
+        "acted helpless. This made her",
+        "subjects feel protective of",
+        "her, which she quite enjoyed.");
+    stext(
+        9,
+        "She had a bodyguard, who acted",
+        "like an advisor, at times. But",
+        "one day, some strangers came");
+    stext(
+        9,
+        "into town, on a quest. These",
+        "strangers helped stop the",
+        "threat that menaced the town");
+    stext(
+        9,
+        "that day, but the bodyguard",
+        "didn't like them, and went",
+        "off to make sure that they");
+    stext(
+        9,
+        "didn't interfere with the",
+        "plans of his master. And",
+        "while he was gone, his master");
+    stext(
+        9,
+        "sent another of its servants",
+        "to make the princess his own.",
+        "The princess was taken away,");
+    stext(
+        9,
+        "while the servant took a new",
+        "identity. As previous servants",
+        "had taken the identities of");
+    stext(
+        9,
+        "their victims, so too did this",
+        "one. And so I was born. I am",
+        "Lagome. I have her knowledge,");
+    stext(
+        9,
+        "her appearance, and even her",
+        "powers! I can do everything",
+        "she can do, and better!");
+    stext(4, "Where is the real Lagome?", "Tell me!", "");
+    stext(
+        9,
+        "Tell you? I'll kill you!",
+        "Tee hee!",
+        "And once you've been removed");
+    stext(
+        9,
+        "from the equation, there will",
+        "be nobody left who knows too",
+        "much! You see, I've heard");
+    stext(
+        9,
+        "about what happened in the",
+        "cave. Garm and Mauser were",
+        "careless, to let you");
+    stext(
+        9,
+        "overhear their conversation.",
+        "You have no clue, as yet, to",
+        "what is going on. But you know");
+    stext(9, "that something *is* going on,", "and that is too much!", "");
+    flags(185) = 15;
+    banner("Boss Battle", 1);
+    banner("2 ArmaGuards", 1);
+    banner("and 1 Lagome", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+      mapswitch("lagome2.map", entity.locx(0), entity.locy(0), 1);
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+      mapswitch("lagome2.map", entity.locx(0), entity.locy(0), 1);
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 3;
+      flags(502) = 250;
+      flags(503) = 150;
+      flags(504) = 1000;
+      flags(505) = 63;
+      flags(506) = 63;
+      flags(507) = 73;
+      flags(508) = 73;
+      flags(509) = 1000;
+      flags(510) = 200;
+      flags(511) = 0;
+      flags(512) = 65;
+      flags(513) = 65;
+      flags(540) = 5;
+      flags(541) = 80;
+      flags(1009) = 0;
+      flags(514) = 2;
+      flags(515) = 3;
+      flags(516) = 65;
+      flags(517) = 3000;
+      flags(518) = 39;
+      flags(519) = 39;
+      flags(520) = 39;
+      flags(521) = 39;
+      flags(522) = 3000;
+      flags(523) = 1200;
+      flags(524) = 5;
+      flags(525) = 10;
+      flags(526) = 10;
+      flags(542) = 300;
+      flags(543) = 60;
+      flags(1010) = 0;
+      flags(527) = 3;
+      flags(528) = 250;
+      flags(529) = 150;
+      flags(530) = 1000;
+      flags(531) = 63;
+      flags(532) = 63;
+      flags(533) = 73;
+      flags(534) = 73;
+      flags(535) = 1000;
+      flags(536) = 200;
+      flags(537) = 0;
+      flags(538) = 65;
+      flags(539) = 65;
+      flags(544) = 5;
+      flags(545) = 80;
+      flags(1011) = 0;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      flags(251) = 1;
+      mapswitch("palbat.map", 1, 1, 0);
+    }
+  }
+}
+event
+{
+  stext(10, "Ah, velkomme! Mein leader", "is grateful for all you've", "done.");
+  if (char(4))
+  {
+    stext(4, "Only your leader?", "", "");
+    specialframe(10) = 20;
+    wait(50);
+    specialframe(10) = 0;
+  }
+  if (char(3))
+  {
+    stext(
+        3,
+        "<Hmmm... It seems I was wrong",
+        "before, when I thought it was",
+        "Lagome who smelled that way.");
+    stext(3, "It's Mauser! Now I wonder", "why...>", "");
+  }
+}
+event
+{
+  if (face(0) == 0 && flags(1181) == 0)
+  {
+    flags(1181) = 1;
+    stext(1, "Hey, I found a picture stuck", "behind the shelf!", "");
+    banner("Sam found:", 1);
+    banner("Dingo Bromide!", 1);
+    if (char(5))
+    {
+      stext(1, "Huh? What's your picture", "doing back here?", "");
+      stext(5, "I dunno! I'd never been", "here until you brought me!", "");
+      stext(1, "It's probably just GMW's", "lack of plot consistency...", "");
+      stext(5, "Yeah, that'd explain it!", "", "");
+    }
+  }
+  banner("Nothing!", 1);
+}
+event { banner("Nothing!", 1); }

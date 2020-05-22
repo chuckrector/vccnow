@@ -3,7 +3,7 @@
 
 #include "v1vc_token.hpp"
 
-struct Parser_t
+struct parser
 {
   char *Path = 0; // NOTE(aen): If data from disk
   u8 *Data = 0;
@@ -14,27 +14,27 @@ struct Parser_t
   u64 Column = 0;
   u64 TabSize = 8;
 
-  void ToTokenList(TokenList_t *TokenList);
+  void ToTokenList(token_list *TokenList);
 
-  Parser_t();
-  Parser_t(const char *S);
-  Parser_t(Buffer_t *B);
+  parser();
+  parser(const char *S);
+  parser(buffer *B);
 
   void Reset(const char *S);
-  void Reset(Buffer_t *B);
+  void Reset(buffer *B);
   void CalcPath(const char *Filename);
   void Load(const char *Filename);
 
-  bool64 IsWhite();
-  bool64 IsLetter();
-  bool64 IsDigit();
-  bool64 IsSpecial();
-  bool64 IsIdent();
+  b64 IsWhite();
+  b64 IsLetter();
+  b64 IsDigit();
+  b64 IsSpecial();
+  b64 IsIdent();
 
   u8 *End();
-  bool64 AtEnd();
-  bool64 AtText(char Char);
-  bool64 AtText(const char *Text, u64 Length);
+  b64 AtEnd();
+  b64 AtText(char Char);
+  b64 AtText(const char *Text, u64 Length);
   void Expect(char Char);
   void Expect(const char *Text, u64 Length);
   void SkipPast(const char *Text, u64 Length);

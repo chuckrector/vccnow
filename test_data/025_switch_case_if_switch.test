@@ -1,0 +1,59 @@
+/* This one allows us to properly decompile PHAGE's *bat.vc */
+event {
+  switch (a) { case 1: if (b) vgadump(); }
+  switch (c) { case 2: vgadump(); }
+}
+
+//
+
+01 00 00 00       .1 script
+00 00 00 00       .offset 0
+
+.event0
+
+  0a              .switch
+  02 00           .var0 a
+  ff              .end var0
+
+    0b            .case
+    01            .literal
+    01 00 00 00
+    ff            .end (literal)
+
+    1c 00 00 00
+
+    05            .if
+    01            .terms
+    1b 00 00 00   .else
+    02 01         .var0 b
+    ff
+    01            .sign
+
+      01 45       .exec vgadump
+
+    ff            .end (case)
+  ff              .end (switch)
+
+  0a              .switch
+  02 02           .var0 c
+  ff              .end (var0)
+
+    0b            .case
+    01            .literal
+    02 00 00 00
+    ff            .end (literal)
+
+    2f 00 00 00
+
+      01 45       .exec vgadump
+
+    ff            .end (case)
+  ff              .end (switch)
+
+ff                .end (event0)
+
+.xx
+
+//
+
+event/*0*/{switch(a){case 1:if(b){vgadump();}}switch(c){case 2:vgadump();}}

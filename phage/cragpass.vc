@@ -1,0 +1,64 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+}
+event { stext(0, "Crag Mountain", "Furriers ---->", "<---- Cave of Roaches"); }
+event { stext(0, "Furriers", "Visitors welcome.", ""); }
+event { mapswitch("bugdung.map", 47, 73, 0); }
+event { mapswitch("overland.map", 52, 90, 0); }
+event
+{
+  stext(
+      0,
+      "Ya know, I went into the",
+      "roach dungeon, and was",
+      "tryin to smash all the");
+  stext(
+      0,
+      "nasty bugs! But I saw a",
+      "ghost in there, by the",
+      "eastern wall! I ran so");
+  stext(0, "quick, I never got to", "smush them all!", "");
+}
+event
+{
+  stext(
+      0,
+      "If you want to get through",
+      "to Frog Pond, you have to",
+      "get through the roach");
+  stext(
+      0,
+      "dungeon. But there was",
+      "a cave-in in there a few",
+      "years back, so I don't");
+  stext(
+      0,
+      "know how you'll get past...",
+      "I also met this weird",
+      "coyote a long time ago.");
+  stext(
+      0,
+      "What was his name...?",
+      "Can something. Anyways,",
+      "he made it through.");
+  stext(
+      0,
+      "He said there were twelve",
+      "bugs you had to crush. He",
+      "snuck past their mom to hit");
+  stext(
+      0,
+      "the switch, and got out.",
+      "He said that the mom is one",
+      "scary bug!");
+  if (char(5))
+  {
+    stext(
+        5,
+        "That sounds like my uncle,",
+        "Canteen the explorer! He",
+        "disappeared years ago!");
+  }
+}

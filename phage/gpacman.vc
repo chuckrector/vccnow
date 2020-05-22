@@ -1,0 +1,140 @@
+event
+{
+  fadein(1);
+  if (flags(114) < 4)
+  {
+    alterftile(46, 10, 29, 0);
+    alterftile(28, 10, 29, 0);
+    alterftile(37, 1, 29, 0);
+    alterftile(37, 19, 29, 0);
+  }
+}
+event
+{
+  alterftile(28, 10, 0, 0);
+  alterftile(35, 8, 29, 0);
+  flags(114)++;
+  if (flags(114) == 4)
+  {
+    chainevent(10);
+  }
+  changezone(28, 10, 0);
+}
+event
+{
+  alterftile(46, 10, 0, 0);
+  alterftile(39, 12, 29, 0);
+  flags(114)++;
+  if (flags(114) == 4)
+  {
+    chainevent(10);
+  }
+  changezone(46, 10, 0);
+}
+event
+{
+  alterftile(37, 1, 0, 0);
+  alterftile(39, 8, 29, 0);
+  flags(114)++;
+  if (flags(114) == 4)
+  {
+    chainevent(10);
+  }
+  changezone(37, 1, 0);
+}
+event
+{
+  alterftile(37, 19, 0, 0);
+  alterftile(35, 12, 29, 0);
+  flags(114)++;
+  if (flags(114) == 4)
+  {
+    chainevent(10);
+  }
+  changezone(37, 19, 0);
+}
+event
+{
+  for (x, 6, 10, 1)
+  {
+    specialframe(x) = 20;
+  }
+  stext(0, "Boo!", "", "");
+  for (x, 6, 10, 1)
+  {
+    specialframe(x) = 0;
+  }
+  alterftile(46, 10, 29, 0);
+  alterftile(28, 10, 29, 0);
+  alterftile(37, 1, 29, 0);
+  alterftile(37, 19, 29, 0);
+  alterftile(39, 8, 0, 0);
+  alterftile(35, 8, 0, 0);
+  alterftile(35, 12, 0, 0);
+  alterftile(39, 12, 0, 0);
+  changezone(46, 10, 2);
+  changezone(28, 10, 1);
+  changezone(37, 1, 3);
+  changezone(37, 19, 4);
+  flags(114) = 0;
+}
+event
+{
+  if (flags(114) < 4)
+  {
+    warp(37, 16, 0);
+  }
+}
+event { warp(37, 26, 0); }
+event
+{
+  if (flags(114) == 5)
+  {
+    stext(0, "You're really good! I have", "nothing left to give you...", "");
+  }
+  if (flags(114) == 4)
+  {
+    stext(
+        0,
+        "Wow! You got all four orbs!",
+        "I know when I'm beat! Here,",
+        "take this!");
+    giveitem(36);
+    entity.locx(5) = 0;
+    entity.locy(5) = 41;
+    flags(114)++;
+  }
+  if (flags(114) < 4)
+  {
+    stext(
+        0,
+        "Hi! Do you think you can beat",
+        "us at Capture the Flag?",
+        "If you want to try, just head");
+    stext(0, "over to the 'T-Square.'", "", "");
+    entity.locx(5) = 0;
+    entity.locy(5) = 41;
+  }
+}
+event
+{
+  if (flags(114) < 4)
+  {
+    flags(114) = 0;
+  }
+  if (flags(180) == 0)
+  {
+    mapswitch("damcity.map", 123, 36, 0);
+  }
+  if (flags(180) > 0)
+  {
+    mapswitch("damcity2.map", 123, 36, 0);
+  }
+}
+event
+{
+  entity.locx(5) = 37;
+  entity.locy(5) = 29;
+  stext(0, "Congratulations!", "", "");
+  warp(37, 28, 0);
+}

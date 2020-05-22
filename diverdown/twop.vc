@@ -1,0 +1,511 @@
+event
+{
+  if (flags(150))
+  {
+    specialframe((5)) = 29;
+    alterbtile(183, 188, 679, 1);
+    alterbtile(184, 188, 680, 1);
+    entity.locy((5)) = 185;
+  }
+  if (!flags(152))
+  {
+    changezone(194, 184, 13);
+    changezone(194, 185, 13);
+    changezone(194, 186, 13);
+  }
+  if (!flags(153))
+  {
+    changezone(122, 187, 13);
+    changezone(123, 187, 13);
+    changezone(124, 187, 13);
+  }
+  if (flags(154)) {}
+  if (flags(155))
+  {
+    changezone(116, 158, 49);
+  }
+  if (flags(119) > 1)
+  {
+    alterftile(162, 117, 177, 2);
+    alterftile(163, 117, 178, 2);
+    alterbtile(162, 118, 673, 0);
+    alterbtile(163, 118, 674, 0);
+    changezone(162, 118, 0);
+    changezone(163, 118, 0);
+  }
+  if (flags(158))
+  {
+    changezone(176, 158, 49);
+  }
+  volume = 100;
+  enforceanimation();
+  redraw();
+}
+event
+{
+  warp(locx, locy - 1, 1);
+  calleffect(
+      2, 2, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+  warp(locx, locy + 2, 1);
+  calleffect(
+      2, 3, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+  warp(locx, locy - 1, 1);
+}
+event
+{
+  calleffect(
+      2, 2, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+}
+event
+{
+  calleffect(
+      2, 3, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+}
+event { calleffect(3); }
+event { calleffect(4); }
+event { calleffect(5); }
+event { calleffect(6); }
+event { calleffect(7, 251, 4, 5); }
+event { calleffect(7, 258, 4, 5); }
+event
+{
+  warp(locx - 1, locy, 1);
+  calleffect(
+      2, 4, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+  warp(locx + 2, locy, 1);
+  calleffect(
+      2, 5, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+  warp(locx - 1, locy, 1);
+}
+event
+{
+  calleffect(
+      2, 4, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+}
+event
+{
+  calleffect(
+      2, 5, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+}
+event { text(0, "The doors are locked.", "", ""); }
+event
+{
+  face((0)) = 0;
+  mapswitch("twoppass.map", 46, 5, 0);
+}
+event { banner("Welcome Hall", 1); }
+event { chainevent(18, 55, 112); }
+event { chainevent(18, 165, 112); }
+event
+{
+  drawparty = 0;
+  warp(var(0), var(1), 0);
+  face((0)) = 0;
+  drawparty = 1;
+  partymove("D1");
+}
+event
+{
+  if (flags(150))
+  {
+    return;
+  }
+  flags(150)++;
+  partymove("X182 Y187");
+  layervc = 1;
+  vcputpcx("10lo.pcx", 60, 20);
+  text(
+      12,
+      "Welcome in! It is always good",
+      "to see visitors. May I ask",
+      "what business brings you here?");
+  text(1, "Err, it is simple really.", "I come on business for Anja.", "");
+  text(12, "Anja!", "", "");
+  entitymove(5, "R7 D5");
+  while (movecode(5))
+  {
+    wait(10);
+  }
+  partymove("X183 F2");
+  entitymove(5, "L4");
+  while (movecode(5))
+  {
+    wait(10);
+  }
+  text(12, "And how is Emil doing?", "", "");
+  text(
+      1,
+      "Oh, just fine. The thing is,",
+      "Anja needed a copy of the",
+      "Neutral Right-of-Way Treaty.");
+  text(12, "Wha- ... did he say that?", "", "");
+  vcputpcx("11lo.pcx", 240, 30);
+  text(1, "Straight from his mouth.", "", "");
+  text(12, "Wh- where did you say you were", "from again?", "");
+  text(1, "I didn't. Listen, Anja needs", "these papers quickly.", "");
+  text(12, "Oh, I'm s-sorry.", "", "");
+  text(12, "My, that IS interesting-", "                 ...armor...", "");
+  text(1, "    . . .", "", "");
+  text(
+      12,
+      "Yes, well, I'll definitely",
+      "have that copy for you.",
+      "           Wait right here.");
+  text(1, "(Hmm, a little too easy.)", "", "");
+  face((0)) = 0;
+  vcputpcx("12lo.pcx", 240, 30);
+  entitymove(5, "D1 L2");
+  while (movecode(5))
+  {
+    wait(10);
+  }
+  text(1, "WAIT!!!", "", "");
+  text(12, "Ahhh!", "", "");
+  vcputpcx("13lo.pcx", 20, 20);
+  wait(100);
+  vcputpcx("14lo.pcx", 20, 100);
+  wait(200);
+  text(12, ".....mmmm-", "", "");
+  specialframe((5)) = 29;
+  alterbtile(183, 188, 679, 1);
+  alterbtile(184, 188, 680, 1);
+  entity.locy((5)) = 185;
+  text(1, "So much for politics. Now we", "play this the hard way.", "");
+  layervc = 0;
+  vcclear();
+}
+event
+{
+  text(0, "This man is dead and has no", "important belongings.", "");
+  text(1, "Just as useless as when he", "was alive . . .", "");
+}
+event
+{
+  if (!facing(1))
+  {
+    return;
+  }
+  text(0, "This torch is lit.", "", "");
+}
+event { text(0, "These plants are kept as", "they should be.", ""); }
+event { specialframe((0)) = 0; }
+event
+{
+  if (curzone == 23)
+  {
+    specialframe((0)) = 22;
+    return;
+  }
+  text(1, "This bench doesn't look.", "very comfortable.", "");
+}
+event
+{
+  if (curzone == 24)
+  {
+    calleffect(15, 0);
+    return;
+  }
+  text(0, "This is a handcrafted stool.", "", "");
+}
+event { text(0, "This table is solid hardwood.", "", ""); }
+event { text(0, "A functional weapons rack,", "if not a pretty one.", ""); }
+event { text(0, "Nice, plush beds again.", "", ""); }
+event
+{
+  text(0, "These training dummies are", "filled with wood shavings.", "");
+}
+event
+{
+  if (!facing(1))
+  {
+    return;
+  }
+  text(0, "This torch is unlit.", "", "");
+  text(1, "I guess no one's supposed to", "be here now.", "");
+}
+event { text(1, "These chairs look a bit", "uncomfortable.", ""); }
+event
+{
+  text(0, "The statue of Twilight,", "symbolizing balance and", "order.");
+}
+event { text(0, "A Twilight Royalty Banner.", "", ""); }
+event { text(0, "This portcullis is shut tight.", "", ""); }
+event { text(0, "Ink and a quill used for", "documentation.", ""); }
+event { text(0, "A couple of low-grade", "liquors.", ""); }
+event
+{
+  text(1, "This is a warrant.", "", "");
+  text(
+      0,
+      "Twilight Infantry:",
+      "Be advised of a perpetrator in",
+      "our midst. A man from the");
+  text(
+      0,
+      "Northern Region wearing odd",
+      "armor has broken into our",
+      "castle and murdered some of");
+  text(
+      0,
+      "our troops. One of this man's",
+      "team is dead, but it is not",
+      "yet known if he is alone.");
+  text(
+      0,
+      "This man is an enemy to our",
+      "order, and should be viewed",
+      "as a thief, assassin, and spy.");
+  text(
+      0,
+      "The return of his carcass will",
+      "be rewarded with property.",
+      "Do as you will.");
+  text(0, "              Your king,", "", "                   Bester.");
+  text(
+      1,
+      "Word spreads like wildfire.",
+      "I'd better hurry and leave",
+      "this cursed region.");
+}
+event
+{
+  text(
+      0,
+      "Dear Paul of Emil,",
+      "The recent threat of Hyde",
+      "wolves is at an end. It");
+  text(
+      0,
+      "still is not known how those",
+      "beasts managed to penetrate",
+      "our walls, but rest assured");
+  text(
+      0,
+      "that it is once again safe",
+      "to go hunting. We are sorry",
+      "for the loss of your son.");
+  text(0, "             Yours truly,", "", "               Davenport");
+  text(
+      1,
+      "Monsters within the capital?",
+      "How fierce could these wolves",
+      "actually be?");
+  text(1, "No decent hunter should find", "himself slain by dogs.", "");
+  text(1, "Davenport must be the nervous", "wreck I just killed.", "");
+}
+event
+{
+  text(0, "These plants are kept as", "they should be.", "");
+  if (flags(151) == 1)
+  {
+    text(
+        1,
+        "Well, what do you know? This",
+        "is a Pey plant. The wolves",
+        "couldn't get to this one.");
+    flags(151) = 2;
+    soundeffect(7);
+    banner("Picked Leaves!", 1);
+  }
+}
+event
+{
+  text(
+      0,
+      "This counter top is about as",
+      "sanitary as you'd expect of",
+      "a bunch of grunts.");
+}
+event { text(0, "This is a simple oven used", "for baking and roasting.", ""); }
+event { text(0, "This is an old-style kettle", "used for stewing.", ""); }
+event { text(0, "This is a flour sack.", "", ""); }
+event { text(0, "Dirty drink glasses are", "stacked up, ready for use.", ""); }
+event
+{
+  text(0, "These are various herbs and", "roots ground up.", "");
+  text(
+      1,
+      "Kind of like a soldier's",
+      "all-purpose spice. I can't",
+      "even tell what's in it.");
+}
+event
+{
+  text(
+      0,
+      "   --THE END OF THE LINE--",
+      "  Walk left to end Preview.",
+      "  Walk right to continue.");
+}
+event { exit(); }
+event
+{
+  text(
+      1, "Ahh, a weapon!", "Primitive, but my melee skills", "aren't lacking.");
+}
+event
+{
+  if (flags(154))
+  {
+    return;
+  }
+  flags(154)++;
+  if (locy < 164)
+  {
+    face((6)) = 1;
+    partymove("X122 Y161");
+  }
+  if (locy > 164)
+  {
+    partymove("X122 Y168");
+  }
+  text(5, "What in the hell?", "", "");
+  text(5, "Who are you?", "", "");
+  text(1, "Don't you guys read up", "on Bester's orders?", "");
+  text(5, "What's the king have to do", "with you?", "");
+  text(
+      1,
+      "Do I have to spell it out?",
+      "I have a bounty on my head",
+      "because I'm dangerous.");
+  text(
+      1,
+      "Now, you're not a post guard.",
+      "You could probably be of use",
+      "to me. I need a paper.");
+  text(
+      5,
+      "You think that because I'm a",
+      "little older you could take me",
+      "on? Force your way upstairs?");
+  text(
+      5,
+      "Sure, I got the key. But I",
+      "also got technique, boy! I'm",
+      "the trainer of these troops.");
+  text(
+      5,
+      "And I'm taking you out. Not",
+      "because of the bounty, but",
+      "cause you barged into my room.");
+}
+event { text(0, "There is nothing of value", "in this drawer.", ""); }
+event
+{
+  text(1, "Well, here's that key he", "was rambling about.", "");
+  changezone(116, 158, 49);
+  soundeffect(7);
+  giveitem(1);
+  flags(155) = 1;
+}
+event
+{
+  if (flags(156))
+  {
+    return;
+  }
+  flags(156)++;
+  partymove("R1 Y163 X170");
+  face((7)) = 3;
+  text(11, "      Aaaahhh!", "", "");
+  text(1, "Listen, lady-", "", "");
+  entitymove((7), "R4 U9 F0");
+  wait(50);
+  partymove("R3 U3 R5");
+  face((0)) = 1;
+  face((7)) = 0;
+  text(11, "Please don't hurt me!", "", "");
+  text(1, "That all depends on you.", "", "");
+  text(
+      11,
+      "Please, take my gold from my",
+      "dresser. I'll tell you all you",
+      "wish. But please spare me!");
+}
+event
+{
+  text(11, "What do you want to know?", "", "");
+  textmenu(50, 40, 157, 1, "Identity?", "Treaty?", "Treasure?");
+  if (flags(157) == 0)
+  {
+    text(1, "Just stay quiet.", "", "");
+  }
+  if (flags(157) == 1)
+  {
+    text(
+        11,
+        "I'm just the maid. And a bad",
+        "one at that. All the guards",
+        "call me Shaky because I'm");
+    text(
+        11,
+        "old and uncoordinated. I'm",
+        "useless. There's really no",
+        "reason to kill me.");
+  }
+  if (flags(157) == 2)
+  {
+    text(
+        11,
+        "I swear I don't know what you",
+        "speak of. No one treats me with",
+        "respect around here, much less");
+    text(11, "tells me anything important.", "", "");
+    text(
+        1,
+        "It's a document held in this",
+        "outpost that I need. Where do",
+        "they keep things like that?");
+    text(
+        11,
+        "Forgive me! The papers! They",
+        "keep those papers upstairs.",
+        "But there are many guards up");
+    text(11, "there. And the papers are", "guarded. You can't-", "");
+    text(1, " . . . .", "", "");
+    text(11, "I -  I mean. . .", "It would be hard for you to-", "");
+    text(1, " . . . .", "", "");
+    text(
+        11,
+        "I'm sorry. There are many of",
+        "them up there. That's where",
+        "they sleep.");
+  }
+  if (flags(157) == 3)
+  {
+    text(
+        11,
+        "There's really no treasure",
+        "here. They keep some items in",
+        "the Welcome Hall closet.");
+  }
+  x = random(1, 4);
+  if (x == 1)
+  {
+    text(11, "Thank you for sparing my", "old, shaky bones!", "");
+  }
+  if (x == 2)
+  {
+    text(11, "Oh, bless you for not", "violently murdering me!", "");
+  }
+  if (x == 3)
+  {
+    text(
+        11,
+        "If you didn't have a blade",
+        "I would kiss you for not",
+        "stabbing me with that blade!");
+  }
+  if (x == 4)
+  {
+    text(11, "Many thanks for letting an", "old woman live.", "");
+  }
+}
+event
+{
+  changezone(176, 158, 49);
+  soundeffect(7);
+  givegp(150);
+  banner("Got 150 Gold!", 1);
+  flags(158) = 1;
+}

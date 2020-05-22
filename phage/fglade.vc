@@ -1,0 +1,174 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(141) = 0;
+  flags(142) = 0;
+  flags(143) = 0;
+  flags(144) = 0;
+  if (!flags(111))
+  {
+    entity.locx(5) = 25;
+    entity.locy(5) = 33;
+    alterftile(24, 33, 327, 0);
+    alterftile(25, 33, 328, 1);
+    alterftile(26, 33, 329, 1);
+    stext(0, "HAALLP! HAAAAALP! ...", "... ... ...", "... Anybody?");
+    partymove("U10R20U1");
+    wait(150);
+    stext(
+        4,
+        "Hey! You there! Could you get",
+        "me out from under this thing?",
+        "... ... Please?");
+    if (item(5))
+    {
+      stext(1, "No problem! I'll just use my", "Fury Tongue!", "");
+    }
+    if (!item(5))
+    {
+      stext(1, "I'll have to use brute force", "to move it...", "");
+    }
+    stext(1, "Hiyeeah!", "", "");
+    timer = 0;
+    while (timer < 100)
+    {
+      palettemorph(63, 63, 0, 100 - timer, 63);
+      alterftile(24, 33, 0, 0);
+      alterftile(25, 33, 0, 0);
+      alterftile(26, 33, 0, 1);
+    }
+    stext(4, "Wow! Thanks! I thought I'd", "never get out from there!", "");
+    stext(
+        1,
+        "Surely someone else would",
+        "have come along and helped you",
+        "out...");
+    stext(
+        4,
+        "Well, I'm usually the only",
+        "beaver who comes out this far",
+        "from the dam... And that big");
+    stext(4, "frog who came by a few minutes", "ago just laughed at me.", "");
+    stext(
+        1,
+        "So... Bull's looking for the",
+        "Seed, too... I wonder if he",
+        "knows where it's hidden?");
+    stext(4, "What are you talking about?", "", "");
+    stext(
+        1,
+        "I'm on a quest! I'm going to",
+        "save my town from certain",
+        "destruction!");
+    stext(
+        4, "Uhhh... yeah. Sure, kid. Why", "don't you start from the top?", "");
+    stext(0, "(So Sam tells the beaver his", "story...)", "");
+    stext(
+        4,
+        "I see... Well, I gotta tell",
+        "you something, Sam, and I",
+        "don't think you're gonna");
+    stext(4, "like it: You don't stand a", "chance out there.", "");
+    stext(
+        1,
+        "Well, I've got to try! All of",
+        "Frog Pond is depending on me!",
+        "");
+    stext(
+        4,
+        "I'll tell you what: Why don't",
+        "I go with you? I can at least",
+        "bring some measure of common");
+    stext(4, "sense to this whole affair...", "", "");
+    stext(
+        1,
+        "Well, that'd be great, but",
+        "why would you do that? Don't",
+        "you have other things to do?");
+    stext(
+        4,
+        "I'm going to help you because",
+        "I like you. You may be far too",
+        "naive and optimistic for your");
+    stext(
+        4,
+        "own good, but you've got a",
+        "good heart, and I'd hate to",
+        "see you get killed... Plus");
+    stext(4, "I wouldn't mind seeing the", "world myself!", "");
+    specialframe(0) = 20;
+    wait(100);
+    specialframe(0) = 0;
+    face(0) = 1;
+    stext(
+        1,
+        "You mean all that talk and",
+        "you've never been outside the",
+        "valley either?");
+    stext(
+        4,
+        "Nope! But I still think you",
+        "need all the help you can get!",
+        "And I bet I know more than you");
+    stext(4, "do!", "By the way, you can call me", "Rikk!");
+    banner("Rikk joins!", 1);
+    addcharacter(4);
+    entity.locx(5) = 1;
+    entity.locy(5) = 1;
+    flags(111) = 1;
+  }
+}
+event { mapswitch("damfor.map", 57, 36, 0); }
+event
+{
+  if (flags(180) == 0)
+  {
+    mapswitch("damcity.map", 25, 55, 0);
+  }
+  if (flags(180) > 0)
+  {
+    mapswitch("damcity2.map", 25, 55, 0);
+  }
+}
+event
+{
+  if (flags(141) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(141) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 491, 1);
+    changezone(x, y, 0);
+  }
+}
+event { chainevent(3, 2); }
+event { chainevent(3, 38); }

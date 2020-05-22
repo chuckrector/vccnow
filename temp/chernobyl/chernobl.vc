@@ -1,0 +1,526 @@
+#include globals.h
+
+event // 0
+{
+a=bit(7999,1);
+ Outside()=0;
+ VCLayerWrite=1;
+ VCClear();
+ LayerVC=1;
+ DrawParty=1;
+ Layer1Trans=0;
+ VCCenterText(0,"Town of Chernobyl");
+ HookTimer(4);
+ Flags[7004]=0;
+ ReDraw();
+}
+
+event // 1 Leave town
+{
+ VCClear(); LayerVC=0;
+ MapSwitch("outside.map",Flags[6001],Flags[6002],0);
+ if (a && b) a=a;
+}
+
+event // 2 into a building
+{
+ flags[7004]=0;
+ flags[7002]=locX; flags[7003]=locY;
+ Warp(var(0),var(1),0);
+}
+
+event // 3 out of a building
+{
+ warp(flags[7002],flags[7003]+1,0);
+}
+
+event // 4 removes the banners after a few seconds
+{
+ flags[7004]++;
+ if (flags[7004]>100)
+  {
+   VCClearRegion(0,0,319,16);
+   HookTimer(0);
+  }
+}
+
+// following events correspond with the numbered entities
+event // entity 5 -- the old man
+{
+ If (!Flags[1])
+  {
+   Flags[1]=1;
+   SmallText(10,170,"Leave me the fuck alone!","I ain't got nuthin'!");
+   VCSpc(8,20,1,0);
+   SmallText(40,20,"Who the hell pissed",
+                   "in your Corn Flakes(tm)?!");
+   VCClear();
+
+   SmallText(20,150,"You're from the other side",
+                    "too! Welcome to the club",
+                    "then, ya poor bastard");
+
+   VCSpc(50,30,1,0);
+   SmallText(30,10,"What? Where am I?",
+                   "What's wrong with all",
+                   "these people?");
+   VCClear();
+   SmallText(50,140,"This is Chernobyl. The melting",
+                    "pot of all the nutters and",
+                    "wackos in this world.");
+   SmallText(5,145,"Occasionally, someone winds up 'ere",
+                   "with their sanity. Some even manages",
+                   "to keeps it for quite some time.");
+   SmallText(5,145,"The sane ones tend to group",
+                   "togeather, ya tend to stay",
+                   "normal longer that way.");
+
+   VCSpc(50,30,1,0);
+   SmallText(20,10,"shit",
+                   "How do I get out?");
+   VCClear();
+
+   SmallText(50,140,"You think I'd be 'ere",
+                    "if you could get out?");
+   SmallText(90,150,"Ha!");
+
+   SmallText(40,150,"If you need a rest, though",
+                    "You can talk to the innkeeper.");
+
+  }
+  SmallText(10,160,".....");
+}
+
+Event // entity 6 -- this guy is a prick
+{
+ z=3; // how many beats he's gonna get
+
+ Text(16,"You suck!","","");
+ If (LocY!=2)
+   {
+    PartyMove("Y3 X7 Y2");
+   }
+ If (LocX!=7)
+   {
+    PartyMove("Y3 X7 Y2");
+   }
+Start:
+ SetFace(1,3);
+ For (a,1,z,1)
+   {
+    SpecialFrame(0)=28;
+    SpecialFrame(6)=9;
+    Wait(10);
+    SpecialFrame(6)=29;
+    SpecialFrame(0)=29;
+    SoundEffect(20);
+    Wait(1);
+    SpecialFrame(0)=0;
+    Wait(10);
+   }
+ EntityMoveScript(6,4);
+
+ a=random(1,7);
+ if (a=5)
+   {
+    SText(1,"This ass kicking was brought",
+            "to you by Bob.","");
+    SText(1,"Please call us again the next",
+            "time you want your ass kicked","");
+    SText(1,"Remember, here at Bob's ass",
+            "kicking...",
+            "``We Kick Ass!''");    
+    SText(1,"Next time, remember to ask for",
+            "our special birthday discounts",
+            "Have a nice day!");
+    Return;
+   }
+ If (a>5)
+   {
+    SText(1,"Hey!","","");
+    SText(1,"This is fun!","","");
+    z=Random(6,12);  // how many beats this guy gets...
+    Goto Start;
+   }
+ Switch(a)
+  {
+//                 123456789012345678901234567890
+   Case 1:SText(1,"I'm sorry, I mistook you for",
+                  "someone else","");
+   Case 2:SText(1,"Excuse me?",
+                  "Did you say something to me?","");
+   Case 3:SText(1,"HAHAHAHAHAha!!!","","");
+   Case 4:SText(1,"Thanks, I needed to do that","","");
+  }
+}
+
+event // entity 7 -- the DW3 guy
+{
+ SmallText(10,10,"Excuse me, I seem to be",
+                 "stuck in the wrong game.");
+}
+
+event // entity 8 -- dizzy person
+{
+ SmallText(50,10,"...so dizzy...","..gonna...pass...out");
+}           
+
+event // entity 9 -- paranoid guy
+{
+ if (Speed(9)<7)
+  {
+   SmallText(10,10,"They're watching!");
+   SmallText(20,20,"THEY'RE WATCHING YOU",
+                   "FOOL! THEY'RE GONNA GET ME!");
+   SmallText(20,30,"RUN FOR YOUR LIFE!!!!",
+                   "AAAAAAAAAAAAAAAAAAAAHHHHH",
+                   "HHHHHHHHHHHHHHH!!!!!!!!!!");
+   Speed(9)++;
+   Return;
+  }
+ x=Random(0,100);
+ y=Random(0,150);
+ SmallText(x,y,"AaaaAAaAAAAAAAAAAAAaaaAaAAaAa",
+               "AAaAAAaAAAaAAAAaaAHHHHHhHHHHH",
+               "HhHhHHHhHhhhHHHhHHHh!!!!!!!!!");
+ if (Entity.LocY(9)>60)
+  {
+   While(Entity.Moving(9)) Wait(10);
+   MoveCode(9)=0;    ObsMode(9)=1;
+   EntityMove(9,"X15 Y69");
+   Wait(10); While (MoveCode(9)=4) Wait(10);
+
+   Entity.LocX(9)=29;
+   Entity.LocY(9)=12;
+   Entity.Step(9)=4;
+   MoveCode(9)=3;
+   ObsMode(9)=0;
+  } 
+}     
+
+Event // entity 10 -- Innkeeper
+{
+ if (!Flags[1])
+  {
+   SmallText(0,130,"Sorry, still cleaning",
+                   "up after the last couple",
+                   "of slobs who were here.",
+                   "Come back later.");
+   Return;
+  }
+ if (Flags[1]=1 AND !Flags[3])
+  {
+   Flags[3]=1;
+   SmallText(0,140,"What's this here? Someone",
+                   "new? Welcome, my friend.",
+                   "I'm Billy Bob. I run this",
+                   "establishment.");   
+
+   v=Volume;
+   for (x,0,63,1)
+    {
+     PaletteMorph(0,0,0,0,63-x);
+     if (x%5=0) Wait(1);
+     if (Volume>0) Volume--;
+    }
+   SoundEffect(32);
+   Wait(100);
+   HealAll();
+   for (x,0,63,1)
+    {
+     PaletteMorph(0,0,0,0,x);
+     if (x%5=0) Wait(1);
+     if (v>x) Volume++;
+    }
+   ReDraw();
+   Volume=v;
+   return;
+  }
+ Prompt(0,"MORE WOOD! MORE WOOD!",
+          "IT'S TOO COLD!! Oh! Hi!",
+          "You can stay for 20 GP",7998,"Yeah","Uh...");
+ If (Flags[7998])
+  {
+   Return;
+  }
+ If (gp<20)
+   {
+    Text(0,"Hit the road, you",
+           "moocher before I",
+           "throw you in the fire!");
+    Return;
+   }
+ TakeGP(20);
+
+ v=Volume;
+ for (x,0,63,1)
+  {
+   PaletteMorph(0,0,0,0,63-x);
+   if (x%5=0) Wait(1);
+   if (Volume>0) Volume--;
+  }
+ SoundEffect(32);
+ Wait(100);
+ HealAll();
+ for (x,0,63,1)
+  {
+   PaletteMorph(0,0,0,0,x);
+   if (x%5=0) Wait(1);
+   if (v>x) Volume++;
+  }
+ ReDraw();
+ Volume=v;
+}
+
+event // entity 11 -- the weapons dealer
+{                                       
+/* Prompt(0,"I have some neat weapons of",
+            "mass destruction at my",
+            "disposal.  Want some?",
+          7998,"YEAH!","I am a fuck-up.");
+ if (Flags[7998])
+   {
+    Text(0,"You're one of those pansy",
+           "ass animal sympathizers,",
+           "aren't you?");
+    Return;
+   }*/
+ DrawTextBox(25,105,27,3);
+   VCText(25,105,"I have some neat weapons of");
+   VCText(25,115,"mass destruction at a great");
+   VCText(25,125,"price. Wanna look?");
+   TextMenu(10,40,7998,1,"Hell, yeah!","I suck and I don't want weapons.");
+
+ x=var(0); y=var(1); w=var(2)*8+12+x; h=var(3)*8+y+14;
+
+ EraseTextBox(25,105,27,3);
+
+ if (Flags[7998]!=1)
+  {
+   SmallText(30,10,"Get outta my sight, you pansy",
+                   "ass animal rights activist!");
+   Return;
+  }
+
+ DrawTextBox(110,140,22,3);
+   VCText(110,140,"Finally! A real man!");
+   VCText(110,150,"Go fuck 'em up for me,");
+   VCText(110,160,"ya hear?");
+
+   Shop(11,12,13,14,15,16);
+
+ VCClear();
+}
+
+event // entity 12 -- the Item guy
+{
+ Prompt(0,"Want some supplies?","","",7998,
+          "What the heck",
+          "Nah");
+ if (Flags[7998])
+   {Return;}
+ Shop(1,2,3,4,5,6,7,8,9);
+}
+
+event // entity 13 -- da boyd
+{
+ SText(0,"Polly want some beans!","","");
+ SText(0,"Polly want some beans!","","");
+ SText(0,"Skwwaaaaaaawwwk!","","");
+}
+
+Event // Entity 14 -- Mac Daddy Magic
+{
+ if (!Flags[4])
+  {
+   SmallText(30,120,"Yo! Whuzzup Homies! I'm Mac Daddy",
+                    "Magic. I run this pathetic excuse",
+                    "for a magic school!");
+   SmallText(50,100,"this is all tha magic advice",
+                    "I have 'cause tha game ain't",
+                    "done yet:");
+   SmallText(0,110,"Some spells won't work in combat.",
+                   "This's cuz the And-man's still groovin'",
+                   "with the code, if ya catch m' rythim");
+   VCSpc(0,15,1,0);
+   SmallText(40,10,"What the fuck are","you talking about?");
+   VCClear();
+   SText(0,"Oh, in English: some magic",
+           "won't work in combat because",
+           "the game is not finished yet.");
+   VCSpc(10,100,1,0);
+   SmallText(5,132,"Oh...");
+   VCClear();
+   SmallText(20,10,"Oh, I almost forgot.",
+                   "'You noticed an incision",
+                   "in the back o' yo neck?");
+
+   VCSpc(0,100,1,0);
+   SmallText(0,132,"You lost me again.");
+   VCClear();
+   SmallText(40,100,"Most o' da people around here",
+                    "had an implant installed before",
+                    "dey joined da posse.");
+   VCSpc(20,118,1,0);
+   SmallText(0,150,"I remember hearing",
+                   "some doctors talking",
+                   "about an implant.");
+
+   SmallText(10,160,"They screwed up their paperwork",
+                    "and didn't get to me.");
+   VCClear();
+
+   SmallText(40,100,"Lucky, man.");
+   VCSpc(10,100,1,0);
+   SmallText(0,132,"What about it?");
+   VCClear();
+   SmallText(50,90,"It's what drives some of",
+                   "the people around here",
+                   "nuts.");
+   VCSpc(10,80,1,0);
+   SmallText(30,112,"Glad I'm missing it!");
+   VCClear();
+   Flags[4]=1;
+   Return;
+  }
+ Smalltext(40,10,"Hey man! Howz it goin'?");
+}
+
+event // entity  15 -- this guy stares at the trees all day
+{
+ SmallText(100,10,"They all line up..",
+                  "this can't be!",
+                  "How....?");
+}
+event // entity  16 -- Homonculus
+{
+ SText(0,"HELP!",
+         "Let me out!","");
+ SText(0,"I'm the pet homonculus",
+         "the magic students poke",
+         "me with pointed shards of");
+ SText(0,"glass and test their",
+         "magic stuff on me",
+         "LET ME OUTTA HERE!");
+ Text(1,"Sweet!","","");
+ if (Char(2))
+  {
+   Text(2,"I wanna Homonculus",
+          "can we keep him?",
+          "This glass thing sounds fun");
+   if (char(3))
+    {
+     Text(3,"No Way!",
+            "All it does is whine!","");
+     Text(1,"Let's just poke it for a minute","and see if it's worth it.","");
+     SText(0,"AAAAAUUUUUUUUGGGGGGHHHH!!!","","");
+     SText(2,"HAHAHAhahAHHAhaHahaha!","","");
+     SText(1,"HahahaHAhahAHahAhahahA!!!","","");   
+     SText(3,"HAHAHAHAHAhahahahaHahahah!","","");
+     Text(1,"Maybe we should get one",
+            "in a soundproof jar?","");
+     text(3,"Let's get one later",
+            "We have other stuff",
+            "to do.");
+    }
+   }
+
+}
+event // entity  17 humble peasant
+{
+ SText(0,"I'm looking for my leg.","have you seen it?","");
+ SText(1,"!!!","I gotta get outta here!","");
+}
+
+event // entity 18 avid magic student
+{
+ Text(0,"Hey! Did you know you can",
+        "Use your implant to do",
+        "magic?");
+ Text(1,"Didn't get one.","","");
+ Text(0,"Really! You can have",
+        "mine! I'll go and get",
+        "my scalpul!");
+ Text(1,"Uh, no thanks","","");
+}
+
+event // entity 19
+{}
+event // entity 20
+{}
+event // entity 21
+{}
+event // entity 22 
+{}
+event // entity 23 
+{}
+event // entity 24 
+{}
+event // entity 25 
+{}
+event // entity 26 
+{}
+event // entity 27 
+{}
+event // entity 28 
+{}
+event // entity 29 
+{}
+event // entity 30
+{
+}
+
+event // 31 into the inn
+{
+ VCCenterText(0,"Inn");
+ HookTimer(4);
+ CallEvent(2,15,55);
+}
+
+event // 32 into the weapon shop
+{
+ VCCenterText(0,"Weapon Store");
+ HookTimer(4);
+ CallEvent(2,32,55);
+}
+
+event // 33 into the item shop
+{
+ VCCenterText(0,"Item Store");
+ HookTimer(4);
+ CallEvent(2,50,55);
+}
+
+event // 34 into the magic school
+{
+ VCCenterText(0,"Magic School");
+ HookTimer(4);
+ CallEvent(2,71,56);
+}
+
+event // 35 into house 1 -- the paranoid guy's place
+{
+ CallEvent(2,15,67);
+}
+
+event // 36 into house 2
+{
+}
+
+event // 37 into house 3
+{
+}
+
+event // 38 into house 4
+{
+}
+
+event // 39 into house 5
+{
+}
+
+event // 40 into the secret area
+{
+ VCClear(); LayerVC=0; 
+ MapSwitch("Secret.MAP",0,0,0);
+}

@@ -1,0 +1,2093 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(801) = 1;
+  flags(251) = 0;
+  if (flags(185) == 35)
+  {
+    palettemorph(63, 20, 0, 40, 63);
+    flags(185)++;
+    alterbtile(50, 57, 829, 2);
+    alterftile(58, 55, 0, 2);
+    alterftile(58, 56, 0, 2);
+    alterftile(58, 54, 0, 2);
+    alterbtile(59, 57, 56, 2);
+    alterbtile(59, 58, 55, 2);
+    alterbtile(59, 59, 56, 2);
+    for (x, 46, 48, 1)
+    {
+      alterbtile(x, 50, 77, 2);
+      alterbtile(x, 51, 75, 2);
+      alterbtile(x, 52, 73, 2);
+    }
+    for (x, 54, 56, 1)
+    {
+      alterbtile(x, 50, 77, 2);
+      alterbtile(x, 51, 75, 2);
+      alterbtile(x, 52, 73, 2);
+    }
+    for (x, 53, 55, 1)
+    {
+      alterftile(x, 30, 77, 2);
+      alterftile(x, 31, 75, 2);
+      alterftile(x, 32, 73, 2);
+    }
+    for (x, 47, 49, 1)
+    {
+      alterftile(x, 12, 77, 2);
+      alterftile(x, 13, 75, 2);
+      alterftile(x, 14, 73, 2);
+    }
+    for (x, 55, 57, 1)
+    {
+      alterftile(x, 12, 77, 2);
+      alterftile(x, 13, 75, 2);
+      alterftile(x, 14, 73, 2);
+    }
+    alterbtile(57, 56, 830, 1);
+    alterbtile(57, 60, 830, 1);
+    alterbtile(54, 58, 830, 1);
+    alterbtile(54, 56, 830, 1);
+    alterbtile(48, 56, 830, 1);
+    alterftile(60, 14, 0, 2);
+    alterftile(60, 15, 0, 2);
+    alterftile(60, 16, 0, 2);
+    alterbtile(60, 18, 0, 0);
+    alterbtile(60, 19, 0, 0);
+    alterbtile(60, 20, 0, 0);
+    alterbtile(59, 18, 56, 1);
+    alterbtile(59, 19, 55, 1);
+    alterbtile(59, 20, 56, 1);
+    alterbtile(61, 18, 338, 2);
+    alterbtile(61, 19, 55, 2);
+    alterbtile(61, 20, 56, 2);
+    alterbtile(61, 21, 339, 2);
+    if (char(7))
+    {
+      removecharacter(7);
+    }
+    entity.locx(17) = 51;
+    entity.locy(17) = 58;
+    face(17) = 1;
+    entity.locx(18) = 54;
+    entity.locy(18) = 57;
+    face(18) = 3;
+    entity.locx(19) = 55;
+    entity.locy(19) = 58;
+    face(19) = 3;
+    entity.locx(20) = 56;
+    entity.locy(20) = 59;
+    face(20) = 3;
+    autoon();
+    entity.locx(char(1) + 94) = 49;
+    entity.locy(char(1) + 94) = 59;
+    face(char(1) + 94) = 2;
+    entity.locx(char(4) + 94) -= 1;
+    entity.locy(char(4) + 94) += 1;
+    face(char(4) + 94) = 2;
+    entity.locx(char(3) + 94) += 1;
+    entity.locy(char(3) + 94) += 1;
+    face(char(3) + 94) = 2;
+    entity.locy(char(2) + 94) += 1;
+    face(char(2) + 94) = 2;
+    stext(0, "Retreat!", "", "");
+    entitymove(18, "R4");
+    entitymove(19, "R3");
+    entitymove(20, "R2");
+    wait(80);
+    entity.locx(18) = 0;
+    entity.locx(19) = 0;
+    entity.locx(20) = 0;
+    face(17) = 0;
+    stext(7, "This desk is in my way!", "", "");
+    soundeffect(9);
+    alterftile(51, 58, 0, 2);
+    alterbtile(51, 59, 834, 0);
+    alterbtile(52, 59, 332, 2);
+    layervc = 1;
+    vcputpcx("boost1.pcx", 150, 28);
+    entitymove(17, "D3U3");
+    wait(50);
+    vcclear();
+    layervc = 0;
+    wait(50);
+    soundeffect(11);
+    stext(7, "Unf! Open, damn you!", "", "");
+    entitymove(17, "D3U3");
+    wait(100);
+    soundeffect(11);
+    stext(7, "Rrrgh!", "", "");
+    entitymove(17, "D3U3");
+    wait(100);
+    soundeffect(11);
+    stext(7, "Grrrr!", "", "");
+    stext(3, "The place is on fire! We've", "got to get out of here!", "");
+    stext(2, "Fweep it all! We gotta move!", "", "");
+    entitymove(char(2) + 94, "R5U5R2");
+    entitymove(char(4) + 94, "R6U5R2");
+    entitymove(char(3) + 94, "U1L3U2");
+    entitymove(17, "D3U3");
+    wait(100);
+    soundeffect(11);
+    wait(120);
+    entity.locx(char(2) + 94) = 0;
+    entity.locx(char(4) + 94) = 0;
+    stext(3, "Sam! Come on!", "", "");
+    face(char(1) + 94) = 2;
+    stext(
+        1,
+        "Bull! What are you doing? The",
+        "mansion is on fire! You need",
+        "to go!");
+    stext(
+        7,
+        "You gotta be kiddin' me! I",
+        "ain't goin' nowhere without",
+        "my money, twerp!");
+    entitymove(17, "D3U3");
+    wait(100);
+    soundeffect(11);
+    stext(7, "Firp!", "", "");
+    stext(3, "Come on Sam! We don't have", "time for this!", "");
+    entitymove(char(1) + 94, "D3R2F1");
+    entitymove(char(3) + 94, "D3R7U4R2");
+    wait(320);
+    entity.locx(char(3) + 94) = 0;
+    autooff();
+    removecharacter(3);
+    removecharacter(2);
+    removecharacter(4);
+    movecode(17) = 4;
+    entitymovescript(17, 2);
+  }
+  if (flags(185) == 34)
+  {
+    flags(185)++;
+    autoon();
+    entity.locx(16) = 51;
+    entity.locy(16) = 58;
+    entity.locx(9) = 49;
+    entity.locy(9) = 58;
+    entity.locx(21) = 53;
+    entity.locy(21) = 62;
+    face(21) = 3;
+    entity.locx(10) = 49;
+    entity.locy(10) = 61;
+    face(10) = 2;
+    entity.locx(11) = 53;
+    entity.locy(11) = 61;
+    face(11) = 3;
+    entity.locx(17) = 51;
+    entity.locy(17) = 60;
+    face(17) = 1;
+    entity.locx(12) = 49;
+    entity.locy(12) = 60;
+    face(12) = 2;
+    entity.locx(13) = 53;
+    entity.locy(13) = 60;
+    face(13) = 3;
+    entity.locx(14) = 50;
+    entity.locy(14) = 61;
+    face(14) = 1;
+    entity.locx(15) = 52;
+    entity.locy(15) = 61;
+    face(15) = 1;
+    face(char(1) + 94) = 1;
+    entity.locx(char(4) + 94) -= 1;
+    entity.locy(char(4) + 94) += 1;
+    face(char(4) + 94) = 1;
+    entity.locx(char(3) + 94) += 1;
+    entity.locy(char(3) + 94) += 1;
+    face(char(3) + 94) = 1;
+    entity.locy(char(2) + 94) += 1;
+    face(char(2) + 94) = 1;
+    stext(12, "I will have someone's hide for", "this!", "");
+    entitymove(21, "R2U4F0");
+    wait(110);
+    stext(11, "Falkonner! Where do you think", "you're going?", "");
+    stext(
+        12,
+        "Master Vultris, we must hurry",
+        "and make our escape while the",
+        "guards keep these intruders");
+    stext(12, "busy.", "", "");
+    specialframe(10) = 21;
+    specialframe(11) = 21;
+    specialframe(12) = 21;
+    specialframe(13) = 21;
+    specialframe(14) = 21;
+    specialframe(15) = 21;
+    wait(50);
+    specialframe(10) = 0;
+    specialframe(11) = 0;
+    specialframe(12) = 0;
+    specialframe(13) = 0;
+    specialframe(14) = 0;
+    specialframe(15) = 0;
+    stext(11, "But my money! The safe... I", "can't just leave it...", "");
+    stext(12, "It's your funeral.", "", "");
+    specialframe(16) = 21;
+    wait(50);
+    specialframe(16) = 0;
+    stext(11, "You're right... I'm out of", "here! Infido! Come!", "");
+    layervc = 1;
+    face(9) = 2;
+    entitymove(16, "L1");
+    wait(20);
+    specialframe(10) = 21;
+    specialframe(11) = 21;
+    specialframe(12) = 21;
+    specialframe(13) = 21;
+    specialframe(14) = 21;
+    specialframe(15) = 21;
+    specialframe(21) = 21;
+    specialframe(17) = 21;
+    specialframe(16) = 21;
+    specialframe(9) = 21;
+    specialframe(char(1) + 94) = 21;
+    specialframe(char(2) + 94) = 21;
+    specialframe(char(3) + 94) = 21;
+    specialframe(char(4) + 94) = 21;
+    alterftile(58, 55, 0, 2);
+    alterftile(58, 56, 0, 2);
+    alterftile(58, 54, 0, 2);
+    alterbtile(59, 57, 56, 2);
+    alterbtile(59, 58, 55, 2);
+    alterbtile(59, 59, 56, 2);
+    alterbtile(57, 56, 830, 1);
+    alterbtile(57, 60, 830, 1);
+    flags(112) = random(240, 272);
+    flags(107) = random(0, 48);
+    vcputpcx("spore.pcx", flags(112) + 14, flags(107) + 14);
+    for (x, 1, 24, 1)
+    {
+      vcclear();
+      vcputpcx("boost1.pcx", flags(112), flags(107));
+      flags(112) = random(240, 272);
+      flags(107) = random(0, 48);
+      vcputpcx("spore.pcx", flags(112) + 14, flags(107) + 14);
+      soundeffect(9);
+      wait(10);
+    }
+    vcclear();
+    wait(10);
+    vcputpcx("boost1.pcx", flags(112), flags(107));
+    vcclear();
+    earthquake(1, 1, 30);
+    layervc = 0;
+    wait(100);
+    specialframe(10) = 0;
+    specialframe(11) = 0;
+    specialframe(12) = 0;
+    specialframe(13) = 0;
+    specialframe(14) = 0;
+    specialframe(15) = 0;
+    specialframe(21) = 0;
+    specialframe(17) = 0;
+    specialframe(16) = 0;
+    specialframe(9) = 0;
+    face(16) = 2;
+    specialframe(char(1) + 94) = 0;
+    specialframe(char(2) + 94) = 0;
+    specialframe(char(3) + 94) = 0;
+    specialframe(char(4) + 94) = 0;
+    entity.locx(18) = 58;
+    entity.locy(18) = 57;
+    entity.locx(19) = 58;
+    entity.locy(19) = 58;
+    entity.locx(20) = 58;
+    entity.locy(20) = 59;
+    stext(0, "All right old geezer! Hand", "over your rich self to us!", "");
+    entitymove(18, "L1");
+    entitymove(19, "L1");
+    entitymove(20, "L1");
+    wait(20);
+    stext(
+        0,
+        "For the Indestructible Trio",
+        "has arrived to hold you for",
+        "ransom!");
+    specialframe(16) = 21;
+    stext(11, "*More* intruders!?! Hurry,", "Infido! We must make haste!", "");
+    specialframe(9) = 21;
+    stext(
+        0,
+        "Yes, Master Vultris, time",
+        "is of the essence! But we",
+        "won't be going anywhere...");
+    specialframe(9) = 0;
+    specialframe(16) = 23;
+    layervc = 1;
+    entity.locx(16) = 0;
+    entity.locx(9) -= 30;
+    soundeffect(8);
+    specialframe(10) = 21;
+    specialframe(11) = 21;
+    specialframe(12) = 21;
+    specialframe(13) = 21;
+    specialframe(14) = 21;
+    specialframe(15) = 21;
+    specialframe(20) = 21;
+    specialframe(17) = 21;
+    specialframe(19) = 21;
+    specialframe(18) = 21;
+    specialframe(char(1) + 94) = 21;
+    specialframe(char(2) + 94) = 21;
+    specialframe(char(3) + 94) = 21;
+    specialframe(char(4) + 94) = 21;
+    vcclear();
+    vcputpcx("betray1.pcx", 124, 14);
+    wait(30);
+    vcclear();
+    vcputpcx("betray2.pcx", 124, 14);
+    wait(30);
+    vcclear();
+    soundeffect(11);
+    vcputpcx("betray3.pcx", 124, 14);
+    alterbtile(50, 57, 829, 2);
+    wait(60);
+    vcclear();
+    vcputpcx("betray4.pcx", 124, 14);
+    wait(60);
+    vcclear();
+    vcputpcx("betray5.pcx", 124, 14);
+    wait(30);
+    vcclear();
+    vcputpcx("betray6.pcx", 124, 14);
+    wait(30);
+    vcclear();
+    vcputpcx("betray7.pcx", 124, 14);
+    wait(30);
+    vcclear();
+    vcputpcx("betray8.pcx", 124, 14);
+    wait(30);
+    vcclear();
+    soundeffect(11);
+    vcputpcx("betray9.pcx", 124, 14);
+    wait(100);
+    entity.locx(9) += 30;
+    vcclear();
+    layervc = 0;
+    stext(
+        0,
+        "Or at least, *you* won't.",
+        "I'll be taking the Seed now,",
+        "since you have no need for");
+    stext(0, "it anymore...", "", "");
+    stext(
+        0,
+        "Falkonner! Go grab the thief",
+        "and get going! Father is",
+        "waiting for us!");
+    stext(12, "Yes... Let us go...", "", "");
+    entitymove(21, "U5");
+    wait(90);
+    entity.locx(21) = 0;
+    specialframe(10) = 0;
+    specialframe(11) = 0;
+    specialframe(12) = 0;
+    specialframe(13) = 0;
+    specialframe(14) = 0;
+    specialframe(15) = 0;
+    stext(0, "He killed the boss!", "", "");
+    stext(0, "Let's get out of here!", "", "");
+    entitymove(10, "L3U8");
+    entitymove(12, "L3U7");
+    entitymove(14, "L4U8");
+    entitymove(11, "R3U8");
+    entitymove(13, "R3U7");
+    entitymove(15, "R4U8");
+    wait(220);
+    entity.locx(10) = 0;
+    entity.locx(11) = 0;
+    entity.locx(12) = 0;
+    entity.locx(13) = 0;
+    entity.locx(14) = 0;
+    entity.locx(15) = 0;
+    specialframe(17) = 0;
+    stext(
+        7,
+        "Holy crap! The old buzzard's",
+        "bought it! And I don't know",
+        "the combination for the safe!");
+    entitymove(17, "R2U2L2F1");
+    wait(110);
+    stext(7, "Looks like I'll have to bash", "it in!", "");
+    specialframe(20) = 0;
+    specialframe(19) = 0;
+    specialframe(18) = 0;
+    entitymove(18, "L1F0");
+    wait(20);
+    stext(0, "Our plans are ruined again!", "", "");
+    entitymove(19, "L2F0");
+    wait(40);
+    stext(0, "Yeah! And dynamite costs four", "GP a pound!", "");
+    entitymove(20, "L1F0");
+    wait(20);
+    stext(
+        0,
+        "Someone eez going to pay",
+        "dearly for zees! What do",
+        "we do now?");
+    face(19) = 2;
+    face(20) = 1;
+    specialframe(char(1) + 94) = 0;
+    specialframe(char(2) + 94) = 0;
+    specialframe(char(3) + 94) = 0;
+    specialframe(char(4) + 94) = 0;
+    stext(1, "Infido! Why did you do it?", "", "");
+    specialframe(9) = 23;
+    wait(50);
+    specialframe(9) = 0;
+    face(9) = 0;
+    stext(0, "Because, frog...", "", "");
+    entity.chrindex(9) = 10;
+    stext(0, "I am not Infido...!", "", "");
+    specialframe(char(1) + 94) = 21;
+    stext(1, "Morpheos!", "", "");
+    stext(0, "You recognize me? I don't", "recall our having met...", "");
+    specialframe(char(4) + 94) = 23;
+    stext(4, "You know this guy, Sam?", "", "");
+    specialframe(char(4) + 94) = 0;
+    stext(3, "State your purpose, cloud!", "Friend or foe?", "");
+    stext(2, "Amazing! This has to go in", "the report!", "");
+    specialframe(char(1) + 94) = 0;
+    entitymove(char(1) + 94, "L2U3");
+    wait(100);
+    stext(1, "Morpheos, you've got the Seed!", "Frog Pond is saved!", "");
+    soundeffect(25);
+    for (z, 1, 100, 2)
+    {
+      palettemorph(63, 63, 63, z, 63);
+      wait(1);
+    }
+    for (z, 1, 100, 2)
+    {
+      palettemorph(63, 63, 63, 101 - z, 63);
+      wait(1);
+    }
+    palettemorph(63, 63, 63, 0, 63);
+    soundeffect(11);
+    specialframe(char(1) + 94) = 5;
+    speed(char(1) + 94) = 7;
+    entitymove(char(1) + 94, "D5");
+    wait(50);
+    soundeffect(11);
+    speed(char(1) + 94) = 4;
+    specialframe(char(4) + 94) = 21;
+    stext(4, "Hey! You can't do that to him!", "", "");
+    entity.chrindex(9) = 17;
+    stext(
+        0,
+        "Oh, can't I? I'm taking the",
+        "Seed. You won't be able to",
+        "follow me, as I'll be crossing");
+    stext(
+        0,
+        "the ocean. I'm afraid this is",
+        "goodbye forever, unless you",
+        "think you can make it to the");
+    stext(
+        0,
+        "North Continent... Which you",
+        "most assuredly cannot. Ta ta,",
+        "little ones!");
+    stext(1, "Morpheos, wait!", "", "");
+    entitymove(char(1) + 94, "U5");
+    entitymove(9, "U5");
+    wait(90);
+    entity.locx(9) = 0;
+    stext(0, "Hold it right there!", "", "");
+    specialframe(18) = 4;
+    stext(
+        0,
+        "We, the United Terror Front",
+        "For Liberation of Terrorists",
+        "are here to ruin your day!");
+    specialframe(19) = 25;
+    stext(0, "   Anarchy and chaos:", "   Try 'em, you'll like 'em!", "");
+    specialframe(20) = 25;
+    stext(
+        0,
+        "      Zee forces of mediocrity",
+        "      and ordairly leeveeng",
+        "      can not stand up to ze");
+    stext(0, "      powair of love!", "", "");
+    wait(50);
+    specialframe(18) = 0;
+    face(18) = 0;
+    specialframe(19) = 0;
+    face(19) = 0;
+    specialframe(20) = 0;
+    face(20) = 0;
+    entitymove(18, "L2F0");
+    wait(40);
+    stext(0, "Just because you beat us last", "time-", "");
+    specialframe(20) = 21;
+    stext(0, "      And zee time before!", "", "");
+    specialframe(20) = 0;
+    stext(
+        0,
+        "-Yes, and the time before,",
+        "doesn't mean we're going to go",
+        "easy on you this time!");
+    face(19) = 3;
+    stext(
+        0,
+        "   Yeah, and don't think you",
+        "   can get out of this just",
+        "   because we've never seen");
+    stext(0, "   you before in our life,", "   fatty!", "");
+    face(17) = 2;
+    stext(7, "Huh? Hey! Hold on! Stop!", "", "");
+    forceequip(7, 11);
+    forceequip(7, 64);
+    forceequip(7, 98);
+    getitem(7, 53);
+    getitem(7, 53);
+    givexp(7, 10000);
+    givexp(7, 10000);
+    givexp(7, 10000);
+    givexp(7, 10000);
+    givexp(7, 10000);
+    givexp(7, 10000);
+    banner("Boss Battle!", 1);
+    banner("1 Lenny C.", 1);
+    banner("1 Squiggy D.", 1);
+    banner("and 1 Pierre L.", 1);
+    autooff();
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      mapswitch("mansion2.map", flags(109), flags(110), 0);
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      mapswitch("mansion2.map", flags(109), flags(110), 0);
+    }
+    if (flags(200) == 2)
+    {
+      addcharacter(7);
+      flags(501) = 2;
+      flags(502) = 150;
+      flags(503) = 190;
+      flags(504) = 1000;
+      flags(505) = 37;
+      flags(506) = 22;
+      flags(507) = 51;
+      flags(508) = 37;
+      flags(509) = 400;
+      flags(510) = 150;
+      flags(511) = 4;
+      flags(512) = 65;
+      flags(513) = 19;
+      flags(540) = 80;
+      flags(541) = 80;
+      flags(1009) = 0;
+      flags(514) = 2;
+      flags(515) = 185;
+      flags(516) = 80;
+      flags(517) = 900;
+      flags(518) = 46;
+      flags(519) = 19;
+      flags(520) = 18;
+      flags(521) = 38;
+      flags(522) = 400;
+      flags(523) = 150;
+      flags(524) = 4;
+      flags(525) = 19;
+      flags(526) = 65;
+      flags(542) = 100;
+      flags(543) = 60;
+      flags(1010) = 0;
+      flags(527) = 2;
+      flags(528) = 5;
+      flags(529) = 50;
+      flags(530) = 500;
+      flags(531) = 39;
+      flags(532) = 39;
+      flags(533) = 40;
+      flags(534) = 16;
+      flags(535) = 400;
+      flags(536) = 150;
+      flags(537) = 4;
+      flags(538) = 39;
+      flags(539) = 39;
+      flags(544) = 90;
+      flags(545) = 150;
+      flags(1011) = 0;
+      flags(251) = 1;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      mapswitch("lspbat3.map", 1, 1, 0);
+    }
+  }
+  if (flags(185) == 28)
+  {
+    flags(185)++;
+  }
+  if (flags(185) == 27)
+  {
+    stext(
+        5,
+        "Okay... My instincts tell me",
+        "that Vultris is around here",
+        "somewhere, and my instincts");
+    stext(5, "are never wrong!", "", "");
+    changechr(5, "dingc.chr");
+    specialframe(0) = 21;
+    wait(20);
+    specialframe(0) = 22;
+    wait(20);
+    specialframe(0) = 21;
+    wait(20);
+    specialframe(0) = 22;
+    wait(20);
+    specialframe(0) = 21;
+    wait(20);
+    specialframe(0) = 22;
+    wait(20);
+    specialframe(0) = 21;
+    wait(20);
+    specialframe(0) = 0;
+    changechr(5, "dingo.chr");
+    wait(10);
+    stext(5, "I just know it'll be clear", "sailing from here on in!", "");
+    partymove("L2D1L5L6");
+    wait(50);
+    cameratracking = 0;
+    autoon();
+    entity.locx(5) = 91;
+    entity.locy(5) = 79;
+    entitymove(5, "R1");
+    wait(50);
+    specialframe(95) = 21;
+    specialframe(5) = 21;
+    stext(0, "Oh! An intruder!", "Stop right there, intruder!", "");
+    playmusic("zpolka.mod");
+    specialframe(95) = 0;
+    specialframe(5) = 0;
+    entitymove(95, "R1U2");
+    entitymove(5, "R1U1R1");
+    wait(75);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    wait(25);
+    specialframe(5) = 24;
+    stext(
+        0,
+        "Hey! I said *stop!* I guess I",
+        "need some backup with this",
+        "guy!");
+    specialframe(5) = 25;
+    wait(20);
+    specialframe(5) = 26;
+    wait(50);
+    soundeffect(4);
+    entity.locx(6) = 94;
+    entity.locy(6) = 77;
+    layervc = 1;
+    vcputpcx("boost1.pcx", 72, 72);
+    face(6) = 2;
+    specialframe(5) = 0;
+    wait(50);
+    vcclear();
+    specialframe(5) = 25;
+    wait(20);
+    specialframe(5) = 26;
+    wait(50);
+    soundeffect(4);
+    entity.locx(7) = 94;
+    entity.locy(7) = 79;
+    vcputpcx("boost1.pcx", 72, 104);
+    face(7) = 2;
+    specialframe(5) = 0;
+    wait(50);
+    vcclear();
+    layervc = 0;
+    entitymove(6, "R9D1F1");
+    entitymove(5, "R6F1");
+    entitymove(7, "R3W50U1");
+    wait(300);
+    entity.locx(95) = 91;
+    entity.locy(95) = 79;
+    entitymove(95, "R9");
+    wait(150);
+    changechr(5, "dingc.chr");
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 0;
+    changechr(5, "dingo.chr");
+    wait(10);
+    entitymove(95, "R5R4U1R1");
+    wait(200);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    specialframe(5) = 21;
+    specialframe(6) = 21;
+    specialframe(7) = 21;
+    wait(30);
+    specialframe(5) = 0;
+    specialframe(6) = 0;
+    specialframe(7) = 0;
+    entitymove(5, "D1W35R9");
+    entitymove(6, "D2W55R6");
+    entitymove(7, "R5R7");
+    wait(300);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    entity.locx(6) = 1;
+    entity.locy(6) = 3;
+    entity.locx(7) = 1;
+    entity.locy(7) = 4;
+    wait(50);
+    entity.locx(95) = 94;
+    entity.locy(95) = 83;
+    entitymove(95, "U7");
+    wait(140);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    entity.locx(5) = 94;
+    entity.locy(5) = 83;
+    entitymove(5, "U1");
+    wait(20);
+    entity.locx(6) = 94;
+    entity.locy(6) = 83;
+    entitymove(5, "U1");
+    entitymove(6, "U1");
+    wait(20);
+    entity.locx(7) = 94;
+    entity.locy(7) = 83;
+    entitymove(5, "U5");
+    entitymove(6, "U5");
+    entitymove(7, "U5");
+    wait(90);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    entitymove(7, "U1");
+    entitymove(6, "U1");
+    wait(20);
+    entity.locx(6) = 1;
+    entity.locy(6) = 3;
+    entitymove(7, "U1");
+    wait(20);
+    entity.locx(7) = 1;
+    entity.locy(7) = 4;
+    wait(50);
+    entity.locx(95) = 103;
+    entity.locy(95) = 83;
+    entitymove(95, "U7");
+    wait(140);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    entity.locx(5) = 103;
+    entity.locy(5) = 83;
+    entitymove(5, "U1");
+    wait(20);
+    entity.locx(6) = 103;
+    entity.locy(6) = 83;
+    entitymove(5, "U1");
+    entitymove(6, "U1");
+    wait(20);
+    entity.locx(7) = 103;
+    entity.locy(7) = 83;
+    entitymove(5, "U5");
+    entitymove(6, "U5");
+    entitymove(7, "U5");
+    wait(90);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    entitymove(7, "U1");
+    entitymove(6, "U1");
+    wait(20);
+    entity.locx(6) = 1;
+    entity.locy(6) = 3;
+    entitymove(7, "U1");
+    wait(20);
+    entity.locx(7) = 1;
+    entity.locy(7) = 4;
+    wait(50);
+    entity.locx(95) = 106;
+    entity.locy(95) = 83;
+    entitymove(95, "U3R2");
+    wait(140);
+    entity.locx(5) = 106;
+    entity.locy(5) = 83;
+    entitymove(5, "U1");
+    wait(20);
+    entity.locx(6) = 106;
+    entity.locy(6) = 83;
+    entitymove(5, "U1");
+    entitymove(6, "U1");
+    wait(20);
+    entity.locx(7) = 106;
+    entity.locy(7) = 83;
+    entitymove(5, "U5");
+    entitymove(6, "U5");
+    entitymove(7, "U5");
+    wait(90);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    entitymove(7, "U1");
+    entitymove(6, "U1");
+    wait(20);
+    entity.locx(6) = 1;
+    entity.locy(6) = 3;
+    entitymove(7, "U1");
+    wait(20);
+    entity.locx(7) = 1;
+    entity.locy(7) = 4;
+    wait(20);
+    entitymove(95, "L2");
+    wait(40);
+    changechr(5, "dingc.chr");
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 0;
+    changechr(5, "dingo.chr");
+    wait(10);
+    specialframe(5) = 21;
+    specialframe(95) = 21;
+    entity.locx(5) = 106;
+    entity.locy(5) = 76;
+    wait(30);
+    specialframe(5) = 0;
+    specialframe(95) = 0;
+    entitymove(95, "R1");
+    entitymove(5, "D1");
+    wait(20);
+    entity.locx(6) = 106;
+    entity.locy(6) = 76;
+    entitymove(95, "R1");
+    entitymove(5, "D1");
+    entitymove(6, "D1");
+    wait(20);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    entity.locx(7) = 106;
+    entity.locy(7) = 76;
+    entitymove(6, "D1");
+    entitymove(7, "D1");
+    entitymove(5, "D1");
+    wait(20);
+    entitymove(6, "D2R1");
+    entitymove(7, "D3");
+    entitymove(5, "D1R2");
+    wait(60);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    entitymove(6, "R1");
+    entitymove(7, "R1");
+    wait(20);
+    entity.locx(6) = 1;
+    entity.locy(6) = 3;
+    entitymove(7, "R1");
+    wait(20);
+    entity.locx(7) = 1;
+    entity.locy(7) = 4;
+    wait(50);
+    entity.locx(95) = 97;
+    entity.locy(95) = 76;
+    entitymove(95, "D2U2");
+    wait(72);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    wait(20);
+    entity.locx(5) = 97;
+    entity.locy(5) = 76;
+    entitymove(5, "D1");
+    wait(20);
+    entity.locx(6) = 97;
+    entity.locy(6) = 76;
+    entitymove(5, "D1");
+    entitymove(6, "D1");
+    wait(20);
+    entity.locx(7) = 97;
+    entity.locy(7) = 76;
+    entitymove(5, "D1R1Z23");
+    entitymove(6, "D2L1Z23");
+    entitymove(7, "D2Z23");
+    wait(80);
+    specialframe(5) = 0;
+    specialframe(6) = 0;
+    specialframe(7) = 0;
+    entitymove(5, "R5R3");
+    entitymove(6, "U2R6");
+    entitymove(7, "L3D5");
+    wait(150);
+    entity.locx(7) = 1;
+    entity.locy(7) = 4;
+    entitymove(5, "D2");
+    entitymove(6, "R1U1");
+    wait(40);
+    entity.locx(6) = 1;
+    entity.locy(6) = 3;
+    entitymove(5, "D2");
+    wait(40);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    wait(50);
+    entity.locx(95) = 106;
+    entity.locy(95) = 76;
+    entitymove(95, "D3L6L6D4");
+    wait(300);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    entity.locx(5) = 100;
+    entity.locy(5) = 76;
+    entity.locx(6) = 97;
+    entity.locy(6) = 76;
+    entity.locx(7) = 103;
+    entity.locy(7) = 83;
+    entitymove(5, "D4L2U1R2U1");
+    entitymove(6, "D3R6U4");
+    entitymove(7, "U3L6D4");
+    wait(180);
+    entity.locx(6) = 1;
+    entity.locy(6) = 3;
+    entity.locx(7) = 1;
+    entity.locy(7) = 4;
+    entitymove(5, "U2");
+    wait(40);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    wait(20);
+    entity.locx(95) = 100;
+    entity.locy(95) = 76;
+    entity.locx(6) = 97;
+    entity.locy(6) = 76;
+    entity.locx(7) = 103;
+    entity.locy(7) = 76;
+    entitymove(95, "D2W30D2");
+    entitymove(6, "D2F2R3");
+    entitymove(7, "D2F3L2");
+    wait(80);
+    soundeffect(11);
+    specialframe(6) = 25;
+    specialframe(7) = 26;
+    entitymove(95, "D3");
+    wait(60);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    wait(20);
+    entity.locx(5) = 100;
+    entity.locy(5) = 83;
+    entitymove(5, "U4Z21");
+    wait(100);
+    specialframe(5) = 24;
+    wait(50);
+    specialframe(5) = 25;
+    wait(20);
+    specialframe(5) = 26;
+    soundeffect(4);
+    layervc = 1;
+    vcputpcx("boost1.pcx", 152, 88);
+    entity.locx(6) = 1;
+    entity.locy(6) = 2;
+    wait(50);
+    vcclear();
+    specialframe(5) = 25;
+    wait(20);
+    specialframe(5) = 26;
+    soundeffect(4);
+    vcputpcx("boost1.pcx", 168, 88);
+    entity.locx(7) = 1;
+    entity.locy(7) = 3;
+    wait(50);
+    vcclear();
+    specialframe(5) = 25;
+    wait(20);
+    specialframe(5) = 26;
+    soundeffect(4);
+    vcputpcx("boost1.pcx", 168, 104);
+    entity.locx(8) = 101;
+    entity.locy(8) = 79;
+    wait(50);
+    vcclear();
+    specialframe(5) = 0;
+    entitymove(5, "L3D4");
+    wait(120);
+    entity.locx(5) = 1;
+    entity.locy(5) = 2;
+    wait(20);
+    entity.locx(8) = 1;
+    entity.locy(8) = 5;
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    entity.locx(95) = 103;
+    entity.locy(95) = 76;
+    entitymove(95, "D1L2Z23");
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    specialframe(95) = 0;
+    entitymove(95, "L4U1");
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    entity.locx(95) = 1;
+    entity.locy(95) = 1;
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    entity.locx(5) = 91;
+    entity.locy(5) = 79;
+    entitymove(5, "R9");
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance8.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    specialframe(5) = 24;
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance2.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance6.pcx", 180, 94);
+    wait(20);
+    vcclear();
+    specialframe(5) = 25;
+    vcputpcx("dance9.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    vcputpcx("dance1.pcx", 180, 94);
+    wait(10);
+    vcclear();
+    specialframe(5) = 26;
+    soundeffect(4);
+    vcputpcx("boost1.pcx", 168, 104);
+    wait(50);
+    vcclear();
+    specialframe(5) = 24;
+    wait(100);
+    entity.locx(95) = 100;
+    entity.locy(95) = 76;
+    entitymove(95, "D2");
+    wait(35);
+    playmusic("StrFrcNv.xm");
+    soundeffect(11);
+    specialframe(95) = 21;
+    specialframe(5) = 21;
+    wait(30);
+    specialframe(5) = 0;
+    face(5) = 1;
+    stext(
+        0,
+        "Ow! That hurt, you intruder-",
+        "type person! Now I'm going to",
+        "make you pay!");
+    partymove("R1");
+    face(0) = 0;
+    layervc = 0;
+    autooff();
+    cameratracking = 1;
+    banner("Boss Battle!", 1);
+    banner("1 Conjurer", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      flags(185) += 2;
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      flags(185) += 2;
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 0;
+      flags(502) = 15;
+      flags(503) = 5;
+      flags(504) = 0;
+      flags(505) = 14;
+      flags(506) = 14;
+      flags(507) = 15;
+      flags(508) = 15;
+      flags(509) = 0;
+      flags(510) = 0;
+      flags(511) = 0;
+      flags(512) = 65;
+      flags(513) = 65;
+      flags(540) = 5;
+      flags(541) = 5;
+      flags(1009) = 0;
+      flags(514) = 4;
+      flags(515) = 5;
+      flags(516) = 100;
+      flags(517) = 5000;
+      flags(518) = 34;
+      flags(519) = 34;
+      flags(520) = 34;
+      flags(521) = 34;
+      flags(522) = 10000;
+      flags(523) = 5000;
+      flags(524) = 5;
+      flags(525) = 65;
+      flags(526) = 65;
+      flags(542) = 5;
+      flags(543) = 5000;
+      flags(1010) = 0;
+      flags(527) = 0;
+      flags(528) = 15;
+      flags(529) = 5;
+      flags(530) = 0;
+      flags(531) = 14;
+      flags(532) = 14;
+      flags(533) = 15;
+      flags(534) = 15;
+      flags(535) = 0;
+      flags(536) = 0;
+      flags(537) = 0;
+      flags(538) = 65;
+      flags(539) = 65;
+      flags(544) = 5;
+      flags(545) = 5;
+      flags(1011) = 0;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      flags(251) = 1;
+      flags(185)++;
+      mapswitch("conjbat.map", 1, 1, 0);
+    }
+  }
+  if (flags(185) == 29)
+  {
+    entity.locx(5) = 1;
+    entity.locx(5) = 1;
+    stext(5, "Whew! That was a close one!", "", "");
+    flags(185) = 30;
+  }
+}
+event
+{
+  if (flags(185) != 30)
+  {
+    warp(entity.locx(0) + 10, entity.locy(0) - 56, 0);
+    return;
+  }
+  warp(101, 24, 0);
+  partymove("L5");
+  autoon();
+  cameratracking = 0;
+  specialframe(95) = 21;
+  stext(0, "What was all that noise?", "", "");
+  specialframe(95) = 0;
+  entitymove(95, "D4R1F0");
+  wait(80);
+  entity.locx(9) = 91;
+  entity.locy(9) = 24;
+  entitymove(9, "R5F1W30F0W30F3");
+  wait(150);
+  stext(
+      0,
+      "It came from this direction!",
+      "Come on! What do you think",
+      "Master Vultris pays you for?");
+  entity.locx(10) = 91;
+  entity.locy(10) = 24;
+  entity.locx(11) = 91;
+  entity.locy(11) = 23;
+  entity.locx(12) = 91;
+  entity.locy(12) = 25;
+  entitymove(11, "R1U1R5F0");
+  entitymove(12, "R1D1R5F1");
+  entitymove(10, "R3U1F0");
+  wait(130);
+  partymove("D4R1F0");
+  entity.locx(13) = 91;
+  entity.locy(13) = 24;
+  entity.locx(14) = 91;
+  entity.locy(14) = 23;
+  entity.locx(15) = 91;
+  entity.locy(15) = 25;
+  entitymove(15, "R1D1R3F1");
+  entitymove(14, "R1U1R3F0");
+  entitymove(13, "R3D1F1");
+  specialframe(95) = 20;
+  wait(100);
+  face(9) = 1;
+  wait(50);
+  face(9) = 0;
+  specialframe(95) = 21;
+  stext(
+      0,
+      "You two! And you two! Cover",
+      "the exits! Robert! Percy!",
+      "Stay there! I'll go in.");
+  entitymove(11, "R3D1");
+  entitymove(12, "R3U1");
+  entitymove(15, "L3U1");
+  entitymove(14, "L3D1");
+  specialframe(95) = 0;
+  alterbtile(97, 29, 61, 0);
+  alterbtile(96, 29, 61, 0);
+  entitymove(95, "D2");
+  wait(80);
+  entitymove(9, "R4");
+  wait(80);
+  specialframe(9) = 21;
+  stext(
+      0,
+      "Put on the alert. An intruder",
+      "is in the building. He can't",
+      "have gone far!");
+  specialframe(9) = 0;
+  wait(10);
+  entitymove(9, "L4");
+  wait(80);
+  stext(
+      0,
+      "You four, keep guarding the",
+      "exits! Robert and Percy,",
+      "check behind...");
+  specialframe(9) = 23;
+  wait(50);
+  specialframe(9) = 0;
+  stext(0, "...er, those north pillars.", "I'll check behind...", "");
+  entitymove(10, "U1R2U2R1F1");
+  entitymove(13, "U5R1F1");
+  entitymove(9, "D2L2F0");
+  for (x, 1, 64, 1)
+  {
+    ywin++;
+    wait(2);
+  }
+  specialframe(95) = 20;
+  stext(0, "...this one!", "", "");
+  entitymove(9, "R4F0");
+  wait(80);
+  specialframe(95) = 21;
+  stext(0, "No, make that *this* one!", "", "");
+  entitymove(9, "D2L1F0");
+  wait(110);
+  specialframe(9) = 21;
+  specialframe(95) = 20;
+  wait(100);
+  stext(0, "    Nothing here sir!", "", "");
+  stext(0, "   Same here!", "", "");
+  specialframe(9) = 0;
+  wait(100);
+  entitymove(9, "L1U4F3");
+  specialframe(95) = 23;
+  for (x, 1, 64, 1)
+  {
+    ywin--;
+    wait(2);
+  }
+  stext(
+      0,
+      "No, nobody down there, either.",
+      "the intruder must have gone",
+      "further in... After him, boys!");
+  entitymove(14, "L1");
+  entitymove(15, "L1");
+  wait(20);
+  entity.locx(14) = 1;
+  entity.locy(14) = 1;
+  entity.locx(15) = 1;
+  entity.locy(15) = 1;
+  entitymove(11, "U1L8D1L1");
+  entitymove(12, "D1L8U1L1");
+  wait(180);
+  entity.locx(11) = 2;
+  entity.locy(11) = 2;
+  entity.locx(12) = 2;
+  entity.locy(12) = 2;
+  entitymove(10, "L1D2L2D2L1");
+  entitymove(13, "L1D2L2D2L1");
+  wait(150);
+  entity.locx(13) = 3;
+  entity.locy(13) = 3;
+  entitymove(10, "L2");
+  wait(40);
+  entity.locx(10) = 3;
+  entity.locy(10) = 3;
+  face(9) = 0;
+  stext(0, "...", "...", "...");
+  entitymove(9, "L5");
+  wait(100);
+  entity.locx(9) = 1;
+  entity.locy(9) = 5;
+  specialframe(95) = 0;
+  entitymove(95, "U2L1U4F3");
+  partymove("L1U4F3");
+  wait(140);
+  stext(5, "Another coyote...?", "", "");
+  stext(5, "But I thought...", "", "");
+  stext(5, "I thought *I* was the last", "one!", "");
+  stext(
+      5,
+      "And why didn't he give me",
+      "away...? What is he doing",
+      "working for Vultris?");
+  flags(185)++;
+  autooff();
+  cameratracking = 1;
+  alterbtile(97, 29, 61, 1);
+  alterbtile(96, 29, 61, 1);
+}
+event
+{
+  if (char(5))
+  {
+    stext(
+        5,
+        "I ain't goin' back in there!",
+        "There are sharp things in",
+        "there!");
+  }
+  if (!char(5))
+  {
+    stext(
+        1,
+        "Look, it's a ventilation",
+        "shaft. It's almost as if",
+        "GMW was using the most");
+    stext(1, "cliched way to get past", "security possible on purpose!", "");
+  }
+}
+event { warp(entity.locx(0) - 10, entity.locy(0) + 56, 0); }
+event
+{
+  warp(entity.locx(0) - 25, entity.locy(0) + 3, 0);
+  if (flags(185) > 35)
+  {
+    palettemorph(63, 20, 0, 40, 63);
+  }
+}
+event { warp(entity.locx(0) + 25, entity.locy(0) - 3, 0); }
+event
+{
+  if (char(5))
+  {
+    stext(
+        5,
+        "This'd take me back to the",
+        "lobby... I'd better remember",
+        "this route when making my");
+    stext(
+        5,
+        "dramatic escape! I think",
+        "Vultris is the *other* way",
+        "though...");
+    partymove("U1");
+  }
+  if (!char(5))
+  {
+    mapswitch("vultmans.map", 51, 50, 0);
+  }
+}
+event
+{
+  warp(entity.locx(0) - 1, entity.locy(0) + 39, 0);
+  entity.locx(16) = 51;
+  entity.locy(16) = 58;
+  if (char(5))
+  {
+    entity.locx(10) = 51;
+    entity.locy(10) = 60;
+    face(10) = 1;
+    entity.locx(21) = 51;
+    entity.locy(21) = 55;
+    flags(185)++;
+    specialframe(0) = 21;
+    wait(100);
+    specialframe(0) = 0;
+    if (entity.locx(0) == 46)
+    {
+      partymove("R5F0");
+    }
+    if (entity.locx(0) == 47)
+    {
+      partymove("R4F0");
+    }
+    if (entity.locx(0) == 48)
+    {
+      partymove("R3F0");
+    }
+    if (entity.locx(0) == 54)
+    {
+      partymove("L3F0");
+    }
+    if (entity.locx(0) == 55)
+    {
+      partymove("L4F0");
+    }
+    if (entity.locx(0) == 56)
+    {
+      partymove("L5F0");
+    }
+    cameratracking = 0;
+    for (x, 1, 75, 1)
+    {
+      ywin = ywin + 1;
+      wait(1);
+    }
+    wait(50);
+    entitymove(16, "L1R1F0");
+    wait(40);
+    stext(
+        11,
+        "Hrmf! What's all this about",
+        "an intruder? Some thief come",
+        "to steal my money, hmmm?");
+    specialframe(16) = 22;
+    stext(11, "Well, I won't have it! Not in", "*my* house!", "");
+    stext(
+        0,
+        "Sir, we have guards hunting",
+        "all over the mansion for him!",
+        "He won't get far, sir!");
+    specialframe(16) = 0;
+    entitymove(16, "R1F0");
+    wait(20);
+    specialframe(16) = 22;
+    stext(
+        11,
+        "He'd better not! Tell Infido",
+        "to come here. I have special",
+        "instructions for him for when");
+    stext(11, "that fat fool arrives!", "", "");
+    specialframe(16) = 0;
+    entitymove(16, "L1F0");
+    wait(20);
+    stext(
+        5,
+        "<Hmmm... Bull's not here yet!",
+        "I'd better just wait and hide",
+        "here until he shows up!>");
+    entitymove(16, "L1F0");
+    wait(20);
+    stext(
+        11,
+        "And I want him to set up",
+        "increased security around",
+        "this room! This business deal");
+    stext(11, "must *not* be interrupted!", "", "");
+    stext(
+        0,
+        "Yes sir! But don't you have",
+        "Falkonner, sir? He *is* your",
+        "bodyguard, sir.");
+    entitymove(16, "R1F0");
+    wait(20);
+    specialframe(16) = 22;
+    stext(
+        11,
+        "It is not your place to",
+        "question your superiors! Now",
+        "go and do your job!");
+    entitymove(10, "L1");
+    wait(20);
+    specialframe(16) = 23;
+    stext(
+        11,
+        "But wait a second... Where",
+        "*is* Falkonner? He should",
+        "be in here guarding me!");
+    face(10) = 1;
+    specialframe(16) = 0;
+    stext(
+        0,
+        "He's stationed behind that",
+        "safe, sir, where he won't",
+        "be spotted by the intruder!");
+    stext(
+        12,
+        "Correct. Master Vultris,",
+        "you will be pleased to know",
+        "that I have apprehended the");
+    stext(12, "intruder.", "", "");
+    autoon();
+    entitymove(21, "L2D6R2U1R1F1");
+    entitymove(95, "D1L2D6R2U1");
+    wait(140);
+    specialframe(16) = 21;
+    wait(50);
+    specialframe(16) = 0;
+    stext(
+        11,
+        "Ah! So this is the intruder",
+        "who has managed to get past",
+        "my expensive security...");
+    specialframe(16) = 22;
+    stext(
+        11,
+        "Hmmph! I expected better,",
+        "for some reason. Some sort",
+        "of super-spy or something.");
+    specialframe(16) = 0;
+    stext(11, "But you're nothing but a", "common thief!", "");
+    stext(5, "Yup!", "", "");
+    changechr(5, "dingc.chr");
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 22;
+    wait(20);
+    specialframe(95) = 21;
+    wait(20);
+    specialframe(95) = 0;
+    changechr(5, "dingo.chr");
+    wait(10);
+    stext(
+        11,
+        "I'm surprised you don't take",
+        "offense at that... Don't your",
+        "kind prefer the ludicrous");
+    stext(11, "moniker of 'Treasure Hunter,'", "instead?", "");
+    stext(
+        5,
+        "Nah... That doesn't really",
+        "capture my spirit. Maybe",
+        "'Criminally Inclined,' or");
+    stext(5, "'Larceny Enabled,' or...", "", "");
+    stext(
+        11,
+        "If you break into a musical",
+        "number, I'll have Falkonner",
+        "shoot you on the spot.");
+    specialframe(95) = 22;
+    stext(5, "Hmmph!", "", "");
+    specialframe(95) = 0;
+    stext(11, "Well, what shall we do with", "you, then...", "");
+    stext(
+        12,
+        "As I recall, he was not alone",
+        "when last we ran into him.",
+        "His friends are bound to make");
+    stext(12, "a rescue attempt...", "", "");
+    stext(
+        11,
+        "Yes, but those ruffians didn't",
+        "strike me as the slippery sort",
+        "this fellow represents... Let");
+    stext(
+        11,
+        "them try to get through the",
+        "security in my mansion! I buy",
+        "only the best!");
+    stext(
+        12,
+        "With all due respect, your",
+        "overconfidence is unwarranted,",
+        "Master Vultris.");
+    specialframe(16) = 22;
+    stext(
+        11,
+        "If they should manage to get",
+        "past my security, it will be",
+        "*your* job to take care of");
+    stext(
+        11,
+        "them! I will *not* let these",
+        "fools delay my business deal",
+        "any further! Do I make myself");
+    stext(11, "clear, Falkonner?", "", "");
+    stext(12, "Yes, Master Vultris...", "", "");
+    boxfadeout(50);
+    addcharacter(1);
+    addcharacter(4);
+    addcharacter(3);
+    addcharacter(2);
+    removecharacter(5);
+    autooff();
+    cameratracking = 1;
+    mapswitch("Bunoose.map", 131, 68, 0);
+  }
+  if (!char(5))
+  {
+    alterftile(51, 58, 828, 2);
+    entity.locx(9) = 50;
+    entity.locy(9) = 55;
+    entity.locx(21) = 52;
+    entity.locy(21) = 55;
+    entity.locx(10) = 50;
+    entity.locy(10) = 54;
+    entity.locx(11) = 52;
+    entity.locy(11) = 54;
+    entity.locx(17) = 51;
+    entity.locy(17) = 60;
+    face(17) = 1;
+    flags(185)++;
+    partymove("D8");
+    stext(7, "... Here's the Seed! Now,", "gimme the goods!", "");
+    stext(11, "Ahh... Excellent!", "", "");
+    alterftile(51, 58, 244, 2);
+    if (entity.locx(0) == 46)
+    {
+      partymove("R5");
+    }
+    if (entity.locx(0) == 47)
+    {
+      partymove("R4");
+    }
+    if (entity.locx(0) == 48)
+    {
+      partymove("R3");
+    }
+    if (entity.locx(0) == 54)
+    {
+      partymove("L3");
+    }
+    if (entity.locx(0) == 55)
+    {
+      partymove("L4");
+    }
+    if (entity.locx(0) == 56)
+    {
+      partymove("L5");
+    }
+    face(0) = 1;
+    autoon();
+    if (entity.locx(1) == 52)
+    {
+      entitymove(96, "L1");
+      entitymove(97, "L2");
+      entitymove(98, "L3");
+    }
+    if (entity.locx(1) == 50)
+    {
+      entitymove(96, "R1");
+      entitymove(97, "R2");
+      entitymove(98, "R3");
+    }
+    wait(50);
+    face(char(1) + 94) = 1;
+    entitymove(char(4) + 94, "D1L1F1");
+    entitymove(char(3) + 94, "D1R1F1");
+    entitymove(char(2) + 94, "D1F1");
+    cameratracking = 0;
+    for (z, 1, 50, 2)
+    {
+      ywin -= 1;
+      wait(2);
+    }
+    stext(
+        1,
+        "Not so fast! That Seed is the",
+        "rightful property of Frog",
+        "Pond! Give it to me, and we'll");
+    stext(1, "leave peacefully!", "", "");
+    specialframe(17) = 21;
+    stext(
+        11,
+        "Heh... You've really got to",
+        "learn to say something new",
+        "once in a while, little frog!");
+    stext(7, "Sam!", "", "");
+    specialframe(17) = 0;
+    face(17) = 0;
+    stext(
+        11,
+        "So, you managed to get past my",
+        "security system after all...",
+        "I must applaud your tenacity!");
+    specialframe(16) = 22;
+    stext(
+        11,
+        "But I'm afraid that it's",
+        "finders keepers, in any case!",
+        "If Frog Pond wants this Seed");
+    stext(
+        11,
+        "so badly, it will cede to my",
+        "demands, and send workers to",
+        "my factories to make");
+    stext(
+        11,
+        "chocolate-covered flies!",
+        "With them working for me, I",
+        "will finally have a monopoly");
+    stext(
+        11,
+        "in the candy industry!",
+        "If they refuse, I'll make",
+        "diced-Seed-filled candy!");
+    specialframe(16) = 0;
+    specialframe(char(1) + 94) = 20;
+    stext(
+        1,
+        "Wha...? All this was for some",
+        "stupid business advantage?!",
+        "You're absolutely twisted, do");
+    stext(1, "you know that?", "", "");
+    specialframe(char(1) + 94) = 0;
+    specialframe(16) = 22;
+    stext(
+        11,
+        "Heh... Sore loser, aren't",
+        "you? Well in any case, you're",
+        "breaking and entering, and");
+    stext(11, "my guards will have to deal", "with you...", "");
+    specialframe(16) = 0;
+    entitymove(11, "R2D2");
+    entitymove(10, "L2D2");
+    entitymove(21, "R1D1");
+    entitymove(9, "L1D1");
+    wait(70);
+    entity.locx(12) = 50;
+    entity.locy(12) = 55;
+    entity.locx(13) = 52;
+    entity.locy(13) = 55;
+    entity.locx(14) = 50;
+    entity.locy(14) = 54;
+    entity.locx(15) = 52;
+    entity.locy(15) = 54;
+    entitymove(14, "D1L1F0");
+    entitymove(15, "D1R1F0");
+    entitymove(12, "L2F0");
+    entitymove(13, "R2F0");
+    wait(40);
+    entitymove(11, "D6F3");
+    entitymove(10, "D6F2");
+    entitymove(14, "L1D5R1D1");
+    entitymove(15, "R1D5L1D1");
+    entitymove(12, "D6F2");
+    entitymove(13, "D6F3");
+    specialframe(17) = 21;
+    wait(120);
+    specialframe(17) = 0;
+    face(17) = 1;
+    stext(
+        7,
+        "Hey! Aren't you forgetting",
+        "something? Pay up, pal! That",
+        "Seed was hard to get, it");
+    stext(7, "ain't yours yet, and it ain't", "comin' cheap!", "");
+    stext(
+        11,
+        "Ah, I'm afraid that's where",
+        "you're wrong... Guards! Show",
+        "this fat fool the door!");
+    specialframe(17) = 21;
+    entitymove(11, "U1L1F3");
+    entitymove(10, "U1R1F2");
+    entitymove(12, "U1R1F2");
+    entitymove(13, "U1L1F3");
+    entitymove(14, "R1F1");
+    entitymove(15, "L1F1");
+    wait(80);
+    stext(7, "Wh- Wh- Wha!?!", "", "");
+    stext(
+        11,
+        "It's quite simple, boy: I'm",
+        "betraying you! In other words,",
+        "I keep the Seed *and* the");
+    stext(11, "cash!", "", "");
+    specialframe(17) = 22;
+    stext(7, "Why you...!", "", "");
+    specialframe(17) = 0;
+    entitymove(9, "D2");
+    entitymove(21, "R1D6L1");
+    wait(180);
+    stext(12, "There is no escape. This time,", "I will finish the job.", "");
+    banner("Boss Battle!", 1);
+    banner("1 Falkonner.", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      stext(12, "My weapons... sabotaged!?!", "", "");
+      autooff();
+      cameratracking = 1;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      mapswitch("mansion2.map", flags(109), flags(110), 0);
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      stext(12, "My weapons... sabotaged!?!", "", "");
+      autooff();
+      cameratracking = 1;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      mapswitch("mansion2.map", flags(109), flags(110), 0);
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 0;
+      flags(502) = 250;
+      flags(503) = 1350;
+      flags(504) = 1500;
+      flags(505) = 23;
+      flags(506) = 23;
+      flags(507) = 23;
+      flags(508) = 23;
+      flags(509) = 1000;
+      flags(510) = 0;
+      flags(511) = 0;
+      flags(512) = 65;
+      flags(513) = 65;
+      flags(540) = 200;
+      flags(541) = 1380;
+      flags(1009) = 0;
+      flags(514) = 5;
+      flags(515) = 200;
+      flags(516) = 1365;
+      flags(517) = 8000;
+      flags(518) = 22;
+      flags(519) = 25;
+      flags(520) = 26;
+      flags(521) = 27;
+      flags(522) = 3000;
+      flags(523) = 0;
+      flags(524) = 5;
+      flags(525) = 93;
+      flags(526) = 93;
+      flags(542) = 200;
+      flags(543) = 1160;
+      flags(1010) = 0;
+      flags(527) = 0;
+      flags(528) = 250;
+      flags(529) = 1350;
+      flags(530) = 1000;
+      flags(531) = 24;
+      flags(532) = 24;
+      flags(533) = 24;
+      flags(534) = 24;
+      flags(535) = 1000;
+      flags(536) = 0;
+      flags(537) = 0;
+      flags(538) = 65;
+      flags(539) = 65;
+      flags(544) = 5;
+      flags(545) = 1380;
+      flags(1011) = 0;
+      flags(251) = 1;
+      autooff();
+      cameratracking = 1;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      mapswitch("fal2bat.map", 1, 1, 0);
+    }
+  }
+}
+event { stext(1, "Ick!", "", ""); }
+event
+{
+  if (!flags(266))
+  {
+    stext(1, "Ouch! Hot!", "", "");
+  }
+  if (flags(266))
+  {
+    stext(1, "It's not working! The wood", "just catches fire again!", "");
+  }
+}
+event
+{
+  stext(1, "Whoa! It's an inferno in", "there! I've got to go another", "way!");
+  partymove("D1");
+}
+event
+{
+  stext(1, "Bull! Come on!", "", "");
+  stext(7, "I ain't goin' without my", "money!", "");
+}
+event
+{
+  if (flags(185) > 34)
+  {
+    stext(
+        1, "Whoa! It's an inferno in", "there! I've got to go another", "way!");
+    partymove("U1");
+  }
+}
+event
+{
+  warp(57, entity.locy(0) + 39, 0);
+  palettemorph(63, 20, 0, 40, 63);
+}
+event
+{
+  warp(61, entity.locy(0) - 39, 0);
+  palettemorph(63, 20, 0, 40, 63);
+}
+event
+{
+  if (flags(185) > 35)
+  {
+    mapswitch("mansdrm.map", 9, 8, 0);
+  }
+}
+event
+{
+  if (flags(185) == 36)
+  {
+    flags(185)++;
+    stext(
+        3,
+        "Sam! Hurry up! They blasted",
+        "a hole here, too! We can get",
+        "out this way!");
+  }
+}
+event { palettemorph(63, 20, 0, 40, 63); }

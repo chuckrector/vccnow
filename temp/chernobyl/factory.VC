@@ -1,0 +1,487 @@
+#include globals.h
+
+Event // 0 Autoexec
+{
+ fade=1;
+ If (Item(19))
+  AlterBTile(17,148,111,0);
+ if (!Flags[1])
+  {
+   AlterFTile(23,188,150,0);
+   AlterBTile(24,189,126,1);
+   ParallaxC=0;
+   PaletteMorph(0,0,0,0,0);
+   ReDraw();
+   CancelFade++;
+   CameraTracking=0;
+   ywin=LocY*16-95;
+   xwin=LocX*16-155;
+   ywin-=64;
+
+   VCClear();
+   if (!Char(3)) AddCharacter(3); // Locke
+   if (!Char(4)) AddCharacter(4); // Terra
+   // maybe replace these two with Vicks and Wedge? :)
+   q=Volume;
+   for (x,0,63,1)
+    {
+     PaletteMorph(0,0,0,0,x);
+     Wait(2);
+     if (q) Volume=(x*q)/63;
+    }
+   PartyMove("U7");
+   Wait(10); While(Entity.Moving(0)) Wait(10);
+
+   Wait(20);
+   SetFace(1,FaceDown());
+   LayerVC=1;
+   VCSPC(30,35,1,0);
+   DrawTextBox(10,10,15,1);
+   VCText(10,10,"This the place?");
+   Wait(75);   SetFace(2,FaceLeft());
+   Wait(50);   SetFace(2,FaceRight());
+   Wait(50);   SetFace(2,FaceUp()); 
+   VCSPC(150,60,3,0);
+   SmallText(120,100,"Yeah.");
+   VCClearRegion(150,60,182,92);
+
+   EraseTextBox(10,10,15,1);
+   SmallText(20,10,"Nice place.","Shame we have to fuck","it up.");
+   VCSpc(145,30,3,0);
+   SmallText(185,70,"uh, sure.");
+   VCClear();
+   VCSPC(100,150,4,0);
+   SmallText(20,100,"Hey, Locke, how come",
+                    "we have to bring this",
+                    "guy along?");
+   VCClear();
+   VCSPC(130,60,3,0);
+   SmallText(165,70,"I dunno, the boss",
+                    "said we bring 'im,",
+                    "so we bring 'im.");
+   VCClearRegion(130,60,162,92);
+   VCSPC(30,35,1,0);
+   SmallText(10,20,"My considerable skills","must've impressed him");
+   VCClear();
+
+   VCSPC(20,145,4,0);
+   SmallText(10,180,"Stuck up %$&#!");
+
+   AutoOn();
+   SmallText(0,180,"Just let me disable the security.");
+   VCClear();
+   Face(95)=FaceUp();
+   x=Entity.LocX(97);
+   y=Entity.LocY(97);
+   EntityMove(97,"R1 U4");
+   Wait(10);
+   While (MoveCode(97)=4) Wait(10);
+   for (s,0,10,1)
+    {
+     SoundEffect(Random(1,9));
+     Wait(10);
+    }
+   VCSpc(180,30,4,0);
+   DrawTextBox(165,70,10,1);
+   VCText(165,70,"Goddamit..");
+   for (s,0,10,1)
+    {
+     SpecialFrame(97)=Random(5,9);
+     switch(random(1,4))
+      {
+       case 1:soundeffect(20);
+       case 2:soundeffect(14);
+       case 3:soundeffect(9);
+       case 4:soundeffect(24);
+      }
+     Wait(10);
+    }
+   SpecialFrame(97)=0;
+   VCClear();
+   SoundEffect(22);
+   AlterBTile(24,189,127,1);
+   AlterFTile(23,188,0,0);
+   Wait(30);
+   EntityMove(97,"D4 L1");
+   Wait(10);
+   d=0; While (!d) {
+                    Wait(10); d=1;
+                    if (Entity.LocX(97)!=x) d=0;
+                    if (Entity.LocY(97)!=y) d=0;
+                    if (Entity.Moving(97)) d=0;
+                   }
+   AutoOff();
+
+   VCClear(); LayerVC=0;
+   Flags[1]=1;
+   while (ywin<(locY*16-95)) {ywin++; Wait(1);}
+   CameraTracking=1;
+   Return;
+  }
+ if (Flags[1]=1)
+  {ReDraw(); FadeIn(30); CancelFade++;}
+ if (Flags[1]>1)
+  {
+   PlayMusic("Rage.mod"); ModPosition=MapMusicPos();
+   ChangeZone(24,8,0);
+   Quake=1; QuakeX=2; QuakeY=2;
+  }
+ if (Flags[1]=2)
+  {
+   AutoOn();
+   PartyMove("D3");
+   CameraTracking=0;
+   EntityMove(95,"D2 FFaceUp()");
+   EntityMove(96,"D1 L1 FFaceRight()");
+   EntityMove(97,"D1 R1 FFaceLeft()");
+   Wait(10);
+   While (Entity.Moving(95)) Wait(10);
+   While (Entity.Moving(96)) Wait(10);
+   While (Entity.Moving(97)) Wait(10);
+   ReDraw();
+   FadeIn(30);
+
+   Text(1,"See?","What did I tell ya?","");
+   Text(3,"...","","");
+   LayerVC=1; VCSPC(20,145,4,0);
+   SmallText(10,180,"Stuck up %$&#!");
+   VCClear(); LayerVC=0;
+   EntityMove(95,"D1");
+   EntityMove(96,"R1 D1");
+   EntityMove(97,"L1 FFaceDown()");
+   Wait(10);
+   While (Entity.Moving(95)) Wait(10);
+   While (Entity.Moving(96)) Wait(10);
+   While (Entity.Moving(97)) Wait(10);
+
+   CameraTracking=1;
+   AutoOff();
+   CancelFade++;
+   Flags[1]=3;
+   Return;
+  }
+ if (Flags[1]>3)
+  {
+   ReDraw();
+   FadeIn(30);
+   LayerVC=1;
+   VCSPC(100,100,1,0);
+   SmallText(90,132,"Hahahaha.");
+   SmallText(80,140,"Time for a friendly",
+                    "chat with the boss");
+   Timer=0;
+   SoundEffect(13);
+   Wait(60);
+   SmallText(70,140,"SHIT!!!"); VCClear();
+   While (Timer<200) Wait(10);
+   Speed(0)++; PartyMove("D4"); Speed(0)--;
+   VCClear(); LayerVC=0;
+   FadeOut(15);
+   Quake=0; Fade=0;
+   for (i,0,7999,1) {Flags[i]=0;}
+   DestroyItem(19,0); // don't need the keycard anymore
+   MapSwitch("Town.Map",5,6,0);
+   Return;
+  }
+}
+
+Event // 1 Parallax 0
+{
+ ParallaxC=0;
+}
+
+Event // 2 Parallax 1
+{
+ ParallaxC=1;
+}
+
+Event // 3 Stairway 1
+{
+ if (LocY=188)
+   {
+    Warp(24,176,0);
+    Return;
+   }
+ Warp(23,189,0);
+// 23,189 <-> 24,176
+}
+
+Event // 4 Big Red Button
+{
+ Text(3,"This is it",
+        "Just hit the big red button","");
+ SmallText(10,10,"Don't you think the self-destruct",
+                 "should be less obvious? S'pose",
+                 "it's their fault, for being so stupid");
+ SoundEffect(20);
+ Wait(50);
+ SoundEffect(13);
+ Quake=1; QuakeX=2; QuakeY=2;
+ Text(1,"Well, that was easy",
+        "Better hurry",
+        "outta here");
+ Entity.LocX(5)=LocX-2;
+ Entity.LocX(6)=LocX-1;
+ Entity.LocX(7)=LocX+1;
+ Entity.LocX(8)=LocX+2;
+ for (n,1,4,1) {Entity.LocY(n+4)=LocY+8;
+                EntityMove(n+4,"U5");}
+
+ Wait(10); While (Entity.Moving(5)) Wait(10);
+ Wait(20);
+ SetFace(1,FaceDown());
+ Text(1,"Ooohhh, guards!","Neat!","Hahahaha!");
+ Text(3,"Anyone tell you what a",
+        "fuck up you are! We're",
+        "in just a bit of a RUSH!!");
+ Text(1,"Pummeling's like Tim Horton's:",
+        "always time for more!","");
+ LayerVC=1; VCSPC(0,150,4,0);
+ SmallText(40,150,"Stuck up %$&#!");
+ VCClear(); LayerVC=0;
+ Flags[1]=2;
+
+ MapMusicPos()=ModPosition;
+ SoundEffect(30);
+ BoxFadeOut(30);
+ BoxFadeOut(30);
+ FadeOut(1);
+ BoxFadeIn(1);
+ SavX()=LocX;
+ SavY()=LocY;
+ MapNum()=3;
+ BattleBG()=2;
+
+ Flags[7100]=6;
+ Flags[7101]=6;
+ Flags[7102]=6;
+ Flags[7103]=6;
+ Flags[7104]=0;
+ RunChance()=0; // Boss fight
+ Quake=0;
+ PlayMusic("Zeromus.s3m");
+ MapSwitch("Battle.Map",0,0,1);
+}
+
+Event // 5 the Entrance
+{
+ if (Flags[1]!=3)
+  {
+   LayerVC=1; VCClear();
+   VCSpc(0,150,4,0);
+   SmallText(40,150,"Might I remind you that","we have a job to do?");
+   VCClear();
+   VCSpc(30,30,1,0);
+   SmallText(20,70,"You might");
+   VCClear(); LayerVC=0;
+   PartyMove("U3");
+   Return;
+  }
+ if (Flags[1]=3)
+  {
+   AutoOn();
+   EntityMove(95,"D2 FFaceDown()");
+   EntityMove(96,"R1 FFaceDown()");
+   EntityMove(97,"L1 D1");
+   Wait(20);
+   While (Entity.Moving(95)) Wait(20);
+   While (Entity.Moving(96)) Wait(20);
+   While (Entity.Moving(97)) Wait(20);
+   Face(95)=FaceUp();        Wait(50);
+
+   LayerVC=1;
+   VCSpc(110,108,4,0);
+   SmallText(100,140,"End of the line.",
+                     "I've been waiting",
+                     "for this");
+   VCClear();
+   VCSpc(140,28,3,0);
+   SmallText(130,60,"Boss says we takes 'im",
+                    "out, so we takes 'im","out");
+
+   VCClear();
+   VCSpc(10,30,1,0); 
+   SmallText(0,65,"Damn. Shoulda seen it coming.",
+                  "You sure you want",
+                  "to do this?");
+   VCClear();
+   VCSpc(0,130,4,0);
+   SmallText(40,150,"Stuck up %$&#!");
+   VCClear();
+
+   Speed(95)=2;  Speed(96)=2;        Speed(97)=2;
+   EntityMove(96,"D1"); EntityMove(97,"D1");
+   Wait(20);
+   EntityMove(95,"U1");
+   While (Entity.Moving(96)) Wait(20);
+   While (Entity.Moving(97)) Wait(20);
+
+   LayerVC=0;
+   for (x,0,63,1)
+    {
+     PaletteMorph(63,63,63,x,63-x);
+     ReDraw();
+    }
+   AutoOff();
+   Flags[1]=4;
+   MapMusicPos()=ModPosition;
+   SoundEffect(30);
+   SavX()=LocX;
+   SavY()=LocY;
+   MapNum()=3;
+   BattleBG()=2;
+
+   Flags[7100]=7;
+   Flags[7101]=8;
+   Flags[7102]=0;
+   Flags[7103]=0;
+   Flags[7104]=0;
+   RunChance()=0; // Boss fight
+
+   CancelFade++;
+   RemoveCharacter(3);
+   RemoveCharacter(4);
+   Quake=0;
+   //PlayMusic("deff3bos.s3m");
+   MapSwitch("Battle.map",0,0,0);
+  }
+}
+
+Event // 6 Random battles
+{
+ // a=random(1,4); // pick a random enemy formation
+ switch(random(1,4))
+  {
+   Case 1:flags[7100]=6;
+          flags[7101]=0;
+          flags[7102]=0;
+          flags[7103]=0;
+          flags[7104]=0;
+   Case 2:flags[7100]=6;
+          flags[7101]=1;
+          flags[7102]=6;
+          flags[7103]=0;
+          flags[7104]=0;
+   Case 3:flags[7100]=6;
+          flags[7101]=0;
+          flags[7102]=6;
+          flags[7103]=0;
+          flags[7104]=0;
+   Case 4:flags[7100]=0;
+          flags[7101]=0;
+          flags[7102]=0;
+          flags[7103]=6;
+          flags[7104]=0;
+  }
+
+ MapMusicPos()=ModPosition;
+ SoundEffect(30);
+ BoxFadeOut(30);
+ BoxFadeOut(30);
+ FadeOut(1);
+ BoxFadeIn(1);
+ SavX()=LocX;
+ SavY()=LocY;
+ MapNum()=3;
+ BattleBG()=2;
+
+ Outside()=0;
+ FadeOut(30);
+ 
+ RunChance()=64; // 1 out of 4
+ for (n,1,NumChars,1)
+  {
+   RunChance()+=MBL(pi(n)); // Mobile characters can run faster
+  }
+ Quake=0;
+ if (Flags[1]<2)
+   PlayMusic("CTBATT2.S3M");
+ MapSwitch("Battle.map",0,0,1);
+}
+
+Event // 7 sign A
+{
+ x=LocX*16-XWin;
+ y=LocY*16-YWin;
+ x-=70;
+ y-=56;
+ SmallText(x,y,"Administration",
+               "No unauthorized access.",
+               "Violators will be terminated");
+}
+
+Event // 8 sign B
+{
+ x=LocX*16-XWin;
+ y=LocY*16-YWin;
+ x-=64;
+ y-=56;
+ SmallText(x,y,"Working area",
+               "Manual labourors",
+               "go here.  -the Manager");
+}
+
+Event // 9 doorway A
+{
+ if (LocX=21)
+  {
+   Warp(24,16,0);
+   Return;
+  }
+ Warp(21,170,0);
+ Return;
+}
+
+Event // 10 Doorway B
+{
+// 25,155 <-> 27,169
+ if (LocX=27)
+  {Warp(25,154,0); Return;}
+ Warp(27,170,0);
+}
+
+Event // 11 Doorway C
+{
+ Text(4,"Hey, Bob","If we go in there,","somebody'll see us");
+ Text(3,"Can't be fuckin the job","up","");
+ Text(1,"S'pose so","","");
+ PartyMove("D1");
+}
+
+Event // 12 the keycard
+{
+ SmallText(10,10,"Hey, a keycard!","How convenient!","Maybe in a later version of this","game, it'll be a bit","harder to get!");
+//17,148
+ AlterBTile(17,148,111,0);
+ GiveItem(19);
+}
+
+Event // 13 Console
+{
+ if (Item(19))
+  {
+// (21,169) 106
+   Text(0,"KeyCard accepted","","");
+   AlterBTile(21,169,106,0);
+   Return;
+  }
+ if (!Flags[2])
+  {
+   Text(1,"We need a keycard","","");
+   Text(4,"I can handle this","","");
+   Text(1,"Hold off a second!",
+          "This one probably",
+          "has lots of alarms.");
+   Text(3,"We could just steal",
+          "one from one of the",
+          "lockers. It's night");
+   Text(3,"shift right now, so",
+          "the janitors are",
+          "asleep");
+  Flags[2]++;
+  Return;
+ }
+ Text(1,"Where the hell is",
+        "that damn thing...","");
+}
+

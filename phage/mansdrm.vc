@@ -1,0 +1,128 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  disablesave();
+  disablemenu();
+}
+event
+{
+  stext(0, "Hello again, Sam...", "", "");
+  specialframe(0) = 21;
+  stext(
+      1,
+      "Morpheos! What's going on?!?",
+      "How did I get here? The last",
+      "thing I remember was...");
+  specialframe(0) = 0;
+  stext(
+      0,
+      "Your sensitivity to the Dream",
+      "World is astounding, Sam. In",
+      "time, you will become");
+  stext(
+      0,
+      "powerful enough to wrest the",
+      "title of Dream Lord from me...",
+      "But this very sensitivity is");
+  stext(
+      0,
+      "what allows me to contact you",
+      "like this. I make my escape",
+      "while you stand hallucinating");
+  stext(0, "in a collapsing building...", "", "");
+  stext(1, "Morpheos! Give me back the", "Seed, or...", "");
+  stext(
+      0,
+      "You are very powerful. But I",
+      "have far more experience than",
+      "you do, Guardian Sam. You");
+  stext(0, "would do well to remember", "this.", "");
+  specialframe(0) = 23;
+  stext(1, "Guardian!? What are you", "talking about? I'm not a", "Guardian!");
+  specialframe(0) = 0;
+  stext(
+      0,
+      "No, you are something far",
+      "greater, Sam. You are the",
+      "Catalyst for my plans...");
+  stext(0, "In a sense, you are my", "greatest creation...", "");
+  specialframe(0) = 23;
+  stext(1, "What!?", "", "");
+  specialframe(0) = 0;
+  stext(
+      0,
+      "I was not always the Phage's",
+      "harbinger, Sam... Long ago, I",
+      "decided to manipulate the");
+  stext(
+      0,
+      "Guardian Gene in a few",
+      "subjects, and let evolution",
+      "take it's unpredictable");
+  stext(
+      0,
+      "course. I must say, it came as",
+      "quite a surprise to see one of",
+      "their descendants pop up just");
+  stext(
+      0,
+      "now... And the results have",
+      "been more than satisfactory...",
+      "You will be quite useful in");
+  stext(0, "the days ahead. If you can", "survive...", "");
+  stext(
+      1,
+      "What do you need the Seed for,",
+      "Morpheos? Give it to me! Frog",
+      "Pond is *dying!*");
+  stext(
+      0,
+      "I plan to take it to the",
+      "North, Sam. My reasons are",
+      "my own. If Frog Pond must");
+  stext(
+      0,
+      "die... So be it. I warned",
+      "you that circumstances would",
+      "be different this time, Sam!");
+  stext(
+      1,
+      "You can't really be serious",
+      "about this! There are innocent",
+      "lives at stake!");
+  stext(
+      0,
+      "Thousands of years ago, I",
+      "murdered two entire species,",
+      "Sam. You have no idea what I");
+  stext(0, "am capable of...", "", "");
+  stext(
+      1,
+      "Then I will have to come after",
+      "you and *take* it back,",
+      "Morpheos! I don't care where");
+  stext(
+      1,
+      "you go! I don't care who or",
+      "what you think I am! You've",
+      "made yourself my enemy, and");
+  stext(1, "I will *not* stand idly by", "while you betray us!", "");
+  stext(
+      0,
+      "My power holds you fast in",
+      "this dream, Sam. How do you",
+      "propose to stop me?");
+  stext(
+      1,
+      "You can't stop me from leaving",
+      "the dream, Morpheos! I *will*",
+      "leave. *Now!*");
+  for (x, 1, 100, 2)
+  {
+    palettemorph(63, 63, 63, x, 63);
+    wait(1);
+  }
+  savemenu();
+  mapswitch("endcred.map", 8, 9, 0);
+}

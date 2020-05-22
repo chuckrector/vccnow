@@ -1,145 +1,89 @@
 #include "decompile.hpp"
-#include "libfuncs.hpp"
+#include "lib_funcs.hpp"
 #include "log.hpp"
+#include "mem.hpp"
 #include "types.hpp"
 #include "util.hpp"
 #include "v1vc_token.hpp"
+#include <stdarg.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define STRING_HEAP_SIZE (1024 * 1024 * 10)
-u8 *StringHeap = 0;
-u8 *StringHeapTail = 0;  // NOTE(aen): byte index of tail
-s32 StringHeapCount = 0; // NOTE(aen): # strings in the heap
-u64 StringHeapSize = 0;
-u8 *LastString = 0;
-u64 LastStringLength = 0;
+int Nest = 0;
+int OpNest = 0;
 
-void
-InitStringHeap()
+// NOTE(aen): Important to use this when adding tokens with dynamic contents
+// because their Text will point directly to the string passed in. For dynamic
+// bits like these markers, we need to allocate new memory so it remains unique
+// per instance. Otherwise, the minified output will reuse whatever memory
+// was pointed to for the last instance, creating output such as:
+//
+// event/*2*/{}event/*2*/{}event/*2*/{}
+//
+char *
+NewString(char *OriginalString)
 {
-  if (IsStringHeapReady)
-    return;
-  StringHeapSize = STRING_HEAP_SIZE;
-  StringHeap = new u8[StringHeapSize];
-  StringHeapTail = StringHeap;
-  IsStringHeapReady = true;
+  u64 L = strlen(OriginalString);
+  char *S = NewList(&TokenPool, L + 1, char);
+  memcpy(S, OriginalString, L);
+  S[L] = 0;
+  return S;
 }
 
 void
-FreeStringHeap()
+decompiler::DisSaveAddress(char Marker)
 {
-  delete[] StringHeap;
+  PrevDisMarker = DisMarker;
+  DisMarker = Marker;
+  DisRefCheck(); // NOTE(aen): May override marker
+  u64 Address0 = C - ScriptBase;
+  if (Address0 >= 0xffffffff)
+    Fail("Address is larger than 32-bit: %d %x\n", Address0, Address0);
+  DisAddress = (u32)Address0;
 }
 
-u8 *
-NewString(char *S, u64 L)
+void
+decompiler::DisLogComments(const char *Format, ...)
 {
-  if (!IsStringHeapReady)
-    Fail("Error: Must call InitStringHeap before using NewString\n");
-  if (!L)
-    L = strlen(S);
-  u64 NewSize = (StringHeapTail + L) - StringHeap;
-  if (NewSize > STRING_HEAP_SIZE)
-    Fail(
-        "Error: String heap exhausted. %s strings, %d bytes, no room for "
-        "%.*s[%d]\n",
-        StringHeapCount,
-        StringHeapTail - StringHeap,
-        L,
-        S,
-        L);
-
-  u8 *Home = StringHeapTail;
-  memcpy(Home, S, L);
-  Home[L] = 0; // NOTE(aen): Important. Confusing print output otherwise! 😅
-  StringHeapTail += L + 1;
-  StringHeapCount++;
-
-  LastString = Home;
-  LastStringLength = L;
-  // Log("LastString %.*s\n", LastStringLength, LastString);
-
-  // Log("<<<NewString %.*s[%d] #%d>>>\n", L, S, L, StringHeapCount);
-  return Home;
+  va_list Args;
+  va_start(Args, Format);
+  vsnprintf(DisComments, TEMP_BUFFER_SIZE, Format, Args);
+  va_end(Args);
 }
 
-Token_t *
-Decomp_t::AddTokenD(u32 Value)
+void
+decompiler::DisFlush()
+{
+  u8 *A = (u8 *)&DisAddress;
+  Log("%c%c%02x %02x %02x %02x %20s%s\n",
+      PrevDisMarker,
+      DisMarker,
+      A[0],
+      A[1],
+      A[2],
+      A[3],
+      DisByteCodes,
+      DisComments);
+
+  PrevDisMarker = ' ';
+  DisMarker = ' ';
+  DisAddress = 0xffffffff;
+  memset(DisByteCodes, 0, TEMP_BUFFER_SIZE);
+  memset(DisComments, 0, TEMP_BUFFER_SIZE);
+  DisByteCodesP = DisByteCodes;
+}
+
+char TempNumber[TEMP_BUFFER_SIZE];
+token *
+decompiler::AddTokenD(u32 Value)
 {
   // Log("AddTokenD %d\n", Value);
-  sprintf_s(TempBuffer, TEMP_BUFFER_SIZE, "%d", Value);
-  return AddToken(TempBuffer, TT_NUMBER);
+  sprintf_s(TempNumber, TEMP_BUFFER_SIZE, "%d", Value);
+
+  return AddToken(NewString(TempNumber), TT_NUMBER);
 }
-
-#define VC_END 255
-
-// Single-byte opcode descriptors
-
-#define VC_EXEC 1
-#define VC_VAR0_ASSIGN 2
-#define VC_VAR1_ASSIGN 3
-#define VC_VAR2_ASSIGN 4
-#define VC_GENERAL_IF 5
-#define VC_ELSE 6
-#define VC_GOTO 7
-#define VC_FOR_LOOP0 8
-#define VC_FOR_LOOP1 9
-#define VC_SWITCH 10
-#define VC_CASE 11
-
-// Single-byte operand descriptors
-
-#define VC_OP_IMMEDIATE 1
-#define VC_OP_VAR0 2
-#define VC_OP_VAR1 3
-#define VC_OP_VAR2 4
-#define VC_OP_GROUP 5
-
-// Single-byte IF handler parameters
-
-#define VC_ZERO 0
-#define VC_NONZERO 1
-#define VC_EQUALTO 2
-#define VC_NOTEQUAL 3
-#define VC_GREATERTHAN 4
-#define VC_GREATERTHANOREQUAL 5
-#define VC_LESSTHAN 6
-#define VC_LESSTHANOREQUAL 7
-
-// Single byte assignment descriptors
-
-#define VC_SET 1
-#define VC_INCREMENT 2
-#define VC_DECREMENT 3
-#define VC_INCSET 4
-#define VC_DECSET 5
-
-// Operand combination descriptors
-#define VC_ADD 1
-#define VC_SUB 2
-#define VC_MULT 3
-#define VC_DIV 4
-#define VC_MOD 5
-
-// Token types
-
-#define VC_TT_IDENT 1
-#define VC_TT_DIGIT 2
-#define VC_TT_CONTROL 3
-#define VC_TT_RESERVED 4
-#define VC_TT_FUNCTION 5
-#define VC_TT_VAR0 5
-#define VC_TT_VAR1 6
-#define VC_TT_VAR2 7
-
-struct Var_t
-{
-  char *Name = 0;
-  bool CanWrite = 0;
-};
 
 // NOTE(aen): Return is never actually reached as a lib function because it
 // emits the 255 end marker. It's kept in here so that the correct numbering is
@@ -247,6 +191,12 @@ const char *VCLibFuncs[] = {"MapSwitch:snnn",
                             "MagicShop:v1n",
                             "VcTextBox:nnnv1s",
                             "PlayVas:snnnnn"};
+
+struct Var_t
+{
+  char *Name = 0;
+  bool CanWrite = 0;
+};
 
 const Var_t VCVars0[] = {{"A", 1},
                          {"B", 1},
@@ -398,45 +348,132 @@ int VCVars1Length = sizeof(VCVars1) / sizeof(*VCVars1);
 int VCVars2Length = sizeof(VCVars2) / sizeof(*VCVars2);
 
 void
-Decomp_t::ParseString()
+decompiler::ParseString()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
+  // Log("ParseString\n");
   u8 *Start = C;
   while (*C++) {}
+  // Log("ParseString: final '%c' %d\n", *C, *C);
   sprintf_s(TempBuffer, TEMP_BUFFER_SIZE, "\"%s\"", Start);
-  AddToken(TempBuffer, TT_STRING);
+  AddToken(NewString(TempBuffer), TT_STRING);
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisLogComments("%s", TempBuffer);
+    DisFlush();
+
+    DumpHex("", Start, C - Start, C - Start, "              ");
+    // for (u8 *P = Start; P != C; P++)
+    //   Log("%02x ", *P);
+    // Log(".%s\n", TempBuffer);
+  }
 }
 
 void
-Decomp_t::ParseVar0()
+decompiler::ParseVar0()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   ExpectOpCode(VC_OP_VAR0);
-  AddIdent(VCVars0[*C++].Name);
+  u8 Index = *C++;
+  char *Name = VCVars0[Index].Name;
+
+  AddIdent(Name);
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_OP_VAR0);
+    DisC(Index);
+    DisLogComments(".var0 %s", Name);
+    DisFlush();
+  }
 }
 
 void
-Decomp_t::ParseVar1()
+decompiler::ParseVar1()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   ExpectOpCode(VC_OP_VAR1);
-  AddIdent(VCVars1[*C++].Name);
+  u8 Index = *C++;
+  char *Name = VCVars1[Index].Name;
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_OP_VAR1);
+    DisC(Index);
+    DisLogComments(".var1 %s", Name);
+    DisFlush();
+  }
+
+  AddIdent(Name);
   AddSymbol("(");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(")");
 }
 
 void
-Decomp_t::ParseVar2()
+decompiler::ParseVar2()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   ExpectOpCode(VC_OP_VAR2);
-  AddToken(VCVars2[*C++].Name, TT_IDENT);
-  AddToken("(", TT_SYMBOL), ParseOperand();
-  AddToken(",", TT_SYMBOL), ParseOperand();
+  u8 Index = *C++;
+  char *Name = VCVars2[Index].Name;
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_OP_VAR2);
+    DisC(Index);
+    DisLogComments(".var2 %s", Name);
+    DisFlush();
+  }
+
+  AddToken(Name, TT_IDENT);
+  AddToken("(", TT_SYMBOL);
+  ParseOperand();
+  if (ParseFailure)
+    return;
+  AddToken(",", TT_SYMBOL);
+  ParseOperand();
+  if (ParseFailure)
+    return;
   AddToken(")", TT_SYMBOL);
 }
 
 void
-Decomp_t::ParseVarAssignment()
+decompiler::ParseVarAssignment()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   int AssignType = *C++;
+
+  if (Mode == DISASSEMBLE)
+  {
+    switch (AssignType)
+    {
+      case VC_SET: DisC(VC_SET), DisLogComments(".set"); break;
+      case VC_INCREMENT:
+        DisC(VC_INCREMENT), DisLogComments(".increment");
+        break;
+      case VC_DECREMENT:
+        DisC(VC_DECREMENT), DisLogComments(".decrement");
+        break;
+      case VC_INCSET: DisC(VC_INCSET), DisLogComments(".incset"); break;
+      case VC_DECSET: DisC(VC_DECSET), DisLogComments(".decset"); break;
+    }
+    DisFlush();
+  }
+
   switch (AssignType)
   {
     case VC_SET: AddToken("=", TT_SYMBOL), ParseOperand(); break;
@@ -445,34 +482,117 @@ Decomp_t::ParseVarAssignment()
     case VC_INCSET: AddToken("+=", TT_SYMBOL), ParseOperand(); break;
     case VC_DECSET: AddToken("-=", TT_SYMBOL), ParseOperand(); break;
   }
+
   AddToken(";", TT_SYMBOL);
 }
 
 void
-Decomp_t::ParseOperandPrimitive()
+decompiler::ParseOperandPrimitive()
 {
+  // Log("ParseOperandPrimitive: %d\n", *C);
   switch (*C)
   {
-    case VC_OP_IMMEDIATE: *C++, AddTokenD(GetD()); break;
+    case VC_OP_IMMEDIATE:
+    {
+      if (Mode == DISASSEMBLE)
+        DisSaveAddress();
+
+      // Log("ParseOperandPrimitive: IMMEDIATE\n");
+      *C++;
+      if (Mode == DISASSEMBLE)
+      {
+        DisC(VC_OP_IMMEDIATE);
+        DisLogComments(".literal");
+        DisFlush();
+        DisSaveAddress();
+      }
+      u32 Value = GetD();
+      // Log("ParseOperandPrimitive: IMMEDIATE value %d\n", Value);
+
+      if (Mode == DISASSEMBLE)
+      {
+        DisD(Value);
+        DisLogComments("%d", Value);
+        DisFlush();
+      }
+
+      AddTokenD(Value);
+      break;
+    }
     case VC_OP_VAR0: ParseVar0(); break;
     case VC_OP_VAR1: ParseVar1(); break;
     case VC_OP_VAR2: ParseVar2(); break;
-    default: Fail("ParseOperandArg: Unknown op %d\n", *C);
+    default:
+    {
+      // if (Mode == DISASSEMBLE)
+      // {
+      ParseFailure = true;
+      AddComment("/*parse failure: ParseOperandArg: Unknown op %d*/", *C);
+
+      // }
+      // else
+      // {
+      //   DumpHex("Uknown op", C - 32, C - ScriptBase);
+      //   Fail("ParseOperandArg: Unknown op %d\n", *C);
+      // }
+    }
   }
 }
 
 void
-Decomp_t::ParseOperand()
+decompiler::ParseOperand()
 {
+  DebugLog(
+      MEDIUM,
+      "%.*sParseOperand '%c' %d, At End? %d\n",
+      OpNest * 4,
+      "",
+      *C,
+      *C,
+      C >= CurrentScriptEnd);
+  OpNest++;
   while (C < CurrentScriptEnd && *C != VC_END)
   {
+    if (Mode == DISASSEMBLE)
+      DisSaveAddress();
+
     if (*C == VC_OP_GROUP)
     {
-      *C++, AddSymbol("("), ParseOperand(), AddSymbol(")");
+      // Log("ParseOperand: GROUP\n");
+      *C++;
+
+      AddSymbol("(");
+      if (Mode == DISASSEMBLE)
+      {
+        DisC(VC_OP_GROUP);
+        DisLogComments(".group");
+        DisFlush();
+      }
+
+      ParseOperand();
+      AddSymbol(")");
     }
     else
     {
       ParseOperandPrimitive();
+    }
+
+    if (ParseFailure)
+      return;
+    if (Mode == DISASSEMBLE)
+    {
+      if (Mode == DISASSEMBLE)
+        DisSaveAddress();
+      switch (*C)
+      {
+        case VC_ADD: DisC(VC_ADD), DisLogComments(".add +"), DisFlush(); break;
+        case VC_SUB: DisC(VC_SUB), DisLogComments(".sub -"), DisFlush(); break;
+        case VC_DIV: DisC(VC_DIV), DisLogComments(".div /"), DisFlush(); break;
+        case VC_MULT:
+          DisC(VC_MULT), DisLogComments(".mul *"), DisFlush();
+          break;
+        case VC_MOD: DisC(VC_MOD), DisLogComments(".mod %"), DisFlush(); break;
+      }
     }
 
     switch (*C)
@@ -482,36 +602,84 @@ Decomp_t::ParseOperand()
       case VC_DIV: C++, AddSymbol("/"); break;
       case VC_MULT: C++, AddSymbol("*"); break;
       case VC_MOD: C++, AddSymbol("%"); break;
-      case VC_END: *C++; return;
-      default: Fail("ParseOperand: Unknown op %d\n", *C);
+      case VC_END:
+      {
+        if (Mode == DISASSEMBLE)
+        {
+          DisC(VC_END);
+          DisLogComments(".end (operand)");
+          DisFlush();
+        }
+
+        DebugLog(MEDIUM, "ParseOperand: END\n");
+        *C++;
+        OpNest--;
+
+        return;
+      }
+      default:
+      {
+        // if (Mode == DISASSEMBLE)
+        // {
+        ParseFailure = true;
+        AddComment("/*parse failure: ParseOperand: Unknown op %d*/", *C);
+
+        // }
+        // else
+        // {
+        //   Fail("ParseOperand: Unknown op %d\n", *C);
+        // }
+      }
     }
   }
+  // Fail("ParseOperand: Fell off end\n");
 }
 
 char *
-Decomp_t::ParseParam(u64 T1, char *P)
+decompiler::ParseParam(u64 T1, char *P)
 {
+  // Log("ParseParam: %c, %s\n", T1, P);
   switch (T1)
   {
     case 's': ParseString(); break;
     case 'n': ParseOperand(); break;
     case 'v':
     {
-      u64 NumArgs = *C++, Base = *P++, T2 = *P++;
+      u64 NumArgs = *C++;
+      u64 Base = *P++;
+      u64 T2 = *P++;
       ParseParam(T2, 0);
+      if (ParseFailure)
+        return P;
       if (Base == '1')
         NumArgs--; // 🎩 The rent is too damn high!
       while (NumArgs--)
-        AddSymbol(","), ParseParam(T2, NULL);
+      {
+        AddSymbol(",");
+        ParseParam(T2, NULL);
+        if (ParseFailure)
+          return P;
+      }
       break;
     }
-    default: Fail("ParseLibFunc: Unknown param type '%c'\n", T1);
+    default:
+    {
+      // if (Mode == DISASSEMBLE)
+      // {
+      ParseFailure = true;
+      AddComment(
+          "/*parse failure: ParseLibFunc: Unknown param type '%c'*/", T1);
+      Log("[ParseFailure] ParseLibFunc: Unknown param type '%c'\n", T1);
+      // }
+      // else
+      //   Fail("ParseLibFunc: Unknown param type '%c'\n", T1);
+    }
   }
   return P;
 }
 
 u64
-Decomp_t::ExpectOpCode(u64 Code)
+decompiler::ExpectOpCode(u64 Code)
 {
   u64 Result = *C++;
   if (Result != Code)
@@ -520,16 +688,36 @@ Decomp_t::ExpectOpCode(u64 Code)
 }
 
 void
-Decomp_t::ParseLibFunc()
+decompiler::ParseLibFunc()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   ExpectOpCode(VC_EXEC);
 
   u8 FunctionIndex = *C++;
   if (FunctionIndex < 1 || FunctionIndex > VCLibFuncsLength)
-    Fail(
-        "Unknown function index: %d (max %d)\n",
+  {
+    // if (Mode == DISASSEMBLE)
+    // {
+    ParseFailure = true;
+    AddComment(
+        "/*parse failure: Unknown function index: %d (max %d)*/",
         FunctionIndex,
         VCLibFuncsLength);
+    Log("[ParseFailure]: Unknown function index: %d (max %d)\n",
+        FunctionIndex,
+        VCLibFuncsLength);
+    return;
+    // }
+    // else
+    // {
+    //   Fail(
+    //       "Unknown function index: %d (max %d)\n",
+    //       FunctionIndex,
+    //       VCLibFuncsLength);
+    // }
+  }
 
   char *Signature = (char *)VCLibFuncs[FunctionIndex - 1];
   char *Name = Signature;
@@ -540,34 +728,73 @@ Decomp_t::ParseLibFunc()
   NameLength = P - Name;
   P++; // :
 
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_EXEC);
+    DisC(FunctionIndex);
+    DisLogComments(".exec %.*s", NameLength, Name);
+    DisFlush();
+  }
+
   AddIdent((char *)Name, NameLength);
   AddSymbol("(");
+
   while (*P)
   {
     char Type = *P++;
     P = ParseParam(Type, P);
-    *P &&AddSymbol(",");
+    if (ParseFailure)
+      return;
+    if (*P)
+      AddSymbol(",");
   }
   AddSymbol(")");
   AddSymbol(";");
 }
 
 void
-Decomp_t::Debug()
+decompiler::Debug()
 {
   Log("@%d:0x%x %c[%d]\n", C - ScriptBase, C - ScriptBase, *C, *C);
 }
 
 void
-Decomp_t::ParseIfTerm()
+decompiler::ParseIfTerm()
 {
-  // Log("ParseIfTerm\n");
+  DebugLog(MEDIUM, "ParseIfTerm\n");
   // NOTE(aen): Negation is a tail marker in V1 VC, so we need to
   // retroactively patch up the placeholder token we emitted, similar to
   // varargs.
-  Token_t *ZeroToken = AddToken(" ", TT_SYMBOL);
+  token *ZeroToken = AddToken(NewString(" "), TT_SYMBOL);
   ParseOperand();
-  u64 T = *C++;
+  if (C >= CurrentScriptEnd)
+  {
+    Log("ParseIfTerm: C >= CurrentScriptEnd after parsing operand, "
+        "bailing...\n");
+    return;
+  }
+  if (ParseFailure)
+    return;
+
+  u8 T = *C++; // control byte (sign)
+  if (C >= CurrentScriptEnd)
+  {
+    Log("ParseIfTerm: C >= CurrentScriptEnd after parsing control byte, "
+        "bailing...\n");
+    return;
+  }
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisSaveAddress();
+    DisC(T);
+    if (T == VC_ZERO)
+      DisLogComments(".if-sign-zero");
+    else
+      DisLogComments(".if-sign-nonzero");
+    DisFlush();
+  }
+
   if (T == VC_ZERO)
     *ZeroToken->Text = '!';
   else if (T == VC_NONZERO)
@@ -583,35 +810,102 @@ Decomp_t::ParseIfTerm()
       case VC_GREATERTHANOREQUAL: AddToken(">=", TT_SYMBOL); break;
       case VC_LESSTHAN: AddToken("<", TT_SYMBOL); break;
       case VC_LESSTHANOREQUAL: AddToken("<=", TT_SYMBOL); break;
-      default: Fail("ParseIf: Unknown IF relational operator %d\n", T);
+      default:
+      {
+        Fail("ParseIf: Unknown IF relational operator %d\n", T);
+      }
     }
     ParseOperand(); // NOTE(aen): V1 VC doesn't allow negating term RHS
   }
 }
 
 void
-Decomp_t::ParseIf()
+decompiler::ParseIf()
 {
-  u64 IfStart = C - ScriptBase;
-  // Log("ParseIf, Start %d\n", IfStart);
-  ExpectOpCode(VC_GENERAL_IF);
-  Token_t *Head = AddToken("if", TT_IDENT);
-  AddToken("(", TT_SYMBOL);
-  u64 NumArgs = *C++;
-  u64 ReturnIndex = GetD();
+  u64 IfAddress = C - ScriptBase;
+  u64 IfNum = NumIfRefs++;
+  IfRefs[IfNum] = IfAddress;
+  AddressRefs[NumAddressRefs++] = IfAddress;
 
-  for (u64 N = 0; N < NumArgs; N++)
+  if (Mode == DISASSEMBLE)
+  {
+    DisSaveAddress(':');
+    Log("if%d\n", IfNum);
+  }
+
+  u64 IfStart = C - ScriptBase;
+  DebugLog(MEDIUM, "ParseIf, Start %lld\n", IfStart);
+
+  ExpectOpCode(VC_GENERAL_IF);
+  token *Head = AddToken("if", TT_IDENT);
+  AddToken("(", TT_SYMBOL);
+  u8 NumTerms = *C++;
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_GENERAL_IF);
+    DisC(NumTerms);
+    DisLogComments(".if [terms=%d]", NumTerms);
+    DisFlush();
+
+    DisSaveAddress();
+  }
+
+  u32 ReturnIndex = GetD();
+  // AddComment("/*ReturnIndex %08x*/", ReturnIndex);
+  AddressRefs[NumAddressRefs++] = ReturnIndex;
+  DebugLog(
+      MEDIUM,
+      "ParseIf: NumTerms %lld, ReturnIndex %lld\n",
+      NumTerms,
+      ReturnIndex);
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisD(ReturnIndex);
+    DisLogComments(".else");
+    DisFlush();
+  }
+
+  u8 *IfEnd = ScriptBase + ReturnIndex;
+  if (C >= IfEnd)
+  {
+    // if (Mode == DISASSEMBLE)
+    // {
+    //   ParseFailure = true;
+    //   return;
+    // }
+    // else
+    // {
+    DumpHex("C past IfEnd", C - 32, CurrentScriptLength);
+    Fail("ParseIf: C past IfEnd before beginning, %lld\n", C - ScriptBase);
+    // }
+  }
+  // if (IfEnd >= CurrentScriptEnd)
+  // {
+  //   DumpHex("IfEnd past CurrentScriptEnd", C - 32, CurrentScriptLength);
+  //   Fail(
+  //       "ParseIf: IfEnd past CurrentScriptEnd before beginning, IfEnd: %lld,
+  //       " "CurrentScriptEnd: %lld, C %lld\n", IfEnd - CurrentScriptBase,
+  //       CurrentScriptEnd - CurrentScriptBase,
+  //       C - ScriptBase);
+  // }
+
+  for (u64 N = 0; N < NumTerms; N++)
   {
     ParseIfTerm();
-    (N < NumArgs - 1) && AddToken("&&", TT_SYMBOL);
+    if (N < NumTerms - 1)
+      AddToken("&&", TT_SYMBOL);
   }
 
   AddToken(")", TT_SYMBOL);
   AddToken("{", TT_SYMBOL);
 
-  u8 *IfEnd = ScriptBase + ReturnIndex;
-  while (C < IfEnd) // && ParseExpression())
+  u64 outer = 0;
+  while (C < IfEnd)
   {
+    DebugLog(HIGH, "ParseIf: Outer loop %lld\n", outer);
+    outer++;
     // NOTE(aen): WHILE detection. If GOTO is last expression in block and it
     // points to the start, it's a WHILE. It could be a manually written IF/GOTO
     // loop, but converting to WHILE is behavior-preserving.
@@ -622,19 +916,61 @@ Decomp_t::ParseIf()
     //       GotoAddress == IfStart);
     if (*C == VC_GOTO && C + 5 >= IfEnd && GotoAddress == IfStart)
     {
-      Head->Text = "while", Head->Length = 5, *C++, GetD();
+      // if (Mode == DISASSEMBLE)
+      // {
+      //   DisSaveAddress();
+      //   DisC(VC_GOTO);
+      //   DisLogComments(".goto if%d (while)", IfNum);
+      //   DisFlush();
+      // }
+
+      Head->Text = "while";
+      Head->Length = 5;
+      // *C++;
+
+      // if (Mode == DISASSEMBLE)
+      //   DisSaveAddress();
+
+      // u32 Value = GetD();
+
+      // if (Mode == DISASSEMBLE)
+      // {
+      //   DisD(Value);
+      //   DisFlush();
+      // }
+      ParseGoto(/*EmitDecompilation*/ false);
+
       break;
     }
 
-    NewParseExpression();
+    ParseExpression();
+    if (ParseFailure)
+    {
+      Log("ParseIf: ParseFailure eject after ParseExpression\n");
+      return;
+    }
+    // if (C > IfEnd)
+    // {
+    //   Fail("ParseIf: A Overshot IfEnd by %d bytes\n", C - IfEnd);
+    // }
+
     if (*C == VC_END)
     {
       if (C < IfEnd)
       {
         AddIdent("return");
         AddSymbol(";");
+
+        if (Mode == DISASSEMBLE)
+        {
+          DisSaveAddress();
+          DisC(VC_END);
+          DisLogComments(".end (return)");
+          DisFlush();
+        }
+
+        C++;
       }
-      C++;
       // else
       // {
       //   Log("Real VC_END within ParseIf\n");
@@ -644,11 +980,19 @@ Decomp_t::ParseIf()
 
   // ExpectOpCode(VC_END);
   AddToken("}", TT_SYMBOL);
+
+  if (C > IfEnd)
+  {
+    // DumpHex("Overshot If", C - 32, CurrentScriptLength);
+    // Fail("ParseIf: Overshot IfEnd by %d bytes. '%c' %d\n", C - IfEnd, *C,
+    // *C);
+  }
+  // C = IfEnd; // TODO(aen): Necessary?
 }
 
 // NOTE(aen): In expressions
 void
-Decomp_t::ParseReturn()
+decompiler::ParseReturn()
 {
   // if (C + 1 < CurrentScriptEnd) {
   //   AddIdent("return");
@@ -658,35 +1002,132 @@ Decomp_t::ParseReturn()
 }
 
 void
-Decomp_t::ParseGoto()
+decompiler::ParseGoto(b64 EmitDecompilation)
 {
+  if (Mode == DISASSEMBLE)
+  {
+    DisSaveAddress();
+    DisC(VC_GOTO);
+    DisLogComments(".goto");
+    DisFlush();
+  }
+
   ExpectOpCode(VC_GOTO);
-  GetD();
-  AddIdent("goto"), AddIdent("???"), AddSymbol(";");
+
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
+  u32 Address = GetD();
+  AddressRefs[NumAddressRefs++] = Address;
+  u64 ThisGoto = NumGotoRefs++;
+  GotoRefs[ThisGoto] = Address;
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisD(Address);
+
+    b64 IsIf = false;
+    u64 IfNum = 0;
+    for (u64 N = 0; N < NumIfRefs; N++)
+    {
+      if (IfRefs[N] == Address)
+      {
+        IsIf = true;
+        IfNum = N;
+        break;
+      }
+    }
+    if (IsIf)
+      DisLogComments(".if%d", IfNum);
+    DisFlush();
+  }
+
+  if (EmitDecompilation)
+  {
+    AddIdent("goto");
+    AddIdent("???");
+    AddSymbol(";");
+  }
 }
 
 void
-Decomp_t::ParseFor0()
+decompiler::ParseFor0()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   ExpectOpCode(VC_FOR_LOOP0);
+
+  u8 Index = *C++;
+  char *Name = VCVars0[Index].Name;
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_FOR_LOOP0);
+    DisC(Index);
+    DisLogComments(".for0 %s", Name);
+    DisFlush();
+  }
+
   AddIdent("for");
   AddSymbol("(");
-  AddIdent(VCVars0[*C++].Name);
+  AddIdent(Name);
   AddSymbol(",");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(",");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(",");
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisSaveAddress();
+    DisC(*C);
+    if (*C == VC_ZERO)
+      DisLogComments(".for0-sign-zero");
+    else
+      DisLogComments(".for0-sign-nonzero");
+    DisFlush();
+  }
+
   if (!*C++)
     AddSymbol("-");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(")");
   AddSymbol("{");
-  // Log("A\n");
-  // while (C < CurrentScriptEnd && ParseExpression()) {}
 
   ParseBlock(CurrentScriptEnd, false); // NOTE(aen): Assume no top-level returns
-  ExpectOpCode(VC_END);
+
+  // TODO(aen): Why does this fixe PHAGE bugdung.map?
+  // NOTE(aen): Seems to happen when closing out many blocks at the end of an
+  // event, e.g. }}}}. Maybe special check for: Consecutive series of FF that
+  // reach CurrentScriptEnd.
+  if (*C == VC_END)
+  {
+    if (Mode == DISASSEMBLE)
+    {
+      DisSaveAddress();
+      DisC(VC_END);
+      DisLogComments(".end (block) for0");
+      DisFlush();
+    }
+    C++;
+  }
+  else
+  {
+    ParseFailure = true;
+    AddComment(
+        "/*parse failure: ParseFor0: tail but no END found. Found %d*/", *C);
+    Log("[ParseFailure] ParseFor0: tail but no END found. Found %d\n", *C);
+    // Fail("\nParseFor0: tail but no END found. Found %d\n", *C);
+  }
+
+  // ExpectOpCode(VC_END);
   // Log("ParseFor0 END\n");
 
   // ParseBlock(CurrentScriptEnd);
@@ -698,67 +1139,170 @@ Decomp_t::ParseFor0()
 }
 
 void
-Decomp_t::ParseFor1()
+decompiler::ParseFor1()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   ExpectOpCode(VC_FOR_LOOP1);
+
   AddIdent("for");
   AddSymbol("(");
-  AddIdent(VCVars1[*C++].Name);
+
+  u8 Index = *C++;
+  char *Name = VCVars1[Index].Name;
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_FOR_LOOP1);
+    DisC(Index);
+    DisLogComments(".for1 %s", Name);
+    DisFlush();
+  }
+
+  AddIdent(Name);
   AddSymbol("(");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(")");
   AddSymbol(",");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(",");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(",");
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisSaveAddress();
+    DisC(*C);
+    if (*C == VC_ZERO)
+      DisLogComments(".for1-sign-zero");
+    else
+      DisLogComments(".for1-sign-nonzero");
+    DisFlush();
+  }
+
   if (!*C++)
     AddSymbol("-");
+
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(")");
   AddSymbol("{");
 
   ParseBlock(CurrentScriptEnd, false); // NOTE(aen): Assume no top-level RETURNs
-  // while (C < CurrentScriptEnd && ParseExpression()) {}
-  ExpectOpCode(VC_END);
+
+  // Log("CurrentScript: Base %lld, End %lld, Current %lld\n",
+  //     CurrentScriptBase - ScriptBase,
+  //     CurrentScriptEnd - CurrentScriptBase,
+  //     C - CurrentScriptBase);
+
+  // TOD(aen): HMMMMMMMMMMMM This fixes PHAGE forruin.map
+  if (*C == VC_END)
+  {
+    if (Mode == DISASSEMBLE)
+    {
+      DisSaveAddress();
+      DisC(VC_END);
+      DisLogComments(".end (block) for1");
+      DisFlush();
+    }
+    C++;
+  }
+  // ExpectOpCode(VC_END);
+  // Log("B\n");
 
   AddSymbol("}");
   // Fail("No\n");
 }
 
 void
-Decomp_t::ParseSwitch()
+decompiler::ParseSwitch()
 {
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress();
+
   ExpectOpCode(VC_SWITCH);
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisC(VC_SWITCH);
+    DisLogComments(".switch");
+    DisFlush();
+  }
+
   AddIdent("switch");
   AddSymbol("(");
   ParseOperand();
+  if (ParseFailure)
+    return;
   AddSymbol(")");
   AddSymbol("{");
   // TODO(aen): Check for VC_END instead?
   while (*C != VC_END)
   {
+    if (Mode == DISASSEMBLE)
+    {
+      DisSaveAddress();
+      DisC(VC_CASE);
+      DisLogComments(".case");
+      DisFlush();
+    }
     // Log("Case %d\n", C - ScriptBase);
     ExpectOpCode(VC_CASE);
     AddIdent("case");
     ParseOperand();
+    if (ParseFailure)
+      return;
     AddSymbol(":");
-    u8 *End = ScriptBase + GetD();
+
+    if (Mode == DISASSEMBLE)
+      DisSaveAddress();
+
+    u32 CaseEndAddress = GetD();
+    AddressRefs[NumAddressRefs++] = CaseEndAddress;
+
+    u8 *End = ScriptBase + CaseEndAddress;
+    if (Mode == DISASSEMBLE)
+    {
+      DisD(CaseEndAddress);
+      DisLogComments(".case-end-address");
+      DisFlush();
+    }
+
     // Log("Case End: %d\n", End - ScriptBase);
-    // NOTE(aen): ParseExpression similar to ExecuteBlock
-    // while (C < End && ParseExpression()) {}
     ParseBlock(End);
-    // ParseExpression();
-    // ExpectOpCode(VC_END);
+
+    // NOTE(aen): Resetting C here is important. Without, you get:
+    //   Expected op-code 11 but got 10
+    // When parsing PHAGE *bat.vc. Anything like this:
+    //   switch (a) { case 0: if (b) vgadump(); }
+    //   switch (c) { case 1: vgadump(); }
+    C = End;
   }
+
+  if (Mode == DISASSEMBLE)
+  {
+    DisSaveAddress();
+    DisC(VC_END);
+    DisLogComments(".end (switch)");
+    DisFlush();
+  }
+
   ExpectOpCode(VC_END);
   AddSymbol("}");
 }
 
 void
-Decomp_t::NewParseExpression()
+decompiler::ParseExpression()
 {
-  // Log("ParseExpression %d\n", C - ScriptBase);
+  DebugLog(MEDIUM, "ParseExpression %d\n", C - ScriptBase);
   switch (*C)
   {
     case VC_EXEC: ParseLibFunc(); break;
@@ -774,97 +1318,88 @@ Decomp_t::NewParseExpression()
       // NOTE(aen): Never handle VC_END ourselves. It may or not be a RETURN
       // based on local context.
       break;
-    default: Fail("Illegal opcode %d\n", *C);
+    default:
+    {
+      // if (Mode == DISASSEMBLE)
+      // {
+      // Assert(0);
+      ParseFailure = true;
+      AddComment("/*parse failure: ParseExpression: Illegal opcode %d*/", *C);
+      Log("[ParseFailure] ParseExpression: Illegal opcode %d\n", *C);
+      // }
+      // else
+      // {
+      //   DebugLog(
+      //       LOW,
+      //       "Position %d, ScriptLength %d, C %d, CurrentScriptIndex %d\n",
+      //       C - ScriptBase,
+      //       CurrentScriptLength,
+      //       C - CurrentScriptBase,
+      //       CurrentScriptIndex);
+      //   DumpHex("Illegal opcode", C - 32, C - ScriptBase);
+      //   Fail("ParseExpression: Illegal opcode %d\n", *C);
+      // }
+      break;
+    }
   }
 }
 
-// NOTE(aen): End is an escape hatch for WHILE detection.
-bool64
-Decomp_t::ParseExpression()
+void
+decompiler::DisRefCheck()
 {
-  // Log("ParseExpression %d\n", C - ScriptBase);
-  switch (*C)
+  u64 Address = C - ScriptBase;
+  for (u64 N = 0; N < NumAddressRefs; N++)
   {
-    case VC_EXEC: ParseLibFunc(); return 1;
-    case VC_VAR0_ASSIGN: ParseVar0(), ParseVarAssignment(); return 1;
-    case VC_VAR1_ASSIGN: ParseVar1(), ParseVarAssignment(); return 1;
-    case VC_VAR2_ASSIGN: ParseVar2(), ParseVarAssignment(); return 1;
-    case VC_GENERAL_IF: ParseIf(); return 1;
-    case VC_FOR_LOOP0: ParseFor0(); return 1;
-    case VC_FOR_LOOP1: ParseFor1(); return 1;
-    case VC_GOTO: ParseGoto(); return 1;
-    case VC_SWITCH: ParseSwitch(); return 1;
-    case VC_END:
-      // NOTE(aen): Never handle VC_END ourselves. It may or not be a RETURN
-      // based on local context.
-
-      // ParseReturn();
-      C++;
-      if (C < CurrentScriptEnd)
-      {
-        AddIdent("return");
-        AddSymbol(";");
-      }
-      return 0;
+    if (Address == AddressRefs[N])
+    {
+      DisMarker = ':';
+      break;
+    }
   }
-  Fail("Illegal opcode %d\n", *C);
-  return 0;
 }
 
-// void
-// Decomp_t::Parse()
-// {
-//   Log("Parse %d\n", C - ScriptBase);
-//   switch (*C)
-//   {
-//     case VC_EXEC: ParseLibFunc(); break;
-//     case VC_VAR0_ASSIGN: ParseVar0(), ParseVarAssignment(); break;
-//     case VC_VAR1_ASSIGN: ParseVar1(), ParseVarAssignment(); break;
-//     case VC_VAR2_ASSIGN: ParseVar2(), ParseVarAssignment(); break;
-//     case VC_GENERAL_IF: ParseIf(); break;
-//     case VC_GOTO: ParseGoto(); break;
-//     case VC_FOR_LOOP0: ParseFor0(); break;
-//     case VC_FOR_LOOP1: ParseFor1(); break;
-//     case VC_SWITCH: ParseSwitch(); break;
-//     case VC_END:
-//       if (C + 2 < CurrentScriptEnd)
-//       {
-//         AddIdent("return");
-//         AddSymbol(";");
-//       }
-//       // C++;
-//       // ParseReturn(); // TODO(aen): Why must this be after C++?
-//       break;
-//     default: Fail("Unexpected op-code: %d\n", *C);
-//   }
-// }
-
-Token_t *
-Decomp_t::AddToken(char *Text, u64 L, TokenType_e Type)
+token *
+decompiler::AddToken(char *Text, u64 L, TokenType_e Type)
 {
-  return TokenList.AddToken((char *)NewString(Text, L), L, Type, 0, 0);
+  // DebugLog("AddToken: L %d\n", L);
+  DebugLog(LOW, "%.*s ", L, Text);
+  return TokenList.AddToken(Text, L, Type, 0, 0);
 }
 
-Token_t *
-Decomp_t::AddToken(char *Text, TokenType_e Type)
+token *
+decompiler::AddToken(char *Text, TokenType_e Type)
 {
-  return AddToken(Text, strlen(Text), Type);
+  u64 L = strlen(Text);
+  // Log("AddToken: strlen %s\n", Text);
+  return AddToken(Text, L, Type);
 }
 
-Token_t *
-Decomp_t::AddIdent(char *S, u64 L)
+token *
+decompiler::AddIdent(char *S, u64 L)
 {
   return AddToken(S, L, TT_IDENT);
 }
-Token_t *
-Decomp_t::AddIdent(char *Text)
+token *
+decompiler::AddIdent(char *Text)
 {
   return AddIdent(Text, strlen(Text));
 }
-Token_t *
-Decomp_t::AddSymbol(char *Text)
+token *
+decompiler::AddSymbol(char *Text)
 {
   return AddToken(Text, TT_SYMBOL);
+}
+
+token *
+decompiler::AddComment(char *Format, ...)
+{
+  char Temp[TEMP_BUFFER_SIZE];
+  va_list Args;
+  va_start(Args, Format);
+  vsnprintf(Temp, TEMP_BUFFER_SIZE, Format, Args);
+  va_end(Args);
+
+  return AddSymbol(NewString(Temp));
 }
 
 // TODO(aen): Maybe split this into multiple funcs. The EmitReturns stuff is
@@ -876,42 +1411,205 @@ Decomp_t::AddSymbol(char *Text)
 // shenanigans inside a FOR. I've seen label+GOTO in WHILE (e.g. Chernobyl) but
 // no top-level RETURNs yet.
 void
-Decomp_t::ParseBlock(u8 *End, bool64 EmitReturns)
+decompiler::ParseBlock(u8 *End, b64 EmitReturns)
 {
-  // Log("ParseBlock\n");
+  Nest++;
+
+  u8 *BlockStart = C;
+  DebugLog(MEDIUM, "ParseBlock\n");
   while (C < End)
   {
-    NewParseExpression();
+    ParseExpression();
+    if (ParseFailure)
+      break;
+    if (Mode == DISASSEMBLE)
+    {
+      DisSaveAddress();
+    }
+
     if (*C == VC_END)
     {
+      // NOTE(aen): Regardless of whether we're emitting returns or not, if the
+      // next byte is the known end of the block, this isn't a return. Not sure
+      // how smart this is. There is a lot of fiddly behavior with VC_END op
+      // codes. The interpreter in the engine doesn't have to care about the
+      // kind of nuances a decompiler does, which is why VC_END handling is so
+      // special-cased all over the place.
+      if (C + 1 == End)
+      {
+        // Log("\nTRUE END\n");
+        // C++;
+        break;
+      }
+
       if (EmitReturns)
         C++;
       else
         break;
-      // NOTE(aen): If we're not at the known end of this block, it's a return.
+
+      // NOTE(aen): If we're not at the known end of this block, it's a
+      // return.
       if (EmitReturns && C < End)
       {
         AddIdent("return");
         AddSymbol(";");
+
+        if (Mode == DISASSEMBLE)
+        {
+          DisC(VC_END);
+          DisLogComments(".end (return)");
+          DisFlush();
+        }
       }
+      else
+      {
+        if (Mode == DISASSEMBLE)
+        {
+          DisC(VC_END);
+          DisLogComments(".end (block)");
+          DisFlush();
+        }
+      }
+
+      // DebugLog(MEDIUM, "ParseBlock: Tail check...\n");
+      // u8 *TailCheck = C;
+      // while (*TailCheck++ == VC_END) {}
+      // if (TailCheck >= End)
+      // {
+      //   DebugLog(
+      //       MEDIUM,
+      //       "ParseBlock: Detected end of block. %d FF\n",
+      //       TailCheck - C);
+      //   break;
+      // }
     }
   }
+
+  Nest--;
 }
 
 void
-Decomp_t::ParseEvent(u64 Index)
+decompiler::DisD(u32 Value)
 {
-  // Log("ParseEvent %d\n", Index);
+  u8 *P = (u8 *)&Value;
+  sprintf_s(
+      DisTemp,
+      TEMP_BUFFER_SIZE,
+      "%02x %02x %02x %02x ",
+      P[0],
+      P[1],
+      P[2],
+      P[3]);
+  u64 L = strlen(DisTemp);
+  memcpy(DisByteCodesP, DisTemp, L);
+  DisByteCodesP += L;
+}
+
+void
+decompiler::DisW(u16 Value)
+{
+  u8 *P = (u8 *)&Value;
+  sprintf_s(DisTemp, TEMP_BUFFER_SIZE, "%02x %02x ", P[0], P[1]);
+  u64 L = strlen(DisTemp);
+  memcpy(DisByteCodesP, DisTemp, L);
+  DisByteCodesP += L;
+}
+
+void
+decompiler::DisC(u8 Value)
+{
+  sprintf_s(DisTemp, TEMP_BUFFER_SIZE, "%02x ", Value);
+  // Log("DisC %d\n", Value);
+  u64 L = strlen(DisTemp);
+  // Log("DisC L %d\n", L);
+  memcpy(DisByteCodesP, DisTemp, L);
+  DisByteCodesP += L;
+}
+
+void
+decompiler::ParseEvent(u64 Index, u8 *RetryAddress)
+{
+  Nest = 0;
+
+  if (Mode == DISASSEMBLE)
+    DisSaveAddress('*');
+
+  DebugLog(MEDIUM, "\nParseEvent %d (of %d)\n", Index, NumScripts);
+  CurrentScriptIndex = Index;
   CurrentScriptBase = ScriptBase + ScriptOffsetTable[Index];
   CurrentScriptEnd = ScriptBase + ScriptOffsetTable[Index + 1];
   CurrentScriptLength = ScriptOffsetTable[Index + 1] - ScriptOffsetTable[Index];
+  DebugLog(MEDIUM, "ParseEvent: CurrentScriptLength %d\n", CurrentScriptLength);
   C = CurrentScriptBase;
-  AddIdent("event");
-  AddSymbol("{");
+  if (RetryAddress)
+  {
+    ParseFailure = false;
+    C = RetryAddress;
+  }
+  DebugLog(MEDIUM, "ParseEvent: First byte '%c' %d\n", *C, *C);
+
+  if (!RetryAddress)
+  {
+    AddIdent("event");
+    char Num[TEMP_BUFFER_SIZE];
+    sprintf_s(Num, TEMP_BUFFER_SIZE, "/*%lld*/", Index);
+    AddSymbol(NewString(Num));
+    AddSymbol("{");
+  }
   // Log("CurrentScriptEnd %d\n", CurrentScriptEnd - CurrentScriptBase);
-  ParseBlock(CurrentScriptEnd);
-  AddSymbol("}");
+
+  if (Mode == DISASSEMBLE)
+  {
+    Log("\n.event %lld\n", Index);
+  }
+
+  switch (*C)
+  {
+    case VC_EXEC:
+    case VC_VAR0_ASSIGN:
+    case VC_VAR1_ASSIGN:
+    case VC_VAR2_ASSIGN:
+    case VC_GENERAL_IF:
+    case VC_FOR_LOOP0:
+    case VC_FOR_LOOP1:
+    case VC_GOTO:
+    case VC_SWITCH:
+    case VC_END: ParseBlock(CurrentScriptEnd); break;
+    default:
+    {
+      AddIdent("return");
+      AddSymbol(";");
+      // AddIdent("/* Skipping. Bad offset? */");
+      break;
+    }
+  }
+
   // ExpectOpCode(VC_END);
+  DebugLog(MEDIUM, "ParseEvent END\n");
+
+  // if (Mode == DISASSEMBLE)
+  // {
+  if (ParseFailure)
+  {
+    Log("Parse failure. Attempting to recover...\n");
+    s64 BytesLeft = CurrentScriptEnd - C;
+    if (BytesLeft < 0)
+      Log("Negative bytes left: %d. Skipping to next event...\n", BytesLeft);
+    else if (BytesLeft > 0)
+    {
+      Log("ParseFailure: Skipping past next 0xff byte\n");
+      u8 *P = C;
+      while (*C++ != VC_END) {}
+      DumpHex("Skipped Bytes", P, C - P, C - P);
+      Log("Retry parsing the rest of event %d\n", Index);
+
+      ParseEvent(Index, C);
+    }
+  }
+
+  // Log("D\n");
+  AddSymbol("}");
+  // }
 }
 
 void
@@ -925,57 +1623,122 @@ DebugLengths()
 }
 
 u32
-Decomp_t::PeekD()
+decompiler::PeekD()
 {
   return *(u32 *)C;
 }
 u16
-Decomp_t::PeekW()
+decompiler::PeekW()
 {
   return *(u16 *)C;
 }
 u32
-Decomp_t::GetD()
+decompiler::GetD()
 {
   return C += 4, *(u32 *)(C - 4);
 }
 u16
-Decomp_t::GetW()
+decompiler::GetW()
 {
   return C += 2, *(u16 *)(C - 4);
 }
 
 void
-Decomp_t::Init(Buffer_t *Buffer)
+decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
 {
-  // Log("Decompile.Init\n");
+  DebugLog(MEDIUM, "Decompile.Init: Size %lld\n", Buffer->Length);
+
+  Mode = M;
+
+  NumAddressRefs = 0;
+  AddressRefs = NewList(&TempPool, 1000, u64);
+  DisByteCodesP = DisByteCodes;
+
+  NumGotoRefs = 0;
+  GotoRefs = NewList(&TempPool, 1000, u64);
+
+  NumIfRefs = 0;
+  IfRefs = NewList(&TempPool, 1000, u64);
+
+  memset(DisTemp, 0, TEMP_BUFFER_SIZE);
+  memset(DisByteCodes, 0, TEMP_BUFFER_SIZE);
+  memset(DisComments, 0, TEMP_BUFFER_SIZE);
 
   Data = Buffer->Data;
   DataSize = Buffer->Length;
-  Data[DataSize] = 0;
   DataEnd = Data + DataSize;
   C = Data;
 
+  DebugLog(LOW, "MaxTokens %d\n", MaxTokens);
+  TokenList.SetMaxTokens(MaxTokens);
+
   NumScripts = GetD();
-  // Log("NumScripts %d\n", NumScripts);
+  DebugLog(MEDIUM, "NumScripts %d\n", NumScripts);
   if (NumScripts < 0 || NumScripts > 100)
     Fail("Scripts negative or >100: %d\n", NumScripts);
-  ScriptOffsetTable = new u32[NumScripts + 1];
+  ScriptOffsetTable = (u32 *)NewTempBuffer(sizeof(u32 *) * (NumScripts + 1));
   memcpy(ScriptOffsetTable, C, NumScripts * 4);
   C += NumScripts * 4;
 
   ScriptBase = C;
+
+  // NOTE(aen): Attempt to fixup corrupt offset tables. In PHAGE, every offset
+  // which follows a corruption will be shifted ahead by a fixed amount.
+  for (u64 Index = 1; Index < NumScripts; Index++)
+  {
+    u8 *Head = ScriptBase + ScriptOffsetTable[Index];
+    if (Index && Head[-1] != 0xff)
+    {
+      u8 *P = Head - 1;
+      while (P != ScriptBase && *P != 0xff)
+        P--;
+      if (P == ScriptBase)
+      {
+        Log("/*Script %d has a corrupt offset. No 0xff byte found earlier.*/",
+            Index);
+      }
+      else
+      {
+        u32 NearestEndByte = (u32)(Head - (P + 1));
+
+        Log("/*Script %d has a corrupt offset. Rewinding all subsequent "
+            "offsets by %d bytes.*/",
+            Index,
+            NearestEndByte);
+        for (u64 FixupIndex = Index; FixupIndex < NumScripts; FixupIndex++)
+          ScriptOffsetTable[FixupIndex] -= NearestEndByte;
+      }
+    }
+  }
+
+  u64 HeaderSize = ScriptBase - Data;
   // NOTE(aen): So we can always check +1 to get length of current script
-  ScriptOffsetTable[NumScripts] = (u32)(DataSize - (ScriptBase - Data));
-  // Log("Load: Final offset %d\n", ScriptOffsetTable[NumScripts]);
-  // Log("Load: Scripts end %d, Total end %d\n", C - ScriptBase, DataSize);
+  DebugLog(MEDIUM, "DataSize %lld\n", DataSize);
+  u32 LastOffset = ScriptOffsetTable[NumScripts - 1];
+  DebugLog(MEDIUM, "Last offset %d\n", LastOffset);
+  u64 Size = DataSize;
+  DebugLog(MEDIUM, "Last size %lld\n", Size);
+  ScriptOffsetTable[NumScripts] = (u32)(DataSize - HeaderSize);
+  DebugLog(MEDIUM, "Load: Final offset %d\n", ScriptOffsetTable[NumScripts]);
+  DebugLog(
+      MEDIUM, "Load: Scripts end %d, Total end %d\n", C - ScriptBase, DataSize);
+
+  // NOTE(aen): Validate script offsets
+  for (int N = 0; N < NumScripts; N++)
+  {
+    u64 Current = ScriptOffsetTable[N];
+    u64 Next = ScriptOffsetTable[N + 1];
+    // Log("Current %lld, Next %lld, diff %lld\n", Current, Next, Next -
+    // Current);
+    DebugLog(LOW, "Script %d: @%lld, L%lld\n", N, Current, Next - Current);
+  }
 }
 
 void
-Decompile(Buffer_t *Input, Buffer_t *Output)
+Decompile(buffer *Input, buffer *Output, u64 MaxTokens, decomp_mode Mode)
 {
-  ASSERT(Input);
-  ASSERT(Output);
+  Assert(Input);
+  Assert(Output);
 
   if (!Input->Length)
   {
@@ -985,44 +1748,34 @@ Decompile(Buffer_t *Input, Buffer_t *Output)
 
   // Log("Decompile: Input %d\n", Input->Length);
 
-  InitBufferSlab();
-  InitStringHeap();
-  InitTokenSlab();
-
-  Decomp_t D;
-  D.Init(Input);
+  decompiler D;
+  D.Init(Input, MaxTokens, Mode);
 
   for (u64 N = 0; N < D.NumScripts; N++)
     D.ParseEvent(N);
-  // Log("Decompile: Finished parsing events, debugging token list...\n");
-  // D.TokenList.Debug();
-  u64 MinifiedLength = D.TokenList.Minify(Output->Data);
+
+  if (Mode == DISASSEMBLE) {}
+  // NOTE(aen): Full decompilation
+  else
+  {
+    // Log("Decompile: Finished parsing events, debugging token list...\n");
+    // D.TokenList.Debug();
+    u64 MinifiedLength = D.TokenList.Minify(
+        Output->Data, /*ForceSpaces*/ false, /*DryRun*/ true);
+    // Log("Needed minified length: %d\n", MinifiedLength);
+    Output->Data = (u8 *)NewTempBuffer(MinifiedLength);
+    Output->Length = MinifiedLength;
+    // Log("Minifying...\n");
+    D.TokenList.Index = 0;
+    D.TokenList.Minify(Output->Data);
+  }
+
   // Log("MinifiedLength %d\n", MinifiedLength);
   // Log("Decompiled Output:%s\n", Output->Data);
-  Output->Length = MinifiedLength;
 }
 
 void
-Decompile(const char *Filename, Buffer_t *Output)
+Decompile(const char *Filename, buffer *Output, u64 MaxTokens, decomp_mode Mode)
 {
-  Decompile(Load(Filename), Output);
-}
-
-int
-decompile_cmdline(int argc, char *argv[])
-{
-  // char *Filename = 0;
-  Log("argc %d\n", argc);
-  switch (argc)
-  {
-    case 1: Fail("usage: vccnow d <filename.map|compiled>\n"); break;
-    case 2: break;
-    default: Fail("vccnow d: Too many parameters.\n");
-  }
-  // Log("Decompiling %s...\n", argv[1]);
-  Buffer_t Output;
-  Output.Data = (u8 *)TempBuffer;
-  Decompile(argv[1], &Output);
-  Log("%s", TempBuffer);
-  return 0;
+  Decompile(Load(Filename), Output, MaxTokens, Mode);
 }

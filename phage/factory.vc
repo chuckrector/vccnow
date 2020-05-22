@@ -1,0 +1,743 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(801) = 1;
+  if (flags(185) == 21)
+  {
+    playmusic("StrFrcNv.xm");
+    cameratracking = 0;
+    xwin = 276;
+    ywin = 192;
+    xwin -= 64;
+    face(21) = 1;
+    stext(
+        11,
+        "Hrmmph! So, it's settled.",
+        "In return for the Seed, I",
+        "pay you 10,000,000 GP and");
+    stext(11, "a box of assorted rare", "flies... Is that correct?", "");
+    stext(
+        7,
+        "Yeah... That's about right...",
+        "But yer lucky that I'm in a",
+        "hurry, or I wouldn't be");
+    stext(
+        7,
+        "lettin' it go this easy...",
+        "So tell me... why're you so",
+        "hot on gettin' yer claws on");
+    stext(7, "this thing, anyways?", "", "");
+    stext(
+        11,
+        "I'll tell you that once the",
+        "trade is completed... I",
+        "didn't get to be this rich");
+    stext(
+        11,
+        "by blabbing my plans to",
+        "every whippersnapper I make",
+        "a deal with!");
+    stext(
+        11,
+        "I have the necessary funds",
+        "at my mansion in Bunoose.",
+        "You'll be paid there.");
+    specialframe(19) = 21;
+    specialframe(21) = 21;
+    partymove("L4");
+    stext(
+        1,
+        "Not so fast! That seed is the",
+        "rightful property of Frog",
+        "Pond, and I'm making sure it");
+    stext(1, "gets brought back to them!", "", "");
+    specialframe(19) = 23;
+    specialframe(21) = 0;
+    face(21) = 2;
+    stext(
+        11,
+        "What's this? Intruders? I'm",
+        "going to severely dock my",
+        "security detail's pay...");
+    specialframe(19) = 22;
+    stext(
+        11,
+        "But as it stands, I am not",
+        "utterly unprepared...",
+        "Falkonner! Attend me!");
+    entitymove(20, "D2R4");
+    wait(200);
+    specialframe(19) = 0;
+    stext(
+        12,
+        "Master Vultris is to be",
+        "unobstructed. If you attempt",
+        "to interfere, I will be");
+    stext(12, "most pleased to bring about", "your complete destruction.", "");
+    stext(
+        11,
+        "Falkonner, hold them off",
+        "until I've made my escape.",
+        "You may kill them if you");
+    stext(11, "find it useful, but it's", "not required. Ta ta!", "");
+    entitymove(19, "L3D5R3D4");
+    wait(450);
+    entity.locy(19) = 1;
+    stext(7, "Hey! Wait up! I want my", "payment!", "");
+    entitymove(21, "D6");
+    givexp(7, 10000);
+    wait(150);
+    entity.locy(21) = 1;
+    flags(185) = 22;
+    stext(
+        12,
+        "Now is the winter of my",
+        "discontent... Commence",
+        "destruction in T minus");
+    stext(12, "3...", "2...", "1...");
+    banner("Boss Battle!", 1);
+    banner("1 Falkonner", 1);
+    cameratracking = 1;
+    if (flags(200) == 0)
+    {
+      fakebattle();
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 0;
+      flags(502) = 250;
+      flags(503) = 350;
+      flags(504) = 1500;
+      flags(505) = 23;
+      flags(506) = 23;
+      flags(507) = 23;
+      flags(508) = 23;
+      flags(509) = 1000;
+      flags(510) = 0;
+      flags(511) = 0;
+      flags(512) = 65;
+      flags(513) = 65;
+      flags(540) = 200;
+      flags(541) = 380;
+      flags(1009) = 0;
+      flags(514) = 4;
+      flags(515) = 200;
+      flags(516) = 365;
+      flags(517) = 8000;
+      flags(518) = 22;
+      flags(519) = 25;
+      flags(520) = 26;
+      flags(521) = 27;
+      flags(522) = 3000;
+      flags(523) = 0;
+      flags(524) = 5;
+      flags(525) = 93;
+      flags(526) = 93;
+      flags(542) = 200;
+      flags(543) = 160;
+      flags(1010) = 0;
+      flags(527) = 0;
+      flags(528) = 250;
+      flags(529) = 350;
+      flags(530) = 1000;
+      flags(531) = 24;
+      flags(532) = 24;
+      flags(533) = 24;
+      flags(534) = 24;
+      flags(535) = 1000;
+      flags(536) = 0;
+      flags(537) = 0;
+      flags(538) = 65;
+      flags(539) = 65;
+      flags(544) = 5;
+      flags(545) = 380;
+      flags(1011) = 0;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      flags(251) = 1;
+      mapswitch("fal1bat.map", 1, 1, 0);
+    }
+  }
+  if (flags(185) == 22)
+  {
+    playmusic("StrFrcNv.xm");
+    flags(251) = 0;
+    flags(185) = 23;
+    autoon();
+    entity.locx(char(2) + 94) = 27;
+    entity.locx(char(3) + 94) = 28;
+    entity.locx(char(4) + 94) = 27;
+    entity.locx(char(5) + 94) = 29;
+    entity.locy(char(2) + 94) = 19;
+    entity.locy(char(3) + 94) = 18;
+    entity.locy(char(4) + 94) = 17;
+    entity.locy(char(5) + 94) = 20;
+    entity.locx(19) = 0;
+    entity.locy(19) = 0;
+    entity.locx(20) = 0;
+    entity.locy(20) = 0;
+    entity.locx(21) = 0;
+    entity.locy(21) = 0;
+    face(char(1) + 94) = 2;
+    stext(1, "They're getting away! We've", "got to follow them!", "");
+    stext(
+        2,
+        "Vultris said he'd be at his",
+        "mansion. That's in Bunoose,",
+        "to the northeast!");
+    stext(
+        3,
+        "That Falkonner character...",
+        "His armor was totally unlike",
+        "anything I've seen. Like");
+    stext(
+        3,
+        "the power armors of the",
+        "Colonization, but even more",
+        "sophisticated, if that's");
+    stext(3, "possible to believe...", "Where'd Vultris get him from?", "");
+    stext(
+        4,
+        "What are you saying? That",
+        "that old coot is some sort",
+        "of immortal scientist from");
+    stext(4, "the Colonization?", "", "");
+    stext(
+        3,
+        "No... He's too aged to be a",
+        "Guardian... We stop aging",
+        "before we hit that kind of");
+    stext(3, "feebleness. But perhaps he's", "receiving aid from one?", "");
+    entitymove(char(5) + 94, "U2F3");
+    wait(100);
+    stext(1, "Hold on! What's a 'Guardian?'", "", "");
+    changechr(5, "dingc.chr");
+    specialframe(char(5) + 94) = 21;
+    wait(20);
+    specialframe(char(5) + 94) = 22;
+    wait(20);
+    specialframe(char(5) + 94) = 21;
+    wait(20);
+    specialframe(char(5) + 94) = 22;
+    wait(20);
+    specialframe(char(5) + 94) = 21;
+    wait(20);
+    specialframe(char(5) + 94) = 22;
+    wait(20);
+    specialframe(char(5) + 94) = 21;
+    wait(20);
+    specialframe(char(5) + 94) = 0;
+    changechr(5, "dingo.chr");
+    wait(20);
+    entitymove(char(5) + 94, "D2F3");
+    wait(100);
+    stext(
+        3,
+        "The Guardians of Civilization",
+        "was the term, from what I've",
+        "heard. Way back during the");
+    stext(
+        3,
+        "Colonization, the humans",
+        "realized that without their",
+        "prescences, the animal");
+    stext(
+        3,
+        "peoples would sink into",
+        "barbarism, forgetting all",
+        "the knowledge that the humans");
+    stext(
+        3,
+        "were leaving them. If the",
+        "animals did so, they would",
+        "have to start over, and the");
+    stext(
+        3,
+        "purpose that the humans had",
+        "for them would be foiled. So,",
+        "the humans coded immortality");
+    stext(
+        3,
+        "into the genes of a select",
+        "few animals, who would teach",
+        "the new generations the uses");
+    stext(
+        3,
+        "of technology, and their",
+        "mission in life. The genes",
+        "for this only appeared very");
+    stext(
+        3,
+        "randomly in the populace, so",
+        "as not to crowd the planet",
+        "with immortals. An added");
+    stext(
+        3,
+        "effect was the abilities",
+        "the new Guardians had to",
+        "interact with the magical");
+    stext(
+        3,
+        "fields of the planet. Whether",
+        "this was intentional or not",
+        "is lost to history.");
+    stext(1, "So *you're* from the", "Colonization?", "");
+    stext(
+        3,
+        "Heavens no! I'm only a few",
+        "thousand years old! Look",
+        "around, boy! Do you see");
+    stext(
+        3,
+        "many animals using the",
+        "humans' technology? The",
+        "Guardians failed. The");
+    stext(
+        3,
+        "animal tribes that had them",
+        "were hated by those who did",
+        "not, and often the Guardians'");
+    stext(
+        3,
+        "own tribes viewed them with",
+        "suspiscion. They were all",
+        "killed. Later generations");
+    stext(
+        3,
+        "of us were born, but the",
+        "damage was done. I only",
+        "know of two Guardians, and");
+    stext(
+        3,
+        "possibly a third, that",
+        "exist today. I am one.",
+        "Lumin is another. Webb, tell");
+    stext(3, "me: Does Echo still lead the", "Bat Clan?", "");
+    stext(
+        2,
+        "I don't know... Grandfather",
+        "is the leader, and everyone",
+        "just calls him Grandfather.");
+    stext(
+        2, "But he's been around for", "as long as anyone can", "remember...");
+    stext(3, "That would be him, then.", "", "");
+    stext(
+        4, "History lesson can wait! Are", "we going after Vultris or", "not?");
+    stext(
+        3,
+        "We should know our foe",
+        "before we face him. Or did",
+        "you forget that we did very");
+    stext(
+        3,
+        "little of use against Bull",
+        "and Falkonner, who are both",
+        "working with Vultris?");
+    face(char(3) + 94) = 0;
+    specialframe(char(3) + 94) = 22;
+    stext(
+        3,
+        "And Dingo, put my wallet",
+        "down, or I will be forced",
+        "to hurt you greatly.");
+    specialframe(char(3) + 94) = 0;
+    specialframe(char(5) + 94) = 21;
+    stext(5, "Eep!", "", "");
+    specialframe(char(5) + 94) = 0;
+    stext(4, "Hey! Why don't you just steal", "us the Seed?", "");
+    specialframe(char(5) + 94) = 21;
+    stext(
+        5,
+        "I never thought of that! All",
+        "right, I'll give it a try!",
+        "But we'll have to get me");
+    specialframe(char(5) + 94) = 0;
+    stext(
+        5,
+        "in close to it... So we'd",
+        "better go and head to",
+        "that Vultris guy's place!");
+    entitymove(char(1) + 94, "R4F3");
+    entitymove(char(2) + 94, "R3U1F3");
+    entitymove(char(3) + 94, "R2F3");
+    entitymove(char(4) + 94, "R3D1F3");
+    entitymove(char(5) + 94, "R1U2F3");
+    wait(150);
+    if (entity.locx(1) != 27)
+    {
+      cameratracking = 0;
+      partymove("R4L4");
+      cameratracking = 1;
+    }
+    entitymove(95, "L4");
+    entitymove(96, "L3");
+    entitymove(97, "L2");
+    entitymove(98, "L1");
+    wait(150);
+    autooff();
+  }
+  if (flags(185) > 22)
+  {
+    entity.locx(6) = 25;
+    entity.locy(6) = 80;
+    entity.locx(7) = 24;
+    entity.locy(7) = 79;
+    entity.locx(8) = 25;
+    entity.locy(8) = 78;
+    entity.locx(9) = 26;
+    entity.locy(9) = 77;
+    entity.locx(10) = 26;
+    entity.locy(10) = 76;
+    entity.locx(11) = 25;
+    entity.locy(11) = 75;
+    entity.locx(12) = 25;
+    entity.locy(12) = 74;
+    for (x, 6, 12, 1)
+    {
+      face(x) = 2;
+    }
+    face(18) = 2;
+  }
+  if (flags(185) > 23)
+  {
+    alterbtile(17, 38, 783, 2);
+    alterbtile(28, 38, 783, 2);
+  }
+}
+event
+{
+  stext(
+      1, "This is one of the famous", "Vultris Brand chocolate", "bunnies...");
+}
+event
+{
+  stext(
+      1, "This is one of the famous", "Vultris Brand chocolate", "bunnies...");
+  stext(
+      0,
+      "Oh, no! I'm actually the",
+      "model for them! It's a",
+      "tough job! They lower me");
+  stext(
+      0,
+      "into a pan of hot chocolate,",
+      "and wait for it to harden.",
+      "Then they use that to make");
+  stext(0, "a mold for the candy!", "", "");
+  if (char(4))
+  {
+    stext(
+        4,
+        "Hunh. You'd think it would",
+        "be easier just to use wax",
+        "and make a mold directly!");
+    stext(
+        0,
+        "Well, yeah, but wax is",
+        "harder to get out of your",
+        "fur! Plus they said something");
+    stext(0, "about it not being 'as much", "fun'... whatever that means!", "");
+    stext(4, "I see their point...", "", "");
+  }
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(0, "Gawrsh! This factory shoore", "is big!", "");
+  }
+  if (flags(185) > 22)
+  {
+    stext(
+        0,
+        "Dang! I just saw the owner",
+        "a' this here place come",
+        "tearing through!");
+  }
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(
+        0,
+        "I'm taking my class on a field",
+        "trip! But half of them are",
+        "lost...");
+  }
+  if (flags(185) > 22)
+  {
+    stext(
+        0,
+        "I heard that someone tried",
+        "to sneak in while you were",
+        "gone! How exciting!");
+  }
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(0, "Did one of those chocolate", "bunnies just... move?", "");
+  }
+  if (flags(185) > 22)
+  {
+    stext(0, "That chocolate bunny just", "winked at me! I swear!", "");
+  }
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(0, "I need to use the bathroom!", "I wonder where it is?", "");
+  }
+  if (flags(185) > 22)
+  {
+    stext(
+        0,
+        "I can't hold it in anymore!",
+        "I'm gonna pee behind one of",
+        "these vats!");
+    if (char(4))
+    {
+      stext(4, "You could just go outside...", "", "");
+      stext(0, "Too late! (sigh!)", "", "");
+    }
+  }
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(0, "Miss Hoover? I saw a bee!", "I'm scared of bees!", "");
+  }
+  if (flags(185) > 22)
+  {
+    stext(
+        0,
+        "I saw an ant! My mommy",
+        "kills them for me, but",
+        "she's not here!");
+  }
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(0, "Dur... Wher're da free", "samples? Hur hur hur!", "");
+  }
+  if (flags(185) > 22)
+  {
+    stext(
+        0, "Dur... No free samples,", "so I just stole some", "butterscotch!");
+    stext(1, "Isn't that molten candy", "still incredibly hot?", "");
+    if (char(4))
+    {
+      stext(
+          4,
+          "The pain probably takes a",
+          "while to register in his",
+          "brain...");
+    }
+  }
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(
+        0,
+        "And these are the main",
+        "butterscotch vats! They",
+        "each hold over 40,000");
+    stext(
+        0,
+        "gallons of butterscotch!",
+        "That's more butterscotch",
+        "than the town of Frog Pond");
+    stext(0, "has ever made in the history", "of their town!", "");
+    stext(
+        1,
+        "Hmph! You'd think Frog Pond",
+        "actually *made* candy, other",
+        "than chocolate-covered flies!");
+    stext(
+        1,
+        "And these folk are sucking it",
+        "up as if it's some sort of",
+        "achievement!");
+    stext(5, "It isn't?", "", "");
+    specialframe(char(1) - 1) = 20;
+    stext(
+        1,
+        "No! They make more than zero!",
+        "That's about all it means!",
+        "They're just trying to");
+    stext(1, "impress people who are", "ignorant about the other", "towns!");
+    specialframe(char(1) - 1) = 0;
+    stext(5, "Ooooohhh! I get it!", "", "");
+    stext(4, "Now there's a first!", "", "");
+    stext(
+        0,
+        "...And up there to your right",
+        "is the part of the factory",
+        "kept off-limits to the tour!");
+    stext(
+        0,
+        "Rumour has it that not even",
+        "the ever-present guards are",
+        "allowed back there!");
+    stext(
+        1,
+        "Hmmm... We'll never get",
+        "anywhere if we stick with",
+        "the tour... So I think we'd");
+    stext(1, "best head that way...", "", "");
+  }
+  if (flags(185) > 22)
+  {
+    stext(0, "And over this way are the", "famous chocolate bunnies...", "");
+  }
+}
+event { mapswitch("dactyl.map", 84, 37, 0); }
+event { mapswitch("clocks.map", 25, 134, 0); }
+event
+{
+  stext(
+      0,
+      "Hi! My name is Tiffany!",
+      "my cheerleading team is",
+      "here on a trip! I wonder");
+  stext(
+      0,
+      "where Bambi and Bonnie are?",
+      "I bet they're trying to get",
+      "a modelling contract!");
+  if (flags(320) == 0 && char(5))
+  {
+    flags(320) = 1;
+    stext(
+        0,
+        "Hey! Where'd my gym bag go?",
+        "All my spare uniforms were",
+        "in there!");
+    stext(5, "Only uniforms? Darn! Uh, I", "mean, I don't know...", "");
+    getmagic(5, 34);
+    banner("Dingo learns:", 1);
+    banner("Pep Rally!", 1);
+  }
+}
+event
+{
+  stext(0, "A stock report for the", "Vultris Confectionery", "Company.");
+}
+event
+{
+  stext(0, "Bookkeeping records.", "", "");
+  stext(1, "Hey! Someone's been fudging", "these!", "");
+}
+event
+{
+  stext(
+      0,
+      "A sappy romance novel?!?",
+      "The owner has dog-eared the",
+      "love scenes...");
+  stext(
+      4,
+      "Hey, the beaver on the cover",
+      "with the long hair is my",
+      "cousin Bobbio!");
+}
+event
+{
+  stext(1, "We've got to catch Vultris!", "there's no time to go this", "way!");
+  partymove("L1");
+}
+event
+{
+  warp(entity.locx(0), entity.locy(0) + 10, 1);
+  playmusic("frogvoic.xm");
+  soundeffect(3);
+}
+event { stext(1, "It must have locked behind us!", "", ""); }
+event
+{
+  if (flags(2500) == 0)
+  {
+    flags(2500) = 1;
+    banner("Found:", 1);
+    banner("M/F Bromide!", 1);
+  }
+}
+event { stext(0, "Incredibly boring books.", "", ""); }
+event
+{
+  if (flags(185) == 23)
+  {
+    flags(185) = 24;
+    stext(11, "Testing, testing 123,", "testing! Is this thing on?", "");
+    stext(1, "Vultris!?", "", "");
+    stext(4, "It's just a recording...", "", "");
+    stext(
+        11,
+        "Ahem! If you're hearing this,",
+        "you must have breached my",
+        "security and forced me to");
+    stext(
+        11,
+        "flee my factory.",
+        "Congratulations, but there",
+        "is still one last security");
+    stext(
+        11,
+        "measure for you to deal",
+        "with! Rising towards you are",
+        "the results of years of");
+    stext(
+        11,
+        "research! The ultimate",
+        "pinnacles of candy-based",
+        "technology! Behold your");
+    stext(
+        11,
+        "doom, foolish raiders!",
+        "Caramel Weapon and Nougat",
+        "Weapon! Ha ha ha ha ha!!");
+    flags(336) = 1;
+    flags(337) = 1;
+    alterftile(17, 38, 782, 2);
+    alterftile(28, 38, 782, 2);
+    soundeffect(19);
+    earthquake(16, 16, 50);
+    soundeffect(19);
+    earthquake(16, 16, 25);
+    wait(50);
+    alterftile(17, 38, 783, 2);
+    alterftile(28, 38, 783, 2);
+    stext(1, "What was *that*!?", "", "");
+    stext(
+        3,
+        "Well, from the new skylights",
+        "this building now boasts, I",
+        "figure Vultris's weapons");
+    stext(3, "just got catapulted through", "the roof...", "");
+    specialframe(22) = 20;
+    stext(
+        0,
+        "Aw, crud! That wasn't",
+        "suppposed ta happen!",
+        "Someone musta wound the");
+    stext(0, "springs too tight!", "", "");
+    specialframe(22) = 0;
+  }
+}
+event
+{
+  stext(0, "Aw, man! Vultris is gonna", "have someone's hide for this!", "");
+}

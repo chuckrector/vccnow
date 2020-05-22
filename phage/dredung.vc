@@ -1,0 +1,634 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  disablemenu();
+  disablesave();
+  stext(1, "Another dream?!? Maybe this", "time I'll get some answers...", "");
+}
+event
+{
+  alterbtile(75, 55, 205, 2);
+  alterbtile(74, 55, 371, 2);
+  alterbtile(60, 56, 205, 2);
+  alterbtile(61, 56, 371, 2);
+  alterbtile(72, 57, 205, 2);
+  alterbtile(71, 57, 371, 2);
+  alterbtile(68, 58, 205, 2);
+  alterbtile(69, 58, 371, 2);
+  alterbtile(65, 58, 205, 2);
+  alterbtile(66, 58, 371, 2);
+  alterbtile(74, 59, 205, 2);
+  alterbtile(73, 59, 371, 2);
+  alterbtile(64, 60, 205, 2);
+  alterbtile(65, 60, 371, 2);
+  wait(10);
+  alterbtile(74, 55, 205, 2);
+  alterbtile(73, 55, 371, 2);
+  alterbtile(61, 56, 205, 2);
+  alterbtile(62, 56, 371, 2);
+  alterbtile(71, 57, 205, 2);
+  alterbtile(70, 57, 371, 2);
+  alterbtile(66, 58, 205, 2);
+  alterbtile(67, 58, 371, 2);
+  alterbtile(73, 59, 205, 2);
+  alterbtile(72, 59, 371, 2);
+  alterbtile(65, 60, 205, 2);
+  alterbtile(66, 60, 371, 2);
+  wait(10);
+  alterbtile(73, 55, 205, 2);
+  alterbtile(72, 55, 371, 2);
+  alterbtile(62, 56, 205, 2);
+  alterbtile(63, 56, 371, 2);
+  alterbtile(70, 57, 205, 2);
+  alterbtile(69, 57, 371, 2);
+  alterbtile(67, 58, 205, 2);
+  alterbtile(68, 58, 371, 2);
+  alterbtile(72, 59, 205, 2);
+  alterbtile(71, 59, 371, 2);
+  alterbtile(66, 60, 205, 2);
+  alterbtile(67, 60, 371, 2);
+  wait(10);
+  alterbtile(72, 55, 205, 2);
+  alterbtile(71, 55, 371, 2);
+  alterbtile(63, 56, 205, 2);
+  alterbtile(64, 56, 371, 2);
+  alterbtile(69, 57, 205, 2);
+  alterbtile(68, 57, 371, 2);
+  alterbtile(71, 59, 205, 2);
+  alterbtile(70, 59, 371, 2);
+  alterbtile(67, 60, 205, 2);
+  alterbtile(68, 60, 371, 2);
+  wait(10);
+  alterbtile(71, 55, 205, 2);
+  alterbtile(70, 55, 371, 2);
+  alterbtile(62, 56, 205, 2);
+  alterbtile(63, 56, 371, 2);
+  alterbtile(70, 59, 205, 2);
+  alterbtile(69, 59, 371, 2);
+  alterbtile(68, 60, 205, 2);
+  alterbtile(69, 60, 371, 2);
+  wait(10);
+  alterbtile(70, 55, 205, 2);
+  alterbtile(69, 55, 371, 2);
+  alterftile(69, 55, 0, 2);
+  alterbtile(63, 56, 205, 2);
+  alterbtile(64, 56, 371, 2);
+  wait(10);
+  alterbtile(69, 55, 205, 2);
+  alterbtile(68, 55, 371, 2);
+  alterftile(69, 55, 315, 2);
+  alterftile(68, 55, 0, 2);
+  alterbtile(64, 56, 205, 2);
+  alterbtile(65, 56, 371, 2);
+  wait(10);
+  alterbtile(65, 56, 205, 2);
+  alterbtile(66, 56, 371, 2);
+  wait(10);
+  alterbtile(66, 56, 205, 2);
+  alterbtile(67, 56, 371, 2);
+  wait(10);
+  alterbtile(67, 56, 205, 2);
+  alterbtile(68, 56, 371, 2);
+  wait(10);
+  changezone(69, 61, 0);
+}
+event
+{
+  soundeffect(22);
+  for (x, var(0), var(1), 1)
+  {
+    for (y, var(2), var(3), 1)
+    {
+      alterbtile(x, y, 205, 1);
+      alterftile(x, y, 696, 1);
+    }
+  }
+  wait(10);
+  for (x, var(0), var(1), 1)
+  {
+    for (y, var(2), var(3), 1)
+    {
+      alterftile(x, y, 697, 1);
+    }
+  }
+  wait(10);
+  for (x, var(0), var(1), 1)
+  {
+    for (y, var(2), var(3), 1)
+    {
+      alterftile(x, y, 698, 1);
+    }
+  }
+  wait(10);
+  for (x, var(0), var(1), 1)
+  {
+    for (y, var(2), var(3), 1)
+    {
+      alterftile(x, y, 699, 1);
+    }
+  }
+  wait(10);
+  for (x, var(0), var(1), 1)
+  {
+    for (y, var(2), var(3), 1)
+    {
+      alterftile(x, y, 0, 1);
+    }
+  }
+}
+event
+{
+  callevent(2, 147, 154, 117, 128);
+  entity.locx(5) = 0;
+  for (z, 117, 128, 1)
+  {
+    changezone(146, z, 0);
+  }
+  stext(1, "I get the feeling I'm being", "shepherded by someone...", "");
+}
+event
+{
+  callevent(2, 104, 117, 93, 94);
+  changezone(103, 93, 0);
+  changezone(103, 94, 0);
+}
+event
+{
+  flags(107) = 2;
+  for (x, 97, 89, -1)
+  {
+    if (flags(107) == 2)
+    {
+      flags(107) = 3;
+    }
+    if (flags(107) == 1)
+    {
+      flags(107) = 2;
+    }
+    if (flags(107) == 3)
+    {
+      flags(107) = 1;
+    }
+    for (y, 73, 79, 2)
+    {
+      if (flags(107) == 2)
+      {
+        alterbtile(x, y, 58, 0);
+        alterbtile(x, y + 1, 57, 0);
+      }
+      if (flags(107) == 1)
+      {
+        alterbtile(x, y, 57, 0);
+        alterbtile(x, y + 1, 58, 0);
+      }
+      wait(10);
+    }
+    soundeffect(21);
+    earthquake(3, 3, 50);
+    for (x, 73, 79, 1)
+    {
+      changezone(88, x, 0);
+    }
+  }
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0);
+  cameratracking = 0;
+  autoon();
+  for (x, 1, 12, 1)
+  {
+    for (flags(159), 93, 100, 1)
+    {
+      for (flags(160), 61, 81, 1)
+      {
+        warp(flags(159), flags(160) + 1, 1);
+        flags(158) = tileb;
+        alterbtile(flags(159), flags(160), flags(158), 2);
+      }
+    }
+    wait(10);
+  }
+  autooff();
+  cameratracking = 1;
+  warp(flags(109), flags(110), 1);
+  for (x, 73, 80, 1)
+  {
+    alterbtile(100, x, 205, 1);
+  }
+  for (x, 61, 68, 1)
+  {
+    changezone(101, x, 0);
+  }
+  soundeffect(21);
+  earthquake(3, 3, 50);
+}
+event
+{
+  soundeffect(22);
+  changezone(68, 54, 0);
+  alterftile(68, 55, 315, 1);
+  alterbtile(69, 61, 205, 0);
+  alterbtile(68, 56, 205, 0);
+  alterbtile(68, 57, 205, 0);
+  alterbtile(68, 58, 205, 0);
+  alterbtile(69, 58, 205, 0);
+  alterbtile(69, 59, 205, 0);
+  alterbtile(69, 60, 205, 0);
+  for (x, 696, 699, 1)
+  {
+    alterbtile(68, 55, x, 1);
+    alterftile(68, 56, x, 0);
+    alterftile(68, 57, x, 0);
+    alterftile(68, 58, x, 0);
+    alterftile(69, 58, x, 0);
+    alterftile(69, 59, x, 0);
+    alterftile(69, 60, x, 0);
+    alterftile(69, 61, x, 0);
+    wait(10);
+  }
+  alterbtile(68, 55, 205, 1);
+  alterftile(68, 56, 0, 0);
+  alterftile(68, 57, 0, 0);
+  alterftile(68, 58, 0, 0);
+  alterftile(69, 58, 0, 0);
+  alterftile(69, 59, 0, 0);
+  alterftile(69, 60, 0, 0);
+  alterftile(69, 61, 0, 0);
+}
+event
+{
+  stext(4, "Sam? Do you think I'm...", "superficial?", "");
+  stext(4, "I know I must seem that way...", "", "");
+  stext(
+      4,
+      "After all, I never act like",
+      "I'm taking things seriously.",
+      "But... you know how things");
+  stext(
+      4,
+      "have been with me. I mean...",
+      "You've got to enjoy life to",
+      "stay sane. And I've got to");
+  stext(
+      4,
+      "stay sane for this, Sam! I've",
+      "just got to! I know, Sam,",
+      "absolutely *know* that you're");
+  stext(
+      4,
+      "headed for great things! And",
+      "I've gotta be here in order",
+      "to make sure you succeed!");
+  stext(
+      4,
+      "I'm willing to sacrifice",
+      "everything, if I can just",
+      "make that mark on the world!");
+  stext(
+      4,
+      "So if I seem like I'm just",
+      "around to crack jokes and",
+      "enjoy the trip... Don't");
+  stext(
+      4,
+      "take that too seriously. It's",
+      "just... superficial, and",
+      "you know how I feel.");
+  stext(4, "Don't take it seriously, Sam.", "", "");
+  wait(150);
+  stext(4, "You know *I* wouldn't!", "", "");
+  entity.locx(5) = 0;
+  callevent(13);
+}
+event
+{
+  stext(
+      5,
+      "You know, when I first met",
+      "you, I assumed you were just",
+      "another fool, maybe willing");
+  stext(
+      5,
+      "to throw scraps to a stray",
+      "cur like me, but never did I",
+      "imagine that you'd offer");
+  stext(5, "me a place in your heart...", "", "");
+  stext(
+      5,
+      "When my parents were murdered,",
+      "I lost my home. The place was",
+      "still there, but the people");
+  stext(
+      5,
+      "who made me feel safe and",
+      "secure were gone... But for",
+      "some reason, I feel sorta");
+  stext(
+      5,
+      "like that with you... I had",
+      "to steal to survive, and I've",
+      "got a talent for it, I admit,");
+  stext(
+      5,
+      "but you're the first person",
+      "I've met who doesn't condemn",
+      "me for it... Even Rikk thinks");
+  stext(
+      5,
+      "I'm nothing but a thief, so I",
+      "steal from him. To prove that",
+      "he's weak! To prove that I'm");
+  stext(
+      5,
+      "still good enough to survive!",
+      "I know it just makes things",
+      "worse, but what can I do?");
+  stext(
+      5,
+      "I am what I am, Sam... and",
+      "I've had only two things that",
+      "I know I can rely on. Why");
+  stext(
+      5,
+      "does Rikk always try to make",
+      "me look bad in your eyes? He's",
+      "going to lose me my only");
+  stext(
+      5,
+      "friend! One of the two things",
+      "I hold dear to me!",
+      "Because I know I can trust in");
+  stext(5, "my prophet, the Phage...", "... ...", "... ...");
+  wait(150);
+  stext(5, "...and I know I can trust in", "you.", "");
+  entity.locx(6) = 0;
+  callevent(13);
+}
+event
+{
+  stext(3, "I am immortal, Sam!", "", "");
+  stext(3, "My flesh is metal, my blood,", "pure darkness.", "");
+  stext(
+      3, "The lightning is mine to", "command! The thunder echoes", "my roar!");
+  stext(3, "I am virtually invulnerable!", "Indestructible!", "Unbeatable!");
+  stext(
+      3,
+      "Yet, once, long ago, I was",
+      "gravely injured... And like",
+      "a wounded animal, my heart");
+  stext(
+      3,
+      "cannot bring itself to trust",
+      "again. Instead I must prove",
+      "to the world that I am the");
+  stext(3, "toughest and the greatest...", "", "");
+  wait(150);
+  stext(
+      3,
+      "Yet, Sam... In you I feel a",
+      "familiar soul, despite our",
+      "every difference. The light");
+  stext(
+      3,
+      "of your courage shines",
+      "through. I have taken it upon",
+      "myself to ensure that that");
+  stext(3, "light is never snuffed out...", "", "");
+  wait(150);
+  stext(3, "... like mine once was...", "", "");
+  entity.locx(7) = 0;
+  callevent(13);
+}
+event
+{
+  stext(
+      2,
+      "Hey! I know you! You're the",
+      "guy I've been following!",
+      "You were so interesting,");
+  stext(
+      2,
+      "I couldn't just let you",
+      "get beat up! Guess I wasn't",
+      "much help, though, huh?");
+  stext(
+      2,
+      "I don't know much about what's",
+      "going on, really! I know that",
+      "you're trying to save a Seed,");
+  stext(
+      2,
+      "in order to save a town. Why'd",
+      "I jump in then? Well, I'm only",
+      "*supposed* to watch and report");
+  stext(
+      2,
+      "what I see, but the Bat Clan",
+      "has always been known to help",
+      "out when a worthy cause");
+  stext(
+      2,
+      "presents itself. I'm honored",
+      "that I could find a cause",
+      "worthy of my aid... Even if");
+  stext(2, "I did fail...", "", "");
+  entity.locx(8) = 0;
+  flags(286) += 1;
+  if (flags(286) == 1)
+  {
+    wait(50);
+    stext(
+        1,
+        "He's really forthcoming for",
+        "a guy who I've never really",
+        "been introduced to. Could");
+    stext(1, "my dream be somehow", "interacting with his?", "");
+  }
+}
+event
+{
+  stext(7, "Sam!?!", "", "");
+  stext(7, "Ya little twerp! Ya gotta", "follow me *everywhere* I go?!?", "");
+  stext(
+      7,
+      "Ya've been a thorn in my side",
+      "ever since ya were born! You",
+      "were 'so cute!' when you were");
+  stext(
+      7,
+      "a li'l tadpole, and what was",
+      "I? I was just the little fat",
+      "kid who always sat by while");
+  stext(
+      7,
+      "*you* were fed the goodies!",
+      "While *you* sucked up to",
+      "everyone! *You* were always");
+  stext(7, "'such a good boy,' while I", "was 'that troublemaker!'", "");
+  stext(
+      7,
+      "So I decided I'd rule that",
+      "town, show all the other",
+      "kids their place: Under me,");
+  stext(
+      7,
+      "the friggin' mayor's son!",
+      "everyone assumed that I got",
+      "spoiled rotten just 'cause");
+  stext(
+      7,
+      "my daddy was powerful!",
+      "Yeah, always assumed...",
+      "No one ever bothered to try");
+  stext(
+      7,
+      "spoiling me themselves. And",
+      "when I tried to make them,",
+      "*you* always showed up!");
+  stext(
+      7,
+      "Ya never acknowledged your",
+      "place! And since you never",
+      "did, no one ever did! If");
+  stext(
+      7,
+      "ya'd ever just backed down!",
+      "If ya'd ever just given up,",
+      "it'd never have had to come");
+  stext(7, "to this! But I know another", "kind of power, Sam! Money!", "");
+  stext(
+      7,
+      "I'm gonna get so much money",
+      "that everyone'll *have* to",
+      "respect me! And there's no");
+  stext(
+      7,
+      "way in heck I'm gonna let you",
+      "beat me to *this* prize!",
+      "Prepare to lose, Sam!");
+  stext(7, "For once in your life, prepare", "to lose...", "");
+  entity.locx(9) = 0;
+  callevent(13);
+}
+event
+{
+  flags(286) += 1;
+  if (flags(286) == 1)
+  {
+    wait(50);
+    stext(
+        1,
+        "I don't think he'd have said",
+        "that to my face... Could my",
+        "dream be touching theirs?");
+  }
+}
+event { mapswitch("dcircle.map", 28, 34, 0); }
+event
+{
+  alterbtile(124, 105, 205, 1);
+  alterbtile(146, 104, 205, 1);
+  stext(0, "Begone!", "", "");
+  warp(142, 104, 0);
+}
+event { alterbtile(146, 104, 58, 0); }
+event { alterbtile(158, 106, 58, 0); }
+event { alterbtile(168, 100, 58, 0); }
+event { alterbtile(173, 86, 58, 0); }
+event { alterbtile(170, 92, 58, 0); }
+event { alterbtile(174, 81, 58, 0); }
+event { alterbtile(177, 101, 58, 0); }
+event { alterbtile(180, 69, 58, 0); }
+event
+{
+  alterbtile(64, 66, 58, 0);
+  stext(
+      1,
+      "I have a strange feeling, as",
+      "if something is beckoning me",
+      "back to the main path...");
+}
+event
+{
+  if (entity.locx(11) < 57)
+  {
+    entitymove(11, "R1");
+  }
+  if (entity.locx(12) < 57)
+  {
+    entitymove(12, "R1");
+  }
+  wait(25);
+}
+event
+{
+  if (entity.locy(11) < 99)
+  {
+    entitymove(11, "D1");
+  }
+  if (entity.locy(12) < 99)
+  {
+    entitymove(12, "D1");
+  }
+  wait(25);
+}
+event
+{
+  if (entity.locx(11) > 46)
+  {
+    entitymove(11, "L1");
+  }
+  if (entity.locx(12) > 46)
+  {
+    entitymove(12, "L1");
+  }
+  wait(25);
+}
+event
+{
+  if (entity.locy(11) > 87)
+  {
+    entitymove(11, "U1");
+  }
+  if (entity.locy(12) > 87)
+  {
+    entitymove(12, "U1");
+  }
+  wait(25);
+}
+event
+{
+  alterbtile(entity.locx(11), entity.locy(11), 58, 0);
+  entity.locx(11) = 1;
+  entity.locy(11) = 1;
+}
+event
+{
+  alterbtile(entity.locx(12), entity.locy(12), 58, 0);
+  entity.locx(12) = 1;
+  entity.locy(12) = 1;
+}
+event
+{
+  if (entity.locx(0) > 158)
+  {
+    changezone(entity.locx(0), entity.locy(0), 0);
+    changezone(entity.locx(0) - 1, entity.locy(0), 21);
+    alterbtile(entity.locx(0) - 1, entity.locy(0), 58, 0);
+  }
+  if (entity.locx(0) > 159)
+  {
+    changezone(entity.locx(0) - 2, entity.locy(0), 14);
+    alterbtile(entity.locx(0) - 2, entity.locy(0), 371, 0);
+  }
+}
+event
+{
+  giveitem(90);
+  alterbtile(64, 66, 205, 1);
+  warp(65, 66, 0);
+}
+event { enablesave(); }

@@ -1,0 +1,50 @@
+event {
+  switch (a) {
+    case 0:
+      switch (b) {
+        case 1: vgadump();
+      }
+  }
+}
+
+//
+
+01 00 00 00       .1 script
+00 00 00 00       .offset 0
+
+.event0
+
+  0a                   .switch
+  02 00                .var0 a
+  ff                   .end (var0)
+
+    0b                 .case
+    01                 .literal
+    00 00 00 00
+    ff                 .end (literal)
+
+      23 00 00 00      .else
+
+      0a               .switch
+      02 01            .var0 b
+      ff               .end (var0)
+
+        0b             .case
+        01             .literal
+        01 00 00 00
+        ff             .end (literal)
+
+          21 00 00 00
+
+          01 45        .exec vgadump
+
+        ff             .end (case)
+      ff               .end (switch)
+    ff                 .end (case)
+  ff                   .end (switch)
+
+ff                     .end (event0)
+
+//
+
+event/*0*/{switch(a){case 0:switch(b){case 1:vgadump();}}}

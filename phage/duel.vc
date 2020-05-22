@@ -1,0 +1,365 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  drawparty = 0;
+  disablemenu();
+  stext(3, "This duel begins now!", "", "");
+  layervc = 1;
+  callevent(1);
+  callevent(2);
+}
+event
+{
+  face(5) = 0;
+  face(6) = 0;
+  specialframe(5) = 0;
+  specialframe(6) = 0;
+  vcclear();
+  vcbox(64, 48, 128, 98);
+  vcbox(240, 48, 314, 98);
+  vctext(69, 53, "Feng");
+  vctext(245, 53, "Sam");
+  vctextnum(69, 68, curhp(3));
+  vctext(89, 68, "/");
+  vctextnum(99, 68, maxhp(3));
+  vctextnum(240, 68, curhp(1));
+  vctext(260, 68, "/");
+  vctextnum(270, 68, maxhp(1));
+  redraw();
+  flags(601) = atk(3);
+  flags(602) = def(3);
+  flags(603) = atk(1);
+  flags(604) = def(1);
+}
+event
+{
+  flags(605) = random(1, 3);
+  flags(606) = random(1, 4);
+  switch (flags(605))
+  {
+    case (1):
+      flags(601) += random(2, 5);
+      switch (flags(606))
+      {
+        case (1): stext(3, "Defend yourself!", "", "");
+        case (2): stext(3, "Now is the time!", "", "");
+        case (3):
+          stext(
+              3,
+              "You must gauge each attack",
+              "precisely. Your enemy will",
+              "exploit any mistakes...");
+        case (4): stext(3, "Bah! That was contemptible!", "", "");
+      }
+    case (2):
+      flags(601) += atk(3);
+      flags(601) += random(2, 5);
+      flags(602) = 0;
+      switch (flags(606))
+      {
+        case (1):
+          stext(3, "You will find my next blow to", "be the final one!", "");
+        case (2): stext(3, "You show considerable promise!", "", "");
+        case (3): stext(3, "This ends now!", "", "");
+        case (4): stext(3, "Grrrrrrr...!", "", "");
+      }
+    case (3):
+      flags(601) -= 15;
+      flags(601) += random(1, 3);
+      flags(602) += 10;
+      switch (flags(606))
+      {
+        case (1): stext(3, "I will wear you down...", "", "");
+        case (2): stext(3, "You grow reckless!", "", "");
+        case (3): stext(3, "Dodge this!", "", "");
+        case (4): stext(3, "I dare you to try that again!", "", "");
+      }
+  }
+}
+event
+{
+  redraw();
+  textmenu(
+      4, 4, 607, 1, "Normal Attack", "Jump Attack", "Guarded Attack", "Item");
+  switch (flags(607))
+  {
+    case (1): flags(603) += random(1, 3); callevent(4);
+    case (2):
+      flags(603) += atk(1);
+      flags(603) += random(1, 3);
+      flags(604) = 0;
+      callevent(5);
+    case (3):
+      flags(603) -= 10;
+      flags(603) += random(1, 3);
+      flags(604) += 10;
+      callevent(6);
+    case (4): flags(603) = 0; itemmenu(1);
+  }
+}
+event
+{
+  specialframe(5) = 3;
+  switch (flags(605))
+  {
+    case (1):
+      specialframe(6) = 3;
+      entitymove(5, "L5F0");
+      entitymove(6, "R5F0");
+      wait(75);
+      specialframe(5) = 4;
+      specialframe(6) = 4;
+      wait(50);
+      entity.locx(5) = 14;
+      entity.locx(6) = 3;
+      specialframe(5) = 0;
+      specialframe(6) = 0;
+    case (2):
+      entitymove(5, "L5L5F0");
+      wait(150);
+      specialframe(5) = 4;
+      wait(50);
+      entity.locx(5) = 14;
+      specialframe(5) = 0;
+      specialframe(6) = 1;
+      entitymove(6, "R5R5F0");
+      wait(200);
+      specialframe(5) = 0;
+      entity.locx(5) = 14;
+      entity.locx(6) = 3;
+    case (3):
+      flags(602) -= 10;
+      vcloadpcx("bolt1.pcx", 0);
+      vcloadpcx("bolt2.pcx", 3200);
+      specialframe(6) = 2;
+      for (z, 1, 13, 4)
+      {
+        vctblitimage(216, z, 32, 100, 0);
+        wait(1);
+        vcclear();
+        vctblitimage(216, z + 2, 32, 100, 3200);
+        wait(1);
+        vcclear();
+      }
+      entitymove(5, "L5L5F0");
+      wait(150);
+      specialframe(5) = 4;
+      wait(50);
+      specialframe(5) = 0;
+      entity.locx(5) = 14;
+      wait(150);
+  }
+}
+event
+{
+  switch (flags(605))
+  {
+    case (1):
+      specialframe(6) = 3;
+      entitymove(6, "R5R5F0");
+      wait(150);
+      specialframe(6) = 4;
+      wait(50);
+      entity.locx(6) = 3;
+      specialframe(5) = 1;
+      entitymove(5, "U7F0");
+      wait(80);
+      entity.locy(5) = 20;
+      entity.locx(5) = 3;
+      wait(100);
+      entity.locy(5) = 1;
+      entitymove(5, "D5U5F0");
+      wait(120);
+      entity.locy(5) = 20;
+      entity.locx(5) = 14;
+      wait(100);
+      entity.locy(5) = 1;
+      entitymove(5, "D6F0");
+      wait(150);
+    case (2):
+      flags(601) += 5;
+      flags(604) += 8;
+      flags(603) += 8;
+      specialframe(5) = 1;
+      entitymove(5, "U7F0");
+      wait(100);
+      entity.locy(5) = 20;
+      entity.locx(5) = 3;
+      wait(100);
+      entity.locy(5) = 1;
+      entitymove(5, "D5U5F0");
+      wait(120);
+      entity.locy(5) = 20;
+      entity.locx(5) = 14;
+      wait(100);
+      entity.locy(5) = 1;
+      entitymove(5, "D6F0");
+      wait(150);
+      specialframe(6) = 1;
+      entitymove(6, "R5R5F0");
+      wait(200);
+      entity.locx(6) = 3;
+    case (3):
+      flags(603) = 0;
+      vcloadpcx("bolt1.pcx", 0);
+      vcloadpcx("bolt2.pcx", 3200);
+      specialframe(6) = 2;
+      specialframe(5) = 1;
+      entitymove(5, "U7F0");
+      wait(100);
+      entity.locy(5) = 20;
+      wait(100);
+      banner("Intercepted!", 1);
+      for (z, 1, 13, 4)
+      {
+        vctblitimage(216, z, 32, 100, 0);
+        wait(1);
+        vcclear();
+        vctblitimage(216, z + 2, 32, 100, 3200);
+        wait(1);
+        vcclear();
+      }
+      entity.locy(5) = 1;
+      entitymove(5, "D6F0");
+      wait(150);
+  }
+}
+event
+{
+  specialframe(5) = 2;
+  switch (flags(605))
+  {
+    case (1):
+      specialframe(6) = 3;
+      entitymove(6, "R5R5F0");
+      wait(200);
+      specialframe(6) = 4;
+      wait(50);
+      entity.locx(6) = 3;
+    case (2):
+      specialframe(6) = 1;
+      entitymove(6, "R5R5F0");
+      wait(200);
+      entity.locx(6) = 3;
+      flags(601) = 2;
+    case (3):
+      specialframe(6) = 2;
+      vcloadpcx("bolt1.pcx", 0);
+      vcloadpcx("bolt2.pcx", 3200);
+      for (z, 1, 13, 4)
+      {
+        vctblitimage(216, z, 32, 100, 0);
+        wait(1);
+        vcclear();
+        vctblitimage(216, z + 2, 32, 100, 3200);
+        wait(1);
+        vcclear();
+      }
+      wait(150);
+  }
+}
+event
+{
+  if (flags(604) >= flags(601))
+  {
+    flags(601) = 0;
+  }
+  if (flags(604) < flags(601))
+  {
+    flags(601) -= flags(604);
+  }
+  if (flags(602) >= flags(603))
+  {
+    flags(603) = 0;
+  }
+  if (flags(602) < flags(603))
+  {
+    flags(603) -= flags(602);
+  }
+  specialframe(5) = 0;
+  specialframe(6) = 0;
+  vctextnum(240, 160, flags(601));
+  vctextnum(64, 160, flags(603));
+  redraw();
+  wait(100);
+  if (curhp(1) <= flags(601))
+  {
+    exit();
+  }
+  curhp(1) -= flags(601);
+  if (curhp(3) <= flags(603))
+  {
+    enablemenu();
+    stext(3, "Urrgh... It appears... I've", "grown sloppy...", "");
+    banner("You win!", 3);
+    givexp(1, 30);
+    layervc = 0;
+    wait(100);
+    drawparty = 1;
+    mapswitch("mtalon.map", 24, 16, 0);
+  }
+  if (curhp(3) > flags(603))
+  {
+    curhp(3) -= flags(603);
+  }
+  wait(100);
+}
+event
+{
+  callevent(3);
+  if (flags(607) == 4)
+  {
+    specialframe(6) = 3;
+    entitymove(6, "R5R5F0");
+    wait(200);
+    specialframe(6) = 4;
+    wait(50);
+    entity.locx(6) = 3;
+  }
+  if (flags(604) >= flags(601))
+  {
+    flags(601) = 0;
+  }
+  if (flags(604) < flags(601))
+  {
+    flags(601) -= flags(604);
+  }
+  if (flags(602) >= flags(603))
+  {
+    flags(603) = 0;
+  }
+  if (flags(602) < flags(603))
+  {
+    flags(603) -= flags(602);
+  }
+  specialframe(5) = 0;
+  specialframe(6) = 0;
+  vctextnum(240, 160, flags(601));
+  vctextnum(64, 160, flags(603));
+  redraw();
+  wait(100);
+  if (curhp(1) <= flags(601))
+  {
+    exit();
+  }
+  curhp(1) -= flags(601);
+  if (curhp(3) <= flags(603))
+  {
+    enablemenu();
+    stext(3, "Urrgh... It appears... I've", "grown sloppy...", "");
+    banner("You win!", 3);
+    givexp(1, 30);
+    layervc = 0;
+    wait(100);
+    drawparty = 1;
+    mapswitch("mtalon.map", 24, 16, 0);
+  }
+  if (curhp(3) > flags(603))
+  {
+    curhp(3) -= flags(603);
+  }
+  wait(100);
+  callevent(1);
+  callevent(2);
+}

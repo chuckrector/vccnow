@@ -22,4 +22,4 @@ ff              .end (event)
 
 //
 
-event{if(1){vgadump();}}
+event/*0*/{if(1){vgadump();}}

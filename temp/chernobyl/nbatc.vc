@@ -1,0 +1,1281 @@
+#include nbatc.h
+
+/* NBAT -- the next VERGE battle system
+ * by Andy
+ * May 21,'99-
+ *
+ * Things done:
+ *
+ * Programmable enemy AI
+ * Psudo-Real Time (kind of like FF on wait mode)
+ * Normal attacks
+ * Magic
+ * Items
+ * Running away
+ * Entity based
+ *
+ * New things:
+ * Defending (done)
+ * Elementals (fire,water,etc...) (done)
+ * Status Ailments (poison,etc...) (works but not implemented yet)
+ * Counter attacks (done)
+ * The enemies and characters will be affected by
+ *  the same battle effects. In the previous version,
+ *  they had to be separate. I might put them in BATFX.VC,
+ *  also.
+ */
+
+Event // init
+{
+ For (i,7010,7999,1)
+  {
+   Flags[i]=0;
+  }
+ VCLoadPCX("battle\pointer.pcx",Arrow());
+ VCLoadPCX("battle\batbob.pcx",CHRFrame(0,0));
+ IsCtr()=0;
+ DrawParty=0;
+ LayerVC=1; VCLayerWrite=1; VCClear();
+ XWin=0;
+
+ YWin=BattleBG()*208;
+
+ for (i,5,10,1)
+  {
+   Entity.LocY(i)+=(BattleBG()*13);
+  }
+
+ CallEvent(SetUpChars());
+ CallEvent(SetUpEnemies());
+ for (n,6,10,1)
+  {PHP(n)=PMaxHP(n); PMP(n)=PMaxMP(n);}
+
+ MaxTime()=0;
+ for (n,1,10,1)
+  {
+   if (NumChars<=n AND PMbl(n)<MaxTime() AND PMbl(n)>0)
+     MaxTime()=PMbl(n);
+  }
+ MaxTime()=MaxTime()*10;     
+ MaxTime()=100;
+ //
+ CallEvent(DrawStat());
+ ReDraw();
+ FadeIn(30);
+
+
+ CallEvent(Main());     // THIS IS IT!!!
+
+ // wrap up
+ for (n,1,NumChars,1)
+  {
+   CurHP[pi(n)]=PHP(n);
+   CurMP[pi(n)]=PMP(n);
+  }
+ if (DoneYet()=1)
+  {
+   PlayMusic("Planets.mod");
+
+   n=0; m=0;
+   for (o,6,10,1)
+    {
+     n+=PXP(o); m+=PGP(o);
+    }
+   GiveGP(m);
+
+   if (NumChars>1)
+     VCBox(0,0,157,30);
+   if (NumChars=1)
+     VCBox(0,0,117,30);
+   VCText(8, 8,"Earned     XP");
+   if (NumChars>1) VCText(120,8,"each");
+   VCText(8,16,"Found      GP");
+   VCATextNum(76, 8,n,1);
+   VCATextNum(76,16,m,1);
+
+   VCBox(20,84,217,104+(NumChars*10));
+   VCText(28,90,"Name      XP   Next  Lv");
+   w=(n/10);
+   if (!w) w=1;
+   LayerVC2=1; VCLayerWrite=2;
+   WaitKeyUp();
+   for (x,1,n,1)
+    {
+     VCClear();
+     for(i,1,NumChars,1)
+      {
+       if (!CurHP(pi(i))) FontColor=35;
+       if (CurHP(pi(i)))
+        {GiveXP(pi(i),1); Fontcolor=31;}
+       VCCharName( 28,90+(i*10),pi(i),0);
+       VCATextNum(128,90+(i*10),xp(pi(i)),2);
+       VCATextNum(180,90+(i*10),nxt(pi(i))-xp(pi(i)),2);
+       VCATextNum(212,90+(i*10),Lvl(pi(i)),2);
+      }
+     if (!(x%w)) Wait(1);
+    }
+   FontColor=31;
+   WaitKeyUp(); While (!b1) ReadControls(); WaitKeyUp();
+  }
+ if (DoneYet()=2)
+  {
+   PlayMusic("Cr_Guit.s3m");
+   AutoOff();
+   CameraTracking=1;
+   LayerVC=0;
+   LayerVCTrans=0;
+   LayerVC2=0;
+   LayerVC2Trans=0;
+   DrawParty=1;
+   MapSwitch("RIP.MAP",0,0,0);
+  }
+
+ for (y,0,199,2)
+  {
+   VCLine(0,y,320,y,1);
+   VCLine(0,199-y,320,199-y,1);
+   if ((y%3)=0) ReDraw();
+  }
+ VCLayerWrite=2; VCClear(); LayerVC2=0; VCLayerWrite=1;
+ AutoOff();
+ CameraTracking=1;
+ LayerVC=0;
+ LayerVCTrans=0;
+ LayerVC2=0;
+ LayerVC2Trans=0;
+ DrawParty=1;
+vcclear();
+ if (MapNum()=0)
+  MapSwitch("outside.map",SavX(),SavY(),0);
+ if (MapNum()=1)
+  MapSwitch("castle1.map",SavX(),SavY(),0);
+ if (MapNum()=2)
+  MapSwitch("ande.map",SavX(),SavY(),0);
+ if (MapNum()=3)
+  MapSwitch("Factory.map",SavX(),SavY(),0);
+ if (MapNum()=4)
+  MapSwitch("Office.map",SavX(),SavY(),0);
+ if (MapNum()=5)
+  MapSwitch("Beach.map",SavX(),SavY(),0);
+ Quit("MapNum() set to some weird value somewhere");
+}
+
+Event // main
+{
+ DoneYet()=0;
+ CallEvent(DrawStat());
+ While (!DoneYet())
+  {
+   for (p,1,10,1)
+    {
+     if (PHP(p)>0) PTime(p)+=PMbl(p)+random(0-1,1); // increment the time bars
+     if (PTime(p)>MaxTime())
+      {
+       PTime(p)=MaxTime();
+       CallEvent(DrawTimeBars());
+       if (p<=NumChars)
+         CallEvent(CharTurn(),p);
+       if (p>5)
+         CallEvent(MonTurn(),p);
+       CallEvent(DrawStat());
+       PTime(p)=0;
+       p=11;
+      }
+    }
+   CallEvent(DrawTimeBars());
+   Wait(1);
+
+   n=0;
+   for (a,1,numChars,1)
+    {
+     if (PHP(a)=0) n++;
+    }
+   if (n=NumChars) DoneYet()=2; // defeat
+   n=0;
+   for (a,6,10,1)
+    {
+     if (PHP(a)=0) n++;
+    }
+   if (n=5) DoneYet()=1; // Victory
+  }
+}
+
+Event // it's a character's turn
+// CallEvent(charturn(),party member(1-5))
+{
+ p=var(0);
+ TurnOver()=0;
+ SDefending(p)=0;
+ FontColor=238;
+ VCCharName(16,(p*9)+138,pi(p),0);
+ FontColor=31;
+ While (!TurnOver())
+  {//      ^---------|   TurnOver()=Flags[7501]
+   TextMenu(100,130,7501,1,"Attack","Magic","Defend","Run","Item");
+   Switch(TurnOver())
+    {
+     Case 0:Wait(50); // accidently hit b2
+     Case 1:CallEvent(ChooseTarget(),6);  // Attack
+            if (!RetVal()) TurnOver()=0; // cancelled
+            if (RetVal()) CallEvent(BatFX(2),p,RetVal());
+     Case 2:CallEvent(SpellMenu(),p);  // Magic
+     Case 3:SDefending(p)=1;  // Defend
+     case 4:DoneYet()=3;  // Run away -- expand on this later
+     Case 5:CallEvent(ItemMenu(),p);  // Item
+    }
+  }
+ VCCharName(16,(p*9)+138,pi(p),0);
+}
+
+Event // an enemy's turn
+{
+ d=0;
+ While (!d)
+  {
+   d=Random(1,5);
+   if (!PHP(d)) d=0;
+  }
+ CallEvent(BatFX(3),var(0),d);
+
+ // stick a case structure in here later
+}
+
+Event // Spell Menu
+// var0 - caster(1-5)
+
+// a - caster(party.dat)  s - spell selected
+// v - victim             n - number of spells known
+// x,y - coordinates on menu screen
+// w - repeat flag (so the cursor repeats like the normal keyboard routines)
+{
+ a=PartyIndex(var(0));
+ n=0;
+// VCLoadPCX("battle\pointer.pcx",0);
+ VCClearRegion(0,0,320,129);
+ for (j,1,24,1)
+  {
+   if (Spells(a,n)) n=j-1;
+  }
+ if (!n)
+  {
+   SoundEffect(4);
+   TurnOver()=0;
+   Return;
+  } // just buzz if the character knows no magic
+
+ x=155;
+ y=((n+1)*9)+5;
+ if (n>12) {x=270; y=130;} // size the menu box to fit
+
+ VCBox(40,0,x,y); // draw the box
+
+ q=var(0);
+ for(x,0,1,1)
+  {
+   For(y,0,11,1)
+    {
+     p=(x*10);
+     s=(x*12)+y;
+     If (Spell.Cost(Spells(a,s))>PMP(q))
+      FontColor=16;
+     If (Spell.Use(Spells(a,s))=4)
+      FontColor=16;
+     if(Spells(a,s))
+      {
+       VCSpellName(x*104+50,y*10+5,Spells(a,s),0);
+      }
+     FontColor=31;
+    }
+  } // fill it up
+
+ LayerVC2=1; VCLayerWrite=2; LayerVC2Trans=0;
+ x=0; y=0; s=0; d=0;
+ while (!d)
+  {
+   VCBlitImage(x*104+34,y*10+3,16,16,Arrow());
+   Wait(1);
+   VCClearRegion(0,0,320,129);
+   VCClearRegion(63,155,134,186);
+   VCBox(63,155,133,185);
+   VCText(70,160,"MP Cost");
+   VCATextNum(98,170,Spell.Cost(Spells(a,x*12+y)),1);
+
+   ReadControls();
+   if (up and y>0)    y--;
+   if (down and y<11) y++;
+   if (left and x=1)  x=0;
+   if (right and x=0) x=1;
+   s=(x*12)+y;
+   if (s>(n-1)) {x=n/12; y=(n%22)-1;}
+   if (b1) // selected
+    {
+     d=1;
+     if (Spell.Cost(Spells(a,s))>PMP(q))
+      {SoundEffect(4); d=0;}
+     if (Spell.Use(Spells(a,s))=4)
+      {SoundEffect(4); d=0;}
+    }
+   if (b2) // cancelled
+    {
+     TurnOver()=0;
+     VCClear(); LayerVC2=0; VCLayerWrite=1;
+     VCClearRegion(0,0,320,129);
+     d=1;
+     Return;
+    }
+  }
+ s=Spells(a,(x*12)+y); // s is now the MAGIC.DAT index
+ VCClear(); LayerVC2=0; VCLayerWrite=1;
+ VCClearRegion(0,0,320,129);
+ i=0;
+ RetVal()=0;
+ if (Spell.Type(s)=1)
+  CallEvent(ChooseTarget(),q); // pick an ally to use magic on (default is the caster)
+ if (Spell.Type(s)=3)
+  CallEvent(ChooseTarget(),6); // who will you kill?
+ if (!RetVal())
+  {
+   TurnOver()=0;
+   Return;
+  } // cancelled
+
+ PMP(q)-=Spell.Cost(s);
+ CallEvent(SpellFX(s),q,RetVal());
+}
+
+Event // Item Menu
+// var0 person using an item (1-5)
+// a - user (party.dat)         i - item chosen
+// n - number of items in possesion
+// x,y coordinates in menu      v - target of the item
+{
+ a=PartyIndex(var(0));
+ for (j,6,24,1)
+  {
+   if (!Items(a,j))
+    {
+     n=j;
+     j=24;
+    }
+  }
+ x=158;
+ y=((n+1)*10)+5;
+ if (n>12) {x=270; y=130;} // size the menu box to fit
+
+ VCBox(40,0,x,y); // draw the box
+
+ for (y,0,11,1)
+  {
+   for (x,0,1,1)
+    {
+     i=Items(a,(x*12)+y);
+     if (!Item.Use(i)) FontColor=16;
+     if (Item.Use(i)>=3 and Item.Use(i)<=4) Fontcolor=16;
+     VCItemName(x*104+50,y*10+5,i,0);
+     FontColor=31;
+    }
+  }
+
+ LayerVC2=1; VCLayerWrite=2; VCClear();
+// VCLoadPCX("battle\pointer.pcx",0);
+ d=0; x=0; y=0;
+ While (!d)
+  {
+   VCBlitImage(x*104+34,y*10+3,16,16,Arrow());
+   Wait(1);
+   VCClearRegion(0,0,320,129);
+   ReadControls();
+   if (up and y>0)    {SoundEffect(0); y--;}
+   if (down and y<11) {SoundEffect(0); y++;}
+   if (left and x=1)  {SoundEffect(0); x=0;}
+   if (right and x=0 and n>12) x=1;
+   i=(x*12)+y;
+   if (i>(n-1)) {x=n/12; y=(n%22)-1;}
+   if (b1)
+    {
+     d=1;
+     i=(x*12)+y;
+     j=Items(a,i);
+     if (!Item.Use(j)) d=0;
+     if (Item.Use(j)>=3 and Item.Use(j)<=4) d=0;
+     if (!d)
+      SoundEffect(4);
+     WaitKeyUp();
+    }
+   if (b2)
+    {
+     TurnOver()=0;
+     VCClear(); LayerVC2=0; VCLayerWrite=1;
+     VCClearRegion(0,0,320,129);
+     d=1;
+     WaitKeyUp();
+     Return;
+    }
+  }
+
+ VCClear(); LayerVC2=0; VCLayerWrite=1;
+ VCClearRegion(0,0,320,130);
+
+ i=Items(a,i); // i is now the ITEMS.DAT index
+ if (Item.Type(i)=1)
+  CallEvent(ChooseTarget(),var(0));
+ if (Item.Type(i)=3)
+  CallEvent(ChooseTarget(),6);
+
+ v=RetVal();
+ if (!v)
+  {
+   TurnOver()=0;
+   VCClearRegion(0,0,320,129);
+   WaitKeyUp();
+   Return;
+  }
+ CallEvent(ItemFX(i),var(0),v);
+ if ((Item.Use(i)%2)=1) DestroyItem(i,a+1);
+}
+
+Event // Choose the target for something
+// Syntax: CallEvent(choosetarget(),Default);
+// the target(1-10) will be stored in retval()
+{
+ LayerVC2=1; VCLayerWrite=2; VCClear();
+ p=var(0);
+ d=0;
+        q=0;
+ while (!PHP(p))
+  {
+   p++;
+   if (p=6) p=1;
+   if (p=11) p=6;
+   q++;
+   if (q>10) Quit("Problem with choosetarget routine!!!");
+  }
+// VCLoadPCX("battle\pointer.pcx",0);
+ VCBlitImage((Entity.LocX(p+4)*16)-XWin-17,(Entity.LocY(p+4)*16)-YWin,16,16,Arrow());
+ WaitKeyUp();
+ while (!d)
+  {
+   ReadControls();
+   Wait(1);
+   if (up)
+    {
+     if (p=6) p=11;
+     if (p=1) p=NumChars+1;
+     p--;
+     while (PHP(p)=0)
+      {
+       p--;
+       if (p=5) p=10;
+       if (!p) p=NumChars;
+      }
+     VCClear();
+     VCBlitImage((Entity.LocX(p+4)*16)-XWin-17,(Entity.LocY(p+4)*16)-YWin,16,16,Arrow());
+     SoundEffect(0);
+    }
+   if (down)
+    {
+     if (p=NumChars) p=0;
+     if (p=10) p=5;
+     p++;
+     while (PHP(p)=0)
+      {
+       p++;
+       if (p=6) p=1;
+       if (p=11) p=6;
+      }
+     VCClear();
+     VCBlitImage((Entity.LocX(p+4)*16)-XWin-17,(Entity.LocY(p+4)*16)-YWin,16,16,Arrow());
+     SoundEffect(0);
+    }
+   if (left and p<6)
+    {
+     p=6;
+     while (!PHP(p))
+      {
+       p++;
+       if (p=6) p=1;
+       if (p=11) p=6;
+      }
+     VCClear();
+     VCBlitImage((Entity.LocX(p+4)*16)-XWin-17,(Entity.LocY(p+4)*16)-YWin,16,16,Arrow());
+     SoundEffect(0);
+    }
+   if (right and p>5)
+    {
+     p=1;
+     VCClear();
+     VCBlitImage((Entity.LocX(p+4)*16)-XWin-17,(Entity.LocY(p+4)*16)-YWin,16,16,Arrow());
+     SoundEffect(0);
+    }
+   if (b1)
+    d=1;
+   if (b2)
+    {d=1; p=0;}
+  }
+ RetVal()=p;
+ VCClear(); LayerVC2=0; VCLayerWrite=1;
+}
+
+Event // someone dies (this is just the graphical stuff
+// var0=who's dying (1-10)
+{
+ v=Var(0);
+ if (v>=6)
+  {
+   SoundEffect(16);
+   MoveCode(v+4)=0;
+   Wait(1);
+   For(a,16,18,1)
+    {
+     SpecialFrame(v+4)=a;
+     ReDraw();  
+     Wait(10);
+    }
+   Entity.CHRIndex(v+4)=5; // NOBODY.CHR (invisible)
+   Return;
+  }
+ SpecialFrame(v+4)=26;
+ PTime(v)=0;
+ CharStatus(pi(v))=1; // set the status bit for the engine
+}
+
+Event // the spiffy bouncing numbers
+// Syntax: CallEvent(Numbers,Entity Number,value);
+{
+ e=var(0); v=var(1);
+ f=LayerVC2; g=VCLayerWrite; LayerVC2=1; VCLayerWrite=2;
+ if (fontcolor=31 and v<0)
+  {FontColor=94; v=0-v;}
+ For(a,10,16,3)
+  {
+   b=Entity.LocX(e)*16+8;
+   c=(Entity.LocY(e)-(YWin/ 16))*16+16-a;
+   VCATextNum(b,c,v,1);
+   ReDraw();
+   VCClearRegion(b-30,c,b+30,c+8);
+  }
+ For(a,16,10,-1)
+  {
+   b=Entity.LocX(e)*16+8;
+   c=(Entity.LocY(e)-(YWin/ 16))*16+16-a;
+   VCATextNum(b,c,v,1);
+   d=a%3;
+   if (d) Wait(1);
+   if (!d) ReDraw();
+   VCClearRegion(b-30,c,b+30,c+8);
+  }
+ if (fontcolor=94) fontcolor=31;
+ LayerVC2=f; VCLayerWrite=g;
+}
+
+Event // just like the event above, but prints "miss!" instead of a number
+{
+ e=var(0);
+ f=LayerVC2; g=VCLayerWrite;
+ LayerVC2=1; VCLayerWrite=2;
+ For(a,10,16,3)
+  {
+   b=Entity.LocX(e)*16+8;
+   c=(Entity.LocY(e)-(YWin/ 16))*16+16-a;
+   VCText(b-20,c,"miss!");
+   ReDraw();
+   VCClearRegion(b-30,c,b+30,c+8);
+  }
+ For(a,16,10,-1)
+  {
+   b=Entity.LocX(e)*16+8;
+   c=(Entity.LocY(e)-(YWin/ 16))*16+16-a;
+   VCText(b-20,c,"miss!");
+   d=a%3;
+   if (d) Wait(1);
+   if (!d) ReDraw();
+   VCClearRegion(b-30,c,b+30,c+8);
+  }
+ LayerVC2=f; VCLayerWrite=g;
+}
+
+Event // Draw the status bar at the bottom
+// does a few other things as well
+// ex. makes the weak characters stand with the other frame (a la FF)
+{
+// VCClearRegion(0,130,320,200);
+ for (y,130,200,1)
+  {
+   VCLine(0,y,320,y,((y-130)*32)/70);
+  }
+ VCBox(0,130,319,199);
+ VCText(64,134,"Name");
+ VCText(158,134,"HP");
+ VCText(230,134,"MP");
+ VCText(282,134,"T");
+ VCText(288,134,"i");
+ VCText(294,134,"me");
+
+ For(n,1,NumChars,1)
+  {
+   FontColor=31;
+   Face(n+4)=FaceLeft();
+   SpecialFrame(n+4)=0;
+   If (PHP(n)<=(PMaxHP(n)/5)) {FontColor=238; SpecialFrame(n+4)=22;}
+   If (PHP(n)=0) {FontColor=35; SpecialFrame(n+4)=26;}
+   m=138+(n*9);
+   VCCharName(16,m, pi(n),0);
+   VCATextNum(157,m,PHP(n),2);
+   VCText    (158,m,"/");
+   VCTextNum (166,m,PMaxHP(n));
+   If (MaxMP[pi(n)])
+    {
+     VCATextNum(245,m,PMP(n),2);
+     VCText    (246,m,"/");
+     VCATextNum(254,m,PMaxMP(n),0);
+    }
+  }
+ FontColor=31;
+ CallEvent(DrawTimeBars());
+}
+
+event // draw the time bars
+{
+ for (n,1,NumChars,1)
+  {
+   m=138+(n*9);
+   t=((PTime(n)*30)/MaxTime())+280;
+   if (t>310) t=310;
+
+   for (y,m+1,m+7,1)
+    {
+     VCLine(280,y,311,y,1); 
+    }
+
+   if (PTime(n))                 // spiffy gradient time bar
+    {     
+     for (x,280,t,1)
+      {
+       for (y,m+1,m+7,1)
+        {
+         c=(x-280)*23;
+         c=c/32;
+         c+=136+y-m;
+         if (c>159) c-=(c-159)*2;
+         Screen[x,y]=c;
+        }
+      }
+    }
+  }
+}
+
+Event // set up characters
+{
+ for (a,1,NumChars,1)
+  {
+   PKind(a)=0; // irrelevant
+   PMaxHP(a)=MaxHP[pi(a)];
+   PMaxMP(a)=MaxMP[pi(a)];
+   PHP(a)=CurHP[pi(a)];
+   PMP(a)=CurMP[pi(a)];
+   PHit(a)=Hit[pi(a)];
+   PDod(a)=Dod[pi(a)];
+   PMag(a)=Mag[pi(a)];
+   PMgr(a)=Mgr[pi(a)];
+   PRea(a)=Rea[pi(a)];
+   PMbl(a)=Mbl[pi(a)];
+   PFer(a)=Fer[pi(a)];
+   PAtk(a)=Atk[pi(a)];
+   PDef(a)=Def[pi(a)];
+   PXP(a)=0; // irrelevant
+   PGP(a)=0; // ditto
+   PCounterChance(a)=0;                 // this will change
+   PCounter(a)=0;                       // ditto
+   PEAbsorb(a)=0;                       // see above
+   PENil(a)=0;                          //   "
+   PEHalf(a)=0;                         //   "
+   PEDbl(a)=0;                          //   "
+   PStatus(a)=0;                        //   "
+   Entity.CHRindex(a+4)=a-1;
+  }
+}
+
+Event // Set up enemies
+// got this idea from Ric's BATSM, but expanded on it just a bit
+{
+ for (a,6,10,1)
+  {
+//                              #,MaxHP,MaxMP,Hit,Dod,Mag,Mgr,Rea,Mbl,Fer,Atk,Def, XP, GP,Counter,Coun-,EAtk, EAbs-, ENil,EHalf,EDbl, Status
+//                                                                                        Chance  ter         orb
+   switch(PKind(a))
+    {
+     case 0:CallEvent(MakeMon(),a,    0,    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,      0,    0,   0,     0,    0,    0,   0,      0);
+     case 1:CallEvent(MakeMon(),a,  100,    0, 80,  3,  1,  1,  3,  5,  2, 15,  3,  1, 10,     10,    3,   0,     0,   16,    0, 132,      0); // Crab
+     case 2:CallEvent(MakeMon(),a,  100,    1, 90, 10,  1,  4,  3,  6,  4, 20, 10, 20, 50,    128,    3,   0,   128,    4,    0,  16,      0); // Undead guy
+     case 3:CallEvent(MakeMon(),a,  500,  100, 70,  1, 10, 10,  3,  4,  6, 30,  5,100,  0,      0,    0,   0,     0,    0,    0,  16,      0); // Insane guy
+//                                                                                                             lit. Water        Fire
+    }
+
+   Entity.CHRindex(a+4)=PKind(a)+5;
+   SpecialFrame(a+4)=20;
+  }
+}
+
+Event // makemon
+// puts all the numbers from setupenemies into the flags
+{
+ a=var(0);
+ PMaxHP(a)         = var( 1);
+ PMaxMP(a)         = var( 2);
+ PHit(a)           = var( 3);
+ PDod(a)           = var( 4);
+ PMag(a)           = var( 5);
+ PMgr(a)           = var( 6);
+ PRea(a)           = var( 7);
+ PMbl(a)           = var( 8);
+ PFer(a)           = var( 9);
+ PAtk(a)           = var(10);
+ PDef(a)           = var(11);
+ PXP(a)            = var(12);
+ PGP(a)            = var(13);
+ PCounterChance(a) = var(14);
+ PCounter(a)       = var(15);
+ PEAttack(a)       = var(16);
+ PEAbsorb(a)       = var(17);
+ PENil(a)          = var(18);
+ PEHalf(a)         = var(19);
+ PEDbl(a)          = var(20);
+ PStatus(a)        = var(21);
+ PAI(a)            = 0;                 // maybe change this (maybe)
+}
+
+Event // loadweapon -- loads the right weapon PCX and sets wepnsound
+// var0 - character (1-5)
+{
+ c=var(0);
+ w=Items(PartyIndex(c),0);
+ if (c>5)
+  {for (n,0,4096,1) {VCDataBuf(n)=0;}}
+ Switch(w)
+  {
+   Case  0:for(n,0,4096,1) {VCDataBuf(Free()+n)=0;} // nothing
+           WepnSound()=20;
+   Case 11:VCLoadPCX("Battle\Sword1.PCX",Free()); // Knife
+           WepnSound()=25;
+   Case 12:VCLoadPCX("Battle\Sword2.PCX",Free()); // Blade
+           WepnSound()=19;
+   Case 13:VCLoadPCX("Battle\Sword3.PCX",Free()); // Buster Sword
+           WepnSound()=24;
+   Case 18:VCLoadPCX("Battle\Katana1a.PCX",Free()); // Katana
+           WepnSound()=19;
+   Case 19:for(n,0,4096,1) {VCDataBuf(n+Free())=0;} // Iron Knuckle
+           WepnSound()=20;
+  }
+}
+
+Event // hook -- this is hooktimered
+{
+}
+
+Event // batfx 1 -- a physical attack
+// var0=the attacker (1-10)
+// var1=the victim (1-10)
+{
+/* SoundEffect(20);
+ CallEvent(Numbers(),var(1)+4,10);
+ Return; */
+
+ a=var(0);
+ v=var(1);
+
+ CallEvent(LoadWepn(),a);      // load the weapon graphic
+
+ c=PHit(a)-(PDod(v)/2);
+ if (c<1) c=1;
+
+ while (c<50) c=c*2;           // TEMP
+
+ d=Random(0,100);
+
+ if (d<c)
+  {
+   d=(PAtk(a)*2)-PDef(v);
+   if (d<1) d=0;
+   e=d/5;
+   d=random(d-e,d+e);          // dmg=2*atk-def ñ5%
+   d+=PFer(a);
+   if (d<1) d=0;               // minimum of zero damage (no healing)
+   if (SDefending(v)) d=d/2;   // defending results in half damage
+
+   if (d)
+    {
+     // HIT
+     SoundEffect(WepnSound());
+     if (v<=5)
+      SpecialFrame(v+4)=21;
+     CallEvent(Numbers(),v+4,d);
+     SpecialFrame(v+4)=0;
+     PHP(v)-=d;
+     if (PHP(v)<1) {PHP(v)=0; CallEvent(Die(),v);}     
+     c=Random(1,255);
+     d=PCounterChance(v);
+     if (IsCtr()=0 AND PHP(v)>0 AND c<d)
+      {
+       p=PCounter(v);
+       IsCtr()=1; // isctr is set to 1 on counters so that a counter
+       CallEvent(BatFX(p),v,a);
+       IsCtr()=0; // won't be itself countered (things could get out of hand)
+      } // Counter?
+    }
+   Return;
+  }
+ // MISS
+ CallEvent(Miss(),v+4,0);
+}
+
+Event // batfx 2 a character attacks
+// this is only separated so that the characters can have different animations
+// when they attack.  
+// var0 - attacker (1-10) var1 - victim(1-10)
+{
+ a=var(0);
+ v=var(1);
+ CallEvent(LoadWepn(),a);
+
+ z=MoveCode(a+4); MoveCode(a+4)=0;
+ EntityMove(a+4,"L2"); Wait(10);
+ While (MoveCode(a+4)=4) Wait(10);
+
+ x=Entity.LocX(a+4)*16-24;
+ y=(Entity.LocY(a+4)-(YWin/ 16))*16-24;
+
+ VCBlitImage(x,y,64,32,Free());
+ SpecialFrame(a+4)=20;
+ Wait(3);
+ c=PHit(a)-(PDod(v)/2);
+ if (c<1) c=1;
+ b=Random(1,100); m=0;
+ if (b<c)
+  {
+   m=1;
+   VCBlitImage(x-6,y,64,32,Free()+2048-64);
+   SoundEffect(WepnSound());
+   // hit
+   d=(PAtk(a)*2)-(PDef(v));
+   if (d<0) d=0;
+   e=d/5;
+   d=Random(d-e,d+e); // 2*ATK-DEF ñ10%
+   d+=PFer(a);        // +FER
+   CallEvent(Numbers(),v+4,d);
+   VCClearRegion(x-6,y,x+64,y+32);
+   PHP(v)-=d;
+   if (PHP(v)<1) {PHP(v)=0; CallEvent(Die(),v);}     
+   if (PHP(v)!=0)
+    {
+     c=Random(1,255);
+     d=PCounterChance(v);
+     if (IsCtr()=0 AND c<d)
+      {
+       p=PCounter(v);
+       IsCtr()=1; // isctr is set to 1 on counters so that a counter
+       CallEvent(BatFX(p),v,a);
+       IsCtr()=0; // won't be itself countered (things could get out of hand)
+      } // Counter?
+    }
+  }
+ if (!m)
+  {
+   // miss
+   VCBlitImage(x-6,y,64,32,Free()+2048-64);
+   CallEvent(Miss(),v+4);
+   VCClearRegion(0,0,320,120);
+  }
+
+ SpecialFrame(a+4)=0;
+ EntityMove(a+4,"R2 F3"); Wait(10);
+ While (MoveCode(a+4)=4) Wait(10);
+ MoveCode(a+4)=z;
+}
+
+Event // batfx 3 a monster attacks
+// this is only separated so that the enemies can have different animations
+// when they attack.  It actually calls the event above for all of the damage
+// algorithms
+{
+ WepnSound()=33;
+ a=var(0);
+ v=var(1);
+ CallEvent(BatFX(1),a,v);
+}
+
+Event // magicfx 1 CURE
+{
+ a=var(0); v=var(1);
+ d=0-(Random(20,50)+PMag(a));
+
+ VCCenterText(10,"Cure");
+ SoundEffect(10);
+ LayerVC2=1; VCLayerWrite=2; LayerVC2Trans=0;
+ VCLoadPCX("battle\castspel.pcx",Free());
+ x=Entity.LocX(a+4)*16;
+ if (a<=5)
+  x-=16;
+ if (a>=6)
+  x+=16;
+ y=(Entity.LocY(a+4)-(YWin/16))*16-16;
+ For (w,0,15,1)
+  {
+   p=(w*32*32)+Free();
+   VCBlitImage(x,y,32,32,p);
+   ReDraw();
+  }
+ p=(32*32*15)+Free();
+ VCBlitImage(x,y,32,40,p);
+ ReDraw();
+ VCClear(); LayerVC2=0; VCLayerWrite=1; LayerVC2Trans=0;
+
+ VCClearRegion(0,0,320,20);
+
+ SoundEffect(28); 
+ PHP(v)-=d;
+ if (PHP(v)>PMaxHP(v)) PHP(v)=PMaxHP(v);
+ CallEvent(Numbers(),v+4,d);
+}
+
+Event // magicfx 2 FIRE
+{
+ a=var(0); v=var(1);
+
+ VCCenterText(10,"Fire");
+ SoundEffect(10);
+ LayerVC2=1; VCLayerWrite=2; LayerVC2Trans=0;
+ VCLoadPCX("battle\castspel.pcx",Free());
+ x=Entity.LocX(a+4)*16;
+ if (a<=5)
+  x-=16;
+ if (a>=6)
+  x+=16;
+ y=(Entity.LocY(a+4)-(YWin/16))*16-16;
+ For (w,0,14,1)
+  {
+   p=(w*32*32)+Free();
+   VCBlitImage(x,y,32,32,p);
+   ReDraw();
+   PaletteMorph(0,0,0,0,63-(w*2));
+  }
+ Wait(50);
+ VCClear(); VCLayerWrite=1;
+
+ VCClearRegion(0,0,320,20);
+
+ x=Entity.LocX(v+4)*16;
+ y=(Entity.LocY(v+4)-(YWin/16))*16;
+
+ VCLoadPCX("Battle\Fire1.PCX",Free());
+ r=Entity.LocX(a+4)*16;
+ w=(Entity.LocY(a+4)-(YWin/16))*16;
+ SoundEffect(17);
+ VCLayerWrite=2;
+ for (n,y-30,y+30,4)
+  {
+   VCLine(r,w-1,x+(n/10),n-1,230);
+   VCLine(r,w  ,x+(n/10),n  ,239);
+   VCLine(r,w+1,x+(n/10),n+1,230);
+   p=((n%6)*1617)+Free();
+   VCTBlitImage(x+(n/10)-16,n-30,33,49,p);
+   ReDraw();
+   VCClear();
+  }
+ LayerVC2Trans=0; LayerVC2=0; VCLayerWrite=1;
+// 2*ATK-DEF ñ5%
+ d=(2*PMag(a))-PMgr(v);
+
+// ADJUST FOR ELEMENTAL STRENGTHS/WEAKNESSES
+/* if ((PEAbsorb(v)%2)=1) d=0-d;
+ if ((PENil(v)%2)=1) d=0;
+ if ((PEDbl(v)%2)=1) d+=d;  // d=d*2 only faster I'd bet
+ if ((PEHalf(v)%2)=1) d=d/2;*/
+
+ if (IsEDbl(v,EFire ))  d+=d;
+ if (IsEHalf(v,EFire )) d=d/2;
+ if (IsEAbs(v,EFire ))  d=0-d;
+ if (IsENil(v,EFire ))  d=0;
+// END OF ELEMENTAL STUFF
+
+ e=d/5;
+ d=Random(d-e,d+e);
+ CallEvent(Numbers(),v+4,d);
+ if (PHP(v)<d) d=PHP(v);
+ PHP(v)-=d;
+ if (PHP(v)>PMaxHP(v)) PHP(v)=PMaxHP(v); // just in case the enemy absorbed it
+ if (!PHP(v)) CallEvent(Die(),v);
+ for (w,1,14,1)
+  {
+   PaletteMorph(0,0,0,0,33+(w*2));
+   ReDraw();
+  }
+ PaletteMorph(0,0,0,0,63);
+}
+
+Event // magfx 2 ICE
+{
+ a=var(0); v=var(1);
+ VCCenterText(10,"Ice");
+ SoundEffect(10);
+ LayerVC2=1; VCLayerWrite=2; LayerVC2Trans=0;
+ VCLoadPCX("battle\castspel.pcx",Free());
+ x=Entity.LocX(a+4)*16;
+ if (a<=5)
+  x-=16;
+ if (a>=6)
+  x+=16;
+ y=(Entity.LocY(a+4)-(YWin/16))*16-16;
+ For (w,0,14,1)
+  {
+   p=(w*32*32)+Free();
+   VCBlitImage(x,y,32,32,p);
+   ReDraw();
+   PaletteMorph(0,0,0,0,63-(w*2));
+  }
+ Wait(50);
+ VCClear(); VCLayerWrite=1;
+ VCClearRegion(0,0,320,20);
+ VCLayerWrite=2;
+ 
+ x=Entity.LocX(v+4)*16;
+ y=(Entity.LocY(v+4)-(YWin/16))*16;
+ SoundEffect(18);
+ for (n,1,5,1)
+  {PlayVAS("Battle\Ice1.pcx",0,33,49,x-3,y-20);}
+ VCClear(); LayerVC2=0; VCLayerWrite=1;
+
+ d=(PMag(a)*2)-PMgr(v); // 2*ATK-DEF ñ20%
+ e=d/5;
+ d=Random(d-e,d+e);
+
+ // ELEMENTAL ADJUSTMENTS
+/* if (((PEAbsorb(v)%4)-1)>0) d=0-d;
+ if (((PENil(v)%4)-1)>0) d=0;
+ if (((PEDbl(v)%4)-1)>0) d+=d;
+ if (((PEHalf(v)%4)-1)>0) d=d/2;*/
+
+ if (IsEDbl(v,EWater ))  d+=d;
+ if (IsEHalf(v,EWater )) d=d/2;
+ if (IsEAbs(v,EWater ))  d=0-d;
+ if (IsENil(v,EWater ))  d=0;
+ // END OF ELEMENTAL ADJUSTMENT
+ CallEvent(Numbers(),v+4,d);
+ if (PHP(v)<d) d=PHP(v);
+ PHP(v)-=d;
+ if (PHP(v)>PMaxHP(v)) PHP(v)=PMaxHP(v); // if it's absorbed
+ if (!PHP(v)) CallEvent(Die(),v);
+
+ for (w,1,14,1)
+  {
+   PaletteMorph(0,0,0,0,33+(w*2));
+   ReDraw();
+  }
+ PaletteMorph(0,0,0,0,63);
+}
+
+Event // magfx 3 BOLT
+{
+ a=var(0); v=var(1);
+
+ LayerVC2=1; VCLayerWrite=2; LayerVC2Trans=0;
+ VCCenterText(10,"Bolt");
+ SoundEffect(10);
+ VCLoadPCX("battle\castspel.pcx",Free());
+ x=Entity.LocX(a+4)*16;
+ if (a<=5)
+  x-=16;
+ if (a>=6)
+  x+=16;
+ y=(Entity.LocY(a+4)-(YWin/16))*16-16;
+ For (w,0,14,1)
+  {
+   p=(w*32*32)+Free();
+   VCBlitImage(x,y,32,32,p);
+   ReDraw();
+   PaletteMorph(0,0,0,0,63-(w*2));
+  }
+ Wait(50);
+ VCClear();
+
+ VCClearRegion(0,0,320,20);
+
+ x=Entity.LocX(v+4)*16;
+ x+=8;
+ y=(Entity.LocY(v+4)-(YWin/16))*16;
+ y+=16;
+
+ // (b,c)-(d,e) coords of line
+ // (x,y) end coords of bolt
+ // f while structure control variable
+ // g loop counter
+ // h color
+ timer=0;
+ SoundEffect(34);
+ while (timer<100)
+  {
+   VCClearRegion(x-23,0,x+23,y);
+   for (g,1,5,1)
+    {
+     i=Random(1,3);
+     switch (i)
+      {
+       case 1:h=239;
+       case 2:h=232;
+       case 3:h=147;
+      }
+     f=0;
+     b=x+random(1,10)-random(1,10);
+     c=0;
+     while (!f)
+      {
+       d=b;
+       e=c;
+       b+=Random(0,20);
+       b-=Random(0,20);
+       while (b+20<x) b+=Random(1,5);
+       while (b-20>x) b-=Random(1,5);
+       c+=Random(1,20);
+       if (c>y) {c=y; f=1;}
+//       VCLine (b,c,d,e,h);
+       VCLine (b-1,c,d+1,e,h);
+       VCLine (b+1,c,d-1,e,h);
+      }
+    }
+   Redraw();
+  }
+ VCClear(); LayerVC2=0; VCLayerWrite=1;
+ // specialframe stuff here
+ Wait(50);
+
+ d=(PMag(a)*2)-PMgr(v); // 2*ATK-DEF ñ20%
+ e=d/5;
+ d=Random(d-e,d+e);
+
+ // ELEMENTAL ADJUSTMENTS
+/* if (((PEAbsorb(v)%4)-1)>0)     d=0-d;
+ if (((PENil(v)%4)-1)>0)        d=0;
+ if (((PEDbl(v)%4)-1)>0)        d+=d; // d=d*2 only faster
+ if (((PEHalf(v)%4)-1)>0)       d=d/2;*/
+
+ if (IsEDbl(v,ELightening ))  d+=d;
+ if (IsEHalf(v,ELightening )) d=d/2;
+ if (IsEAbs(v,ELightening ))  d=0-d;
+ if (IsENil(v,ELightening ))  d=0;
+
+ // END OF ELEMENTAL ADJUSTMENT
+
+ CallEvent(Numbers(),v+4,d);
+ if (PHP(v)<d) d=PHP(v);
+ PHP(v)-=d;
+ if (PHP(v)>PMaxHP(v)) PHP(v)=PMaxHP(v); // if it's absorbed
+ if (!PHP(v)) CallEvent(Die(),v);
+
+ for (w,1,14,1)
+  {
+   PaletteMorph(0,0,0,0,33+(w*2));
+   ReDraw();
+  }
+ PaletteMorph(0,0,0,0,63);
+}
+
+Event // magfx 4 haste
+{
+ // nuthin' yet
+}
+
+Event // magfx 5 slow
+{
+}
+
+Event // magfx 6 drop kick
+{
+ banner ("Not yet!",100);
+}
+
+Event // magfx 7 eye poke
+{
+}
+
+Event // itemfx 1 potion
+{
+ VCCenterText(10,"Potion");
+ Wait(50);
+
+ SoundEffect(28);
+ q=var(1);
+ PHP(q)+=50;
+ if (PHP(q)>PMaxHP(q)) PHP(q)=PMaxHP(q);
+ CallEvent(Numbers(),q+4,0-50);
+ VCClearRegion(0,0,320,20);
+}
+
+Event // itemfx 2 hi-potion
+{
+ VCCenterText(10,"Hi-Potion");
+ Wait(50);
+
+ SoundEffect(28);
+ q=var(1);
+ PHP(q)+=250;
+ if (PHP(q)>PMaxHP(q)) PHP(q)=PMaxHP(q);
+ CallEvent(Numbers(),q+4,0-250);
+ VCClearRegion(0,0,320,20);
+}
+
+Event // itemfx 3 x-potion
+{
+ VCCenterText(10,"X-Potion");
+ Wait(50);
+ VCClearRegion(0,0,320,20);
+
+ SoundEffect(28);
+ q=var(1);
+ PHP(q)+=9999;
+ if (PHP(q)>PMaxHP(q)) PHP(q)=PMaxHP(q);
+ CallEvent(Numbers(),q+4,0-PMaxHP(q));
+ VCClearRegion(127,4,192,24);
+}
+
+Event // itemfx 4 Tincture
+{
+ VCCenterText(10,"Tincture");
+ Wait(50);
+ VCClearRegion(0,0,320,20);
+
+ SoundEffect(28);
+ q=var(1);
+ PMP(q)+=50;
+ if (PMP(q)>PMaxMP(q)) PMP(q)=PMaxMP(q);
+ FontColor=142;
+ CallEvent(Numbers(),q+4,50);
+ FontColor=31;
+}
+
+Event // itemfx 5 Ether
+{
+ VCCenterText(10,"Ether");
+ Wait(50);
+ VCClearRegion(0,0,320,20);
+
+ SoundEffect(28);
+ q=var(1);
+ PMP(q)+=100;
+ if (PMP(q)>PMaxMP(q)) PMP(q)=PMaxMP(q);
+ FontColor=142;
+ CallEvent(Numbers(),q+4,100);
+ FontColor=31;
+}
+
+Event // itemfx 4 Turbo Ether
+{
+ VCCenterText(10,"Turbo Ether");
+ Wait(50);
+ VCClearRegion(0,0,320,20);
+
+ SoundEffect(28);
+ q=var(1);
+ PMP(q)=PMaxMP(q);
+ FontColor=142;
+ CallEvent(Numbers(),q+4,PMaxMP(q));
+ FontColor=31;
+}

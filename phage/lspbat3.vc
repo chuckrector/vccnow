@@ -1,0 +1,3478 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  drawparty = 0;
+  disablemenu();
+  flags(800) = 1;
+  flags(1001) = 0;
+  flags(1002) = 0;
+  flags(1003) = 0;
+  flags(1004) = 0;
+  flags(1005) = 0;
+  flags(1006) = 0;
+  flags(1007) = 0;
+  flags(1008) = 0;
+  switch (flags(501))
+  {
+    case (0): entity.chrindex(7) = 16;
+    case (1): entity.chrindex(7) = 7;
+    case (2): entity.chrindex(7) = 14; playmusic("battle05.s3m");
+    case (3): entity.chrindex(7) = 15;
+    case (4): entity.chrindex(7) = 18; playmusic("battle05.s3m");
+    case (5): entity.chrindex(7) = 20;
+    case (6): entity.chrindex(7) = 21;
+  }
+  switch (flags(514))
+  {
+    case (0): entity.chrindex(5) = 16;
+    case (1): entity.chrindex(5) = 7;
+    case (2): entity.chrindex(5) = 15;
+    case (3): entity.chrindex(5) = 15;
+    case (4): entity.chrindex(5) = 18;
+    case (5): entity.chrindex(5) = 20;
+    case (6): entity.chrindex(5) = 22;
+  }
+  switch (flags(527))
+  {
+    case (0): entity.chrindex(6) = 16;
+    case (1): entity.chrindex(6) = 7;
+    case (2): entity.chrindex(6) = 19;
+    case (3): entity.chrindex(6) = 15;
+    case (4): entity.chrindex(6) = 18;
+    case (5): entity.chrindex(6) = 20;
+    case (6): entity.chrindex(6) = 21;
+  }
+  if (char(1))
+  {
+    entity.locx(8) -= 3;
+  }
+  if (!char(1))
+  {
+    entity.locx(8) += 7;
+  }
+  if (char(2))
+  {
+    entity.locx(13) -= 3;
+  }
+  if (!char(2))
+  {
+    entity.locx(13) += 7;
+  }
+  if (char(3))
+  {
+    entity.locx(10) -= 3;
+  }
+  if (!char(3))
+  {
+    entity.locx(10) += 7;
+  }
+  if (char(4))
+  {
+    entity.locx(9) -= 3;
+  }
+  if (!char(4))
+  {
+    entity.locx(9) += 7;
+  }
+  if (char(5))
+  {
+    entity.locx(14) -= 3;
+  }
+  if (!char(5))
+  {
+    entity.locx(14) += 7;
+  }
+  if (char(6))
+  {
+    entity.locx(15) -= 3;
+  }
+  if (!char(6))
+  {
+    entity.locx(15) += 7;
+  }
+  if (char(7))
+  {
+    entity.locx(12) -= 3;
+  }
+  if (!char(7))
+  {
+    entity.locx(12) += 7;
+  }
+  if (char(8))
+  {
+    entity.locx(11) -= 3;
+  }
+  if (!char(8))
+  {
+    entity.locx(11) += 7;
+  }
+  flags(598) = flags(504);
+  flags(599) = flags(517);
+  flags(600) = flags(530);
+  layervc = 1;
+  chainevent(1);
+}
+event
+{
+  face(5) = 0;
+  face(6) = 0;
+  face(7) = 0;
+  face(8) = 0;
+  face(9) = 0;
+  face(10) = 0;
+  face(11) = 0;
+  face(12) = 0;
+  face(13) = 0;
+  face(14) = 0;
+  face(15) = 0;
+  if (flags(598) > 0)
+  {
+    specialframe(7) = 0;
+  }
+  if (flags(599) > 0)
+  {
+    specialframe(5) = 0;
+  }
+  if (flags(600) > 0)
+  {
+    specialframe(6) = 0;
+  }
+  if (curhp(1) > 0)
+  {
+    specialframe(8) = 0;
+  }
+  if (curhp(2) > 0)
+  {
+    specialframe(13) = 0;
+  }
+  if (curhp(3) > 0)
+  {
+    specialframe(10) = 0;
+  }
+  if (curhp(4) > 0)
+  {
+    specialframe(9) = 0;
+  }
+  if (curhp(5) > 0)
+  {
+    specialframe(14) = 0;
+  }
+  if (curhp(6) > 0)
+  {
+    specialframe(15) = 0;
+  }
+  if (curhp(7) > 0)
+  {
+    specialframe(12) = 0;
+  }
+  if (curhp(8) > 0)
+  {
+    specialframe(11) = 0;
+  }
+  vcclear();
+  vcbox(240, 10, 314, 198);
+  flags(595) = 13;
+  if (char(1))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Sam");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(1));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(1));
+  }
+  if (char(2))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Webb");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(2));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(2));
+  }
+  if (char(3))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Feng");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(3));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(3));
+  }
+  if (char(4))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Rikk");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(4));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(4));
+  }
+  if (char(5))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Dingo");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(5));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(5));
+  }
+  if (char(6))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Jeemdub");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(6));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(6));
+  }
+  if (char(7))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Bull");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(7));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(7));
+  }
+  if (char(8))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Lumin");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(8));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(8));
+  }
+  vctext(245, 173, "SP");
+  vctextnum(245, 183, flags(703));
+  redraw();
+  flags(601) = atk(1);
+  flags(602) = def(1);
+  flags(716) = mag(1);
+  flags(717) = mgr(1);
+  flags(603) = atk(2);
+  flags(604) = def(2);
+  flags(718) = mag(2);
+  flags(719) = mgr(2);
+  flags(605) = atk(3);
+  flags(606) = def(3);
+  flags(720) = mag(3);
+  flags(721) = mgr(3);
+  flags(607) = atk(4);
+  flags(608) = def(4);
+  flags(722) = mag(4);
+  flags(723) = mgr(4);
+  flags(609) = atk(5);
+  flags(610) = def(5);
+  flags(724) = mag(5);
+  flags(725) = mgr(5);
+  flags(611) = atk(6);
+  flags(612) = def(6);
+  flags(726) = mag(6);
+  flags(727) = mgr(6);
+  flags(613) = atk(7);
+  flags(614) = def(7);
+  flags(728) = mag(7);
+  flags(729) = mgr(7);
+  flags(615) = atk(8);
+  flags(616) = def(8);
+  flags(730) = mag(8);
+  flags(731) = mgr(8);
+  flags(617) = flags(502);
+  flags(618) = flags(503);
+  flags(710) = flags(540);
+  flags(711) = flags(541);
+  flags(619) = flags(515);
+  flags(620) = flags(516);
+  flags(712) = flags(542);
+  flags(713) = flags(543);
+  flags(621) = flags(528);
+  flags(622) = flags(529);
+  flags(714) = flags(544);
+  flags(715) = flags(545);
+  flags(629) = 0;
+  chainevent(2);
+}
+event
+{
+  flags(629) = 1;
+  if (flags(1021) > 0 && char(1) && curhp(1) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 1;
+    if (flags(1021) >= curhp(1))
+    {
+      flags(1021) = 0;
+      flags(617) = curhp(1);
+      curhp(1) = 0;
+    }
+    if (curhp(1) != 0)
+    {
+      curhp(1) -= flags(1021);
+      flags(617) = flags(1021);
+    }
+    callevent(16);
+  }
+  if (flags(1022) > 0 && char(2) && curhp(2) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 2;
+    if (flags(1022) >= curhp(2))
+    {
+      flags(1022) = 0;
+      flags(617) = curhp(2);
+      curhp(2) = 0;
+    }
+    if (curhp(2) != 0)
+    {
+      curhp(2) -= flags(1022);
+      flags(617) = flags(1022);
+    }
+    callevent(16);
+  }
+  if (flags(1023) > 0 && char(3) && curhp(3) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 3;
+    if (flags(1023) >= curhp(3))
+    {
+      flags(1023) = 0;
+      flags(617) = curhp(3);
+      curhp(3) = 0;
+    }
+    if (curhp(3) != 0)
+    {
+      curhp(3) -= flags(1023);
+      flags(617) = flags(1023);
+    }
+    callevent(16);
+  }
+  if (flags(1024) > 0 && char(4) && curhp(4) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 4;
+    if (flags(1024) >= curhp(4))
+    {
+      flags(1024) = 0;
+      flags(617) = curhp(4);
+      curhp(4) = 0;
+    }
+    if (curhp(4) != 0)
+    {
+      curhp(4) -= flags(1024);
+      flags(617) = flags(1024);
+    }
+    callevent(16);
+  }
+  if (flags(1025) > 0 && char(5) && curhp(5) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 5;
+    if (flags(1025) >= curhp(5))
+    {
+      flags(1025) = 0;
+      flags(617) = curhp(5);
+      curhp(5) = 0;
+    }
+    if (curhp(5) != 0)
+    {
+      curhp(5) -= flags(1025);
+      flags(617) = flags(1025);
+    }
+    callevent(16);
+  }
+  if (flags(1026) > 0 && char(6) && curhp(6) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 6;
+    if (flags(1026) >= curhp(6))
+    {
+      flags(1026) = 0;
+      flags(617) = curhp(6);
+      curhp(6) = 0;
+    }
+    if (curhp(6) != 0)
+    {
+      curhp(6) -= flags(1026);
+      flags(617) = flags(1026);
+    }
+    callevent(16);
+  }
+  if (flags(1027) > 0 && char(7) && curhp(7) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 7;
+    if (flags(1027) >= curhp(7))
+    {
+      flags(1027) = 0;
+      flags(617) = curhp(7);
+      curhp(7) = 0;
+    }
+    if (curhp(7) != 0)
+    {
+      curhp(7) -= flags(1027);
+      flags(617) = flags(1027);
+    }
+    callevent(16);
+  }
+  if (flags(1028) > 0 && char(8) && curhp(8) > 0)
+  {
+    banner("Poison!", 1);
+    flags(624) = 8;
+    if (flags(1028) >= curhp(8))
+    {
+      flags(1028) = 0;
+      flags(617) = curhp(8);
+      curhp(8) = 0;
+    }
+    if (curhp(8) != 0)
+    {
+      curhp(8) -= flags(1028);
+      flags(617) = flags(1028);
+    }
+    callevent(16);
+  }
+  if (curhp(1) == 0 && char(1))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(2) == 0 && char(2))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(3) == 0 && char(3))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(4) == 0 && char(4))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(5) == 0 && char(5))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(6) == 0 && char(6))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(7) == 0 && char(7))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(8) == 0 && char(8))
+  {
+    flags(702) += 1;
+  }
+  if (flags(702) == numchars)
+  {
+    banner("You lose...", 3);
+    exit();
+  }
+  flags(702) = 0;
+  flags(617) = flags(502);
+  flags(623) = random(1, 4);
+  flags(705) = 9;
+  flags(706) = 10;
+  while (flags(705) != flags(706))
+  {
+    flags(705) = random(1, 8);
+    flags(706) = flags(705);
+    switch (flags(705))
+    {
+      case (1):
+        if (!char(1))
+        {
+          flags(705) += flags(706);
+        }
+      case (2):
+        if (!char(2))
+        {
+          flags(705) += flags(706);
+        }
+      case (3):
+        if (!char(3))
+        {
+          flags(705) += flags(706);
+        }
+      case (4):
+        if (!char(4))
+        {
+          flags(705) += flags(706);
+        }
+      case (5):
+        if (!char(5))
+        {
+          flags(705) += flags(706);
+        }
+      case (6):
+        if (!char(6))
+        {
+          flags(705) += flags(706);
+        }
+      case (7):
+        if (!char(7))
+        {
+          flags(705) += flags(706);
+        }
+      case (8):
+        if (!char(8))
+        {
+          flags(705) += flags(706);
+        }
+    }
+    switch (flags(706))
+    {
+      case (1):
+        if (curhp(1) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (2):
+        if (curhp(2) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (3):
+        if (curhp(3) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (4):
+        if (curhp(4) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (5):
+        if (curhp(5) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (6):
+        if (curhp(6) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (7):
+        if (curhp(7) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (8):
+        if (curhp(8) == 0)
+        {
+          flags(706) += flags(705);
+        }
+    }
+  }
+  flags(624) = flags(705);
+  flags(705) = 9;
+  flags(706) = 10;
+  flags(625) = random(1, 4);
+  while (flags(705) != flags(706))
+  {
+    flags(705) = random(1, 8);
+    flags(706) = flags(705);
+    switch (flags(705))
+    {
+      case (1):
+        if (!char(1))
+        {
+          flags(705) += flags(706);
+        }
+      case (2):
+        if (!char(2))
+        {
+          flags(705) += flags(706);
+        }
+      case (3):
+        if (!char(3))
+        {
+          flags(705) += flags(706);
+        }
+      case (4):
+        if (!char(4))
+        {
+          flags(705) += flags(706);
+        }
+      case (5):
+        if (!char(5))
+        {
+          flags(705) += flags(706);
+        }
+      case (6):
+        if (!char(6))
+        {
+          flags(705) += flags(706);
+        }
+      case (7):
+        if (!char(7))
+        {
+          flags(705) += flags(706);
+        }
+      case (8):
+        if (!char(8))
+        {
+          flags(705) += flags(706);
+        }
+    }
+    switch (flags(706))
+    {
+      case (1):
+        if (curhp(1) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (2):
+        if (curhp(2) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (3):
+        if (curhp(3) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (4):
+        if (curhp(4) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (5):
+        if (curhp(5) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (6):
+        if (curhp(6) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (7):
+        if (curhp(7) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (8):
+        if (curhp(8) == 0)
+        {
+          flags(706) += flags(705);
+        }
+    }
+  }
+  flags(626) = flags(705);
+  flags(705) = 9;
+  flags(706) = 10;
+  flags(627) = random(1, 4);
+  while (flags(705) != flags(706))
+  {
+    flags(705) = random(1, 8);
+    flags(706) = flags(705);
+    switch (flags(705))
+    {
+      case (1):
+        if (!char(1))
+        {
+          flags(705) += flags(706);
+        }
+      case (2):
+        if (!char(2))
+        {
+          flags(705) += flags(706);
+        }
+      case (3):
+        if (!char(3))
+        {
+          flags(705) += flags(706);
+        }
+      case (4):
+        if (!char(4))
+        {
+          flags(705) += flags(706);
+        }
+      case (5):
+        if (!char(5))
+        {
+          flags(705) += flags(706);
+        }
+      case (6):
+        if (!char(6))
+        {
+          flags(705) += flags(706);
+        }
+      case (7):
+        if (!char(7))
+        {
+          flags(705) += flags(706);
+        }
+      case (8):
+        if (!char(8))
+        {
+          flags(705) += flags(706);
+        }
+    }
+    switch (flags(706))
+    {
+      case (1):
+        if (curhp(1) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (2):
+        if (curhp(2) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (3):
+        if (curhp(3) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (4):
+        if (curhp(4) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (5):
+        if (curhp(5) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (6):
+        if (curhp(6) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (7):
+        if (curhp(7) == 0)
+        {
+          flags(706) += flags(705);
+        }
+      case (8):
+        if (curhp(8) == 0)
+        {
+          flags(706) += flags(705);
+        }
+    }
+  }
+  flags(628) = flags(705);
+}
+event
+{
+  textmenu(4, 4, 112, 1, "Fight", "Run");
+  if (flags(251) == 1 && flags(112) == 2)
+  {
+    stext(0, "Can't run from Boss Battles!", "", "");
+    return;
+  }
+  if (flags(251) != 1 && flags(112) == 2)
+  {
+    banner("You ran!", 1);
+    vcclear();
+    layervc = 0;
+    flags(800) = 0;
+    flags(851) = 0;
+    flags(852) = 0;
+    flags(853) = 0;
+    flags(854) = 0;
+    flags(855) = 0;
+    flags(856) = 0;
+    flags(857) = 0;
+    flags(858) = 0;
+    flags(859) = 0;
+    flags(860) = 0;
+    wait(100);
+    enablemenu();
+    drawparty = 1;
+    flags(190) = 1;
+    if (flags(801) == 1)
+    {
+      mapswitch("mansion2.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 2)
+    {
+      mapswitch("packwood.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 3)
+    {
+      mapswitch("orchard.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 4)
+    {
+      mapswitch("untrfarm.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 5)
+    {
+      mapswitch("mtalon.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 6)
+    {
+      mapswitch("catac.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 7)
+    {
+      mapswitch("warrens.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 8)
+    {
+      mapswitch("damcity.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 9)
+    {
+      mapswitch("beach.map", flags(109), flags(110), 0);
+    }
+  }
+  callevent(4);
+  callevent(5);
+  callevent(6);
+  callevent(7);
+  callevent(8);
+  callevent(9);
+  callevent(10);
+  callevent(11);
+  callevent(12);
+  chainevent(13);
+}
+event
+{
+  redraw();
+  if (flags(630) == 0)
+  {
+    if (char(1) && curhp(1) > 0)
+    {
+      flags(638) = 1;
+      if (flags(1001) < maxhp(1) + maxhp(1) - fer(1))
+      {
+        textmenu(4, 4, 630, 1, "Attack", "Jump", "Magic", "Item");
+      }
+      if (flags(1001) >= maxhp(1) + maxhp(1) - fer(1))
+      {
+        textmenu(4, 4, 630, 1, "Attack", "Jump", "Magic", "Item", "Anger Move");
+      }
+      switch (flags(630))
+      {
+        case (1): flags(601) += random(1, 3); callevent(14);
+        case (2):
+          flags(601) += atk(1);
+          flags(601) += random(1, 3);
+          flags(602) = 0;
+          if (items(1, 4) == 3)
+          {
+            flags(601) += 25;
+          }
+          if (items(1, 4) == 78)
+          {
+            flags(601) += atk(1);
+            flags(601) += 75;
+            flags(602) += 45;
+          }
+          if (items(1, 4) == 79)
+          {
+            flags(601) += atk(1);
+            flags(601) += atk(1);
+            flags(601) += 75;
+            flags(602) += 47;
+          }
+          callevent(14);
+        case (3): flags(630) = 0; magicmenu(char(1));
+        case (4): flags(630) = 0; itemmenu(char(1));
+        case (5): magicmenu(char(1));
+      }
+    }
+  }
+}
+event
+{
+  redraw();
+  if (flags(631) == 0)
+  {
+    if (char(2) && curhp(2) > 0)
+    {
+      flags(638) = 2;
+      if (flags(1002) < maxhp(2) + maxhp(2) - fer(2))
+      {
+        textmenu(4, 4, 631, 1, "Attack", "Technique", "Item");
+      }
+      if (flags(1002) >= maxhp(2) + maxhp(2) - fer(2))
+      {
+        textmenu(4, 4, 631, 1, "Attack", "Technique", "Item", "Anger Move");
+      }
+      switch (flags(631))
+      {
+        case (1): flags(603) += random(1, 3); callevent(14);
+        case (2): flags(631) = 0; magicmenu(char(2));
+        case (3): flags(631) = 0; itemmenu(char(2));
+        case (4): magicmenu(char(2));
+      }
+    }
+  }
+}
+event
+{
+  redraw();
+  if (flags(632) == 0)
+  {
+    if (char(3) && curhp(3) > 0)
+    {
+      flags(638) = 3;
+      if (flags(1003) < maxhp(3) + maxhp(3) - fer(3))
+      {
+        textmenu(4, 4, 632, 1, "Attack", "Magic", "Item");
+      }
+      if (flags(1003) >= maxhp(3) + maxhp(3) - fer(3))
+      {
+        textmenu(4, 4, 632, 1, "Attack", "Magic", "Item", "Anger Move");
+      }
+      switch (flags(632))
+      {
+        case (1): flags(605) += random(1, 3); callevent(14);
+        case (2): flags(632) = 0; magicmenu(char(3));
+        case (3): flags(632) = 0; itemmenu(char(3));
+        case (4): flags(606) += 1000; magicmenu(char(3));
+      }
+    }
+  }
+}
+event
+{
+  redraw();
+  if (flags(633) == 0)
+  {
+    if (char(4) && curhp(4) > 0)
+    {
+      flags(638) = 4;
+      if (flags(1004) < maxhp(4) + maxhp(4) - fer(4))
+      {
+        textmenu(4, 4, 633, 1, "Attack", "Drop", "Item");
+      }
+      if (flags(1004) >= maxhp(4) + maxhp(4) - fer(4))
+      {
+        textmenu(4, 4, 633, 1, "Attack", "Drop", "Item", "Anger Move");
+      }
+      switch (flags(633))
+      {
+        case (1): flags(607) += random(1, 3); callevent(14);
+        case (2): flags(633) = 0; magicmenu(char(4));
+        case (3): flags(633) = 0; itemmenu(char(4));
+        case (4): magicmenu(char(4));
+      }
+    }
+  }
+}
+event
+{
+  redraw();
+  if (flags(634) == 0)
+  {
+    if (char(5) && curhp(5) > 0)
+    {
+      flags(638) = 5;
+      if (flags(1005) < maxhp(5) + maxhp(5) - fer(5))
+      {
+        textmenu(4, 4, 634, 1, "Attack", "Steal", "Magic", "Item");
+      }
+      if (flags(1005) >= maxhp(5) + maxhp(5) - fer(5))
+      {
+        textmenu(
+            4, 4, 634, 1, "Attack", "Steal", "Magic", "Item", "Anger Move");
+      }
+      switch (flags(634))
+      {
+        case (1): flags(609) += random(1, 3); callevent(14);
+        case (2):
+          flags(610) += def(5);
+          flags(609) += random(1, 3);
+          callevent(14);
+        case (3): flags(634) = 0; magicmenu(char(5));
+        case (4): flags(634) = 0; itemmenu(char(5));
+        case (5): magicmenu(char(5));
+      }
+    }
+  }
+}
+event
+{
+  redraw();
+  if (flags(635) == 0)
+  {
+    if (char(6) && curhp(6) > 0)
+    {
+      flags(638) = 6;
+      if (flags(1006) < maxhp(6) + maxhp(6) - fer(6))
+      {
+        textmenu(4, 4, 635, 1, "G.E.P", "Magic", "Item");
+      }
+      if (flags(1006) >= maxhp(6) + maxhp(6) - fer(6))
+      {
+        textmenu(4, 4, 635, 1, "G.E.P", "Magic", "Item", "Anger Move");
+      }
+      switch (flags(635))
+      {
+        case (1):
+          flags(611) += atk(6);
+          flags(611) += atk(6);
+          flags(611) += atk(6);
+          flags(611) += random(1, 3);
+          flags(612) += def(6);
+          flags(612) += def(6);
+          callevent(14);
+        case (2): flags(635) = 0; magicmenu(char(6));
+        case (3): flags(635) = 0; itemmenu(char(6));
+        case (4): magicmenu(char(6));
+      }
+    }
+  }
+}
+event
+{
+  redraw();
+  if (flags(636) == 0)
+  {
+    if (char(7) && curhp(7) > 0)
+    {
+      flags(638) = 7;
+      if (flags(1007) < maxhp(7) + maxhp(7) - fer(7))
+      {
+        textmenu(4, 4, 636, 1, "Attack", "Croak", "Item");
+      }
+      if (flags(1007) >= maxhp(7) + maxhp(7) - fer(7))
+      {
+        textmenu(4, 4, 636, 1, "Attack", "Croak", "Item", "Anger Move");
+      }
+      switch (flags(636))
+      {
+        case (1): flags(613) += random(1, 3); callevent(14);
+        case (2):
+          flags(613) += atk(7);
+          flags(613) += random(1, 3);
+          flags(614) = 0;
+        case (3): flags(636) = 0; itemmenu(char(7));
+        case (4): magicmenu(char(7));
+      }
+    }
+  }
+}
+event
+{
+  redraw();
+  if (flags(637) == 0)
+  {
+    if (char(8) && curhp(8) > 0)
+    {
+      flags(638) = 8;
+      if (flags(1008) < maxhp(8) + maxhp(8) - fer(8))
+      {
+        textmenu(4, 4, 637, 1, "Attack", "Magic", "Item");
+      }
+      if (flags(1008) >= maxhp(8) + maxhp(8) - fer(8))
+      {
+        textmenu(4, 4, 637, 1, "Attack", "Magic", "Item", "Anger Move");
+      }
+      switch (flags(637))
+      {
+        case (1): flags(615) += random(1, 3); callevent(14);
+        case (2): flags(637) = 0; magicmenu(char(8));
+        case (3): flags(637) = 0; itemmenu(char(8));
+        case (4): magicmenu(char(8));
+      }
+    }
+  }
+}
+event
+{
+  if (flags(598) > 0)
+  {
+    flags(629) = 1;
+    switch (flags(623))
+    {
+      case (1): calleffect(flags(505));
+      case (2): calleffect(flags(506));
+      case (3): calleffect(flags(507));
+      case (4): calleffect(flags(508));
+    }
+  }
+  if (flags(599) > 0)
+  {
+    flags(629) = 2;
+    switch (flags(625))
+    {
+      case (1): calleffect(flags(518));
+      case (2): calleffect(flags(519));
+      case (3): calleffect(flags(520));
+      case (4): calleffect(flags(521));
+    }
+  }
+  if (flags(600) > 0)
+  {
+    flags(629) = 3;
+    switch (flags(627))
+    {
+      case (1): calleffect(flags(531));
+      case (2): calleffect(flags(532));
+      case (3): calleffect(flags(533));
+      case (4): calleffect(flags(534));
+    }
+  }
+  if (char(1) && curhp(1) > 0)
+  {
+    flags(638) = 1;
+    switch (flags(630))
+    {
+      case (1):
+        specialframe(8) = 3;
+        wait(15);
+        specialframe(8) = 4;
+        wait(25);
+        specialframe(8) = 3;
+        wait(15);
+        specialframe(8) = 0;
+        switch (flags(640))
+        {
+          case (1):
+            if (flags(601) < flags(618))
+            {
+              flags(618) = flags(601);
+            }
+            flags(601) -= flags(618);
+            if (flags(598) < flags(601))
+            {
+              flags(601) = flags(598);
+            }
+            flags(598) -= flags(601);
+          case (2):
+            if (flags(601) < flags(620))
+            {
+              flags(620) = flags(601);
+            }
+            flags(601) -= flags(620);
+            if (flags(599) < flags(601))
+            {
+              flags(601) = flags(599);
+            }
+            flags(599) -= flags(601);
+          case (3):
+            if (flags(601) < flags(622))
+            {
+              flags(622) = flags(601);
+            }
+            flags(601) -= flags(622);
+            if (flags(600) < flags(601))
+            {
+              flags(601) = flags(600);
+            }
+            flags(600) -= flags(601);
+        }
+        callevent(15);
+      case (2):
+        banner("Jump", 1);
+        entitymove(8, "L1");
+        wait(20);
+        specialframe(8) = 1;
+        entitymove(8, "U7");
+        wait(50);
+        entity.locx(8) += 11;
+        wait(50);
+        vcloadpcx("samjump.pcx", 0);
+        switch (flags(640))
+        {
+          case (1):
+            for (z, 1, 65, 4)
+            {
+              vctblitimage(49, z, 16, 32, 0);
+              wait(1);
+              vcclear();
+            }
+            for (z, 1, 65, 4)
+            {
+              vctblitimage(49, 66 - z, 16, 32, 0);
+              wait(1);
+              vcclear();
+            }
+            if (flags(601) < flags(618))
+            {
+              flags(618) = flags(601);
+            }
+            flags(601) -= flags(618);
+            if (flags(598) < flags(601))
+            {
+              flags(601) = flags(598);
+            }
+            flags(598) -= flags(601);
+          case (2):
+            for (z, 1, 97, 4)
+            {
+              vctblitimage(49, z, 16, 32, 0);
+              wait(1);
+              vcclear();
+            }
+            for (z, 1, 97, 4)
+            {
+              vctblitimage(49, 98 - z, 16, 32, 0);
+              wait(1);
+              vcclear();
+            }
+            if (flags(601) < flags(620))
+            {
+              flags(620) = flags(601);
+            }
+            flags(601) -= flags(620);
+            if (flags(599) < flags(601))
+            {
+              flags(601) = flags(599);
+            }
+            flags(599) -= flags(601);
+          case (3):
+            for (z, 1, 129, 4)
+            {
+              vctblitimage(49, z, 16, 32, 0);
+              wait(1);
+              vcclear();
+            }
+            for (z, 1, 129, 4)
+            {
+              vctblitimage(49, 130 - z, 16, 32, 0);
+              wait(1);
+              vcclear();
+            }
+            if (flags(601) < flags(622))
+            {
+              flags(622) = flags(601);
+            }
+            flags(601) -= flags(622);
+            if (flags(600) < flags(601))
+            {
+              flags(601) = flags(600);
+            }
+            flags(600) -= flags(601);
+        }
+        entity.locx(8) -= 11;
+        entitymove(8, "D7");
+        wait(50);
+        specialframe(8) = 0;
+        entitymove(8, "R1");
+        wait(20);
+        face(8) = 0;
+        callevent(15);
+      case (5):
+    }
+  }
+  if (char(2) && curhp(2) > 0)
+  {
+    flags(638) = 2;
+    switch (flags(631))
+    {
+      case (1):
+        specialframe(13) = 3;
+        wait(15);
+        specialframe(13) = 4;
+        wait(25);
+        specialframe(13) = 3;
+        wait(15);
+        specialframe(13) = 0;
+        switch (flags(641))
+        {
+          case (1):
+            if (flags(603) < flags(618))
+            {
+              flags(618) = flags(603);
+            }
+            flags(603) -= flags(618);
+            if (flags(598) < flags(603))
+            {
+              flags(603) = flags(598);
+            }
+            flags(598) -= flags(603);
+          case (2):
+            if (flags(603) < flags(620))
+            {
+              flags(620) = flags(603);
+            }
+            flags(603) -= flags(620);
+            if (flags(599) < flags(603))
+            {
+              flags(603) = flags(599);
+            }
+            flags(599) -= flags(603);
+          case (3):
+            if (flags(603) < flags(622))
+            {
+              flags(622) = flags(603);
+            }
+            flags(603) -= flags(622);
+            if (flags(600) < flags(603))
+            {
+              flags(603) = flags(600);
+            }
+            flags(600) -= flags(603);
+        }
+        callevent(15);
+      case (4):
+    }
+  }
+  if (char(3) && curhp(3) > 0)
+  {
+    flags(638) = 3;
+    switch (flags(632))
+    {
+      case (1):
+        specialframe(10) = 3;
+        wait(15);
+        specialframe(10) = 4;
+        wait(25);
+        specialframe(10) = 3;
+        wait(15);
+        specialframe(10) = 0;
+        switch (flags(642))
+        {
+          case (1):
+            if (flags(605) < flags(618))
+            {
+              flags(618) = flags(605);
+            }
+            flags(605) -= flags(618);
+            if (flags(598) < flags(605))
+            {
+              flags(605) = flags(598);
+            }
+            flags(598) -= flags(605);
+          case (2):
+            if (flags(605) < flags(620))
+            {
+              flags(620) = flags(605);
+            }
+            flags(605) -= flags(620);
+            if (flags(599) < flags(605))
+            {
+              flags(605) = flags(599);
+            }
+            flags(599) -= flags(605);
+          case (3):
+            if (flags(605) < flags(622))
+            {
+              flags(622) = flags(605);
+            }
+            flags(605) -= flags(622);
+            if (flags(600) < flags(605))
+            {
+              flags(605) = flags(600);
+            }
+            flags(600) -= flags(605);
+        }
+        callevent(15);
+      case (4):
+    }
+  }
+  if (char(4) && curhp(4) > 0)
+  {
+    flags(638) = 4;
+    switch (flags(633))
+    {
+      case (1):
+        specialframe(9) = 3;
+        wait(15);
+        specialframe(9) = 4;
+        wait(25);
+        specialframe(9) = 3;
+        wait(15);
+        specialframe(9) = 0;
+        switch (flags(643))
+        {
+          case (1):
+            if (flags(607) < flags(618))
+            {
+              flags(618) = flags(607);
+            }
+            flags(607) -= flags(618);
+            if (flags(598) < flags(607))
+            {
+              flags(607) = flags(598);
+            }
+            flags(598) -= flags(607);
+          case (2):
+            if (flags(607) < flags(620))
+            {
+              flags(620) = flags(607);
+            }
+            flags(607) -= flags(620);
+            if (flags(599) < flags(607))
+            {
+              flags(607) = flags(599);
+            }
+            flags(599) -= flags(607);
+          case (3):
+            if (flags(607) < flags(622))
+            {
+              flags(622) = flags(607);
+            }
+            flags(607) -= flags(622);
+            if (flags(600) < flags(607))
+            {
+              flags(607) = flags(600);
+            }
+            flags(600) -= flags(607);
+        }
+        callevent(15);
+      case (4):
+    }
+  }
+  if (char(5) && curhp(5) > 0)
+  {
+    flags(638) = 5;
+    switch (flags(634))
+    {
+      case (1):
+        specialframe(14) = 3;
+        wait(15);
+        specialframe(14) = 4;
+        wait(25);
+        specialframe(14) = 3;
+        wait(15);
+        specialframe(14) = 0;
+        switch (flags(644))
+        {
+          case (1):
+            if (flags(609) < flags(618))
+            {
+              flags(618) = flags(609);
+            }
+            flags(609) -= flags(618);
+            if (flags(598) < flags(609))
+            {
+              flags(609) = flags(598);
+            }
+            flags(598) -= flags(609);
+          case (2):
+            if (flags(609) < flags(620))
+            {
+              flags(620) = flags(609);
+            }
+            flags(609) -= flags(620);
+            if (flags(599) < flags(609))
+            {
+              flags(609) = flags(599);
+            }
+            flags(599) -= flags(609);
+          case (3):
+            if (flags(609) < flags(622))
+            {
+              flags(622) = flags(609);
+            }
+            flags(609) -= flags(622);
+            if (flags(600) < flags(609))
+            {
+              flags(609) = flags(600);
+            }
+            flags(600) -= flags(609);
+        }
+        callevent(15);
+      case (2):
+        stext(5, "I'm, um, borrowing!", "Yeah, that's it!", "");
+        specialframe(14) = 21;
+        wait(10);
+        specialframe(14) = 22;
+        wait(10);
+        specialframe(14) = 21;
+        wait(10);
+        specialframe(14) = 22;
+        wait(10);
+        specialframe(14) = 21;
+        wait(10);
+        specialframe(14) = 22;
+        wait(10);
+        specialframe(14) = 0;
+        flags(609) = 0;
+        flags(701) = random(1, 20);
+        if (flags(701) == 1)
+        {
+          switch (flags(644))
+          {
+            case (1): getitem(5, flags(513));
+            case (2): getitem(5, flags(526));
+            case (3): getitem(5, flags(539));
+          }
+        }
+        if (flags(701) > 1 && flags(701) < 9)
+        {
+          switch (flags(644))
+          {
+            case (1): getitem(5, flags(512));
+            case (2): getitem(5, flags(525));
+            case (3): getitem(5, flags(538));
+          }
+        }
+        if (flags(701) > 8)
+        {
+          banner("Failed to steal!", 2);
+        }
+        callevent(18);
+      case (5):
+    }
+  }
+  if (char(6) && curhp(6) > 0)
+  {
+    flags(638) = 6;
+    switch (flags(635))
+    {
+      case (1):
+        specialframe(15) = 3;
+        wait(15);
+        specialframe(15) = 4;
+        wait(25);
+        specialframe(15) = 3;
+        wait(15);
+        specialframe(15) = 0;
+        switch (flags(645))
+        {
+          case (1):
+            if (flags(611) < flags(618))
+            {
+              flags(618) = flags(611);
+            }
+            flags(611) -= flags(618);
+            if (flags(598) < flags(611))
+            {
+              flags(611) = flags(598);
+            }
+            flags(598) -= flags(611);
+          case (2):
+            if (flags(611) < flags(620))
+            {
+              flags(620) = flags(611);
+            }
+            flags(611) -= flags(620);
+            if (flags(599) < flags(611))
+            {
+              flags(611) = flags(599);
+            }
+            flags(599) -= flags(611);
+          case (3):
+            if (flags(611) < flags(622))
+            {
+              flags(622) = flags(611);
+            }
+            flags(611) -= flags(622);
+            if (flags(600) < flags(611))
+            {
+              flags(611) = flags(600);
+            }
+            flags(600) -= flags(611);
+        }
+        callevent(15);
+      case (4):
+    }
+  }
+  if (char(7) && curhp(7) > 0)
+  {
+    flags(638) = 7;
+    switch (flags(636))
+    {
+      case (1):
+        specialframe(12) = 3;
+        wait(15);
+        specialframe(12) = 4;
+        wait(25);
+        specialframe(12) = 3;
+        wait(15);
+        specialframe(12) = 0;
+        switch (flags(646))
+        {
+          case (1):
+            if (flags(613) < flags(618))
+            {
+              flags(618) = flags(613);
+            }
+            flags(613) -= flags(618);
+            if (flags(598) < flags(613))
+            {
+              flags(613) = flags(598);
+            }
+            flags(598) -= flags(613);
+          case (2):
+            if (flags(613) < flags(620))
+            {
+              flags(620) = flags(613);
+            }
+            flags(613) -= flags(620);
+            if (flags(599) < flags(613))
+            {
+              flags(613) = flags(599);
+            }
+            flags(599) -= flags(613);
+          case (3):
+            if (flags(613) < flags(622))
+            {
+              flags(622) = flags(613);
+            }
+            flags(613) -= flags(622);
+            if (flags(600) < flags(613))
+            {
+              flags(613) = flags(600);
+            }
+            flags(600) -= flags(613);
+        }
+        callevent(15);
+      case (2):
+        banner("Croak", 1);
+        specialframe(12) = 5;
+        wait(15);
+        specialframe(12) = 6;
+        wait(15);
+        specialframe(12) = 7;
+        wait(15);
+        specialframe(12) = 6;
+        wait(15);
+        specialframe(12) = 5;
+        wait(15);
+        specialframe(12) = 0;
+        flags(646) = 7;
+        if (flags(598) < flags(613))
+        {
+          flags(598) = 0;
+        }
+        if (flags(599) < flags(613))
+        {
+          flags(599) = 0;
+        }
+        if (flags(600) < flags(613))
+        {
+          flags(600) = 0;
+        }
+        if (flags(598) != 0)
+        {
+          flags(598) -= flags(613);
+        }
+        if (flags(599) != 0)
+        {
+          flags(599) -= flags(613);
+        }
+        if (flags(600) != 0)
+        {
+          flags(600) -= flags(613);
+        }
+        callevent(15);
+      case (4):
+    }
+  }
+  if (char(8) && curhp(8) > 0)
+  {
+    flags(638) = 8;
+    switch (flags(637))
+    {
+      case (1):
+        specialframe(11) = 3;
+        wait(15);
+        specialframe(11) = 4;
+        wait(25);
+        specialframe(11) = 3;
+        wait(15);
+        specialframe(11) = 0;
+        switch (flags(647))
+        {
+          case (1):
+            if (flags(615) < flags(618))
+            {
+              flags(618) = flags(615);
+            }
+            flags(615) -= flags(618);
+            if (flags(598) < flags(615))
+            {
+              flags(615) = flags(598);
+            }
+            flags(598) -= flags(615);
+          case (2):
+            if (flags(613) < flags(620))
+            {
+              flags(620) = flags(613);
+            }
+            flags(615) -= flags(620);
+            if (flags(599) < flags(615))
+            {
+              flags(615) = flags(599);
+            }
+            flags(599) -= flags(615);
+          case (3):
+            if (flags(613) < flags(622))
+            {
+              flags(622) = flags(613);
+            }
+            flags(615) -= flags(622);
+            if (flags(600) < flags(615))
+            {
+              flags(615) = flags(600);
+            }
+            flags(600) -= flags(615);
+        }
+        callevent(15);
+      case (4):
+    }
+  }
+  flags(630) = 0;
+  flags(631) = 0;
+  flags(632) = 0;
+  flags(633) = 0;
+  flags(634) = 0;
+  flags(635) = 0;
+  flags(636) = 0;
+  flags(637) = 0;
+}
+event
+{
+  if (curhp(1) == 0 && char(1))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(2) == 0 && char(2))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(3) == 0 && char(3))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(4) == 0 && char(4))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(5) == 0 && char(5))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(6) == 0 && char(6))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(7) == 0 && char(7))
+  {
+    flags(702) += 1;
+  }
+  if (curhp(8) == 0 && char(8))
+  {
+    flags(702) += 1;
+  }
+  if (flags(702) == numchars)
+  {
+    banner("You lose...", 3);
+    exit();
+  }
+  flags(702) = 0;
+  if (flags(598) == 0 && flags(599) == 0 && flags(600) == 0)
+  {
+    enablemenu();
+    banner("You win!", 3);
+    for (x, 1, 8, 1)
+    {
+      if (char(x) && curhp(x) > 0)
+      {
+        givexp(x, flags(509));
+        givexp(x, flags(522));
+        givexp(x, flags(535));
+      }
+      flags(701) = random(1, 20);
+      if (flags(701) == 1)
+      {
+        giveitem(flags(513));
+      }
+      if (flags(701) > 1 && flags(701) < 9)
+      {
+        giveitem(flags(512));
+      }
+      givegp(flags(510));
+      givegp(flags(523));
+      givegp(flags(536));
+      flags(703) += flags(511);
+      flags(703) += flags(524);
+      flags(703) += flags(537);
+      vcclear();
+      layervc = 0;
+      flags(800) = 0;
+      flags(851) = 0;
+      flags(852) = 0;
+      flags(853) = 0;
+      flags(854) = 0;
+      flags(855) = 0;
+      flags(856) = 0;
+      flags(857) = 0;
+      flags(858) = 0;
+      flags(859) = 0;
+      flags(860) = 0;
+      wait(100);
+      drawparty = 1;
+      flags(190) = 1;
+      if (flags(801) == 1)
+      {
+        mapswitch("mansion2.map", flags(109), flags(110), 0);
+      }
+      if (flags(801) == 2)
+      {
+        mapswitch("packwood.map", flags(109), flags(110), 0);
+      }
+      if (flags(801) == 3)
+      {
+        mapswitch("orchard.map", flags(109), flags(110), 0);
+      }
+      if (flags(801) == 4)
+      {
+        mapswitch("untrfarm.map", flags(109), flags(110), 0);
+      }
+      if (flags(801) == 5)
+      {
+        mapswitch("mtalon.map", flags(109), flags(110), 0);
+      }
+      if (flags(801) == 6)
+      {
+        mapswitch("catac.map", flags(109), flags(110), 0);
+      }
+      if (flags(801) == 7)
+      {
+        mapswitch("warrens.map", flags(109), flags(110), 0);
+      }
+      if (flags(801) == 8)
+      {
+        mapswitch("damcity.map", flags(109), flags(110), 0);
+      }
+      quit("You Win!");
+      chainevent(1);
+    }
+  }
+}
+event
+{
+  if (flags(598) > 0 && flags(599) > 0 && flags(600) > 0)
+  {
+    textmenu(30, 30, 639, 1, "Enemy 1", "Enemy 2", "Enemy 3");
+    switch (flags(638))
+    {
+      case (1):
+        switch (flags(639))
+        {
+          case (1): flags(640) = 1;
+          case (2): flags(640) = 2;
+          case (3): flags(640) = 3;
+        }
+      case (2):
+        switch (flags(639))
+        {
+          case (1): flags(641) = 1;
+          case (2): flags(641) = 2;
+          case (3): flags(641) = 3;
+        }
+      case (3):
+        switch (flags(639))
+        {
+          case (1): flags(642) = 1;
+          case (2): flags(642) = 2;
+          case (3): flags(642) = 3;
+        }
+      case (4):
+        switch (flags(639))
+        {
+          case (1): flags(643) = 1;
+          case (2): flags(643) = 2;
+          case (3): flags(643) = 3;
+        }
+      case (5):
+        switch (flags(639))
+        {
+          case (1): flags(644) = 1;
+          case (2): flags(644) = 2;
+          case (3): flags(644) = 3;
+        }
+      case (6):
+        switch (flags(639))
+        {
+          case (1): flags(645) = 1;
+          case (2): flags(645) = 2;
+          case (3): flags(645) = 3;
+        }
+      case (7):
+        switch (flags(639))
+        {
+          case (1): flags(646) = 1;
+          case (2): flags(646) = 2;
+          case (3): flags(646) = 3;
+        }
+      case (8):
+        switch (flags(639))
+        {
+          case (1): flags(647) = 1;
+          case (2): flags(647) = 2;
+          case (3): flags(647) = 3;
+        }
+    }
+  }
+  if (flags(598) == 0 && flags(599) > 0 && flags(600) > 0)
+  {
+    textmenu(30, 30, 639, 1, "Enemy 2", "Enemy 3");
+    switch (flags(638))
+    {
+      case (1):
+        switch (flags(639))
+        {
+          case (1): flags(640) = 2;
+          case (2): flags(640) = 3;
+        }
+      case (2):
+        switch (flags(639))
+        {
+          case (1): flags(641) = 2;
+          case (2): flags(641) = 3;
+        }
+      case (3):
+        switch (flags(639))
+        {
+          case (1): flags(642) = 2;
+          case (2): flags(642) = 3;
+        }
+      case (4):
+        switch (flags(639))
+        {
+          case (1): flags(643) = 2;
+          case (2): flags(643) = 3;
+        }
+      case (5):
+        switch (flags(639))
+        {
+          case (1): flags(644) = 2;
+          case (2): flags(644) = 3;
+        }
+      case (6):
+        switch (flags(639))
+        {
+          case (1): flags(645) = 2;
+          case (2): flags(645) = 3;
+        }
+      case (7):
+        switch (flags(639))
+        {
+          case (1): flags(646) = 2;
+          case (2): flags(646) = 3;
+        }
+      case (8):
+        switch (flags(639))
+        {
+          case (1): flags(647) = 2;
+          case (2): flags(647) = 3;
+        }
+    }
+  }
+  if (flags(598) > 0 && flags(599) == 0 && flags(600) > 0)
+  {
+    textmenu(30, 30, 639, 1, "Enemy 1", "Enemy 3");
+    switch (flags(638))
+    {
+      case (1):
+        switch (flags(639))
+        {
+          case (1): flags(640) = 1;
+          case (2): flags(640) = 3;
+        }
+      case (2):
+        switch (flags(639))
+        {
+          case (1): flags(641) = 1;
+          case (2): flags(641) = 3;
+        }
+      case (3):
+        switch (flags(639))
+        {
+          case (1): flags(642) = 1;
+          case (2): flags(642) = 3;
+        }
+      case (4):
+        switch (flags(639))
+        {
+          case (1): flags(643) = 1;
+          case (2): flags(643) = 3;
+        }
+      case (5):
+        switch (flags(639))
+        {
+          case (1): flags(644) = 1;
+          case (2): flags(644) = 3;
+        }
+      case (6):
+        switch (flags(639))
+        {
+          case (1): flags(645) = 1;
+          case (2): flags(645) = 3;
+        }
+      case (7):
+        switch (flags(639))
+        {
+          case (1): flags(646) = 1;
+          case (2): flags(646) = 3;
+        }
+      case (8):
+        switch (flags(639))
+        {
+          case (1): flags(647) = 1;
+          case (2): flags(647) = 3;
+        }
+    }
+  }
+  if (flags(598) > 0 && flags(599) > 0 && flags(600) == 0)
+  {
+    textmenu(30, 30, 639, 1, "Enemy 1", "Enemy 2");
+    switch (flags(638))
+    {
+      case (1):
+        switch (flags(639))
+        {
+          case (1): flags(640) = 1;
+          case (2): flags(640) = 2;
+        }
+      case (2):
+        switch (flags(639))
+        {
+          case (1): flags(641) = 1;
+          case (2): flags(641) = 2;
+        }
+      case (3):
+        switch (flags(639))
+        {
+          case (1): flags(642) = 1;
+          case (2): flags(642) = 2;
+        }
+      case (4):
+        switch (flags(639))
+        {
+          case (1): flags(643) = 1;
+          case (2): flags(643) = 2;
+        }
+      case (5):
+        switch (flags(639))
+        {
+          case (1): flags(644) = 1;
+          case (2): flags(644) = 2;
+        }
+      case (6):
+        switch (flags(639))
+        {
+          case (1): flags(645) = 1;
+          case (2): flags(645) = 2;
+        }
+      case (7):
+        switch (flags(639))
+        {
+          case (1): flags(646) = 1;
+          case (2): flags(646) = 2;
+        }
+      case (8):
+        switch (flags(639))
+        {
+          case (1): flags(647) = 1;
+          case (2): flags(647) = 2;
+        }
+    }
+  }
+  if (flags(598) == 0 && flags(599) == 0 && flags(600) > 0)
+  {
+    switch (flags(638))
+    {
+      case (1): flags(640) = 3;
+      case (2): flags(641) = 3;
+      case (3): flags(642) = 3;
+      case (4): flags(643) = 3;
+      case (5): flags(644) = 3;
+      case (6): flags(645) = 3;
+      case (7): flags(646) = 3;
+      case (8): flags(647) = 3;
+    }
+  }
+  if (flags(598) == 0 && flags(599) > 0 && flags(600) == 0)
+  {
+    switch (flags(638))
+    {
+      case (1): flags(640) = 2;
+      case (2): flags(641) = 2;
+      case (3): flags(642) = 2;
+      case (4): flags(643) = 2;
+      case (5): flags(644) = 2;
+      case (6): flags(645) = 2;
+      case (7): flags(646) = 2;
+      case (8): flags(647) = 2;
+    }
+  }
+  if (flags(598) > 0 && flags(599) == 0 && flags(600) == 0)
+  {
+    switch (flags(638))
+    {
+      case (1): flags(640) = 1;
+      case (2): flags(641) = 1;
+      case (3): flags(642) = 1;
+      case (4): flags(643) = 1;
+      case (5): flags(644) = 1;
+      case (6): flags(645) = 1;
+      case (7): flags(646) = 1;
+      case (8): flags(647) = 1;
+    }
+  }
+}
+event
+{
+  switch (flags(638))
+  {
+    case (1):
+      switch (flags(640))
+      {
+        case (1): vctextnum(48, 80, flags(601));
+        case (2): vctextnum(48, 112, flags(601));
+        case (3): vctextnum(48, 144, flags(601));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(601));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(601));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(601));
+          }
+      }
+    case (2):
+      switch (flags(641))
+      {
+        case (1): vctextnum(48, 80, flags(603));
+        case (2): vctextnum(48, 112, flags(603));
+        case (3): vctextnum(48, 144, flags(603));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(603));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(603));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(603));
+          }
+      }
+    case (3):
+      switch (flags(642))
+      {
+        case (1): vctextnum(48, 80, flags(605));
+        case (2): vctextnum(48, 112, flags(605));
+        case (3): vctextnum(48, 144, flags(605));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(605));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(605));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(605));
+          }
+      }
+    case (4):
+      switch (flags(643))
+      {
+        case (1): vctextnum(48, 80, flags(607));
+        case (2): vctextnum(48, 112, flags(607));
+        case (3): vctextnum(48, 144, flags(607));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(607));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(607));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(607));
+          }
+      }
+    case (5):
+      switch (flags(644))
+      {
+        case (1): vctextnum(48, 80, flags(609));
+        case (2): vctextnum(48, 112, flags(609));
+        case (3): vctextnum(48, 144, flags(609));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(609));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(609));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(609));
+          }
+      }
+    case (6):
+      switch (flags(645))
+      {
+        case (1): vctextnum(48, 80, flags(611));
+        case (2): vctextnum(48, 112, flags(611));
+        case (3): vctextnum(48, 144, flags(611));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(611));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(611));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(611));
+          }
+      }
+    case (7):
+      switch (flags(646))
+      {
+        case (1): vctextnum(48, 80, flags(613));
+        case (2): vctextnum(48, 112, flags(613));
+        case (3): vctextnum(48, 144, flags(613));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(613));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(613));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(613));
+          }
+      }
+    case (8):
+      switch (flags(647))
+      {
+        case (1): vctextnum(48, 80, flags(615));
+        case (2): vctextnum(48, 112, flags(615));
+        case (3): vctextnum(48, 144, flags(615));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(615));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(615));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(615));
+          }
+      }
+  }
+  wait(100);
+  if (flags(598) == 0)
+  {
+    specialframe(7) = 29;
+  }
+  if (flags(599) == 0)
+  {
+    specialframe(5) = 29;
+  }
+  if (flags(600) == 0)
+  {
+    specialframe(6) = 29;
+  }
+  vcclear();
+  vcbox(240, 10, 314, 198);
+  flags(595) = 13;
+  if (char(1))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Sam");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(1));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(1));
+  }
+  if (char(2))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Webb");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(2));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(2));
+  }
+  if (char(3))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Feng");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(3));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(3));
+  }
+  if (char(4))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Rikk");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(4));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(4));
+  }
+  if (char(5))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Dingo");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(5));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(5));
+  }
+  if (char(6))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Jeemdub");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(6));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(6));
+  }
+  if (char(7))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Bull");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(7));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(7));
+  }
+  if (char(8))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Lumin");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(8));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(8));
+  }
+  vctext(245, 173, "SP");
+  vctextnum(245, 183, flags(703));
+  redraw();
+}
+event
+{
+  switch (flags(629))
+  {
+    case (1):
+      switch (flags(624))
+      {
+        case (1): vctextnum(176, 112, flags(617));
+        case (2): vctextnum(208, 128, flags(617));
+        case (3): vctextnum(176, 144, flags(617));
+        case (4): vctextnum(176, 80, flags(617));
+        case (5): vctextnum(208, 96, flags(617));
+        case (6): vctextnum(224, 112, flags(617));
+        case (7): vctextnum(192, 160, flags(617));
+        case (8): vctextnum(192, 64, flags(617));
+        case (9):
+          if (char(1))
+          {
+            vctextnum(176, 112, flags(617));
+          }
+          if (char(2))
+          {
+            vctextnum(208, 128, flags(617));
+          }
+          if (char(3))
+          {
+            vctextnum(176, 144, flags(617));
+          }
+          if (char(4))
+          {
+            vctextnum(176, 80, flags(617));
+          }
+          if (char(5))
+          {
+            vctextnum(208, 96, flags(617));
+          }
+          if (char(6))
+          {
+            vctextnum(224, 112, flags(617));
+          }
+          if (char(7))
+          {
+            vctextnum(192, 160, flags(617));
+          }
+          if (char(8))
+          {
+            vctextnum(192, 64, flags(617));
+          }
+      }
+    case (2):
+      switch (flags(626))
+      {
+        case (1): vctextnum(176, 112, flags(619));
+        case (2): vctextnum(208, 128, flags(619));
+        case (3): vctextnum(176, 144, flags(619));
+        case (4): vctextnum(176, 80, flags(619));
+        case (5): vctextnum(208, 96, flags(619));
+        case (6): vctextnum(224, 112, flags(619));
+        case (7): vctextnum(192, 160, flags(619));
+        case (8): vctextnum(192, 64, flags(619));
+        case (9):
+          if (char(1))
+          {
+            vctextnum(176, 112, flags(619));
+          }
+          if (char(2))
+          {
+            vctextnum(208, 128, flags(619));
+          }
+          if (char(3))
+          {
+            vctextnum(176, 144, flags(619));
+          }
+          if (char(4))
+          {
+            vctextnum(176, 80, flags(619));
+          }
+          if (char(5))
+          {
+            vctextnum(208, 96, flags(619));
+          }
+          if (char(6))
+          {
+            vctextnum(224, 112, flags(619));
+          }
+          if (char(7))
+          {
+            vctextnum(192, 160, flags(619));
+          }
+          if (char(8))
+          {
+            vctextnum(192, 64, flags(619));
+          }
+      }
+    case (3):
+      switch (flags(628))
+      {
+        case (1): vctextnum(176, 112, flags(621));
+        case (2): vctextnum(208, 128, flags(621));
+        case (3): vctextnum(176, 144, flags(621));
+        case (4): vctextnum(176, 80, flags(621));
+        case (5): vctextnum(208, 96, flags(621));
+        case (6): vctextnum(224, 112, flags(621));
+        case (7): vctextnum(192, 160, flags(621));
+        case (8): vctextnum(192, 64, flags(621));
+        case (9):
+          if (char(1))
+          {
+            vctextnum(176, 112, flags(621));
+          }
+          if (char(2))
+          {
+            vctextnum(208, 128, flags(621));
+          }
+          if (char(3))
+          {
+            vctextnum(176, 144, flags(621));
+          }
+          if (char(4))
+          {
+            vctextnum(176, 80, flags(621));
+          }
+          if (char(5))
+          {
+            vctextnum(208, 96, flags(621));
+          }
+          if (char(6))
+          {
+            vctextnum(224, 112, flags(621));
+          }
+          if (char(7))
+          {
+            vctextnum(192, 160, flags(621));
+          }
+          if (char(8))
+          {
+            vctextnum(192, 64, flags(621));
+          }
+      }
+  }
+  wait(100);
+  if (char(1) && curhp(1) == 0)
+  {
+    specialframe(8) = 29;
+  }
+  if (char(2) && curhp(2) == 0)
+  {
+    specialframe(13) = 29;
+  }
+  if (char(3) && curhp(3) == 0)
+  {
+    specialframe(10) = 29;
+  }
+  if (char(4) && curhp(4) == 0)
+  {
+    specialframe(9) = 29;
+  }
+  if (char(5) && curhp(5) == 0)
+  {
+    specialframe(14) = 29;
+  }
+  if (char(6) && curhp(6) == 0)
+  {
+    specialframe(15) = 29;
+  }
+  if (char(7) && curhp(7) == 0)
+  {
+    specialframe(12) = 29;
+  }
+  if (char(8) && curhp(8) == 0)
+  {
+    specialframe(11) = 29;
+  }
+  vcclear();
+  vcbox(240, 10, 314, 198);
+  flags(595) = 13;
+  if (char(1))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Sam");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(1));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(1));
+  }
+  if (char(2))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Webb");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(2));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(2));
+  }
+  if (char(3))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Feng");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(3));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(3));
+  }
+  if (char(4))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Rikk");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(4));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(4));
+  }
+  if (char(5))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Dingo");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(5));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(5));
+  }
+  if (char(6))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Jeemdub");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(6));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(6));
+  }
+  if (char(7))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Bull");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(7));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(7));
+  }
+  if (char(8))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Lumin");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(8));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(8));
+  }
+  vctext(245, 173, "SP");
+  vctextnum(245, 183, flags(703));
+  redraw();
+}
+event
+{
+  switch (flags(740))
+  {
+    case (1): entity.chrindex(8) = 17;
+    case (2): entity.chrindex(13) = 17;
+    case (3): entity.chrindex(10) = 17;
+    case (4): entity.chrindex(9) = 17;
+    case (5): entity.chrindex(14) = 17;
+    case (6): entity.chrindex(15) = 17;
+    case (7): entity.chrindex(12) = 17;
+    case (8): entity.chrindex(11) = 17;
+  }
+}
+event
+{
+  vcclear();
+  vcbox(240, 10, 314, 198);
+  flags(595) = 13;
+  if (char(1))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Sam");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(1));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(1));
+  }
+  if (char(2))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Webb");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(2));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(2));
+  }
+  if (char(3))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Feng");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(3));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(3));
+  }
+  if (char(4))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Rikk");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(4));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(4));
+  }
+  if (char(5))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Dingo");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(5));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(5));
+  }
+  if (char(6))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Jeemdub");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(6));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(6));
+  }
+  if (char(7))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Bull");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(7));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(7));
+  }
+  if (char(8))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Lumin");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(8));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(8));
+  }
+  vctext(245, 173, "SP");
+  vctextnum(245, 183, flags(703));
+  redraw();
+}
+event
+{
+  textmenu(4, 4, 112, 1, "Fight", "Run");
+  if (flags(251) == 1 && flags(112) == 2)
+  {
+    stext(0, "Can't run from Boss Battles!", "", "");
+    return;
+  }
+  if (flags(251) != 1 && flags(112) == 2)
+  {
+    banner("You ran!", 1);
+    vcclear();
+    layervc = 0;
+    flags(800) = 0;
+    flags(851) = 0;
+    flags(852) = 0;
+    flags(853) = 0;
+    flags(854) = 0;
+    flags(855) = 0;
+    flags(856) = 0;
+    flags(857) = 0;
+    flags(858) = 0;
+    flags(859) = 0;
+    flags(860) = 0;
+    wait(100);
+    drawparty = 1;
+    flags(190) = 1;
+    if (flags(801) == 1)
+    {
+      mapswitch("mansion2.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 2)
+    {
+      mapswitch("packwood.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 3)
+    {
+      mapswitch("orchard.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 4)
+    {
+      mapswitch("untrfarm.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 5)
+    {
+      mapswitch("mtalon.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 6)
+    {
+      mapswitch("catac.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 7)
+    {
+      mapswitch("packtown.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 8)
+    {
+      mapswitch("damcity.map", flags(109), flags(110), 0);
+    }
+  }
+}
+event
+{
+  switch (flags(629))
+  {
+    case (1):
+      switch (flags(624))
+      {
+        case (1): vctextnum(176, 112, flags(710));
+        case (2): vctextnum(208, 128, flags(710));
+        case (3): vctextnum(176, 144, flags(710));
+        case (4): vctextnum(176, 80, flags(710));
+        case (5): vctextnum(208, 96, flags(710));
+        case (6): vctextnum(224, 112, flags(710));
+        case (7): vctextnum(192, 160, flags(710));
+        case (8): vctextnum(192, 64, flags(710));
+        case (9):
+          if (char(1))
+          {
+            vctextnum(176, 112, flags(710));
+          }
+          if (char(2))
+          {
+            vctextnum(208, 128, flags(710));
+          }
+          if (char(3))
+          {
+            vctextnum(176, 144, flags(710));
+          }
+          if (char(4))
+          {
+            vctextnum(176, 80, flags(710));
+          }
+          if (char(5))
+          {
+            vctextnum(208, 96, flags(710));
+          }
+          if (char(6))
+          {
+            vctextnum(224, 112, flags(710));
+          }
+          if (char(7))
+          {
+            vctextnum(192, 160, flags(710));
+          }
+          if (char(8))
+          {
+            vctextnum(192, 64, flags(710));
+          }
+      }
+    case (2):
+      switch (flags(626))
+      {
+        case (1): vctextnum(176, 112, flags(712));
+        case (2): vctextnum(208, 128, flags(712));
+        case (3): vctextnum(176, 144, flags(712));
+        case (4): vctextnum(176, 80, flags(712));
+        case (5): vctextnum(208, 96, flags(712));
+        case (6): vctextnum(224, 112, flags(712));
+        case (7): vctextnum(192, 160, flags(712));
+        case (8): vctextnum(192, 64, flags(712));
+        case (9):
+          if (char(1))
+          {
+            vctextnum(176, 112, flags(712));
+          }
+          if (char(2))
+          {
+            vctextnum(208, 128, flags(712));
+          }
+          if (char(3))
+          {
+            vctextnum(176, 144, flags(712));
+          }
+          if (char(4))
+          {
+            vctextnum(176, 80, flags(712));
+          }
+          if (char(5))
+          {
+            vctextnum(208, 96, flags(712));
+          }
+          if (char(6))
+          {
+            vctextnum(224, 112, flags(712));
+          }
+          if (char(7))
+          {
+            vctextnum(192, 160, flags(712));
+          }
+          if (char(8))
+          {
+            vctextnum(192, 64, flags(712));
+          }
+      }
+    case (3):
+      switch (flags(628))
+      {
+        case (1): vctextnum(176, 112, flags(714));
+        case (2): vctextnum(208, 128, flags(714));
+        case (3): vctextnum(176, 144, flags(714));
+        case (4): vctextnum(176, 80, flags(714));
+        case (5): vctextnum(208, 96, flags(714));
+        case (6): vctextnum(224, 112, flags(714));
+        case (7): vctextnum(192, 160, flags(714));
+        case (8): vctextnum(192, 64, flags(714));
+        case (9):
+          if (char(1))
+          {
+            vctextnum(176, 112, flags(714));
+          }
+          if (char(2))
+          {
+            vctextnum(208, 128, flags(714));
+          }
+          if (char(3))
+          {
+            vctextnum(176, 144, flags(714));
+          }
+          if (char(4))
+          {
+            vctextnum(176, 80, flags(714));
+          }
+          if (char(5))
+          {
+            vctextnum(208, 96, flags(714));
+          }
+          if (char(6))
+          {
+            vctextnum(224, 112, flags(714));
+          }
+          if (char(7))
+          {
+            vctextnum(192, 160, flags(714));
+          }
+          if (char(8))
+          {
+            vctextnum(192, 64, flags(714));
+          }
+      }
+  }
+  wait(100);
+  if (char(1) && curhp(1) == 0)
+  {
+    specialframe(8) = 29;
+  }
+  if (char(2) && curhp(2) == 0)
+  {
+    specialframe(13) = 29;
+  }
+  if (char(3) && curhp(3) == 0)
+  {
+    specialframe(10) = 29;
+  }
+  if (char(4) && curhp(4) == 0)
+  {
+    specialframe(9) = 29;
+  }
+  if (char(5) && curhp(5) == 0)
+  {
+    specialframe(14) = 29;
+  }
+  if (char(6) && curhp(6) == 0)
+  {
+    specialframe(15) = 29;
+  }
+  if (char(7) && curhp(7) == 0)
+  {
+    specialframe(12) = 29;
+  }
+  if (char(8) && curhp(8) == 0)
+  {
+    specialframe(11) = 29;
+  }
+  vcclear();
+  vcbox(240, 10, 314, 198);
+  flags(595) = 13;
+  if (char(1))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Sam");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(1));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(1));
+  }
+  if (char(2))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Webb");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(2));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(2));
+  }
+  if (char(3))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Feng");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(3));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(3));
+  }
+  if (char(4))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Rikk");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(4));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(4));
+  }
+  if (char(5))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Dingo");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(5));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(5));
+  }
+  if (char(6))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Jeemdub");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(6));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(6));
+  }
+  if (char(7))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Bull");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(7));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(7));
+  }
+  if (char(8))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Lumin");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(8));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(8));
+  }
+  vctext(245, 173, "SP");
+  vctextnum(245, 183, flags(703));
+  redraw();
+}
+event
+{
+  switch (flags(638))
+  {
+    case (1):
+      switch (flags(640))
+      {
+        case (1): vctextnum(48, 80, flags(716));
+        case (2): vctextnum(48, 112, flags(716));
+        case (3): vctextnum(48, 144, flags(716));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(716));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(716));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(716));
+          }
+      }
+    case (2):
+      switch (flags(641))
+      {
+        case (1): vctextnum(48, 80, flags(718));
+        case (2): vctextnum(48, 112, flags(718));
+        case (3): vctextnum(48, 144, flags(718));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(718));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(718));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(718));
+          }
+      }
+    case (3):
+      switch (flags(642))
+      {
+        case (1): vctextnum(48, 80, flags(720));
+        case (2): vctextnum(48, 112, flags(720));
+        case (3): vctextnum(48, 144, flags(720));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(720));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(720));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(720));
+          }
+      }
+    case (4):
+      switch (flags(643))
+      {
+        case (1): vctextnum(48, 80, flags(722));
+        case (2): vctextnum(48, 112, flags(722));
+        case (3): vctextnum(48, 144, flags(722));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(722));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(722));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(722));
+          }
+      }
+    case (5):
+      switch (flags(644))
+      {
+        case (1): vctextnum(48, 80, flags(724));
+        case (2): vctextnum(48, 112, flags(724));
+        case (3): vctextnum(48, 144, flags(724));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(724));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(724));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(724));
+          }
+      }
+    case (6):
+      switch (flags(645))
+      {
+        case (1): vctextnum(48, 80, flags(726));
+        case (2): vctextnum(48, 112, flags(726));
+        case (3): vctextnum(48, 144, flags(726));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(726));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(726));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(726));
+          }
+      }
+    case (7):
+      switch (flags(646))
+      {
+        case (1): vctextnum(48, 80, flags(728));
+        case (2): vctextnum(48, 112, flags(728));
+        case (3): vctextnum(48, 144, flags(728));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(728));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(728));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(728));
+          }
+      }
+    case (8):
+      switch (flags(647))
+      {
+        case (1): vctextnum(48, 80, flags(730));
+        case (2): vctextnum(48, 112, flags(730));
+        case (3): vctextnum(48, 144, flags(730));
+        case (7):
+          if (flags(598) != 0)
+          {
+            vctextnum(48, 80, flags(730));
+          }
+          if (flags(599) != 0)
+          {
+            vctextnum(48, 112, flags(730));
+          }
+          if (flags(600) != 0)
+          {
+            vctextnum(48, 144, flags(730));
+          }
+      }
+  }
+  wait(100);
+  if (flags(598) == 0)
+  {
+    specialframe(7) = 29;
+  }
+  if (flags(599) == 0)
+  {
+    specialframe(5) = 29;
+  }
+  if (flags(600) == 0)
+  {
+    specialframe(6) = 29;
+  }
+  vcclear();
+  vcbox(240, 10, 314, 198);
+  flags(595) = 13;
+  if (char(1))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Sam");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(1));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(1));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(1));
+  }
+  if (char(2))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Webb");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(2));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(2));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(2));
+  }
+  if (char(3))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Feng");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(3));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(3));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(3));
+  }
+  if (char(4))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Rikk");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(4));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(4));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(4));
+  }
+  if (char(5))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Dingo");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(5));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(5));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(5));
+  }
+  if (char(6))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Jeemdub");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(6));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(6));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(6));
+  }
+  if (char(7))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Bull");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(7));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(7));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(7));
+  }
+  if (char(8))
+  {
+    flags(595) += 10;
+    vctext(245, flags(595), "Lumin");
+    flags(595) += 10;
+    vctextnum(245, flags(595), curhp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxhp(8));
+    flags(595) += 10;
+    vctextnum(245, flags(595), curmp(8));
+    vctext(265, flags(595), "/");
+    vctextnum(275, flags(595), maxmp(8));
+  }
+  vctext(245, 173, "SP");
+  vctextnum(245, 183, flags(703));
+  redraw();
+}

@@ -1,0 +1,232 @@
+event
+{
+  enforceanimation();
+  changechr(5, "lilding.chr");
+  warp(82, 47, 1);
+  face(0) = 0;
+  fadein(200);
+  palettemorph(10, 10, 35, 45, 43);
+  wait(200);
+  face(9) = 2;
+  stext(0, "Son, yesterday we witnessed", "something very special...", "");
+  face(10) = 3;
+  face(0) = 2;
+  stext(
+      0,
+      "Pay attention to your father,",
+      "dear. He's talking about",
+      "something very important.");
+  face(0) = 3;
+  stext(5, "What do you mean, daddy?", "", "");
+  stext(
+      0,
+      "You remember the wolf who came",
+      "in yesterday? The one who flew",
+      "down from the sun?");
+  wait(200);
+  stext(
+      5, "Umm... Oh yeah! I remember! He", "was cool! I wish I could fly!", "");
+  stext(
+      0,
+      "Well, he was a messenger. Do",
+      "you remember how he told us",
+      "he'd be coming?");
+  stext(
+      5,
+      "Yeah! He showed up when I was",
+      "sleeping, and he said some",
+      "stuff I forgot.");
+  stext(
+      0,
+      "He showed up in our *dreams*",
+      "and told us that his arrival",
+      "would herald the coming of");
+  stext(0, "GMW's chosen one. The next", "messiah who would lead us all!", "");
+  wait(100);
+  stext(5, "Oh, yeah! That's right!", "", "");
+  stext(
+      0,
+      "And we knew it was a sign,",
+      "because everyone in our tribe",
+      "had the same dream.");
+  stext(
+      0,
+      "Yesterday, he came before us,",
+      "remember? And he said that",
+      "the Phage would come, and we");
+  stext(0, "were the people he'd chosen", "to spread the word!", "");
+  stext(
+      0,
+      "So son, I want you to remember",
+      "this blessed event. I know",
+      "that you are very young, and");
+  stext(
+      0,
+      "that you might not realize the",
+      "importance of his coming, and",
+      "therefore might forget. So try");
+  stext(
+      0,
+      "to keep the picture in your",
+      "head, and never let it fade.",
+      "You'd be sorry later if you");
+  stext(0, "did forget something like", "this...", "");
+  wait(100);
+  stext(5, "I understand, daddy! I'll", "never forget!", "");
+  stext(0, "Good! Now let's go and get", "some supper, shall we?", "");
+  fadeout(200);
+  warp(69, 46, 1);
+  face(0) = 3;
+  face(25) = 2;
+  fadein(200);
+  palettemorph(10, 10, 35, 45, 43);
+  wait(200);
+  stext(
+      0,
+      "Well, if it isn't my most",
+      "favorite nephew! Are you",
+      "planning to be a great");
+  stext(0, "explorer like your uncle,", "Dingo?", "");
+  stext(
+      5,
+      "You bet, uncle Canteen!",
+      "I'm gonna be just like you",
+      "when I grow up!");
+  stext(
+      0,
+      "Good, good! I knew you'd",
+      "turn out to be a fine lad!",
+      "I'll tell you what...");
+  stext(0, "See this?", "", "");
+  stext(5, "It's a ratty old hanky!", "", "");
+  specialframe(25) = 21;
+  wait(100);
+  specialframe(25) = 0;
+  stext(
+      0,
+      "My boy, this is the family's",
+      "most prized possession,",
+      "handed down from generation");
+  stext(0, "to generation: the", "Grandkerchief!", "");
+  stext(5, "It doesn't *look* all that", "valuable!", "");
+  stext(
+      0,
+      "There's more to things than",
+      "just money, boy! The",
+      "Grandkerchief has absorbed");
+  stext(
+      0,
+      "the sweat from countless",
+      "generations of coyote",
+      "explorers, warriors and");
+  stext(
+      0,
+      "adventurers! It has seen them",
+      "through their escapades, and",
+      "is symbolic of their great");
+  stext(0, "spirits!", "", "");
+  stext(5, "Wow! Who would've known that", "that damp rag was all", "that!");
+  specialframe(25) = 20;
+  wait(100);
+  specialframe(25) = 0;
+  stext(0, "Dingo, I'm going off on", "another trip.", "");
+  stext(
+      5, "But you just got back! I", "haven't seen you since I was", "a baby!");
+  stext(
+      0,
+      "Yes, but... While I was",
+      "gone... You all had that",
+      "strange dream.");
+  stext(5, "Yeah, it was really neat!", "", "");
+  stext(
+      0,
+      "I'm a little scared, Dingo!",
+      "The coyote folk are getting",
+      "overzealous, and I fear");
+  stext(
+      0,
+      "that our neighbors will",
+      "soon be at our throats...",
+      "I'm going to find out the");
+  stext(0, "truth! When I return, I", "want you to have the", "Grandkerchief!");
+  stext(5, "Me? You'll give it to me?", "Really? Thanks, uncle!", "");
+  stext(
+      0,
+      "Heh heh... My boy, you'll",
+      "no doubt be a coyote worthy",
+      "of it! I have a hunch I'll");
+  stext(0, "be back soon!", "", "");
+  stext(5, "Goodbye, uncle! Come back", "safe!", "");
+  face(0) = 0;
+  entitymove(25, "D9");
+  wait(225);
+  entity.locx(25) = 0;
+  fadeout(200);
+  drawparty = 0;
+  drawentities = 0;
+  layer0 = 0;
+  layer1 = 0;
+  fadein(1);
+  stext(5, "I never saw my uncle Canteen", "again.", "");
+  wait(50);
+  fadeout(1);
+  drawparty = 1;
+  drawentities = 1;
+  layer0 = 1;
+  layer1 = 1;
+  warp(90, 62, 1);
+  face(0) = 0;
+  fadein(200);
+  palettemorph(10, 10, 35, 45, 43);
+  playmusic("fear2.mod");
+  wait(100);
+  autoon();
+  stext(5, "Mom...", "...Dad...", "...dead!");
+  stext(5, "I've gotta hide, quick!", "", "");
+  entitymove(95, "R2U4R3F0");
+  entitymove(23, "U5U5");
+  entitymove(24, "U5U5");
+  wait(200);
+  face(23) = 2;
+  stext(
+      0,
+      "It is good... The coyote tribe",
+      "is no more, as is their false",
+      "religion.");
+  face(24) = 3;
+  stext(
+      0,
+      "Yes! All know Lumin is only",
+      "chosen of GMW! All others",
+      "false prophets! Arooo!");
+  entitymove(23, "R1U1");
+  wait(50);
+  stext(
+      0,
+      "They should have realized the",
+      "conceit of thinking that GMW",
+      "would choose them over us! Did");
+  stext(
+      0,
+      "they think themselves holier",
+      "than we? Did they think us any",
+      "less faithful than they?");
+  entitymove(24, "U1");
+  wait(50);
+  stext(
+      0, "Those foolish thoughts! They", "dead fools now! Gurrheheheheh!", "");
+  stext(
+      5,
+      "<These butchers will pay...",
+      "I'll see them dead if it's the",
+      "last thing I do!...>");
+  speed(95) = 5;
+  entitymove(95, "R2D4L5D1L2D4D4");
+  wait(300);
+  fadeout(200);
+  autooff();
+  changechr(5, "dingo.chr");
+  addcharacter(1);
+  addcharacter(4);
+  mapswitch("packtown.map", 89, 66, 0);
+}

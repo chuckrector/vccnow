@@ -1,0 +1,13 @@
+#include batcore.vc
+
+Event // set up the enemy (the killer door)
+{
+ Flags[6005]=1;
+
+ Flags[7100]=3; // only one enemy (the killer door, duh!)
+ Flags[7101]=0;
+ Flags[7102]=0;
+ Flags[7103]=0;
+ Flags[7104]=0;
+ VCClear();
+}

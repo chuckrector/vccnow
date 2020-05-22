@@ -1,0 +1,185 @@
+#include globals.h
+
+event // 0 Autoexec
+{
+  enablesave();
+  ModPosition = CurMusicPos();
+  LayerVCTrans = 0;
+  LayerVC2Trans = 0;
+  ParallaxC = SavPMode();
+  PMultX = SavPMult();
+  PDivX = SavPDiv();
+  PMultY = SavPMult();
+  PDivY = SavPDiv();
+}
+
+Event // 1 out
+{
+  VCClear();
+  MapSwitch("outside.map", GlobalX(), GlobalY(), 0);
+}
+
+event // 2 into a building
+{
+  SavX() = locX;
+  SavY() = locY;
+
+  Warp(var(0), var(1), 0);
+}
+
+event // 3 out of a building
+{
+  warp(flags[7002], flags[7003] + 1, 0);
+}
+
+event // 4 removes the banners after a few seconds
+{
+  flags[7004]++;
+  if (flags[7004] > 100) {
+    VCClearRegion(0, 0, 319, 16);
+    HookTimer(0);
+  }
+}
+
+event // 5
+{}
+
+event // 6
+{}
+
+event // 7
+{}
+
+event // 8
+{}
+
+event // 9 Random Battles
+{
+  a = random(1, 4); // pick a random enemy formation
+  switch (a) {
+    Case 1 : flags[7100] = 2;
+    flags[7101] = 2;
+    flags[7102] = 0;
+    flags[7103] = 2;
+    flags[7104] = 0;
+    Case 2 : flags[7100] = 5;
+    flags[7101] = 5;
+    flags[7102] = 5;
+    flags[7103] = 4;
+    flags[7104] = 0;
+    Case 3 : flags[7100] = 4;
+    flags[7101] = 2;
+    flags[7102] = 1;
+    flags[7103] = 1;
+    flags[7104] = 1;
+    Case 4 : flags[7100] = 5;
+    flags[7101] = 4;
+    flags[7102] = 4;
+    flags[7103] = 0;
+    flags[7104] = 0;
+  }
+
+  SoundEffect(29);
+  BoxFadeOut(30);
+  BoxFadeOut(30);
+  FadeOut(1);
+  BoxFadeIn(1);
+
+  CurMusicPos() = ModPosition;
+  flags[6012] = ModPosition;
+  Flags[6003] = LocX;
+  Flags[6004] = LocY;
+  Flags[6005] = 2;
+  Flags[6008] = 1;  // BattleBG = Mountains
+  RunChance() = 64; // 1 out of 4
+  for (n, 1, NumChars, 1) {
+    RunChance() += MBL(pi(n)); // faster characters can run away better
+  }
+
+  SavPMode() = ParallaxC;
+  SavPMult() = PMultX;
+  SavPDiv() = PDivX;
+  Flags[5999] = 0;
+  FadeOut(30);
+
+  PlayMusic("CTBATT2.S3M");
+  MapSwitch("Battle.map", 0, 0, 1);
+}
+
+event // 10 Is Bob ready to go here yet?
+{
+  if (!Flags[1]) {
+    SetFace(1, FaceLeft());
+    Wait(40);
+    SetFace(1, FaceRight());
+    Wait(40);
+    SetFace(1, FaceUp());
+    Text(
+        1, "I have better things", "to do than explore", "some hole in a pile");
+    Text(1, "of rocks. Like getting", "away from this freak", "country.");
+    PartyMove("D1");
+  }
+}
+
+event // 11 Passage 1
+{
+  if (LocX = 20 and LocY = 28) {
+    Warp(18, 6, 0);
+    SetFace(1, FaceDown());
+    Return;
+  }
+
+  Warp(20, 29, 0);
+  SetFace(1, FaceDown());
+}
+
+Event // 12 Passage 2
+{
+  if (locx = 35 and locy = 38) {
+    FadeOut(30);
+    Warp(12, 48, 1);
+    AlterParallax(2, 10, 9);
+    SavPMode() = ParallaxC;
+    SavPMult() = PMultX;
+    SavPDiv() = PDivX;
+    ReDraw();
+    FadeIn(30);
+    SetFace(1, FaceDown());
+    Return;
+  }
+  FadeOut(30);
+  Warp(35, 37, 1);
+  AlterParallax(0, 1, 1);
+  SavPMode() = ParallaxC;
+  SavPMult() = PMultX;
+  SavPDiv() = PDivX;
+  SetFace(1, FaceDown());
+  ReDraw();
+  FadeIn(30);
+}
+
+Event // 13 Passage 3
+{
+  // 41,49 <-> 16,72
+  if (LocY = 72) {
+    FadeOut(30);
+    Warp(41, 50, 1);
+    SetFace(1, FaceDown());
+    AlterParallax(2, 10, 9);
+    SavPMode() = ParallaxC;
+    SavPMult() = PMultX;
+    SavPDiv() = PDivX;
+    ReDraw();
+    FadeIn(30);
+    Return;
+  }
+  FadeOut(30);
+  Warp(16, 73, 1);
+  SetFace(1, FaceDown());
+  AlterParallax(0, 1, 1);
+  SavPMode() = ParallaxC;
+  SavPMult() = PMultX;
+  SavPDiv() = PDivX;
+  ReDraw();
+  FadeIn(30);
+}

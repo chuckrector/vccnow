@@ -1,0 +1,358 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(266) = 0;
+}
+event
+{
+  stext(
+      0,
+      "Our prices are low! Our staff",
+      "is underpaid! We're located",
+      "next door to Willy's Fun");
+  stext(0, "Arcade!", "", "");
+  shop(28, 78, 89);
+  stext(
+      0,
+      "I've got tough competition",
+      "but I'm not afraid, 'cause",
+      "it's my destiny to be the");
+  stext(0, "King of Suede!", "", "");
+}
+event
+{
+  stext(
+      0,
+      "Welcome to Bundalo! This",
+      "hidden town is the source",
+      "of the mysterious secret");
+  stext(
+      0,
+      "society, the Hallucinati!",
+      "Well... they're not all",
+      "*that* secret!");
+  stext(
+      0,
+      "But, due to my growing fame,",
+      "I was offered membership!",
+      "Kreegah! Bundalo!");
+  stext(1, "... ...", "", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(
+      0,
+      "My son refuses to learn",
+      "his tortuous anti-logic!",
+      "All he wants to do is");
+  stext(0, "play video games!", "", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(
+      0,
+      "I'm a member of the",
+      "Hallucinati! What are",
+      "the Hallucinati, you ask?");
+  stext(1, "Um, not really...", "", "");
+  stext(
+      0,
+      "We're a secret society",
+      "who dreams of ruling the",
+      "world from the shadows,");
+  stext(
+      0,
+      "but never actually does",
+      "anything to achieve that",
+      "goal, thus the name! Our");
+  stext(
+      0,
+      "distinctive cry is actually",
+      "a clue to prospective members",
+      "as to the location of our");
+  stext(0, "secret headquarters!", "", "");
+  stext(
+      1,
+      "You mean... It's *not*",
+      "because you're all insane?",
+      "You were actually doing");
+  stext(1, "something purposeful the", "whole time!", "");
+  stext(0, "No, that's not it.", "", "");
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(var(0), var(1), 0);
+}
+event { warp(flags(109), flags(110), 0); }
+event { callevent(5, 13, 90); }
+event { callevent(5, 42, 90); }
+event { callevent(5, 70, 90); }
+event { callevent(5, 13, 107); }
+event { callevent(5, 42, 107); }
+event { callevent(5, 70, 107); }
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(
+      0,
+      "I be an innkeeper!",
+      "I be only doing business with",
+      "customers on other side!");
+}
+event
+{
+  face(6) = 0;
+  stext(0, "Kreegah! Bundalo!", "", "");
+  prompt(0, "Sleep! Only 15 gp!", "", "", 112, "No", "Yes");
+  if (flags(112))
+  {
+    if (gp < 15)
+    {
+      stext(0, "You don't have enough gp!", "", "");
+    }
+    if (gp > 14)
+    {
+      takegp(15);
+      banner("We're healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(0, "Kreegah! Kreegah!", "", "");
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "Kreegah?", "", "");
+  }
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  for (x, 1, 6, 1)
+  {
+    stext(0, "Do you ever get that feeling", "of Deja Vu?", "");
+  }
+}
+event
+{
+  stext(
+      1,
+      "Strange... There's no outhouse",
+      "in here. It's as if the sign",
+      "was there only to fulfill some");
+  stext(1, "kind of running gag...", "", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(0, "You can't kill me! I'm the", "mayor!", "");
+}
+event
+{
+  stext(0, "Lost Woods path is:", "N, E, S, E, N, N!", "");
+  if (char(4))
+  {
+    stext(4, "Your advice is a bit late,", "pal!", "");
+  }
+}
+event { mapswitch("graces.map", 23, 37, 0); }
+event { mapswitch("kreegah.map", 7, 37, 0); }
+event
+{
+  if (!flags(163))
+  {
+    stext(
+        1,
+        "What an ugly bush...",
+        "It's almost as if GMW was",
+        "trying to impress us with");
+    stext(1, "his lack of artistic talent!", "", "");
+  }
+  if (flags(163))
+  {
+    soundeffect(9);
+    stext(0, "The bush is annihalated!", "", "");
+    alterbtile(25, 13, 191, 0);
+    changezone(25, 13, 13);
+  }
+}
+event { callevent(5, 32, 120); }
+event { flags(163) = 0; }
+event { stext(1, "Ow! Hot!", "", ""); }
+event
+{
+  stext(0, "'Ieval Bestiary: Special", "Edition'", "");
+  stext(
+      0,
+      "The legendary Moobvuu is",
+      "supposedly attracted by",
+      "the ringing of bells, but");
+  stext(0, "is docile if you can prove", "that you do not wish to fight.", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(0, "I can do 1000 push-ups! See?", "", "");
+  stext(1, "Cool!", "", "");
+  stext(0, "Look! One-handed!", "", "");
+  stext(1, "Impressive!", "", "");
+  stext(0, "Look! No-handed!", "", "");
+  stext(1, "Huh? How are you doing... oh.", "Ewww...", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(0, "Wanna buy some used water?", "", "");
+  stext(1, "Used water? That looks more", "like lemonade... oh.", "Ewww...");
+}
+event
+{
+  stext(
+      0,
+      "'Canteen's Log: Vol. 7'",
+      "...Unfortunately, I lost",
+      "my kerchief up there. I'd");
+  stext(
+      0,
+      "planned on giving it to",
+      "my nephew, Dingo, when",
+      "I returned. It's a family");
+  stext(
+      0,
+      "heirloom, and I know he'd",
+      "treasure it. I must complain",
+      "to the Ghost Guild about");
+  stext(
+      0,
+      "the cheating spectre who",
+      "took it from me in our game.",
+      "Still, I managed to pry some");
+  stext(
+      0,
+      "information out of him. It",
+      "appears that the Dream World",
+      "is the source of magic! The");
+  stext(
+      0,
+      "ghosts are mainly the only",
+      "ones who can travel freely",
+      "between our two worlds, and");
+  stext(
+      0,
+      "take advantage of the flow",
+      "of mystic energy to",
+      "materialize here. But my");
+  stext(
+      0,
+      "informant told me that there",
+      "is one who calls himself the",
+      "Dream Lord... Could that be");
+  stext(
+      0,
+      "the one who filled my kin",
+      "with such religious zeal?",
+      "I may find some answers on");
+  stext(
+      0,
+      "the northern continent...",
+      "And when I get back, I'll",
+      "reclaim my kerchief!");
+  stext(
+      0,
+      "I think I'll leave this log",
+      "here in Bundalo. The ghost",
+      "downstairs is an honest chap,");
+  stext(0, "and I expect he'll keep it", "safe for posterity...", "");
+  if (char(5))
+  {
+    stext(
+        5,
+        "Wow! My uncle Canteen the",
+        "explorer came through here!",
+        "I wish he'd've come back...");
+    stext(5, "I always did admire that", "kerchief of his!", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "'Ieval Legends'",
+      "Strange hooded Aardvark are",
+      "occasionally reported in");
+  stext(
+      0,
+      "out-of-the-way places.",
+      "While almost certainly",
+      "just a traveler's tale,");
+  stext(
+      0,
+      "the conviction of the various",
+      "accounts is unmistakable.",
+      "The legend goes as follows:");
+  stext(
+      0,
+      "Originally, the Aardvarks were",
+      "created by a force known as",
+      "the Overline to be the");
+  stext(
+      0,
+      "contract-workers of the",
+      "universe. When they had",
+      "finished, the universe began,");
+  stext(
+      0,
+      "and the Aardvarks left to",
+      "pursue a life in their own",
+      "private continuum...");
+  stext(
+      0,
+      "Eventually, a race known as",
+      "the Kiwi was created by the",
+      "Overline to rule existence.");
+  stext(
+      0,
+      "The Kiwi decided to rule over",
+      "the Aardvark as well, and",
+      "forced them into corporeal");
+  stext(
+      0,
+      "form. The Aardvark called",
+      "upon the Gods of Everything",
+      "to call judgement on the");
+  stext(
+      0,
+      "Kiwi, and the Kiwi were",
+      "turned into fruit. The",
+      "Aardvark remain corporeal,");
+  stext(0, "and walk the multiverse to", "this day...", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(
+      0, "I'm the mildly indifferent", "witch of the South-by-", "Southwest!");
+  if (char(4))
+  {
+    stext(
+        4,
+        "Is that south-by-southwest in",
+        "relation to rotation or",
+        "magnetic polarity?");
+    stext(
+        0,
+        "Eh, I've never bothered to",
+        "check. I'm mildly indifferent,",
+        "y'know.");
+    stext(1, "Well, are you planning to help", "or hinder us?", "");
+    stext(0, "Eh, why bother to do either?", "", "");
+  }
+}

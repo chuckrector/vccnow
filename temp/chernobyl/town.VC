@@ -1,0 +1,160 @@
+#include globals.h
+
+Event // 0 AutoExec
+{
+ if (LocY<180)
+  {
+   Fade=0;
+   ReDraw();
+   CallEvent(1,30,0);
+   Return;
+  }
+ Fade=1;
+ ParallaxC=1;
+ Wait(10);
+}
+
+event // 1 Fade (has to be different because of the palettemorph)
+// syntax: Callevent(1,Delay,Mode);
+// mode=0 for FadeIn;
+// mode=1 for FadeOut;
+{
+ Switch(var(1))
+  {
+   case 0: For (x,0,var(0),1)
+            {PaletteMorph(32,32,32,50,(x*50)/var(0)); Wait(1);}
+   case 1: for (x,0,var(0),1)
+            {
+             y=var(0)-x;
+             PaletteMorph(32,32,32,50,(y*50)/var(0)); Wait(1);
+            }
+  }
+}
+
+event // 2 Enter a building
+{
+ SavX()=LocX;
+ SavY()=LocY;
+ x=var(0); y=var(1);
+ CallEvent(1,30,1);
+ Warp(x,y,1); ReDraw();
+ FadeIn(30); // this way, the smog isn't inside the buildings
+}
+
+event // 3 exit the same building as #2
+{
+ FadeOut(30); // no smog inside the buildings, so normal fadeout
+ Warp(SavX(),SavY(),1); ParallaxC=0;
+ CallEvent(1,30,0);
+}
+
+event // 4 deletes the title at the top of the screen after a few seconds
+{
+ if (timer<500) Return;
+ VCClear();
+ HookRetrace(0);
+}
+
+// the following howevermany events correspond to the entities of the same
+// number.  I find this makes things a LOT clearer.
+
+event // Entity 5 the Beggar
+{
+ if (Flags[2]!=1)
+  {
+   LayerVC=1; VCLayerWrite=1; LayerVCTrans=0; VCClear();
+   DrawTextBox(100,20,24,3);
+   VCText(100,20,"Help a poor lass without");
+   VCText(100,30,"enough money for half-");
+   VCText(100,40,"decent graphics?");
+   VCSpc(30,82,1,0);
+   TextMenu(10,120,2,1,"Aw alright","Beat it, you old hag");
+   if (GP<10) {SmallText(10,120,"Sorry, I'm broke"); Flags[2]=2;}
+   if (Flags[2]=1 and GP>=10)
+    {
+     gp-=10;
+     SmallText(10,120,"This is all I can spare","Sorry.");
+     SoundEffect(7);
+     Banner("Handed over 10GP",100);
+    }
+   VCClear(); LayerVC=0;
+   WaitKeyUp();
+   Return;
+  }
+ SmallText(120,20,"Thank you kindly, sir.");
+ LayerVC=1; VCClear(); VCSPC(10,108,1,0);
+ SmallText(10,140,"S'nothin'");
+ VCClear(); LayerVC=0;
+}
+
+event // Entity 6 the tool dealer
+{
+ SmallText(10,10,"'the hell you want?",
+                 "oh! a customer!",
+                 "Neat!");
+ Shop(1,8,4);
+}
+
+event // Entity 7 peasant
+{
+ SmallText(30,120,"Isn't this great?",
+                  "Thanks to Conglomo's EPA",
+                  "division, the air, and",
+                  "water get cleaner and",
+                  "clearer each day!");
+}
+
+event // Entity 8 little boy
+{
+ SmallText(10,20,"Conglomo's new air",
+                 "filters were just",
+                 "put on line today,",
+                 "that's why the smog",
+                 "is so thin today.");
+}
+
+Event // 9 Into the Conglomo Building
+{
+ VCLayerWrite=1; LayerVC=1; VCClear();
+ VCSPC(100,100,1,0);
+ SmallText(60,132,"Alright, this looks like it!",
+                  "Time to kick some ass!");
+ VCClear(); LayerVC=0;
+ PartyMove("R2");
+ CallEvent(1,30,1);  // FadeOut(30);
+ Fade=1; CancelFade++;
+ MapSwitch("Office.map",0,0,0);
+}
+
+Event // 10 Can't explore the slums just yet (not done yet)
+{
+ Text(1,"Oh my god!","Random pixels everywhere!","Better not go on yet");
+ PartyMove("U1");
+}
+
+Event // 11 Shack 1
+{
+ CallEvent(2,8,197);
+ ParallaxC=1;
+}
+
+Event // 12 Save Point
+{
+ Prompt(6,"Save?","","",7999,"Yeah","Nope");
+ if (!flags[7999])
+   SaveMenu();
+}
+
+Event // 13 Entity 9 the hobo who lives in Shack 1
+{
+ SmallText(100,100,"'the hell!? Always some",
+                   "jackass B&E'in inta mah",
+                   "house! Jus' be thankin'",
+                   "the lord I don't whoop",
+                   "yo ass all over tha",
+                   "street, mutha fucka!");
+ LayerVC=1; VCClear();
+ VCSpc(10,10,1,0);
+ SmallText(8,42,"Blow me, you stupid fuck!");
+ VCClear(); LayerVC=0;
+}

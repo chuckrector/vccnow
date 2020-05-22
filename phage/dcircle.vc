@@ -1,0 +1,131 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  for (x, 141, 144, 1)
+  {
+    flags(x) = 0;
+  }
+  partymove("U9W75F2W75F3W75F1");
+  wait(225);
+  stext(1, "Morpheos! Come out! I know", "you're here!", "");
+  wait(100);
+  stext(1, "Well?", "", "");
+  wait(50);
+  entity.chrindex(5) = 8;
+  face(5) = 3;
+  specialframe(0) = 21;
+  wait(100);
+  specialframe(0) = 0;
+  stext(
+      0,
+      "Intruiging. You remember...",
+      "But... I see you still have",
+      "no clue as to what you are...");
+  entitymove(5, "L6F0");
+  wait(200);
+  stext(1, "What do you mean by that?", "", "");
+  entity.chrindex(5) = 6;
+  stext(
+      0,
+      "I sensed something in you long",
+      "ago, Sam. That is why I chose",
+      "to visit *your* dreams...");
+  stext(
+      1,
+      "You're not being very clear,",
+      "you know. Could you be a",
+      "little more direct?");
+  stext(
+      0,
+      "Sam. You've failed to get the",
+      "Seed. But all is not yet lost.",
+      "Retrieve the Seed from your");
+  stext(0, "fellow frog, and your town can", "yet be preserved.", "");
+  stext(
+      1,
+      "I kinda knew that! Bull's up",
+      "to no good, and I need to know",
+      "what he's going to do with");
+  stext(
+      1,
+      "that seed! But you still",
+      "haven't answered my question:",
+      "What did you mean when you");
+  stext(1, "said I don't know what I am?", "", "");
+  stext(
+      0,
+      "Sam! Know this! Next time we",
+      "meet, circumstances might not",
+      "be so favorable! Forces are");
+  stext(
+      0,
+      "on the move that ordinary",
+      "folk have no idea exist!",
+      "Remember that, Sam! And");
+  stext(0, "remember this:", "", "");
+  wait(100);
+  stext(0, "", "       Phage is here.", "");
+  fadeout(50);
+  mapswitch("seedcave.map", 86, 65, 0);
+}
+event
+{
+  stext(
+      0,
+      "A monster used to live in this",
+      "cave, but a few decades ago,",
+      "something else came here and");
+  stext(
+      0,
+      "fought it. I don't know which",
+      "one won, but whichever one did",
+      "left, and we ghosts now use");
+  stext(0, "its cave...", "", "");
+}
+event
+{
+  stext(0, "No one knows who made these", "statues...", "Ugly, ain't they?");
+}
+event { mapswitch("overland.map", 51, 73, 0); }
+event { mapswitch("gslide.map", 17, 15, 0); }
+event
+{
+  if (flags(143) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(143) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 495, 1);
+    changezone(x, y, 0);
+  }
+}
+event { chainevent(5, 64); }

@@ -1,0 +1,482 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  flags(107) = 1;
+  flags(112) = 0;
+}
+event
+{
+  mapswitch("vultmans.map", 1, 3, 0);
+  if (flags(4545) < 4)
+  {
+    flags(4545) = 0;
+  }
+}
+event
+{
+  if (flags(107) == 2)
+  {
+    flags(107) = 0;
+  }
+  flags(107)++;
+  if (flags(107) == 1)
+  {
+    alterbtile(6, 31, 0, 1);
+    alterbtile(6, 32, 0, 1);
+    alterbtile(6, 34, 0, 1);
+    alterbtile(7, 30, 71, 0);
+    alterbtile(7, 33, 71, 0);
+    alterbtile(7, 35, 71, 0);
+    alterbtile(8, 30, 71, 0);
+    alterbtile(8, 33, 71, 0);
+    alterbtile(8, 35, 71, 0);
+    alterbtile(9, 29, 0, 1);
+    alterbtile(9, 31, 0, 1);
+    alterbtile(9, 32, 0, 1);
+    alterbtile(9, 34, 0, 1);
+    alterbtile(9, 36, 0, 1);
+    alterbtile(10, 30, 71, 0);
+    alterbtile(10, 33, 71, 0);
+    alterbtile(10, 35, 71, 0);
+    alterbtile(11, 30, 71, 0);
+    alterbtile(11, 34, 0, 1);
+    alterbtile(11, 36, 0, 1);
+    alterbtile(12, 29, 0, 1);
+    alterbtile(12, 31, 0, 1);
+    alterbtile(12, 35, 71, 0);
+    alterbtile(13, 30, 71, 0);
+    alterbtile(13, 32, 71, 0);
+    alterbtile(13, 35, 71, 0);
+    alterbtile(14, 29, 0, 1);
+    alterbtile(14, 31, 0, 1);
+    alterbtile(14, 33, 0, 1);
+    alterbtile(14, 34, 0, 1);
+    alterbtile(14, 36, 0, 1);
+    alterbtile(15, 30, 71, 0);
+    alterbtile(15, 32, 71, 0);
+    alterbtile(15, 35, 71, 0);
+    alterbtile(16, 30, 71, 0);
+    alterbtile(16, 32, 71, 0);
+    alterbtile(16, 35, 71, 0);
+    alterbtile(17, 31, 0, 1);
+    alterbtile(17, 33, 0, 1);
+    alterbtile(17, 34, 0, 1);
+  }
+  if (flags(107) == 2)
+  {
+    alterbtile(6, 31, 71, 0);
+    alterbtile(6, 32, 71, 0);
+    alterbtile(6, 34, 71, 0);
+    alterbtile(7, 30, 0, 1);
+    alterbtile(7, 33, 0, 1);
+    alterbtile(7, 35, 0, 1);
+    alterbtile(8, 30, 0, 1);
+    alterbtile(8, 33, 0, 1);
+    alterbtile(8, 35, 0, 1);
+    alterbtile(9, 29, 71, 0);
+    alterbtile(9, 31, 71, 0);
+    alterbtile(9, 32, 71, 0);
+    alterbtile(9, 34, 71, 0);
+    alterbtile(9, 36, 71, 0);
+    alterbtile(10, 30, 0, 1);
+    alterbtile(10, 33, 0, 1);
+    alterbtile(10, 35, 0, 1);
+    alterbtile(11, 30, 0, 1);
+    alterbtile(11, 34, 71, 0);
+    alterbtile(11, 36, 71, 0);
+    alterbtile(12, 29, 71, 0);
+    alterbtile(12, 31, 71, 0);
+    alterbtile(12, 35, 0, 1);
+    alterbtile(13, 30, 0, 1);
+    alterbtile(13, 32, 0, 1);
+    alterbtile(13, 35, 0, 1);
+    alterbtile(14, 29, 71, 0);
+    alterbtile(14, 31, 71, 0);
+    alterbtile(14, 33, 71, 0);
+    alterbtile(14, 34, 71, 0);
+    alterbtile(14, 36, 71, 0);
+    alterbtile(15, 30, 0, 1);
+    alterbtile(15, 32, 0, 1);
+    alterbtile(15, 35, 0, 1);
+    alterbtile(16, 30, 0, 1);
+    alterbtile(16, 32, 0, 1);
+    alterbtile(16, 35, 0, 1);
+    alterbtile(17, 31, 71, 0);
+    alterbtile(17, 33, 71, 0);
+    alterbtile(17, 34, 71, 0);
+  }
+}
+event
+{
+  soundeffect(7);
+  if (flags(112) != 1 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+    return;
+  }
+  if (flags(112) == 1)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(8);
+  if (flags(112) != 2 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 2)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(16);
+  if (flags(112) != 3 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 3)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(10);
+  if (flags(112) != 4 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 4)
+  {
+    flags(112) = timer;
+    banner("That's right!", 1);
+    alterftile(10, 12, 0, 0);
+    alterftile(11, 12, 0, 0);
+    if (flags(112) < 1000)
+    {
+      stext(
+          0,
+          "You got it in under ten",
+          "seconds! But that's easy!",
+          "On to round two!");
+      warp(56, 8, 0);
+      flags(4545)++;
+    }
+    if (flags(112) >= 1000)
+    {
+      entity.locx(5) = 10;
+      entity.locy(5) = 6;
+      specialframe(5) = 20;
+      stext(0, "You took too long!", "You should try again...", "");
+    }
+    flags(112) = 0;
+  }
+}
+event
+{
+  soundeffect(16);
+  if (flags(112) != 1 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+    return;
+  }
+  if (flags(112) == 1)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(8);
+  if (flags(112) != 2 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 2)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(10);
+  if (flags(112) != 3 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 3)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(7);
+  if (flags(112) != 4 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 4)
+  {
+    flags(112) = timer;
+    banner("That's right!", 1);
+    alterftile(51, 12, 0, 0);
+    alterftile(52, 12, 0, 0);
+    if (flags(112) < 2000)
+    {
+      stext(
+          0,
+          "You got it in under twenty",
+          "seconds! Not bad!",
+          "On to round three!");
+      warp(11, 34, 0);
+      flags(4545)++;
+    }
+    if (flags(112) >= 2000)
+    {
+      entity.locx(6) = 53;
+      entity.locy(6) = 8;
+      specialframe(6) = 20;
+      stext(0, "You took too long!", "You should try again...", "");
+    }
+    flags(112) = 0;
+  }
+}
+event
+{
+  soundeffect(8);
+  callevent(2);
+  if (flags(112) != 1 && flags(112) != 6 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+    return;
+  }
+  if (flags(112) == 1)
+  {
+    flags(112)++;
+  }
+  if (flags(112) == 6)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(10);
+  callevent(2);
+  if (flags(112) != 2 && flags(112) != 4 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 2)
+  {
+    flags(112)++;
+  }
+  if (flags(112) == 4)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(16);
+  callevent(2);
+  if (flags(112) != 3 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 3)
+  {
+    flags(112)++;
+  }
+}
+event
+{
+  soundeffect(7);
+  callevent(2);
+  if (flags(112) != 5 && flags(112) != 7 && flags(112) != 0)
+  {
+    banner("Wrong!", 1);
+    banner("Try again!", 1);
+    flags(112) = 1;
+  }
+  if (flags(112) == 5)
+  {
+    flags(112)++;
+  }
+  if (flags(112) == 7)
+  {
+    flags(112) = timer;
+    banner("That's right!", 1);
+    alterftile(11, 38, 0, 0);
+    alterftile(12, 38, 0, 0);
+    if (flags(112) < 6000)
+    {
+      specialframe(7) = 21;
+      stext(
+          0,
+          "You got it in under a minute!",
+          "That's amazing! I know when",
+          "I'm beat! Here, take this!");
+      giveitem(27);
+      flags(4545) = 4;
+    }
+    if (flags(112) >= 6000)
+    {
+      entity.locx(7) = 11;
+      entity.locy(7) = 32;
+      specialframe(7) = 20;
+      stext(0, "You took too long!", "You should try again...", "");
+    }
+    flags(112) = 0;
+  }
+}
+event
+{
+  stext(
+      0,
+      "Wanna play Simon with me?",
+      "Get the pattern fast enough",
+      "in three arenas, and I'll");
+  prompt(0, "give you something good!", "", "", 112, "No", "Yes");
+  if (flags(112) == 1 && flags(4545) == 4)
+  {
+    flags(112) = 0;
+    stext(0, "You're good! I have nothing", "left to give you!", "");
+  }
+  if (flags(112) == 1 && flags(4545) < 4)
+  {
+    flags(112) = 1;
+    alterftile(10, 12, 91, 1);
+    alterftile(11, 12, 91, 1);
+    entity.locx(5) = 13;
+    entity.locy(5) = 4;
+    soundeffect(7);
+    wait(60);
+    entity.locx(5) = 13;
+    entity.locy(5) = 9;
+    soundeffect(8);
+    wait(60);
+    entity.locx(5) = 8;
+    entity.locy(5) = 9;
+    soundeffect(16);
+    wait(60);
+    entity.locx(5) = 8;
+    entity.locy(5) = 4;
+    soundeffect(10);
+    wait(60);
+    stext(0, "Got it? Your turn!", "", "");
+    entity.locx(5) = 4;
+    entity.locy(5) = 1;
+    timer = 0;
+  }
+}
+event
+{
+  prompt(0, "Keep going?", "", "", 112, "No", "Yes");
+  if (flags(112) == 1 && flags(4545) == 4)
+  {
+    flags(112) = 0;
+    stext(0, "You're good! I have nothing", "left to give you!", "");
+  }
+  if (flags(112) == 1 && flags(4545) < 4)
+  {
+    flags(112) = 1;
+    alterftile(51, 12, 91, 1);
+    alterftile(52, 12, 91, 1);
+    entity.locx(6) = 49;
+    entity.locy(6) = 9;
+    soundeffect(16);
+    wait(60);
+    entity.locx(6) = 54;
+    entity.locy(6) = 9;
+    soundeffect(8);
+    wait(60);
+    entity.locx(6) = 49;
+    entity.locy(6) = 4;
+    soundeffect(10);
+    wait(60);
+    entity.locx(6) = 54;
+    entity.locy(6) = 4;
+    soundeffect(7);
+    wait(60);
+    stext(0, "Got it? Your turn!", "", "");
+    entity.locx(6) = 58;
+    entity.locy(6) = 1;
+    timer = 0;
+  }
+}
+event
+{
+  prompt(0, "Ready for the last course?", "", "", 112, "No", "Yes");
+  if (flags(112) == 1 && flags(4545) == 4)
+  {
+    flags(112) = 0;
+    stext(0, "You're good! I have nothing", "left to give you!", "");
+  }
+  if (flags(112) == 1 && flags(4545) < 4)
+  {
+    flags(112) = 1;
+    alterftile(11, 38, 91, 1);
+    alterftile(12, 38, 91, 1);
+    entity.locx(7) = 14;
+    entity.locy(7) = 35;
+    soundeffect(8);
+    wait(60);
+    entity.locx(7) = 9;
+    entity.locy(7) = 30;
+    soundeffect(10);
+    wait(60);
+    entity.locx(7) = 9;
+    entity.locy(7) = 35;
+    soundeffect(16);
+    wait(60);
+    entity.locx(7) = 9;
+    entity.locy(7) = 30;
+    soundeffect(10);
+    wait(60);
+    entity.locx(7) = 14;
+    entity.locy(7) = 30;
+    soundeffect(7);
+    wait(60);
+    entity.locx(7) = 14;
+    entity.locy(7) = 35;
+    soundeffect(8);
+    wait(60);
+    entity.locx(7) = 14;
+    entity.locy(7) = 30;
+    soundeffect(7);
+    wait(60);
+    stext(0, "Got it? Your turn!", "", "");
+    entity.locx(7) = 18;
+    entity.locy(7) = 27;
+    timer = 0;
+  }
+}

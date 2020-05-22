@@ -1,66 +1,51 @@
+#include "compile.hpp"
 #include "decompile.hpp"
 #include "log.hpp"
+#include "util.hpp"
 #include "v1vc_macro.hpp"
 #include "v1vc_parser.hpp"
 #include "v1vc_token.hpp"
+#include "vcc.hpp"
 #include <stdlib.h>
 #include <string.h>
 
 // NOTE(aen): Token list index should be pointing at the head of a macro
 void
 TestMacroParsing(
-    TokenList_t *TokenList,
+    token_list *TokenList,
     const char *ExpectedName,
-    TokenList_t *ExpectedParamList,
+    token_list *ExpectedParamList,
     const char *ExpectedExpansion)
 {
-  Macro_t *Macro = NewMacro();
+  macro *Macro = NewMacro();
   Macro->ParseFrom(TokenList);
-  ASSERT(Macro->Token->Length == strlen(ExpectedName));
-  ASSERT(!memcmp(Macro->Token->Text, ExpectedName, Macro->Token->Length));
+  Assert(Macro->Token->Length == strlen(ExpectedName));
+  Assert(!memcmp(Macro->Token->Text, ExpectedName, Macro->Token->Length));
   if (ExpectedParamList)
   {
-    ASSERT(Macro->ParamList.NumTokens == ExpectedParamList->NumTokens);
+    Assert(Macro->ParamList.NumTokens == ExpectedParamList->NumTokens);
     for (int i = 0; i < Macro->ParamList.NumTokens; i++)
     {
-      Token_t *A = Macro->ParamList.Get(i);
-      Token_t *B = ExpectedParamList->Get(i);
-      ASSERT(A->Length == B->Length);
-      ASSERT(!strncmp(A->Text, B->Text, A->Length));
+      token *A = Macro->ParamList.Get(i);
+      token *B = ExpectedParamList->Get(i);
+      Assert(A->Length == B->Length);
+      Assert(!strncmp(A->Text, B->Text, A->Length));
     }
     u64 MinifiedLength = Macro->Expansion.Minify((u8 *)TempBuffer);
-    ASSERT(!memcmp(TempBuffer, ExpectedExpansion, MinifiedLength));
+    Assert(!memcmp(TempBuffer, ExpectedExpansion, MinifiedLength));
   }
 }
 
 // NOTE(aen): Expect token list to have same # tokens and text values
 void
-ExpectTokenList(TokenList_t *TokenList, u64 NumTokens, char *TokenTextList[])
+ExpectTokenList(token_list *TokenList, u64 NumTokens, char *TokenTextList[])
 {
-  ASSERT(NumTokens == TokenList->NumTokens);
+  Assert(NumTokens == TokenList->NumTokens);
   for (u64 i = 0; i < NumTokens; i++)
   {
-    Token_t *Token = TokenList->Data[i];
-    ASSERT(!memcmp(TokenTextList[i], Token->Text, Token->Length));
+    token *Token = TokenList->Get(i);
+    Assert(!memcmp(TokenTextList[i], Token->Text, Token->Length));
   }
-}
-
-void
-DumpHex(const char *Title, u8 *Buffer, u64 Length)
-{
-  Log("%s\n\t", Title);
-  if (!Length)
-  {
-    Log("<empty>\n");
-    return;
-  }
-  for (int N = 0; N < Length; N++)
-  {
-    if (N && !(N % 8))
-      Log("\n\t");
-    Log("%02x ", Buffer[N]);
-  }
-  Log("\n");
 }
 
 u8 *
@@ -88,7 +73,7 @@ SkipToNewLine(u8 *C)
 }
 
 void
-ParseHexCodes(Buffer_t *Input, Buffer_t *Output)
+ParseHexCodes(buffer *Input, buffer *Output)
 {
   u8 *In = Input->Data;
   u64 N = 0;
@@ -121,10 +106,10 @@ ParseHexCodes(Buffer_t *Input, Buffer_t *Output)
 }
 
 void
-AssertBytes(u8 *Buffer, u64 GeneratedByteCount, Buffer_t *HexCodeString)
+AssertBytes(u8 *Buffer, u64 GeneratedByteCount, buffer *HexCodeString)
 {
-  Buffer_t HexCodes;
-  HexCodes.Data = new u8[1024];
+  buffer HexCodes;
+  HexCodes.Data = (u8 *)NewTempBuffer(1024);
   ParseHexCodes(HexCodeString, &HexCodes);
 
   if (GeneratedByteCount != HexCodes.Length)
@@ -149,7 +134,7 @@ AssertBytes(u8 *Buffer, u64 GeneratedByteCount, Buffer_t *HexCodeString)
 }
 
 void
-AssertBytes(char *Buffer, u64 GeneratedByteCount, Buffer_t *HexCodeString)
+AssertBytes(char *Buffer, u64 GeneratedByteCount, buffer *HexCodeString)
 {
   AssertBytes((u8 *)Buffer, GeneratedByteCount, HexCodeString);
 }
@@ -160,9 +145,9 @@ AssertBytes(char *Buffer, u64 GeneratedByteCount, Buffer_t *HexCodeString)
 // void
 // AssertCompile(
 //     const char *Text,
-//     Buffer_t *CompiledOutput,
+//     buffer *CompiledOutput,
 //     u64 CompiledOutputLimit,
-//     Buffer_t *HexCodeString)
+//     buffer *HexCodeString)
 // {
 //   // Log("AssertCompile\n");
 //   u64 GeneratedByteCount = 0;
@@ -212,7 +197,7 @@ AssertCompileDecompile(const char *TestName)
   char TestFilename[TEMP_BUFFER_SIZE];
   sprintf_s(TestFilename, TEMP_BUFFER_SIZE, "test_data/%s.test", TestName);
 
-  Buffer_t *TestFile = Load(TestFilename);
+  buffer *TestFile = Load(TestFilename);
   // Log("TestFile: %s\n", TestFile->Data);
 
   u8 *FileHead = TestFile->Data;
@@ -222,11 +207,11 @@ AssertCompileDecompile(const char *TestName)
   if (SectionEnd >= End)
     Fail("Unable to find script end\n");
   // Log("B\n");
-  Buffer_t VC;
+  buffer VC;
   u64 VCLength = SectionEnd - FileHead;
   if (VCLength < 0 || VCLength > 10000)
     Fail("VCLength out of bounds: %d\n", VCLength);
-  VC.Data = new u8[VCLength + 1];
+  VC.Data = (u8 *)NewTempBuffer(VCLength + 1);
   memcpy(VC.Data, FileHead, VCLength);
   VC.Length = VCLength;
   VC.Data[VCLength] = 0;
@@ -244,13 +229,13 @@ AssertCompileDecompile(const char *TestName)
   if (SectionEnd >= End)
     Fail("Unable to find hex codes end\n");
   // SectionEnd = SkipWhite(SectionEnd + 2);
-  Buffer_t HexCodeStrings;
+  buffer HexCodeStrings;
   HexCodeStrings.Data = HexCodesHead;
   HexCodeStrings.Length = SectionEnd - HexCodesHead;
   // Log("HexCodeStrings Data %s, %d\n", HexCodeStrings.Data,
   //     HexCodeStrings.Length);
-  // Buffer_t HexCodes;
-  // HexCodes.Data = new u8[1024];
+  // buffer HexCodes;
+  // HexCodes.Data = NewTempBuffer(1024);
   // ParseHexCodes(&HexCodeStrings, &HexCodes);
   // Log("HexCodes Length %d\n", HexCodes.Length);
   // Log("HexCodes Data %s\n", HexCodes.Data);
@@ -259,7 +244,7 @@ AssertCompileDecompile(const char *TestName)
   u8 *DecompiledHead = SkipWhite(SectionEnd + 2);
   SectionEnd = ParseTestSection(DecompiledHead, End);
 
-  Buffer_t Decompiled;
+  buffer Decompiled;
   Decompiled.Data = DecompiledHead;
   Decompiled.Length = SectionEnd - DecompiledHead;
   // Decompiled.Data[Decompiled.Length] = 0;
@@ -267,23 +252,23 @@ AssertCompileDecompile(const char *TestName)
   // Log("Decompiled Length %d\n", Decompiled.Length);
   // Log("Decompiled %s\n", Decompiled.Data);
 
-  Parser_t Parser;
+  parser Parser;
   Parser.CalcPath(TestFilename);
-  TokenList_t TLA;
+  token_list TLA;
   Parser.Reset(&VC);
   Parser.ToTokenList(&TLA);
 
-  TokenList_t TLB;
-  MacroList_t ML;
+  token_list TLB;
+  macro_list ML;
   ParseMacros(&Parser, &TLA, &TLB, &ML);
-  TokenList_t TLC;
+  token_list TLC;
   ExpandMacros(&ML, &TLB, &TLC);
-  char *PreprocessedVC = new char[TEMP_BUFFER_SIZE];
+  char *PreprocessedVC = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
   TLC.Minify((u8 *)PreprocessedVC);
   // Log("Preprocessed VC: %s\n", PreprocessedVC);
 
-  Buffer_t CompiledOutput;
-  CompiledOutput.Data = new u8[TEMP_BUFFER_SIZE];
+  buffer CompiledOutput;
+  CompiledOutput.Data = (u8 *)NewTempBuffer(TEMP_BUFFER_SIZE);
   //=========
   u64 GeneratedByteCount = 0;
   CompileToBuffer(
@@ -304,15 +289,15 @@ AssertCompileDecompile(const char *TestName)
   // Log("Generated length %d\n", strlen(Temp));
   //=========
 
-  Buffer_t ScriptOffsetTable;
-  ScriptOffsetTable.Data = new u8[TEMP_BUFFER_SIZE];
+  buffer ScriptOffsetTable;
+  ScriptOffsetTable.Data = (u8 *)NewTempBuffer(TEMP_BUFFER_SIZE);
   WriteScriptOffsetTableToBuffer(&ScriptOffsetTable);
 
   // NOTE(aen): After compilation, we still need to prefix the whole blob with
   // the script offset table header.
-  Buffer_t FullBinary;
+  buffer FullBinary;
   u64 FullBinaryLength = ScriptOffsetTable.Length + CompiledOutput.Length;
-  FullBinary.Data = new u8[FullBinaryLength];
+  FullBinary.Data = (u8 *)NewTempBuffer(FullBinaryLength);
   memcpy(FullBinary.Data, ScriptOffsetTable.Data, ScriptOffsetTable.Length);
   memcpy(
       FullBinary.Data + ScriptOffsetTable.Length,
@@ -323,23 +308,27 @@ AssertCompileDecompile(const char *TestName)
 
   AssertBytes(FullBinary.Data, FullBinary.Length, &HexCodeStrings);
 
-  Buffer_t Output;
-  Output.Data = new u8[TEMP_BUFFER_SIZE];
+  buffer Output;
+  Output.Data = (u8 *)NewTempBuffer(TEMP_BUFFER_SIZE);
   Output.Length = 0;
-  Decompile(&FullBinary, &Output);
-  bool64 BothEmpty = !Decompiled.Length && !Output.Length;
+  Decompile(&FullBinary, &Output, 1000, DECOMPILE);
+  b64 BothEmpty = !Decompiled.Length && !Output.Length;
   if (!BothEmpty)
   {
-    bool64 IsMatch =
-        !strcmp((const char *)Decompiled.Data, (const char *)Output.Data);
-    if (!IsMatch)
+    b64 LengthsMatch = Decompiled.Length == Output.Length;
+    b64 IsMatch = !memcmp(
+        (const char *)Decompiled.Data,
+        (const char *)Output.Data,
+        Output.Length);
+    if (LengthsMatch && IsMatch) {}
+    else
     {
       Log("\n");
       Log("Original Source\n%s", VC.Data);
       DumpHex("Compiled Binary", FullBinary.Data, FullBinary.Length);
       Log("\nDecompiled Source\n%s\n\n", Output.Data);
       DumpHex("Expected Decompilation", Decompiled.Data, Decompiled.Length);
-      DumpHex("Got Decompilation", Output.Data, Output.Length - 1);
+      DumpHex("Got Decompilation", Output.Data, Output.Length);
       Fail(
           "Expected\n%.*s\nBut got\n%.*s\n",
           Decompiled.Length,
@@ -355,13 +344,13 @@ AssertCompileDecompile(const char *TestName)
 
   //         Parser.Load("test_data/004_macro_with_parameters.vc");
   // Parser.ToTokenList(&TLA);
-  // TokenList_t TLB;
-  // MacroList_t ML;
+  // token_list TLB;
+  // macro_list ML;
   // ParseMacros(&Parser, &TLA, &TLB, &ML);
-  // TokenList_t TLC;
+  // token_list TLC;
   // ExpandMacros(&ML, &TLB, &TLC);
   // TLC.Minify((u8 *)TempBuffer);
-  // ASSERT(!strcmp(TempBuffer, "event{a=flags[123];}"));
+  // Assert(!strcmp(TempBuffer, "event{a=flags[123];}"));
 
   // Log("[Test] Compile\n");
   // AssertCompile("event{}", "ff");
@@ -373,34 +362,144 @@ AssertCompileDecompile(const char *TestName)
 }
 
 void
+TestPools()
+{
+  char FancyString[1024];
+  for (u64 Loop = 0; Loop < 2; Loop++)
+  {
+    Log("[Test] TestPools: Pass #%d\n", 1 + Loop);
+
+    u64 TempBufferSize = TEMP_BUFFER_SIZE;
+    u64 NewTempBufferCount = POOL_SIZE / TempBufferSize - 1;
+    FormatU64(NewTempBufferCount, FancyString);
+    Log("\tNewTempBuffer %d x%s\n", TempBufferSize, FancyString);
+    for (u64 i = 0; i < NewTempBufferCount; i++)
+    {
+      char *T = NewTempBuffer(TempBufferSize);
+      Assert(T);
+      for (int j = 0; j < TempBufferSize; j++)
+        Assert(T[j] == 0);
+    }
+
+    char *BufferString = "Hello!";
+    u64 BufferLen = strlen(BufferString) + 1;
+    u64 NewBufferCount = POOL_SIZE / sizeof(buffer);
+    FormatU64(NewBufferCount, FancyString);
+    Log("\tNewBuffer x%s\n", FancyString);
+    for (u64 i = 0; i < NewBufferCount; i++)
+    {
+      buffer *B = NewBuffer((u8 *)BufferString, BufferLen);
+      Assert(B->Length == 7);
+      Assert(!strcmp((char *)B->Data, BufferString));
+    }
+
+    u64 NewTokenCount = TOKEN_POOL_SIZE / sizeof(token);
+    FormatU64(NewTokenCount, FancyString);
+    Log("\tNewToken x%s\n", FancyString);
+    for (u64 i = 0; i < NewTokenCount; i++)
+    {
+      token *T = NewToken();
+      Assert(T);
+    }
+    ResetPool(&TokenPool);
+
+    u64 NewMacroCount = POOL_SIZE / (sizeof(macro) + (sizeof(token) * 104));
+    FormatU64(NewMacroCount, FancyString);
+    Log("\tNewMacro x%s\n", FancyString);
+    for (u64 i = 0; i < NewMacroCount; i++)
+    {
+      macro *M = NewMacro();
+      Assert(M);
+    }
+
+    ResetPool(&TempPool);
+    ResetPool(&BufferPool);
+    ResetPool(&TokenPool);
+    ResetPool(&MacroPool);
+  }
+
+  u64 NewTokenListCount = POOL_SIZE / sizeof(token_list);
+  FormatU64(NewTokenListCount, FancyString);
+  Log("[Test] TokenList x%s\n", FancyString);
+  for (u64 i = 0; i < NewTokenListCount; i++)
+  {
+    token_list TokenList;
+    Assert(TokenList.NumTokens == 0);
+  }
+  ResetPool(&TokenPool);
+
+  // TODO(aen): Figure why I can only allocate peanuts for macro lists, whereas
+  // Ican allocate token lists like gangbusters... I don't get it.
+  u64 NewMacroListCount =
+      POOL_SIZE /
+      (sizeof(macro_list) + (DEFAULT_NUM_MACROS_PER_LIST * sizeof(macro)));
+  FormatU64(NewMacroListCount, FancyString);
+  Log("[Test] MacroList x%s\n", FancyString);
+  for (u64 i = 0; i < NewMacroListCount; i++)
+  {
+    macro_list MacroList;
+    Assert(MacroList.NumMacros == 0);
+  }
+
+  ResetPool(&TokenPool);
+  ResetPool(&MacroPool);
+
+  // TODO(aen): Get rid of this global buffer. A bunch of stuff relies on it
+  // currently and we should just be allocating as we need locally.
+  TempBuffer = NewTempBuffer(TEMP_BUFFER_SIZE);
+}
+
+void
+TestFormatU64(u64 Num, const char *Expect)
+{
+  char Output[1024];
+  FormatU64(Num, Output);
+  Assert(!strcmp(Expect, Output));
+}
+
+void
 RunTests()
 {
   Log("RunTests\n");
-  TokenList_t TokenList;
-  Parser_t Parser;
+
+  Log("[Test] FormatU64\n");
+  TestFormatU64(0, "0");
+  TestFormatU64(12, "12");
+  TestFormatU64(123, "123");
+  TestFormatU64(1234, "1,234");
+  TestFormatU64(12345, "12,345");
+  TestFormatU64(123456, "123,456");
+  TestFormatU64(1234567, "1,234,567");
+  TestFormatU64(12345678, "12,345,678");
+  TestFormatU64(123456789, "123,456,789");
+
+  TestPools();
 
   Log("[Test] AtEnd, C, Next...");
+  parser Parser;
   Parser.Reset(NewBuffer("test."));
-  ASSERT(!Parser.AtEnd());
-  ASSERT(*Parser.C == 't');
+  Assert(!Parser.AtEnd());
+  Assert(*Parser.C == 't');
   Parser.Next();
-  ASSERT(*Parser.C == 'e');
+  Assert(*Parser.C == 'e');
   Parser.SkipPast(".", 1);
-  ASSERT(Parser.AtEnd());
+  Assert(Parser.AtEnd());
   Log("OK\n");
 
   Log("[Test] Skip whitespace...");
   Parser.Reset(NewBuffer("abc/*foo*///bar\nxyz"));
   Parser.SkipWhite();
-  ASSERT(*Parser.C == 'a');
+  Assert(*Parser.C == 'a');
   Parser.C += 3;
   Parser.SkipWhite();
-  ASSERT(*Parser.C == 'x');
+  Assert(*Parser.C == 'x');
   Log("OK\n");
+
+  token_list TokenList;
+  TokenList.SetMaxTokens(100);
 
   Log("[Test] Long symbols...");
   Parser.Reset(NewBuffer("+= -= *= /= %= ++ -- && || <= >= =="));
-  TokenList.Reset();
   Parser.ToTokenList(&TokenList);
   TokenList.Minify((u8 *)TempBuffer);
   char *LongTL[] = {
@@ -434,20 +533,20 @@ RunTests()
   TokenList.Reset();
   Parser.ToTokenList(&TokenList);
   TestMacroParsing(&TokenList, "Cecil", 0, "4");
-  ASSERT(TokenList.AtEnd());
+  Assert(TokenList.AtEnd());
   Log("OK\n");
 
   Log("[Test] #define with flush empty parameter list...");
-  TokenList_t ParamListEmpty;
+  token_list ParamListEmpty;
   Parser.Reset(NewBuffer("#define DrawTextBox() @foo@"));
   TokenList.Reset();
   Parser.ToTokenList(&TokenList);
   TestMacroParsing(&TokenList, "DrawTextBox", &ParamListEmpty, "foo");
-  ASSERT(TokenList.AtEnd());
+  Assert(TokenList.AtEnd());
   Log("OK\n");
 
   Log("[Test] #define with flush parameters...");
-  TokenList_t ParamListDims;
+  token_list ParamListDims;
   ParamListDims.AddToken("x", 1, TT_IDENT, 0, 0);
   ParamListDims.AddToken("y", 1, TT_IDENT, 0, 0);
   ParamListDims.AddToken("w", 1, TT_IDENT, 0, 0);
@@ -458,7 +557,7 @@ RunTests()
   Parser.ToTokenList(&TokenList);
   TestMacroParsing(
       &TokenList, "DrawTextBox", &ParamListDims, "callscript(3,x,y,w,h)");
-  ASSERT(TokenList.AtEnd());
+  Assert(TokenList.AtEnd());
   Log("OK\n");
 
   Log("[Test] #define with non-flush parameters...");
@@ -468,7 +567,7 @@ RunTests()
   Parser.ToTokenList(&TokenList);
   TestMacroParsing(
       &TokenList, "DrawTextBox", &ParamListDims, "callscript(3,x,y,w,h)");
-  ASSERT(TokenList.AtEnd());
+  Assert(TokenList.AtEnd());
   Log("OK\n");
 
   Log("[Test] #define expansion...");
@@ -476,20 +575,20 @@ RunTests()
       NewBuffer("#define DrawTextBox(x,y,w,h) "
                 "@CallScript(3,x,y,w,h)@\nevent{DrawTextBox(11,22,33,44);}"));
   Parser.ToTokenList(&TokenList);
-  MacroList_t MacroListDefExpansion;
-  TokenList_t TokenListDefExpansionWithoutMacros;
+  macro_list MacroListDefExpansion;
+  token_list TokenListDefExpansionWithoutMacros;
   ParseMacros(
       &Parser,
       &TokenList,
       &TokenListDefExpansionWithoutMacros,
       &MacroListDefExpansion);
-  TokenList_t TokenListDefExpansion;
+  token_list TokenListDefExpansion;
   ExpandMacros(
       &MacroListDefExpansion,
       &TokenListDefExpansionWithoutMacros,
       &TokenListDefExpansion);
   TokenListDefExpansion.Minify((u8 *)TempBuffer);
-  ASSERT(!strcmp("event{callscript(3,11,22,33,44);}", TempBuffer));
+  Assert(!strcmp("event{callscript(3,11,22,33,44);}", TempBuffer));
   Log("OK\n");
 
   AssertCompileDecompile("000_empty");
@@ -514,6 +613,12 @@ RunTests()
   AssertCompileDecompile("019_for0_if_var0_return");
   AssertCompileDecompile("020_for1_if_var0_return");
   AssertCompileDecompile("021_for1_empty");
+  AssertCompileDecompile("022_nested_switch");
+  AssertCompileDecompile("023_nested_switch2");
+  AssertCompileDecompile("024_repeated_switch");
+  AssertCompileDecompile("025_switch_case_if_switch");
+  AssertCompileDecompile("026_for0_if");
+  AssertCompileDecompile("027_math");
 
   Log("PASS\n");
 }

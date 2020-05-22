@@ -1,0 +1,160 @@
+event
+{
+  fadein(1);
+  drawparty = 0;
+  disablemenu();
+  disablesave();
+  entitymove(5, "D2");
+  wait(75);
+  stext(
+      6,
+      "Hello, I'm GMW.",
+      "You've reached the end of the",
+      "P.H.A.G.E. Rhapsody demo...");
+  entitymove(5, "R3L6R3F0");
+  wait(200);
+  stext(
+      6,
+      "I'd like to thank the makers",
+      "of Verge, and many of those",
+      "who, for some reason or other,");
+  stext(
+      6,
+      "decided to create their own",
+      "games, which have inspired me",
+      "to no end...");
+  entitymove(5, "L3R6L3F0");
+  wait(200);
+  stext(
+      6,
+      "As for the credits, I will",
+      "currently be listing only",
+      "myself: GMW...");
+  stext(
+      6,
+      "My playtesters: Michael",
+      "Walpole, Mike Johnson,and",
+      "Blake Lambert...");
+  stext(6, "AB Josh Hanley and A1C David", "Strate...", "");
+  stext(6, "...as well as Alun and Hugh", "Walpole...", "");
+  stext(6, "The ACE Character Editor, by", "Richard Lau...", "");
+  stext(
+      6,
+      "And various net places where I",
+      "got the music you are hearing.",
+      "");
+  stext(
+      6,
+      "I'd also like to thank all the",
+      "people who responded so",
+      "favorably to the last demo!");
+  stext(
+      6,
+      "Also, I'd like to thank Lord",
+      "Fruitiger for his help with",
+      "my problem... See the area");
+  stext(6, "under the farm for the result,", "LF!!!", "");
+  stext(
+      6,
+      "Thanks also to Zaratustra for",
+      "his suggestion that ended up",
+      "fixing my battle system!");
+  stext(
+      6,
+      "Furthermore, thanks go to DiO",
+      "and Prince Paul for hosting",
+      "versions of P.H.A.G.E. on");
+  stext(6, "their web sites.", "", "");
+  stext(
+      6,
+      "Bromide Artists: GMW",
+      "          Green_Ness",
+      "and       Zaratustra");
+  stext(
+      6,
+      "Apologies to them for any",
+      "mangling I had to do to",
+      "make them fit...");
+  stext(6, "Monster Design: Mad Monkeys", "suggested by MagiTek Knight.", "");
+  stext(
+      6,
+      "Minor Aardvarks suggested by",
+      "McGrue. The text about them",
+      "in Bundalo was liberally");
+  stext(
+      6,
+      "ripped by me from McGrue's",
+      "e-mail, and is attributed",
+      "to McGrue and Hypno.");
+  stext(
+      6,
+      "Mini-Whales suggested by Lord",
+      "Fruitiger. The 'Moby' version",
+      "was added by me, though.");
+  stext(6, "Wood Chuckers suggested by", "aderax/Vandalist.", "");
+  stext(6, "Hermsters and Trippyweed", "suggested by Newsdee.", "");
+  stext(
+      6,
+      "Hivives created by me, GMW,",
+      "but a similar creature was",
+      "suggested by Newsdee as well.");
+  stext(
+      6,
+      "All other creatures in this",
+      "demo were created solely by",
+      "me, GMW.");
+  entitymove(5, "U3D3L3R6L3F0");
+  wait(300);
+  stext(
+      6,
+      "Future demos will go farther,",
+      "introduce at least one more",
+      "character, and possibly reveal");
+  stext(
+      6,
+      "more of the story... I hope to",
+      "include more library books,",
+      "and more ghost games!");
+  specialframe(5) = 21;
+  wait(50);
+  specialframe(5) = 0;
+  stext(
+      6,
+      "Speaking of the ghost games,",
+      "there are ten in this demo.",
+      "If you haven't found them all");
+  stext(
+      6,
+      "then you aren't looking hard",
+      "enough... If you haven't tried",
+      "to win one yet, I'd do so,");
+  stext(6, "since the items are unique and", "well worth the trouble!", "");
+  specialframe(5) = 23;
+  wait(50);
+  stext(
+      6,
+      "If you'd like your name to be",
+      "prominently displayed in these",
+      "credits, I'm looking for a");
+  stext(
+      6,
+      ".mod, .xm, or .s3m of the",
+      "Torgo theme music, for use in",
+      "my tribute to Torgo...");
+  stext(
+      6,
+      "You may have noticed him back",
+      "in the dam. But it just isn't",
+      "Torgo without his music, and");
+  stext(6, "that .wav I added just doesn't", "cut it!", "");
+  specialframe(5) = 0;
+  entitymove(5, "U3D3");
+  wait(100);
+  stext(
+      6,
+      "That's about it! I now return",
+      "you to your regularly",
+      "scheduled lives!");
+  wait(20);
+  quit("Thank you for playing!");
+}

@@ -1,0 +1,309 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+}
+event { warp(41, 92, 0); }
+event { warp(23, 5, 0); }
+event { mapswitch("graciere.map", 71, 24, 0); }
+event { stext(0, "What do you want?", "", ""); }
+event
+{
+  stext(
+      0,
+      "This way lie the kitchens,",
+      "which are off limits to you",
+      "fellas.");
+}
+event
+{
+  stext(0, "You are entering the throne", "room. Please be respectful.", "");
+}
+event
+{
+  stext(
+      0,
+      "This way leads to the quarters",
+      "of the servants. No entrance",
+      "to visitors.");
+}
+event
+{
+  if (flags(185) == 1)
+  {
+    stext(0, "You don't have anything to", "ask Lumin about.", "");
+    partymove("D1");
+  }
+  if (flags(185) > 2 && flags(185) < 36)
+  {
+    stext(0, "You don't have anything to", "ask Lumin about.", "");
+    if (char(3))
+    {
+      stext(
+          3,
+          "I don't want to see that",
+          "self-righteous ass right",
+          "now, all right?");
+    }
+    partymove("D1");
+  }
+  if (flags(185) == 0)
+  {
+    removecharacter(4);
+    removecharacter(5);
+    addcharacter(4);
+    addcharacter(5);
+    flags(185) = 1;
+    switch (entity.locx(0))
+    {
+      case (39): partymove("R1U1");
+      case (40): partymove("U1");
+      case (41): partymove("L1U1");
+      case (42): partymove("L2U1");
+    }
+    partymove("U7");
+    autoon();
+    entitymove(96, "L1F1");
+    entitymove(97, "R1U1");
+    wait(50);
+    stext(
+        8,
+        "Greetings. It has been long",
+        "since I last spoke with one",
+        "of the frog folk. What brings");
+    stext(8, "you to see me?", "", "");
+    stext(
+        1,
+        "I'm looking for a Giant Lily",
+        "seed, to make a new foundation",
+        "for my town! I came here to");
+    stext(
+        1,
+        "ask for your aid in finding",
+        "it. Please, do you remember",
+        "ever meeting a frog named");
+    stext(
+        1,
+        "Bovus? We believe he may have",
+        "come this way to hide the seed",
+        "long ago.");
+    stext(
+        8,
+        "Hmmm. I believe I *did* meet",
+        "that frog. He came to ask if",
+        "I knew of a safe hiding place");
+    stext(
+        8,
+        "for this seed. I told him that",
+        "I did not know of any, but",
+        "that there was a friend I knew");
+    stext(
+        8,
+        "who could help him. Bovus went",
+        "to my friend's home, to the",
+        "southeast, and I never saw him");
+    stext(
+        8,
+        "again. My old friend still",
+        "lives. Maybe you should go and",
+        "speak to him. He lives on");
+    stext(
+        8,
+        "Mount Alon, near the town of",
+        "Alon. I'm sure that he can",
+        "help you.");
+    entitymove(95, "D1F1");
+    wait(50);
+    stext(
+        8,
+        "Is there anything else you",
+        "would like to ask me, while",
+        "you are petitioning me?");
+    entitymove(97, "L1U1");
+    wait(50);
+    stext(
+        5,
+        "Yes! Great Lumin, I am Dingo,",
+        "of the coyote folk! Tell me,",
+        "have you heard of one called");
+    stext(5, "The Phage?", "", "");
+    specialframe(7) = 23;
+    stext(8, "The Phage?... ... No, I'm", "afraid I haven't. Why?", "");
+    specialframe(7) = 0;
+    stext(
+        5,
+        "Because he is GMW's next",
+        "chosen one! He will come and",
+        "the world will be cleansed of");
+    stext(
+        5,
+        "evil by his prescence!",
+        "I thought that a Saint would",
+        "know of the holy Phage!");
+    stext(
+        8,
+        "Ah, I see. Well, I'm afraid",
+        "that I don't get in touch with",
+        "GMW as much as everyone thinks");
+    stext(
+        8,
+        "I do. I am not denying the",
+        "possibility of your Phage, I",
+        "just have not heard of him.");
+    stext(5, "You... are not angry?", "", "");
+    stext(
+        8,
+        "Why? Should I be? You do not",
+        "win converts by force or",
+        "threats. If you believe that");
+    stext(
+        8,
+        "one will come to replace me,",
+        "then it will do no good to",
+        "tell you otherwise. And I am");
+    stext(
+        8,
+        "not so egotistical as to think",
+        "that I know all. Perhaps you",
+        "are right. Wouldn't I look");
+    stext(
+        8,
+        "foolish denying something",
+        "I know nothing about? And",
+        "wouldn't I be a bad ruler if");
+    stext(
+        8,
+        "I punished people for their",
+        "beliefs, when their beliefs",
+        "do nothing to harm me?");
+    stext(
+        8,
+        "No, my son, I am not angry.",
+        "In fact, I am glad. If you",
+        "doubt my holiness, I don't");
+    stext(
+        8,
+        "have to be perfect and all-",
+        "knowing for you. It's tough",
+        "being looked up to as the");
+    stext(8, "messenger of GMW, you know!", "", "");
+    stext(5, "You are wise, great Lumin.", "", "");
+    stext(
+        1,
+        "See, Dingo? I told you he",
+        "wasn't responsible for those",
+        "wolves!");
+    stext(8, "Wolves?", "", "");
+    stext(
+        5,
+        "Yes, the wolves of the Pack",
+        "Woods slew my tribe for their",
+        "beliefs.");
+    stext(
+        8,
+        "I'd not heard about that...",
+        "I sorrow for you and your",
+        "people, Dingo.");
+    stext(
+        5,
+        "Great Lumin, will you stop",
+        "them? Punish them with",
+        "a meteor from heaven?");
+    stext(8, "I will not do that, Dingo.", "", "");
+    stext(
+        5,
+        "They did this thing in your",
+        "name! Why do you do nothing to",
+        "stop them?");
+    specialframe(7) = 20;
+    stext(
+        8,
+        "It is not so easy a thing to",
+        "call down a meteor, Dingo.",
+        "There were... special");
+    stext(8, "circumstances involved in that", "incident.", "");
+    specialframe(7) = 0;
+    stext(
+        8,
+        "And, Dingo, do you know how",
+        "many times someone has asked",
+        "me to drop another meteor?");
+    stext(
+        8,
+        "I have lost count. Suffice it",
+        "to say that if I had done so",
+        "for every time, life on this");
+    stext(
+        8,
+        "world would be extinct. The",
+        "wolves are not part of my",
+        "empire. I do not rule over");
+    stext(
+        8,
+        "them as their master. I will",
+        "not start a war with them over",
+        "their deeds, for that would");
+    stext(
+        8,
+        "cost many more people their",
+        "lives. All I can do is tell",
+        "them of my disapproval. If");
+    stext(
+        8,
+        "they truly do this because",
+        "they believe I wish it, then",
+        "they will stop. If they do");
+    stext(
+        8,
+        "this because *they* wish to,",
+        "and use my name as an excuse,",
+        "then I can do nothing to stop");
+    stext(
+        8,
+        "them. I am not an avenging",
+        "spirit, Dingo. I am a ruler.",
+        "I try to ensure justice. Not");
+    stext(
+        8,
+        "just for you, but for every",
+        "person I can. And to punish",
+        "those who harmed you, I would");
+    stext(
+        8,
+        "have to forgo justice for",
+        "everyone else. I am sorry",
+        "Dingo, but I will not slay");
+    stext(8, "the wolves for what they have", "done.", "");
+    entitymove(97, "D1R1F0");
+    wait(50);
+    stext(8, "Is there anything else?", "", "");
+    stext(4, "Nothing from me! I'm just", "tagging along!", "");
+    stext(8, "Then this audience is at", "an end.", "");
+    partymove("D3");
+    entitymove(95, "D2");
+    entitymove(96, "R1D1");
+    entitymove(97, "L1F0");
+    wait(50);
+    autooff();
+    partymove("D6");
+    stext(
+        5,
+        "Grrr... I'm so mad! But the",
+        "worst part is that he might",
+        "have a point! Grrr...");
+    stext(5, "... ...", "... ...", "... ...");
+    stext(
+        5,
+        "(sigh) Maybe I've learned",
+        "something from him... If I",
+        "just... Yeah! I'll just");
+    stext(
+        5,
+        "have to help myself! And",
+        "I've thought of a way to",
+        "do it, too!");
+    getmagic(5, 6);
+    banner("Dingo learns:", 1);
+    banner("Life Booster!", 1);
+  }
+}

@@ -1,0 +1,29 @@
+event
+{
+  fadein(1);
+  if (flags(302) == 1)
+  {
+    alterbtile(65, 55, 34, 1);
+    changezone(65, 55, 0);
+  }
+}
+event
+{
+  alterbtile(65, 55, 34, 1);
+  changezone(65, 55, 0);
+  giveitem(57);
+  flags(302) = 1;
+}
+event { mapswitch("alontown.map", 75, 64, 0); }
+event { mapswitch("mtalon.map", 5, 95, 0); }
+event
+{
+  stext(1, "Aaagh! I've been cut!", "", "");
+  for (x, 1, 8, 1)
+  {
+    if (char(x) && curhp(x) > 0)
+    {
+      curhp(x) = 1;
+    }
+  }
+}

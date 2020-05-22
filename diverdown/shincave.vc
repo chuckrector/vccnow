@@ -1,0 +1,187 @@
+event
+{
+  changechr(1, "gren.chr");
+  enforceanimation();
+  redraw();
+  disablesave();
+  if (flags(148))
+  {
+    entity.locx((5)) = 30;
+  }
+  calleffect(11);
+}
+event { calleffect(3); }
+event { calleffect(4); }
+event { calleffect(5); }
+event { calleffect(6); }
+event
+{
+  enablesave();
+  if (flags(131) == 1)
+  {
+    flags(131) = 0;
+    screengradient = 0;
+    face((0)) = 0;
+    mapswitch("Ovrworld.map", 84, 50, 0);
+  }
+}
+event { mapswitch("Ovrworld.map", 84, 50, 0); }
+event
+{
+  if (flags(146))
+  {
+    return;
+  }
+  flags(146)++;
+  text(
+      1,
+      "Whoa! I'm not alone.",
+      "The question is WHY are these",
+      "men in this dangerous cave?");
+  text(1, "I had better be to my wits.", "", "");
+}
+event
+{
+  text(0, "This rock is in the way.", "", "");
+  if (!flags(147))
+  {
+    flags(147)++;
+    text(
+        1,
+        "(A strange feeling arouses my",
+        "senses. Almost as if something",
+        "is preventing my will.)");
+    text(14, "Come around, good knight.", "", "");
+    text(
+        1,
+        "(It seems some force field is",
+        "in place. But that would mean",
+        "these men have some tech.)");
+    text(
+        1,
+        "(I was pretty sure that this",
+        "place had nothing like this.",
+        "The most advanced thing I)");
+    text(
+        1,
+        "(have seen until now was the",
+        "lighting system at Twilight.",
+        "Strange, indeed.)");
+  }
+}
+event { text(0, "This hard-stone slab acts as", "a makeshift bench.", ""); }
+event
+{
+  text(
+      1,
+      "A pleasant aroma clears my",
+      "head when I smell the",
+      "contents of this pot.");
+}
+event
+{
+  text(
+      1,
+      "Probably some of their",
+      "personal belongings. I can't",
+      "exactly go through it now.");
+}
+event
+{
+  if (flags(148))
+  {
+    return;
+  }
+  flags(148)++;
+  face((6)) = 2;
+  text(15, "Our vigil is interrupted!", "", "");
+  partymove("L2");
+  face((5)) = 2;
+  text(
+      1,
+      "(I seemed to be more vigilant",
+      "than them. They just noticed",
+      "me.)");
+  entitymove(5, "R1");
+  wait(60);
+  text(14, "Hail, traveler. Welcome to the", "Shin Cave.", "");
+  text(1, "How goes it?", "", "");
+  text(
+      15,
+      "As always with us. You do not",
+      "look to be in any of the",
+      "neighboring orders. . .?");
+  text(
+      1,
+      "Ya, I get that a lot. In",
+      "fact, I hail from the",
+      "Northern Region.");
+  text(
+      14,
+      "Not the mainland, I presume?",
+      "By that outlandish dress are",
+      "you perhaps and islander?");
+  text(
+      1,
+      ". . . You got me. I can't",
+      "fit in anywhere. And that",
+      "brings us to you.");
+  text(14, "Oh?", "", "");
+  text(1, "Meaning who are you guys?", "", "");
+  text(14, "Ahh. Oh, yes.", "", "");
+  text(
+      15,
+      "We are Knights of Caste,",
+      "standing vigil for the",
+      "initiation of one.");
+  text(
+      14,
+      "Yes, yes. Complete solitude",
+      "is what the man needs. That",
+      "is why we stand guard.");
+  face((5)) = 0;
+  face((6)) = 0;
+  text(15, "To put it another way,", "no one may pass.", "");
+}
+event
+{
+  if (flags(149) == 1)
+  {
+    text(
+        14,
+        "We brew this tea to help us",
+        "stay alert. It is our solemn",
+        "duty to stand watch.");
+  }
+  if (flags(149) == 0)
+  {
+    flags(149) = 1;
+    text(
+        14,
+        "We are sorry to block your",
+        "path, but there is really",
+        "nothing down this way.");
+    text(
+        14,
+        "Over 200 years have passed,",
+        "and we still keep this",
+        "tradition.");
+  }
+}
+event
+{
+  text(
+      15,
+      "Even in Twilight territory",
+      "this cave is considered ours.",
+      "Your way ends here.");
+}
+event { text(1, "Oof, I can't quite squeeze", "through.", ""); }
+event
+{
+  text(
+      0,
+      "Many ashes pile around this",
+      "fire, indicating it's been",
+      "here a while.");
+}

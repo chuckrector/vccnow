@@ -1,0 +1,99 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(174) = 1;
+}
+event
+{
+  flags(173) = tileb;
+  entity.locx(6) = 14;
+  entity.locy(6) = 8;
+  alterbtile(17, 11, 15, 1);
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0);
+  switch (face(0))
+  {
+    case (0): flags(110) = entity.locy(0) - 1;
+    case (1): flags(110) = entity.locy(0) + 1;
+    case (2): flags(109) = entity.locx(0) - 1;
+    case (3): flags(109) = entity.locx(0) + 1;
+  }
+  if (flags(173) == 28)
+  {
+    changezone(flags(109), flags(110), 2);
+    changezone(entity.locx(0), entity.locy(0), 1);
+    alterbtile(flags(109), flags(110), tileb, 0);
+    alterbtile(entity.locx(0), entity.locy(0), flags(173), 0);
+  }
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0);
+  autoon();
+  cameratracking = 0;
+  for (y, 7, 10, 1)
+  {
+    warp(17, y, 1);
+    flags(167 + y) = tileb;
+  }
+  warp(flags(109), flags(110), 1);
+  cameratracking = 1;
+  autooff();
+  if (flags(174) == flags(175) && flags(174) == flags(176) &&
+      flags(174) == flags(177) && flags(179) > 2)
+  {
+    for (x, 14, 20, 1)
+    {
+      for (y, 7, 10, 1)
+      {
+        changezone(x, y, 0);
+      }
+    }
+    alterbtile(17, 6, 1, 0);
+    flags(178) = 1;
+    mapswitch("gslide.map", 17, 13, 0);
+  }
+}
+event
+{
+  if (flags(178) == 0)
+  {
+    stext(
+        0,
+        "This is the sliding tile game!",
+        "To win, make the center tiles",
+        "match up vertically, and tag");
+    stext(0, "me three times!", "", "");
+    entity.locx(5) = 41;
+    entity.locy(5) = 7;
+  }
+  if (flags(178) == 2)
+  {
+    stext(0, "I have nothing left to give", "you!", "");
+  }
+  if (flags(178) == 1)
+  {
+    specialframe(5) = 21;
+    stext(0, "Wow, you're good! Here, take", "this!", "");
+    specialframe(5) = 0;
+    giveitem(59);
+    flags(178) = 2;
+  }
+}
+event
+{
+  stext(0, "I've been tagged!", "", "");
+  flags(179)++;
+}
+event
+{
+  flags(173) = 0;
+  flags(174) = 0;
+  flags(175) = 0;
+  flags(176) = 0;
+  flags(177) = 0;
+  flags(179) = 0;
+  mapswitch("circle.map", 26, 7, 0);
+}

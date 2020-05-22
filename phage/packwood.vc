@@ -1,0 +1,426 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  flags(801) = 2;
+  if (flags(131) == 0)
+  {
+    for (x, 38, 44, 1)
+    {
+      for (y, 96, 101, 1)
+      {
+        alterbtile(x, y, 166, 0);
+      }
+    }
+  }
+  if (flags(131) == 1)
+  {
+    alterbtile(40, 96, 383, 0);
+    autoon();
+    specialframe(95) = 21;
+    specialframe(96) = 21;
+    entitymove(95, "D2");
+    entitymove(96, "D1");
+    wait(50);
+    earthquake(3, 3, 30);
+    stext(1, "What the!?!", "", "");
+    stext(4, "A pit!?!", "", "");
+    specialframe(95) = 0;
+    specialframe(96) = 0;
+    wait(75);
+    stext(0, "That's right!", "", "");
+    face(95) = 3;
+    face(96) = 3;
+    entity.locx(35) = 26;
+    entity.locy(35) = 98;
+    cameratracking = 0;
+    for (x, 1, 60, 1)
+    {
+      xwin -= 1;
+      wait(2);
+    }
+    entitymove(35, "R6R6");
+    wait(250);
+    for (x, 1, 60, 1)
+    {
+      xwin += 1;
+      wait(2);
+    }
+    stext(
+        5,
+        "Now, hand me all of your gold!",
+        "....",
+        "I want all of your food too!");
+    specialframe(96) = 20;
+    stext(
+        4,
+        "We're stuck in this pit! How",
+        "the heck are we supposed to",
+        "hand you our gold?");
+    specialframe(96) = 0;
+    stext(5, "And your food! Um, hold on...", "", "");
+    face(35) = 3;
+    stext(
+        5,
+        "Hmmm... How can I get their",
+        "loot if they're stuck in the",
+        "pit? Hmm... Lemme see...");
+    partymove("L2U3");
+    entitymove(95, "L2U2");
+    entitymove(96, "D1L2U1");
+    wait(75);
+    stext(5, "Hmmm... That's a tough one...", "", "");
+    face(95) = 0;
+    stext(
+        1,
+        "Psst! Rikk! I think I can jump",
+        "out of the pit from this pile",
+        "of snow! Give me a boost!");
+    face(95) = 1;
+    stext(4, "Allez Oop!", "", "");
+    specialframe(96) = 7;
+    specialframe(95) = 7;
+    entitymove(95, "U2");
+    entitymove(96, "U1");
+    wait(50);
+    specialframe(95) = 0;
+    specialframe(96) = 0;
+    face(95) = 0;
+    stext(5, "Wait a minute! I think I've", "got it! Hold on a second...", "");
+    stext(1, "Psst! Rikk! Jump, and I'll", "grab you and pull you out!", "");
+    specialframe(96) = 5;
+    entitymove(96, "U1");
+    wait(25);
+    specialframe(95) = 1;
+    entitymove(95, "U1");
+    entitymove(96, "U1");
+    wait(25);
+    specialframe(95) = 0;
+    specialframe(96) = 0;
+    face(95) = 3;
+    face(96) = 3;
+    face(1) = 3;
+    face(0) = 3;
+    stext(
+        5,
+        "Wait a second! What am I",
+        "thinking? You two can just",
+        "toss me the...");
+    face(35) = 2;
+    stext(5, "Acck! You've escaped! How...?", "", "");
+    alterbtile(40, 96, 383, 1);
+    autooff();
+    partymove("D1L2D2");
+    face(35) = 1;
+    stext(
+        4,
+        "All right! Just what did you",
+        "think you were doing, robbing",
+        "us, huh?");
+    stext(
+        5,
+        "I, I, I was just trying to do",
+        "what I had to! You don't know",
+        "what it's like around here!");
+    specialframe(0) = 23;
+    wait(10);
+    stext(1, "What do you mean?", "", "");
+    specialframe(0) = 0;
+    specialframe(1) = 22;
+    stext(
+        4,
+        "Aw jeez, Sam! Don't fall for",
+        "his lies! He's just trying to",
+        "weasel out of this!");
+    stext(
+        5,
+        "Hey! I may be a thief, but by",
+        "The Phage and by GMW himself,",
+        "I am no liar!");
+    specialframe(0) = 21;
+    stext(1, "Phage? Did you say Phage?", "", "");
+    specialframe(0) = 0;
+    stext(5, "Ummm, no! I did not! I said,", "uhhh, cage!", "");
+    stext(
+        1,
+        "I had this weird dream last",
+        "night, and in it, this guy",
+        "mentioned a 'Phage'...");
+    stext(
+        5,
+        "He is the next prophet! The",
+        "one who will rule us all and",
+        "bring peace and prosperity");
+    stext(
+        5,
+        "to us all! Ummm... I mean,",
+        "Don't know what you're talking",
+        "about! Can't help you!");
+    specialframe(1) = 23;
+    wait(10);
+    stext(
+        4,
+        "Wait a second, you mean you've",
+        "heard of something my friend",
+        "here dreamed up?");
+    specialframe(1) = 0;
+    stext(
+        5,
+        "The Phage is reality! His",
+        "glorious arrival is in the",
+        "future for us all!");
+    stext(4, "So you admit you've heard", "of him?", "");
+    stext(5, "No! I admit nothing! Unless...", "", "");
+    stext(1, "Unless what?", "", "");
+    stext(5, "Do you believe in The Phage?", "", "");
+    stext(1, "I... I suppose.", "", "");
+    stext(4, "I don't know... I don't trust", "you one bit!", "");
+    face(0) = 1;
+    stext(
+        1,
+        "Come on, Rikk! I want to know",
+        "more about this! Just humor",
+        "me, OK?");
+    stext(
+        4,
+        "*grumble grumble* ...All",
+        "right, fine! Yes-I-believe-",
+        "in-your-stupid-messiah!");
+    stext(4, "Happy?", "", "");
+    face(0) = 0;
+    stext(
+        5,
+        "As long as you do not want",
+        "to chop me into pieces, like",
+        "the wolves of this forest, I");
+    stext(
+        5,
+        "am content.",
+        "They are not tolerant of those",
+        "who have beliefs other than");
+    stext(
+        5,
+        "their own, and so I am forced",
+        "to steal from them to",
+        "survive...");
+    stext(1, "Well, why don't you just leave", "the forest?", "");
+    stext(
+        5,
+        "I would, but this has been my",
+        "home for all of my life. I'd",
+        "never be able to survive out");
+    stext(5, "there...", "", "");
+    stext(
+        1,
+        "It's not so bad! If you want,",
+        "you can come with us, and",
+        "we'll help you learn to live");
+    stext(1, "away from this place!", "", "");
+    specialframe(1) = 21;
+    stext(4, "WHAAAAT!?!?!?!", "", "");
+    stext(
+        4,
+        "Sam, do you have any idea of",
+        "the stupidity of what you're",
+        "saying?!? Asking this... this");
+    stext(4, "*thief* to come along with us?", "", "");
+    face(0) = 1;
+    stext(
+        1,
+        "Well, I think he's just had a",
+        "rough time. Let's give him a",
+        "chance to enjoy a life where");
+    stext(
+        1,
+        "he doesn't have to steal!",
+        "Where he doesn't have to be",
+        "afraid! You can't be so");
+    stext(1, "heartless as to deny him that,", "can you?", "");
+    specialframe(1) = 24;
+    stext(
+        4,
+        "I still think we can't trust",
+        "him farther than we can spit",
+        "on him, but you just won't");
+    stext(
+        4,
+        "learn until he does something,",
+        "will you? Don't say I didn't",
+        "warn you!");
+    specialframe(1) = 0;
+    face(0) = 0;
+    stext(1, "Great! Will you come with us,", "umm...", "");
+    stext(
+        5,
+        "The name's Dingo, and I'd be",
+        "eternally grateful, my friend!",
+        "");
+    stext(1, "Great! Let's go!", "", "");
+    banner("Dingo joins!", 2);
+    partymove("U2L3D3L6");
+    face(35) = 3;
+    wait(300);
+    face(0) = 2;
+    face(1) = 2;
+    stext(5, "What a couple of suckers!", "", "");
+    entitymove(35, "L7");
+    wait(150);
+    addcharacter(5);
+    entity.locx(35) = 90;
+    entity.locy(35) = 1;
+    cameratracking = 1;
+    flags(131) = 2;
+  }
+}
+event
+{
+  if (flags(130) < 3)
+  {
+    flags(130) = 0;
+  }
+  mapswitch("overland.map", 32, 65, 0);
+}
+event
+{
+  banner("Battle!", 1);
+  banner("2 Pack Wolves", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    mapswitch("packwood.map", 86, 169, 0);
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    mapswitch("packwood.map", 86, 169, 0);
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 2;
+    flags(502) = 20;
+    flags(503) = 7;
+    flags(504) = 65;
+    flags(505) = 17;
+    flags(506) = 17;
+    flags(507) = 33;
+    flags(508) = 33;
+    flags(509) = 4;
+    flags(510) = 4;
+    flags(511) = 0;
+    flags(512) = 2;
+    flags(513) = 63;
+    flags(540) = 5;
+    flags(541) = 5;
+    flags(1009) = 0;
+    flags(514) = 3;
+    flags(515) = 15;
+    flags(516) = 7;
+    flags(517) = 60;
+    flags(518) = 17;
+    flags(519) = 17;
+    flags(520) = 33;
+    flags(521) = 33;
+    flags(522) = 3;
+    flags(523) = 3;
+    flags(524) = 0;
+    flags(525) = 2;
+    flags(526) = 63;
+    flags(542) = 5;
+    flags(543) = 5;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 15;
+    flags(529) = 5;
+    flags(530) = 0;
+    flags(531) = 14;
+    flags(532) = 14;
+    flags(533) = 15;
+    flags(534) = 15;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 5;
+    flags(545) = 5;
+    flags(1011) = 0;
+    flags(109) = 86;
+    flags(110) = 169;
+    mapswitch("snowbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  if (flags(130) == 3)
+  {
+    stext(
+        0,
+        "Wow, you're good! I just",
+        "don't have anything left to",
+        "give to you!");
+  }
+  if (flags(130) == 2)
+  {
+    specialframe(34) = 21;
+    stext(0, "Inconceivable! I know when", "I'm beat! Here, take this!", "");
+    specialframe(34) = 0;
+    flags(130) = 3;
+    giveitem(51);
+  }
+  if (flags(130) == 1)
+  {
+    specialframe(34) = 20;
+    stext(0, "What!?! I bet you can't", "catch me a third time!", "");
+    specialframe(34) = 0;
+    speed(34) = 6;
+    flags(130) = 2;
+  }
+  if (flags(130) == 0)
+  {
+    specialframe(34) = 20;
+    stext(0, "Tagged!?! All right, let's", "see you do that again!", "");
+    specialframe(34) = 0;
+    speed(34) = 5;
+    flags(130) = 1;
+  }
+}
+event
+{
+  if (flags(131) == 0)
+  {
+    flags(131) = 1;
+    removecharacter(4);
+    addcharacter(4);
+    partymove("L3");
+    stext(1, "Whew! Those guys weren't too", "friendly, were they?", "");
+    stext(
+        4,
+        "I wonder what got them so",
+        "riled up? We'd better be very",
+        "careful around here, Sam.");
+    givexp(5, 20);
+    forceequip(5, 7);
+    forceequip(5, 12);
+    forceequip(5, 20);
+    partymove("U2L5");
+    mapswitch("packwood.map", 42, 97, 1);
+  }
+}
+event
+{
+  if (flags(132) == 0)
+  {
+    flags(132) = 1;
+  }
+  mapswitch("packtown.map", 31, 78, 0);
+}
+event
+{
+  if (flags(133) == 0)
+  {
+    flags(133) = 1;
+  }
+  mapswitch("packtown.map", 89, 68, 0);
+}

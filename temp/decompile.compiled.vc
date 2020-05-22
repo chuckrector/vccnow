@@ -1,0 +1,52 @@
+event /*0*/
+{
+  stext(0, "Photo album...", "", "");
+  layervc = 1;
+  drawentities = 0;
+  layer0 = 0;
+  layer1 = 0;
+  if (flags(1180) == 1)
+  {
+    vcputpcx("bromide2.pcx", 0, 0);
+    stext(0, "'Lagome: Still Life'", "", "(Press enter to continue)");
+    wait(200);
+  }
+  vcclear();
+  if (flags(1181) == 1)
+  {
+    vcputpcx("DingoB.pcx", 57, 0);
+    stext(0, "'Dingo: By Green_Ness'", "", "(Press enter to continue)");
+    wait(200);
+  }
+  if (flags(275) == 1)
+  {
+    vcputpcx("bromide1.pcx", 0, 0);
+    stext(0, "'Bull: Don't even ask'", "", "(Press enter to continue)");
+    wait(200);
+  }
+  if (flags(306) == 1)
+  {
+    vcputpcx("morpheos.pcx", 0, 0);
+    stext(0, "'Morpheos: By Zaratustra'", "", "(Press enter to continue)");
+    wait(200);
+    if (flags(2500) == 1)
+    {
+      vcputpcx("bromidez.pcx", 0, 0);
+      stext(0, "'Untitled: By Zaratustra'", "", "(Press enter to continue)");
+      wait(200);
+      layervc = 0;
+      return;
+    }
+  }
+  drawentities = 1;
+  layer0 = 1;
+  layer1 = 1;
+  return;
+}
+event /*1*/
+{
+  if (flags(100) == 1)
+  {
+    vgadump();
+  }
+}

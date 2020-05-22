@@ -21,4 +21,4 @@ ff              .end (event)
 
 //
 
-event{if(1){}}
+event/*0*/{if(1){}}

@@ -1,0 +1,342 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(307) = 7;
+  flags(308) = 5;
+  flags(309) = 7;
+  flags(310) = 4;
+  flags(311) = 10;
+  if (flags(303) == 1)
+  {
+    alterbtile(145, 73, 701, 2);
+    changezone(145, 73, 0);
+  }
+  if (flags(304) == 1)
+  {
+    alterbtile(147, 73, 701, 2);
+    changezone(147, 73, 0);
+  }
+  if (flags(305) == 1)
+  {
+    alterbtile(149, 73, 701, 2);
+    changezone(149, 73, 0);
+  }
+  if (flags(306) == 1)
+  {
+    alterbtile(154, 109, 701, 2);
+    changezone(154, 109, 0);
+  }
+}
+event
+{
+  flags(303) = 1;
+  soundeffect(3);
+  alterbtile(145, 73, 701, 2);
+  changezone(145, 73, 0);
+  giveitem(91);
+}
+event
+{
+  flags(304) = 1;
+  soundeffect(3);
+  alterbtile(147, 73, 701, 2);
+  changezone(147, 73, 0);
+  giveitem(57);
+}
+event
+{
+  flags(305) = 1;
+  soundeffect(3);
+  alterbtile(149, 73, 701, 2);
+  changezone(149, 73, 0);
+  giveitem(92);
+}
+event
+{
+  flags(306) = 1;
+  soundeffect(3);
+  alterbtile(154, 109, 701, 2);
+  changezone(154, 109, 0);
+  banner("Found Morpheos", 1);
+  banner("Bromide!", 1);
+}
+event
+{
+  alterbtile(var(0), var(1), 734, 2);
+  soundeffect(3);
+  wait(100);
+  alterbtile(var(0), var(1), 735, 2);
+}
+event {}
+event
+{
+  stext(
+      0,
+      "Objective: Change clock to",
+      "11 o'clock. Pull the lever",
+      "to reset the clock.");
+}
+event
+{
+  stext(
+      0,
+      "Objective: Change clock #1 to",
+      "12 o'clock. Change #2 to 4.",
+      "Pull the lever next to the");
+  stext(0, "clock to reset it.", "", "");
+}
+event
+{
+  stext(
+      0,
+      "Objective: Change clock #1 to",
+      "8 o'clock. Change #2 to 1.",
+      "Pull the lever next to the");
+  stext(0, "clock to reset it.", "", "");
+}
+event
+{
+  if (tileb == 709)
+  {
+    flags(307) += 1;
+    if (flags(307) == 13)
+    {
+      flags(307) = 1;
+    }
+  }
+  if (tileb == 710)
+  {
+    flags(307) -= 1;
+    if (flags(307) == 0)
+    {
+      flags(307) = 12;
+    }
+  }
+  switch (flags(307))
+  {
+    case (1): entity.locx(5) = 57; entity.locy(5) = 119;
+    case (2): entity.locx(5) = 58; entity.locy(5) = 120;
+    case (3): entity.locx(5) = 58; entity.locy(5) = 121;
+    case (4): entity.locx(5) = 58; entity.locy(5) = 122;
+    case (5): entity.locx(5) = 57; entity.locy(5) = 123;
+    case (6): entity.locx(5) = 56; entity.locy(5) = 123;
+    case (7): entity.locx(5) = 55; entity.locy(5) = 123;
+    case (8): entity.locx(5) = 54; entity.locy(5) = 122;
+    case (9): entity.locx(5) = 54; entity.locy(5) = 121;
+    case (10): entity.locx(5) = 54; entity.locy(5) = 120;
+    case (11): entity.locx(5) = 55; entity.locy(5) = 119;
+    case (12): entity.locx(5) = 56; entity.locy(5) = 119;
+  }
+  alterbtile(62, 127, 707, 1);
+  if (flags(307) == 11)
+  {
+    alterbtile(62, 127, 706, 0);
+  }
+}
+event
+{
+  if (tileb == 709)
+  {
+    flags(308) += 1;
+    if (flags(308) == 13)
+    {
+      flags(308) = 1;
+    }
+    flags(309) += 1;
+    if (flags(309) == 13)
+    {
+      flags(309) = 1;
+    }
+  }
+  if (tileb == 710)
+  {
+    flags(308) -= 1;
+    if (flags(308) == 0)
+    {
+      flags(308) = 12;
+    }
+    flags(309) -= 1;
+    if (flags(309) == 0)
+    {
+      flags(309) = 12;
+    }
+  }
+  switch (flags(308))
+  {
+    case (1): entity.locx(6) = 103; entity.locy(6) = 95;
+    case (2): entity.locx(6) = 104; entity.locy(6) = 96;
+    case (3): entity.locx(6) = 104; entity.locy(6) = 97;
+    case (4): entity.locx(6) = 104; entity.locy(6) = 98;
+    case (5): entity.locx(6) = 103; entity.locy(6) = 99;
+    case (6): entity.locx(6) = 102; entity.locy(6) = 99;
+    case (7): entity.locx(6) = 101; entity.locy(6) = 99;
+    case (8): entity.locx(6) = 100; entity.locy(6) = 98;
+    case (9): entity.locx(6) = 100; entity.locy(6) = 97;
+    case (10): entity.locx(6) = 100; entity.locy(6) = 96;
+    case (11): entity.locx(6) = 101; entity.locy(6) = 95;
+    case (12): entity.locx(6) = 102; entity.locy(6) = 95;
+  }
+  switch (flags(309))
+  {
+    case (1): entity.locx(7) = 109; entity.locy(7) = 95;
+    case (2): entity.locx(7) = 110; entity.locy(7) = 96;
+    case (3): entity.locx(7) = 110; entity.locy(7) = 97;
+    case (4): entity.locx(7) = 110; entity.locy(7) = 98;
+    case (5): entity.locx(7) = 109; entity.locy(7) = 99;
+    case (6): entity.locx(7) = 108; entity.locy(7) = 99;
+    case (7): entity.locx(7) = 107; entity.locy(7) = 99;
+    case (8): entity.locx(7) = 106; entity.locy(7) = 98;
+    case (9): entity.locx(7) = 106; entity.locy(7) = 97;
+    case (10): entity.locx(7) = 106; entity.locy(7) = 96;
+    case (11): entity.locx(7) = 107; entity.locy(7) = 95;
+    case (12): entity.locx(7) = 108; entity.locy(7) = 95;
+  }
+  alterbtile(112, 104, 707, 1);
+  if (flags(308) == 12 && flags(309) == 4)
+  {
+    alterbtile(112, 104, 706, 0);
+  }
+}
+event
+{
+  if (tileb == 711)
+  {
+    flags(310) += 1;
+    if (flags(310) == 13)
+    {
+      flags(310) = 1;
+    }
+    flags(311) -= 1;
+    if (flags(311) == 0)
+    {
+      flags(311) = 12;
+    }
+  }
+  if (tileb == 712)
+  {
+    flags(310) -= 1;
+    if (flags(310) == 0)
+    {
+      flags(310) = 12;
+    }
+    flags(311) -= 1;
+    if (flags(311) == 0)
+    {
+      flags(311) = 12;
+    }
+  }
+  if (tileb == 713)
+  {
+    flags(310) -= 1;
+    if (flags(310) == 0)
+    {
+      flags(310) = 12;
+    }
+    flags(311) += 1;
+    if (flags(311) == 13)
+    {
+      flags(311) = 1;
+    }
+  }
+  if (tileb == 714)
+  {
+    flags(310) += 1;
+    if (flags(310) == 13)
+    {
+      flags(310) = 1;
+    }
+    flags(311) += 1;
+    if (flags(311) == 13)
+    {
+      flags(311) = 1;
+    }
+  }
+  switch (flags(310))
+  {
+    case (1): entity.locx(8) = 140; entity.locy(8) = 72;
+    case (2): entity.locx(8) = 141; entity.locy(8) = 73;
+    case (3): entity.locx(8) = 141; entity.locy(8) = 74;
+    case (4): entity.locx(8) = 141; entity.locy(8) = 75;
+    case (5): entity.locx(8) = 140; entity.locy(8) = 76;
+    case (6): entity.locx(8) = 139; entity.locy(8) = 76;
+    case (7): entity.locx(8) = 138; entity.locy(8) = 76;
+    case (8): entity.locx(8) = 137; entity.locy(8) = 75;
+    case (9): entity.locx(8) = 137; entity.locy(8) = 74;
+    case (10): entity.locx(8) = 137; entity.locy(8) = 73;
+    case (11): entity.locx(8) = 138; entity.locy(8) = 72;
+    case (12): entity.locx(8) = 139; entity.locy(8) = 72;
+  }
+  switch (flags(311))
+  {
+    case (1): entity.locx(9) = 156; entity.locy(9) = 72;
+    case (2): entity.locx(9) = 157; entity.locy(9) = 73;
+    case (3): entity.locx(9) = 157; entity.locy(9) = 74;
+    case (4): entity.locx(9) = 157; entity.locy(9) = 75;
+    case (5): entity.locx(9) = 156; entity.locy(9) = 76;
+    case (6): entity.locx(9) = 155; entity.locy(9) = 76;
+    case (7): entity.locx(9) = 154; entity.locy(9) = 76;
+    case (8): entity.locx(9) = 153; entity.locy(9) = 75;
+    case (9): entity.locx(9) = 153; entity.locy(9) = 74;
+    case (10): entity.locx(9) = 153; entity.locy(9) = 73;
+    case (11): entity.locx(9) = 154; entity.locy(9) = 72;
+    case (12): entity.locx(9) = 155; entity.locy(9) = 72;
+  }
+  alterbtile(146, 76, 707, 1);
+  alterbtile(147, 76, 707, 1);
+  alterbtile(148, 76, 707, 1);
+  alterftile(155, 77, 0, 2);
+  changezone(155, 77, 0);
+  if (flags(310) == 8 && flags(311) == 1)
+  {
+    alterbtile(146, 76, 706, 0);
+    alterbtile(147, 76, 706, 0);
+    alterbtile(148, 76, 706, 0);
+    alterftile(155, 77, 603, 2);
+    changezone(155, 77, 17);
+  }
+}
+event
+{
+  flags(307) = 7;
+  entity.locx(5) = 55;
+  entity.locy(5) = 123;
+  callevent(5, 52, 123);
+}
+event
+{
+  flags(308) = 5;
+  entity.locx(6) = 103;
+  entity.locy(6) = 99;
+  callevent(5, 104, 100);
+}
+event
+{
+  flags(309) = 7;
+  entity.locx(7) = 107;
+  entity.locy(7) = 99;
+  callevent(5, 106, 100);
+}
+event
+{
+  flags(310) = 4;
+  entity.locx(8) = 141;
+  entity.locy(8) = 75;
+  callevent(5, 142, 76);
+}
+event
+{
+  flags(311) = 10;
+  entity.locx(9) = 153;
+  entity.locy(9) = 73;
+  callevent(5, 152, 76);
+}
+event
+{
+  enablesave();
+  healall();
+  banner("Save Point!", 1);
+}
+event { disablesave(); }
+event { mapswitch("factory.map", 37, 61, 0); }
+event { mapswitch("stairway.map", 1, 35, 0); }

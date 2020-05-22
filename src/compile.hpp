@@ -14,8 +14,8 @@
 
 struct label // goto labels
 {
-  char ident[40];
-  u8 *pos;
+  char Identifier[40];
+  u8 *Position;
 };
 
 // Character types
@@ -36,12 +36,12 @@ struct label // goto labels
 #define VAR2 7
 
 // NOTE(aen): An in-memory instance of the compiler.
-struct CompileGuy_t
+struct compile_guy
 {
   char *BasePath = 0;
 
-  bool64 IsQuiet = 0;
-  bool64 IsVerbose = 0;
+  b64 IsQuiet = 0;
+  b64 IsVerbose = 0;
 
   struct label Labels[200] = {};
   struct label Gotos[200] = {};
@@ -70,28 +70,28 @@ struct CompileGuy_t
   u64 NumLabels = 0;
   u64 NumGotos = 0;
 
-  bool64 IsInEvent = 0;
-  bool64 IsExternalGarbage = 0;       // TODO(aen): Is this really what it is?
+  b64 IsInEvent = 0;
+  b64 IsExternalGarbage = 0;          // TODO(aen): Is this really what it is?
   const char *TopLevelScriptType = 0; // NOTE(aen): EFFECT, SCRIPT, EVENT
   u64 LibraryFunctionIndex = 0;
 };
 
-CompileGuy_t CompileGuy;
+compile_guy CompileGuy;
 
-// int numscripts;
-// unsigned int scriptofstbl[1024];
+// int GlobalNumScripts;
+// unsigned int GlobalScriptOffsetTable[1024];
 // char token[2048];
 u8 CharTypeLookup[256];
 void InitCharTypeLookup();
 
-bool64 IsCharType(u64 C, u64 Type);
+b64 IsCharType(u64 C, u64 Type);
 void err(const char *str);
 void EmitOperand();
 void ProcessGoto();
 void EmitD(u64 w);
 void EmitC(u64 c);
 void Expect(const char *str);
-bool64 NextIs(const char *str);
+b64 NextIs(const char *str);
 void GetString();
 void EmitString(const char *str);
 void CompileToBuffer(

@@ -1,0 +1,544 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  if (flags(126) == 1)
+  {
+    if (!char(4))
+    {
+      addcharacter(4);
+    }
+    changechr(1, "sam2.chr");
+  }
+  if (flags(126) == 2)
+  {
+    if (!char(4))
+    {
+      entity.locx(9) = 79;
+      entity.locy(9) = 86;
+    }
+    entity.locx(10) = 39;
+    entity.locy(10) = 44;
+    if (!char(4))
+    {
+      stext(1, "Gah! Another weird dream!", "", "");
+      partymove("L1");
+      stext(1, "Rikk! Wake up! Time to go!", "", "");
+      specialframe(9) = 21;
+      wait(50);
+      specialframe(9) = 0;
+      face(9) = 2;
+      wait(25);
+      stext(4, "All right already! I'm up!", "", "");
+      entity.locx(9) = 95;
+      entity.locy(9) = 1;
+      addcharacter(4);
+    }
+  }
+  if (flags(126) > 1)
+  {
+    entity.locy(5) -= 1;
+    entity.locy(6)++;
+  }
+}
+event
+{
+  if (flags(126) < 2)
+  {
+    stext(
+        0,
+        "This gate'll be open in the",
+        "morning. We keep it closed the",
+        "rest of the time to keep out");
+    stext(0, "the wolves from the forest.", "", "");
+  }
+  if (flags(126) > 1)
+  {
+    stext(0, "Y'all have a nice day, hear?", "", "");
+  }
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(1, "Oh for crying out loud!", "Is there one of you in every", "town?");
+  stext(0, "I be Esophagus the Elder!", "", "");
+  stext(
+      1,
+      "I don't care! Why aren't there",
+      "useful townsfolk wandering",
+      "these towns?");
+}
+event
+{
+  stext(
+      0,
+      "Please don't come back here!",
+      "The back of the counter is",
+      "being renovated!");
+}
+event
+{
+  face(8) = 0;
+  prompt(
+      0,
+      "It'll cost 10 gold to stay the",
+      "night,or you can wash dishes",
+      "and stay for free!",
+      112,
+      "Don't stay.",
+      "Stay.");
+  if (flags(112) == 0)
+  {
+    stext(0, "Come back when you're sleepy!", "", "");
+  }
+  if (flags(112) == 1)
+  {
+    stext(1, "We'd better save our money...", "We'll wash dishes.", "");
+    stext(0, "(After an hour or so...)", "", "");
+    healall();
+    timer = 0;
+    while (timer < 100)
+    {
+      palettemorph(10, 10, 10, 100 - timer, 63);
+    }
+    if (flags(126) == 1)
+    {
+      palettemorph(10, 10, 35, 45, 43);
+      stext(1, "Boy, I'm tired now... Let's", "hit the sack!", "");
+      stext(4, "Sounds good to me!", "", "");
+      removecharacter(4);
+      addcharacter(4);
+      partymove("D3R6R6R3U2R1");
+      autoon();
+      entitymove(95, "F0");
+      entitymove(96, "L1F0");
+      wait(100);
+      entitymove(95, "F3");
+      entitymove(96, "F2");
+      wait(2);
+      stext(4, "Sam?", "", "");
+      wait(100);
+      stext(1, "Yes?", "", "");
+      stext(4, "I was wondering something...", "", "");
+      wait(100);
+      stext(1, "What?", "", "");
+      stext(
+          4,
+          "I know you want to save your",
+          "town and all, but why are you",
+          "doing all this?");
+      stext(1, "What do you mean?", "", "");
+      stext(
+          4,
+          "Well, I mean... You know Bull",
+          "is looking for the seed, so",
+          "if he's bringing it back, why");
+      stext(4, "are you looking for it also?", "", "");
+      wait(100);
+      stext(
+          1,
+          "Well, I mean, he could fail,",
+          "right? So I'm sort of a backup",
+          "in case he does fail.");
+      wait(100);
+      stext(
+          1,
+          "But really, I guess I really",
+          "just wanted to do something",
+          "important for once... Not that");
+      stext(
+          1,
+          "caring for tadpoles isn't",
+          "important, but no one really",
+          "gives me much respect...");
+      stext(
+          1,
+          "I just want people to think",
+          "of me as more than just Sam,",
+          "you know?");
+      wait(100);
+      stext(4, "I guess I understand...", "... ... ...", "Good night Sam.");
+      stext(1, "Good night Rikk.", "", "");
+      entitymove(95, "F0");
+      entitymove(96, "F0");
+      specialframe(95) = 24;
+      wait(100);
+      stext(1, "Zzzzzzz....", "", "");
+      flags(126) = 2;
+      palettemorph(0, 0, 0, 0, 63);
+      autooff();
+      removecharacter(4);
+      mapswitch("dremaze.map", 126, 95, 0);
+    }
+  }
+}
+event
+{
+  if (flags(126) == 2)
+  {
+    flags(126) = 3;
+    stext(1, "What a beautiful day!", "... ...", "Isn't that Bull?");
+    partymove("D7L1");
+    face(1) = 3;
+    stext(
+        7,
+        "... I pull you out of a well,",
+        "and all you can give me is",
+        "five lousy gold?");
+    stext(
+        0,
+        "Sorry mister, but that's all",
+        "I have! It was supposed to be",
+        "my lunch money!");
+    stext(
+        7,
+        "Well, I'll take it, but I",
+        "don't know why I even bother",
+        "helping people like you...");
+    stext(
+        7,
+        "I have better things to do",
+        "than save kids who can't even",
+        "reward me properly!");
+    stext(1, "Like finding the seed?", "", "");
+    specialframe(10) = 21;
+    wait(50);
+    specialframe(10) = 27;
+    stext(
+        7,
+        "What are you doing here,",
+        "ya little pipsqueak? You'd",
+        "better run along home to");
+    stext(7, "your mommy, 'cause it's a", "rough world out here!", "");
+    stext(
+        1,
+        "Bull, can't we work together",
+        "to find the seed? We'd have",
+        "a better chance to save the");
+    stext(1, "town if we joined forces!", "", "");
+    stext(
+        7,
+        "As if I'd want to share the",
+        "reward money with runts like",
+        "you and your drowned rat pal!");
+    specialframe(char(4) - 1) = 21;
+    specialframe(char(1) - 1) = 23;
+    stext(1, "What reward? The town hasn't", "offered a reward!", "");
+    specialframe(char(1) - 1) = 0;
+    specialframe(char(4) - 1) = 22;
+    stext(4, "Rat?", "", "");
+    stext(
+        7,
+        "That's right, runt. The town",
+        "*hasn't* offered a reward.",
+        "But I'm still getting one!");
+    stext(4, "Rat?!?", "", "");
+    specialframe(char(1) - 1) = 23;
+    stext(1, "From who? Bull! What are you", "up to?", "");
+    specialframe(char(1) - 1) = 0;
+    stext(
+        7,
+        "Who do ya think ya are, ya",
+        "little tadpole? My ma? I",
+        "don't have to tell ya nuthin'!");
+    stext(4, "RAT?!?", "", "");
+    stext(7, "See ya, twerps!", "", "");
+    specialframe(10) = 0;
+    entitymove(10, "L5L6");
+    wait(250);
+    entity.locx(10) = 96;
+    entity.locy(10) = 1;
+    if (char(1) == 1)
+    {
+      face(0) = 2;
+    }
+    if (char(1) == 2)
+    {
+      face(1) = 3;
+    }
+    stext(1, "Calm down, Rikk!", "", "");
+    stext(
+        4,
+        "I'm gonna kill him! I'm gonna",
+        "murder him! Just let me at",
+        "the fat bastard!");
+    stext(
+        1,
+        "He's gone, Rikk! Now calm",
+        "down! People are beginning",
+        "to stare!");
+    specialframe(char(4) - 1) = 0;
+    stext(
+        4,
+        "Sam, we have to get that seed!",
+        "I won't let him have the",
+        "pleasure of beating us to it!");
+    stext(1, "Um.... Whatever you say, Rikk!", "... ...", "Let's go then!");
+  }
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(66, 89, 0);
+}
+event { warp(flags(109), flags(110), 0); }
+event
+{
+  stext(0, "This is Carbera Town!", "", "");
+  stext(4, "Why are you way out here?", "", "");
+  stext(0, "My fans demanded it, so I'm", "on my World Tour!", "");
+}
+event { warp(44, 36, 0); }
+event
+{
+  if (flags(126) < 3)
+  {
+    stext(
+        0,
+        "I bought ice cream with my",
+        "lunch money today! I think",
+        "tomorrow I might buy real");
+    stext(0, "food...", "", "");
+    stext(4, "As far as I'm concerned, ice", "cream *is* real food!", "");
+  }
+  if (flags(126) == 3)
+  {
+    stext(0, "I'm hungry... I wish I had", "my lunch money...", "");
+    stext(
+        4,
+        "That Bull is a real jerk!",
+        "*I* wouldn't charge kids for",
+        "saving them!");
+    if (item(50))
+    {
+      stext(1, "Here, have some ice cream.", "", "");
+      destroyitem(50, 0);
+      stext(0, "Thanks, mister!", "", "");
+    }
+    if (item(49))
+    {
+      stext(1, "Here, try this Gourmet Ripple.", "", "");
+      destroyitem(49, 0);
+      stext(
+          0, "Wow! Gourmet Ripple! I've", "never been able to afford it!", "");
+      if (flags(129) == 1)
+      {
+        stext(0, "I wish I could give you", "something in return...", "");
+      }
+      if (flags(129) == 0)
+      {
+        stext(
+            0,
+            "Here! you can have this! I",
+            "found it a couple of minutes",
+            "ago, but it only had one GP");
+        stext(0, "in it.", "", "");
+        giveitem(48);
+        flags(129) = 1;
+      }
+    }
+  }
+}
+event
+{
+  stext(
+      0,
+      "Arr, I been waitin' for my",
+      "three pals, Lenny, Squiggy,",
+      "and Pierre... They had an");
+  stext(
+      0,
+      "important mission to fulfill",
+      "in the Great Dam. I hope they",
+      "weren't arrested. Arr...");
+}
+event
+{
+  stext(
+      0,
+      "So, ye be feelin' a mite",
+      "chilly, eh? That's 'cause of",
+      "the freakish weather from the");
+  stext(0, "west. The snow lies there", "year-round in the pass, mates!", "");
+  stext(1, "I wonder why?", "", "");
+  stext(
+      0,
+      "Oh, it's due to the complex",
+      "interaction between the local",
+      "mountainous terrain and the");
+  stext(
+      0,
+      "upper atmosphere, causing a",
+      "meteorological phenomenon that",
+      "perplexes and amazes!");
+  stext(4, "Hey! What happened to your", "quaint sailor dialect?", "");
+  stext(0, "Umm... Arr?", "... ... ...", "All right, you caught me!");
+  stext(
+      0,
+      "I'm actually a wandering",
+      "meteorologist posing as a",
+      "sailor to obtain pertinent");
+  stext(0, "folklore from this region.", "", "");
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(68, 110, 0);
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(37, 89, 0);
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(10, 89, 0);
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(41, 110, 0);
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(10, 109, 0);
+}
+event
+{
+  stext(
+      0,
+      "This is my dog Rex. I guess",
+      "it's true what they say about",
+      "owners and pets looking alike.");
+}
+event
+{
+  stext(
+      0,
+      "This is my dog Thaddeus. It's",
+      "true what they say about pets",
+      "and owners looking alike.");
+}
+event
+{
+  stext(
+      0,
+      "I understand that the wolves",
+      "from the Pack Woods to the",
+      "west are really religious.");
+  stext(
+      0, "They supposedly make this guy", "seem like a tolerant atheist!", "");
+}
+event
+{
+  stext(
+      0,
+      "This guy is going over old",
+      "ground! Carbera is part of",
+      "the Savannah Empire, so that");
+  stext(0, "makes Lumin our emperor! We", "grow up knowing this stuff!", "");
+}
+event { stext(0, "Testify, brother! Right on!", "", ""); }
+event
+{
+  stext(
+      0,
+      "Arr! Carbera Town be part of",
+      "the Savannah Empire, ya know!",
+      "It's the only town in the");
+  stext(
+      0,
+      "Empire that ya have to leave",
+      "the Empire to get to, since ya",
+      "have to go through the western");
+  stext(0, "pass to reach us, and that's", "wolf territory, that is! Arr!", "");
+}
+event
+{
+  stext(
+      0,
+      "And St. Lumin be the right",
+      "hand of GMW! He smites those",
+      "whose actions offend the God");
+  stext(
+      0,
+      "of Ieval, and they shall stay",
+      "smoten! Such was the fate of",
+      "the Horse Nomads, and such");
+  stext(
+      0,
+      "was to be the fate of the",
+      "brown-haired coyote infidels,",
+      "had they not been torn apart");
+  stext(0, "by the true believers!", "", "");
+  if (char(5))
+  {
+    stext(
+        5, "You see what I had to deal", "with? I'm the only one left...", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "I understand that the biggest",
+      "library on the continent is",
+      "not owned by the Savannah");
+  stext(
+      0,
+      "Empire, but by the frog folk",
+      "to the south. Ain't that a",
+      "kick in the pants?");
+}
+event { mapswitch("overland.map", 34, 67, 0); }
+event
+{
+  stext(
+      0,
+      "These books all have titles",
+      "like 'The Joy of Deep-Frying'",
+      "and 'Special-Effects Laundry.'");
+}
+event
+{
+  stext(0, "A horror novel.", "", "");
+  stext(4, "A *bad* horror novel!", "", "");
+}
+event
+{
+  stext(0, "We sell medicinal items and", "ice cream!", "");
+  shop(1, 2, 38, 39, 49, 50, 54, 55);
+  stext(0, "Have a nice day!", "", "");
+}
+event
+{
+  stext(0, "We have lots of weapons!", "", "");
+  shop(5, 25, 14, 40, 41);
+  stext(0, "Remember: We're your one-stop", "killing shop!", "");
+}
+event
+{
+  stext(
+      0,
+      "I wish I had some cheese to",
+      "sell you, but this franchise",
+      "has had problems. Nobody seems");
+  stext(
+      0,
+      "to want any cheese! This must",
+      "be a bad location for cheese",
+      "sales...");
+  stext(
+      1,
+      "To think I almost became the",
+      "cheese shop owner's apprentice",
+      "back in Frog Pond... Yeesh!");
+}

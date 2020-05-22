@@ -1,0 +1,1055 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  flags(801) = 8;
+  entity.locy(24) += 2;
+  if (flags(118) == 1)
+  {
+    alterbtile(151, 52, 0, 1);
+  }
+  if (flags(120) == 1)
+  {
+    entity.locx(17) = 1;
+    entity.locy(17) = 2;
+    entity.locx(18) = 1;
+    entity.locy(18) = 3;
+    entity.locx(19) = 1;
+    entity.locy(19) = 4;
+  }
+  if (flags(121) == 1)
+  {
+    entity.locx(17) = 97;
+    entity.locy(17) = 26;
+    entity.locx(18) = 97;
+    entity.locy(18) = 30;
+    entity.locx(19) = 94;
+    entity.locy(19) = 34;
+  }
+  if (flags(121) == 1)
+  {
+    entity.locx(15) = 4;
+    entity.locy(15) = 1;
+    entity.locx(16) = 1;
+    entity.locy(16) = 2;
+  }
+  if (flags(117) == 1)
+  {
+    chainevent(25);
+  }
+}
+event { warp(112, 34, 0); }
+event { warp(33, 36, 0); }
+event { mapswitch("fglade.map", 61, 19, 0); }
+event { stext(0, "Enjoy your stay at our", "incredibly prosperous city!", ""); }
+event
+{
+  stext(
+      0,
+      "The... Master doesn't like",
+      "people... coming back here!",
+      "You shouldn't... do that!");
+  stext(0, "The Master... doesn't like", "it...", "");
+}
+event
+{
+  face(7) = 0;
+  volume = 0;
+  soundeffect(26);
+  stext(
+      0,
+      "You can't stay here! The",
+      "Master wouldn't like it!...",
+      "You can't stay here!...");
+  stext(1, "But this is an inn!", "", "");
+  prompt(
+      0,
+      "It'll... be ten... gold...",
+      "The Master...",
+      "... ....",
+      112,
+      "Too Creepy.",
+      "Pay him.");
+  if (flags(112))
+  {
+    if (gp < 10)
+    {
+      stext(
+          0,
+          "You... don't have enough!",
+          "The Master doesn't... lodge",
+          "cheapskates!...");
+      soundeffect(26);
+    }
+    if (gp > 9)
+    {
+      takegp(10);
+      banner("We're healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(0, "Come... again!...", "", "");
+      soundeffect(26);
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "The Master... will be...", "waiting...", "");
+    soundeffect(26);
+  }
+  wait(200);
+  volume = 100;
+}
+event
+{
+  stext(
+      0,
+      "This is the Great Beaver Dam!",
+      "I'm making 15 gold an hour",
+      "doing this! I'm gonna be rich!");
+}
+event { mapswitch("gpacman.map", 58, 3, 0); }
+event
+{
+  face(10) = 1;
+  stext(0, "   Hey, Cleav! These guys want", "   to spar with you!", "");
+  stext(0, "Gee, Wally, I dunno...", "", "");
+  stext(
+      0,
+      "   Don't be such a chicken,",
+      "   Cleav! You don't want them",
+      "   to think you're yellow, do");
+  stext(0, "   you?", "", "");
+  stext(0, "Uh... I guess not, Wally!", "But...", "");
+  stext(0, "   Then do it!", "", "");
+  prompt(0, "Spar with 'The Cleav?'", "", "", 112, "No.", "Yes.");
+  if (flags(112) == 0)
+  {
+    stext(0, "Suit yourselves!", "", "");
+  }
+  if (flags(112) == 1)
+  {
+    if (face(0) == 1)
+    {
+      specialframe(9) = 22;
+    }
+    if (face(0) == 2)
+    {
+      specialframe(9) = 26;
+    }
+    stext(0, "Prepare yourselves!", "", "");
+    earthquake(4, 4, 300);
+    specialframe(9) = 0;
+    banner("Battle!", 1);
+    banner("1 Cleav", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 0;
+      flags(502) = 15;
+      flags(503) = 5;
+      flags(504) = 0;
+      flags(505) = 33;
+      flags(506) = 33;
+      flags(507) = 33;
+      flags(508) = 33;
+      flags(509) = 0;
+      flags(510) = 0;
+      flags(511) = 0;
+      flags(512) = 2;
+      flags(513) = 1;
+      flags(540) = 5;
+      flags(541) = 5;
+      flags(1009) = 0;
+      flags(514) = 1;
+      flags(515) = 15;
+      flags(516) = 10;
+      flags(517) = 70;
+      flags(518) = 33;
+      flags(519) = 33;
+      flags(520) = 33;
+      flags(521) = 33;
+      flags(522) = 4;
+      flags(523) = 0;
+      flags(524) = 0;
+      flags(525) = 2;
+      flags(526) = 1;
+      flags(542) = 5;
+      flags(543) = 5;
+      flags(1010) = 0;
+      flags(527) = 0;
+      flags(528) = 15;
+      flags(529) = 5;
+      flags(530) = 0;
+      flags(531) = 14;
+      flags(532) = 14;
+      flags(533) = 15;
+      flags(534) = 15;
+      flags(535) = 0;
+      flags(536) = 0;
+      flags(537) = 0;
+      flags(538) = 2;
+      flags(539) = 1;
+      flags(544) = 5;
+      flags(545) = 5;
+      flags(1011) = 0;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      mapswitch("dambat.map", 1, 1, 0);
+    }
+  }
+}
+event
+{
+  face(10) = 0;
+  stext(0, "Hi! I'm Wally the Butcher!", "What would you like?", "");
+  stext(4, "Got any free samples?", "", "");
+  prompt(
+      0,
+      "Sure. The beetalope's good",
+      "today. Want some?",
+      "",
+      112,
+      "No thanks.",
+      "Yes, please.");
+  if (flags(112) == 0)
+  {
+    stext(0, "I guess skunkraven's more", "your style?", "");
+  }
+  if (flags(112) == 1)
+  {
+    stext(0, "Hey Cleav! Gimme a sample of", "the beetalope!", "");
+    entitymove(9, "L4D5");
+    wait(150);
+    stext(0, "Here you go.", "", "");
+    entitymove(9, "U5R4");
+    wait(150);
+    stext(1, "Mmmm. It's tough, but good.", "", "");
+    stext(4, "Who or what was that?!?", "", "");
+    stext(
+        0,
+        "That's my brother 'The Cleav.'",
+        "He's kind of a wuss, but he's",
+        "a good fighter. Go on back and");
+    stext(0, "spar with him if you want.", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "If you want some meat, go",
+      "around to the front of the",
+      "counter. If you want to spar,");
+  stext(0, "'The Cleav' is in the back.", "", "");
+}
+event
+{
+  stext(0, "I sell healing items!", "", "");
+  shop(1, 2, 38, 39, 54);
+  stext(0, "Nobody respects the lowly", "'item'... I hate this job!", "");
+}
+event
+{
+  stext(0, "We sell the lowest-grade", "weapons at the cheapest rates!", "");
+  shop(14, 40, 41);
+  stext(
+      0,
+      "Please buy a lot! I'm trying",
+      "to raise enough money to get",
+      "a way out from behind this");
+  stext(0, "counter...", "", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(
+      1,
+      "You're likely to get sued for",
+      "copyright violation if you",
+      "keep that up...");
+}
+event
+{
+  stext(
+      0,
+      "This used to be my inn... But",
+      "I couldn't compete with the",
+      "inn that's across the street.");
+  stext(
+      0,
+      "Even though it's kind of",
+      "creepy over there, their rates",
+      "are lower, and they don't have");
+  stext(0, "a draft coming from somewhere.", "", "");
+}
+event { warp(28, 31, 0); }
+event { warp(159, 34, 0); }
+event
+{
+  banner("Dam lvl. 1", 3);
+  warp(129, 33, 0);
+}
+event
+{
+  banner("Dam lvl. 2", 3);
+  warp(189, 33, 0);
+}
+event
+{
+  banner("Dam lvl. 2", 3);
+  warp(189, 4, 0);
+}
+event
+{
+  banner("Dam lvl. 3", 3);
+  warp(189, 51, 0);
+}
+event
+{
+  if (flags(115) == 0)
+  {
+    stext(4, "Ah, home sweet home!", "", "");
+    stext(
+        1,
+        "What? You lived *here?* Rikk,",
+        "this place is huge! Exactly",
+        "how rich or important are you?");
+    stext(
+        4,
+        "Well, I'm sort of the master",
+        "architect around here...",
+        "My family designed this whole");
+    stext(
+        4,
+        "dam, and, over time, made any",
+        "changes that were required.",
+        "We're really pretty rich now.");
+    stext(
+        1,
+        "But then why are you coming",
+        "along to help me? You've got",
+        "it made here, right?");
+    specialframe(char(4) - 1) = 24;
+    stext(
+        4,
+        "Well, I thought so for a long",
+        "time... I worked long and",
+        "hard, and brought honor to my");
+    stext(
+        4,
+        "family name, all in the",
+        "pursuit of happiness. You see,",
+        "I thought that if I made lots");
+    stext(
+        4,
+        "of money, I could use it to",
+        "make myself happy. I worked",
+        "my tail off to earn money, and");
+    stext(
+        4,
+        "then I invested that money in",
+        "various projects to make more",
+        "money, and never got to the");
+    stext(
+        4,
+        "point where I could spend the",
+        "money and be happy. I wasn't",
+        "enjoying myself at work, and");
+    stext(
+        4,
+        "I wasn't getting anything but",
+        "money that wasn't worth it to",
+        "me, and eventually, I sank");
+    stext(
+        4,
+        "into a deep depression... I",
+        "came out of it about a month",
+        "later, when I realized that");
+    stext(
+        4,
+        "if I wanted to enjoy myself,",
+        "I had to enjoy what I was",
+        "doing... So I decided to take");
+    specialframe(char(4) - 1) = 0;
+    stext(
+        4,
+        "what opportunities life gave",
+        "me to enjoy myself, and then",
+        "you came along!");
+    stext(
+        4,
+        "When I met you I had the",
+        "chance to explore the world",
+        "and help people! So I took");
+    stext(4, "that chance, and joined you!", "", "");
+    stext(1, "Wow... I'm so moved...", "*sniff*", "");
+    stext(
+        4,
+        "In fact, I bet I could talk",
+        "to the mayor, and see if he",
+        "knows anything about a giant");
+    stext(
+        4,
+        "seed! He'd listen to me!",
+        "The key to the upper level is",
+        "probably still under Freddy");
+    stext(
+        4,
+        "the guard's bed, which is in",
+        "the northwestern room! Let's",
+        "go!");
+    flags(115) = 1;
+  }
+}
+event
+{
+  if (flags(116) == 0)
+  {
+    giveitem(31);
+    flags(116) = 1;
+  }
+}
+event
+{
+  if (item(31))
+  {
+    destroyitem(31, 0);
+    flags(117) = 1;
+    soundeffect(18);
+    chainevent(25);
+  }
+}
+event
+{
+  alterbtile(171, 8, 338, 0);
+  alterbtile(172, 8, 55, 0);
+  alterbtile(171, 7, 339, 0);
+  alterbtile(172, 7, 56, 0);
+  alterftile(171, 6, 0, 0);
+  alterftile(172, 6, 0, 0);
+  alterftile(171, 5, 0, 0);
+  alterftile(172, 5, 0, 0);
+}
+event
+{
+  if (item(30))
+  {
+    destroyitem(30, 0);
+    stext(
+        1,
+        "Hey! We just saved the dam",
+        "from terrorists! We left 'em",
+        "in the catacombs! Here's the");
+    stext(1, "termites they were going to", "use!", "");
+    stext(0, "Egads! Termites! You'd better", "show us these terrorists!", "");
+    stext(
+        0,
+        "(Sam and Rikk show the guards",
+        "to the terrorists. While the",
+        "guards are busy...)");
+    timer = 0;
+    while (timer < 100)
+    {
+      palettemorph(5, 5, 5, 100 - timer, 63);
+    }
+    entity.locx(17) = 97;
+    entity.locy(17) = 26;
+    entity.locx(18) = 97;
+    entity.locy(18) = 30;
+    entity.locx(19) = 94;
+    entity.locy(19) = 34;
+    entity.locx(15) = 4;
+    entity.locy(15) = 1;
+    entity.locx(16) = 1;
+    entity.locy(16) = 2;
+    flags(121) = 1;
+    return;
+  }
+  stext(0, "The Mayor is too busy to talk", "to anyone right now.", "");
+  stext(4, "Not even to me?", "", "");
+  stext(0, "Not even to you.", "... ...", "Sorry, but that's how it is!");
+}
+event
+{
+  if (flags(118) == 0)
+  {
+    partymove("L7L4");
+    stext(
+        0,
+        "Heh. The time is ripe...",
+        "No one even suspects a thing.",
+        "Soon the termites will be");
+    stext(0, "everywhere!", "... ...", "Ha ha ha!");
+    stext(
+        0,
+        "  Yeah, this storage chamber",
+        "  is almost never used! It's",
+        "  a perfect meeting place!");
+    specialframe(18) = 26;
+    stext(
+        0,
+        "    Well, I for one wish that",
+        "    this room *was* used more",
+        "    often! The damn floor's");
+    stext(0, "    nearly rotted through!", "    It's scary!", "");
+    specialframe(18) = 0;
+    stext(0, "Well, shall we?", "", "");
+    entitymove(17, "U2L5L5U7");
+    entitymove(18, "U2L6L6U6");
+    entitymove(19, "W150U1L5L6U5");
+    wait(400);
+    stext(
+        4,
+        "Oh no! Those guys are planning",
+        "to release termites! Stupid",
+        "terrorists! They really think");
+    stext(
+        4,
+        "that causing mass destruction",
+        "will get people to listen to",
+        "them! This'll be catastrophic!");
+    stext(
+        1,
+        "They're trying to destroy the",
+        "dam?!? But... the dam's the",
+        "only thing keeping tons of");
+    stext(
+        1, "water from washing away Frog", "Pond! We've got to stop them!", "");
+    stext(
+        4,
+        "Don't forget that this dam's",
+        "my home! Not just Frog Pond's",
+        "at risk! We must stop them!");
+    flags(118) = 1;
+    removecharacter(4);
+    addcharacter(4);
+    autoon();
+    entitymove(95, "L1L6U8");
+    entitymove(96, "W50L2L5U4");
+    wait(225);
+    stext(0, "Creak!", "", "");
+    face(96) = 0;
+    specialframe(96) = 23;
+    wait(50);
+    specialframe(96) = 21;
+    wait(50);
+    alterbtile(151, 52, 0, 1);
+    removecharacter(1);
+    wait(10);
+    autooff();
+    mapswitch("catac.map", 75, 13, 0);
+  }
+}
+event
+{
+  if (flags(118) == 0)
+  {
+    partymove("U1");
+    chainevent(27);
+  }
+}
+event { mapswitch("catac.map", 74, 11, 0); }
+event
+{
+  if (flags(125) == 0)
+  {
+    stext(
+        0,
+        "Thank you for saving our dam!",
+        "I'm afraid I don't know where",
+        "any giant seeds are, but I bet");
+    stext(
+        0,
+        "someone in the Savannah Empire",
+        "must know... There are many",
+        "wise people over there...");
+    stext(0, "Here's a reward for your", "bravery.", "");
+    givegp(400);
+    banner("Got 400 gp!", 2);
+    stext(
+        0,
+        "And I'll give you a boat trip",
+        "north, so you can continue",
+        "your search!");
+    flags(125) = 1;
+  }
+  if (flags(125) == 1)
+  {
+    prompt(0, "Ready to leave?", "", "", 112, "No.", "Yes.");
+    if (flags(112) == 1)
+    {
+      stext(0, "(So Sam and Rikk head out on", "the next boat...)", "");
+      flags(126) = 1;
+      mapswitch("overland.map", 47, 70, 0);
+    }
+    if (flags(112) == 0)
+    {
+      stext(0, "Come back here when you're", "ready!", "");
+    }
+  }
+}
+event { stext(4, "Aaagh! Tax books!", "", ""); }
+event
+{
+  stext(4, "Ah, my nest egg!", "", "");
+  if (flags(123) == 1)
+  {
+    banner("Got 0 gp?!?", 2);
+    stext(4, "D'oh! I'm out!", "", "");
+  }
+  if (flags(123) == 0)
+  {
+    givegp(2500);
+    banner("Got 2500 gp!!!", 2);
+    flags(123) = 1;
+  }
+}
+event
+{
+  stext(
+      0,
+      "The Great Dam is divided into",
+      "three levels. The first is the",
+      "marketplace, designed to");
+  stext(
+      0,
+      "attract tourists. The second",
+      "level is the living quarters",
+      "for most of the townsfolk.");
+  stext(
+      0,
+      "That's where we are now. The",
+      "third level is the seat of our",
+      "government, and storage areas.");
+  stext(
+      0,
+      "There's a rumor that a mad",
+      "architect built a catacombs",
+      "as well, but it served no");
+  stext(0, "useful purpose, so it was left", "abandoned...", "");
+  stext(4, "Hey! Uncle Louie was *not*", "insane!", "");
+}
+event
+{
+  stext(1, "Wow! A swimming pool! I'm", "gonna take a swim!", "");
+  stext(4, "That's a toilet! Don't do it!", "", "");
+  stext(1, "What!?!", "", "");
+  stext(
+      4,
+      "Yeah, it's the only privy in",
+      "the entire dam... I'm the envy",
+      "of all for having indoor");
+  stext(
+      4,
+      "plumbing while the other",
+      "beavers trek all the way to",
+      "the outhouse...");
+}
+event
+{
+  if (flags(124) == 0)
+  {
+    stext(
+        4,
+        "All right! This book describes",
+        "one of the special 'Drop'",
+        "techniques!");
+    banner("Rikk learns:", 2);
+    banner("Drop: Anvil", 2);
+    getmagic(4, 2);
+    flags(124) = 1;
+  }
+}
+event
+{
+  stext(
+      0,
+      "Currently, all the beavers",
+      "that normally live here are",
+      "at work downstairs or out");
+  stext(0, "shipping stuff from Carbera.", "", "");
+  stext(4, "Then why are you here?", "", "");
+  stext(
+      0,
+      "Uh, I'm... sick!",
+      "Yeah, that's it! Sick! With...",
+      "leprosy! Yeah! That's it!");
+  stext(
+      4,
+      "You probably hold the world",
+      "record for number of jobs",
+      "fired from, right?");
+}
+event
+{
+  if (flags(121) == 1)
+  {
+    face(17) = 3;
+    stext(0, "You haven't won!", "", "");
+  }
+}
+event
+{
+  if (flags(121) == 1)
+  {
+    face(18) = 3;
+    stext(0, "Our cause lives on!", "", "");
+  }
+}
+event
+{
+  if (flags(121) == 1)
+  {
+    face(19) = 1;
+    stext(
+        0,
+        "Eventually, the totalitarian",
+        "fascist government will fall,",
+        "and we will be vindicated!");
+  }
+}
+event { stext(0, "Books on accounting.", "", ""); }
+event { stext(0, "Texts on architecture.", "", ""); }
+event
+{
+  stext(0, "A stock report for the Vultris", "Confectionary Company.", "");
+}
+event
+{
+  prompt(
+      0,
+      "I can cure you of all",
+      "toxins, poisons, and",
+      "Carbon Monoxide! Only 5 gp!",
+      112,
+      "No",
+      "Yes");
+  if (flags(112))
+  {
+    if (gp < 5)
+    {
+      stext(0, "(Sigh) Get more money...", "", "");
+    }
+    if (gp > 4)
+    {
+      takegp(5);
+      stext(0, "Presto!", "", "");
+      banner("We're cured!", 1);
+      flags(1021) = 0;
+      flags(1022) = 0;
+      flags(1023) = 0;
+      flags(1024) = 0;
+      flags(1025) = 0;
+      flags(1026) = 0;
+      flags(1027) = 0;
+      flags(1028) = 0;
+      stext(0, "I'll always be there for ya!", "", "");
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "I need more business...", "", "");
+  }
+}
+event
+{
+  if (flags(2613) == 20)
+  {
+    stext(0, "I have nothing left to give", "you! Leave me alone!", "");
+    return;
+  }
+  if (flags(2613) != 20)
+  {
+    prompt(
+        0,
+        "Let's play money-making game!",
+        "It'll cost you 50 gp!",
+        "",
+        112,
+        "No thanks.",
+        "Sure!");
+    if (flags(112) == 0)
+    {
+      stext(0, "Well, come back later!", "", "");
+      return;
+    }
+    if (gp < 50)
+    {
+      stext(0, "I said it costs 50 gp!", "", "");
+      return;
+    }
+    takegp(50);
+    flags(2614) = 0;
+    stext(
+        0,
+        "All right! The rules are",
+        "simple! There are twelve",
+        "cards. Six are 'coin' cards.");
+    stext(
+        0,
+        "Those give you money. Three",
+        "are 'multi' cards. They take",
+        "your current winnings and");
+    stext(
+        0,
+        "multiply them. The last three",
+        "are 'zero' cards. They make",
+        "your winnings vanish!");
+    stext(
+        0,
+        "Once you've uncovered all the",
+        "cards, you keep what you've",
+        "won! And if you manage to");
+    stext(
+        0,
+        "win 200 or more coins in a",
+        "game, I'll give you this",
+        "Grandkerchief!");
+    stext(0, "Let's play!", "", "");
+    disablesave();
+    entity.locx(24) = 0;
+    for (x, 32, 43, 1)
+    {
+      alterftile(x + 122, 78, 806, 2);
+      changezone(x + 122, 79, x);
+    }
+    flags(112) = 0;
+    flags(107) = 0;
+    flags(1099) = 0;
+    for (y, 2615, 2626, 1)
+    {
+      flags(2627) = random(1, 6);
+      if (flags(112) == 6 && flags(2627) < 4)
+      {
+        flags(2627) = random(4, 6);
+      }
+      if (flags(1099) == 3 && flags(2627) > 3 && flags(2627) < 6)
+      {
+        flags(2627) = 6;
+      }
+      if (flags(107) == 3 && flags(2627) == 6)
+      {
+        flags(2627) = random(4, 5);
+      }
+      if (flags(1099) == 3 && flags(2627) > 3 && flags(2627) < 6)
+      {
+        flags(2627) = random(1, 3);
+      }
+      if (flags(2627) < 4)
+      {
+        flags(112) += 1;
+      }
+      if (flags(2627) == 6)
+      {
+        flags(107) += 1;
+      }
+      if (flags(2627) > 3 && flags(2627) < 6)
+      {
+        flags(1099) += 1;
+      }
+      if (y == 2615)
+      {
+        flags(2615) = flags(2627);
+      }
+      if (y == 2616)
+      {
+        flags(2616) = flags(2627);
+      }
+      if (y == 2617)
+      {
+        flags(2617) = flags(2627);
+      }
+      if (y == 2618)
+      {
+        flags(2618) = flags(2627);
+      }
+      if (y == 2619)
+      {
+        flags(2619) = flags(2627);
+      }
+      if (y == 2620)
+      {
+        flags(2620) = flags(2627);
+      }
+      if (y == 2621)
+      {
+        flags(2621) = flags(2627);
+      }
+      if (y == 2622)
+      {
+        flags(2622) = flags(2627);
+      }
+      if (y == 2623)
+      {
+        flags(2623) = flags(2627);
+      }
+      if (y == 2624)
+      {
+        flags(2624) = flags(2627);
+      }
+      if (y == 2625)
+      {
+        flags(2625) = flags(2627);
+      }
+      if (y == 2626)
+      {
+        flags(2626) = flags(2627);
+      }
+      alterftile(151, 79, 0, 1);
+      alterftile(152, 79, 0, 1);
+      alterftile(153, 79, 0, 1);
+      alterftile(166, 79, 0, 1);
+      alterftile(167, 79, 0, 1);
+      alterftile(168, 79, 0, 1);
+      alterftile(169, 79, 0, 1);
+    }
+  }
+}
+event
+{
+  flags(2613) += 1;
+  flags(112) = var(0);
+  if (flags(112) == 1)
+  {
+    flags(2614) += 10;
+  }
+  if (flags(112) == 2)
+  {
+    flags(2614) += 20;
+  }
+  if (flags(112) == 3)
+  {
+    flags(2614) += 30;
+  }
+  if (flags(112) == 4)
+  {
+    flags(2614) += flags(2614);
+  }
+  if (flags(112) == 5)
+  {
+    flags(107) = flags(2614);
+    flags(2614) += flags(107);
+    flags(2614) += flags(107);
+  }
+  if (flags(112) == 6)
+  {
+    flags(2614) = 0;
+  }
+  if (flags(2614) > 199 && flags(2613) == 12)
+  {
+    stext(0, "Ooh... you may be a winner!", "", "");
+    if (flags(2608) < 4)
+    {
+      flags(112) = 6;
+      flags(2614) = 0;
+    }
+    if (flags(2608) == 4)
+    {
+      entity.locx(25) = entity.locx(0);
+      entity.locy(25) = 76;
+      stext(0, "  What do you think you're", "  doing!?", "");
+      specialframe(24) = 21;
+      entity.locx(24) = entity.locx(0) - 1;
+      entity.locy(24) = 76;
+      stext(0, "What are you doing here?!", "", "");
+      specialframe(25) = 20;
+      stext(
+          0,
+          "  I owe these guys a favor,",
+          "  and *you* my friend, are",
+          "  *cheating!*");
+      stext(0, "I never!", "", "");
+      stext(0, "  Pony up, or I'll report", "  you to the Ghost Guild!", "");
+      stext(0, "You wouldn't!", "", "");
+      stext(0, "  Try me!", "", "");
+    }
+  }
+  if (flags(112) == 1)
+  {
+    alterftile(entity.locx(0), 78, 807, 2);
+  }
+  if (flags(112) == 2)
+  {
+    alterftile(entity.locx(0), 78, 808, 2);
+  }
+  if (flags(112) == 3)
+  {
+    alterftile(entity.locx(0), 78, 809, 2);
+  }
+  if (flags(112) == 4)
+  {
+    alterftile(entity.locx(0), 78, 810, 2);
+  }
+  if (flags(112) == 5)
+  {
+    alterftile(entity.locx(0), 78, 811, 2);
+  }
+  if (flags(112) == 6)
+  {
+    alterftile(entity.locx(0), 78, 812, 2);
+  }
+  if (flags(2613) == 12)
+  {
+    givegp(flags(2614));
+    entity.locx(24) = 152;
+    stext(0, "Here you go!", "", "");
+    enablesave();
+    for (z, 154, 165, 1)
+    {
+      alterftile(z, 78, 178, 2);
+    }
+    alterftile(151, 79, 0, 0);
+    alterftile(152, 79, 0, 0);
+    alterftile(153, 79, 0, 0);
+    alterftile(166, 79, 0, 0);
+    alterftile(167, 79, 0, 0);
+    alterftile(168, 79, 0, 0);
+    alterftile(169, 79, 0, 0);
+  }
+  if (flags(2613) == 12 && flags(2608) < 4)
+  {
+    flags(2614) = 0;
+    flags(2613) = 0;
+  }
+  if (flags(2614) < 200 && flags(2613) == 12 && flags(2608) == 4)
+  {
+    flags(2614) = 0;
+    flags(2613) = 0;
+  }
+  if (flags(2614) >= 200 && flags(2613) == 12 && flags(2608) == 4)
+  {
+    flags(2608) = 5;
+    flags(2613) = 20;
+    stext(0, "You win! Here, take it!", "", "");
+    giveitem(100);
+    entity.locx(24) = 0;
+    entity.locy(24) = 0;
+    entity.locx(25) = 0;
+    entity.locy(25) = 0;
+  }
+  waitkeyup();
+  changezone(entity.locx(0), 79, 20);
+}
+event { callevent(45, flags(2615)); }
+event { callevent(45, flags(2616)); }
+event { callevent(45, flags(2617)); }
+event { callevent(45, flags(2618)); }
+event { callevent(45, flags(2619)); }
+event { callevent(45, flags(2620)); }
+event { callevent(45, flags(2621)); }
+event { callevent(45, flags(2622)); }
+event { callevent(45, flags(2623)); }
+event { callevent(45, flags(2624)); }
+event { callevent(45, flags(2625)); }
+event { callevent(45, flags(2626)); }

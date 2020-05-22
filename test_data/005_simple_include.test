@@ -40,4 +40,4 @@ ff                .end (event2)
 
 //
 
-event{exit();}event{a=1;b=2;c=666;quit("Bye!");}event{exit();}
+event/*0*/{exit();}event/*1*/{a=1;b=2;c=666;quit("Bye!");}event/*2*/{exit();}

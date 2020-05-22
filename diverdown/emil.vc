@@ -1,0 +1,143 @@
+event
+{
+  changechr(1, "gren.chr");
+  redraw();
+  volume = 100;
+  flags(134) = 0;
+  flags(135) = 0;
+  if (flags(133) == 1)
+  {
+    flags(133) = 0;
+  }
+}
+event { calleffect(3); }
+event { calleffect(4); }
+event { calleffect(5); }
+event { calleffect(6); }
+event { calleffect(12, 0, 0, 5, 358, 359, 360, 356, 408, 357); }
+event
+{
+  calleffect(13);
+  if (flags(132) == 1)
+  {
+    flags(132) = 0;
+    wait(400);
+    text(0, "No one answers. . . .", "", "");
+    chainevent(6);
+  }
+}
+event
+{
+  face((0)) = 0;
+  mapswitch("ovrworld.map", 31, 56, 0);
+}
+event
+{
+  specialframe((6)) = 0;
+  if (entity.locx((6)) == 84 && entity.locy((6)) == 61)
+  {
+    entitymove((6), "U19 L4 U1 F0 Z29");
+    if (flags(133) == 0)
+    {
+      flags(133) = 1;
+    }
+  }
+  if (entity.locx((6)) == 58 && entity.locy((6)) == 63)
+  {
+    entitymove((6), "R26 U2");
+    return;
+  }
+  if (entity.locx((6)) == 8 && entity.locy((6)) == 43)
+  {
+    entitymove((6), "D20 R50");
+    return;
+  }
+}
+event
+{
+  if (flags(143) == 1 && flags(133) == 2)
+  {
+    calleffect(12, 0, 0, 5, 358, 359, 360, 356, 408, 357);
+    return;
+  }
+  calleffect(13);
+  if (flags(132) == 1)
+  {
+    flags(132) = 0;
+    if (flags(133) == 1 && flags(140) == 1)
+    {
+      flags(133) = 2;
+      flags(140) = 2;
+      flags(141) = 3;
+      wait(200);
+      specialframe((6)) = 0;
+      entitymove((6), "D12");
+      while (movecode(6))
+      {
+        wait(10);
+      }
+      face((0)) = 0;
+      text(1, "Bingo. This is it.", "", "");
+      chainevent(9);
+      return;
+    }
+    wait(400);
+    text(0, "No one answers. . . .", "", "");
+    chainevent(9);
+  }
+}
+event { calleffect(14, 10, 11); }
+event { calleffect(14, 36, 11); }
+event { calleffect(14, 70, 11); }
+event { calleffect(14, 89, 11); }
+event { calleffect(14, 9, 28); }
+event { calleffect(14, 42, 28); }
+event { calleffect(14, 66, 28); }
+event { calleffect(14, 90, 28); }
+event { calleffect(14, 20, 47); }
+event { calleffect(14, 70, 69); }
+event { calleffect(14, 18, 88); }
+event { calleffect(14, 47, 88); }
+event { text(12, "Welcome to Emil, knight.", "", ""); }
+event { text(0, "    The Busted Keg Tavern", "", ""); }
+event { text(0, "   Home of Anja, Town Elder", "", ""); }
+event { text(0, "These posts mark the edge of", "Emil.", ""); }
+event { text(0, "As high grade as this wood is,", "the age of it shows.", ""); }
+event { text(0, "There's nothing unusual about", "this tree.", ""); }
+event { text(0, "This is a pile of logs", "", ""); }
+event { text(0, "The curtains are drawn closed.", "", ""); }
+event { text(0, "This place isn't getting", "very much business.", ""); }
+event { text(0, "Nothing unusual inside.", "", ""); }
+event { text(0, "This shop looks to do", "good business.", ""); }
+event { text(0, "This bar is packed, and", "probably is always so.", ""); }
+event { text(0, "There's some activity inside.", "", ""); }
+event
+{
+  if (entity.locx((6)) == 58 && entity.locy((6)) == 63)
+  {
+    text(11, "That bird flew straight for", "the elder's house!", "");
+    return;
+  }
+  text(
+      11,
+      "She always locks the door-",
+      "something about safety, I",
+      "suppose. Just knock.");
+}
+event
+{
+  text(
+      0,
+      "This window has no glass",
+      "and everything generally",
+      "looks a little more worn.");
+  text(0, "There's nothing very", "noticeable inside.", "");
+}
+event
+{
+  text(
+      0,
+      "These barrels are shut tight",
+      "due to the fermentation of",
+      "the spirits inside.");
+}

@@ -1,0 +1,560 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  flags(801) = 6;
+  if (entity.locx(0) > 45 && entity.locx(0) < 57 && entity.locy(0) == 98)
+  {
+    alterftile(53, 97, 279, 1);
+    alterftile(52, 97, 0, 1);
+    alterftile(51, 97, 0, 1);
+    alterftile(50, 97, 0, 1);
+    alterftile(49, 97, 0, 1);
+    alterftile(48, 97, 0, 1);
+    alterftile(53, 98, 279, 0);
+    alterftile(52, 98, 0, 0);
+    alterftile(51, 98, 0, 0);
+    alterftile(50, 98, 0, 0);
+    alterftile(49, 98, 0, 0);
+    alterftile(48, 98, 279, 0);
+    alterftile(53, 99, 279, 1);
+    alterftile(52, 99, 0, 1);
+    alterftile(51, 99, 0, 1);
+    alterftile(50, 99, 0, 1);
+    alterftile(49, 99, 0, 1);
+    alterftile(48, 99, 0, 1);
+  }
+  if (flags(4078) >= 14)
+  {
+    alterbtile(40, 82, 341, 0);
+    changezone(40, 82, 32);
+  }
+  if (flags(126) == 1)
+  {
+    changechr(1, "boat.chr");
+    removecharacter(4);
+    partymove("U4L5L5");
+    mapswitch("docktown.map", 45, 15, 0);
+  }
+}
+event
+{
+  if (flags(180) == 0)
+  {
+    mapswitch("frogpond.map", 197, 32, 0);
+  }
+  if (flags(180) == 1)
+  {
+    mapswitch("frogpon2.map", 197, 32, 0);
+  }
+}
+event
+{
+  flags(172) = 0;
+  mapswitch("damfor.map", 10, 67, 0);
+}
+event { mapswitch("gcave.map", 37, 34, 0); }
+event { stext(0, "You'd need a machete to go any", "further.", ""); }
+event { mapswitch("docktown.map", 1, 40, 0); }
+event { mapswitch("packwood.map", 86, 169, 0); }
+event { mapswitch("packtown.map", 32, 19, 0); }
+event
+{
+  if (face(0) == 2)
+  {
+    mapswitch("avis.map", 11, 33, 0);
+  }
+  if (face(0) == 1)
+  {
+    mapswitch("avis.map", 9, 47, 0);
+  }
+  if (face(0) == 3)
+  {
+    mapswitch("avis.map", 71, 29, 0);
+  }
+}
+event
+{
+  if (face(0) == 0)
+  {
+    mapswitch("orchard.map", 14, 2, 0);
+  }
+  mapswitch("farm.map", 28, 34, 0);
+}
+event { mapswitch("circle.map", 27, 33, 0); }
+event { mapswitch("graciere.map", 61, 71, 0); }
+event { stext(0, "Can't go there in this demo.", "", ""); }
+event { mapswitch("alontown.map", 70, 77, 0); }
+event { mapswitch("morefor.map", 178, 1, 0); }
+event { mapswitch("morefor.map", 49, 1, 0); }
+event
+{
+  if (face(0) == 1)
+  {
+    mapswitch("beach.map", 63, 32, 0);
+  }
+  if (face(0) == 2)
+  {
+    mapswitch("beach.map", 11, 22, 0);
+  }
+  if (face(0) == 3)
+  {
+    mapswitch("beach.map", 137, 22, 0);
+  }
+}
+event
+{
+  stext(
+      6,
+      "So, Sam and company continue",
+      "their grand journey to find",
+      "the Seed. But will they find");
+  stext(
+      6,
+      "it in time? And what will",
+      "they run across in their",
+      "quest? Tune in next demo to");
+  stext(6, "find out the answers to these", "questions and more!", "");
+  mapswitch("endcred.map", 8, 9, 0);
+}
+event { stext(0, "There's a fence blocking this", "side.", ""); }
+event
+{
+  if (face(0) != 2 && flags(185) < 10)
+  {
+    mapswitch("warrens.map", 148, 51, 0);
+  }
+  if (face(0) == 2 && flags(185) < 10)
+  {
+    mapswitch("warrens.map", 1, 12, 0);
+  }
+  if (face(0) != 2 && flags(185) > 10)
+  {
+    mapswitch("warren2.map", 148, 51, 0);
+  }
+  if (face(0) == 2 && flags(185) > 10)
+  {
+    mapswitch("warren2.map", 1, 12, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("1 Camelite", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 15;
+    flags(503) = 5;
+    flags(504) = 0;
+    flags(505) = 14;
+    flags(506) = 14;
+    flags(507) = 15;
+    flags(508) = 15;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 35;
+    flags(513) = 10;
+    flags(540) = 5;
+    flags(541) = 5;
+    flags(1009) = 0;
+    flags(514) = 7;
+    flags(515) = 85;
+    flags(516) = 45;
+    flags(517) = 850;
+    flags(518) = 46;
+    flags(519) = 46;
+    flags(520) = 45;
+    flags(521) = 45;
+    flags(522) = 450;
+    flags(523) = 30;
+    flags(524) = 0;
+    flags(525) = 35;
+    flags(526) = 10;
+    flags(542) = 65;
+    flags(543) = 30;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 15;
+    flags(529) = 5;
+    flags(530) = 0;
+    flags(531) = 14;
+    flags(532) = 14;
+    flags(533) = 15;
+    flags(534) = 15;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 5;
+    flags(545) = 5;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("overbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("3 High_Rollers", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 5;
+    flags(502) = 46;
+    flags(503) = 46;
+    flags(504) = 400;
+    flags(505) = 47;
+    flags(506) = 47;
+    flags(507) = 48;
+    flags(508) = 49;
+    flags(509) = 200;
+    flags(510) = 35;
+    flags(511) = 0;
+    flags(512) = 54;
+    flags(513) = 55;
+    flags(540) = 46;
+    flags(541) = 46;
+    flags(1009) = 6;
+    flags(514) = 5;
+    flags(515) = 46;
+    flags(516) = 46;
+    flags(517) = 400;
+    flags(518) = 47;
+    flags(519) = 47;
+    flags(520) = 48;
+    flags(521) = 49;
+    flags(522) = 200;
+    flags(523) = 35;
+    flags(524) = 0;
+    flags(525) = 54;
+    flags(526) = 55;
+    flags(542) = 46;
+    flags(543) = 46;
+    flags(1010) = 6;
+    flags(527) = 5;
+    flags(528) = 46;
+    flags(529) = 46;
+    flags(530) = 400;
+    flags(531) = 47;
+    flags(532) = 47;
+    flags(533) = 48;
+    flags(534) = 49;
+    flags(535) = 200;
+    flags(536) = 35;
+    flags(537) = 0;
+    flags(538) = 54;
+    flags(539) = 55;
+    flags(544) = 46;
+    flags(545) = 46;
+    flags(1011) = 6;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("overbat.map", 1, 1, 0);
+  }
+}
+event { mapswitch("bunoose.map", 54, 98, 0); }
+event { mapswitch("dactyl.map", 148, 52, 0); }
+event { mapswitch("biglake.map", 71, 9, 0); }
+event { mapswitch("biglake.map", 85, 9, 0); }
+event
+{
+  if (face(0) == 2)
+  {
+    mapswitch("tbridge.map", 2, 14, 0);
+  }
+  if (face(0) == 3)
+  {
+    mapswitch("tbridge.map", 27, 14, 0);
+  }
+}
+event { mapswitch("kreegah.map", 140, 47, 0); }
+event { mapswitch("kreegah.map", 3, 12, 0); }
+event { mapswitch("sewer1.map", 25, 114, 0); }
+event
+{
+  banner("Battle!", 1);
+  banner("1 Anonymoose", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 0;
+    flags(503) = 0;
+    flags(504) = 0;
+    flags(505) = 47;
+    flags(506) = 47;
+    flags(507) = 48;
+    flags(508) = 49;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 2;
+    flags(513) = 1;
+    flags(540) = 0;
+    flags(541) = 0;
+    flags(1009) = 0;
+    flags(514) = 2;
+    flags(515) = 30;
+    flags(516) = 20;
+    flags(517) = 80;
+    flags(518) = 22;
+    flags(519) = 22;
+    flags(520) = 23;
+    flags(521) = 24;
+    flags(522) = 15;
+    flags(523) = 4;
+    flags(524) = 0;
+    flags(525) = 2;
+    flags(526) = 1;
+    flags(542) = 25;
+    flags(543) = 15;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 46;
+    flags(529) = 46;
+    flags(530) = 0;
+    flags(531) = 47;
+    flags(532) = 47;
+    flags(533) = 48;
+    flags(534) = 49;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 54;
+    flags(539) = 55;
+    flags(544) = 46;
+    flags(545) = 46;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("moosebat.map", 1, 1, 0);
+  }
+}
+event { mapswitch("cragpass.map", 50, 90, 0); }
+event { mapswitch("bugdung.map", 47, 9, 0); }
+event
+{
+  banner("Battle!", 1);
+  flags(112) = random(1, 21);
+  if (flags(112) < 11)
+  {
+    banner("1 Moostery", 1);
+  }
+  if (flags(112) < 21 && flags(112) > 10)
+  {
+    banner("1 Yeti Gyen", 1);
+  }
+  if (flags(112) == 21)
+  {
+    banner("1 Skunkraven", 1);
+  }
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 2 && flags(112) < 11)
+  {
+    flags(501) = 0;
+    flags(502) = 0;
+    flags(503) = 0;
+    flags(504) = 0;
+    flags(505) = 47;
+    flags(506) = 47;
+    flags(507) = 48;
+    flags(508) = 49;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 2;
+    flags(513) = 1;
+    flags(540) = 0;
+    flags(541) = 0;
+    flags(1009) = 0;
+    flags(514) = 2;
+    flags(515) = 130;
+    flags(516) = 120;
+    flags(517) = 680;
+    flags(518) = 22;
+    flags(519) = 22;
+    flags(520) = 23;
+    flags(521) = 24;
+    flags(522) = 415;
+    flags(523) = 40;
+    flags(524) = 0;
+    flags(525) = 2;
+    flags(526) = 1;
+    flags(542) = 125;
+    flags(543) = 115;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 46;
+    flags(529) = 46;
+    flags(530) = 0;
+    flags(531) = 47;
+    flags(532) = 47;
+    flags(533) = 48;
+    flags(534) = 49;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 54;
+    flags(539) = 55;
+    flags(544) = 46;
+    flags(545) = 46;
+    flags(1011) = 0;
+  }
+  if (flags(200) == 2 && flags(112) > 10 && flags(112) < 21)
+  {
+    flags(501) = 0;
+    flags(502) = 0;
+    flags(503) = 0;
+    flags(504) = 0;
+    flags(505) = 47;
+    flags(506) = 47;
+    flags(507) = 48;
+    flags(508) = 49;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 25;
+    flags(513) = 53;
+    flags(540) = 0;
+    flags(541) = 0;
+    flags(1009) = 0;
+    flags(514) = 3;
+    flags(515) = 180;
+    flags(516) = 180;
+    flags(517) = 800;
+    flags(518) = 25;
+    flags(519) = 26;
+    flags(520) = 27;
+    flags(521) = 28;
+    flags(522) = 1000;
+    flags(523) = 50;
+    flags(524) = 0;
+    flags(525) = 25;
+    flags(526) = 53;
+    flags(542) = 120;
+    flags(543) = 120;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 46;
+    flags(529) = 46;
+    flags(530) = 0;
+    flags(531) = 47;
+    flags(532) = 47;
+    flags(533) = 48;
+    flags(534) = 49;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 54;
+    flags(539) = 55;
+    flags(544) = 46;
+    flags(545) = 46;
+    flags(1011) = 0;
+  }
+  if (flags(200) == 2 && flags(112) == 21)
+  {
+    flags(501) = 0;
+    flags(502) = 0;
+    flags(503) = 0;
+    flags(504) = 0;
+    flags(505) = 47;
+    flags(506) = 47;
+    flags(507) = 48;
+    flags(508) = 49;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 38;
+    flags(513) = 39;
+    flags(540) = 0;
+    flags(541) = 0;
+    flags(1009) = 0;
+    flags(514) = 4;
+    flags(515) = 160;
+    flags(516) = 160;
+    flags(517) = 500;
+    flags(518) = 29;
+    flags(519) = 30;
+    flags(520) = 31;
+    flags(521) = 32;
+    flags(522) = 500;
+    flags(523) = 50;
+    flags(524) = 0;
+    flags(525) = 38;
+    flags(526) = 39;
+    flags(542) = 150;
+    flags(543) = 160;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 46;
+    flags(529) = 46;
+    flags(530) = 0;
+    flags(531) = 47;
+    flags(532) = 47;
+    flags(533) = 48;
+    flags(534) = 49;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 54;
+    flags(539) = 55;
+    flags(544) = 46;
+    flags(545) = 46;
+    flags(1011) = 0;
+  }
+  if (flags(200) == 2)
+  {
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("mtnbat.map", 1, 1, 0);
+  }
+}

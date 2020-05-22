@@ -1,0 +1,267 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+  flags(801) = 1;
+  flags(316) = 0;
+  flags(251) = 0;
+  if (flags(185) > 19)
+  {
+    entity.locy(6) = 60;
+    entity.locy(7) = 60;
+  }
+}
+event
+{
+  warp(entity.locx(0), entity.locy(0), 1);
+  alterftile(var(0), var(1), 0, 0);
+  alterftile(var(0), var(1) + 1, 708, 0);
+  alterftile(var(0) + 1, var(1), 0, 0);
+  alterftile(var(0) + 1, var(1) + 1, 708, 0);
+  alterftile(var(0) - 1, var(1), 0, 0);
+  alterftile(var(0) - 1, var(1) + 1, 708, 0);
+  alterftile(var(0), var(1) + 2, 716, 1);
+}
+event
+{
+  warp(entity.locx(0), entity.locy(0), 1);
+  alterftile(var(0), var(1), 706, 0);
+  alterftile(var(0), var(1) + 1, 756, 0);
+  alterftile(var(0) + 1, var(1), 0, 1);
+  alterftile(var(0) + 1, var(1) + 1, 708, 1);
+  alterftile(var(0) - 1, var(1), 0, 1);
+  alterftile(var(0) - 1, var(1) + 1, 708, 1);
+  alterftile(var(0), var(1) + 2, 716, 0);
+}
+event { callevent(1, 7, 28); }
+event { callevent(2, 7, 28); }
+event { callevent(1, 14, 19); }
+event { callevent(2, 14, 19); }
+event { callevent(1, 7, 10); }
+event { callevent(2, 7, 10); }
+event { callevent(1, 14, 3); }
+event { callevent(2, 14, 3); }
+event { mapswitch("clocks.map", 169, 78, 0); }
+event {}
+event
+{
+  if (flags(185) < 20)
+  {
+    flags(185) = 20;
+    stext(
+        0,
+        "Halt right there, intruders!",
+        "If you think you're getting",
+        "any further, think again!");
+    stext(
+        0,
+        "Our boss, Vultris, is",
+        "incredibly rich! And to make",
+        "sure he stays that way, he's");
+    stext(
+        0,
+        "beefed up factory security",
+        "by searching the ruins for",
+        "Colonization-era technology!");
+    stext(
+        0,
+        "And it payed off! Behold! The",
+        "TikTox Mark 13 Anti-Temporal",
+        "Device! This puppy'll mash");
+    stext(0, "you into a fine paste!", "", "");
+    specialframe(7) = 21;
+    wait(50);
+    specialframe(7) = 0;
+    face(7) = 2;
+    stext(
+        0,
+        "But the janitorial staff'll",
+        "get really pissed off! They're",
+        "gonna make *us* clean it up!");
+    face(6) = 3;
+    stext(
+        0,
+        "Only if we're still here to",
+        "take the blame, which is why",
+        "we're going to leave now!");
+    face(7) = 0;
+    face(6) = 0;
+    stext(0, "Enjoy!", "", "");
+    entitymove(6, "L4U8");
+    entitymove(7, "L2U9");
+    wait(300);
+    entity.locy(6) = 59;
+    entity.locy(7) = 59;
+    specialframe(5) = 25;
+    stext(0, "My name is TikTox,", "I have metal joints,", "Beat me up,");
+    stext(0, "Or else I will win.", "", "");
+    stext(4, "Wow, what a lousy poem...", "", "");
+    banner("Boss Battle!", 1);
+    banner("1 TikTox", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 0;
+      flags(502) = 15;
+      flags(503) = 5;
+      flags(504) = 0;
+      flags(505) = 14;
+      flags(506) = 14;
+      flags(507) = 15;
+      flags(508) = 15;
+      flags(509) = 0;
+      flags(510) = 0;
+      flags(511) = 0;
+      flags(512) = 65;
+      flags(513) = 65;
+      flags(540) = 5;
+      flags(541) = 5;
+      flags(1009) = 0;
+      flags(514) = 4;
+      flags(515) = 250;
+      flags(516) = 250;
+      flags(517) = 5000;
+      flags(518) = 22;
+      flags(519) = 23;
+      flags(520) = 24;
+      flags(521) = 22;
+      flags(522) = 4000;
+      flags(523) = 3000;
+      flags(524) = 6;
+      flags(525) = 65;
+      flags(526) = 65;
+      flags(542) = 250;
+      flags(543) = 350;
+      flags(1010) = 0;
+      flags(527) = 0;
+      flags(528) = 15;
+      flags(529) = 5;
+      flags(530) = 0;
+      flags(531) = 14;
+      flags(532) = 14;
+      flags(533) = 15;
+      flags(534) = 15;
+      flags(535) = 0;
+      flags(536) = 0;
+      flags(537) = 0;
+      flags(538) = 2;
+      flags(539) = 1;
+      flags(544) = 5;
+      flags(545) = 5;
+      flags(1011) = 0;
+      flags(109) = entity.locx(0);
+      flags(110) = entity.locy(0);
+      flags(251) = 1;
+      mapswitch("clockbat.map", 1, 1, 0);
+    }
+  }
+}
+event { mapswitch("factory2.map", 173, 116, 0); }
+event { stext(0, "Zzzz...", "", ""); }
+event
+{
+  stext(
+      0,
+      "Boy, is this job boring...",
+      "I oughta get some sleep like",
+      "Joe over there!");
+  stext(0, "Hey! Wait a minute! Are you", "guys supposed to be back", "here?");
+  specialframe(char(1) - 1) = 21;
+  wait(50);
+  specialframe(char(1) - 1) = 0;
+  stext(1, "Uh... Um... Well...", "", "");
+  stext(5, "Ahem! Yes. Yes we are.", "", "");
+  stext(0, "Oh... Right then! Carry on.", "", "");
+  for (z, 1, 4, 1)
+  {
+    specialframe(char(z) - 1) = 21;
+  }
+  wait(100);
+  for (z, 1, 4, 1)
+  {
+    specialframe(char(z) - 1) = 0;
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("1 Tarantella", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 15;
+    flags(503) = 5;
+    flags(504) = 0;
+    flags(505) = 14;
+    flags(506) = 14;
+    flags(507) = 15;
+    flags(508) = 15;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 65;
+    flags(513) = 65;
+    flags(540) = 5;
+    flags(541) = 5;
+    flags(1009) = 0;
+    flags(514) = 5;
+    flags(515) = 250;
+    flags(516) = 150;
+    flags(517) = 1000;
+    flags(518) = 27;
+    flags(519) = 30;
+    flags(520) = 28;
+    flags(521) = 29;
+    flags(522) = 1400;
+    flags(523) = 300;
+    flags(524) = 0;
+    flags(525) = 65;
+    flags(526) = 65;
+    flags(542) = 250;
+    flags(543) = 150;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 15;
+    flags(529) = 5;
+    flags(530) = 0;
+    flags(531) = 14;
+    flags(532) = 14;
+    flags(533) = 15;
+    flags(534) = 15;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 5;
+    flags(545) = 5;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    flags(801) = 2;
+    mapswitch("factbat.map", 1, 1, 0);
+  }
+}

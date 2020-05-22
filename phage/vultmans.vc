@@ -1,0 +1,1177 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  flags(801) = 1;
+  flags(251) = 0;
+  if (flags(4962) == 1)
+  {
+    alterbtile(13, 35, 700, 1);
+    changezone(13, 35, 29);
+  }
+  if (flags(4962) == 2)
+  {
+    alterbtile(13, 35, 701, 1);
+    changezone(13, 35, 0);
+    entity.locy(5) -= 2;
+  }
+  if (flags(4963) == 1)
+  {
+    alterbtile(47, 93, 700, 1);
+    changezone(47, 93, 30);
+  }
+  if (flags(4963) == 2)
+  {
+    alterbtile(47, 93, 701, 1);
+    changezone(47, 93, 0);
+    entity.locy(6) += 2;
+  }
+  if (flags(4964) == 1)
+  {
+    alterbtile(130, 5, 701, 1);
+    changezone(130, 5, 0);
+    entity.locy(7) += 2;
+  }
+  if (flags(4965) == 1)
+  {
+    alterbtile(123, 39, 701, 1);
+    changezone(123, 39, 0);
+    entity.locy(8) -= 2;
+  }
+  if (2588 != 0)
+  {
+    alterbtile(142, 13, 701, 2);
+  }
+  if (entity.locx(0) < 3 && entity.locy(0) == 3)
+  {
+    palettemorph(10, 10, 35, 45, 43);
+  }
+}
+event
+{
+  if (char(1))
+  {
+    mapswitch("bunoose.map", 131, 68, 0);
+  }
+  if (!char(1))
+  {
+    stext(5, "Sam's counting on me! I won't", "leave without the Seed!", "");
+    partymove("U1");
+  }
+}
+event
+{
+  if (char(1))
+  {
+    stext(1, "It's a statue of Vultris.", "", "");
+    if (char(4))
+    {
+      stext(4, "Man! His ego must be even", "bigger than GMW's!", "");
+    }
+  }
+  if (!char(1))
+  {
+    stext(
+        5,
+        "Hmmm... this guy looks",
+        "familiar! Looks like these",
+        "are supposed to be moved");
+    stext(
+        5,
+        "when some puzzle is solved...",
+        "I really don't feel like",
+        "solving puzzles right now,");
+    stext(5, "so let's see if there's some", "other way past!", "");
+  }
+}
+event
+{
+  if (char(1))
+  {
+    stext(
+        1,
+        "I don't know... We can't all",
+        "fit in here. Let's find",
+        "another way through.");
+  }
+  if (!char(1))
+  {
+    if (flags(185) == 25)
+    {
+      stext(5, "Ah ha! That's my way in!", "", "");
+      flags(185) += 1;
+    }
+    warp(53, 39, 0);
+  }
+}
+event
+{
+  stext(5, "Ya know, maybe I oughta bring", "the guys along after all...", "");
+  specialframe(0) = 21;
+  stext(
+      5,
+      "What am I saying!?! How do I",
+      "expect to get my revenge on",
+      "the wolves if I'm too");
+  stext(5, "scared to even do this? Pull", "yourself together, Dingo!", "");
+  specialframe(0) = 0;
+}
+event
+{
+  stext(
+      5, "Hmmm... I think I need to go", "farther north to find", "Vultris...");
+  prompt(
+      5,
+      "But there might be loot down",
+      "there!",
+      "Should I check it out?",
+      112,
+      "Not now!",
+      "Too curious!");
+  if (flags(112) > 0)
+  {
+    warp(144, 12, 0);
+    alterftile(134, 10, 798, 2);
+    alterftile(135, 10, 796, 2);
+    alterftile(136, 10, 797, 2);
+    alterftile(137, 10, 799, 2);
+    alterftile(138, 10, 797, 2);
+  }
+}
+event
+{
+  stext(5, "Hmmm... I think I've drifted", "a little off course...", "");
+  prompt(
+      5,
+      "But there might be something",
+      "good down there!",
+      "Shouldn't I check?",
+      112,
+      "No time!",
+      "Why not?");
+  if (flags(112) > 0)
+  {
+    stext(5, "Wow, it sure is dark in", "there!", "");
+    warp(17, 3, 0);
+    palettemorph(10, 10, 35, 45, 43);
+  }
+}
+event
+{
+  prompt(
+      5,
+      "I bet Vultris is down there",
+      "somewhere close by!",
+      "Am I ready?",
+      112,
+      "Um... no.",
+      "Let's go!");
+  if (flags(112) > 0)
+  {
+    flags(185) = 27;
+    mapswitch("mansion2.map", 112, 77, 0);
+  }
+}
+event
+{
+  curhp(5) = 1;
+  flags(112) = random(1, 6);
+  switch (flags(112))
+  {
+    case (1): stext(5, "Yeeowch! That hurts!", "", "");
+    case (2): stext(5, "Ow! I gotta remember not to", "do that!", "");
+    case (3): stext(5, "Oh, the pain, the pain!", "", "");
+    case (4): stext(5, "Sharp, sharp, sharp! Ah!", "", "");
+    case (5): stext(5, "Aargh!", "", "");
+    case (6):
+      stext(
+          5,
+          "Eek! I better stop doing",
+          "this! I'm starting to get to",
+          "like it!");
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("1 Wet Sarser", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 175;
+    flags(503) = 5;
+    flags(504) = 0;
+    flags(505) = 43;
+    flags(506) = 43;
+    flags(507) = 16;
+    flags(508) = 16;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 38;
+    flags(513) = 39;
+    flags(540) = 175;
+    flags(541) = 5;
+    flags(1009) = 12;
+    flags(514) = 2;
+    flags(515) = 175;
+    flags(516) = 5;
+    flags(517) = 1000;
+    flags(518) = 24;
+    flags(519) = 24;
+    flags(520) = 23;
+    flags(521) = 22;
+    flags(522) = 300;
+    flags(523) = 20;
+    flags(524) = 0;
+    flags(525) = 38;
+    flags(526) = 39;
+    flags(542) = 175;
+    flags(543) = 5;
+    flags(1010) = 12;
+    flags(527) = 0;
+    flags(528) = 175;
+    flags(529) = 5;
+    flags(530) = 0;
+    flags(531) = 43;
+    flags(532) = 43;
+    flags(533) = 16;
+    flags(534) = 16;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 38;
+    flags(539) = 39;
+    flags(544) = 175;
+    flags(545) = 5;
+    flags(1011) = 12;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("ventbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("1 Tarantella", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 15;
+    flags(503) = 5;
+    flags(504) = 0;
+    flags(505) = 14;
+    flags(506) = 14;
+    flags(507) = 15;
+    flags(508) = 15;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 65;
+    flags(513) = 65;
+    flags(540) = 5;
+    flags(541) = 5;
+    flags(1009) = 0;
+    flags(514) = 5;
+    flags(515) = 250;
+    flags(516) = 150;
+    flags(517) = 1000;
+    flags(518) = 27;
+    flags(519) = 30;
+    flags(520) = 28;
+    flags(521) = 29;
+    flags(522) = 1400;
+    flags(523) = 300;
+    flags(524) = 0;
+    flags(525) = 65;
+    flags(526) = 65;
+    flags(542) = 250;
+    flags(543) = 150;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 15;
+    flags(529) = 5;
+    flags(530) = 0;
+    flags(531) = 14;
+    flags(532) = 14;
+    flags(533) = 15;
+    flags(534) = 15;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 5;
+    flags(545) = 5;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    flags(801) = 1;
+    mapswitch("ventbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  if (flags(2588) == 0)
+  {
+    alterbtile(142, 13, 701, 2);
+    stext(5, "Woo hoo hoo! Score!", "", "");
+    giveitem(53);
+    giveitem(22);
+    giveitem(53);
+    giveitem(23);
+    giveitem(53);
+    flags(2588) = 1;
+  }
+}
+event { stext(5, "Huh... Some boiler room the", "old geezer's got!", ""); }
+event
+{
+  stext(5, "Well, I guess I gotta get", "back to findin' the Seed!", "");
+  warp(39, 28, 0);
+}
+event
+{
+  stext(0, "Zzz...", "", "");
+  stext(0, "*mmbl*... Nrf! Did I forget", "to reset it? *mmbl*...", "");
+  stext(0, "Zzz...", "", "");
+}
+event
+{
+  stext(5, "Gyaaah! That's the biggest", "dang spider I've ever seen!", "");
+  stext(
+      5,
+      "Whew! I think it's dead...",
+      "Must've starved to death in",
+      "here...");
+}
+event
+{
+  stext(
+      5,
+      "This place is givin' me the",
+      "creeps! I'm outta here!",
+      "'Sides, I've got a Seed to");
+  stext(5, "steal!", "", "");
+  palettemorph(0, 0, 0, 0, 63);
+  warp(94, 14, 0);
+}
+event { mapswitch("gsimon.map", 10, 13, 0); }
+event
+{
+  stext(
+      0,
+      "Aw, heck! I forgot my",
+      "truncheon! Will you spare me",
+      "if I give you a hint?");
+  stext(
+      0,
+      "All four colors are used",
+      "in the first four parts.",
+      "The fifth is the repeat.");
+}
+event
+{
+  stext(
+      0,
+      "Whoa! There are too many of",
+      "you guys to fight! I'll tell",
+      "you what I know about the");
+  stext(
+      0,
+      "code instead: The fifth color",
+      "is neither green nor",
+      "contiguous with itself.");
+}
+event
+{
+  stext(
+      0,
+      "Well, I could fight you guys,",
+      "but I'd rather not... I'll",
+      "tell you what I know instead!");
+  stext(
+      0,
+      "Yellow and blue are next to",
+      "each other, but blue and red",
+      "are not.");
+}
+event
+{
+  stext(0, "Leave me alone! I'm trying", "to sleep!", "Zzzz...");
+  stext(0, "Zzzz...", "", "");
+  stext(0, "Zzzz...", "", "");
+  stext(0, "*Mmbl*... Red is after green,", "but not fourth... *Mrmbl*...", "");
+  stext(0, "Zzzz...", "", "");
+}
+event
+{
+  if (flags(109) < 138)
+  {
+    flags(109)++;
+    alterftile(flags(109), 10, var(0), 2);
+    if (flags(109) == 134 && var(0) == 798)
+    {
+      flags(110)++;
+    }
+    if (flags(109) == 135 && var(0) == 796)
+    {
+      flags(110)++;
+    }
+    if (flags(109) == 136 && var(0) == 797)
+    {
+      flags(110)++;
+    }
+    if (flags(109) == 137 && var(0) == 799)
+    {
+      flags(110)++;
+    }
+    if (flags(109) == 138 && var(0) == 797)
+    {
+      flags(110)++;
+    }
+    if (flags(110) == 5)
+    {
+      alterbtile(129, 11, 706, 0);
+      alterbtile(130, 11, 706, 0);
+      alterbtile(131, 11, 706, 0);
+      alterbtile(132, 11, 706, 0);
+    }
+  }
+}
+event
+{
+  if (!char(1))
+  {
+    stext(
+        5,
+        "Hmmm... There might be guards",
+        "in there. I'd better look",
+        "around out here first.");
+  }
+  if (char(1))
+  {
+    alterftile(134, 10, 800, 2);
+    alterftile(135, 10, 800, 2);
+    alterftile(136, 10, 800, 2);
+    alterftile(137, 10, 800, 2);
+    alterftile(138, 10, 800, 2);
+    flags(109) = 133;
+    flags(110) = 0;
+    warp(136, 22, 0);
+  }
+}
+event { warp(68, 66, 0); }
+event { callevent(22, 796); }
+event { callevent(22, 797); }
+event { callevent(22, 798); }
+event { callevent(22, 799); }
+event
+{
+  flags(107) = 0;
+  flags(112) = 0;
+  if (entity.locx(30) == 1 && entity.locy(30) == 33)
+  {
+    flags(107)++;
+    flags(112) += 8;
+  }
+  if (entity.locx(30) == 7 && entity.locy(30) == 34)
+  {
+    flags(107)++;
+    flags(112) += 4;
+  }
+  if (entity.locx(30) == 11 && entity.locy(30) == 31)
+  {
+    flags(107)++;
+    flags(112) += 2;
+  }
+  if (entity.locx(30) == 17 && entity.locy(30) == 32)
+  {
+    flags(107)++;
+    flags(112) += 1;
+  }
+  if (entity.locx(31) == 1 && entity.locy(31) == 33)
+  {
+    flags(107)++;
+    flags(112) += 8;
+  }
+  if (entity.locx(31) == 7 && entity.locy(31) == 34)
+  {
+    flags(107)++;
+    flags(112) += 4;
+  }
+  if (entity.locx(31) == 11 && entity.locy(31) == 31)
+  {
+    flags(107)++;
+    flags(112) += 2;
+  }
+  if (entity.locx(31) == 17 && entity.locy(31) == 32)
+  {
+    flags(107)++;
+    flags(112) += 1;
+  }
+  if (entity.locx(32) == 1 && entity.locy(32) == 33)
+  {
+    flags(107)++;
+    flags(112) += 8;
+  }
+  if (entity.locx(32) == 7 && entity.locy(32) == 34)
+  {
+    flags(107)++;
+    flags(112) += 4;
+  }
+  if (entity.locx(32) == 11 && entity.locy(32) == 31)
+  {
+    flags(107)++;
+    flags(112) += 2;
+  }
+  if (entity.locx(32) == 17 && entity.locy(32) == 32)
+  {
+    flags(107)++;
+    flags(112) += 1;
+  }
+  if (entity.locx(29) == 1 && entity.locy(29) == 33)
+  {
+    flags(112) += 8;
+  }
+  if (entity.locx(29) == 7 && entity.locy(29) == 34)
+  {
+    flags(112) += 4;
+  }
+  if (entity.locx(29) == 11 && entity.locy(29) == 31)
+  {
+    flags(112) += 2;
+  }
+  if (entity.locx(29) == 17 && entity.locy(29) == 32)
+  {
+    flags(112) += 1;
+  }
+  if (flags(107) != 3)
+  {
+    flags(109) = entity.locx(29);
+    flags(110) = entity.locy(29);
+    if (flags(112) < 8)
+    {
+      flags(109) = 1;
+      flags(110) = 33;
+    }
+    if (flags(112) > 7)
+    {
+      flags(112) -= 8;
+    }
+    if (flags(112) < 4)
+    {
+      flags(109) = 7;
+      flags(110) = 34;
+    }
+    if (flags(112) > 3)
+    {
+      flags(112) -= 4;
+    }
+    if (flags(112) < 2)
+    {
+      flags(109) = 11;
+      flags(110) = 31;
+    }
+    if (flags(112) > 1)
+    {
+      flags(112) -= 2;
+    }
+    if (flags(112) < 1)
+    {
+      flags(109) = 17;
+      flags(110) = 32;
+    }
+    flags(112) = random(1, 2);
+    if (flags(112) == 1)
+    {
+      stext(0, "Nyuk nyuk nyuk!", "", "");
+    }
+    if (flags(112) == 2)
+    {
+      stext(0, "Woo woo woo woo!", "", "");
+    }
+    entity.locx(29) = flags(109);
+    entity.locy(29) = flags(110);
+    return;
+  }
+  stext(0, "Oh, a wise guy, eh?", "", "");
+  banner("Boss Battle!", 1);
+  banner("1 Wacky Mole", 1);
+  if (flags(4962) == 0)
+  {
+    flags(4962) = 1;
+    alterbtile(13, 35, 700, 1);
+    changezone(13, 35, 29);
+  }
+  if (flags(200) == 0)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+    fakebattle();
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 350;
+    flags(503) = 100;
+    flags(504) = 2500;
+    flags(505) = 22;
+    flags(506) = 23;
+    flags(507) = 24;
+    flags(508) = 25;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 65;
+    flags(513) = 65;
+    flags(540) = 350;
+    flags(541) = 100;
+    flags(1009) = 0;
+    flags(514) = 4;
+    flags(515) = 350;
+    flags(516) = 100;
+    flags(517) = 2500;
+    flags(518) = 22;
+    flags(519) = 23;
+    flags(520) = 24;
+    flags(521) = 25;
+    flags(522) = 4000;
+    flags(523) = 2500;
+    flags(524) = 0;
+    flags(525) = 65;
+    flags(526) = 65;
+    flags(542) = 350;
+    flags(543) = 100;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 350;
+    flags(529) = 100;
+    flags(530) = 2500;
+    flags(531) = 22;
+    flags(532) = 23;
+    flags(533) = 24;
+    flags(534) = 25;
+    flags(535) = 0;
+    flags(536) = 0;
+    flags(537) = 0;
+    flags(538) = 2;
+    flags(539) = 1;
+    flags(544) = 350;
+    flags(545) = 100;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    flags(251) = 1;
+    mapswitch("mole1bat.map", 1, 1, 0);
+  }
+}
+event { mapswitch("mansion2.map", 54, 32, 0); }
+event
+{
+  flags(109) = entity.locx(var(0));
+  flags(110) = entity.locy(var(0));
+  switch (face(0))
+  {
+    case (0): flags(110)++;
+    case (1): flags(110)--;
+    case (2): flags(109)++;
+    case (3): flags(109)--;
+  }
+  if (flags(109) == entity.locx(29) && flags(110) == entity.locy(29))
+  {
+    return;
+  }
+  if (flags(109) == entity.locx(30) && flags(110) == entity.locy(30))
+  {
+    return;
+  }
+  if (flags(109) == entity.locx(31) && flags(110) == entity.locy(31))
+  {
+    return;
+  }
+  if (flags(109) == entity.locx(32) && flags(110) == entity.locy(32))
+  {
+    return;
+  }
+  if (flags(109) == 0)
+  {
+    return;
+  }
+  if (flags(109) == 18)
+  {
+    return;
+  }
+  if (flags(110) == 29)
+  {
+    return;
+  }
+  if (flags(110) == 39)
+  {
+    return;
+  }
+  switch (face(0))
+  {
+    case (0): entitymove(var(0), "D1");
+    case (1): entitymove(var(0), "U1");
+    case (2): entitymove(var(0), "R1");
+    case (3): entitymove(var(0), "L1");
+  }
+  wait(20);
+}
+event { callevent(31, 30); }
+event { callevent(31, 31); }
+event { callevent(31, 32); }
+event
+{
+  if (char(5))
+  {
+    stext(
+        5,
+        "I'm pretty sure that I want",
+        "to sneak past security, not",
+        "walk into it... I'd better");
+    stext(5, "not go in here...", "", "");
+  }
+  if (!char(5))
+  {
+    warp(9, 39, 0);
+  }
+}
+event { warp(26, 66, 0); }
+event
+{
+  if (char(5))
+  {
+    stext(
+        5,
+        "This has got to be part of",
+        "Vultris' security system.",
+        "I'd better find another way.");
+  }
+  if (!char(5))
+  {
+    warp(123, 51, 0);
+    flags(601) = 1;
+    flags(602) = 0;
+    flags(603) = 1;
+    flags(604) = 0;
+    flags(605) = 1;
+    alterbtile(123, 40, (706 + flags(601)), flags(601));
+    alterbtile(123, 41, (706 + flags(602)), flags(602));
+    alterbtile(123, 42, (706 + flags(603)), flags(603));
+    alterbtile(123, 44, (706 + flags(604)), flags(604));
+    alterbtile(123, 45, (706 + flags(605)), flags(605));
+  }
+}
+event { warp(77, 66, 0); }
+event
+{
+  flags(601)++;
+  if (flags(601) == 2)
+  {
+    flags(601) = 0;
+  }
+  flags(602)++;
+  if (flags(602) == 2)
+  {
+    flags(602) = 0;
+  }
+  flags(604)++;
+  if (flags(604) == 2)
+  {
+    flags(604) = 0;
+  }
+  flags(605)++;
+  if (flags(605) == 2)
+  {
+    flags(605) = 0;
+  }
+  callevent(43);
+}
+event
+{
+  flags(601)++;
+  if (flags(601) == 2)
+  {
+    flags(601) = 0;
+  }
+  flags(603)++;
+  if (flags(603) == 2)
+  {
+    flags(603) = 0;
+  }
+  flags(604)++;
+  if (flags(604) == 2)
+  {
+    flags(604) = 0;
+  }
+  flags(605)++;
+  if (flags(605) == 2)
+  {
+    flags(605) = 0;
+  }
+  callevent(43);
+}
+event
+{
+  flags(602)++;
+  if (flags(602) == 2)
+  {
+    flags(602) = 0;
+  }
+  flags(603)++;
+  if (flags(603) == 2)
+  {
+    flags(603) = 0;
+  }
+  flags(605)++;
+  if (flags(605) == 2)
+  {
+    flags(605) = 0;
+  }
+  callevent(43);
+}
+event
+{
+  flags(601)++;
+  if (flags(601) == 2)
+  {
+    flags(601) = 0;
+  }
+  flags(602)++;
+  if (flags(602) == 2)
+  {
+    flags(602) = 0;
+  }
+  flags(603)++;
+  if (flags(603) == 2)
+  {
+    flags(603) = 0;
+  }
+  flags(604)++;
+  if (flags(604) == 2)
+  {
+    flags(604) = 0;
+  }
+  callevent(43);
+}
+event
+{
+  soundeffect(18);
+  alterbtile(123, 40, (706 + flags(601)), flags(601));
+  alterbtile(123, 41, (706 + flags(602)), flags(602));
+  alterbtile(123, 42, (706 + flags(603)), flags(603));
+  alterbtile(123, 44, (706 + flags(604)), flags(604));
+  alterbtile(123, 45, (706 + flags(605)), flags(605));
+}
+event { warp(123, 46, 0); }
+event
+{
+  flags(4962) = 2;
+  stext(1, "Hey! There's a switch in here!", "", "");
+  soundeffect(18);
+  alterbtile(13, 35, 701, 1);
+  changezone(13, 35, 0);
+  entity.locy(5) -= 2;
+}
+event
+{
+  flags(4963) = 2;
+  stext(1, "Hey! There's a switch in here!", "", "");
+  soundeffect(18);
+  alterbtile(47, 93, 701, 1);
+  changezone(47, 93, 0);
+  entity.locy(6) += 2;
+}
+event
+{
+  flags(4964) = 1;
+  stext(1, "Hey! There's a switch in here!", "", "");
+  soundeffect(18);
+  alterbtile(130, 5, 701, 1);
+  changezone(130, 5, 0);
+  entity.locy(7) += 2;
+}
+event
+{
+  flags(4965) = 1;
+  stext(1, "Hey! There's a switch in here!", "", "");
+  soundeffect(18);
+  alterbtile(123, 39, 701, 1);
+  changezone(123, 39, 0);
+  entity.locy(8) -= 2;
+}
+event
+{
+  alterbtile(53, 58, 706, 0);
+  alterbtile(54, 58, 706, 0);
+}
+event
+{
+  alterbtile(48, 58, 706, 0);
+  alterbtile(49, 58, 706, 0);
+}
+event
+{
+  warp(18, 11, 0);
+  palettemorph(10, 10, 35, 45, 43);
+}
+event
+{
+  warp(66, 50, 0);
+  palettemorph(0, 0, 0, 0, 63);
+}
+event
+{
+  if (char(5))
+  {
+    stext(5, "A broom closet? Hmmm...", "", "");
+    soundeffect(18);
+    wait(40);
+    soundeffect(7);
+    wait(40);
+    soundeffect(8);
+    stext(5, "Nope, no Seeds in here!", "", "");
+  }
+  if (!char(5))
+  {
+    stext(
+        1,
+        "It's a janitor's closet.",
+        "There's not much point in",
+        "hanging around in here...");
+  }
+}
+event
+{
+  enablesave();
+  banner("Save point!", 1);
+}
+event { disablesave(); }
+event { warp(120, 71, 0); }
+event { warp(37, 50, 0); }
+event
+{
+  if (char(5))
+  {
+    stext(
+        5,
+        "My thief's intuition tells me",
+        "that going in there would be",
+        "a bad idea... And I'm always");
+    stext(5, "right when it comes to these", "things!", "");
+  }
+  if (!char(5))
+  {
+    warp(47, 101, 0);
+    alterbtile(46, 95, 792, 1);
+    alterbtile(47, 95, 792, 1);
+    alterbtile(48, 95, 792, 1);
+    alterbtile(46, 96, 792, 1);
+    alterbtile(47, 96, 792, 1);
+    alterbtile(48, 96, 792, 1);
+    alterbtile(46, 97, 792, 1);
+    alterbtile(47, 97, 792, 1);
+    alterbtile(48, 97, 792, 1);
+  }
+}
+event { warp(35, 66, 0); }
+event
+{
+  stext(
+      0,
+      "Turn the corners green, the",
+      "top and bottom red, and the",
+      "rest blue...");
+}
+event
+{
+  cameratracking = 0;
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0);
+  flags(112) = entity.locx(0);
+  flags(107) = entity.locy(0);
+  if (face(0) == 0)
+  {
+    flags(107) += 1;
+  }
+  if (face(0) == 1)
+  {
+    flags(107) -= 1;
+  }
+  if (face(0) == 2)
+  {
+    flags(112) += 1;
+  }
+  if (face(0) == 3)
+  {
+    flags(112) -= 1;
+  }
+  warp(flags(112), flags(107), 1);
+  if (tileb == 792)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 793, 1);
+  }
+  if (tileb == 795)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 792, 1);
+  }
+  if (tileb == 794)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 795, 1);
+  }
+  if (tileb == 793)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 794, 1);
+  }
+  warp(flags(112) - 1, flags(107), 1);
+  if (tileb == 792)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 793, 1);
+  }
+  if (tileb == 795)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 792, 1);
+  }
+  if (tileb == 794)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 795, 1);
+  }
+  if (tileb == 793)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 794, 1);
+  }
+  warp(flags(112) + 1, flags(107), 1);
+  if (tileb == 792)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 793, 1);
+  }
+  if (tileb == 795)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 792, 1);
+  }
+  if (tileb == 794)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 795, 1);
+  }
+  if (tileb == 793)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 794, 1);
+  }
+  warp(flags(112), flags(107) - 1, 1);
+  if (tileb == 792)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 793, 1);
+  }
+  if (tileb == 795)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 792, 1);
+  }
+  if (tileb == 794)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 795, 1);
+  }
+  if (tileb == 793)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 794, 1);
+  }
+  warp(flags(112), flags(107) + 1, 1);
+  if (tileb == 792)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 793, 1);
+  }
+  if (tileb == 795)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 792, 1);
+  }
+  if (tileb == 794)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 795, 1);
+  }
+  if (tileb == 793)
+  {
+    alterbtile(entity.locx(0), entity.locy(0), 794, 1);
+  }
+  flags(112) = 0;
+  warp(46, 95, 1);
+  if (tileb != 792)
+  {
+    flags(112) = 1;
+  }
+  warp(47, 95, 1);
+  if (tileb != 795)
+  {
+    flags(112) = 1;
+  }
+  warp(48, 95, 1);
+  if (tileb != 792)
+  {
+    flags(112) = 1;
+  }
+  warp(46, 96, 1);
+  if (tileb != 794)
+  {
+    flags(112) = 1;
+  }
+  warp(47, 96, 1);
+  if (tileb != 794)
+  {
+    flags(112) = 1;
+  }
+  warp(48, 96, 1);
+  if (tileb != 794)
+  {
+    flags(112) = 1;
+  }
+  warp(46, 97, 1);
+  if (tileb != 792)
+  {
+    flags(112) = 1;
+  }
+  warp(47, 97, 1);
+  if (tileb != 795)
+  {
+    flags(112) = 1;
+  }
+  warp(48, 97, 1);
+  if (tileb != 792)
+  {
+    flags(112) = 1;
+  }
+  warp(flags(109), flags(110), 1);
+  cameratracking = 1;
+  if (flags(112) == 0 && flags(4963) == 0)
+  {
+    flags(4963) = 1;
+    alterbtile(47, 93, 700, 1);
+    changezone(47, 93, 30);
+  }
+  waitkeyup();
+}

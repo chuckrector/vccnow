@@ -28,4 +28,4 @@ ff              .end (event0)
 
 //
 
-event{while(1){return;return;}}
+event/*0*/{while(1){return;return;}}

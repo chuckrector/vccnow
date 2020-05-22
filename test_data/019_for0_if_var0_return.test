@@ -40,4 +40,4 @@ ff              .end (event0)
 
 //
 
-event{for(a,1,b,1){if(c){return;}}}
+event/*0*/{for(a,1,b,1){if(c){return;}}}

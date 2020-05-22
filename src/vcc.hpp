@@ -9,6 +9,6 @@ void WriteOutput(const char *FilenameWithoutExtension);
 void WriteEffectOutput();
 void WriteMagicOutput();
 void WriteScriptOutput();
-void WriteScriptOffsetTableToBuffer(Buffer_t *Output);
+void WriteScriptOffsetTableToBuffer(buffer *Output);
 
 #endif // VCC_HPP

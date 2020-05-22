@@ -1,0 +1,437 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  if (flags(164) == 1)
+  {
+    alterbtile(13, 69, 0, 0);
+    changezone(13, 69, 6);
+  }
+  if (flags(166) == 1)
+  {
+    entity.locx(15) = 0;
+    entity.locy(15) = 44;
+  }
+}
+event
+{
+  if (flags(165) == 1)
+  {
+    stext(1, "It's got to be in there", "somewhere!", "");
+    wait(100);
+    stext(1, "Aha! Got it!", "", "");
+    giveitem(31);
+    flags(165) = 2;
+    return;
+  }
+  stext(
+      0,
+      "It's a scarecrow. It's",
+      "supposed to keep the",
+      "skunkravens away from the");
+  stext(0, "crops. It doesn't seem to be", "working, though...", "");
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "Bleh, this farm's gone to heck",
+        "ever since the pigs took over.",
+        "");
+    stext(
+        0,
+        "They get to sleep in the house",
+        "while we get that cruddy barn!",
+        "And no one else seems to");
+    stext(0, "notice! Something ain't kosher", "around here!", "");
+  }
+  if (flags(166) == 1)
+  {
+    stext(
+        0,
+        "Well, things are better, but",
+        "I hope the sheep don't get",
+        "*too* used to being in charge!");
+  }
+}
+event
+{
+  stext(
+      0,
+      "I had this great dream last",
+      "night. Some dude with pointy",
+      "ears was attacking me with a");
+  stext(
+      0,
+      "sword, so I summoned up my",
+      "brethren, and we pecked him",
+      "to death! Then we swiped his");
+  stext(0, "rupees and went to Vegas!", "", "");
+  stext(1, "Vegas? Never heard of it.", "", "");
+  stext(
+      0,
+      "It was just a *dream,* silly!",
+      "Now begone, lest you feel my",
+      "fowl wrath!");
+  stext(1, "Boy, that dream went to your", "head, didn't it?", "");
+}
+event { stext(0, "Caw!", "", ""); }
+event
+{
+  stext(0, "Nevermore!", "", "");
+  if (flags(5025) > 0)
+  {
+    flags(5025) = 0;
+    stext(1, "Hey! It stole that egg!", "", "");
+    wait(100);
+    stext(1, "Huh? What's this?", "", "");
+    giveitem(99);
+    stext(1, "It must have dropped it when", "it grabbed the egg!", "");
+  }
+}
+event
+{
+  if (char(4))
+  {
+    stext(
+        0,
+        "Some day, my species will",
+        "become intelligent! What do",
+        "you think of that? Huh?");
+    stext(4, "I think you're delusional!", "", "");
+    specialframe(char(1) - 1) = 23;
+    stext(
+        1,
+        "Rikk, are you feeling all",
+        "right? You're talking to a",
+        "skunkraven!");
+    specialframe(char(1) - 1) = 0;
+    stext(4, "But it said that it'd become", "intelligent!", "");
+    stext(1, "It said 'Caw,' Rikk.", "", "");
+    stext(4, "Hey, bird, repeat what you", "said!", "");
+  }
+  stext(0, "Caw!", "", "");
+  if (char(4))
+  {
+    stext(4, "Oh.", "", "");
+  }
+}
+event { mapswitch("overland.map", 37, 49, 0); }
+event { flags(163) = 0; }
+event
+{
+  if (flags(163))
+  {
+    soundeffect(9);
+    stext(0, "The hay is burnt away!", "", "");
+    alterbtile(entity.locx(0), entity.locy(0) - 1, 82, 0);
+    alterbtile(entity.locx(0), entity.locy(0), 338, 0);
+    alterftile(entity.locx(0), entity.locy(0) - 2, 0, 2);
+    changezone(entity.locx(0), entity.locy(0) - 1, 0);
+  }
+}
+event
+{
+  if (item(31))
+  {
+    soundeffect(18);
+    flags(164) = 1;
+    destroyitem(31, 0);
+    alterbtile(entity.locx(0), entity.locy(0) - 1, 0, 0);
+    changezone(entity.locx(0), entity.locy(0) - 1, 6);
+  }
+}
+event { mapswitch("untrfarm.map", 27, 36, 0); }
+event { warp(40, 24, 0); }
+event { warp(13, 86, 0); }
+event { banner("Hello!", 1); }
+event
+{
+  stext(
+      0,
+      "I hear this farm was built",
+      "over the top of a ruined",
+      "Colonization-era city!");
+}
+event
+{
+  if (flags(165) == 0)
+  {
+    stext(
+        0,
+        "It's Snowball's diary.",
+        "'Last night went to the vault.",
+        "Put money in. Stuck the key in");
+    stext(
+        0,
+        "a new hiding place: Some straw",
+        "in the fields. The key's too",
+        "shiny to leave out, or the");
+    stext(0, "skunkravens'd carry it off.'", "The rest is boring.", "");
+    flags(165) = 1;
+    return;
+  }
+  stext(0, "It's Snowball's diary.", "", "");
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "Sheesh! That pig Snowball just",
+        "has to flaunt that ring he got",
+        "in Avis a few years back! I");
+    stext(
+        0,
+        "don't care that it shoots",
+        "fire! I just want some",
+        "friggin' money of my own!");
+  }
+  if (flags(166) == 1)
+  {
+    stext(0, "Hah! I got myself a new ring!", "wanna see?", "");
+    soundeffect(9);
+  }
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "Every once in a while, I see",
+        "Snowball and some of the rest",
+        "of the pigs sneaking out in");
+    stext(
+        0,
+        "the middle of the night to the",
+        "hay shed. Once, I took a look",
+        "in there a few minutes after");
+    stext(
+        0,
+        "they went in, so I could see",
+        "what they were doing, and the",
+        "place was empty!");
+  }
+  if (flags(166) == 1)
+  {
+    stext(
+        0,
+        "So there was a secret",
+        "underground vault the whole",
+        "time! Wow!");
+  }
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "This is The Commune, a farm",
+        "where all animals serve the",
+        "people in the way they are");
+    stext(
+        0,
+        "best suited! I was told I",
+        "could only stay here if I",
+        "contributed, so I told them");
+    stext(
+        0,
+        "that I was best at telling",
+        "people where they were, and",
+        "they bought it!");
+  }
+  if (flags(166) == 1)
+  {
+    stext(
+        0,
+        "This is the Commune, a farm",
+        "where all are allowed to do",
+        "as they please, as long as");
+    stext(0, "they don't piss off the", "sheep!", "");
+  }
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(1, "What now?", "", "");
+  stext(0, "I be Attilla the Pun!", "", "");
+  stext(1, "I didn't need to know that.", "", "");
+}
+event
+{
+  if (item(24))
+  {
+    flags(166) = 1;
+    destroyitem(24, 0);
+    specialframe(14) = 23;
+    stext(0, "What's that you've got? New", "music? Let me see...", "... ...");
+    specialframe(14) = 21;
+    stext(0, "!!!", "", "");
+    stext(
+        0,
+        "Why... this is from the...",
+        "Colonization! It must be the",
+        "original lyrics of The Song!");
+    stext(0, "I'll give you this in", "exchange for it!", "");
+    giveitem(67);
+    wait(150);
+    specialframe(14) = 22;
+    stext(
+        0,
+        "It's not at all the same!",
+        "The pigs aren't chosen as the",
+        "natural leaders at all!");
+    stext(0, "Plus, the real song scans", "better!", "");
+    stext(0, "They LIED to us!", "", "");
+    text(0, "They LIED to us!", "They made us SLAVES!", "");
+    text(
+        0,
+        "They LIED to us!",
+        "They made us SLAVES!",
+        "There will be a RECKONING!!!");
+    specialframe(14) = 0;
+    boxfadeout(100);
+    mapswitch("farm.map", 28, 34, 0);
+  }
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "Some day, my people will be",
+        "shown the truth, and there",
+        "will be a reckoning. For now");
+    stext(0, "we sing...", "", "");
+    return;
+  }
+  if (flags(166) == 1)
+  {
+    stext(0, "Thank you, my friends!", "", "");
+  }
+}
+event { stext(0, "You don't have to go right", "now.", ""); }
+event
+{
+  if (flags(166) == 0)
+  {
+    disablesave();
+    warp(49, 62, 0);
+    return;
+  }
+  banner("Locked!", 1);
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    enablesave();
+    warp(30, 10, 0);
+    return;
+  }
+  banner("Locked!", 1);
+}
+event { warp(41, 63, 0); }
+event { warp(72, 63, 0); }
+event { warp(43, 78, 0); }
+event { warp(27, 17, 0); }
+event { warp(57, 106, 0); }
+event { warp(11, 27, 0); }
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(1, "I'm not going that way! The", "pigs might see me!", "");
+    partymove("U1");
+  }
+}
+event { stext(0, "No entrance!", "(grunt!)", ""); }
+event
+{
+  if (flags(166) == 1)
+  {
+    stext(0, "Old MacDonald had a farm...", "", "");
+    return;
+  }
+  switch (flags(167))
+  {
+    case (0): stext(0, "The United People's Commune", "had a farm...", "");
+    case (1): stext(0, "E-I-E-I-O!", "", "");
+    case (2): stext(0, "And on that farm there was a", "sheep...", "");
+    case (3):
+      stext(
+          0,
+          "...laboring diligently under",
+          "the inspired leadership of",
+          "their porcine brethren...");
+    case (4): stext(0, "E-I-E-I-O!", "", "");
+  }
+  flags(167)++;
+  if (flags(167) > 4)
+  {
+    flags(167) = 0;
+  }
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "What do we chickens do? We",
+        "weed this area and hunt for",
+        "bugs, so that when the crops");
+    stext(0, "are rotated here, they'll do", "well!", "");
+    return;
+  }
+  stext(0, "What do we chickens do? We", "sit back and enjoy ourselves!", "");
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "All work according to their",
+        "abilities! We pigs are best",
+        "at leading, so that is what");
+    stext(0, "we do here!", "", "");
+    return;
+  }
+  stext(
+      0,
+      "This will not last forever.",
+      "Eventually, we will lead this",
+      "farm again...");
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(0, "Work harder! You shame your", "brethren by slacking!", "");
+    return;
+  }
+  stext(0, "Now we must work! This is not", "what we are best suited for!", "");
+}
+event
+{
+  if (flags(166) == 0)
+  {
+    stext(
+        0,
+        "I noticed something you might",
+        "find interesting! Snowball",
+        "leaves the house at night by");
+    stext(0, "a back window that he always", "leaves unlocked! Cool, huh?", "");
+    return;
+  }
+  stext(
+      0,
+      "Darn! That window's locked",
+      "now, so I can't sneak in and",
+      "steal vodka now!");
+}
+event { mapswitch("orchard.map", 14, 37, 0); }

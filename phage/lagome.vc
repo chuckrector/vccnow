@@ -1,0 +1,115 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+}
+event { mapswitch("warrens.map", 85, 1, 0); }
+event { stext(0, ".........", "", ""); }
+event
+{
+  stext(0, "Mauser's diary. -- Keep out!", "", "");
+  stext(1, "Hmmm... This is dated a few", "days ago...", "");
+  stext(
+      0,
+      "Yesterday, my contact in",
+      "Carbera disappeared. This is a",
+      "good sign. His friends must've");
+  stext(
+      0,
+      "escaped. Soon, my plan will be",
+      "executed, and I'll be a hero",
+      "in these parts...");
+  stext(1, "This is the next entry...", "", "");
+  stext(
+      0,
+      "Blast! She waited too long!",
+      "I couldn't let them escape,",
+      "but father won't let me kill");
+  stext(
+      0,
+      "them! He says it's not",
+      "'artistic' enough... whatever",
+      "that means... Anyway, then");
+  stext(
+      0,
+      "*They* showed up, and my plan",
+      "was ruined! Now they're heroes",
+      "and I look like an incompetent");
+  stext(
+      0,
+      "bungler! Father is interested",
+      "in this development. He says",
+      "that Garm fared badly against");
+  stext(
+      0,
+      "them earlier, and lost his",
+      "cover identity. But Garm's",
+      "a weakling... I won't lose...");
+}
+event
+{
+  stext(0, "Lagome's diary.", "", "");
+  stext(1, "Here's a recent entry...", "", "");
+  stext(
+      0,
+      "Today was really neat! I saw",
+      "the cutest guy! He helped us",
+      "out against these three dorks");
+  stext(
+      0,
+      "who wanted to kidnap me! I",
+      "wonder: if I kiss him, will",
+      "he turn into a prince?");
+  if (char(4))
+  {
+    stext(4, "Huh?!? No way! I'll get her", "to like *me!*", "");
+  }
+}
+event
+{
+  specialframe(9) = 21;
+  stext(9, "Hi!", "", "");
+  if (char(4))
+  {
+    stext(4, "H... Hi! <She spoke to *me*!>", "", "");
+  }
+  stext(9, "Mr. Sam, have you decided to", "come here to stay?", "");
+  if (char(4))
+  {
+    stext(4, "<Oh.>", "", "");
+  }
+  stext(1, "Ah... nope, sorry!", "", "");
+}
+event
+{
+  stext(10, "Ah, velkomme! Mein leader", "is grateful for all you've", "done.");
+  if (char(4))
+  {
+    stext(4, "Only your leader?", "", "");
+    specialframe(10) = 20;
+    wait(50);
+    specialframe(10) = 0;
+  }
+  if (char(3))
+  {
+    stext(
+        3,
+        "<Hmmm... It seems I was wrong",
+        "before, when I thought it was",
+        "Lagome who smelled that way.");
+    stext(3, "It's Mauser! Now I wonder", "why...>", "");
+  }
+}
+event
+{
+  if (face(0) == 0 && flags(1180) == 0)
+  {
+    flags(1180) = 1;
+    stext(1, "Hey, I found a picture stuck", "behind the shelf!", "");
+    banner("Sam found:", 1);
+    banner("Lagome Bromide!", 1);
+    return;
+  }
+  banner("Nothing!", 1);
+}
+event { banner("Nothing!", 1); }

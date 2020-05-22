@@ -1,0 +1,853 @@
+event
+{
+  fadein(1);
+  flags(801) = 7;
+  enforceanimation();
+  if (flags(185) == 12)
+  {
+    flags(185) = 13;
+    partymove("R4");
+    stext(
+        3,
+        "Hrmm... That charnel stench...",
+        "Something bad went down here!",
+        "");
+    specialframe(char(4) - 1) = 21;
+    stext(4, "Where's Lagome? Is she OK?", "We've got to find her!", "");
+    specialframe(char(4) - 1) = 0;
+    stext(
+        1,
+        "Calm down, Rikk! We'll look",
+        "for her! If she's in here,",
+        "we'll find her!");
+    stext(3, "But what about Bull, and the", "Seed?", "");
+    specialframe(char(1) - 1) = 20;
+    stext(
+        1,
+        "I... I want to find them,",
+        "but... I can't just leave",
+        "without trying to help, and...");
+    specialframe(char(1) - 1) = 0;
+    stext(
+        3,
+        "And Rikk loves her... Is that",
+        "what you were going to say?",
+        "(sigh) I told you that love");
+    stext(
+        3,
+        "leads to nothing but trouble,",
+        "but you wouldn't listen. Now,",
+        "because of love, you're going");
+    stext(3, "to risk the future well-being", "of your hometown...", "");
+    specialframe(char(4) - 1) = 21;
+    stext(
+        4,
+        "Shut up! Just shut up! Why",
+        "are you trying to sabotage my",
+        "happiness? Why're you putting");
+    stext(
+        4,
+        "Sam in such a hard decision?",
+        "Why can't you just help her?",
+        "Why?!?");
+    stext(3, "... ... ...", "", "");
+    stext(
+        4,
+        "Sam! You know we can't just",
+        "abandon Lagome! Please, Sam!",
+        "help me, and we'll all work");
+    stext(4, "extra hard to get the Seed", "back!", "");
+    stext(
+        1,
+        "Rikk... You don't have to",
+        "convince me... I'm gonna",
+        "help you any way I can,");
+    stext(
+        1,
+        "buddy... But we've got to",
+        "hurry and start this *now,*",
+        "so that we don't lose any");
+    stext(1, "more time chasing the Seed!", "", "");
+    specialframe(char(4) - 1) = 0;
+    stext(4, "Sam... Thank you. I won't", "let you down!", "");
+    stext(
+        3,
+        "Well, then... If we must do",
+        "this, then let's do it! I",
+        "have little patience for");
+    stext(3, "talk, when action is the", "thing required!", "");
+  }
+}
+event { mapswitch("overland.map", 56, 98, 0); }
+event
+{
+  if (flags(185) > 15)
+  {
+    mapswitch("overland.map", 61, 98, 0);
+  }
+  if (flags(185) < 16)
+  {
+    stext(4, "No! We've gotta find Lagome!", "", "");
+    stext(
+        1,
+        "Right! Hmmm... Maybe she's in",
+        "her chambers? We certainly",
+        "haven't seen her out here!");
+    partymove("L1");
+  }
+}
+event
+{
+  face(5) = 0;
+  prompt(0, "Soft beds for just 35 gp!", "", "", 112, "No.", "Yes.");
+  if (flags(112))
+  {
+    if (gp < 35)
+    {
+      stext(0, "You don't have enough gp!", "", "");
+    }
+    if (gp > 34)
+    {
+      takegp(35);
+      banner("We're healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(0, "Cute frogs are always", "welcome! Tee hee!", "");
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "Awwww... Are you sure?", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "Hey, cutie! No messing",
+      "around behind the counter",
+      "until I get off duty, OK?");
+}
+event
+{
+  stext(0, "Would you like to learn my", "secret healing arts?", "");
+  prompt(
+      0,
+      "It'll cost 10 SP, and you'll",
+      "still have to pay money!",
+      "",
+      112,
+      "No.",
+      "Yes.");
+  if (flags(112) == 1 && flags(703) < 10)
+  {
+    stext(0, "Not enough SP! Begone!", "", "");
+  }
+  if (flags(112) == 1 && flags(703) > 9)
+  {
+    flags(703) -= 10;
+    magicshop(18, 10);
+    stext(
+        0,
+        "Whaddya mean you're",
+        "disappointed? It's really hard",
+        "to get de-poisoned, you know!");
+  }
+  if (flags(112) == 0)
+  {
+    stext(0, "I'll still be here later!", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "This is the Warrens, a ghost",
+      "town! I'm scared! But a frog",
+      "has to do what a frog has to");
+  stext(
+      0, "do, and what I gotta do is", "tell people the name of the", "town!");
+  stext(1, "Wow, I'm so... mysteriously", "unmoved by that sentiment...", "");
+}
+event
+{
+  if (flags(185) == 13)
+  {
+    flags(185) = 14;
+    stext(
+        1,
+        "Boy, it sure is eerie in",
+        "here with everyone missing!",
+        "I wonder if this is what");
+    stext(1, "the BPC was like...", "", "");
+    specialframe(char(5) - 1) = 23;
+    stext(5, "The what?", "", "");
+    specialframe(char(5) - 1) = 0;
+    stext(
+        1,
+        "The Burrowing People's",
+        "Republic, Dingo! Oh, yeah,",
+        "sorry... I forgot you grew");
+    stext(
+        1,
+        "up without a lot of access",
+        "to history books... The",
+        "BPC was this group of");
+    stext(
+        1,
+        "burrowing races that banded",
+        "together and mined for",
+        "metals that the other races");
+    stext(
+        1,
+        "couldn't get at... Then the",
+        "BPC would sell the metals",
+        "to the other races, and");
+    stext(
+        1,
+        "get filthy rich! In fact,",
+        "they were so important,",
+        "the whole war between the");
+    stext(
+        1,
+        "Savannah Empire and the",
+        "Horse Nomads revolved",
+        "around who had control of");
+    stext(
+        1,
+        "the BPC and it's resources!",
+        "And since the BPC was right",
+        "next to the Nomads' lands,");
+    stext(
+        1,
+        "they had an enormous advantage",
+        "that led to them nearly",
+        "winning the war! If Lumin");
+    stext(
+        1,
+        "hadn't dropped the meteor on",
+        "them, they would have taken",
+        "over the world!");
+    stext(5, "Well, so what happened to", "them? You keep saying 'was!'", "");
+    stext(
+        1,
+        "Around 200 years ago, the",
+        "BPC stopped sending ships",
+        "to trade with us. When Lumin");
+    stext(
+        1,
+        "went to investigate, he came",
+        "back and reported that the",
+        "entire population had up and");
+    stext(
+        1,
+        "vanished! Others went to",
+        "investigate, but they never",
+        "returned, and after a few");
+    stext(
+        1,
+        "months, Lumin had the Empire",
+        "stop sending ships across",
+        "the ocean, because they were");
+    stext(1, "losing too many ships and", "too many people!", "");
+    specialframe(char(5) - 1) = 23;
+    stext(5, "So... what was your point", "again?", "");
+    specialframe(char(5) - 1) = 0;
+    specialframe(char(1) - 1) = 20;
+    wait(100);
+    specialframe(char(1) - 1) = 0;
+    stext(1, "Never mind...", "", "");
+  }
+}
+event { stext(0, "Princess Lagome is so...", "perfect! (Sigh!)", ""); }
+event
+{
+  stext(
+      0,
+      "Man! Princess Lagome is such",
+      "a babe! I heard the Vultris",
+      "Confectionary Company has");
+  stext(
+      0,
+      "offered her 1,000,000,000",
+      "gp to let them make a",
+      "chocolate bunny in her");
+  stext(0, "image! Boy, would I like", "to be there for that!", "");
+}
+event
+{
+  stext(0, "I have incredible weapons", "for sale!", "");
+  shop(13, 16, 17, 19, 32, 18);
+  stext(
+      0,
+      "Did you hear the one about",
+      "Lagome and the guy with a",
+      "hydraulic tongue? Well...");
+  stext(1, "I think I'm too young to", "hear this joke!", "");
+  if (char(4))
+  {
+    stext(4, "Yeah, me too...", "", "");
+    text(4, "Yeah, me too... So keep", "going!", "");
+    stext(
+        0,
+        "No, I think your green",
+        "friend has a point. I'll",
+        "tell you when you're old");
+    stext(0, "enough to drink.", "", "");
+    stext(4, "Dangit!", "", "");
+  }
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(1, "And you would be...?", "", "");
+  stext(0, "I be the Anti-Worm!", "", "");
+  stext(1, "The Anti-Worm? What's the", "Worm, then?", "");
+  stext(0, "Don't confuse the issue!", "", "");
+  stext(1, "Or the tissue?", "", "");
+  stext(
+      0,
+      "I concede to one who is",
+      "obviously my superior in",
+      "the arts of debate!");
+  stext(0, "I hereby change my name", "to the Anti-Worm!", "");
+  stext(1, "But that's exactly the same", "name as you had before!", "");
+  stext(0, "Oh, *is* it, mister? *Is* it?", "", "");
+  stext(1, "Yes! It is!", "", "");
+  stext(0, "Don't confuse the issue!", "", "");
+  stext(1, "I give up!", "", "");
+}
+event
+{
+  prompt(
+      0,
+      "Antidotes cast here! Do you",
+      "wish to be cured of all your",
+      "ailments? Only 15 gp!",
+      112,
+      "No",
+      "Yes");
+  if (flags(112))
+  {
+    if (gp < 15)
+    {
+      stext(0, "No can do, compadre, unless", "you get some dinero!", "");
+    }
+    if (gp > 14)
+    {
+      takegp(15);
+      stext(0, "Alakazam!", "", "");
+      banner("We're cured!", 1);
+      flags(1021) = 0;
+      flags(1022) = 0;
+      flags(1023) = 0;
+      flags(1024) = 0;
+      flags(1025) = 0;
+      flags(1026) = 0;
+      flags(1027) = 0;
+      flags(1028) = 0;
+      stext(0, "Come again, mis amigos!", "", "");
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "Come back when you're ready...", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "Mauser is the princess's",
+      "personal bodyguard. Most",
+      "people find him scary, but I");
+  stext(0, "think that it just makes", "him... interesting...", "Tee hee!");
+}
+event
+{
+  stext(
+      0,
+      "Mon, zat Mauser khuy khives",
+      "me ze willies! E's khot",
+      "zis... akhzent! Y'know, mon?");
+}
+event
+{
+  banner("Battle!", 1);
+  banner("3 Thunderbunnies", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 3;
+    flags(502) = 225;
+    flags(503) = 105;
+    flags(504) = 1005;
+    flags(505) = 23;
+    flags(506) = 23;
+    flags(507) = 22;
+    flags(508) = 22;
+    flags(509) = 500;
+    flags(510) = 170;
+    flags(511) = 0;
+    flags(512) = 38;
+    flags(513) = 39;
+    flags(540) = 150;
+    flags(541) = 250;
+    flags(1009) = 0;
+    flags(514) = 3;
+    flags(515) = 225;
+    flags(516) = 105;
+    flags(517) = 1005;
+    flags(518) = 23;
+    flags(519) = 23;
+    flags(520) = 22;
+    flags(521) = 22;
+    flags(522) = 500;
+    flags(523) = 170;
+    flags(524) = 0;
+    flags(525) = 38;
+    flags(526) = 39;
+    flags(542) = 150;
+    flags(543) = 250;
+    flags(1010) = 0;
+    flags(527) = 3;
+    flags(528) = 225;
+    flags(529) = 105;
+    flags(530) = 1005;
+    flags(531) = 22;
+    flags(532) = 22;
+    flags(533) = 23;
+    flags(534) = 23;
+    flags(535) = 500;
+    flags(536) = 170;
+    flags(537) = 0;
+    flags(538) = 38;
+    flags(539) = 39;
+    flags(544) = 150;
+    flags(545) = 250;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("warbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  banner("Battle!", 1);
+  banner("1 Bud-A", 1);
+  if (flags(200) == 0)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 1)
+  {
+    fakebattle();
+  }
+  if (flags(200) == 2)
+  {
+    flags(501) = 0;
+    flags(502) = 100;
+    flags(503) = 160;
+    flags(504) = 0;
+    flags(505) = 23;
+    flags(506) = 24;
+    flags(507) = 25;
+    flags(508) = 26;
+    flags(509) = 0;
+    flags(510) = 0;
+    flags(511) = 0;
+    flags(512) = 55;
+    flags(513) = 56;
+    flags(540) = 400;
+    flags(541) = 300;
+    flags(1009) = 0;
+    flags(514) = 2;
+    flags(515) = 100;
+    flags(516) = 160;
+    flags(517) = 1200;
+    flags(518) = 24;
+    flags(519) = 25;
+    flags(520) = 26;
+    flags(521) = 27;
+    flags(522) = 600;
+    flags(523) = 300;
+    flags(524) = 0;
+    flags(525) = 55;
+    flags(526) = 56;
+    flags(542) = 400;
+    flags(543) = 300;
+    flags(1010) = 0;
+    flags(527) = 0;
+    flags(528) = 225;
+    flags(529) = 105;
+    flags(530) = 0;
+    flags(531) = 50;
+    flags(532) = 50;
+    flags(533) = 51;
+    flags(534) = 51;
+    flags(535) = 500;
+    flags(536) = 170;
+    flags(537) = 0;
+    flags(538) = 38;
+    flags(539) = 39;
+    flags(544) = 150;
+    flags(545) = 250;
+    flags(1011) = 0;
+    flags(109) = entity.locx(0);
+    flags(110) = entity.locy(0);
+    mapswitch("warbat.map", 1, 1, 0);
+  }
+}
+event
+{
+  stext(
+      0,
+      "There's a crazy guy around",
+      "here who thinks Mauser is",
+      "from the BPC... But we all");
+  stext(
+      0,
+      "know that's impossible! The",
+      "BPC was totally abandoned!",
+      "... ... ... Wasn't it?");
+}
+event
+{
+  stext(
+      0,
+      "Arrrgh! Everywhere you go",
+      "in this town, it's 'Lagome'",
+      "this,' and 'Lagome that!'");
+  stext(
+      0,
+      "I mean, what's the big",
+      "deal! Sure, she's stinking",
+      "rich, from a royal bloodline,");
+  stext(
+      0,
+      "incredibly beautiful, got a",
+      "body to die for... (drool!)",
+      "Lagome... You must be mine!");
+}
+event
+{
+  stext(
+      0,
+      "All these people making",
+      "dirty comments about the",
+      "princess... They're just");
+  stext(
+      0,
+      "too much! My sweet, pure",
+      "goddess would never do the",
+      "things they say! Never!");
+  stext(0, "NEEEEVEEEERRRR!!!!!!", "", "");
+  stext(1, "I'm going to walk slowly", "away now...", "");
+}
+event
+{
+  if (flags(265) < 2)
+  {
+    stext(
+        0,
+        "None shall pass! Within lie",
+        "the personal chambers of the",
+        "princess!");
+  }
+  if (flags(265) > 1)
+  {
+    stext(0, "Hey, yeah, go on in!", "", "");
+  }
+}
+event
+{
+  if (flags(265) < 2)
+  {
+    stext(
+        0,
+        "None shall pass! Within lie",
+        "the personal chambers of the",
+        "princess!");
+    stext(
+        0,
+        "... And her skimpy underwear!",
+        "I'm guarding the gateway to",
+        "Paradise!");
+  }
+  if (flags(265) > 1)
+  {
+    stext(0, "Wow! It's the guys who saved", "Lagome! Go on in!", "");
+    stext(
+        0,
+        "And... while you're in there,",
+        "do you think you could get me",
+        "an autographed pair of...");
+    if (char(4))
+    {
+      stext(4, "No way! I'm not going to", "get you that! Forget it!", "");
+    }
+  }
+}
+event
+{
+  stext(0, "We've got items for sale!", "", "");
+  shop(1, 2, 38, 39, 54, 55, 65, 53);
+  stext(
+      0,
+      "I wish I could make witty",
+      "comments like the other",
+      "item salespeople!");
+}
+event
+{
+  stext(
+      0,
+      "This way lie the communal",
+      "sleeping quarters... Not",
+      "much of interest in there!");
+}
+event
+{
+  specialframe(15) = 0;
+  stext(0, "I sell cheese!", "", "");
+  stext(
+      1,
+      "Really? That makes you the",
+      "first cheese salesperson",
+      "I've met that did!");
+  stext(
+      0,
+      "Oh, yes! I really do sell",
+      "cheese! Why, Mauser bought",
+      "my entire stock today!");
+  stext(1, "So... you *have* no cheese?", "", "");
+  specialframe(15) = 20;
+  stext(0, "Uh... nope!", "", "");
+  stext(1, "And therefore you *sell* no", "cheese?", "");
+  stext(0, "Not at this *very* moment...", "", "");
+  stext(1, "It figures...", "", "");
+}
+event { stext(0, ".........", "", ""); }
+event
+{
+  stext(
+      0,
+      "Those armadillos are Lagome's",
+      "elite guardsmen! They're also",
+      "completely mute.");
+}
+event
+{
+  stext(
+      0,
+      "Come see the amazing mystery",
+      "spot, where the laws of the",
+      "universe are broken as if by");
+  stext(
+      0,
+      "a common criminal! No one",
+      "has ever been able to walk",
+      "into it, yet there is nothing");
+  stext(0, "there to stop them!", "", "");
+}
+event
+{
+  if (flags(265) == 0)
+  {
+    stext(
+        10,
+        "Hurry, mein ruler!",
+        "Ve must get you to savety",
+        "before I can take these");
+    stext(10, "ruffians on !", "", "");
+    entitymove(35, "R5R6F3");
+    wait(250);
+    stext(
+        9,
+        "No! I want to watch you",
+        "fight! I won't get in the",
+        "way, I promise!");
+    entitymove(34, "R5R6F3");
+    wait(250);
+    face(35) = 1;
+    stext(
+        10,
+        "No, mein ruler! Ve haff",
+        "to get you to savety,",
+        "or I vill not fight");
+    stext(10, "effectiffly!", "", "");
+    specialframe(34) = 20;
+    stext(9, "Awwww... But I want to", "see you in action!", "");
+    specialframe(35) = 20;
+    wait(50);
+    specialframe(35) = 0;
+    specialframe(34) = 0;
+    stext(10, "Ve haff no time to arkue!", "Now go! Schnell!", "");
+    stext(0, "Too late! We're here!", "", "");
+    entitymove(36, "R5R6");
+    entitymove(37, "R5R6");
+    entitymove(38, "R5R6");
+    wait(250);
+    face(35) = 3;
+    stext(
+        0,
+        "Thought you could escape",
+        "us by running really fast?",
+        "It isn't so easy!");
+    flags(265) = 1;
+    specialframe(char(4) - 1) = 21;
+    stext(4, "It can't be!", "", "");
+    specialframe(char(4) - 1) = 0;
+    specialframe(char(1) - 1) = 21;
+    stext(1, "Not them?!?", "", "");
+    specialframe(char(1) - 1) = 0;
+    specialframe(char(5) - 1) = 21;
+    stext(5, "Gasp! Impossible!", "... ... ...", "... ... ...");
+    specialframe(char(5) - 1) = 23;
+    stext(5, "Wait a minute, who the heck", "*are* they?", "");
+    specialframe(char(5) - 1) = 0;
+    stext(3, "I take it you know these", "three?", "");
+    stext(0, "We have returned...", "", "");
+    stext(0, "   We have obtained new", "   powers...", "");
+    stext(0, "      Oui, and new costumes!", "", "");
+    stext(4, "Yeah, and even an outrageous", "accent!", "");
+    stext(0, "Nothing shall stop us!", "", "");
+    stext(0, "   The princess will be ours", "   to ransom!", "");
+    stext(
+        0,
+        "      Oui, unless she succumbs",
+        "      to ze masculine charms I",
+        "      pozess, and zen...");
+    stext(4, "Hey! You three! Want a", "rematch?", "");
+    specialframe(36) = 21;
+    stext(0, "Huh? You!!!", "", "");
+    specialframe(36) = 0;
+    stext(
+        4,
+        "Yeah, us! And this time, I",
+        "brought friends, so you won't",
+        "be able to gang up on me");
+    stext(4, "again!", "", "");
+    stext(0, "Ha! You are no match for the", "likes of...", "");
+    specialframe(36) = 4;
+    stext(0, "Lenny, the Conqueror!", "", "");
+    specialframe(37) = 25;
+    stext(0, "   Squiggy, the Destroyer!", "", "");
+    specialframe(38) = 25;
+    stext(0, "      Pierre, zee Lovairr!", "", "");
+    wait(50);
+    stext(0, "Together, we are the", "Indestructible Trio!", "");
+    wait(50);
+    specialframe(36) = 0;
+    specialframe(37) = 0;
+    specialframe(38) = 0;
+    stext(0, "Banzai!", "    En Guarde!", "       Surrendair!");
+    banner("Boss Battle!", 1);
+    banner("1 Lenny C.", 1);
+    banner("1 Squiggy D.", 1);
+    banner("and 1 Pierre L.", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      callevent(29);
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+      fakebattle();
+      fakebattle();
+      callevent(29);
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 2;
+      flags(502) = 150;
+      flags(503) = 190;
+      flags(504) = 1000;
+      flags(505) = 37;
+      flags(506) = 22;
+      flags(507) = 51;
+      flags(508) = 37;
+      flags(509) = 400;
+      flags(510) = 150;
+      flags(511) = 4;
+      flags(512) = 65;
+      flags(513) = 19;
+      flags(540) = 80;
+      flags(541) = 80;
+      flags(1009) = 0;
+      flags(514) = 2;
+      flags(515) = 185;
+      flags(516) = 80;
+      flags(517) = 900;
+      flags(518) = 46;
+      flags(519) = 19;
+      flags(520) = 18;
+      flags(521) = 38;
+      flags(522) = 400;
+      flags(523) = 150;
+      flags(524) = 4;
+      flags(525) = 19;
+      flags(526) = 65;
+      flags(542) = 100;
+      flags(543) = 60;
+      flags(1010) = 0;
+      flags(527) = 2;
+      flags(528) = 5;
+      flags(529) = 50;
+      flags(530) = 500;
+      flags(531) = 39;
+      flags(532) = 39;
+      flags(533) = 40;
+      flags(534) = 16;
+      flags(535) = 400;
+      flags(536) = 150;
+      flags(537) = 4;
+      flags(538) = 39;
+      flags(539) = 39;
+      flags(544) = 90;
+      flags(545) = 150;
+      flags(1011) = 0;
+      flags(251) = 1;
+      flags(109) = 31;
+      flags(110) = 12;
+      mapswitch("dambat.map", 1, 1, 0);
+    }
+  }
+}
+event { mapswitch("warrens.map", 31, 12, 0); }
+event
+{
+  if (flags(265) > 1)
+  {
+    if (entity.locx(16) == 84)
+    {
+      stext(0, "Go on in, mighty heroes!", "", "");
+      entitymove(16, "D1L1F0");
+      entitymove(17, "D1R1F0");
+    }
+  }
+}
+event { mapswitch("lagome2.map", 4, 33, 0); }
+event
+{
+  if (entity.locx(16) == 84)
+  {
+    stext(0, "You may leave, friends!", "", "");
+    entitymove(16, "D1L1F0");
+    entitymove(17, "D1R1F0");
+  }
+}

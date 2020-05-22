@@ -1,0 +1,515 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  if (flags(185) > 9)
+  {
+    entity.locx(5) += 3;
+    entity.locy(5) += 2;
+    entity.locx(6) += 2;
+    entity.locy(6) += 1;
+    entity.locx(7) += 1;
+  }
+  if (flags(185) > 20)
+  {
+    alterftile(82, 23, 344, 2);
+    alterftile(86, 23, 344, 2);
+  }
+}
+event { mapswitch("overland.map", 54, 85, 0); }
+event
+{
+  if (flags(271) == 1)
+  {
+    stext(
+        1,
+        "We're not going in there,",
+        "considering what happened",
+        "last time...");
+    if (char(5))
+    {
+      stext(5, "I'd think of it as a", "good reason to do it again!", "");
+    }
+  }
+  if (flags(271) == 0)
+  {
+    stext(0, "EEEEEEEEEEEEK!", "", "");
+    specialframe(0) = 21;
+    stext(1, "I'm terribly sorry ma'am!", "", "");
+    specialframe(0) = 0;
+    partymove("D1");
+    stext(
+        1,
+        "Mental note: Do not go",
+        "barging into people's houses",
+        "as if this were some game!");
+    flags(271) = 1;
+  }
+}
+event
+{
+  if (flags(185) < 10)
+  {
+    stext(
+        0,
+        "Sorry, boys, but nobody's",
+        "allowed in unless they're",
+        "in the tour group.");
+    if (char(4))
+    {
+      stext(4, "Darn! I wanted a chocolate", "bunny!", "");
+    }
+  }
+  if (flags(185) > 9)
+  {
+    stext(
+        0,
+        "Hey! Where are you going?",
+        "You missed the tour, if",
+        "that's why you're here.");
+  }
+  if (flags(185) > 9 && flags(185) < 21)
+  {
+    stext(
+        1,
+        "Oh, no! We're here with",
+        "a guy named Bull... Did",
+        "he come through earlier?");
+    stext(
+        0,
+        "Huh? Oh, yeah. So you're",
+        "friends of that guy? No",
+        "accounting for taste, I");
+    stext(
+        0,
+        "guess... Go on in. He's",
+        "meeting with the boss now,",
+        "so we can't let you into");
+    stext(
+        0,
+        "the office, but I'll tell",
+        "you what: You can hang with",
+        "the tour for free, until");
+    stext(
+        0,
+        "the meetin's done with.",
+        "I'll send someone to get you",
+        "when he comes out.");
+    stext(1, "Hey, thanks!", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "Every year, Mr. Vultris holds",
+      "a beauty pageant to see who",
+      "gets to be the model for his");
+  stext(
+      0,
+      "famous chocolate bunnies!",
+      "The winner gets lots of perks,",
+      "and is paid handsomely!");
+  stext(
+      0,
+      "I'm going to try out this",
+      "year! I just hope the casting",
+      "for the mold is painless!");
+}
+event
+{
+  stext(
+      0,
+      "Y'know, Vultris is really",
+      "pretty old! And he's also the",
+      "only vulture anyone's seen in");
+  stext(
+      0,
+      "decades! I wonder if the",
+      "reason he's always so cranky",
+      "is 'cause he doesn't have a");
+  stext(0, "wife... He must be lonely!", "", "");
+}
+event
+{
+  stext(
+      0,
+      "Vultris may be a reclusive old",
+      "coot with a bad temper and",
+      "the morals of a... a...");
+  stext(
+      0,
+      "... the morals of a guy with",
+      "no morals, but he's also a",
+      "business genius whose");
+  stext(
+      0,
+      "factory has provided jobs for",
+      "half the town and joy to",
+      "children all over the Empire!");
+}
+event
+{
+  stext(
+      0,
+      "Vultris is a tycoon who has a",
+      "factory in our town. He's",
+      "really really rich! Filthy");
+  stext(
+      0,
+      "stinkin' wealthy beyond all",
+      "my dreams of glorious glorious",
+      "avarice!");
+  stext(0, "... ... Ahem! Where was I?", "", "");
+  stext(
+      0,
+      "Oh yes! But I wonder if all",
+      "of his money was made legally?",
+      "He's not the nicest guy.");
+}
+event
+{
+  stext(0, "Sorry, I'm too busy to talk", "to some wandering stranger...", "");
+  if (flags(185) < 24)
+  {
+    stext(
+        0,
+        "Oh, who am I kidding! No",
+        "townsperson has *ever* been",
+        "too busy to talk to a");
+    stext(
+        0,
+        "wandering stranger! What can",
+        "I talk to you about? Perhaps",
+        "I can explain some little");
+    stext(
+        0,
+        "bit of history that may mean",
+        "nothing to you now, but will",
+        "explain the things you find");
+    stext(
+        0,
+        "in the future! Or maybe I",
+        "could tell you all about some",
+        "guy who you will end up");
+    stext(
+        0,
+        "running into later! Or maybe,",
+        "just maybe, I can ask you to",
+        "perform some random quest for");
+    stext(
+        0,
+        "me that will end up providing",
+        "you with some desperately",
+        "needed item or spell!");
+    stext(
+        0,
+        "Ah! I've got it! I like to",
+        "eat cheese! Let me name the",
+        "various kinds of cheese that");
+    stext(
+        0,
+        "tend to tickle my palate...",
+        "There's limburger, munster,",
+        "swiss, blue, cheddar, jack...");
+    stext(1, "I'm outta here! This guy is", "too sarcastic for my taste!", "");
+  }
+  if (flags(185) > 23)
+  {
+    stext(
+        0,
+        "Oh, you know we wandering",
+        "townsfolk are never too",
+        "busy to chat aimlessly!");
+    stext(
+        0,
+        "I just saw two giant globs",
+        "of candy go flying off from",
+        "the factory! One went east,");
+    stext(
+        0,
+        "towards the Frog Pond area.",
+        "the other went west, towards",
+        "that lake in the mountains!");
+  }
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(1, "Yes?", "", "");
+  stext(0, "I am Error!", "", "");
+  stext(1, "No you're not!", "", "");
+  stext(0, "Oh yes I am! My parents", "forgot their contraceptives!", "");
+  stext(1, "... Oh.", "Sorry.", "");
+}
+event
+{
+  stext(
+      0,
+      "Welcome to the town of",
+      "Dactylis! This is a quickly",
+      "growing community that has");
+  stext(
+      0,
+      "produced some of the finest,",
+      "(and cutest,) candy Ieval has",
+      "ever seen!");
+  stext(
+      0,
+      "Me? I'm seeing if Vultris'll",
+      "make an ice cream bar shaped",
+      "like me!");
+}
+event { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event { warp(flags(109), flags(110), 0); }
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(47, 112, 0);
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(77, 112, 0);
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(101, 112, 0);
+}
+event
+{
+  face(18) = 0;
+  prompt(0, "Wanna sleep here for just 35", "gp?", "", 112, "No.", "Yes.");
+  if (flags(112))
+  {
+    if (gp < 35)
+    {
+      stext(0, "You don't have enough gp!", "", "");
+    }
+    if (gp > 34)
+    {
+      takegp(35);
+      banner("We're healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(0, "Thanks for givin' me", "some business!", "");
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "See ya then!", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "We got implements of",
+      "destruction, just for",
+      "you, our customers!");
+  if (flags(255) < 3)
+  {
+    shop(5, 3, 7, 8, 9, 14, 42);
+  }
+  if (flags(255) > 2 && flags(265) < 1)
+  {
+    shop(61, 3, 62, 35, 63, 64, 40, 41);
+  }
+  if (flags(265) > 0)
+  {
+    shop(13, 3, 19, 35, 16, 17, 26, 40, 41, 32, 64);
+  }
+  stext(
+      0,
+      "We occasionally get a new",
+      "selection! May death and",
+      "blood rain upon your foes!");
+}
+event
+{
+  stext(
+      0,
+      "'Items' sounds better than",
+      "'Miscellaneous Junk,' don't",
+      "you think?");
+  if (flags(255) < 3)
+  {
+    shop(1, 2, 38, 39, 54, 55);
+  }
+  if (flags(255) > 2 && flags(265) < 1)
+  {
+    shop(1, 2, 38, 39, 65, 53, 54, 55, 58);
+  }
+  if (flags(265) > 0)
+  {
+    shop(1, 2, 38, 39, 65, 50, 53, 54, 55, 58, 18);
+  }
+  stext(
+      0, "I'll have an even better", "stock of jun-- I mean", "items, later!");
+}
+event
+{
+  stext(0, "Hey, yah! Hang around back", "here as much as ya want!", "");
+  if (char(4))
+  {
+    stext(4, "Huh? We can stay behind the", "counter? This is bizarre!", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "I've never heard a single bad",
+      "thing said about that Vultris",
+      "fellow.");
+  specialframe(20) = 20;
+  stext(0, "    Don't listen to him, he's", "    completely deaf.", "");
+  specialframe(20) = 0;
+}
+event
+{
+  stext(0, "My husband's not only deaf,", "but he's an old coot, as well!", "");
+  specialframe(19) = 21;
+  stext(0, "    I heard that!", "", "");
+  specialframe(19) = 0;
+  specialframe(20) = 15;
+  stext(0, "No you didn't, you old fool!", "You're stone deaf!", "");
+  specialframe(19) = 23;
+  stext(0, "    What?", "", "");
+  specialframe(19) = 0;
+  specialframe(20) = 0;
+  stext(0, "See?", "", "");
+}
+event { mapswitch("factory.map", 22, 93, 0); }
+event
+{
+  if (flags(185) < 10)
+  {
+    stext(
+        0,
+        "Sorry, boys, but nobody's",
+        "allowed in unless they're",
+        "in the tour group.");
+    if (char(4))
+    {
+      stext(4, "Darn! I wanted a chocolate", "bunny!", "");
+    }
+  }
+  if (flags(185) > 9)
+  {
+    stext(0, "Zzzz...", "", "");
+    if (char(4))
+    {
+      stext(4, "Wow, this factory sure has", "impressive security...", "");
+    }
+  }
+}
+event
+{
+  if (flags(185) < 10)
+  {
+    stext(
+        0,
+        "Sorry, boys, but nobody's",
+        "allowed in unless they're",
+        "in the tour group.");
+    if (char(4))
+    {
+      stext(4, "Darn! I wanted a chocolate", "bunny!", "");
+    }
+  }
+  if (flags(185) > 9)
+  {
+    stext(0, "Yeah? What do you want?", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "I just bought a magic ring!",
+      "Rings of Fire are used to",
+      "burn objects, like hay and");
+  stext(
+      0,
+      "dry wood. Rings of Water",
+      "can be used to douse open",
+      "flames. It's more useful");
+  stext(0, "than you'd think!", "", "");
+}
+event
+{
+  if (flags(185) < 23)
+  {
+    stext(0, "Hallo! I'm stargazing!", "", "");
+    stext(1, "But it's daytime!", "", "");
+    stext(
+        0,
+        "I'm one of the Nietzchean",
+        "Stargazers! There's no way",
+        "I'm going to look into the");
+    stext(0, "Abyss! It's scary!", "", "");
+    if (char(4))
+    {
+      stext(
+          4,
+          "I always heard that the",
+          "Nietzchean Stargazers",
+          "*wanted*  to look into");
+      stext(4, "the Abyss!", "", "");
+      stext(
+          0,
+          "Most do, because they say",
+          "that the only true form of",
+          "immortality is to have the");
+      stext(
+          0,
+          "Abyss look back into them,",
+          "and *remember.* Since the",
+          "emptiness between the stars");
+      stext(
+          0,
+          "will last forever, so will",
+          "our memories, even after our",
+          "civilizations fall and our");
+      stext(
+          0,
+          "world is swallowed by the",
+          "corpse of our sun. But I'm",
+          "afraid that it will look back");
+      stext(
+          0,
+          "upon me and find me *utterly",
+          "beneath its notice!* That",
+          "would be the worst thing that");
+      stext(0, "could ever happen to me! So I", "don't want to find out!", "");
+      stext(
+          4,
+          "Hmf! *I'd* do it! Just to",
+          "be done with it once and for",
+          "all!");
+    }
+  }
+  if (flags(185) > 22)
+  {
+    stext(
+        0,
+        "I was just observing the skies",
+        "when I saw two great globs of",
+        "candy go flying off overhead!");
+    stext(0, "One went northeast, and the", "other went off to the west!", "");
+    stext(
+        0,
+        "Maybe I'll start skygazing at",
+        "night after all! It's less",
+        "weird!");
+  }
+}

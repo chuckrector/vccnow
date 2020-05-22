@@ -13,4 +13,4 @@ ff   .end (event)
 
 //
 
-event{return;}
+event/*0*/{return;}

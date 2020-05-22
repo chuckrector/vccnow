@@ -1,0 +1,61 @@
+event
+{
+  enforceanimation();
+  fadein(50);
+  disablemenu();
+  stext(1, "What the?!?", "", "");
+  wait(50);
+  stext(1, "I'm... dreaming again!", "", "");
+  wait(50);
+  stext(
+      1,
+      "But this time... I remember!",
+      "I remember going to sleep!",
+      "I remember... Morpheos!");
+  face(0) = 1;
+  cameratracking = 0;
+  for (x, 1, 96, 1)
+  {
+    ywin -= 1;
+    wait(5);
+  }
+  wait(100);
+  for (x, 1, 96, 1)
+  {
+    ywin += 1;
+    wait(5);
+  }
+  cameratracking = 1;
+}
+event
+{
+  specialframe(5) = 23;
+  stext(0, "What?!?", "", "");
+  wait(50);
+  specialframe(5) = 0;
+  stext(0, "You? How did you get here?", "", "");
+  entity.chrindex(5) = 5;
+  stext(1, "Morpheos? What's going on?", "", "");
+  stext(0, "I'm not sure...", "", "");
+  specialframe(5) = 25;
+  text(0, "I'm not sure... You will", "remember none of this. Begone!", "");
+  fadeout(50);
+  drawparty = 0;
+  wait(2);
+  fadein(50);
+  wait(30);
+  specialframe(5) = 24;
+  stext(
+      0,
+      "It must have been him... Can",
+      "it be? His receptiveness...",
+      "goes beyond the normal...");
+  stext(
+      0,
+      "That must be it! That must be",
+      "what I sensed from him... Now",
+      "my plan grows to fruition...");
+  enablemenu();
+  fadeout(50);
+  mapswitch("graciere.map", 39, 122, 0);
+}

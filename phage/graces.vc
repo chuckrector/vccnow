@@ -1,0 +1,156 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+}
+event {}
+event
+{
+  if (flags(2608) > 2)
+  {
+    stext(0, "Wow! You're good!", "I have nothing left to give", "you!");
+    if (flags(2608) > 4)
+    {
+      stext(0, "We sure showed that", "cheater, though!", "Heh heh heh!");
+    }
+  }
+  prompt(
+      0,
+      "Wanna race? I'll give you",
+      "a good prize if you win",
+      "three races!",
+      112,
+      "Nah!",
+      "Sure!");
+  if (flags(112) == 0)
+  {
+    stext(0, "Oh well... Maybe later?", "", "");
+  }
+  if (flags(112) == 1 && flags(2608) == 0)
+  {
+    stext(0, "OK! Let the first race begin!", "", "");
+    entity.locx(5) = 0;
+    entity.locy(5) = 0;
+    entity.locx(6) = 28;
+    entity.locy(6) = 33;
+    warp(28, 31, 0);
+    stext(0, "On your mark!", "", "");
+    stext(0, "Get set!", "", "");
+    stext(0, "GO!", "", "");
+    entitymove(
+        6, "R5R6D1W50U1R9R9R8U6L5L6U4R2U6U6R6U7L8D7L9L9L7D3R1W50D3L4D5D5L1D3");
+  }
+  if (flags(112) == 1 && flags(2608) == 1)
+  {
+    stext(
+        0,
+        "Hmph! You got off easy,",
+        "before! You won't be so",
+        "lucky this time!");
+    entity.locx(5) = 0;
+    entity.locy(5) = 0;
+    entity.locx(6) = 28;
+    entity.locy(6) = 33;
+    speed(6) = 4;
+    warp(28, 31, 0);
+    stext(0, "On your mark!", "", "");
+    stext(0, "Get set!", "", "");
+    stext(0, "GO!", "", "");
+    entitymove(6, "R5R6R9R9R8U6L5L6U4R2U6U6R6U7L8D7L9L9L7D3R1D3L4D5D5L1D3");
+  }
+  if (flags(112) == 1 && flags(2608) == 2)
+  {
+    stext(
+        0,
+        "Ooh, you dirty *cheaters!* I'm",
+        "*not* going to lose so easily!",
+        "");
+    entity.locx(5) = 0;
+    entity.locy(5) = 0;
+    entity.locx(6) = 28;
+    entity.locy(6) = 33;
+    speed(6) = 4;
+    warp(28, 31, 0);
+    stext(0, "On your mark!", "", "");
+    entitymove(6, "R2");
+    wait(30);
+    stext(0, "Get set!", "", "");
+    entitymove(6, "R2");
+    wait(30);
+    stext(0, "GO!", "", "");
+    entitymove(6, "R1R6R9R6R4W100U6L4U4R2U6U6W100L2L9L9L7D3R1D3L4D5D5L1D3");
+  }
+}
+event
+{
+  if (entity.locx(6) == 25 && entity.locy(6) == 30)
+  {
+    specialframe(6) = 20;
+    stext(0, "Heh heh! I won! You'll have", "to do this one over!", "");
+    specialframe(6) = 0;
+    entity.locx(5) = 26;
+    entity.locy(5) = 31;
+    entity.locx(6) = 0;
+    entity.locy(6) = 0;
+    mapswitch("graces.map", 26, 32, 0);
+    return;
+  }
+  flags(2608)++;
+  specialframe(6) = 21;
+  stext(0, "I can't believe you beat me!", "", "");
+  specialframe(6) = 0;
+  if (flags(2608) == 3)
+  {
+    flags(2608)++;
+    stext(1, "Yeah, and you were cheating", "pretty badly that last time!", "");
+    stext(0, "Here's your prize! Take it!", "", "");
+    giveitem(1);
+    stext(1, "Huh? That's *it?*", "", "");
+    stext(
+        0,
+        "Umm... Yeah, I know it's a",
+        "pretty crummy prize, but I",
+        "ran out a while back...");
+    stext(
+        0,
+        "Tell you what... I know",
+        "I've been a pretty poor",
+        "sport, but I hate losing!");
+    stext(
+        0,
+        "But you guys beat me even",
+        "when I didn't play fair!",
+        "So, if you ever run into");
+    stext(
+        0,
+        "a ghost who cheats worse",
+        "than I did, I'll help you",
+        "out! What do you say?");
+    stext(1, "Well... All right. I'll", "take you up on that!", "");
+    stext(0, "Cool! Hasta la bamba,", "dudes!", "");
+  }
+  entity.locx(5) = 26;
+  entity.locy(5) = 31;
+  entity.locx(6) = 0;
+  entity.locy(6) = 0;
+  mapswitch("graces.map", 26, 32, 0);
+}
+event
+{
+  if (flags(2608) < 3)
+  {
+    flags(2608) = 0;
+  }
+  mapswitch("bundalo.map", 65, 102, 0);
+}
+event
+{
+  soundeffect(18);
+  alterbtile(51, 31, 88, 0);
+}
+event
+{
+  soundeffect(18);
+  alterftile(26, 19, 0, 0);
+  alterftile(32, 19, 0, 0);
+}

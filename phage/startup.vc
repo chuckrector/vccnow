@@ -1,0 +1,80 @@
+ParseIfTerm : C >= CurrentScriptEnd after parsing operand,
+    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
+    : ParseFailure eject after NewParseExpression Parse failure
+          .Attempting to recover... Negative bytes left
+    : -3. Skipping to next event... ParseIf
+    : ParseFailure eject after NewParseExpression Parse failure
+          .Attempting to recover... ParseFailure
+    : Skipping past next 0xff byte Skipped Bytes ff Retry parsing the rest of
+          event 1 Parse failure
+          .Attempting to recover... ParseFailure
+    : Skipping past next 0xff byte Skipped Bytes 01 01 01 00 00 00 ff Retry
+          parsing the rest of event 1 [ParseFailure] NewParseExpression
+    : Illegal opcode 0 ParseIf
+    : ParseFailure eject after NewParseExpression Parse failure.Attempting to
+          recover... event /*0*/
+{
+  playmusic("ZOOLRAVE.MOD");
+  sys_displaypcx("verge320.pcx");
+  vgadump();
+  fadein(100);
+  delay(100);
+  fadeout(100);
+  sys_displaypcx("phagblnk.pcx");
+  vgadump();
+  fadein(100);
+  delay(100);
+  sys_displaypcx("phageanx.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phageany.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phageanz.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean0.pcx");
+  vgadump();
+  delay(100);
+  sys_displaypcx("phagean1.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean2.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean3.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean4.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean5.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean6.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean7.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phagean8.pcx");
+  vgadump();
+  delay(10);
+  sys_displaypcx("phageop3.pcx");
+  vgadump();
+  delay(100);
+  bindkey(48, 1);
+  oldstartupmenu();
+  return;
+  return;
+  if ()
+  {
+    flags() = ; /*parse failure: NewParseExpression: Illegal opcode 32*/
+  }             /*Corrupt offset. Rewinding all subsequent offsets by 6 bytes.*/
+  event         /*1*/
+  {if( flags(800){
+      return;facing(-16777216-/*parse failure: ParseOperandArg: Unknown op 47*/;vcbox(155,1,265,40);vctext(160,10,"Spell Points");vctextnum(160,25,flags(703));textmenu(4,4,200,1,"No Battles","Battles");if(flags(800)!=1){
+        vcclear();
+        layervc = 0;
+        return; /*parse failure: NewParseExpression: Illegal opcode 0*/}}
+  }

@@ -1,0 +1,48 @@
+event {
+  for (a, 1, b, 1) {
+    if (c) vgadump();
+  }
+  return;
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+.event0
+  08            .for0
+
+  00            .var0 a (implicit end)
+
+  01            .literal
+  01 00 00 00
+  ff            .end (literal)
+
+  02 01         .var0 b
+  ff            .end (var0)
+
+  01            .sign
+  01            .literal
+  01 00 00 00
+  ff            .end (literal)
+
+    05            .if
+    01            .terms
+    1e 00 00 00   .else
+
+    02 02         .var0 c
+    ff            .end (var1)
+    01            .sign
+
+      01 45         .exec vgadump
+
+  ff            .end (for0)
+
+  ff         .exec vgadump
+
+ff              .end (event0)
+
+//
+
+event/*0*/{for(a,1,b,1){if(c){vgadump();}}return;}

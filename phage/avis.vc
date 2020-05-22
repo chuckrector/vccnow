@@ -1,0 +1,569 @@
+event
+{
+  enforceanimation();
+  fadein(1);
+  for (x, 141, 144, 1)
+  {
+    flags(x) = 0;
+  }
+  if (flags(148) == 0)
+  {
+    partymove("R1D1");
+    face(1) = 0;
+    face(2) = 0;
+    stext(
+        4,
+        "Well, it looks like we've",
+        "reached the Savannah Empire.",
+        "This should be Avis City,");
+    stext(4, "known for its casino!", "", "");
+    stext(1, "Do you think we'll find a", "lead to the seed here?", "");
+    stext(
+        4,
+        "I doubt it. We'll just be",
+        "passing through on our way",
+        "to the capital city.");
+    stext(1, "What's the capital called,", "and where is it?", "");
+    stext(
+        4,
+        "It's called Graciere, and it",
+        "should be to the southeast,",
+        "in the center of the plains.");
+    stext(1, "Then... To Graciere!", "", "");
+    specialframe(char(5) - 1) = 20;
+    wait(100);
+    specialframe(char(5) - 1) = 0;
+    stext(
+        5,
+        "But... I wanna gamble!",
+        "And... I don't like the idea",
+        "of going anywhere near Lumin!");
+    stext(
+        1,
+        "But why? Lumin didn't *order*",
+        "those wolves to do what they",
+        "did, right?");
+    specialframe(char(5) - 1) = 25;
+    stext(5, "Maybe not, but...", "I...", "...");
+    stext(
+        1,
+        "Don't worry! I'm sure that",
+        "everything will turn out just",
+        "fine! So cheer up, OK?");
+    specialframe(char(5) - 1) = 0;
+    wait(50);
+    specialframe(char(5) - 1) = 25;
+    wait(50);
+    specialframe(char(5) - 1) = 0;
+    stext(5, "All... all right.", "", "");
+    stext(1, "Right! Maybe we will have a", "look around first, though.", "");
+    flags(148) = 1;
+  }
+}
+event
+{
+  flags(140) = 1;
+  mapswitch("slots.map", 21, 26, 0);
+}
+event { mapswitch("overland.map", 48, 59, 0); }
+event { mapswitch("overland.map", 51, 59, 0); }
+event
+{
+  stext(
+      0,
+      "This is the town of Avis, one",
+      "of the tackiest places on",
+      "Ieval!");
+  stext(1, "Who are all these people?", "", "");
+  stext(
+      0,
+      "They're my disciples! I'm",
+      "teaching them to tell complete",
+      "strangers the name of their");
+  stext(0, "towns for no reason!", "", "");
+}
+event { stext(0, "The master speaks words of", "infinite wisdom!", ""); }
+event
+{
+  stext(0, "I had no purpose before I met", "the Frogarishi!", "");
+  if (char(4))
+  {
+    stext(4, "Now you just have no life!", "", "");
+  }
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(1, "Oh no...", "", "");
+  stext(0, "I be Pillsbury Mandingo XXIII!", "", "");
+  stext(
+      1,
+      "And I'm Granatole the Maximum,",
+      "Lord of the Seventh Circle and",
+      "Keeper of the Toroidal Kazoo!");
+  stext(
+      0,
+      "Greetings, Brother! I had no",
+      "idea I was in the company of",
+      "such an esteemed personage");
+  stext(0, "such as yourself! I prostrate", "myself before you!", "");
+  stext(1, "Ummm... I gotta go!", "", "");
+}
+event { mapswitch("overland.map", 50, 61, 0); }
+event
+{
+  if (flags(256) < 2)
+  {
+    stext(0, "Shhh! I'm hiding back here!", "", "");
+    stext(1, "Hiding from what?", "", "");
+    stext(
+        0,
+        "My mom. She wants me to eat",
+        "her 'Skunkraven Surprise' for",
+        "dinner tonight!");
+    flags(256) = 1;
+  }
+  if (flags(256) == 2)
+  {
+    stext(
+        1,
+        "We talked to your mom. Now",
+        "she's making Beetalope Pot",
+        "Pie for dinner.");
+    stext(
+        0,
+        "Really? Wow, thanks mister!",
+        "I don't know how I can ever",
+        "repay you! Here, take this!");
+    giveitem(68);
+    flags(256) = 3;
+  }
+  if (flags(256) == 3)
+  {
+    stext(0, "I'm gonna go home as soon", "as I'm finished packing up.", "");
+  }
+}
+event
+{
+  if (flags(145) == 1)
+  {
+    chainevent(11);
+  }
+  if (flags(145) == 2)
+  {
+    chainevent(12);
+  }
+  stext(0, "Hello!", "", "");
+  if (char(5))
+  {
+    autoon();
+    switch (char(5))
+    {
+      case (1):
+        entity.locx(95) = 60;
+        entity.locy(95) = 24;
+        face(95) = 0;
+      case (2):
+        entity.locx(96) = 60;
+        entity.locy(96) = 24;
+        face(96) = 0;
+      case (3):
+        entity.locx(97) = 60;
+        entity.locy(97) = 24;
+        face(97) = 0;
+      case (4):
+        entity.locx(98) = 60;
+        entity.locy(98) = 24;
+        face(98) = 0;
+      case (5):
+        entity.locx(99) = 60;
+        entity.locy(99) = 24;
+        face(99) = 0;
+    }
+  }
+  stext(0, "Isn't it a wonderful day?", "", "");
+  stext(1, "Yup, sure is!", "", "");
+  if (char(5))
+  {
+    stext(0, "Well, I must be going now!", "", "");
+    entitymove(16, "D9D9");
+    wait(300);
+    entity.locx(16) = 0;
+    entity.locy(16) = 58;
+    givegp(30);
+    flags(145) = 1;
+    autooff();
+    stext(1, "Dingo, what were you doing?", "", "");
+    stext(
+        5,
+        "Heh, these city dwellers are",
+        "bred soft! He wasn't even on",
+        "his guard! Lessee, he had...");
+    stext(5, "30 gp on 'im! Am I good or", "what?", "");
+    stext(1, "...", "...", "...");
+    specialframe(char(5) - 1) = 20;
+    stext(1, "...", "...", "...");
+    stext(5, "What? Why are you staring at", "me like that?", "");
+    stext(1, "You stole his *wallet*?!?!?", "", "");
+    specialframe(char(5) - 1) = 0;
+    stext(5, "Uh... Hold on a sec...", "...", "...");
+    stext(5, "...", "...", "Oh yeah! I forgot! You guys");
+    stext(5, "think stealing is bad, don't", "you? ...", "Uh oh!");
+    specialframe(char(1) - 1) = 22;
+    if (char(4))
+    {
+      specialframe(char(4) - 1) = 22;
+    }
+    wait(100);
+    stext(
+        5,
+        "All right! All right! I'll",
+        "give it back to him next",
+        "time I see him, all right?");
+    for (c, 0, 4, 1)
+    {
+      specialframe(c) = 0;
+    }
+    stext(1, "All right, but try not to", "do that again, would you?", "");
+    if (char(4))
+    {
+      specialframe(char(4) - 1) = 21;
+      stext(
+          4,
+          "I can't believe you're letting",
+          "him off the hook again!",
+          "Arrrrrggggggh!!!!");
+      specialframe(char(4) - 1) = 0;
+      stext(5, "Heh heh heh...", "", "");
+    }
+  }
+}
+event
+{
+  stext(0, "I can't find my wallet!", "", "");
+  if (gp < 30 && char(5))
+  {
+    stext(5, "I don't have enough money to", "pay him back right now...", "");
+  }
+  if (gp > 29 && char(5))
+  {
+    autoon();
+    switch (char(5))
+    {
+      case (1):
+        entity.locx(95) = 60;
+        entity.locy(95) = 24;
+        face(95) = 0;
+      case (2):
+        entity.locx(96) = 60;
+        entity.locy(96) = 24;
+        face(96) = 0;
+      case (3):
+        entity.locx(97) = 60;
+        entity.locy(97) = 24;
+        face(97) = 0;
+      case (4):
+        entity.locx(98) = 60;
+        entity.locy(98) = 24;
+        face(98) = 0;
+      case (5):
+        entity.locx(99) = 60;
+        entity.locy(99) = 24;
+        face(99) = 0;
+    }
+    wait(150);
+    autooff();
+    takegp(30);
+    flags(145) = 2;
+    stext(5, "There! Ya happy?", "", "");
+    stext(1, "Yup.", "", "");
+    specialframe(16) = 23;
+    stext(0, "Huh? What're you fellas", "talking about?", "");
+    specialframe(16) = 0;
+    stext(5, "Oh, nothin'...", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "I found my wallet! It must",
+      "have been in my other pocket",
+      "the whole time!");
+}
+event { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event
+{
+  stext(0, "Argh! I really have to go!", "What's taking 'im so long?", "");
+}
+event
+{
+  stext(0, "I'm in here!", "", "");
+  partymove("L1");
+}
+event { chainevent(17, 58, 81); }
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(var(0), var(1), 0);
+}
+event { warp(flags(109), flags(110), 0); }
+event
+{
+  playmusic("enigma.mod");
+  face(18) = 0;
+  prompt(
+      0,
+      "Welcome to mah inn, suckas!",
+      "Sleep here fo' only 10 gp a",
+      "night! Yo in, or out?",
+      107,
+      "Out, sucka.",
+      "In, foo'.");
+  if (flags(107))
+  {
+    if (gp < 10)
+    {
+      stext(0, "Yo don't got enough GP!", "", "");
+    }
+    if (gp > 9)
+    {
+      takegp(10);
+      banner("We be healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(0, "Come again, suckas!", "", "");
+    }
+  }
+  if (!flags(107))
+  {
+    stext(0, "Whatcha wastin my time fo'", "then, foo's?", "");
+  }
+  playmusic("elekfunk.mod");
+}
+event
+{
+  stext(
+      0,
+      "If yo want to sleep here, get",
+      "yo'self on the otha side of",
+      "this counter 'fore I bust yo");
+  stext(0, "ass good!", "", "");
+}
+event
+{
+  face(21) = 0;
+  stext(
+      0,
+      "We sell all sorts of medicinal",
+      "aids, as well as some... other",
+      "stuff!");
+  shop(1, 2, 38, 39, 58);
+  if (char(4))
+  {
+    stext(4, "Where's the other stuff?", "", "");
+    stext(0, "You're too young to see it!", "", "");
+    stext(4, "Wow, this town has everything!", "", "");
+  }
+  if (!char(4))
+  {
+    stext(
+        0,
+        "Come back next week! We're",
+        "getting a shipment of yellow",
+        "pollens then!");
+  }
+}
+event
+{
+  face(20) = 0;
+  stext(
+      0,
+      "I'm in a great town to sell",
+      "this stuff! The innkeeper here",
+      "is my best customer!");
+  stext(0, "I don't know what he does with", "it all, though!", "");
+  shop(5, 25, 14, 7, 12, 20, 40, 41);
+  stext(
+      0,
+      "Remember, if you're in trouble",
+      "and you need help, if you're",
+      "very lucky, you might be able");
+  stext(0, "to hire... that innkeeper.", "", "");
+}
+event { stext(0, "Only employees allowed back", "here!", ""); }
+event
+{
+  stext(
+      0,
+      "Go to the other side of the",
+      "counter! Some of the stuff",
+      "back here is only quasi-legal!");
+  if (char(5))
+  {
+    stext(5, "Lemme see! Lemme see!", "I wanna see!", "");
+  }
+}
+event { chainevent(17, 82, 82); }
+event { chainevent(17, 99, 82); }
+event
+{
+  stext(
+      0,
+      "'Evolution in Magic'",
+      "Unlike their ancestor species,",
+      "the avians of Ieval have");
+  stext(
+      0,
+      "the unique ability to hover",
+      "in midair, and fly despite",
+      "their insufficient wing size.");
+  stext(
+      0,
+      "This is apparently due to the",
+      "apparently innate attunement",
+      "they have to the planet's");
+  stext(0, "magical fields, which they", "instinctively tap while awake.", "");
+}
+event { chainevent(17, 13, 79); }
+event { chainevent(17, 35, 79); }
+event
+{
+  stext(
+      0,
+      "Down south is the town of",
+      "Dactylis. The candy factory",
+      "there produces *incredible*");
+  stext(0, "chocolate bunnies!", "", "");
+}
+event
+{
+  if (flags(141) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(141) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 491, 1);
+    changezone(x, y, 0);
+  }
+}
+event
+{
+  if (flags(142) == 1)
+  {
+    if (face(0) == 0)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) + 1;
+    }
+    if (face(0) == 1)
+    {
+      x = entity.locx(0);
+      y = entity.locy(0) - 1;
+    }
+    if (face(0) == 2)
+    {
+      x = entity.locx(0) + 1;
+      y = entity.locy(0);
+    }
+    if (face(0) == 3)
+    {
+      x = entity.locx(0) - 1;
+      y = entity.locy(0);
+    }
+    flags(142) = 0;
+    banner("Pollen used.", 2);
+    r = random(1, 3);
+    if (r < 3)
+    {
+      giveitem(var(0));
+    }
+    if (r > 2)
+    {
+      banner("Empty!", 1);
+    }
+    alterbtile(x, y, 493, 1);
+    changezone(x, y, 0);
+  }
+}
+event { chainevent(31, 1); }
+event { chainevent(32, 39); }
+event { chainevent(31, 50); }
+event
+{
+  stext(
+      0,
+      "Avis town is full of these",
+      "bird-folk, which means that",
+      "most of the population can");
+  stext(
+      0,
+      "fly! So these towers are just",
+      "perfect for them to live in,",
+      "but they also make for a great");
+  stext(
+      0,
+      "tourist attraction! One thing",
+      "led to another, and we ended",
+      "up building a casino!");
+  if (char(4))
+  {
+    stext(4, "Thank you, Mister History!", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "Are you guys travellers? Did",
+      "you ever meet a guy in a pith",
+      "helmet? He was pretty cool!");
+  stext(
+      0,
+      "But I guess you'd have been",
+      "kids when he came through Avis",
+      "and headed south... He came");
+  stext(0, "through again, later, and", "headed east...", "");
+  if (char(4))
+  {
+    stext(4, "And you're telling us all", "this *why?*", "");
+    stext(
+        0,
+        "Well, I was hoping you could",
+        "get me a pith helmet like",
+        "his, actually!");
+  }
+}

@@ -1,0 +1,421 @@
+event
+{
+  if (flags(124))
+  {
+    redraw();
+    specialframe((5)) = 20;
+    entity.locx((6)) = 95;
+    entity.locy((6)) = 3;
+    face((6)) = 1;
+    face((7)) = 1;
+    face((8)) = 1;
+    face((9)) = 1;
+    return;
+  }
+  volume = 100;
+  enforceanimation();
+  redraw();
+  specialframe((5)) = 20;
+  face((7)) = 1;
+  face((8)) = 1;
+  face((9)) = 1;
+  fadein(150);
+  flags(124)++;
+  text(1, "Humph, strange dreams. . .", "", "");
+  text(1, "Where am I now? These look", "to be royal chambers.", "");
+  text(
+      1,
+      "Well, you can't slam the",
+      "hospitality - my wounds are",
+      "even dressed.");
+  text(7, "Ahh, I see your slumber ends!", "", "");
+  entitymove(6, "U11 F2");
+  while (movecode(6))
+  {
+    wait(10);
+  }
+  text(7, "The king commands your", "swift attendance to his", "throne room.");
+  text(
+      7,
+      "It is just a few rooms down",
+      "from these prince's",
+      "quarters. Obviously my lord");
+  text(7, "wishes to see you well cared", "for.", "");
+  text(1, "(Or keep me under eye.)", "", "");
+  entitymove(6, "R4");
+  while (movecode(6))
+  {
+    wait(10);
+  }
+  text(
+      7,
+      "Between us, I wish you luck,",
+      "but I am not in control of",
+      "your fate anymore.");
+  text(
+      1,
+      "That's not as reassuring as",
+      "you seem to think it.",
+      "          But thanks.");
+  entitymove(6, "U2");
+  while (movecode(6))
+  {
+    wait(300);
+  }
+  text(7, "I understand.", "", "");
+}
+event
+{
+  warp(locx, locy - 1, 1);
+  calleffect(
+      2, 2, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+  warp(locx, locy + 2, 1);
+  calleffect(
+      2, 3, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+  warp(locx, locy - 1, 1);
+}
+event
+{
+  calleffect(
+      2, 2, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+}
+event
+{
+  calleffect(
+      2, 3, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+}
+event { calleffect(3); }
+event { calleffect(4); }
+event { calleffect(5); }
+event { calleffect(6); }
+event { calleffect(7, 251, 4, 5); }
+event { calleffect(7, 258, 4, 5); }
+event
+{
+  if (!facing(1))
+  {
+    return;
+  }
+  text(0, "This torch is lit.", "", "");
+}
+event { text(0, "These plants are kept for", "very well.", ""); }
+event
+{
+  if (curzone == 12)
+  {
+    calleffect(15, 0);
+    return;
+  }
+  text(0, "This is a handcrafted stool.", "", "");
+}
+event { specialframe((0)) = 0; }
+event
+{
+  if (curzone == 14)
+  {
+    specialframe((0)) = 22;
+    return;
+  }
+  text(1, "This bench doesn't look", "very comfortable.", "");
+}
+event { text(1, "Hmm, looks like a storm", "is brewing on the horizon.", ""); }
+event
+{
+  text(
+      0,
+      "This is a humbling statue",
+      "of a woman holding a sun",
+      "and a moon.");
+  if (!flags(123))
+  {
+    flags(123)++;
+    text(
+        1,
+        "Very nice. I seem to remember",
+        "something about this Order",
+        "believing strongly in balance.");
+    text(
+        1,
+        "The sun and the moon must",
+        "symbolize this struggle. Hmm,",
+        "...the Order of Twilight!");
+    text(
+        1,
+        "That's who these people are!",
+        "If they are so neutral, I",
+        "wonder why they are warring?");
+  }
+}
+event { text(0, "This table is solid hardwood.", "", ""); }
+event { text(0, "This dresser is empty.", "", ""); }
+event { text(3, "You may not enter m'lord's", "bedchamber.", ""); }
+event
+{
+  text(0, "This bed has fresh linen,", "and expensive one at that.", "");
+}
+event { text(0, "This is a simple tapestry.", "", ""); }
+event
+{
+  if (flags(125) == 1)
+  {
+    text(7, "For what it's worth,", "               good luck.", "");
+    return;
+  }
+  flags(125) = 1;
+  text(7, "Do you believe in portents,", "knight?", "");
+  text(1, "I-", "", "");
+  text(
+      1,
+      "I suppose a man's experiences",
+      "result from the culmination of",
+      "his actions.");
+  text(
+      1,
+      "Signs and omens are just tools",
+      "of fate, and fate neglects",
+      "responsibility.");
+  text(
+      7,
+      "Hmm. Well I hope you're right.",
+      "The weather has been getting",
+      "worse lately.");
+  text(7, "I can't recall the last time", "I witnessed a calm sky.", "");
+}
+event
+{
+  if (flags(126) == 1)
+  {
+    text(
+        0, "Too bad we couldn't get", "to know each other a little", "better.");
+    return;
+  }
+  flags(126) = 1;
+  text(
+      0,
+      "Ahh! You are the one the",
+      "others speak of! Quite a",
+      "scare you caused.");
+  text(1, "Yes, I'm meeting the king", "now to explain.", "");
+  text(
+      0,
+      "Hmmph, you'll be needing",
+      "the old gods at your back",
+      "to get through safely.");
+  text(
+      0,
+      "The man just hasn't been",
+      "the same after the attempt on",
+      "his life.");
+  text(
+      0,
+      "He's not a bad man, you see,",
+      "but the Order of the Veil",
+      "has nearly succeeded twice!");
+  text(1, "Really? To win the war?", "", "");
+  text(0, "Why else? So naturally you", "would arouse suspicion.", "");
+}
+event
+{
+  text(3, "This floor and its exit are", "off-limits to you, stranger.", "");
+}
+event { text(3, "The throne room is at the end", "of the hall.", ""); }
+event
+{
+  text(
+      3,
+      "I wouldn't keep the man who",
+      "decides your fate waiting if",
+      "I were you, scum.");
+}
+event
+{
+  partymove("X14 Y15 U4");
+  autoon();
+  partymove("U5");
+  text(9, "Ahh, the stranger finds time", "to pay his king a visit!", "");
+  text(1, "Your highness.", "", "");
+  text(
+      9,
+      "I discovered an interesting",
+      "thing yesterday. Imagine my",
+      "surprise to hear news of");
+  text(9, "several carcasses seemingly", "dead from a gas explosion!", "");
+  text(1, "Well, I was just as-", "", "");
+  text(
+      9,
+      "And the strange part is the",
+      "location of this incident.",
+      "I dismiss the possibility");
+  text(
+      9,
+      "of thievery at foot because",
+      "of our low caches. Wars do",
+      "not take kindly to wealth.");
+  text(9, "So I wonder, at a time as", "this, what WERE you doing", "there?");
+  text(
+      1,
+      "I was chased by those Shift",
+      "Guards. My questions are",
+      "unanswered as well.");
+  text(
+      9,
+      "Oh? And the fact that you",
+      "broke into a secured area",
+      "through a metal portcullis");
+  text(9, "should be discounted as", "fleeing? Really now...", "");
+  text(
+      1,
+      "I know times are bad, but",
+      "I will bother you no more.",
+      "You will never see me again.");
+  text(
+      9,
+      "If only that were so. Do you",
+      "justify the point of you",
+      "possessing a dungeon key?");
+  text(1, "Oh, well that. I - umm -", "", "");
+  alterftile(13, 3, 0, 2);
+  alterftile(15, 3, 0, 2);
+  specialframe((5)) = 0;
+  wait(30);
+  entitymove(5, "D2");
+  while (movecode(5))
+  {
+    wait(5);
+  }
+  layervc = 1;
+  vcputpcx("8lo.pcx", 100, 20);
+  text(
+      9,
+      "KILLED ONE OF MY GUARDS WHO",
+      "WAS ON DUTY! YOU SLANDER ME",
+      "WITH LIES!");
+  text(
+      1,
+      "(Shit. I won't get out of this",
+      "mess quietly.",
+      "         Only two guards. . .)");
+  layervc = 0;
+  vcclear();
+  text(
+      9,
+      "Now, I trust my advisor. He",
+      "tells me that you had no",
+      "intention of hurting me.");
+  text(
+      9,
+      "He has a way with seeing",
+      "through lies and picking out",
+      "the truth.");
+  text(
+      9,
+      "But attacking my men is simply",
+      "not excusable. You will be",
+      "sent to maximum security -");
+  text(9, "for as long as I deem fit.", "", "");
+  partymove("D5 F1");
+  autooff();
+  partymove("U1");
+  entity.locx((7)) = 12;
+  entity.locy((7)) = 20;
+  entity.locx((8)) = 14;
+  entity.locy((8)) = 20;
+  entity.locx((9)) = 16;
+  entity.locy((9)) = 20;
+  text(1, "I can't stay here.", "", "");
+  text(9, "Heh heh. You think you have a", "choice in the matter?", "Riglo?");
+  entitymove((10), "D1");
+  speed((0)) = 2;
+  speed((7)) = 2;
+  speed((8)) = 2;
+  speed((9)) = 2;
+  changechr(1, "BackGren.chr");
+  entitymove((7), "U4");
+  entitymove((8), "U4");
+  entitymove((9), "U4");
+  partymove("D4");
+  text(1, "No, this won't happen like", "this.", "");
+  speed((0)) = 4;
+  speed((5)) = 3;
+  speed((7)) = 4;
+  speed((8)) = 4;
+  speed((9)) = 4;
+  changechr(1, "Gren.chr");
+  entitymove((5), "U1 R3 D1");
+  entitymove((7), "W50 L4 U9");
+  entitymove((8), "W50 U8 L9");
+  entitymove((9), "W50 U8 L11");
+  entitymove((10), "W50 D4 L1");
+  partymove("U2 L5 U2");
+  soundeffect(10);
+  specialframe((10)) = 29;
+  alterftile(10, 9, 226, 2);
+  alterftile(10, 9, 241, 2);
+  alterftile(11, 9, 242, 2);
+  alterftile(11, 10, 243, 2);
+  alterftile(9, 9, 227, 2);
+  partymove("U1");
+  alterftile(9, 9, 0, 2);
+  alterftile(9, 10, 227, 2);
+  partymove("U2 L4");
+  calleffect(
+      2, 3, 244, 253, 246, 254, 245, 249, 251, 250, 252, 256, 258, 255, 257);
+  alterftile(10, 9, 0, 2);
+  alterftile(11, 9, 0, 2);
+  alterftile(11, 10, 0, 2);
+  specialframe((10)) = 0;
+  entitymove((10), "U4 L9 D20 R5 D1");
+  entitymove((7), "L5 D20");
+  entitymove((8), "W50 U1 L7 D20");
+  entitymove((9), "L1 U1 L9 D20");
+  partymove("L3 D24 F1");
+  text(1, "Leave me be!", "", "");
+  text(1, "(If only I had some tech.", "But where would I get it?)", "");
+  wait(80);
+  text(3, "No tricks this time, eh?", "", "");
+  wait(150);
+  text(1, " . . .   Damn it!", "", "");
+  entitymove((7), "D63");
+  entitymove((8), "R3 D63 R2 D2");
+  entitymove((9), "W20 D67");
+  entitymove((10), "W10 D70 L1");
+  partymove("D66 R2");
+  while (movecode(7))
+  {
+    wait(5);
+  }
+  text(
+      3, "Surround him! There's little", "chance the vermin has of", "escape!");
+  while (movecode(10))
+  {
+    wait(5);
+  }
+  text(3, "Heh - I hope you can fly,", "punk.", "");
+  partymove("U1");
+  drawparty = 0;
+  fadeout(50);
+  mappalettegradient(0, 0, 0, 0);
+  screengradient = 1;
+  mapswitch("rooftop.map", 0, 0, 1);
+}
+event
+{
+  warp(locx - 1, locy, 1);
+  calleffect(
+      2, 4, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+  warp(locx + 2, locy, 1);
+  calleffect(
+      2, 5, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+  warp(locx - 1, locy, 1);
+}
+event
+{
+  calleffect(
+      2, 4, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+}
+event
+{
+  calleffect(
+      2, 5, 587, 588, 589, 590, 585, 586, 595, 596, 591, 592, 593, 594, 181);
+}
+event { text(0, "The door is locked.", "", ""); }

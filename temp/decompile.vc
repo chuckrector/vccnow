@@ -1,0 +1,528 @@
+event /*0*/
+{
+  EnforceAnimation();
+  FadeIn(1);
+  FLAGS(801) = 8;
+  if (FLAGS(185) == 9)
+  {
+    ENTITY.LOCX(26) = 145;
+    ENTITY.LOCX(27) = 145;
+    ENTITY.LOCY(26) = 46;
+    ENTITY.LOCY(27) = 47;
+    FACE(26) = 3;
+    FACE(27) = 3;
+  }
+  TRUE END
+}
+event /*1*/
+{
+  SText(0, "Bundalo? What's a bundalo?", "", "");
+  TRUE END
+}
+event /*2*/
+{
+  SText(0, "Photo album...", "", "");
+  LAYERVC = 1;
+  DRAWENTITIES = 0;
+  LAYER0 = 0;
+  LAYER1 = 0;
+  if (FLAGS(1180) == 1)
+  {
+    VcPutPcx("bromide2.pcx", 0, 0);
+    SText(0, "'Lagome: Still Life'", "", "(Press enter to continue)");
+    Wait(200);
+  }
+  VcClear();
+  if (FLAGS(1181) == 1)
+  {
+    VcPutPcx("DingoB.pcx", 57, 0);
+    SText(0, "'Dingo: By Green_Ness'", "", "(Press enter to continue)");
+    Wait(200);
+  }
+  if (FLAGS(275) == 1)
+  {
+    VcPutPcx("bromide1.pcx", 0, 0);
+    SText(0, "'Bull: Don't even ask'", "", "(Press enter to continue)");
+    Wait(200);
+  }
+  if (FLAGS(306) == 1)
+  {
+    VcPutPcx("morpheos.pcx", 0, 0);
+    SText(0, "'Morpheos: By Zaratustra'", "", "(Press enter to continue)");
+    Wait(200);
+    if (FLAGS(2500) == 1)
+    {
+      VcPutPcx("bromidez.pcx", 0, 0);
+      SText(0, "'Untitled: By Zaratustra'", "", "(Press enter to continue)");
+      Wait(200);
+      LAYERVC = 0;
+    }
+  }
+  DRAWENTITIES = 1;
+  LAYER0 = 1;
+  LAYER1 = 1;
+  TRUE END
+}
+event /*3*/
+{
+  if (FLAGS(185) != 9)
+  {
+    MapSwitch("overland.map", 47, 98, 0);
+    if (FLAGS(185) == 9)
+    {
+      SText(1, "What the?!?", "", "");
+      SText(4, "Something's happened over", "in the Warrens!", "");
+      SText(1, "Look out! Monsters!", "", "");
+      EntityMove(26, "L3");
+      EntityMove(27, "L3");
+      Wait(100);
+      SText(
+          1,
+          "It's no use! We won't be",
+          "able to get to the Warrens",
+          "with all these monsters on");
+      SText(1, "the bridge!", "", "");
+      Banner("Battle!", 1);
+      Banner("3 Thunderbunnies", 1);
+      if (FLAGS(200) == 0)
+      {
+        FakeBattle();
+        if (FLAGS(200) == 1)
+        {
+          FakeBattle();
+          if (FLAGS(200) == 2)
+          {
+            FLAGS(501) = 2;
+            FLAGS(502) = 225;
+            FLAGS(503) = 105;
+            FLAGS(504) = 1005;
+            FLAGS(505) = 50;
+            FLAGS(506) = 50;
+            FLAGS(507) = 51;
+            FLAGS(508) = 51;
+            FLAGS(509) = 500;
+            FLAGS(510) = 170;
+            FLAGS(511) = 0;
+            FLAGS(512) = 38;
+            FLAGS(513) = 39;
+            FLAGS(540) = 150;
+            FLAGS(541) = 250;
+            FLAGS(1009) = 0;
+            FLAGS(514) = 2;
+            FLAGS(515) = 225;
+            FLAGS(516) = 105;
+            FLAGS(517) = 1005;
+            FLAGS(518) = 50;
+            FLAGS(519) = 50;
+            FLAGS(520) = 51;
+            FLAGS(521) = 51;
+            FLAGS(522) = 500;
+            FLAGS(523) = 170;
+            FLAGS(524) = 0;
+            FLAGS(525) = 38;
+            FLAGS(526) = 39;
+            FLAGS(542) = 150;
+            FLAGS(543) = 250;
+            FLAGS(1010) = 0;
+            FLAGS(527) = 2;
+            FLAGS(528) = 225;
+            FLAGS(529) = 105;
+            FLAGS(530) = 1005;
+            FLAGS(531) = 50;
+            FLAGS(532) = 50;
+            FLAGS(533) = 51;
+            FLAGS(534) = 51;
+            FLAGS(535) = 500;
+            FLAGS(536) = 170;
+            FLAGS(537) = 0;
+            FLAGS(538) = 38;
+            FLAGS(539) = 39;
+            FLAGS(544) = 150;
+            FLAGS(545) = 250;
+            FLAGS(1011) = 0;
+            FLAGS(109) = ENTITY.LOCX(0) - 1;
+            FLAGS(110) = ENTITY.LOCY(0);
+            MapSwitch("kreebat.map", 1, 1, 0);
+            return;
+            MapSwitch("overland.map", , , );
+          }
+        }
+      }
+    }
+  }
+}
+event /*4*/
+{
+  MapSwitch("overland.map", 43, 98, 0);
+  TRUE END
+}
+event /*5*/
+{
+  SText(
+      0,
+      "Within this house is the",
+      "community's photo album,",
+      "containing a collection of");
+  SText(
+      0,
+      "pictures travellers have",
+      "donated from across the land.",
+      "Feel free to add and peruse");
+  SText(0, "your own!", "", "");
+  TRUE END
+}
+event /*6*/
+{
+  if (FLAGS(163))
+  {
+    SText(1, "Hmmm... Extremely dry wood...", "", "");
+    if (FLAGS(163))
+    {
+      SoundEffect(9);
+      SText(0, "The wood is set ablaze!", "", "");
+      AlterBTile(6, 37, 691, 1);
+      ChangeZone(6, 37, 5);
+      return;
+      if (ParseIfTerm : C >= CurrentScriptEnd after parsing operand, bailing...)
+      {
+        FLAGS() = ;
+        switch ()
+        {
+  // #include batcore.h
+  // #include globals.h
+  // #define bye @"bye" @
+  // event
+  // {
+  //   // SText(0, "Photo album...", "", "");
+  //   // LAYERVC = 1;
+  //   // if (1)
+  //   //   return;
+  //   // if (1)
+  //   // {
+  //   //   return;
+  //   //   return;
+  //   // }
+  //   // while (1)
+  //   //   return;
+  //   // while (1)
+  //   // {
+  //   //   return;
+  //   //   return;
+  //   // }
+  //   // return;
+  //   // switch (a)
+  //   // {
+  //   //   case 0: return; return;
+  //   //   case 1: return;
+  //   // }
+  //   // return;
+
+  //   // for (a, 1, b, 1)
+  //   // {
+  //   //   if (a)
+  //   //     return;
+  //   //   vgadump();
+  //   // }
+
+  //   // while (1)
+  //   // {
+  //   //   if (a)
+  //   //     return;
+  //   //   vgadump();
+  //   // }
+  //   // vgadump();
+  //   // if (b)
+  //   //   return;
+  //   // exit();
+  //   // vgadump();
+  //   // for (a, 1, b, 1)
+  //   // {
+  //   //   return;
+  //   // }
+  //   // vgadump();
+  //   // vgadump();
+  //   // for (a, 1, b, 1) {
+  //   //   return;
+  //   //   vgadump();
+  //   // }
+  //   // vgadump();
+
+  //   // a = b;
+  //   // return;
+  //   //   if (!a) {
+  //   //     // flags[7999] = 0;
+  //   //     return;
+  //   //   }
+
+  //   //   if (a > b) return;
+  //   // if (a) { return; }
+  //   // if (a) {}
+  //   //   return;
+  //   //   return;
+
+  //   //   While(Entity.Moving(94 + a)) Wait(20);
+  //   //   Return;
+  //   // CharMiss:
+
+  //   //   If(!n) {
+  //   //     SoundEffect(4);
+  //   //     Flags[7999] = 0;
+  //   //     Return;
+  //   //   }
+
+  //   // if (b2) {
+  //   //   Flags[7999] = 0;
+  //   //   VCClear();
+  //   //   VCLayerWrite = 1;
+  //   //   VCClearRegion(0, 0, 320, 129);
+  //   //   Return;
+  //   // }
+
+  //   // if (a) {}
+  //   // if (a) return;
+
+  //   // for (a, 1, a, 1) {
+  //   //   // if (a) v = p;
+  //   //   return;
+  //   //   // return;
+  //   // } // pick the enemy with the lowest health, then heal 'em
+
+  //   // for (a, 1, a, 1) {
+  //   //   // if (a) v = p;
+  //   //   vgadump();
+  //   //   for (b, 1, b, 1) {}
+  //   //   // return;
+  //   // } // pick the enemy with the lowest health, then heal 'em
+  //   // for (flags[a], 1, flags[b], 1) {
+  //   //   // if (a) v = p;
+  //   //   vgadump();
+  //   //   // return;
+  //   // } // pick the enemy with the lowest health, then heal 'em
+  //   // Switch(a) {
+  //   //   case 0: // Terra
+  //   //     // v = 1;
+  //   //       //            Return;
+  //   // }     // cast cure,
+  //   //}
+
+  //   // if (b = 1 and MHP(e) <= 200 and MMP(e) >= 5) {
+  //   //   CallEvent(EnemyMove(), e, e, 1); // It'll either heal (if it's low
+  //   //   Return;                          // in health) or it'll attack
+  //   //                                    // a random character (all the
+  //   stuff
+  //   //                                    below)
+  //   // }
+
+  //   // switch (a) {
+  //   //   case 0: vgadump(); vgadump();
+  //   //   case 1: vgadump();
+  //   // }
+
+  //   // switch (a) {
+  //   //   case 0:
+  //   //     for (b, 1, c, 1) { vgadump(); }
+  //   //   case 1: vgadump();
+  //   // }
+
+  //   // switch (a) {
+  //   //   case 0: a++;
+  //   //   case 1:
+  //   //     vgadump();
+  //   //     if (b) flags[x / y] = z;
+  //   //     for (n, 1, numchars, 1) { vgadump(); }
+  //   //   case 2: screen[f, e] = g;
+  //   // }
+
+  //   // for (n, 1, numchars, 1) { vgadump(); }
+  //   // for (flags(0), 1, a, 1) { vgadump(); }
+  //   // quit(bye());
+
+  //   // if (a) vgadump();
+  //   // if (!a) vgadump();
+  //   // if ((a)) vgadump();
+  //   // if (!(a)) vgadump();
+  //   // if ((a + b) = c) vgadump();
+  //   // if (a) {
+  //   //   vgadump();
+  //   //   vgadump();
+  //   // }
+  //   // if (a && b) vgadump();
+  //   // if (a + b && c == d) vgadump();
+
+  //   //   if (a) goto foo;
+  //   //   a += 1;
+  //   // foo:
+
+  //   //   goto foo;
+  //   // foo:
+
+  //   // foo:
+  //   //   if (a) goto foo;
+  //   // bar:
+  //   //   if (b) {
+  //   //     vgadump();
+  //   //     goto bar;
+  //   //   }
+  //   //   if (c) vgadump();
+  //   //   while (d) vgadump();
+  //   //   // NOTE(aen): Doesn't decompile correctly, but has same effect as if
+  //   //   (0). i.e
+  //   //   // not worth supporting anyway.if (!a = b) vgadump();
+
+  //   //   a = 1;
+  //   //   a += 2;
+  //   //   a -= 3;
+  //   //   a++;
+  //   //   a--;
+  //   //   a = 1 + [2 * 3];
+  //   //   modposition = 1;
+  //   //   vclayerwrite += 2;
+  //   //   layervc2trans -= 3;
+  //   //   keepaz++;
+  //   //   fontcolor--;
+  //   //   flags[a] = 666;
+  //   //   flags[entity.y1[tilef]] = 42;
+  //   //   screen[x, items[y, z]] = 777;
+  //   //   // z=666;
+
+  //   //   mapswitch("test.map", 2147483647, 1 + ((2 * 3) / 4) % 5, 3);
+  //   //   warp(6, 7, 8);
+  //   //   addcharacter(9);
+  //   //   soundeffect(10);
+  //   //   giveitem(11);
+  //   //   text(12, "a", "b", "c");
+  //   //   alterftile(13, 14, 15, 16);
+  //   //   alterbtile(17, 18, 19, 20);
+  //   //   fakebattle();
+
+  //   //   // return; // TODO(aen): This one may be tricky.
+
+  //   //   playmusic("aurora.mod");
+  //   //   stopmusic();
+  //   //   healall();
+  //   //   alterparallax(21, 22, 23);
+  //   //   fadein(24);
+  //   //   fadeout(25);
+  //   //   removecharacter(26);
+  //   //   banner("hi", 27);
+  //   //   enforceanimation();
+  //   //   waitkeyup();
+  //   //   destroyitem(28, 29);
+  //   //   prompt(30, "d", "e", "f", 31, "g", "h");
+  //   //   chainevent(32);
+  //   //   chainevent(32, 33);
+  //   //   chainevent(32, 33, 34);
+  //   //   chainevent(32, 33, 34, 35);
+  //   //   chainevent(32, 33, 34, 35, 36);
+  //   //   callevent(37);
+  //   //   callevent(37, 38);
+  //   //   heal(39, 40);
+  //   //   earthquake(41, 42, 43);
+  //   //   savemenu();
+  //   //   enablesave();
+  //   //   disablesave();
+  //   //   revivechar(44);
+  //   //   restoremp(45, 46);
+  //   //   redraw();
+  //   //   stext(47, "i", "j", "k");
+  //   //   disablemenu();
+  //   //   enablemenu();
+  //   //   wait(48);
+  //   //   setface(49, 50);
+  //   //   mappalettegradient(51, 52, 53, 54);
+  //   //   boxfadeout(55);
+  //   //   boxfadein(56);
+  //   //   givegp(57);
+  //   //   takegp(58);
+  //   //   changezone(59, 60, 61);
+  //   //   getitem(62, 63);
+  //   //   forceequip(64, 65);
+  //   //   givexp(66, 67);
+
+  //   //   // funky bois
+  //   //   shop(68);
+  //   //   shop(68, 688);
+  //   //   shop(68, 688, 6888);
+
+  //   //   palettemorph(69, 70, 71, 72, 73);
+  //   //   changechr(74, "knight.chr");
+  //   //   readcontrols();
+  //   //   vcputpcx("cool.pcx", 75, 76);
+  //   //   hooktimer(77);
+  //   //   hookretrace(78);
+  //   //   vcloadpcx("boss.pcx", 79);
+  //   //   vcblitimage(80, 81, 82, 83, 84);
+  //   //   playfli("neat.fli");
+  //   //   vcclear();
+  //   //   vcclearregion(85, 86, 87, 88);
+  //   //   vctext(89, 90, "yolo");
+  //   //   vctblitimage(91, 92, 93, 94, 95);
+  //   //   exit();
+  //   //   quit("it");
+  //   //   vccentertext(96, "Restore");
+  //   //   resettimer();
+  //   //   vcblittile(97, 98, 99);
+  //   //   sys_clearscreen();
+  //   //   sys_displaypcx("intro\image7.pcx");
+  //   //   oldstartupmenu();
+  //   //   vgadump();
+  //   //   newgame("test.map");
+  //   //   loadmenu();
+  //   //   delay(100);
+  //   //   partymove("D3 F1");
+  //   //   entitymove(101, "R1 F3");
+  //   //   autoon();
+  //   //   autooff();
+  //   //   entitymovescript(102, 103);
+  //   //   vctextnum(104, 105, 106);
+  //   //   vcloadraw("miscicon.dat", 107, 108, 109);
+  //   //   vcbox(110, 111, 112, 113);
+  //   //   vccharname(114, 115, 116, 117);
+  //   //   vcitemname(118, 119, 120, 121);
+  //   //   vcitemdesc(122, 123, 124, 125);
+  //   //   vcitemimage(126, 127, 128, 129);
+  //   //   vcatextnum(130, 131, 132, 133);
+  //   //   vcspc(134, 135, 136, 137);
+  //   //   calleffect(138);
+  //   //   calleffect(138, 139);
+  //   //   calleffect(138, 139, 140);
+  //   //   callscript(141);
+  //   //   callscript(141, 142);
+  //   //   callscript(141, 142, 143);
+  //   //   vcline(144, 145, 146, 147, 148);
+  //   //   getmagic(149, 150);
+  //   //   bindkey(151, 152);
+
+  //   //   // funky bois
+  //   //   textmenu(153, 154, 155, 156, "l");
+  //   //   textmenu(153, 154, 155, 156, "l", "m");
+  //   //   textmenu(153, 154, 155, 156, "l", "m", "n");
+
+  //   //   itemmenu(157);
+  //   //   equipmenu(158);
+  //   //   magicmenu(159);
+  //   //   statusscreen(160);
+  //   //   vccr2(161, 162, 163, 164);
+  //   //   vcspellname(165, 166, 167, 168);
+  //   //   vcspelldesc(169, 170, 171, 172);
+  //   //   vcspellimage(173, 174, 175, 176);
+
+  //   //   // funky bois
+  //   //   magicshop(177);
+  //   //   magicshop(177, 1777);
+  //   //   magicshop(177, 1777, 17777);
+  //   //   vctextbox(178, 179, 180, "o");
+  //   //   vctextbox(178, 179, 180, "o", "m");
+  //   //   vctextbox(178, 179, 180, "o", "m", "g");
+
+  //   //   playvas("Battle\Ice1.PCX", 177, 178, 179, 180, 181);
+  //   return;
+  // }
+
+  // event
+  // {
+  //   if (flags(100) = 1)
+  //   {
+  //     vgadump();
+  //   }
+  // }

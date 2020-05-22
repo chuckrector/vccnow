@@ -1,41 +1,35 @@
 #include "v1vc_macro.hpp"
 #include "compile.hpp"
 #include "log.hpp"
+#include "mem.hpp"
+#include "util.hpp"
 #include <stdlib.h>
 
 // -----------------------------------------------------------------------------
 
-Macro_t *MacroSlab;
 void
-InitMacroSlab()
+InitMacroPool()
 {
-  if (IsMacroSlabReady)
-    return;
-  MacroSlab = new Macro_t[MACRO_SLAB_SIZE];
-  IsMacroSlabReady = true;
-}
-void
-FreeMacroSlab()
-{
-  delete[] MacroSlab;
+  Assert(!MacroPool.Base);
+  InitMemPool(&MacroPool, PoolBase(MACRO_POOL_INDEX), POOL_SIZE);
 }
 
 // NOTE(aen): Never dealloc. Use what we got or boom
-Macro_t *
+macro *
 NewMacro()
 {
-  if (!IsMacroSlabReady)
-    Fail("Error: Must call InitMacroSlab before using NewMacro\n");
-  if (MacroSlabResidents >= MACRO_SLAB_SIZE)
-    Fail("Too many slab macros! Over %d, exiting...\n", MACRO_SLAB_SIZE);
-  // Log("<<<NewMacro %d>>>\n", MacroSlabResidents);
-  return MacroSlab + MacroSlabResidents++;
+  // Log("<<<NewMacro %d>>>\n", MacroPool.Residents);
+  Assert(MacroPool.Base);
+  macro *Result = NewItem(&MacroPool, macro);
+  Result->ParamList.SetMaxTokens(4);
+  Result->Expansion.SetMaxTokens(100);
+  return Result;
 }
 
 // -----------------------------------------------------------------------------
 
 void
-Macro_t::Debug()
+macro::Debug()
 {
   ParamList.Minify((u8 *)TempBuffer);
   Log("Macro@%d:%d: %.*s[%d] (%s) ",
@@ -50,7 +44,7 @@ Macro_t::Debug()
 }
 
 void
-Macro_t::ParseFrom(TokenList_t *TokenList)
+macro::ParseFrom(token_list *TokenList)
 {
   TokenList->ExpectToken('#');
   TokenList->ExpectToken("define", 6);
@@ -75,7 +69,7 @@ Macro_t::ParseFrom(TokenList_t *TokenList)
     while (!TokenList->AtEnd() && !TokenList->IsToken(')'))
     {
       // NOTE(aen): Saving token because Expect* moves to the next one.
-      Token_t *T = TokenList->AtToken();
+      token *T = TokenList->AtToken();
 
       TokenList->ExpectTokenType(TT_IDENT);
 
@@ -125,29 +119,40 @@ Macro_t::ParseFrom(TokenList_t *TokenList)
 
 // -----------------------------------------------------------------------------
 
-// NOTE(aen): Alloc/free pointer list only. Fine cz underlying tokens in slab
-MacroList_t::MacroList_t(u64 N) { Reset(N); }
-MacroList_t::~MacroList_t() { delete[] Data; }
-Macro_t *
-MacroList_t::Get(u64 MacroIndex)
+macro *
+macro_list::Get(u64 MacroIndex)
 {
-  return Data[MacroIndex];
+  return Data + MacroIndex;
 }
 
 void
-MacroList_t::Reset(u64 N)
+macro_list::Reset()
 {
-  if (MaxMacros != N)
-  {
-    if (Data)
-      delete[] Data;
-    Data = new Macro_t *[MaxMacros = N];
-  }
   NumMacros = 0;
 }
 
 void
-MacroList_t::Debug()
+macro_list::SetMaxMacros(u64 NewMaxMacros)
+{
+  if (MaxMacros != NewMaxMacros)
+  {
+    // NOTE(aen): Dumbly create a new list and copy items over. Don't bother
+    // freeing anything. Bump allocation all the way until it's a problem.
+    macro *OldData = Data;
+    u64 OldMaxMacros = MaxMacros;
+    Data = NewList(&MacroPool, MaxMacros = NewMaxMacros, macro);
+    for (int N = 0; N < MaxMacros && N < OldMaxMacros; N++)
+      Data[N] = OldData[N];
+    DebugLog(
+        MEDIUM,
+        "MacroList.SetMaxMacros: Realloc from %lld to %lld\n",
+        OldMaxMacros,
+        MaxMacros);
+  }
+}
+
+void
+macro_list::Debug()
 {
   for (u64 M = 0; M < NumMacros; M++)
   {
@@ -157,11 +162,14 @@ MacroList_t::Debug()
 }
 
 void
-MacroList_t::AddMacro(Macro_t *Macro)
+macro_list::AddMacro(macro *Macro)
 {
+  if (!MaxMacros)
+    SetMaxMacros(DEFAULT_NUM_MACROS_PER_LIST);
   if (NumMacros >= MaxMacros)
     Fail("Too many macros! Over %d, exiting...\n", MaxMacros);
-  Data[NumMacros++] = Macro;
+
+  Data[NumMacros++] = *Macro;
 }
 
 // -----------------------------------------------------------------------------
@@ -169,10 +177,10 @@ MacroList_t::AddMacro(Macro_t *Macro)
 // NOTE(aen): Parses from/to current indices, wherever those lie
 void
 ParseMacros(
-    Parser_t *Parent,
-    TokenList_t *In,
-    TokenList_t *Out,
-    MacroList_t *MacroList)
+    parser *Parent,
+    token_list *In,
+    token_list *Out,
+    macro_list *MacroList)
 {
   // Log("ParseMacros\n");
   while (!In->AtEnd())
@@ -186,14 +194,14 @@ ParseMacros(
       {
         // Log("#define\n");
         In->Index = SaveTokenIndex;
-        Macro_t *Macro = NewMacro();
+        macro *Macro = NewMacro();
         Macro->ParseFrom(In);
         MacroList->AddMacro(Macro);
       }
       else if (In->IsToken("include", 7))
       {
         In->NextToken();
-        Token_t *Token = In->AtToken();
+        token *Token = In->AtToken();
         // Log("--> #include %.*s\n", Token->Length, Token->Text);
         In->NextToken();
 
@@ -209,15 +217,17 @@ ParseMacros(
             (int)Token->Length,
             Token->Text);
 
-        Parser_t P;
+        parser P;
         // P.Path = Parent->Path;
         P.Load(TempBuffer);
-        TokenList_t TLA;
+        token_list TLA;
+        TLA.SetMaxTokens(In->MaxTokens);
         P.ToTokenList(&TLA);
         // TLA.Debug();
 
-        TokenList_t TLB;
-        MacroList_t ML;
+        token_list TLB;
+        TLB.SetMaxTokens(In->MaxTokens);
+        macro_list ML;
         ParseMacros(Parent, &TLA, &TLB, &ML);
 
         for (u64 T = 0; T < TLB.NumTokens; T++)
@@ -241,17 +251,17 @@ ParseMacros(
 }
 
 void
-ExpandMacros(MacroList_t *MacroList, TokenList_t *In, TokenList_t *Out)
+ExpandMacros(macro_list *MacroList, token_list *In, token_list *Out)
 {
   while (!In->AtEnd())
   {
-    Token_t *Token = In->AtToken();
+    token *Token = In->AtToken();
     bool FoundMacro = false;
 
     // TODO(aen): Hash lookup
     for (u64 m = 0; m < MacroList->NumMacros; m++)
     {
-      Macro_t *Macro = MacroList->Data[m];
+      macro *Macro = MacroList->Get(m);
       bool IsMatch = Token->IsMatch(Macro->Token);
       if (Token->IsIdent() && IsMatch)
       {
@@ -264,11 +274,13 @@ ExpandMacros(MacroList_t *MacroList, TokenList_t *In, TokenList_t *Out)
         // Token->Debug();
         In->NextToken();
 
-        TokenList_t *SubList = new TokenList_t[Macro->ParamList.NumTokens];
+        token_list *SubList =
+            NewList(&TokenPool, Macro->ParamList.NumTokens, token_list);
         In->ExpectToken('(', '[');
         for (u64 p = 0; p < Macro->ParamList.NumTokens; p++)
         {
-          TokenList_t *SL = SubList + p;
+          token_list *SL = SubList + p;
+          SL->SetMaxTokens(1000); // TODO(aen): Dynamify
           // NOTE(aen): Gobble param, even if it's a complex expression.
           while (!In->AtEnd() && !In->IsToken(')') && !In->IsToken(']') &&
                  !In->IsToken(','))
@@ -289,12 +301,12 @@ ExpandMacros(MacroList_t *MacroList, TokenList_t *In, TokenList_t *Out)
         Macro->Expansion.Index = 0;
         while (!Macro->Expansion.AtEnd())
         {
-          Token_t *TokenToWrite = Macro->Expansion.AtToken();
+          token *TokenToWrite = Macro->Expansion.AtToken();
 
           s64 Match = -1;
           for (u64 P = 0; P < Macro->ParamList.NumTokens; P++)
           {
-            Token_t *T = Macro->ParamList.Get(P);
+            token *T = Macro->ParamList.Get(P);
             if (TokenToWrite->IsMatch(T))
             {
               Match = P;
@@ -304,7 +316,7 @@ ExpandMacros(MacroList_t *MacroList, TokenList_t *In, TokenList_t *Out)
 
           if (Match >= 0)
           {
-            TokenList_t *SLP = SubList + Match;
+            token_list *SLP = SubList + Match;
             // NOTE(aen): Write out full expansion
             for (int X = 0; X < SLP->NumTokens; X++)
               Out->AddToken(SLP->Get(X));

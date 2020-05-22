@@ -1,0 +1,51 @@
+event
+{
+  volume = 100;
+  enforceanimation();
+  redraw();
+  flags(131) = 0;
+  calleffect(9);
+}
+event
+{
+  if (flags(130) == 1)
+  {
+    return;
+  }
+  calleffect(3);
+}
+event
+{
+  if (flags(130) == 1)
+  {
+    return;
+  }
+  calleffect(4);
+}
+event
+{
+  if (flags(130) == 1)
+  {
+    return;
+  }
+  calleffect(5);
+}
+event
+{
+  if (flags(130) == 1)
+  {
+    return;
+  }
+  calleffect(6);
+}
+event
+{
+  flags(131) = 1;
+  mapswitch("shincave.map", 0, 0, 1);
+}
+event
+{
+  face((0)) = 2;
+  mapswitch("emil.map", 0, 0, 0);
+}
+event { mapswitch("twoppass.map", 0, 0, 0); }

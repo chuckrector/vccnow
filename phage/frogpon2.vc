@@ -1,0 +1,1147 @@
+event
+{
+  fadein(1);
+  flags(151) = 0;
+  enforceanimation();
+  if (flags(105))
+  {
+    entity.locx(18) = 1;
+    entity.locy(18) = 1;
+  }
+  if (flags(101) == 1 && flags(103) == 0)
+  {
+    entity.locx(10) = 47;
+    entity.locy(10) = 33;
+    face(10) = 0;
+    entity.locx(11) = 47;
+    entity.locy(11) = 34;
+    face(11) = 1;
+  }
+}
+event
+{
+  stext(0, "'The Wit and Wisdom of GMW'", "", "");
+  stext(1, "Hey, this book is full of", "blank pages!", "");
+}
+event
+{
+  stext(
+      0,
+      "'The Avenging Pig' comics,",
+      "#1-7. These supposedly date",
+      "back to the Colonization.");
+}
+event { stext(0, "These shelves are empty.", "", ""); }
+event
+{
+  stext(0, "'The Encyclopedia of Fungus'", "", "");
+  stext(1, "The cure for insomnia!", "", "");
+}
+event
+{
+  stext(0, "'The Complete Guide to Dust'", "", "");
+  stext(1, "I refuse to read this!", "Uh uh, No way!", "");
+  if (char(4))
+  {
+    stext(
+        4,
+        "How do you know that you",
+        "don't like it if you refuse",
+        "to try it? Hmmm?");
+    stext(1, "You've gotta be kidding me...", "", "");
+    stext(4, "Yep. I'd rather die than read", "that thing!", "... <shudder>");
+  }
+}
+event
+{
+  stext(
+      0,
+      "'The Verge Gods'",
+      "...and so Vecna made the",
+      "cosmos, and many of the");
+  stext(
+      0,
+      "Creator Gods flocked to it",
+      "and each created a world to",
+      "call their own...");
+  stext(0, "Ours was made by the great", "GMW...", "");
+  stext(1, "What a shameless piece of", "self-insertion...", "");
+}
+event
+{
+  stext(
+      0,
+      "'The Colonization, Pt 1'",
+      "During what must have been a",
+      "golden age of expansion, a");
+  stext(
+      0,
+      "group of humans colonized",
+      "this world, which they named",
+      "Ieval...");
+}
+event
+{
+  stext(
+      0,
+      "'The Colonization, Pt 2'",
+      "The humans could do many",
+      "things, and turned this world");
+  stext(
+      0,
+      "into a paradise. They then",
+      "created several intelligent",
+      "animal species with which to");
+  stext(0, "share their knowledge...", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'The Colonization, Pt 3'",
+      "No one knows what happened",
+      "next. Over the course of ten");
+  stext(
+      0,
+      "years, the humans all died",
+      "and new colonists stopped",
+      "arriving from other worlds.");
+}
+event
+{
+  stext(
+      0,
+      "'The Origin of the Species'",
+      "During the last years of the",
+      "Colonization, many of the");
+  stext(
+      0,
+      "species that exist today were",
+      "given the capacity for",
+      "intelligence. Did the humans");
+  stext(0, "hope that we would continue", "where they left off?", "");
+}
+event
+{
+  stext(
+      0,
+      "'Modern Sea Travel'",
+      "...Sea travel has been mostly",
+      "discontinued since trade with");
+  stext(0, "the BPC stopped.", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'Mysteries of the Paranormal'",
+      "Possibly the most advanced",
+      "civilization in the world,");
+  stext(
+      0,
+      "the Burrowing People's",
+      "Collective sent trade ships",
+      "to sell processed ore to the");
+  stext(
+      0,
+      "nations without mining",
+      "capability. Then, 200 years",
+      "ago, they suddenly stopped.");
+  stext(
+      0,
+      "An expedition headed by St.",
+      "Lumin himself found the BPC's",
+      "cities and tunnels abandoned,");
+  stext(
+      0,
+      "with no signs of their",
+      "departure. What could have",
+      "made an entire nation");
+  stext(0, "disappear?", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'Ruins, A Historical Guide'",
+      "The only places where ruins",
+      "from the human colonization");
+  stext(
+      0,
+      "can be found are deep under",
+      "the ground. Lumin is said to",
+      "have sent teams out looking");
+  stext(
+      0,
+      "for such ruins during the war",
+      "against the Horse Nomads,",
+      "hoping to find lost human");
+  stext(0, "technology.", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'On the Origins of Magic'",
+      "No one knows how magic works,",
+      "or what it is. It is believed");
+  stext(
+      0,
+      "that the humans gave us magic",
+      "at the same time as they gave",
+      "us intelligence. Why? They");
+  stext(0, "were most likely wary of", "experimenting on their own", "kind...");
+}
+event { warp(112, 97, 0); }
+event { warp(83, 101, 0); }
+event { warp(45, 33, 0); }
+event { warp(16, 103, 0); }
+event { warp(54, 32, 0); }
+event { warp(55, 32, 0); }
+event { warp(78, 106, 0); }
+event { warp(46, 106, 0); }
+event { warp(38, 42, 0); }
+event { warp(39, 42, 0); }
+event
+{
+  stext(0, "Sam! Where've you been?", "", "");
+  stext(1, "I went out to find a", "Giant Lily Seed for the", "town!");
+  stext(
+      0,
+      "You as well? Did you meet up",
+      "with Bull? He went out to",
+      "look for one as well!");
+  stext(
+      0,
+      "I always thought that boy",
+      "was trouble, but then he",
+      "goes and does something");
+  stext(0, "heroic like this!", "", "");
+  stext(1, "Umm... Sure. Yeah, heroic...", "", "");
+  if (char(7))
+  {
+    stext(7, "I *am* right here, ya know!", "", "");
+  }
+}
+event
+{
+  stext(0, "This's the town of Frog Pond.", "...", "...");
+  stext(0, "I'm gonna miss this place!", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'Giant Lily Plants'",
+      "The Giant Lily is a special",
+      "plant that grows a huge pad");
+  stext(
+      0,
+      "that floats on the water. Its",
+      "flower is unusually small for",
+      "its size, leaving a large");
+  stext(
+      0,
+      "amount of pad space. The plant",
+      "is used exclusively by the",
+      "frogs of Frog Pond, who build");
+  stext(
+      0,
+      "their houses on the pad and",
+      "thus avoid landbound enemies.",
+      "The pads are capable of");
+  stext(
+      0,
+      "supporting entire towns, but",
+      "the frogs cleverly build",
+      "sparsely on the plant, so as");
+  stext(0, "not to inhibit its ability to", "photosynthesize.", "");
+}
+event
+{
+  if (!flags(101))
+  {
+    givegp(20);
+    stext(
+        1,
+        "Whoa! What a bizarre dream.",
+        "I guess I'd better get up.",
+        "The tadpoles are probably");
+    stext(1, "hungry.", "", "");
+    earthquake(4, 4, 100);
+    stext(0, "WAAAAH! Lemme go!", "", "");
+    earthquake(5, 5, 100);
+    stext(
+        1,
+        "What was that? I hope it's",
+        "not what I think it is...",
+        "I'd better go check it out.");
+    entity.locx(10) = 47;
+    entity.locy(10) = 33;
+    face(10) = 0;
+    entity.locx(11) = 47;
+    entity.locy(11) = 34;
+    face(11) = 1;
+    flags(101) = 1;
+    flags(102) = 0;
+    flags(103) = 0;
+    flags(105) = 0;
+  }
+}
+event
+{
+  if (!flags(102))
+  {
+    banner("HiddenZone!", 2);
+    addcharacter(2);
+    addcharacter(3);
+    addcharacter(4);
+    addcharacter(5);
+    flags(102) = 1;
+  }
+}
+event
+{
+  stext(0, "'Rootwalla'", "", "");
+  stext(
+      1,
+      "It's a play about a lizard",
+      "who wants to be the ruler of",
+      "the Savannah Empire.");
+}
+event
+{
+  stext(0, "'Pride and Impertinence'", "", "");
+  stext(
+      1,
+      "It's a morality play. A bunch",
+      "of people act in ways that",
+      "annoy St. Lumin, until the");
+  stext(1, "end of the play, when they", "repent.", "");
+  if (char(4))
+  {
+    stext(4, "This reviewer gives it two", "thumbs down. It stinks!", "");
+  }
+}
+event
+{
+  stext(0, "'The Complete Works of Edgar'", "", "");
+  stext(1, "Burn a copy today!", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'Stairway to Success!'",
+      "...Tip #32: Make lots of cash",
+      "so you can buy some friends!");
+  if (char(4))
+  {
+    stext(4, "Hey, yeah! Gimme cash!", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "'The Star Summoner'",
+      "Then St. Lumin spoke: 'The",
+      "Horse Nomads shall fight no");
+  stext(
+      0,
+      "more. They shall fall this",
+      "day, for they have provoked",
+      "my wrath! Behold!' And with");
+  stext(
+      0,
+      "those words, a great meteor",
+      "fell from the heavens, and",
+      "slammed into the northern");
+  stext(
+      0,
+      "steppes, shattering the Nomad",
+      "threat forever. Thus was the",
+      "Savannah Empire saved from");
+  stext(
+      0,
+      "disaster, and Lumin's true",
+      "power revealed in its awesome",
+      "majesty...");
+}
+event
+{
+  if (!flags(103))
+  {
+    face(0) = 2;
+    stext(
+        7,
+        "Gimme that beetle, ya little",
+        "twerp! Else I'm gonna rough",
+        "ya up some more!");
+    earthquake(5, 5, 100);
+    stext(1, "Bull!", "", "");
+    specialframe(10) = 23;
+    wait(100);
+    specialframe(10) = 0;
+    face(10) = 3;
+    stext(
+        7, "Hey! Butt out jerk, Or you're", "next to get a beating today!", "");
+    stext(
+        1,
+        "Leave the kid alone!",
+        "Really! I thought you at",
+        "least had better sense than");
+    stext(
+        1,
+        "that! Do you think your dad's",
+        "gonna protect you if you're",
+        "found mugging people? You'll");
+    stext(
+        1,
+        "get kicked out of the town",
+        "for sure! Hey kid, you can go",
+        "home while I deal with this");
+    stext(1, "idiot.", "", "");
+    entitymove(11, "R30 U30");
+    wait(250);
+    stext(
+        7,
+        "I'd beat you up right here,",
+        "loser, but there're too many",
+        "people around. But just wait");
+    stext(7, "'til later! Then you'll see", "my true power!", "");
+    entitymove(10, "R30 U30");
+    wait(400);
+    stext(1, "My, aren't *we* melodramatic", "today? What a jerk.", "");
+    stext(
+        1,
+        "I'd better go feed the",
+        "tadpoles... After all, that",
+        "*is* my job! Good thing I live");
+    stext(1, "just north of the spawning", "pools.", "");
+    flags(103) = 1;
+  }
+}
+event { warp(158, 104, 0); }
+event { warp(83, 40, 0); }
+event { warp(126, 141, 0); }
+event { warp(104, 34, 0); }
+event
+{
+  if (flags(104))
+  {
+    stext(1, "I refuse to speak to him, for", "he sells no cheese!", "");
+  }
+  if (!flags(104))
+  {
+    stext(1, "Hello, I'd like some cheese.", "", "");
+    stext(0, "What kind would you like?", "", "");
+    stext(1, "Cheddar, please.", "", "");
+    stext(
+        0,
+        "Sorry, I'm afraid we're all",
+        "out of cheddar at the moment,",
+        "sir.");
+    stext(1, "Well, how about a bit of, oh,", "Gorgonzola?", "");
+    stext(0, "I'm afraid we're out of that", "as well, sir.", "");
+    stext(1, "Munster?", "", "");
+    stext(0, "Fresh out sir.", "", "");
+    stext(1, "Perhaps a Brie, or maybe some", "sort of blue cheese?", "");
+    stext(0, "Let's see... No and, mmmm...", "no. Neither of those.", "");
+    stext(1, "I'll even take Limburger!", "You do have Limburger, right?", "");
+    stext(0, "It's a bit runny sir.", "", "");
+    stext(1, "That's all right. I'll still", "take it.", "");
+    stext(0, "Actually, it's quite nasty,", "sir.", "");
+    stext(1, "I don't care. Give it here.", "", "");
+    stext(
+        0,
+        "It's gone off altogether sir.",
+        "I really can't recommend it,",
+        "sir.");
+    stext(
+        1,
+        "I've got a stomach of iron.",
+        "I can take anything it can",
+        "dish out. Now give it to me!");
+    stext(0, "Oh wait, I remember now! We", "don't have it any more.", "");
+    stext(1, "But you were just telling me", "its condition!", "");
+    stext(0, "No, I sold it last Thursday.", "", "");
+    stext(
+        1,
+        "You seemed awfully attached",
+        "to that cheese... I think you",
+        "have it behind the counter!");
+    stext(0, "No sir! On my word of honor,", "I really did sell it sir!", "");
+    stext(
+        1, "Well, all right. Do you have", "*any* cheese? Any whatsoever?", "");
+    stext(0, "Well... ...", "... ... ...", "... ...no, sir. No I don't.");
+    stext(
+        1,
+        "You are a silly person, and I",
+        "refuse to continue this",
+        "conversation!");
+    flags(104) = 1;
+  }
+}
+event
+{
+  stext(0, "I don't know what we're going", "to do...", "");
+  face(15) = 0;
+}
+event { stext(0, "Look at the flower! It's all", "dried up!", ""); }
+event
+{
+  if (!flags(105))
+  {
+    if (flags(106))
+    {
+      prompt(7, "Wanna try again?", "", "", flags(107), "No!", "This time...");
+    }
+    if (!flags(106))
+    {
+      prompt(
+          7,
+          "So! Ya li'l squirt! Wanna",
+          "fight?",
+          "",
+          flags(106),
+          "No.",
+          "Let's rumble!");
+    }
+    flags(106) = 1;
+    flags(107) = 0;
+    stext(7, "Ha! I'm gonna kick your ass!", "", "");
+    earthquake(5, 5, 200);
+    stext(7, "Ha ha!", "", "");
+    partymove("L1");
+  }
+}
+event
+{
+  stext(
+      0,
+      "'Bogeyman Tales'",
+      "The dreaded Horse Hunters",
+      "still roam the night in their");
+  stext(
+      0,
+      "endless hunt for the Horse",
+      "Nomads, even though they",
+      "killed the last one long ago.");
+  stext(0, "Only St.Lumin has seen one", "and lived to tell the tale.", "");
+}
+event
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(1, "Um... Yes?", "", "");
+  stext(0, "I be Wild Willy Wonka!", "", "");
+  stext(1, "Some things never change...", "", "");
+}
+event { warp(127, 119, 0); }
+event { warp(37, 61, 0); }
+event { stext(0, "I don't want to say goodbye to", "this town!", ""); }
+event
+{
+  stext(
+      0,
+      "My little brother was gonna be",
+      "growin' his legs soon and",
+      "gettin' all the attention, but");
+  stext(
+      0,
+      "he got released into the pond!",
+      "Now I'm gonna be the baby in",
+      "the family a while longer!");
+}
+event
+{
+  stext(
+      0,
+      "Sam! Where've *you* been?",
+      "We had to release all the",
+      "tadpoles... They'll probably");
+  stext(
+      0, "do better in the pond than", "they will in this place of", "death!");
+}
+event
+{
+  stext(
+      0,
+      "Have you been to the cheese",
+      "shop lately? I'm worried that",
+      "it'll sink into the pond...");
+}
+event { stext(0, "Periodicals, including 'The", "Frog Pond Gazette.'", ""); }
+event
+{
+  stext(
+      0,
+      "An ancient manuscript dating",
+      "from before the Horse War,",
+      "over 1000 years ago, entitled");
+  stext(0, "'The Dream Lord.'", "It's nearly illegible.", "");
+}
+event
+{
+  stext(
+      0,
+      "Insects, and Their Impact'",
+      "Insects were never given",
+      "intelligence by the humans,");
+  stext(
+      0,
+      "so they are the creatures",
+      "most animals use to perform",
+      "manual labor, such as plowing");
+  stext(0, "fields or acting as beasts of", "burden.", "");
+}
+event
+{
+  stext(
+      0,
+      "'Modern Parlance'",
+      "The usage of words such as",
+      "'animal' and 'people' are");
+  stext(
+      0,
+      "different than the humans",
+      "originally used them. The",
+      "term 'animal' now refers to");
+  stext(
+      0,
+      "any intelligent species that",
+      "was brought to that state by",
+      "the human colonists, rather");
+  stext(
+      0,
+      "as a term for non-intelligent",
+      "creatures. The term 'people'",
+      "has changed from the human");
+  stext(
+      0,
+      "definition as 'other humans',",
+      "to the present definition as",
+      "'other intelligent beings.'");
+}
+event
+{
+  stext(
+      0,
+      "Please go to the front of the",
+      "desk for service! My manager",
+      "is really strict about letting");
+  stext(0, "others back here! I could get", "in trouble!", "");
+}
+event
+{
+  stext(
+      0,
+      "This town used to be so",
+      "scenic! Now it's getting kind",
+      "of slimy and disgusting...");
+}
+event
+{
+  face(24) = 0;
+  prompt(0, "Rest here for just 10 gp!", "", "", 107, "No.", "Yes.");
+  if (flags(107))
+  {
+    if (gp < 10)
+    {
+      stext(0, "You don't have enough GP!", "", "");
+    }
+    if (gp > 9)
+    {
+      takegp(10);
+      banner("We're healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(0, "Come again!", "", "");
+    }
+  }
+  if (!flags(107))
+  {
+    stext(0, "Maybe next time?", "", "");
+  }
+}
+event { warp(18, 132, 0); }
+event { warp(123, 72, 0); }
+event
+{
+  stext(
+      1,
+      "I love the flowers of the",
+      "Giant Lily Plant... This",
+      "is breaking my heart!");
+  stext(1, "I can't believe it's dying!", "", "");
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(48, 126, 0);
+}
+event { warp(flags(109), flags(110), 0); }
+event
+{
+  if (!flags(108))
+  {
+    stext(1, "The tadpoles are gone!", "", "");
+  }
+}
+event
+{
+  stext(
+      0,
+      "Get your items before the pad",
+      "collapses and dies! Everything",
+      "must go!");
+  shop(1, 2, 38, 39, 54);
+  stext(
+      0,
+      "Our factory discounts will",
+      "only last a limited time, so",
+      "buy now!");
+}
+event
+{
+  stext(
+      0,
+      "We'll all be needin' weapons",
+      "when we're fightin' for our",
+      "survival in the wilds!");
+  shop(25, 40, 41);
+  stext(0, "You'll defend me, right?", "", "");
+}
+event { mapswitch("overland.map", 44, 78, 0); }
+event
+{
+  stext(
+      0,
+      "Before the Collapse, humankind",
+      "had perfected a fiendish form",
+      "of indescribable torture,");
+  stext(
+      0,
+      "referred to only as the 'Long-",
+      "Distance Company Commercial.'",
+      "Eventually it was banned, and");
+  stext(0, "all offenders were put to", "death.", "");
+}
+event
+{
+  stext(
+      1,
+      "It's a screenplay for",
+      "something called 'Bambi Meets",
+      "Godzilla.' It's very short...");
+}
+event
+{
+  stext(1, "Hello?", "", "");
+  wait(150);
+  stext(1, "Ahem!", "", "");
+  wait(150);
+  specialframe(0) = 21;
+  stext(1, "HELLO!", "", "");
+  face(26) = 1;
+  wait(50);
+  specialframe(0) = 0;
+  stext(0, "What? Hello! What do you need?", "", "");
+  stext(1, "I'd like to check out a book,", "please.", "");
+  stext(
+      0,
+      "I see. Well, I've only got",
+      "one that you may read, and",
+      "it's about foot fungus.");
+  stext(1, "Never mind, I'll pass.", "", "");
+  face(26) = 0;
+}
+event { stext(0, "A book entitled 'The Legend of", "the Bagel.'", ""); }
+event { stext(0, "A book entitled 'Mystical", "Party Zone.'", ""); }
+event { stext(0, "A book entitled 'Return of El", "Thirsto Diablo.'", ""); }
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(74, 128, 0);
+}
+event
+{
+  stext(
+      0,
+      "'World Cuisine'",
+      "Strangely enough, all of the",
+      "intelligent animal species are");
+  stext(
+      0,
+      "omnivorous, which means that",
+      "it is much easier to prepare",
+      "food for foreigners than would");
+  stext(
+      0,
+      "at first be apparent. Some",
+      "theorize that we were given",
+      "this trait by the humans in");
+  stext(
+      0,
+      "order to develop similar",
+      "cultures to their own, since",
+      "it seems unlikely that violent");
+  stext(
+      0,
+      "carnivores or passive",
+      "herbivores would develop in a",
+      "similar manner to the humans.");
+}
+event
+{
+  stext(0, "These books are boring.", "", "");
+  stext(
+      1,
+      "And the game designer copped",
+      "out on the prospect of coming",
+      "up with more books...");
+}
+event
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(102, 136, 0);
+}
+event
+{
+  stext(0, "Oh, you must be one of Bull's", "little friends!", "");
+  specialframe(0) = 20;
+  stext(1, "Er... yeah.", "", "");
+  specialframe(0) = 0;
+  stext(
+      0,
+      "Bull's gone right now! He's",
+      "searching for the Seed that",
+      "will save our town!");
+  if (char(7))
+  {
+    stext(7, "Hi maw. What's for dinner?", "", "");
+    stext(0, "Bull! How is the quest going?", "", "");
+    stext(
+        7,
+        "Oh, you know... It's goin'",
+        "okay, I guess. What's for",
+        "dinner?");
+    stext(
+        0,
+        "Oh, good! Now, don't forget",
+        "to wear clean underwear, and",
+        "mind your elders, and...");
+    stext(7, "I *will,* maw! Come on, I'm", "starvin' here!", "");
+    stext(0, "That's nice, dear. Now have", "fun with your friends!", "");
+    if (char(4))
+    {
+      stext(
+          4,
+          "How'd you ever get so fat",
+          "when your mother never feeds",
+          "you?");
+      stext(
+          7,
+          "Don't ya say anything nasty",
+          "'bout my maw if you don't",
+          "wanna get a poundin'!");
+      stext(4, "Sheesh! So touchy!", "", "");
+    }
+  }
+}
+event
+{
+  stext(
+      0,
+      "'Ieval Bestiary: Book 1'",
+      "The most common threat to",
+      "travellers is the Skunkraven.");
+  stext(
+      0,
+      "Skunkravens are aggressive,",
+      "but a seasoned traveler can",
+      "deal with them with ease.");
+  stext(
+      0,
+      "Skunkravens are found",
+      "throughout the world, but",
+      "are most common in wooded");
+  stext(0, "areas.", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'Ieval Bestiary: Book 2'",
+      "Another creature to look out",
+      "for is the Mad Monkey, so");
+  stext(
+      0,
+      "named for its incredibly bad",
+      "temper. These creatures live",
+      "in Thermal Banana Trees, and");
+  stext(
+      0,
+      "lob the fruit like grenades",
+      "at anything that enters their",
+      "territory. Mad Monkeys live");
+  stext(
+      0,
+      "almost exclusively in the",
+      "Great Forest, south of the",
+      "Savannah Empire.");
+}
+event
+{
+  stext(
+      0,
+      "'Ieval Bestiary: Book 3'",
+      "Hermsters and Hivives are",
+      "both 'spawning' threats.");
+  stext(
+      0,
+      "Hivives, located in the",
+      "Great Forest, are known to",
+      "create swarms of bees with");
+  stext(
+      0,
+      "more mass than the Hivive",
+      "itself. Hermsters are known",
+      "for their ability to");
+  stext(0, "reproduce asexually, and", "their love of swarm tactics.", "");
+}
+event
+{
+  stext(
+      0,
+      "'Ieval Bestiary: Book 4'",
+      "Shelldons and Barrier Squid",
+      "are both found in the watery");
+  stext(
+      0,
+      "areas that they thrive in.",
+      "Shelldons are often sought",
+      "out by hunters for their");
+  stext(
+      0,
+      "pearls, while the Squid are",
+      "sometimes killed for their",
+      "ink. Shelldons have been");
+  stext(
+      0,
+      "to spit their pearls at high",
+      "velocity at hunters. The",
+      "Barrier Squid prefer to use");
+  stext(0, "force fields to ward off", "enemies while they attack.", "");
+}
+event
+{
+  stext(
+      0,
+      "'Combat For Beginners'",
+      "Most frogs have two means of",
+      "offense: Their tongues and");
+  stext(
+      0,
+      "their feet. A tongue attack",
+      "utilizes the powerful muscles",
+      "of the frog's tongue to punch,");
+  stext(
+      0,
+      "or even pierce the enemy. A",
+      "jump attack uses the frog's",
+      "body weight against the enemy.");
+  stext(
+      0,
+      "So which is better? Neither.",
+      "While the jump attack is more",
+      "damaging to enemies, it has a");
+  stext(
+      0,
+      "disadvantage in that it leaves",
+      "the frog nearly defenseless",
+      "for a few seconds. Frogs must");
+  stext(0, "choose their attack to fit the", "occasion.", "");
+}
+event
+{
+  stext(
+      0,
+      "'Combat For Dummies'",
+      "If you've got spells, flaunt",
+      "'em! Spells and Items are very");
+  stext(
+      0,
+      "quick to use, so they take",
+      "effect as soon as you select",
+      "one! Furthermore, there's");
+  stext(
+      0,
+      "not much to stop you from",
+      "using several in a row!",
+      "All this may leave mages");
+  stext(
+      0,
+      "asking, 'Why fight?' The",
+      "answer is: 'Exhaustible.'",
+      "Simply put, spells and items");
+  stext(
+      0,
+      "tend to run out quickly, so",
+      "rather than bombarding an",
+      "enemy, it's usually better");
+  stext(
+      0,
+      "to use spells only when you",
+      "want to keep enemies from",
+      "doing something, or if they");
+  stext(0, "have a strong defense.", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'A Dark and Stormy Night'",
+      "The green-clad criminal",
+      "jauntily adjusted the four-");
+  stext(
+      0,
+      "leaf clover in his hat with",
+      "a three-fingered hand as he",
+      "smiled at the kids who had");
+  stext(
+      0,
+      "stolen his cereal and were",
+      "now busy retching, for there",
+      "was nothing that amused Lucky");
+  stext(
+      0,
+      "the Leprous Con more than to",
+      "watch their expressions when",
+      "he revealed that those weren't");
+  stext(0, "marshmallows.", "", "");
+}
+event
+{
+  stext(
+      0,
+      "There's a forest just outside",
+      "of town. Inside it's like a",
+      "maze. I never go there...");
+  stext(
+      0,
+      "Last person I know went there",
+      "was Bull, and that fella in",
+      "the pith helmet a long time");
+  stext(
+      0, "ago... What? You too, Sam?", "Wow... I'd never be that", "brave...");
+}
+event
+{
+  stext(
+      0,
+      "A children's book, entitled",
+      "'Wally the Warthog Visits",
+      "Snake Land.'");
+}
+event
+{
+  stext(
+      0,
+      "'Ieval Bestiary: Book 5'",
+      "Thunderducks are strange,",
+      "storm-resistant waterfowl,");
+  stext(
+      0,
+      "known for throwing bolts",
+      "of lightning at any who dare",
+      "intrude on their mountainous");
+  stext(0, "domain.", "", "");
+}
+event
+{
+  stext(
+      0,
+      "'Ieval Bestiary: Book 6'",
+      "Camelites are vicious valley-",
+      "dwelling animals with a toxic");
+  stext(
+      0,
+      "demeanor that leaves others",
+      "cold and dead. They and the",
+      "strange beetles known as High");
+  stext(
+      0,
+      "Rollers (for their extreme",
+      "variations in ability and",
+      "coloration) are found");
+  stext(0, "primarily in the valleys", "south of Frog Pond.", "");
+}
+event
+{
+  stext(
+      0,
+      "'Floral Magic'",
+      "Many flowers contain items",
+      "inside, to lure creatures");
+  stext(
+      0,
+      "into pollenating them. By",
+      "sprinkling pollens of the",
+      "correct color on them, these");
+  stext(0, "flowers can be made to give", "up the items within.", "");
+}
+event
+{
+  stext(
+      0,
+      "Press 'B' to access your",
+      "battle menu and check SP.",
+      "SP are Spell Points, used");
+  stext(
+      0,
+      "to buy things from some",
+      "people, and also to power up",
+      "your magic! SP are hard to");
+  stext(0, "come by, so make your choices", "wisely!", "");
+}
+event
+{
+  stext(
+      0,
+      "'Status Anomalies'",
+      "Some animals I've viewed have",
+      "not died when struck down in");
+  stext(
+      0,
+      "battle, and were restored by",
+      "a quick trip to an inn! I",
+      "call this status of seeming");
+  stext(
+      0,
+      "death and miraculous recovery",
+      "'Getting Better.' And I have",
+      "read similar accounts of");
+  stext(
+      0,
+      "individuals who have 'got",
+      "better' from other ailments!",
+      "The following is an example:");
+  stext(
+      0,
+      "''Hendrik!' I cried, 'Where",
+      "have you been?' 'In the ruin,'",
+      "he replied. 'There were weird");
+  stext(
+      0,
+      "beings there, and one turned",
+      "me into a teapot!' 'A teapot?'",
+      "'I got better...''");
+}

@@ -1,0 +1,139 @@
+event
+{
+  fadein(1);
+  enforceanimation();
+}
+event
+{
+  if (flags(134) == 0)
+  {
+    stext(
+        0,
+        "Hello! This is the place where",
+        "we ghosts play the block game!",
+        "");
+    stext(
+        0,
+        "The rules are simple! Just",
+        "place blocks by hitting the",
+        "'Enter' key, and use them to");
+    stext(
+        0,
+        "maneuver the ghosts onto the",
+        "trigger squares, and then talk",
+        "to them to open the way to the");
+    stext(
+        0,
+        "next room! You can remove",
+        "blocks that you've placed by",
+        "hitting 'Enter' there again.");
+    stext(
+        0,
+        "By the way, there are some",
+        "bugs in this place, with the",
+        "ability to teleport you out.");
+    stext(0, "If one touches you, you'll", "have to start over...", "");
+    stext(0, "Good luck!", "", "");
+    entity.locx(5) = 59;
+    entity.locy(5) = 99;
+  }
+  if (flags(134) == 1)
+  {
+    stext(0, "You're good! We have nothing", "left to give to you...", "");
+  }
+}
+event
+{
+  x = entity.locx(0);
+  y = entity.locy(0);
+  if (face(0) == 0)
+  {
+    y++;
+  }
+  if (face(0) == 1)
+  {
+    y -= 1;
+  }
+  if (face(0) == 2)
+  {
+    x++;
+  }
+  if (face(0) == 3)
+  {
+    x -= 1;
+  }
+  alterbtile(x, y, 90, 1);
+  alterftile(x, y - 1, 62, 2);
+  changezone(x, y, 2);
+  wait(10);
+}
+event
+{
+  x = entity.locx(0);
+  y = entity.locy(0);
+  if (face(0) == 0)
+  {
+    y++;
+  }
+  if (face(0) == 1)
+  {
+    y -= 1;
+  }
+  if (face(0) == 2)
+  {
+    x++;
+  }
+  if (face(0) == 3)
+  {
+    x -= 1;
+  }
+  alterbtile(x, y, 55, 0);
+  alterftile(x, y - 1, 0, 2);
+  changezone(x, y, 1);
+  wait(10);
+}
+event
+{
+  if (entity.locx(6) == 13 && entity.locy(6) == 75)
+  {
+    specialframe(6) = 20;
+    stext(0, "I'll open the door.", "", "");
+    specialframe(6) = 0;
+    alterbtile(16, 75, 55, 0);
+    alterbtile(16, 76, 55, 0);
+    alterbtile(16, 77, 55, 0);
+    alterftile(16, 74, 0, 2);
+    alterftile(16, 75, 0, 2);
+    alterftile(16, 76, 0, 2);
+  }
+}
+event
+{
+  if (entity.locx(7) == 14 && entity.locy(7) == 54)
+  {
+    specialframe(7) = 20;
+    stext(0, "I'll open the door.", "", "");
+    specialframe(7) = 0;
+    alterbtile(12, 57, 55, 0);
+    alterbtile(12, 58, 55, 0);
+    alterbtile(12, 59, 55, 0);
+    alterftile(12, 56, 0, 2);
+    alterftile(12, 57, 0, 2);
+    alterftile(12, 58, 0, 2);
+  }
+}
+event
+{
+  if (entity.locx(8) == 14 && entity.locy(8) == 23)
+  {
+    specialframe(8) = 21;
+    speed(8) = 0;
+    stext(0, "Wow, you're good! Here, take", "this!", "");
+    specialframe(8) = 0;
+    giveitem(52);
+    flags(134) = 1;
+    mapswitch("gblocks.map", 10, 94, 0);
+  }
+}
+event { mapswitch("gblocks.map", 10, 94, 0); }
+event { mapswitch("packtown.map", 81, 43, 0); }

@@ -1,0 +1,130 @@
+#include globals.h
+
+event // 0 autoexec
+{
+ if (bit(5,0))
+  Entity.LocY(5)=30; // this guy's already been whacked, so he's not there anymore
+ if (bit(5,1))
+  Entity.LocY(6)=30; // ditto
+ Layer1Trans=1;
+ CameraTracking=0;
+ XWin=0; YWin=0;
+ ReDraw();
+
+ if (!Flags[5])
+  {
+   LayerVC=1; VCLayerWrite=1;
+   for (y,0,200,1) {vcline(0,y,320,y,1);}
+   ReDraw();
+   FadeIn(1);
+   Wait(100);
+
+   SmallText(10, 10,"Look at this one, Bill",
+                    "He must've pissed the",
+                    "boss off!");
+   Smalltext(50,150,"Holy shit! Must've!",
+                    "What's his chart say here?",
+                    "does that say `Bob' or",
+                    "`Bolo'?");
+   SmallText(30, 20,"Goddammit! I hate that stupid",
+                    "Doctor Sandler! He's no Lambert",
+                    "and his handwriting is even",
+                    "worse!");
+   SmallText(50,160,"He probably got this job",
+                    "by sucking up to the higher-",
+                    "ups. Just a damn yes man.");
+   SmallText(20, 10,"Seems more like Dr. Frankenstein",
+                    "if you ask me. Anyway, let's just",
+                    "send him off. These guys get freaky",
+                    "enough with just one implant.");
+   SmallText(30,170,"Yeah. We don't know what'd happen",
+                    "if one guy got TWO of those things.");
+   SmallText(40, 20,"<shudder>");
+  
+   CameraTracking=0; YWin-=32;
+   FadeOut(1); VCClear();
+   SoundEffect(9); Wait(40); SoundEffect(20);
+   Wait(500);
+   SoundEffect(27);
+   Wait(200);
+
+   SpecialFrame(0)=26;
+   ReDraw();
+   FadeIn(100);
+  
+   x=50;
+   VCText(x,50,"...ugh"); x+=48;
+   Wait(100);
+  
+   for (j,1,4,1)
+    {
+     VCText(x,50,".");
+     x+=8;
+     Wait(40);
+    }
+
+   SpecialFrame(0)=22; Warp(LocX,LocY-2,1);
+   SetFace(1,FaceLeft());         Wait(33);
+   SetFace(1,FaceRight());        Wait(33);
+   SetFace(1,FaceUp());           Wait(34);
+   VCText(50,60,"Where ... am I ...?");
+   WaitKeyUp(); While (!b1) {ReadControls(); Wait(10);} WaitKeyUp();
+   VCClear(); LayerVC=0;
+   CancelFade+=3;
+   SpecialFrame(0)=0;
+  }
+ if (Flags[5])
+  { ReDraw(); FadeIn(30); CancelFade++;}
+ if (Flags[5]=1)
+  a=1;
+ if (Flags[5]=2)
+  a=1;
+ if (a=1)
+  {
+   LayerVC=1; VCLayerWrite=1; VCClear();
+   VCSpc(10,10,1,0);
+   SmallText(10,42,"!?");
+   VCClear(); LayerVC=0;
+  }
+}
+
+Event // 1 leave
+{
+ Layer1Trans=0;
+ CameraTracking=1;
+ MapSwitch("outside.map",GlobalX(),GlobalY(),0);
+}
+
+Event // 2 Fuck-up No. 1
+{
+ SmallText(10,100,"Hahaha....");
+ Wait(200);
+ SmallText(30,120,"aHahahaHAHAhaHAAhaHa..");
+ Wait(200);
+ SmallText(20,80,"Hahahahaa.a.a.....");
+
+ Flags[7005]=3;
+ Flags[7006]=0;
+ Flags[7007]=0;
+ Flags[7008]=0;
+ Flags[7009]=0;
+
+ SoundEffect(30);
+ BoxFadeOut(30); BoxFadeOut(30);
+ FadeOut(1);
+ BoxFadeIn(1);
+ SavX()=LocX;
+ SavY()=LocY;
+ MapNum()=5;
+ RunChance()=0; // can't run from a boss fight
+
+ flags[5]++; // set the 1 bit
+ BattleBG()=1; // beach BG
+ PlayMusic("CTBATT2.S3M");
+ MapSwitch("Nbat.map",0,0,1);
+}
+
+Event // 3 nut #2
+{
+
+}

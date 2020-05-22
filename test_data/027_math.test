@@ -1,0 +1,43 @@
+event {
+  a = 6 + ((5 * 4) / 3) % 2;
+}
+
+//
+
+01 00 00 00
+00 00 00 00
+
+.event0
+  02 00             .var0 a
+  01                .set
+
+  01                .literal
+  06 00 00 00
+
+  01                .add +
+
+  05                .group1
+    05              .group2
+      01            .literal
+      05 00 00 00
+      03            .mul *
+      01            .literal
+      04 00 00 00
+      ff            .end (operand)
+
+    04              .div /
+
+    01              .literal
+    03 00 00 00
+    ff              .end (operand) group2
+
+  05                .mod %
+  01                .literal
+  02 00 00 00
+  ff                .end (operand) group1
+
+ff                  .end (event0)
+
+//
+
+event/*0*/{a=6+((5*4)/3)%2;}

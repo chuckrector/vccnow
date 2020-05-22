@@ -1,0 +1,232 @@
+Script // 0 startup script
+{
+ KeepAZ=1;
+ Fade=0;
+
+ sys_displayPCX("intro\image7.pcx"); VGADump(); FadeIn(1);
+ if (z=1) goto SkipIt;
+
+ playmusic("nonexist.mod");
+ Modposition=1;
+ z=1;
+
+ a=2;
+ b=3;
+
+  LayerVC=1; LayerVC2=0; VCLayerWrite=1; LayerVCTrans=0;
+  VCLoadPCX("intro\intro.pcx",0);
+
+  for (i,5,1,-1)
+   {
+    VCBlitImage(0,0,320,200,i*320*200); ReDraw();
+    Wait(a);
+   }
+
+  VCBlitImage(0,0,320,200,0); Wait(100);
+
+  for (i,1,6,1)
+   {
+    VCBlitImage(0,0,320,200,i*320*200);
+    Wait(a);
+   }
+
+SkipIt:
+  VCClear();
+  ReDraw(); FadeIn(30);
+
+  VCLoadPCX("intro\intro.pcx",0);
+  for (i,7,12,1)
+   {
+    VCBlitImage(0,0,320,200,i*320*200);
+    Wait(b);
+   }
+
+  p=2; // p is 1 for new game, 2 for continue, 3 for Exit
+       // defaults to Continue
+  d=0;
+
+  VCLayerWrite=1; LayerVC=1; VCClear();
+  VCBlitImage(0,0,320,200,12*320*200); ReDraw();
+  VCLoadPCX("intro\ptrmove.pcx",0);
+  VCLayerWrite=2; LayerVC2=1;
+  While (!d)
+   {
+    VCClearRegion(120,82,136,178);
+    VCBlitImage(120,50+(p*32),16,16,0);
+    ReadControls(); While (!up and !down and !b1) {ReadControls(); Wait(10);}
+
+    // the finger graphic is, incidently, part of frame one
+
+    if (up and p>1)
+     {
+      p--;
+      for (i,4,0,-1)
+       {
+        VCBlitImage(120,50+(p*32),16,48,i*768);
+        Wait(1);
+       }
+     }
+    if (down and p<3)
+     {
+      for (i,0,4,1)
+       {
+        VCBlitImage(120,50+(p*32),16,48,i*768);
+        Wait(1);
+       }
+      p++;
+     }
+    if (b1)
+     {
+      VCClear(); LayerVC2=0; VCLayerWrite=1;
+      WaitKeyUp();
+      Switch(p)
+       {
+        Case 1:NewGame("Test.map");
+        Case 2:LoadMenu(); FadeOut(30); goto SkipIt;
+        Case 3:FadeOut(30); Quit("Secret of Chernobyl -- coming to a PC near you (eventually)");
+       }
+      }
+   }
+
+  return;
+}         
+
+script // 1 prompt for the new music
+{
+FirstPage:
+ TextMenu(0,0,6008,0,
+  "AURORA.MOD",
+  "BADEXPER.MOD",
+  "DGITLMTX.MOD",
+  "DOS3.MOD",
+  "EXAGE.MOD",
+  "MEDIOEVA.MOD",
+  "MI-TECHN.MOD",
+  "NONEXIST.MOD",
+  "PLANETS.MOD",
+  "RAGE.MOD",
+  "ROCKIT.MOD",
+  "STORM.MOD",
+  "VANGELIS.MOD",
+  "BATTLE.S3M",
+  "CR_GUIT.S3M",
+  "CTBATT2.S3M",
+  "Next...",
+  "Never mind");
+ If (Flags[6008]<17) {Flags[6007]=Flags[6008]; Return;}
+ If (Flags[6008]=18) {Flags[6007]=0; Return;}
+ If (!Flags[6008]) {Flags[6007]=0; Return;}
+ TextMenu(0,0,6008,0,
+  "DEFF3BOS.S3M",
+  "DISCO.S3M",
+  "DREAMS2.S3M",
+  "FF2FIEND.S3M",
+  "FF7BOSS.S3M",
+  "FF7CID.S3M",
+  "FF7SEPH.S3M",
+  "FORTRESS.S3M",
+  "MYSTWATR.S3M",
+  "RICTOWN.S3M",
+  "SIMPL2.S3M",
+  "STARTUP.S3M",
+  "SYMPHONY.S3M",
+  "WORLD_F7.S3M",
+  "ZEROMUS.S3M",
+  "BUTTERFL.XM",
+  "Previous...",
+  "Never mind");
+ If (Flags[6008]=17) Goto FirstPage;
+ If (Flags[6008]=18) {Flags[6007]=0; Return;}
+ If (!Flags[6008]) Return;
+
+ Flags[6007]=Flags[6008]+16;
+}
+
+script // 2 change the music
+{
+ Switch(Flags[6007])
+  {
+   Case 1:PlayMusic("AURORA.MOD");
+   Case 2:PlayMusic("BADEXPER.MOD");
+   Case 3:PlayMusic("DGITLMTX.MOD");
+   Case 4:PlayMusic("DOS3.MOD");
+   Case 5:PlayMusic("EXAGE.MOD");
+   Case 6:PlayMusic("MEDIOEVA.MOD");
+   Case 7:PlayMusic("MI-TECHN.MOD");
+   Case 8:PlayMusic("NONEXIST.MOD");
+   Case 9:PlayMusic("PLANETS.MOD");
+   Case 10:PlayMusic("RAGE.MOD");
+   Case 11:PlayMusic("ROCKIT.MOD");
+   Case 12:PlayMusic("STORM.MOD");
+   Case 13:PlayMusic("VANGELIS.MOD");
+   Case 14:PlayMusic("BATTLE.S3M");
+   Case 15:PlayMusic("CR_GUIT.S3M");
+   Case 16:PlayMusic("CTBATT2.S3M");
+   Case 17:PlayMusic("DEFF3BOS.S3M");
+   Case 18:PlayMusic("DISCO.S3M");
+   Case 19:PlayMusic("DREAMS2.S3M");
+   Case 20:PlayMusic("FF2FIEND.S3M");
+   Case 21:PlayMusic("FF7BOSS.S3M");
+   Case 22:PlayMusic("FF7CID.S3M");
+   Case 23:PlayMusic("FF7SEPH.S3M");
+   Case 24:PlayMusic("FORTRESS.S3M");
+   Case 25:PlayMusic("MYSTWATR.S3M");
+   Case 26:PlayMusic("RICTOWN.S3M");
+   Case 27:PlayMusic("SIMPL2.S3M");
+   Case 28:PlayMusic("STARTUP.S3M");
+   Case 29:PlayMusic("SYMPHONY.S3M");
+   Case 30:PlayMusic("WORLD_F7.S3M");
+   Case 31:PlayMusic("ZEROMUS.S3M");
+   Case 32:PlayMusic("BUTTERFL.XM");
+  }         
+
+ if (Flags[6007]<1)
+  {
+   VCText(0,0,"Flags[6007] set to illegal value somehow");
+   VCTextNum(0,10,Flags[6007]);
+   layervc=1;
+  }
+ if (Flags[6007]>32)
+  {
+   VCText(0,0,"Flags[6007] set to illegal value somehow");
+   VCTextNum(0,10,Flags[6007]);
+   layervc=1;
+  }
+}
+
+Script // 3 box for text
+// DrawTextBox(drawbox,x1,y1,width of longest line (in characters),number of lines);
+{
+ x=var(0); y=var(1); w=var(2)*8+x+6; h=var(3)*10+y+3;
+ VCBox(x-7,y-5,w,h);
+}
+
+Script // 4 Erase Text Box
+// EraseBox(same paramaters in drawtextbox)
+{
+ x=var(0); y=var(1); w=var(2)*8+x+7; h=var(3)*10+y+8;
+ ReDraw();
+ VCClearRegion(x-7,y-5,w,h);
+}
+
+Script // 4 Sleeping the night
+{
+ v=Volume;
+ for (x,0,63,1)
+  {
+   PaletteMorph(0,0,0,0,63-x);
+   if (x%5=0) Wait(1);
+   if (Volume>0) Volume--;
+  }
+ SoundEffect(32);
+ Wait(100);
+ HealAll();
+ for (x,0,63,1)
+  {
+   PaletteMorph(0,0,0,0,x);
+   if (x%5=0) Wait(1);
+   if (v>x) Volume++;
+  }
+ ReDraw();
+ Volume=v;
+}

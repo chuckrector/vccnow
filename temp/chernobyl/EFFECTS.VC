@@ -1,0 +1,154 @@
+#define pi(a)@ PartyIndex(a)-1 @
+/* =======================================================================
+   = effects.vc =
+   ==============    There are a few differences between EFFECTS.VC and
+                     ordinary MAP-based VCs. First, you'll notice that
+"effect" denotes the beginning of a script, not "event". VCC handles it
+differently, it recognizes it simply by filename and compiles to
+EFFECTS.VCS instead of appending the compiled code to the MAP.  Upon entering
+a script, var(0) contains the pointer to whoever was selected to receive
+the effect. If you have an AA or AE effect, however, you will need to cycle
+through the characters individually. For an AA effect, use this example:
+
+for (x, 1, numchars(0), 1)
+{
+  Heal(partyindex(x), 50);
+}
+
+Obviously, AE effects are not yet implemented.
+The valid effect commands currently are:
+
+Heal(character,amount);
+RestoreMP(character,amount);
+ReviveChar(character);
+
+========================================================================== */
+
+Effect // 0 blank
+{vcclear();
+}
+
+Effect // 1 blank
+{vcclear();
+}
+           
+Effect // 2 blank
+{}
+
+Effect // 3 blank
+{}
+
+effect                          // 4 Potion
+{
+ Heal(var(0),50);
+ SoundEffect(12);
+}
+
+effect                          // 5 Hi-Potion
+{
+ Heal(var(0),250);
+ SoundEffect(12);
+}
+
+effect                          // 6 X-Potion
+{
+ Heal(Var(0),9999);
+ SoundEffect(12);
+}
+
+effect                          // 7 Tincture
+{
+ RestoreMP(Var(0),50);
+ SoundEffect(27);
+}
+
+effect                          // 8 Ether
+{
+ RestoreMP(Var(0),100);
+ SoundEffect(27);
+}
+
+Effect                          // 9 Turbo Ether
+{
+ RestoreMP(Var(0),999);
+ SoundEffect(27);
+}
+
+Effect                          //10 Elixer
+{
+ Heal(Var(0),9999);
+ RestoreMP(Var(0),999);
+ SoundEffect(27);
+}
+
+Effect                          //11 Phoenix down
+{
+ ReviveChar(Var(0));
+ Heal(var(0),1);
+ SoundEffect(27);
+}
+
+Effect                          //12 Megalixer
+{
+ HealAll();
+ for (n,1,3,1)
+  {
+   SoundEffect(27);
+   Wait(10);
+  }
+}
+
+Effect                          //13 change music
+{
+ If (!flags[5999])// if not outside
+  {
+   Text(0,"This can only be used",
+          "on the world map",
+          "Sorry!");
+   Return;
+  }
+ CallScript(1);// prompt for which one
+ CallScript(2);// do it
+}
+
+Effect                          //14 Equip Sprint Shoes
+{
+ Speed(0)=5;
+}
+
+Effect                          //15 DeEquip Sprint Shoes
+{
+ Speed(0)=4;
+}
+
+Effect                          //16 Compass
+{
+ a=LayerVC; b=VCLayerWrite; c=LayerVCTrans;
+ LayerVC=1; VCLayerWrite=1; LayerVCTrans=0;
+
+ VCBox(0,0,64,26);
+ VCText(5,5,"X=");     VCText(5,13,"Y=");
+ VCTextNum(37,5,LocX); VCTextNum(37,13,LocY);
+ q=0; ReDraw(); WaitKeyUp();
+ While (!q)
+  {
+   if (b1) q=1;
+   if (b2) q=1;
+   if (b3) q=1;
+   if (b4) q=1;
+   ReadControls();
+   ReDraw();
+  }
+
+ VCClearRegion(0,0,65,27);
+ LayerVC=a; VCLayerWrite=b; LayerVCTrans=c;
+}
+
+effect                          // 17 Cheat
+{
+ Flags[6015]=1-Flags[6015];
+ if (Flags[6015])
+   Banner("Cheat on",2);
+ if (!Flags[6015])
+   Banner("Cheat off",2);
+}
