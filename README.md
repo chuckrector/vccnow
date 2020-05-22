@@ -4,7 +4,7 @@ This is very chaotic right now.
 
 At first, I was playing with just writing a tokenizer for V1 VCC. That grew into my rewriting the preprocessor to use it. That grew into writing a decompiler. After troubles, that grew into writing a disassembler.
 
-I've been watching Handmade Hero, so everything was converted to Windows batch files and `cl.exe`. The whole thing is now a single translation unit. I've renamed and formatted a ton of stuff in Casey's style, with the help of `clang-format` and I have `editor.formatOnSave` enabled in [VSCode](https://code.visualstudio.com/).
+I've been watching [Handmade Hero](https://handmadehero.org/), so everything was converted to Windows batch files and `cl.exe`. The whole thing is now a single translation unit. I've renamed and formatted a ton of stuff in Casey's style, with the help of `clang-format` and I have `editor.formatOnSave` enabled in [VSCode](https://code.visualstudio.com/).
 
 I've renamed a bunch of globals from the old compiler with an eye toward removing them from the global scope eventually.
 
