@@ -4,11 +4,19 @@ This is very chaotic right now.
 
 At first, I was playing with just writing a tokenizer for V1 VCC. That grew into my rewriting the preprocessor to use it. That grew into writing a decompiler. After troubles, that grew into writing a disassembler.
 
-I've been watching Handmade Hero, so everything was converted to Windows batch files and `cl.exe`. The whole thing is now a single translation unit. I've renamed and formatted a ton of stuff in Casey's style, with the help of `clang-format` and I have `editor.formatOnSave` enabled in VSCode.
+I've been watching Handmade Hero, so everything was converted to Windows batch files and `cl.exe`. The whole thing is now a single translation unit. I've renamed and formatted a ton of stuff in Casey's style, with the help of `clang-format` and I have `editor.formatOnSave` enabled in [VSCode](https://code.visualstudio.com/).
 
 I've renamed a bunch of globals from the old compiler with an eye toward removing them from the global scope eventually.
 
 There are no extremely good reasons for most of this, other than I'm having fun relearning C/C++ and trying random things just to see if I can do them.
+
+## setup for building
+
+Similar to HH, I created a `shell.bat` which I launch from a `cmd.exe` shell shortcut on my desktop. That configures `cl.exe` with the right environment and automatically launches VSCode and [RemedyBG](https://remedybg.itch.io/remedybg). The `build` and `s` folders are added to the `PATH` so I can easily run scripts or binaries.
+
+I have VSCode and the `cmd.exe` window opening at specific sizes and location, which was mostly a response to how Windows 10 constantly reboots my machine overnight and causes me to lose my context on various projects. I use virtual desktops, so I'd then have to slowly reopen and arrange everything after a reboot. Now I just click various shortcuts while on given desktops and everything is mostly reconstituted and ready to go.
+
+Assuming that whole setup, I just run `build` and then `vccnow` from `C:\dev\vccnow`.
 
 ## minified output
 
