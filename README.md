@@ -26,6 +26,10 @@ This is a byproduct of my tokenizer and I didn't really intend to create it. `cl
 
 I allocate all memory up front with a single `malloc()` and split it into pools. Everything is bump allocated within each pool after that and nothing is ever freed. I'm sure it's using way too much memory. Especially for tokens, which I am probably redundantly creating too many of and for which I made the pool much larger than the other pools. I have some basic tests that exercise most of the things I care about, like not breaking compilation and decompilation.
 
+## strings
+
+I use good old `char` buffers everywhere, mostly as an exercise to reacquaint myself with C. I'll convert it to something else later, either as an exercise or if it becomes too much of a pain in the butt. So far it's only mildly annoying.
+
 ## command-line
 
 I put everything into a single `vccnow` command-line with a bunch of options. Currently:
