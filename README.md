@@ -16,6 +16,8 @@ Similar to HH, I created a `shell.bat` which I launch from a `cmd.exe` shell sho
 
 I have VSCode and the `cmd.exe` window opening at specific sizes and location, which was mostly a response to how Windows 10 constantly reboots my machine overnight and causes me to lose my context on various projects. I use virtual desktops, so I'd then have to slowly reopen and arrange everything after a reboot. Now I just click various shortcuts while on given desktops and everything is mostly reconstituted and ready to go.
 
+I have Visual Studio 2019 installed, but I don't use it anymore and mostly do everything from the command-line now.
+
 Assuming that whole setup, I just run `build` and then `vccnow` from `C:\dev\vccnow`.
 
 ## minified output
