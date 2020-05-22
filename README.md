@@ -1,5 +1,7 @@
 # vccnow
 
+![Mid-debuggifications](/data/mid-debuggifications.png)
+
 This is very chaotic right now.
 
 At first, I was playing with just writing a tokenizer for V1 VCC. That grew into my rewriting the preprocessor to use it. That grew into writing a decompiler. After troubles, that grew into writing a disassembler.
