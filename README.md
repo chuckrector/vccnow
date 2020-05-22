@@ -10,6 +10,10 @@ I've renamed a bunch of globals from the old compiler with an eye toward removin
 
 There are no extremely good reasons for most of this, other than I'm having fun relearning C/C++ and trying random things just to see if I can do them.
 
+## minified output
+
+This is a byproduct of my tokenizer and I didn't really intend to create it. `clang-format` can more or less format this output just fine as if it were C, so I've been piping decompiled output into `.vc` files and then pressing `CTRL+S` in my editor and letting the auto-formatting take care of making things readable.
+
 ## memory
 
 I allocate all memory up front with a single `malloc()` and split it into pools. Everything is bump allocated within each pool after that and nothing is ever freed. I'm sure it's using way too much memory. Especially for tokens, which I am probably redundantly creating too many of and for which I made the pool much larger than the other pools. I have some basic tests that exercise most of the things I care about, like not breaking compilation and decompilation.
