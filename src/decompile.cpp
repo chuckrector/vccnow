@@ -1244,7 +1244,6 @@ decompiler::ParseSwitch()
     return;
   AddSymbol(")");
   AddSymbol("{");
-  // TODO(aen): Check for VC_END instead?
   while (*C != VC_END)
   {
     if (Mode == DISASSEMBLE)
