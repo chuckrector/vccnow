@@ -20,7 +20,6 @@ PostStartupFiles()
 void
 PreStartupFiles(const char *FilenameWithoutExtension)
 {
-  // printf("!!! PreStartupFiles %s\n", FilenameWithoutExtension);
   strcpy_s(TempBuffer, TEMP_BUFFER_SIZE, FilenameWithoutExtension);
   u64 L = strlen(TempBuffer);
   if (L > 3 && !strcmp(".vc", FilenameWithoutExtension + (L - 3))) {}
@@ -30,7 +29,6 @@ PreStartupFiles(const char *FilenameWithoutExtension)
   strcpy_s(CompileGuy.BasePath, TEMP_BUFFER_SIZE, TempBuffer);
 
   u8 *P = (u8 *)NewTempBuffer(WORKING_MEMORY_TOTAL_SIZE);
-  // memset(P, 0, WORKING_MEMORY_TOTAL_SIZE);
   CompileGuy.WorkingMemory = P;
   CompileGuy.Data = P + 0;
   CompileGuy.GeneratedCode = P + WORKING_MEMORY_BLOCK_SIZE;
@@ -128,7 +126,7 @@ WriteScriptOutput()
 void
 WriteOutput(const char *FilenameWithoutExtension)
 {
-  // printf("WriteOutput %s\n", FilenameWithoutExtension);
+  // Log("WriteOutput %s\n", FilenameWithoutExtension);
   Assert(FilenameWithoutExtension);
 
   FILE *File;
@@ -183,10 +181,4 @@ WriteOutput(const char *FilenameWithoutExtension)
   fwrite(CompileGuy.GeneratedCode, 1, NumCompiledBytes, File);
   Log("OK\n");
   fclose(File);
-
-  // if (Exist("error.txt")) {
-  //   printf("error.txt exists, removing...\n");
-  // int Result = remove("error.txt");
-  //   printf("result %d\n", Result);
-  // }
 }
