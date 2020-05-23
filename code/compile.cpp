@@ -24,17 +24,14 @@
 
 // ============================== Variables ==============================
 
-struct label GlobalLabels[200];    // goto labels
-struct label GlobalGotos[200];     // goto occurence records
-char GlobalToken[2048];            // current token buffer
-char GlobalLastToken[2048];        // restorebuf for NextIs
-u64 GlobalTokenNumericValue;       // int value of token if it's type DIGIT
-u64 GlobalTokenType;               // type of current token.
-u64 GlobalTokenSubType;            // This is just crap.
-u8 *GlobalNumArgsPointer;          // number of arguements to IF ptr
-u32 GlobalScriptOffsetTable[1024]; // script offset table
+struct label GlobalLabels[200]; // goto labels
+struct label GlobalGotos[200];  // goto occurence records
+char GlobalLastToken[2048];     // restorebuf for NextIs
+u64 GlobalTokenNumericValue;    // int value of token if it's type DIGIT
+u64 GlobalTokenType;            // type of current token.
+u64 GlobalTokenSubType;         // This is just crap.
+u8 *GlobalNumArgsPointer;       // number of arguements to IF ptr
 
-u64 GlobalNumScripts = 0; // number of scripts in the VC file
 u64 GlobalLines = 1;
 
 // Compilation-state flags

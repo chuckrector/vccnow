@@ -1,4 +1,5 @@
 #include "util.hpp"
+#include "log.hpp"
 #include "mem.hpp"
 #include <stdio.h>
 

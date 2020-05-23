@@ -78,9 +78,10 @@ struct compile_guy
 
 compile_guy CompileGuy;
 
-// int GlobalNumScripts;
-// unsigned int GlobalScriptOffsetTable[1024];
-// char token[2048];
+u64 GlobalNumScripts = 0;          // number of scripts in the VC file
+u32 GlobalScriptOffsetTable[1024]; // script offset table
+char GlobalToken[2048];            // current token buffer
+
 u8 CharTypeLookup[256];
 void InitCharTypeLookup();
 

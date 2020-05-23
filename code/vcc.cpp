@@ -1,6 +1,7 @@
 
 #include "vcc.hpp"
 #include "compile.hpp"
+#include "log.hpp"
 #include "preproc.hpp"
 #include "util.hpp"
 #include <malloc.h>

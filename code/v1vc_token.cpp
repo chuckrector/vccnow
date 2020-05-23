@@ -1,6 +1,7 @@
 #include "v1vc_token.hpp"
 #include "log.hpp"
 #include "mem.hpp"
+#include "util.hpp"
 #include <stdlib.h>
 #include <string.h>
 
