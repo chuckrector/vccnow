@@ -605,7 +605,6 @@ event /*2*/
         }
     }
   }
-  goto ? ? ? ;
   flags(624) = flags(705);
   flags(705) = 9;
   flags(706) = 10;
@@ -701,7 +700,6 @@ event /*2*/
         }
     }
   }
-  goto ? ? ? ;
   flags(626) = flags(705);
   flags(705) = 9;
   flags(706) = 10;
@@ -797,7 +795,6 @@ event /*2*/
         }
     }
   }
-  goto ? ? ? ;
   flags(628) = flags(705);
 }
 event /*3*/

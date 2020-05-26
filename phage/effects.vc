@@ -231,7 +231,6 @@ event /*17*/
   {
     givegp(1);
   }
-  goto ? ? ? ;
   takegp(10);
   banner("Stole 10 gp!", 1);
 }
