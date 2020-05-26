@@ -1,3 +1,5 @@
+/* Note: Script 23 offset is corrupt. 0xff found 4 bytes earlier.
+   Assuming everything is shifted forward by this amount.*/
 event /*0*/
 {
   enforceanimation();
@@ -3574,11 +3576,118 @@ event /*22*/
   }
   entity.chrindex(5) = 7;
   calleffect(32, 1, 7);
-  return;
-  banner("Las-Burst", );
 }
-event /*23*/ { return; }
-event /*24*/ { return; }
-event /*25*/ { return; }
-event /*26*/ { return; }
-event /*27*/ { return; }
+event /*23*/
+{
+  banner("Las-Burst", 1);
+  vcclear();
+  vcputpcx("laser1.pcx", 64, 65);
+  wait(10);
+  vcclear();
+  vcputpcx("laser2.pcx", 64, 65);
+  wait(10);
+  vcclear();
+  vcputpcx("laser3.pcx", 64, 65);
+  wait(100);
+  vcclear();
+  calleffect(35, 8, 17);
+}
+event /*24*/
+{
+  banner("Barrier", 1);
+  calleffect(53);
+  flags(601) = 0;
+  flags(603) = 0;
+  flags(605) = 0;
+  flags(607) = 0;
+  flags(609) = 0;
+  flags(611) = 0;
+  flags(613) = 0;
+  flags(615) = 0;
+  vcclear();
+  vcputpcx("barrier.pcx", 75, 60);
+  wait(100);
+  vcclear();
+  callevent(18);
+}
+event /*25*/
+{
+  banner("Omega Flare", 1);
+  calleffect(53);
+  vcclear();
+  vcputpcx("omega1.pcx", 64, 97);
+  wait(30);
+  vcclear();
+  vcputpcx("omega2.pcx", 64, 97);
+  wait(30);
+  vcclear();
+  vcputpcx("omega3.pcx", 64, 97);
+  wait(100);
+  vcclear();
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1): curhp(1) -= curhp(1);
+    case (2): curhp(2) -= curhp(2);
+    case (3): curhp(3) -= curhp(3);
+    case (4): curhp(4) -= curhp(4);
+    case (5): curhp(5) -= curhp(5);
+    case (6): curhp(6) -= curhp(6);
+    case (7): curhp(7) -= curhp(7);
+    case (8): curhp(8) -= curhp(8);
+  }
+  wait(50);
+  callevent(16);
+}
+event /*26*/
+{
+  banner("Heavy Vulcan", 1);
+  vcclear();
+  for (x, 1, 10, 1)
+  {
+    vcputpcx("gatling1.pcx", 64, 97);
+    wait(10);
+    vcclear();
+    vcputpcx("gatling2.pcx", 64, 97);
+    wait(10);
+    vcclear();
+    vcputpcx("gatling3.pcx", 64, 97);
+    wait(10);
+    vcclear();
+  }
+  wait(99);
+  calleffect(30, 100, 103);
+}
+event /*27*/
+{
+  banner("Orbital Strike", 1);
+  vcclear();
+  vcputpcx("orbit.pcx", 48, 48);
+  wait(80);
+  vcclear();
+  vcputpcx("Explo1.pcx", 104, 16);
+  soundeffect(12);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo2.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo3.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo4.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo5.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  vcputpcx("Explo6.pcx", 104, 16);
+  wait(10);
+  vcclear();
+  calleffect(35, 108, 117);
+}

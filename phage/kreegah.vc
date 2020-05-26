@@ -1,0 +1,578 @@
+/* Note: Script 3 offset is corrupt. 0xff found 4 bytes earlier.
+   Assuming everything is shifted forward by this amount.*/
+event /*0*/
+{
+  enforceanimation();
+  fadein(1);
+  flags(801) = 8;
+  if (flags(185) == 9)
+  {
+    entity.locx(26) = 145;
+    entity.locx(27) = 145;
+    entity.locy(26) = 46;
+    entity.locy(27) = 47;
+    face(26) = 3;
+    face(27) = 3;
+  }
+}
+event /*1*/ { stext(0, "Bundalo? What's a bundalo?", "", ""); }
+event /*2*/
+{
+  stext(0, "Photo album...", "", "");
+  layervc = 1;
+  drawentities = 0;
+  layer0 = 0;
+  layer1 = 0;
+  if (flags(1180) == 1)
+  {
+    vcputpcx("bromide2.pcx", 0, 0);
+    stext(0, "'Lagome: Still Life'", "", "(Press enter to continue)");
+    wait(200);
+  }
+  vcclear();
+  if (flags(1181) == 1)
+  {
+    vcputpcx("DingoB.pcx", 57, 0);
+    stext(0, "'Dingo: By Green_Ness'", "", "(Press enter to continue)");
+    wait(200);
+  }
+  if (flags(275) == 1)
+  {
+    vcputpcx("bromide1.pcx", 0, 0);
+    stext(0, "'Bull: Don't even ask'", "", "(Press enter to continue)");
+    wait(200);
+  }
+  if (flags(306) == 1)
+  {
+    vcputpcx("morpheos.pcx", 0, 0);
+    stext(0, "'Morpheos: By Zaratustra'", "", "(Press enter to continue)");
+    wait(200);
+    if (flags(2500) == 1)
+    {
+      vcputpcx("bromidez.pcx", 0, 0);
+      stext(0, "'Untitled: By Zaratustra'", "", "(Press enter to continue)");
+      wait(200);
+      layervc = 0;
+    }
+  }
+  drawentities = 1;
+  layer0 = 1;
+  layer1 = 1;
+}
+event /*3*/
+{
+  if (flags(185) != 9)
+  {
+    mapswitch("overland.map", 47, 98, 0);
+  }
+  if (flags(185) == 9)
+  {
+    stext(1, "What the?!?", "", "");
+    stext(4, "Something's happened over", "in the Warrens!", "");
+    stext(1, "Look out! Monsters!", "", "");
+    entitymove(26, "L3");
+    entitymove(27, "L3");
+    wait(100);
+    stext(
+        1,
+        "It's no use! We won't be",
+        "able to get to the Warrens",
+        "with all these monsters on");
+    stext(1, "the bridge!", "", "");
+    banner("Battle!", 1);
+    banner("3 Thunderbunnies", 1);
+    if (flags(200) == 0)
+    {
+      fakebattle();
+    }
+    if (flags(200) == 1)
+    {
+      fakebattle();
+    }
+    if (flags(200) == 2)
+    {
+      flags(501) = 2;
+      flags(502) = 225;
+      flags(503) = 105;
+      flags(504) = 1005;
+      flags(505) = 50;
+      flags(506) = 50;
+      flags(507) = 51;
+      flags(508) = 51;
+      flags(509) = 500;
+      flags(510) = 170;
+      flags(511) = 0;
+      flags(512) = 38;
+      flags(513) = 39;
+      flags(540) = 150;
+      flags(541) = 250;
+      flags(1009) = 0;
+      flags(514) = 2;
+      flags(515) = 225;
+      flags(516) = 105;
+      flags(517) = 1005;
+      flags(518) = 50;
+      flags(519) = 50;
+      flags(520) = 51;
+      flags(521) = 51;
+      flags(522) = 500;
+      flags(523) = 170;
+      flags(524) = 0;
+      flags(525) = 38;
+      flags(526) = 39;
+      flags(542) = 150;
+      flags(543) = 250;
+      flags(1010) = 0;
+      flags(527) = 2;
+      flags(528) = 225;
+      flags(529) = 105;
+      flags(530) = 1005;
+      flags(531) = 50;
+      flags(532) = 50;
+      flags(533) = 51;
+      flags(534) = 51;
+      flags(535) = 500;
+      flags(536) = 170;
+      flags(537) = 0;
+      flags(538) = 38;
+      flags(539) = 39;
+      flags(544) = 150;
+      flags(545) = 250;
+      flags(1011) = 0;
+      flags(109) = entity.locx(0) - 1;
+      flags(110) = entity.locy(0);
+      mapswitch("kreebat.map", 1, 1, 0);
+    }
+  }
+}
+event /*4*/ { mapswitch("overland.map", 43, 98, 0); }
+event /*5*/
+{
+  stext(
+      0,
+      "Within this house is the",
+      "community's photo album,",
+      "containing a collection of");
+  stext(
+      0,
+      "pictures travellers have",
+      "donated from across the land.",
+      "Feel free to add and peruse");
+  stext(0, "your own!", "", "");
+}
+event /*6*/
+{
+  if (!flags(163))
+  {
+    stext(1, "Hmmm... Extremely dry wood...", "", "");
+  }
+  if (flags(163))
+  {
+    soundeffect(9);
+    stext(0, "The wood is set ablaze!", "", "");
+    alterbtile(6, 37, 691, 1);
+    changezone(6, 37, 5);
+  }
+}
+event /*7*/
+{
+  if (!flags(266))
+  {
+    stext(1, "Ack! Hot!", "", "");
+  }
+  if (flags(266))
+  {
+    soundeffect(17);
+    stext(0, "The fire is doused!", "", "");
+    alterbtile(6, 37, 695, 0);
+    changezone(6, 37, 7);
+  }
+}
+event /*8*/
+{
+  flags(163) = 0;
+  flags(266) = 0;
+}
+event /*9*/ { mapswitch("bundalo.map", 96, 2, 0); }
+event /*10*/
+{
+  stext(0, "Kreegah!", "", "");
+  stext(1, "Yes?", "", "");
+  stext(0, "Kreegah is a lovely town!", "", "");
+  stext(
+      1,
+      "What a relief! I thought you",
+      "were going to say 'Kreegah!",
+      "Bundalo!'");
+  specialframe(5) = 23;
+  stext(0, "Bundalo? What's a bundalo?", "", "");
+  specialframe(5) = 0;
+}
+event /*11*/ { stext(0, "Hello! Did you like my bridge?", "", ""); }
+event /*12*/ { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event /*13*/
+{
+  stext(
+      0,
+      "Welcome to the town of",
+      "Kreegah! This remote",
+      "mountain village has a name");
+  stext(
+      0,
+      "that many folks associate",
+      "with a band of looneys, but",
+      "let me assure you that it's");
+  stext(0, "just a huge coincidence.", "Honest!", "");
+}
+event /*14*/
+{
+  stext(0, "Kreegah!", "", "");
+  stext(
+      0, "That's the official greeting", "in our town. Don't be alarmed!", "");
+}
+event /*15*/
+{
+  stext(0, "Kreegah!", "", "");
+  stext(
+      0,
+      "I always get the feeling that",
+      "I should say something else",
+      "after that, but I have no idea");
+  stext(0, "what...", "", "");
+}
+event /*16*/
+{
+  stext(0, "Kreegah!", "", "");
+  stext(
+      0,
+      "Don't you just love the way",
+      "that word just trips off the",
+      "tongue?");
+  if (char(4))
+  {
+    stext(
+        4,
+        "Yeah, and the way it makes me",
+        "feel like a complete idiot to",
+        "say?");
+  }
+}
+event /*17*/
+{
+  stext(0, "Kreegah!", "", "");
+  stext(
+      0,
+      "I said that to the last",
+      "traveller to come through",
+      "here, and he punched me!");
+  stext(0, "It's not like I told him", "that he was fat or anything!", "");
+  if (char(4))
+  {
+    stext(
+        4,
+        "Yet you say it again to the",
+        "next traveller you meet. You",
+        "got a death wish or something?");
+  }
+  stext(1, "That sounds like it was Bull!", "", "");
+  if (char(7))
+  {
+    stext(
+        7,
+        "Yeah, it was me! I got sick of",
+        "hearing it! Guess what? I",
+        "still am!");
+    soundeffect(11);
+    stext(0, "Ow! Quit that!", "", "");
+  }
+}
+event /*18*/
+{
+  stext(0, "Kreegah! Bundalo!", "", "");
+  stext(0, "I'm lactose intolerant!", "", "");
+  stext(1, "Then why...?", "", "");
+  stext(0, "(FART!)", "", "");
+  stext(0, "Behold the power of cheese!", "", "");
+}
+event /*19*/
+{
+  stext(0, "No, there is no cheese here.", "", "");
+  stext(1, "Well, *that* was to the point!", "", "");
+}
+event /*20*/
+{
+  stext(
+      0,
+      "We're playing the P.H.A.G.E.",
+      "Rhapsody RPG! I'm the GM...",
+      "(sigh...)");
+  stext(
+      0,
+      "Some little frog gave us the",
+      "rules, then told us the name",
+      "of our town.");
+}
+event /*21*/
+{
+  stext(
+      0,
+      "I got a high STR and a low",
+      "INT... I have to play as a",
+      "'Fat Bullfrog.'");
+}
+event /*22*/
+{
+  stext(
+      0,
+      "My guy's FER is through the",
+      "roof! He's gonna be a 'Drop",
+      "Beaver.'");
+}
+event /*23*/
+{
+  stext(
+      0,
+      "I rolled the max for every",
+      "score! My character'll be",
+      "a... 'Town-Naming Froglet?!?'");
+  stext(0, "This is a weird, weird game.", "", "");
+}
+event /*24*/
+{
+  stext(
+      0,
+      "The GM won't let me play a",
+      "dual-classed Paladin/Anti-",
+      "Paladin!");
+  if (char(4))
+  {
+    stext(
+        4,
+        "I tried to play one of those",
+        "once. My character sheet",
+        "exploded.");
+  }
+}
+event /*25*/
+{
+  stext(0, "H3Y D00D! 1 L!K3 2 T4LK 1N", "B1FF5P33K!...", "... ...");
+  stext(0, "... Man, I wish I had a", "computer!", "");
+}
+event /*26*/
+{
+  stext(
+      0,
+      "My brother and his friends",
+      "won't let me role-play with",
+      "them, so I'm reading comics!");
+}
+event /*27*/
+{
+  stext(1, "Hey, it's the rare third", "issue of 'Manatee Man!'", "");
+  if (char(4))
+  {
+    stext(4, "Manatee Man?", "", "");
+    stext(
+        1,
+        "Yeah! He was at a science",
+        "lecture when a radioactive",
+        "manatee came along and bit");
+    stext(
+        1,
+        "him. Now he's got the",
+        "proportionate strength and",
+        "speed of a manatee! In this");
+    stext(
+        1,
+        "issue, his 'manatee sense'",
+        "warns him too late to avoid",
+        "the propeller of the");
+    stext(1, "nefarious Dr. Speedway's", "motorboat!", "");
+    stext(
+        4,
+        "Hmmm... Here's the fourth",
+        "issue, where he gets sucked",
+        "into a jet intake... And in");
+    stext(
+        4,
+        "#5, he falls onto an airborne",
+        "helicopter... Is it me, or",
+        "does Manatee Man have a lot");
+    stext(4, "of run-ins with various", "propeller-like objects?", "");
+    stext(1, "You know, I'd never noticed", "it before, but you're right!", "");
+  }
+}
+event /*28*/
+{
+  stext(
+      1,
+      "It's the first issue of the",
+      "HeiferMan comic. I never felt",
+      "comfortable reading about a");
+  stext(1, "man with udders...", "", "");
+}
+event /*29*/
+{
+  stext(
+      1,
+      "Issues of 'T.A.S.K. Force.'",
+      "Don't ask what the acronym",
+      "stands for...");
+}
+event /*30*/
+{
+  stext(
+      1,
+      "Issues of 'Semi-Tokyo Defense",
+      "Force,' with SD Robo backup",
+      "stories!");
+}
+event /*31*/
+{
+  flags(109) = entity.locx(0);
+  flags(110) = entity.locy(0) + 1;
+  warp(var(0), var(1), 0);
+}
+event /*32*/ { warp(flags(109), flags(110), 0); }
+event /*33*/ { callevent(31, 52, 128); }
+event /*34*/ { callevent(31, 86, 128); }
+event /*35*/ { callevent(31, 117, 128); }
+event /*36*/ { callevent(31, 86, 111); }
+event /*37*/ { callevent(31, 117, 111); }
+event /*38*/ { callevent(31, 56, 111); }
+event /*39*/ { callevent(31, 20, 111); }
+event /*40*/
+{
+  stext(
+      1,
+      "Hey! BatMaggot #34! This is",
+      "the issue that explains his",
+      "proficiency with his fabled");
+  stext(1, "maggotarangs!", "", "");
+}
+event /*41*/
+{
+  stext(
+      1,
+      "Hmmm. Some comic with a guy",
+      "in a red cape lifting a car",
+      "on the cover. 'Action Comics?'");
+  stext(1, "Never heard of it.", "", "");
+}
+event /*42*/
+{
+  stext(
+      0,
+      "Welcome to my shop!",
+      "I'm known in these parts as",
+      "'The Jack of Suede!'");
+  shop(28, 78);
+  stext(0, "Who's the king? I ain't", "telling!", "");
+}
+event /*43*/
+{
+  stext(
+      0,
+      "I am selling healing items",
+      "for those wishing to head",
+      "into our recently extended");
+  stext(0, "sewer system! I'm not", "getting much business,", "though...");
+  shop(1, 2, 38, 39, 65, 50, 53, 54, 55, 58, 18);
+  stext(
+      0,
+      "Yeah! I knew I'd get more",
+      "customers after that big",
+      "ugly frog came by!");
+}
+event /*44*/
+{
+  face(23) = 0;
+  prompt(
+      0,
+      "Soothing beds! Only 35",
+      "gp a night!",
+      "",
+      112,
+      "Stay up.",
+      "Sleep.");
+  if (flags(112))
+  {
+    if (gp < 35)
+    {
+      stext(0, "You don't have enough gp!", "", "");
+    }
+    if (gp > 34)
+    {
+      takegp(35);
+      banner("We're healed!", 1);
+      healall();
+      timer = 0;
+      while (timer < 100)
+      {
+        palettemorph(10, 10, 10, 100 - timer, 63);
+      }
+      stext(
+          0,
+          "Our sheets are made from",
+          "suede! I got 'em from the",
+          "King of Suede! His shop's in");
+      stext(
+          0,
+          "a reclusive town to the",
+          "southwest, but it's full",
+          "of insane guys!");
+    }
+  }
+  if (!flags(112))
+  {
+    stext(0, "Adios!", "", "");
+  }
+}
+event /*45*/
+{
+  stext(
+      0, "CUrSed Be tHoSe wHo TrESsPasS", "BeyOND tHE COuNTeR of FEAR!!!", "");
+  specialframe(23) = 21;
+  wait(50);
+  specialframe(23) = 0;
+  stext(0, "I have no clue what possessed", "me to say that!", "");
+}
+event /*46*/ {}
+event /*47*/
+{
+  stext(
+      0,
+      "'Thieves' Handbook'",
+      "Camelites are good sources",
+      "of spear cases and robes.");
+  stext(
+      0,
+      "Aardvarks are known to have",
+      "magic orbs.",
+      "Pack Wolves have bandit's");
+  stext(0, "knives.", "Thunderducks sometimes drop", "Red Pollens.");
+  stext(0, "More as found...", "", "");
+}
+event /*48*/
+{
+  stext(
+      0,
+      "I love Skunkraven Eggs!",
+      "sometimes I collect one",
+      "outside the west gate...");
+  stext(0, "I wish I had one now...", "", "");
+  if (flags(5025) == 1)
+  {
+    flags(5025) = 0;
+    stext(0, "Whoa! Is that for me?", "Thanks!", "");
+    stext(0, "Here, take this!", "", "");
+    givegp(1000);
+    banner("Got 1000 gp!", 1);
+    stext(
+        0,
+        "I heard that Skunkravens in",
+        "an egg-sitting mood say",
+        "'Nevermore!'");
+    stext(0, "I wonder if they do that", "even when no eggs are around?", "");
+  }
+}

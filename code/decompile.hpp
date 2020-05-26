@@ -2,6 +2,7 @@
 #define DECOMPILE_HPP
 
 #include "buffer.hpp"
+#include "log.hpp"
 #include "types.hpp"
 #include "util.hpp"
 #include "v1vc_token.hpp"
@@ -87,6 +88,47 @@ struct decompiler
   u8 *ScriptBase = 0; // NOTE(aen): Offset after # scripts & offset table
   u64 NumScripts = 0;
   u32 *ScriptOffsetTable = 0;
+
+  // NOTE(aen): PHAGE has a handful of files with corrupted script offsets.
+  // The way I'm recovering from this is by scanning backward for the next
+  // nearest 0xff byte, so this will never be negative and should always be
+  // subtracted from every script offset -- not only in the script offset
+  // table, but also for IF/ELSE jumps etc.
+  u32 ScriptCorruptionOffset;
+  // NOTE(aen): The corruption index is the first script for which corruption
+  // was encountered. This is important because corruption adjustment should
+  // only happen from that script onward.
+  s64 ScriptCorruptionIndex = -1;
+  // NOTE(aen): This should wrap all offset reads and will account for any
+  // corruption. If corruption in some games turns out to be more complex than
+  // the situation in PHAGE, we can do any extra tapdancing here.
+  u32
+  GetUncorruptedAddress(u32 Address)
+  {
+    u32 Result = Address;
+
+    // NOTE(aen): We can't backtrack from the first script, so we're out of
+    // luck if it's corrupt. We also don't need to do any work if no script
+    // offsets were found to be corrupt.
+    if (NumScripts > 1 && ScriptCorruptionIndex != -1)
+    {
+      // NOTE(aen): We only need to be corrected if we're at or beyond the point
+      // of corruption. All scripts from here on are assumed to be shifted by
+      // the same amount.
+      if (Result >= ScriptOffsetTable[ScriptCorruptionIndex])
+      {
+        DebugLog(
+            LOW,
+            "Correcting address 0x%x to 0x%x.",
+            Result,
+            Result - ScriptCorruptionOffset);
+        Result -= ScriptCorruptionOffset;
+      }
+    }
+
+    return Result;
+  }
+
   u64 *IfRefs = 0;
   u64 NumIfRefs = 0;
   u64 *AddressRefs = 0; // NOTE(aen): All addresses referenced by IF, GOTO, etc.

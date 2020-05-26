@@ -44,7 +44,7 @@ FileSize(FILE *File)
 }
 
 buffer *
-Load(const char *Filename)
+LoadEntireFile(const char *Filename)
 {
   // Log("Load %s...\n", Filename);
   if (!Exist(Filename))

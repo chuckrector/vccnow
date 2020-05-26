@@ -163,7 +163,7 @@ main(int ArgCount, char *ArgValues[])
           if (Exist(InputFilename))
           {
             // Log("Decompiling %s...\n", InputFilename);
-            buffer *B = Load(InputFilename);
+            buffer *B = LoadEntireFile(InputFilename);
 
             if (IL > 4 && !strcmp(".map", InputFilename + (IL - 4)))
             {

@@ -126,7 +126,8 @@ parser::Load(const char *Filename)
 
   sprintf_s(
       TempBuffer, TEMP_BUFFER_SIZE, "%s%s%s", Path, FilenameOnly, ExtOnly);
-  Reset(::Load(TempBuffer));
+  buffer *Buffer = ::LoadEntireFile(TempBuffer);
+  Reset(Buffer);
 }
 
 void

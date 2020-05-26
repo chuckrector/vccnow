@@ -1,3 +1,5 @@
+/* Note: Script 26 offset is corrupt. 0xff found 1 bytes earlier.
+   Assuming everything is shifted forward by this amount.*/
 event /*0*/
 {
   enforceanimation();
@@ -599,7 +601,6 @@ event /*2*/
         }
     }
   }
-  goto ? ? ? ;
   flags(624) = flags(705);
   flags(705) = 9;
   flags(706) = 10;
@@ -695,7 +696,6 @@ event /*2*/
         }
     }
   }
-  goto ? ? ? ;
   flags(626) = flags(705);
   flags(705) = 9;
   flags(706) = 10;
@@ -791,7 +791,6 @@ event /*2*/
         }
     }
   }
-  goto ? ? ? ;
   flags(628) = flags(705);
 }
 event /*3*/
@@ -3785,18 +3784,394 @@ event /*24*/
   calleffect(32, 111, 170);
   return;
 }
-event /*25*/ { banner("Osmosis", ); }
-event /*26*/ { return; }
+event /*25*/ {}
+event /*26*/
+{
+  banner("Osmosis", 1);
+  calleffect(53);
+  switch (flags(629))
+  {
+    case (1):
+      if (flags(599) == 0)
+      {
+        flags(599) = flags(598);
+        entity.chrindex(5) = entity.chrindex(7);
+        specialframe(5) = 0;
+        flags(515) = flags(502);
+        flags(516) = flags(503);
+        flags(542) = flags(540);
+        flags(543) = flags(541);
+        flags(518) = 36;
+        flags(519) = 23;
+        flags(520) = 36;
+        flags(521) = 23;
+      }
+    case (2):
+      if (flags(600) == 0)
+      {
+        flags(600) = flags(599);
+        entity.chrindex(6) = entity.chrindex(5);
+        specialframe(6) = 0;
+        flags(528) = flags(515);
+        flags(529) = flags(516);
+        flags(544) = flags(542);
+        flags(545) = flags(543);
+        flags(531) = 36;
+        flags(532) = 23;
+        flags(533) = 36;
+        flags(534) = 23;
+      }
+    case (3):
+      if (flags(598) == 0)
+      {
+        flags(598) = flags(600);
+        entity.chrindex(7) = entity.chrindex(6);
+        specialframe(7) = 0;
+        flags(502) = flags(528);
+        flags(503) = flags(529);
+        flags(540) = flags(544);
+        flags(541) = flags(545);
+        flags(505) = 36;
+        flags(506) = 23;
+        flags(507) = 36;
+        flags(508) = 23;
+      }
+  }
+  wait(50);
+}
 event /*27*/ {}
 event /*28*/ {}
-event /*29*/ { banner("Nougat", ); }
-event /*30*/ { return; }
-event /*31*/ { return; }
-event /*32*/ { return; }
-event /*33*/ { return; }
-event /*34*/ { return; }
-event /*35*/ { return; }
-event /*36*/ { return; }
-event /*37*/ { banner("Frenzy Slash", ); }
-event /*38*/ { return; }
-event /*39*/ { return; }
+event /*29*/ {}
+event /*30*/
+{
+  banner("Nougat", 1);
+  banner("Soul Cannon", 1);
+  calleffect(54);
+  vcputpcx("nsc1.pcx", 65, 89);
+  wait(10);
+  vcclear();
+  vcputpcx("nsc2.pcx", 65, 89);
+  wait(10);
+  vcclear();
+  vcputpcx("nsc3.pcx", 65, 89);
+  wait(10);
+  vcclear();
+  vcputpcx("nsc4.pcx", 65, 89);
+  wait(10);
+  vcclear();
+  vcputpcx("nsc5.pcx", 65, 89);
+  wait(10);
+  vcclear();
+  for (x, 1, 10, 1)
+  {
+    vcputpcx("nsc6.pcx", 65, 89);
+    wait(10);
+    vcclear();
+    vcputpcx("nsc7.pcx", 65, 89);
+    wait(10);
+    vcclear();
+  }
+  switch (flags(629))
+  {
+    case (1): flags(112) = flags(624);
+    case (2): flags(112) = flags(626);
+    case (3): flags(112) = flags(628);
+  }
+  switch (flags(112))
+  {
+    case (1): curhp(1) -= curhp(1); specialframe(8) = 29;
+    case (2): curhp(2) -= curhp(2); specialframe(13) = 29;
+    case (3): curhp(3) -= curhp(3); specialframe(10) = 29;
+    case (4): curhp(4) -= curhp(4); specialframe(9) = 29;
+    case (5): curhp(5) -= curhp(5); specialframe(14) = 29;
+    case (6): curhp(6) -= curhp(6); specialframe(15) = 29;
+    case (7): curhp(7) -= curhp(7); specialframe(12) = 29;
+    case (8): curhp(8) -= curhp(8); specialframe(11) = 29;
+  }
+  wait(50);
+  callevent(18);
+}
+event /*31*/
+{
+  banner("Genocide", 1);
+  soundeffect(12);
+  palettemorph(63, 63, 63, 100, 63);
+  wait(10);
+  vcclear();
+  palettemorph(63, 63, 63, 80, 63);
+  vcputpcx("geno1.pcx", 0, 0);
+  earthquake(8, 8, 10);
+  vcclear();
+  palettemorph(63, 63, 63, 60, 63);
+  vcputpcx("geno2.pcx", 0, 0);
+  earthquake(8, 8, 10);
+  vcclear();
+  palettemorph(63, 63, 63, 40, 63);
+  vcputpcx("geno3.pcx", 0, 0);
+  earthquake(8, 8, 40);
+  vcclear();
+  palettemorph(63, 63, 63, 20, 63);
+  vcputpcx("geno4.pcx", 0, 0);
+  earthquake(8, 8, 50);
+  vcclear();
+  palettemorph(63, 63, 63, 0, 63);
+  vcputpcx("geno5.pcx", 0, 0);
+  earthquake(8, 8, 60);
+  vcclear();
+  calleffect(32, 1, 69);
+}
+event /*32*/
+{
+  banner("Mass Heal!", 1);
+  flags(598) = flags(504);
+  flags(599) = flags(517);
+  flags(600) = flags(530);
+  calleffect(53);
+  wait(50);
+}
+event /*33*/
+{
+  banner("HiBoost", 1);
+  flags(599) += 1000;
+  flags(620) += 1000;
+  vcputpcx("boost1.pcx", 40, 97);
+  wait(50);
+  vcclear();
+}
+event /*34*/
+{
+  flags(112) = random(1, 3);
+  if (flags(598) > 0 && flags(600) > 0)
+  {
+    banner("Flamethrower", 1);
+    vcclear();
+    vcputpcx("fthrow1.pcx", 64, 97);
+    wait(10);
+    vcclear();
+    vcputpcx("fthrow2.pcx", 64, 97);
+    wait(10);
+    vcclear();
+    vcputpcx("fthrow3.pcx", 64, 97);
+    wait(100);
+    vcclear();
+    calleffect(35, 5, 7);
+  }
+  if (flags(598) > 0 && flags(600) == 0 && flags(112) == 1)
+  {
+    banner("Spawn XOrb", 1);
+    entity.chrindex(6) = 15;
+    specialframe(6) = 0;
+    flags(600) = 5000;
+    flags(530) = flags(600);
+    flags(531) = 35;
+    flags(532) = 35;
+    flags(533) = 39;
+    flags(534) = 39;
+    flags(621) = 600;
+    flags(528) = 600;
+    flags(622) = 100;
+    flags(529) = 100;
+    flags(714) = 600;
+    flags(544) = 600;
+    flags(715) = 100;
+    flags(545) = 100;
+  }
+  if (flags(598) > 0 && flags(600) == 0 && flags(112) == 2)
+  {
+    banner("Spawn YOrb", 1);
+    entity.chrindex(6) = 20;
+    specialframe(6) = 0;
+    flags(600) = 1;
+    flags(530) = flags(600);
+    flags(531) = 32;
+    flags(532) = 32;
+    flags(533) = 32;
+    flags(534) = 32;
+    flags(621) = 600;
+    flags(528) = 600;
+    flags(622) = 100;
+    flags(529) = 100;
+    flags(714) = 600;
+    flags(544) = 600;
+    flags(715) = 100;
+    flags(545) = 100;
+  }
+  if (flags(598) > 0 && flags(600) == 0 && flags(112) == 3)
+  {
+    banner("Spawn ZOrb", 1);
+    entity.chrindex(6) = 14;
+    specialframe(6) = 0;
+    flags(600) = 1;
+    flags(530) = flags(600);
+    flags(531) = 31;
+    flags(532) = 31;
+    flags(533) = 31;
+    flags(534) = 31;
+    flags(621) = 600;
+    flags(528) = 600;
+    flags(622) = 100;
+    flags(529) = 100;
+    flags(714) = 600;
+    flags(544) = 600;
+    flags(715) = 100;
+    flags(545) = 100;
+  }
+  if (flags(598) == 0 && flags(112) == 1)
+  {
+    banner("Spawn XOrb", 1);
+    entity.chrindex(7) = 15;
+    specialframe(7) = 0;
+    flags(598) = 5000;
+    flags(504) = flags(598);
+    flags(505) = 35;
+    flags(506) = 35;
+    flags(507) = 39;
+    flags(508) = 39;
+    flags(617) = 600;
+    flags(502) = 600;
+    flags(618) = 100;
+    flags(503) = 100;
+    flags(710) = 600;
+    flags(540) = 600;
+    flags(711) = 100;
+    flags(541) = 100;
+  }
+  if (flags(598) == 0 && flags(112) == 2)
+  {
+    banner("Spawn YOrb", 1);
+    entity.chrindex(7) = 20;
+    specialframe(7) = 0;
+    flags(598) = 1;
+    flags(504) = flags(598);
+    flags(505) = 32;
+    flags(506) = 32;
+    flags(507) = 32;
+    flags(508) = 32;
+    flags(617) = 600;
+    flags(502) = 600;
+    flags(618) = 100;
+    flags(503) = 100;
+    flags(710) = 600;
+    flags(540) = 600;
+    flags(711) = 100;
+    flags(541) = 100;
+  }
+  if (flags(598) == 0 && flags(112) == 3)
+  {
+    banner("Spawn ZOrb", 1);
+    entity.chrindex(7) = 14;
+    specialframe(7) = 0;
+    flags(598) = 1;
+    flags(504) = flags(598);
+    flags(505) = 31;
+    flags(506) = 31;
+    flags(507) = 31;
+    flags(508) = 31;
+    flags(617) = 600;
+    flags(502) = 600;
+    flags(618) = 100;
+    flags(503) = 100;
+    flags(710) = 600;
+    flags(540) = 600;
+    flags(711) = 100;
+    flags(541) = 100;
+  }
+}
+event /*35*/
+{
+  banner("Gauss Cannon", 1);
+  vcclear();
+  vcputpcx("orbit.pcx", 48, 48);
+  earthquake(5, 5, 80);
+  vcclear();
+  calleffect(35, 5, 15);
+}
+event /*36*/
+{
+  banner("Reabsorb", 1);
+  calleffect(53);
+  flags(505) = 30;
+  flags(506) = 23;
+  flags(507) = 24;
+  flags(508) = 26;
+  flags(518) = 30;
+  flags(519) = 23;
+  flags(520) = 24;
+  flags(521) = 26;
+  flags(531) = 30;
+  flags(532) = 23;
+  flags(533) = 24;
+  flags(534) = 26;
+  flags(112) = flags(598);
+  if (flags(112) < flags(599))
+  {
+    flags(112) = flags(599);
+  }
+  if (flags(112) < flags(600))
+  {
+    flags(112) = flags(600);
+  }
+  switch (flags(629))
+  {
+    case (1):
+      flags(598) = flags(112);
+      flags(599) = 0;
+      specialframe(5) = 29;
+      flags(600) = 0;
+      specialframe(6) = 29;
+    case (2):
+      flags(598) = 0;
+      specialframe(7) = 29;
+      flags(599) = flags(112);
+      flags(600) = 0;
+      specialframe(6) = 29;
+    case (3):
+      flags(598) = 0;
+      specialframe(7) = 29;
+      flags(599) = 0;
+      specialframe(5) = 29;
+      flags(600) = flags(112);
+  }
+  callevent(18);
+}
+event /*37*/ {}
+event /*38*/
+{
+  banner("Frenzy Slash", 1);
+  flags(317) = random(2, 5);
+  vcclear();
+  vcloadpcx("Beam1.pcx", 0);
+  for (x, 1, flags(317), 1)
+  {
+    calleffect(54);
+    for (z, 65, 226, 4)
+    {
+      vctblitimage(z, 65, 32, 100, 0);
+      wait(1);
+      vcclear();
+    }
+    flags(619) = flags(515);
+    calleffect(30, 100, 250);
+    wait(10);
+  }
+  flags(317) = 0;
+}
+event /*39*/
+{
+  banner("Heavy Vulcan", 1);
+  vcclear();
+  for (x, 1, 10, 1)
+  {
+    vcputpcx("gatling1.pcx", 64, 97);
+    wait(10);
+    vcclear();
+    vcputpcx("gatling2.pcx", 64, 97);
+    wait(10);
+    vcclear();
+    vcputpcx("gatling3.pcx", 64, 97);
+    wait(10);
+    vcclear();
+  }
+  wait(99);
+  calleffect(30, 100, 103);
+}

@@ -23,7 +23,7 @@ char *NewTempBuffer(u64 Size);
 
 b64 Exist(const char *Filename);
 u64 FileSize(FILE *File);
-buffer *Load(const char *Filename);
+buffer *LoadEntireFile(const char *Filename);
 void SetPath(const char *Filename, char *Path, u64 PathLength);
 void DumpHex(
     const char *Title,

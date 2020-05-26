@@ -1,166 +1,35 @@
+/* Note: Script 27 offset is corrupt. 0xff found 8 bytes earlier.
+   Assuming everything is shifted forward by this amount.*/
+/*
 ParseIfTerm : C >= CurrentScriptEnd after parsing operand,
-    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... Negative bytes left
-    : -1. Skipping to next event... Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 03 00 00 ff Retry parsing the
-          rest of event 27 [ParseFailure] NewParseExpression
-    : Illegal opcode 0 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 27 [ParseFailure] NewParseExpression
-    : Illegal opcode 11 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped
-          Bytes 48 6f 00 00 01 04 01 16 00 00 00 ff Retry parsing the rest of
-              event 27 [ParseFailure] NewParseExpression
-    : Illegal opcode 11 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 0b 05 01 03 00 00 00 ff Retry
-          parsing the rest of event 27 [ParseFailure] NewParseExpression
-    : Illegal opcode 68 Parse failure.Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped
-          Bytes 44 70 00 00 01 04 01 16 00 00 00 ff Retry parsing the rest of
-              event 27 ParseIfTerm
-    : C >= CurrentScriptEnd after parsing operand,
-    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... Negative bytes left
-    : -1. Skipping to next event... Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 03 00 00 ff Retry parsing the
-          rest of event 28 [ParseFailure] NewParseExpression
-    : Illegal opcode 0 Parse failure.Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 28 ParseIfTerm
-    : C >= CurrentScriptEnd after parsing operand,
-    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... Negative bytes left
-    : -1. Skipping to next event... Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 03 00 00 ff Retry parsing the
-          rest of event 29 [ParseFailure] NewParseExpression
-    : Illegal opcode 0 Parse failure.Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 29 ParseIfTerm
-    : C >= CurrentScriptEnd after parsing operand,
-    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... Negative bytes left
-    : -1. Skipping to next event... Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 03 00 00 ff Retry parsing the
-          rest of event 30 [ParseFailure] NewParseExpression
-    : Illegal opcode 0 Parse failure.Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 30 ParseIfTerm
-    : C >= CurrentScriptEnd after parsing operand,
-    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... Negative bytes left
-    : -1. Skipping to next event... Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 03 00 00 ff Retry parsing the
-          rest of event 31 [ParseFailure] NewParseExpression
-    : Illegal opcode 0 Parse failure.Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 31 ParseIfTerm
-    : C >= CurrentScriptEnd after parsing operand,
-    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression[ParseFailure] ParseFor0
-    : tail but no END found
-          .Found 32 ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... Negative bytes left
-    : -1. Skipping to next event... Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 03 00 00 ff Retry parsing the
-          rest of event 32 [ParseFailure] NewParseExpression
-    : Illegal opcode 0 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 32 [ParseFailure] NewParseExpression
-    : Illegal opcode 11 ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped
-          Bytes 2f 7c 00 00 08 17 01 01 00 00 00 ff Retry parsing the rest of
-              event 32 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 32 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 ff Retry parsing the rest
-          of event 32 [ParseFailure] NewParseExpression
-    : Illegal opcode 11 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 0b 05 01 03 00 00 00 ff Retry
-          parsing the rest of event 32 [ParseFailure] NewParseExpression
-    : Illegal opcode 167 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes
-          a7 7c 00 00 08 17 01 01 00 00 00 ff Retry parsing the rest of
-              event 32 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 32 Parse failure.Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 ff Retry parsing the rest
-          of event 32 ParseIfTerm : C >= CurrentScriptEnd after parsing operand,
-    bailing...[ParseFailure] NewParseExpression : Illegal opcode 32 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... Negative bytes left
-    : -1. Skipping to next event... Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 03 00 00 ff Retry parsing the
-          rest of event 33 [ParseFailure] NewParseExpression
-    : Illegal opcode 0 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-          rest of event 33 [ParseFailure] NewParseExpression
-    : Illegal opcode 11 ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression ParseIf
-    : ParseFailure eject after NewParseExpression Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes
-          a7 7f 00 00 03 00 01 6b 00 00 00 ff Retry parsing the rest of
-              event 33 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 01 57 02 00 00 ff Retry
-          parsing the rest of event 33 [ParseFailure] NewParseExpression
-    : Illegal opcode 11 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 0b 05 01 03 00 00 00 ff Retry
-          parsing the rest of event 33 [ParseFailure] NewParseExpression
-    : Illegal opcode 199 Parse failure
-          .Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes
-          c7 7f 00 00 03 00 01 6b 00 00 00 ff Retry parsing the rest of
-              event 33 Parse failure.Attempting to recover... ParseFailure
-    : Skipping past next 0xff byte Skipped Bytes 00 01 58 02 00 00 ff Retry
-          parsing the rest of event 33 event /*0*/
+ bailing...[ParseFailure] ParseExpression : Illegal opcode 32 ParseIf
+ : ParseFailure eject after ParseExpression ParseIf
+ : ParseFailure eject after ParseExpression Parse failure
+       .Attempting to recover... Negative bytes left
+ : -9. Skipping to next event... ParseIf
+ : ParseFailure eject after ParseExpression Parse failure
+       .Attempting to recover... ParseFailure
+ : Skipping past next 0xff byte Skipped Bytes ff Retry parsing the rest of
+       event 27 [ParseFailure] ParseExpression
+ : Illegal opcode 0 Parse failure
+       .Attempting to recover... ParseFailure
+ : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
+       rest of event 27 [ParseFailure] ParseExpression
+ : Illegal opcode 0 ParseIf
+ : ParseFailure eject after ParseExpression Parse failure.Attempting to
+       recover... Negative bytes left
+ : -4. Skipping to next event... */
+event /*0*/
 {
-  if (/*ReturnIndex 0000002b*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00000052*/ flags(851) == 1)
+  if (flags(851) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 0000033a*/ flags(800) == 1 && flags(851) == 0)
+  if (flags(800) == 1 && flags(851) == 0)
   {
     flags(607) = hit(4) + 20;
     flags(607) += random(1, 5);
@@ -218,7 +87,7 @@ ParseIfTerm : C >= CurrentScriptEnd after parsing operand,
     flags(851) = 1;
     flags(999)++;
     callevent(15);
-    if (/*ReturnIndex 0000033a*/ flags(999) == 50)
+    if (flags(999) == 50)
     {
       banner("Rikk learned:", 1);
       banner("Drop: Vault!", 1);
@@ -228,15 +97,15 @@ ParseIfTerm : C >= CurrentScriptEnd after parsing operand,
 }
 event /*1*/
 {
-  if (/*ReturnIndex 00000366*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 0000038d*/ flags(852) == 1)
+  if (flags(852) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 00000622*/ flags(800) == 1 && flags(852) == 0)
+  if (flags(800) == 1 && flags(852) == 0)
   {
     flags(607) = hit(4) + 40;
     flags(607) += random(1, 10);
@@ -297,15 +166,15 @@ event /*1*/
 }
 event /*2*/
 {
-  if (/*ReturnIndex 0000064e*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00000675*/ flags(853) == 1)
+  if (flags(853) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 00000910*/ flags(800) == 1 && flags(853) == 0)
+  if (flags(800) == 1 && flags(853) == 0)
   {
     flags(607) = hit(4) + 60;
     flags(607) += random(1, 10);
@@ -366,15 +235,15 @@ event /*2*/
 }
 event /*3*/
 {
-  if (/*ReturnIndex 0000093c*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00000963*/ flags(854) == 1)
+  if (flags(854) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 00000c0b*/ flags(800) == 1 && flags(854) == 0)
+  if (flags(800) == 1 && flags(854) == 0)
   {
     flags(607) = hit(4) + 80;
     flags(607) += random(1, 10);
@@ -436,28 +305,28 @@ event /*3*/
 }
 event /*4*/
 {
-  if (/*ReturnIndex 00000c46*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
     curmp(5) += 30;
   }
-  if (/*ReturnIndex 00001028*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-    if (/*ReturnIndex 00000cea*/ flags(112) == 2 && flags(703) < 3)
+    if (flags(112) == 2 && flags(703) < 3)
     {
       stext(0, "Not enough Spell Points!", "", "");
       flags(112) = 1;
     }
-    if (/*ReturnIndex 00000d1f*/ flags(112) == 2 && flags(703) > 2)
+    if (flags(112) == 2 && flags(703) > 2)
     {
       flags(703) -= 3;
     }
-    if (/*ReturnIndex 00000d4a*/ flags(112) != 2)
+    if (flags(112) != 2)
     {
       banner("Life Booster", 1);
     }
-    if (/*ReturnIndex 00000d75*/ flags(112) == 2)
+    if (flags(112) == 2)
     {
       banner("Deus Booster", 1);
     }
@@ -473,66 +342,66 @@ event /*4*/
     wait(10);
     specialframe(14) = 0;
     wait(50);
-    if (/*ReturnIndex 00000e43*/ char(1))
+    if (char(1))
     {
       curhp(1) += 50;
-      if (/*ReturnIndex 00000e43*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(1) += 100;
       }
     }
-    if (/*ReturnIndex 00000e87*/ char(2))
+    if (char(2))
     {
       curhp(2) += 50;
-      if (/*ReturnIndex 00000e87*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(2) += 100;
       }
     }
-    if (/*ReturnIndex 00000ecb*/ char(3))
+    if (char(3))
     {
       curhp(3) += 50;
-      if (/*ReturnIndex 00000ecb*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(3) += 100;
       }
     }
-    if (/*ReturnIndex 00000f0f*/ char(4))
+    if (char(4))
     {
       curhp(4) += 50;
-      if (/*ReturnIndex 00000f0f*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(4) += 100;
       }
     }
-    if (/*ReturnIndex 00000f53*/ char(5))
+    if (char(5))
     {
       curhp(5) += 50;
-      if (/*ReturnIndex 00000f53*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(5) += 100;
       }
     }
-    if (/*ReturnIndex 00000f97*/ char(6))
+    if (char(6))
     {
       curhp(6) += 50;
-      if (/*ReturnIndex 00000f97*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(6) += 100;
       }
     }
-    if (/*ReturnIndex 00000fdb*/ char(7))
+    if (char(7))
     {
       curhp(7) += 50;
-      if (/*ReturnIndex 00000fdb*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(7) += 100;
       }
     }
-    if (/*ReturnIndex 0000101f*/ char(8))
+    if (char(8))
     {
       curhp(8) += 50;
-      if (/*ReturnIndex 0000101f*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         curhp(8) += 100;
       }
@@ -542,15 +411,15 @@ event /*4*/
 }
 event /*5*/
 {
-  if (/*ReturnIndex 00001054*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 0000107b*/ flags(855) == 1)
+  if (flags(855) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 000015ae*/ flags(800) == 1 && flags(855) == 0)
+  if (flags(800) == 1 && flags(855) == 0)
   {
     flags(607) = hit(4) + 40;
     flags(607) += random(1, 5);
@@ -639,13 +508,13 @@ event /*5*/
     flags(855) = 1;
     flags(998)++;
     callevent(15);
-    if (/*ReturnIndex 0000154b*/ flags(998) == 50)
+    if (flags(998) == 50)
     {
       banner("Rikk learned:", 1);
       banner("Drop: Warhead!", 1);
       getmagic(4, 9);
     }
-    if (/*ReturnIndex 000015ae*/ flags(998) > 99 && flags(998) < 102)
+    if (flags(998) > 99 && flags(998) < 102)
     {
       banner("Rikk learned:", 1);
       banner("Drop:VenusShell!", 1);
@@ -655,28 +524,28 @@ event /*5*/
 }
 event /*6*/
 {
-  if (/*ReturnIndex 000015e9*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
     curmp(1) += 10;
   }
-  if (/*ReturnIndex 00001b63*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-    if (/*ReturnIndex 0000168d*/ flags(112) == 2 && flags(703) < 1)
+    if (flags(112) == 2 && flags(703) < 1)
     {
       stext(0, "Not enough Spell Points!", "", "");
       flags(112) = 1;
     }
-    if (/*ReturnIndex 000016c2*/ flags(112) == 2 && flags(703) > 0)
+    if (flags(112) == 2 && flags(703) > 0)
     {
       flags(703) -= 1;
     }
-    if (/*ReturnIndex 000016e5*/ flags(112) != 2)
+    if (flags(112) != 2)
     {
       banner("Peer", 1);
     }
-    if (/*ReturnIndex 00001709*/ flags(112) == 2)
+    if (flags(112) == 2)
     {
       banner("X-Ray", 1);
     }
@@ -693,14 +562,14 @@ event /*6*/
     specialframe(8) = 0;
     wait(50);
     vcclear();
-    if (/*ReturnIndex 000018d4*/ flags(598) > 0)
+    if (flags(598) > 0)
     {
       vcbox(64, 50, 184, 100);
       vctext(72, 55, "Enemy 1:");
       vctextnum(72, 65, flags(598));
       vctext(107, 65, "/");
       vctextnum(117, 65, flags(504));
-      if (/*ReturnIndex 000018d4*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         vctext(72, 75, "PA:");
         vctextnum(92, 75, flags(502));
@@ -712,14 +581,14 @@ event /*6*/
         vctextnum(137, 85, flags(541));
       }
     }
-    if (/*ReturnIndex 00001a13*/ flags(599) > 0)
+    if (flags(599) > 0)
     {
       vcbox(64, 100, 184, 150);
       vctext(72, 105, "Enemy 2:");
       vctextnum(72, 115, flags(599));
       vctext(107, 115, "/");
       vctextnum(117, 115, flags(517));
-      if (/*ReturnIndex 00001a13*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         vctext(72, 125, "PA:");
         vctextnum(92, 125, flags(515));
@@ -731,14 +600,14 @@ event /*6*/
         vctextnum(137, 135, flags(543));
       }
     }
-    if (/*ReturnIndex 00001b52*/ flags(600) > 0)
+    if (flags(600) > 0)
     {
       vcbox(64, 150, 184, 200);
       vctext(72, 155, "Enemy 3:");
       vctextnum(72, 165, flags(600));
       vctext(107, 165, "/");
       vctextnum(117, 165, flags(530));
-      if (/*ReturnIndex 00001b52*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         vctext(72, 175, "PA:");
         vctextnum(92, 175, flags(528));
@@ -756,30 +625,30 @@ event /*6*/
 }
 event /*7*/
 {
-  if (/*ReturnIndex 00001b9e*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
     curmp(3) += 30;
   }
-  if (/*ReturnIndex 00001f4a*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-    if (/*ReturnIndex 00001c42*/ flags(112) == 2 && flags(703) < 3)
+    if (flags(112) == 2 && flags(703) < 3)
     {
       stext(0, "Not enough Spell Points!", "", "");
       flags(112) = 1;
     }
-    if (/*ReturnIndex 00001c77*/ flags(112) == 2 && flags(703) > 2)
+    if (flags(112) == 2 && flags(703) > 2)
     {
       flags(703) -= 3;
     }
     callevent(14);
     flags(720) = mag(3);
-    if (/*ReturnIndex 00001cbc*/ flags(112) < 2)
+    if (flags(112) < 2)
     {
       banner("Thunderbolt", 1);
     }
-    if (/*ReturnIndex 00001d09*/ flags(112) == 2)
+    if (flags(112) == 2)
     {
       banner("Blitzkrieg", 1);
       flags(720) += mag(3);
@@ -839,29 +708,29 @@ event /*7*/
 }
 event /*8*/
 {
-  if (/*ReturnIndex 00001f85*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
     curmp(3) += 60;
   }
-  if (/*ReturnIndex 0000237c*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-    if (/*ReturnIndex 00002029*/ flags(112) == 2 && flags(703) < 6)
+    if (flags(112) == 2 && flags(703) < 6)
     {
       stext(0, "Not enough Spell Points!", "", "");
       flags(112) = 1;
     }
-    if (/*ReturnIndex 0000205e*/ flags(112) == 2 && flags(703) > 5)
+    if (flags(112) == 2 && flags(703) > 5)
     {
       flags(703) -= 6;
     }
     flags(720) = mag(3);
-    if (/*ReturnIndex 0000209e*/ flags(112) < 2)
+    if (flags(112) < 2)
     {
       banner("Lightning Rider", 1);
     }
-    if (/*ReturnIndex 000020ef*/ flags(112) == 2)
+    if (flags(112) == 2)
     {
       banner("Lightning Soul", 1);
       flags(720) += mag(3);
@@ -924,29 +793,29 @@ event /*8*/
 }
 event /*9*/
 {
-  if (/*ReturnIndex 000023b7*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat only!", 1);
     curmp(3) += 45;
   }
-  if (/*ReturnIndex 000027f0*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-    if (/*ReturnIndex 0000245b*/ flags(112) == 2 && flags(703) < 5)
+    if (flags(112) == 2 && flags(703) < 5)
     {
       stext(0, "Not enough Spell Points!", "", "");
       flags(112) = 1;
     }
-    if (/*ReturnIndex 00002490*/ flags(112) == 2 && flags(703) > 4)
+    if (flags(112) == 2 && flags(703) > 4)
     {
       flags(703) -= 5;
     }
     flags(720) = mag(3);
-    if (/*ReturnIndex 000024cb*/ flags(112) < 2)
+    if (flags(112) < 2)
     {
       banner("Storm Fury", 1);
     }
-    if (/*ReturnIndex 0000251c*/ flags(112) == 2)
+    if (flags(112) == 2)
     {
       banner("Tempest Attack", 1);
       flags(720) += mag(3);
@@ -962,7 +831,7 @@ event /*9*/
     wait(10);
     specialframe(10) = 9;
     wait(20);
-    if (/*ReturnIndex 00002735*/ flags(112) == 2)
+    if (flags(112) == 2)
     {
       vcloadpcx("bolt1.pcx", 0);
       vcloadpcx("bolt2.pcx", 3200);
@@ -1000,7 +869,7 @@ event /*9*/
       callevent(21);
     }
     stext(0, "Feng is Enraged!", "", "");
-    if (/*ReturnIndex 00002775*/ curhp(3) > 0)
+    if (curhp(3) > 0)
     {
       specialframe(10) = 28;
     }
@@ -1015,12 +884,12 @@ event /*9*/
 }
 event /*10*/
 {
-  if (/*ReturnIndex 0000282b*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
     curmp(3) += 1;
   }
-  if (/*ReturnIndex 00002bbf*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     flags(720) = mag(3);
     flags(720) += mag(3);
@@ -1059,7 +928,7 @@ event /*10*/
     curhp(3) = 0;
     curmp(3) = 0;
     callevent(21);
-    if (/*ReturnIndex 00002bbf*/ flags(284) == 1)
+    if (flags(284) == 1)
     {
       stext(0, "Evilchu evolves into Vilechu!", "", "");
       flags(284) = 2;
@@ -1085,15 +954,15 @@ event /*10*/
 }
 event /*11*/
 {
-  if (/*ReturnIndex 00002beb*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00002c12*/ flags(851) == 1)
+  if (flags(851) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 00002ec9*/ flags(800) == 1 && flags(851) == 0)
+  if (flags(800) == 1 && flags(851) == 0)
   {
     flags(607) = hit(4) + 20;
     flags(607) += random(1, 5);
@@ -1158,15 +1027,15 @@ event /*11*/
 }
 event /*12*/
 {
-  if (/*ReturnIndex 00002ef5*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00002f1c*/ flags(855) == 1)
+  if (flags(855) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 0000357e*/ flags(800) == 1 && flags(855) == 0)
+  if (flags(800) == 1 && flags(855) == 0)
   {
     flags(607) = hit(4) + 40;
     flags(607) += random(1, 5);
@@ -1255,11 +1124,11 @@ event /*12*/
     flags(855) = 1;
     callevent(15);
     flags(112) = random(1, 3);
-    if (/*ReturnIndex 000033d3*/ flags(112) == 3)
+    if (flags(112) == 3)
     {
       banner("A dud!", 1);
     }
-    if (/*ReturnIndex 0000350c*/ flags(112) != 3)
+    if (flags(112) != 3)
     {
       soundeffect(12);
       vcputpcx("Explo1.pcx", 1, 16);
@@ -1286,7 +1155,7 @@ event /*12*/
       callevent(21);
     }
     flags(998) += 2;
-    if (/*ReturnIndex 0000357e*/ flags(998) > 99 && flags(998) < 102)
+    if (flags(998) > 99 && flags(998) < 102)
     {
       banner("Rikk learned:", 1);
       banner("Drop:VenusShell!", 1);
@@ -1296,15 +1165,15 @@ event /*12*/
 }
 event /*13*/
 {
-  if (/*ReturnIndex 000035aa*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 000035d1*/ flags(856) == 1)
+  if (flags(856) == 1)
   {
     banner("Used up!", 1);
   }
-  if (/*ReturnIndex 000038aa*/ flags(800) == 1 && flags(856) == 0)
+  if (flags(800) == 1 && flags(856) == 0)
   {
     flags(607) = hit(4) + curhp(7);
     flags(607) += atk(7);
@@ -1369,19 +1238,19 @@ event /*13*/
 }
 event /*14*/
 {
-  if (/*ReturnIndex 000038d6*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00003905*/ flags(630) != 5)
+  if (flags(630) != 5)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00003949*/ flags(1001) < maxhp(1) + maxhp(1) - fer(1))
+  if (flags(1001) < maxhp(1) + maxhp(1) - fer(1))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00004743*/ flags(800) == 1 && flags(630) == 5 &&
+  if (flags(800) == 1 && flags(630) == 5 &&
       flags(1001) >= maxhp(1) + maxhp(1) - fer(1))
   {
     banner("Hyper Tongue!", 1);
@@ -1422,20 +1291,20 @@ event /*14*/
     entity.chrindex(8) = 6;
     wait(10);
     specialframe(8) = 0;
-    if (/*ReturnIndex 00003f22*/ flags(598) > 0)
+    if (flags(598) > 0)
     {
       flags(601) = atk(1);
       flags(601) += atk(1);
       flags(601) += flags(601);
-      if (/*ReturnIndex 00003bcd*/ flags(601) <= flags(618))
+      if (flags(601) <= flags(618))
       {
         flags(601) = 0;
       }
-      if (/*ReturnIndex 00003bf8*/ flags(601) > flags(618))
+      if (flags(601) > flags(618))
       {
         flags(601) -= flags(618);
       }
-      if (/*ReturnIndex 00003ee0*/ flags(601) >= flags(598))
+      if (flags(601) >= flags(598))
       {
         flags(598) = 0;
         vctext(48, 80, "Eaten!");
@@ -1461,26 +1330,26 @@ event /*14*/
             curmp(1) = maxmp(1);
         }
       }
-      if (/*ReturnIndex 00003f22*/ flags(601) < flags(598))
+      if (flags(601) < flags(598))
       {
         flags(598) -= flags(601);
         vctextnum(48, 80, flags(601));
       }
     }
-    if (/*ReturnIndex 000042eb*/ flags(599) > 0)
+    if (flags(599) > 0)
     {
       flags(601) = atk(1);
       flags(601) += atk(1);
       flags(601) += flags(601);
-      if (/*ReturnIndex 00003f96*/ flags(601) <= flags(620))
+      if (flags(601) <= flags(620))
       {
         flags(601) = 0;
       }
-      if (/*ReturnIndex 00003fc1*/ flags(601) > flags(620))
+      if (flags(601) > flags(620))
       {
         flags(601) -= flags(620);
       }
-      if (/*ReturnIndex 000042a9*/ flags(601) >= flags(599))
+      if (flags(601) >= flags(599))
       {
         flags(599) = 0;
         vctext(48, 112, "Eaten!");
@@ -1506,26 +1375,26 @@ event /*14*/
             curmp(1) = maxmp(1);
         }
       }
-      if (/*ReturnIndex 000042eb*/ flags(601) < flags(599))
+      if (flags(601) < flags(599))
       {
         flags(599) -= flags(601);
         vctextnum(48, 112, flags(601));
       }
     }
-    if (/*ReturnIndex 000046b4*/ flags(600) > 0)
+    if (flags(600) > 0)
     {
       flags(601) = atk(1);
       flags(601) += atk(1);
       flags(601) += flags(601);
-      if (/*ReturnIndex 0000435f*/ flags(601) <= flags(622))
+      if (flags(601) <= flags(622))
       {
         flags(601) = 0;
       }
-      if (/*ReturnIndex 0000438a*/ flags(601) > flags(622))
+      if (flags(601) > flags(622))
       {
         flags(601) -= flags(622);
       }
-      if (/*ReturnIndex 00004672*/ flags(601) >= flags(600))
+      if (flags(601) >= flags(600))
       {
         flags(600) = 0;
         vctext(48, 144, "Eaten!");
@@ -1551,21 +1420,21 @@ event /*14*/
             curmp(1) = maxmp(1);
         }
       }
-      if (/*ReturnIndex 000046b4*/ flags(601) < flags(600))
+      if (flags(601) < flags(600))
       {
         flags(600) -= flags(601);
         vctextnum(48, 144, flags(601));
       }
     }
-    if (/*ReturnIndex 000046d9*/ flags(598) == 0)
+    if (flags(598) == 0)
     {
       specialframe(7) = 29;
     }
-    if (/*ReturnIndex 000046fe*/ flags(599) == 0)
+    if (flags(599) == 0)
     {
       specialframe(5) = 29;
     }
-    if (/*ReturnIndex 00004723*/ flags(600) == 0)
+    if (flags(600) == 0)
     {
       specialframe(6) = 29;
     }
@@ -1576,19 +1445,19 @@ event /*14*/
 }
 event /*15*/
 {
-  if (/*ReturnIndex 0000476f*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 0000479e*/ flags(631) != 4)
+  if (flags(631) != 4)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 000047e2*/ flags(1002) < maxhp(2) + maxhp(2) - fer(2))
+  if (flags(1002) < maxhp(2) + maxhp(2) - fer(2))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 000049ff*/ flags(800) == 1 && flags(631) == 4 &&
+  if (flags(800) == 1 && flags(631) == 4 &&
       flags(1002) >= maxhp(2) + maxhp(2) - fer(2))
   {
     banner("Infernal Aura!", 1);
@@ -1628,19 +1497,19 @@ event /*15*/
 }
 event /*16*/
 {
-  if (/*ReturnIndex 00004a2b*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00004a5a*/ flags(632) != 4)
+  if (flags(632) != 4)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00004a9e*/ flags(1003) < maxhp(3) + maxhp(3) - fer(3))
+  if (flags(1003) < maxhp(3) + maxhp(3) - fer(3))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00004ec9*/ flags(800) == 1 && flags(632) == 4 &&
+  if (flags(800) == 1 && flags(632) == 4 &&
       flags(1003) >= maxhp(3) + maxhp(3) - fer(3))
   {
     banner("Armageddon Kata!", 1);
@@ -1725,19 +1594,19 @@ event /*16*/
 }
 event /*17*/
 {
-  if (/*ReturnIndex 00004ef5*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00004f24*/ flags(633) != 4)
+  if (flags(633) != 4)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00004f68*/ flags(1004) < maxhp(4) + maxhp(4) - fer(4))
+  if (flags(1004) < maxhp(4) + maxhp(4) - fer(4))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 000052dd*/ flags(800) == 1 && flags(633) == 4 &&
+  if (flags(800) == 1 && flags(633) == 4 &&
       flags(1004) >= maxhp(4) + maxhp(4) - fer(4))
   {
     banner("Auto-Fire!", 1);
@@ -1787,7 +1656,7 @@ event /*17*/
     calleffect(61);
     callevent(21);
     flags(112) = random(1, 3);
-    if (/*ReturnIndex 000052ce*/ flags(112) == 1)
+    if (flags(112) == 1)
     {
       banner("Reload!", 1);
       flags(851) = 0;
@@ -1806,19 +1675,19 @@ event /*17*/
 }
 event /*18*/
 {
-  if (/*ReturnIndex 00005309*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00005338*/ flags(634) != 5)
+  if (flags(634) != 5)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 0000537c*/ flags(1005) < maxhp(5) + maxhp(5) - fer(5))
+  if (flags(1005) < maxhp(5) + maxhp(5) - fer(5))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 000056dc*/ flags(800) == 1 && flags(634) == 5 &&
+  if (flags(800) == 1 && flags(634) == 5 &&
       flags(1005) >= maxhp(5) + maxhp(5) - fer(5))
   {
     banner("Cold Heart!", 1);
@@ -1860,15 +1729,15 @@ event /*18*/
       vcclear();
       palettemorph(63, 63, 63, 100 - x, 63);
     }
-    if (/*ReturnIndex 00005601*/ flags(598) > 0)
+    if (flags(598) > 0)
     {
       getitem(5, flags(513));
     }
-    if (/*ReturnIndex 00005628*/ flags(599) > 0)
+    if (flags(599) > 0)
     {
       getitem(5, flags(526));
     }
-    if (/*ReturnIndex 0000564f*/ flags(600) > 0)
+    if (flags(600) > 0)
     {
       getitem(5, flags(539));
     }
@@ -1885,19 +1754,19 @@ event /*18*/
 }
 event /*19*/
 {
-  if (/*ReturnIndex 00005708*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00005737*/ flags(635) != 4)
+  if (flags(635) != 4)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 0000577b*/ flags(1006) < maxhp(6) + maxhp(6) - fer(6))
+  if (flags(1006) < maxhp(6) + maxhp(6) - fer(6))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 000057e9*/ flags(800) == 1 && flags(635) == 4 &&
+  if (flags(800) == 1 && flags(635) == 4 &&
       flags(1006) >= maxhp(6) + maxhp(6) - fer(6))
   {
     banner("Burn Magic!", 1);
@@ -1906,19 +1775,19 @@ event /*19*/
 }
 event /*20*/
 {
-  if (/*ReturnIndex 00005815*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00005844*/ flags(636) != 4)
+  if (flags(636) != 4)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00005888*/ flags(1007) < maxhp(7) + maxhp(7) - fer(7))
+  if (flags(1007) < maxhp(7) + maxhp(7) - fer(7))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 000059b2*/ flags(800) == 1 && flags(636) == 4 &&
+  if (flags(800) == 1 && flags(636) == 4 &&
       flags(1007) >= maxhp(7) + maxhp(7) - fer(7))
   {
     banner("Belchaclypse!", 1);
@@ -1942,19 +1811,19 @@ event /*20*/
 }
 event /*21*/
 {
-  if (/*ReturnIndex 000059de*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
   }
-  if (/*ReturnIndex 00005a0d*/ flags(637) != 4)
+  if (flags(637) != 4)
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00005a51*/ flags(1008) < maxhp(8) + maxhp(8) - fer(8))
+  if (flags(1008) < maxhp(8) + maxhp(8) - fer(8))
   {
     banner("Can't use now...", 1);
   }
-  if (/*ReturnIndex 00005ac0*/ flags(800) == 1 && flags(637) == 4 &&
+  if (flags(800) == 1 && flags(637) == 4 &&
       flags(1008) >= maxhp(8) + maxhp(8) - fer(8))
   {
     banner("Sainted Joy!", 1);
@@ -1964,7 +1833,7 @@ event /*21*/
 event /*22*/
 {
   banner("Antidote!", 1);
-  if (/*ReturnIndex 00005b73*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     specialframe(14) = 5;
     wait(10);
@@ -1990,15 +1859,15 @@ event /*22*/
 }
 event /*23*/
 {
-  if (/*ReturnIndex 00005c26*/ flags(800) == 0)
+  if (flags(800) == 0)
   {
     banner("Combat Only!", 1);
     curmp(2) += 10;
   }
-  if (/*ReturnIndex 00005d75*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     flags(603) = 0;
-    if (/*ReturnIndex 00005ca3*/ gp > 49)
+    if (gp > 49)
     {
       takegp(50);
       for (x, 1, 20, 1)
@@ -2007,7 +1876,7 @@ event /*23*/
       }
       flags(603) += random(1, 21);
     }
-    if (/*ReturnIndex 00005cc5*/ gp < 50)
+    if (gp < 50)
     {
       banner("No value!", 1);
     }
@@ -2035,7 +1904,7 @@ event /*24*/
   healall();
   curmp(1) = flags(112);
   soundeffect(10);
-  if (/*ReturnIndex 00005e5c*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     specialframe(8) = 5;
     wait(10);
@@ -2053,12 +1922,12 @@ event /*24*/
 }
 event /*25*/
 {
-  if (/*ReturnIndex 00005e97*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Combat Only!", 1);
     curmp(1) += 75;
   }
-  if (/*ReturnIndex 000063c6*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     banner("Boo!", 1);
     specialframe(8) = 5;
@@ -2095,81 +1964,81 @@ event /*25*/
     wait(100);
     vcclear();
     specialframe(8) = 0;
-    if (/*ReturnIndex 00006140*/ flags(598) > 0)
+    if (flags(598) > 0)
     {
       flags(601) = mag(10);
-      if (/*ReturnIndex 00006094*/ flags(601) <= flags(711))
+      if (flags(601) <= flags(711))
       {
         flags(601) = 0;
       }
-      if (/*ReturnIndex 000060bf*/ flags(601) > flags(711))
+      if (flags(601) > flags(711))
       {
         flags(601) -= flags(711);
       }
-      if (/*ReturnIndex 000060fe*/ flags(601) >= flags(598))
+      if (flags(601) >= flags(598))
       {
         vctextnum(48, 144, flags(598));
         flags(598) = 0;
       }
-      if (/*ReturnIndex 00006140*/ flags(601) < flags(598))
+      if (flags(601) < flags(598))
       {
         flags(598) -= flags(601);
         vctextnum(48, 80, flags(601));
       }
     }
-    if (/*ReturnIndex 0000623c*/ flags(599) > 0)
+    if (flags(599) > 0)
     {
       flags(601) = mag(10);
-      if (/*ReturnIndex 00006190*/ flags(601) <= flags(713))
+      if (flags(601) <= flags(713))
       {
         flags(601) = 0;
       }
-      if (/*ReturnIndex 000061bb*/ flags(601) > flags(713))
+      if (flags(601) > flags(713))
       {
         flags(601) -= flags(713);
       }
-      if (/*ReturnIndex 000061fa*/ flags(601) >= flags(599))
+      if (flags(601) >= flags(599))
       {
         vctextnum(48, 144, flags(599));
         flags(599) = 0;
       }
-      if (/*ReturnIndex 0000623c*/ flags(601) < flags(599))
+      if (flags(601) < flags(599))
       {
         flags(599) -= flags(601);
         vctextnum(48, 112, flags(601));
       }
     }
-    if (/*ReturnIndex 00006338*/ flags(600) > 0)
+    if (flags(600) > 0)
     {
       flags(601) = mag(10);
-      if (/*ReturnIndex 0000628c*/ flags(601) <= flags(715))
+      if (flags(601) <= flags(715))
       {
         flags(601) = 0;
       }
-      if (/*ReturnIndex 000062b7*/ flags(601) > flags(715))
+      if (flags(601) > flags(715))
       {
         flags(601) -= flags(715);
       }
-      if (/*ReturnIndex 000062f6*/ flags(601) >= flags(600))
+      if (flags(601) >= flags(600))
       {
         vctextnum(48, 144, flags(600));
         flags(600) = 0;
       }
-      if (/*ReturnIndex 00006338*/ flags(601) < flags(600))
+      if (flags(601) < flags(600))
       {
         flags(600) -= flags(601);
         vctextnum(48, 144, flags(601));
       }
     }
-    if (/*ReturnIndex 0000635d*/ flags(598) == 0)
+    if (flags(598) == 0)
     {
       specialframe(7) = 29;
     }
-    if (/*ReturnIndex 00006382*/ flags(599) == 0)
+    if (flags(599) == 0)
     {
       specialframe(5) = 29;
     }
-    if (/*ReturnIndex 000063a7*/ flags(600) == 0)
+    if (flags(600) == 0)
     {
       specialframe(6) = 29;
     }
@@ -2180,15 +2049,15 @@ event /*25*/
 }
 event /*26*/
 {
-  if (/*ReturnIndex 00006405*/ flags(800) != 1)
+  if (flags(800) != 1)
   {
     banner("Moobvuu Milk!", 1);
     curhp(1) = maxhp(1);
   }
-  if (/*ReturnIndex 00006baa*/ flags(800) == 1)
+  if (flags(800) == 1)
   {
     flags(112) = random(1, 4);
-    if (/*ReturnIndex 00006516*/ flags(112) == 1)
+    if (flags(112) == 1)
     {
       flags(107) = atk(13);
       banner("Redroom Stampede", 1);
@@ -2206,7 +2075,7 @@ event /*26*/
       vcputpcx("mobvuua4.pcx", 81, 53);
       wait(40);
       vcclear();
-      if (/*ReturnIndex 000065f7*/ flags(112) == 2)
+      if (flags(112) == 2)
       {
         flags(107) = mag(13);
         banner("Moobvuu Meteor", 1);
@@ -2224,7 +2093,7 @@ event /*26*/
         vcputpcx("mobvuum4.pcx", 81, 53);
         wait(40);
         vcclear();
-        if (/*ReturnIndex 0000674b*/ flags(112) == 3)
+        if (flags(112) == 3)
         {
           banner("Bovine Anger", 1);
           banner("Retribution!!!", 1);
@@ -2250,75 +2119,66 @@ event /*26*/
           vcputpcx("bovine4.pcx", 81, 53);
           wait(40);
           vcclear();
-          if (/*ReturnIndex 00006ac4*/ flags(112) < 3)
+          if (flags(112) < 3)
           {
-            if (/*ReturnIndex 0000685d*/ flags(598) > 0)
+            if (flags(598) > 0)
             {
               flags(601) = flags(107);
-              if (/*ReturnIndex 000067b1*/ flags(601) <= flags(711))
+              if (flags(601) <= flags(711))
               {
                 flags(601) = 0;
-                if (/*ReturnIndex 000067dc*/ flags(601) > flags(711))
+                if (flags(601) > flags(711))
                 {
                   flags(601) -= flags(711);
-                  if (/*ReturnIndex 0000681b*/ flags(601) >= flags(598))
+                  if (flags(601) >= flags(598))
                   {
                     vctextnum(48, 144, flags(598));
                     flags(598) = 0;
-                    if (/*ReturnIndex 0000685d*/ flags(601) < flags(598))
+                    if (flags(601) < flags(598))
                     {
                       flags(598) -= flags(601);
                       vctextnum(48, 80, flags(601));
-                      if (/*ReturnIndex 00006959*/ flags(599) > 0)
+                      if (flags(599) > 0)
                       {
                         flags(601) = flags(107);
-                        if (/*ReturnIndex 000068ad*/ flags(601) <= flags(713))
+                        if (flags(601) <= flags(713))
                         {
                           flags(601) = 0;
-                          if (/*ReturnIndex 000068d8*/ flags(601) > flags(713))
+                          if (flags(601) > flags(713))
                           {
                             flags(601) -= flags(713);
-                            if (/*ReturnIndex 00006917*/ flags(601) >=
-                                flags(599))
+                            if (flags(601) >= flags(599))
                             {
                               vctextnum(48, 144, flags(599));
                               flags(599) = 0;
-                              if (/*ReturnIndex 00006959*/ flags(601) <
-                                  flags(599))
+                              if (flags(601) < flags(599))
                               {
                                 flags(599) -= flags(601);
                                 vctextnum(48, 112, flags(601));
-                                if (/*ReturnIndex 00006a55*/ flags(600) > 0)
+                                if (flags(600) > 0)
                                 {
                                   flags(601) = flags(107);
-                                  if (/*ReturnIndex 000069a9*/ flags(601) <=
-                                      flags(715))
+                                  if (flags(601) <= flags(715))
                                   {
                                     flags(601) = 0;
-                                    if (/*ReturnIndex 000069d4*/ flags(601) >
-                                        flags(715))
+                                    if (flags(601) > flags(715))
                                     {
                                       flags(601) -= flags(715);
-                                      if (/*ReturnIndex 00006a13*/ flags(601) >=
-                                          flags(600))
+                                      if (flags(601) >= flags(600))
                                       {
                                         vctextnum(48, 144, flags(600));
                                         flags(600) = 0;
-                                        if (/*ReturnIndex 00006a55*/ flags(
-                                                601) < flags(600))
+                                        if (flags(601) < flags(600))
                                         {
                                           flags(600) -= flags(601);
                                           vctextnum(48, 144, flags(601));
-                                          if (/*ReturnIndex 00006a7a*/ flags(
-                                                  598) == 0)
+                                          if (flags(598) == 0)
                                           {
                                             specialframe(7) = 29;
-                                            if (/*ReturnIndex 00006a9f*/ flags(
-                                                    599) == 0)
+                                            if (flags(599) == 0)
                                             {
                                               specialframe(5) = 29;
-                                              if (/*ReturnIndex 00006ac4*/
-                                                  flags(600) == 0)
+                                              if (flags(600) == 0)
                                               {
                                                 specialframe(6) = 29;
                                                 wait(50);
@@ -2345,7 +2205,7 @@ event /*26*/
       }
     }
     givexp(13, 5);
-    if (/*ReturnIndex 00006ba1*/ flags(112) == 4)
+    if (flags(112) == 4)
     {
       banner("Cow Bell", 1);
       vcclear();
@@ -2365,19 +2225,20 @@ event /*26*/
       callevent(18);
     }
     return;
-    if (/*ReturnIndex 00006bd6*/ flags() +)
-    { /*parse failure: NewParseExpression: Illegal opcode 32*/
+    if ()
+    {
+      flags() = ; /*parse failure: ParseExpression: Illegal opcode 32*/
     }
     event /*27*/
-    {
-      redraw();
-      return;
-      b; /*parse failure: NewParseExpression: Illegal opcode 0*/
-      banner("Combat Only!", 1);
-      if (/*ReturnIndex 00006bfd*/ flags(855) == 1)
-      {
-        banner("Used up!", 1);
-        if (/*ReturnIndex 00007077*/ flags(800) == 1 && flags(855) == 0)
+    {if( flags(800){
+        return;
+        b; /*parse failure: ParseExpression: Illegal opcode 0*/
+        banner("Combat Only!", 1);
+        if (flags(855) == 1)
+        {
+          banner("Used up!", 1);
+        }
+        if (flags(800) == 1 && flags(855) == 0)
         {
           flags(607) = hit(4) + 40;
           flags(607) += random(1, 5);
@@ -2420,72 +2281,66 @@ event /*26*/
               vcputpcx("venus.pcx", 40, 65);
               wait(50);
               vcclear();
-              return; /*parse failure: NewParseExpression: Illegal opcode 11*/
+            case (2):
+              soundeffect(22);
+              for (z, 1, 97, 8)
+              {
+                vctblitimage(40, z, 32, 32, 0);
+                wait(1);
+                vcclear();
+                vctblitimage(40, z + 2, 32, 32, 1024);
+                wait(1);
+                vcclear();
+                vctblitimage(40, z + 4, 32, 32, 2048);
+                wait(1);
+                vcclear();
+                vctblitimage(40, z + 6, 32, 32, 3072);
+                wait(1);
+                vcclear();
+              }
+              vcputpcx("venus.pcx", 40, 97);
+              wait(50);
+              vcclear();
+            case (3):
+              soundeffect(22);
+              for (z, 1, 129, 8)
+              {
+                vctblitimage(40, z, 32, 32, 0);
+                wait(1);
+                vcclear();
+                vctblitimage(40, z + 2, 32, 32, 1024);
+                wait(1);
+                vcclear();
+                vctblitimage(40, z + 4, 32, 32, 2048);
+                wait(1);
+                vcclear();
+                vctblitimage(40, z + 6, 32, 32, 3072);
+                wait(1);
+                vcclear();
+              }
+              vcputpcx("venus.pcx", 40, 129);
+              wait(50);
+              vcclear();
           }
-          for (z, 1, 97, 8)
-          {
-            vctblitimage(40, z, 32, 32, 0);
-            wait(1);
-            vcclear();
-            vctblitimage(40, z + 2, 32, 32, 1024);
-            wait(1);
-            vcclear();
-            vctblitimage(40, z + 4, 32, 32, 2048);
-            wait(1);
-            vcclear();
-            vctblitimage(40, z + 6, 32, 32, 3072);
-            wait(1);
-            vcclear();
-          }
-          vcputpcx("venus.pcx", 40, 97);
-          wait(50);
-          vcclear();
-          return; /*parse failure: NewParseExpression: Illegal opcode 11*/
-          return; /*parse failure: NewParseExpression: Illegal opcode 68*/
-          for (z, 1, 129, 8)
-          {
-            vctblitimage(40, z, 32, 32, 0);
-            wait(1);
-            vcclear();
-            vctblitimage(40, z + 2, 32, 32, 1024);
-            wait(1);
-            vcclear();
-            vctblitimage(40, z + 4, 32, 32, 2048);
-            wait(1);
-            vcclear();
-            vctblitimage(40, z + 6, 32, 32, 3072);
-            wait(1);
-            vcclear();
-          }
-          vcputpcx("venus.pcx", 40, 129);
-          wait(50);
-          vcclear();
-          return;
-          return;
           calleffect(61);
           specialframe(9) = 0;
           flags(855) = 1;
           healall();
           callevent(15);
-          return;
-          if (/*ReturnIndex 000070a3*/ flags() +)
-          { /*parse failure: NewParseExpression: Illegal opcode 32*/
-          }
-        }
-      }
+        }}
     }
   }
-}
-event /*28*/
-{
-  redraw();
-  return;
-  b; /*parse failure: NewParseExpression: Illegal opcode 0*/
-  banner("Combat Only!", 1);
-  if (/*ReturnIndex 000070ca*/ flags(857) == 1)
+  event /*28*/
   {
-    banner("Used up!", 1);
-    if (/*ReturnIndex 00007269*/ flags(800) == 1 && flags(857) == 0)
+    if (flags(800) == 0)
+    {
+      banner("Combat Only!", 1);
+    }
+    if (flags(857) == 1)
+    {
+      banner("Used up!", 1);
+    }
+    if (flags(800) == 1 && flags(857) == 0)
     {
       specialframe(9) = 5;
       wait(10);
@@ -2515,20 +2370,16 @@ event /*28*/
       flags(643) = 7;
       calleffect(62);
       callevent(21);
-      return;
-      if (/*ReturnIndex 000072a4*/ flags() +)
-      { /*parse failure: NewParseExpression: Illegal opcode 32*/
-      }
     }
   }
   event /*29*/
   {
-    redraw();
-    return;
-    b; /*parse failure: NewParseExpression: Illegal opcode 0*/
-    banner("Combat Only!", 1);
-    curmp(1) += 1;
-    if (/*ReturnIndex 000073a6*/ flags(800) == 1)
+    if (flags(800) == 0)
+    {
+      banner("Combat Only!", 1);
+      curmp(1) += 1;
+    }
+    if (flags(800) == 1)
     {
       specialframe(8) = 5;
       wait(10);
@@ -2547,20 +2398,16 @@ event /*28*/
       flags(522) += flags(522);
       flags(535) += flags(535);
       specialframe(8) = 0;
-      return;
-      if (/*ReturnIndex 000073e1*/ flags() +)
-      { /*parse failure: NewParseExpression: Illegal opcode 32*/
-      }
     }
   }
   event /*30*/
   {
-    redraw();
-    return;
-    b; /*parse failure: NewParseExpression: Illegal opcode 0*/
-    banner("Combat Only!", 1);
-    curmp(2) += 35;
-    if (/*ReturnIndex 000074c6*/ flags(800) == 1)
+    if (flags(800) == 0)
+    {
+      banner("Combat Only!", 1);
+      curmp(2) += 35;
+    }
+    if (flags(800) == 1)
     {
       flags(603) = atk(2);
       flags(603) += fer(2);
@@ -2580,20 +2427,16 @@ event /*28*/
       calleffect(61);
       callevent(15);
       wait(25);
-      return;
-      if (/*ReturnIndex 00007501*/ flags() +)
-      { /*parse failure: NewParseExpression: Illegal opcode 32*/
-      }
     }
   }
   event /*31*/
   {
-    redraw();
-    return;
-    b; /*parse failure: NewParseExpression: Illegal opcode 0*/
-    banner("Combat Only!", 1);
-    curmp(5) += 65;
-    if (/*ReturnIndex 000078de*/ flags(800) == 1)
+    if (flags(800) == 0)
+    {
+      banner("Combat Only!", 1);
+      curmp(5) += 65;
+    }
+    if (flags(800) == 1)
     {
       banner("Pep Rally", 1);
       entity.chrindex(14) = 16;
@@ -2669,7 +2512,7 @@ event /*28*/
       callevent(14);
       for (z, 1, 8, 1)
       {
-        if (/*ReturnIndex 000078dd*/ char(z))
+        if (char(z))
         {
           flags(1000 + z) += maxhp(z);
           flags(1000 + z) += fer(z);
@@ -2678,146 +2521,157 @@ event /*28*/
           flags(599 + z + z) += random(70, 310);
           flags(599 + z + z) += 100;
           flags(600 + z + z) += random(7, 10);
-          return;
-          return;
-          if (/*ReturnIndex 00007919*/ flags() +)
-          { /*parse failure: NewParseExpression: Illegal opcode 32*/ /*parse
-                                                                        failure:
-                                                                        ParseFor0:
-                                                                        tail but
-                                                                        no END
-                                                                        found.
-                                                                        Found
-                                                                        32*/
-          }
         }
       }
     }
-    event /*32*/
+  }
+  event /*32*/
+  {
+    if (flags(800) == 0)
     {
-      redraw();
-      return;
-      b; /*parse failure: NewParseExpression: Illegal opcode 0*/
       banner("Combat Only!", 1);
       curmp(2) += 30;
-      if (/*ReturnIndex 00007e15*/ flags(800) == 1)
+    }
+    if (flags(800) == 1)
+    {
+      textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
+      if (flags(112) == 2 && flags(703) < 3)
       {
-        textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-        if (/*ReturnIndex 000079bd*/ flags(112) == 2 && flags(703) < 3)
-        {
-          stext(0, "Not enough Spell Points!", "", "");
-          flags(112) = 1;
-          if (/*ReturnIndex 000079f2*/ flags(112) == 2 && flags(703) > 2)
+        stext(0, "Not enough Spell Points!", "", "");
+        flags(112) = 1;
+      }
+      if (flags(112) == 2 && flags(703) > 2)
+      {
+        flags(703) -= 3;
+      }
+      callevent(14);
+      flags(718) = mag(2);
+      if (flags(112) < 2)
+      {
+        banner("Evilshock", 1);
+      }
+      if (flags(112) == 2)
+      {
+        banner("True Evilshock", 1);
+        flags(718) += mag(2);
+        flags(718) += mag(2);
+      }
+      flags(718) += random(8, 85);
+      specialframe(13) = 5;
+      wait(10);
+      specialframe(13) = 6;
+      wait(10);
+      specialframe(13) = 7;
+      wait(10);
+      specialframe(13) = 8;
+      wait(10);
+      specialframe(13) = 9;
+      wait(20);
+      vcloadpcx("evil1.pcx", 0);
+      vcloadpcx("evil2.pcx", 3200);
+      switch (flags(641))
+      {
+        case (1):
+          for (x, 1, 5, 1)
           {
-            flags(703) -= 3;
-            callevent(14);
+            vctblitimage(48, 64, 100, 32, 0);
+            wait(10);
+            vcclear();
+            vctblitimage(48, 64, 100, 32, 3200);
+            wait(10);
+            vcclear();
           }
-        }
-        flags(718) = mag(2);
-        if (/*ReturnIndex 00007a35*/ flags(112) < 2)
-        {
-          banner("Evilshock", 1);
-          if (/*ReturnIndex 00007a86*/ flags(112) == 2)
+        case (2):
+          for (x, 1, 5, 1)
           {
-            banner("True Evilshock", 1);
-            flags(718) += mag(2);
-            flags(718) += mag(2);
-            flags(718) += random(8, 85);
+            vctblitimage(48, 96, 100, 32, 0);
+            wait(10);
+            vcclear();
+            vctblitimage(48, 96, 100, 32, 3200);
+            wait(10);
+            vcclear();
           }
-        }
-        specialframe(13) = 5;
-        wait(10);
-        specialframe(13) = 6;
-        wait(10);
-        specialframe(13) = 7;
-        wait(10);
-        specialframe(13) = 8;
-        wait(10);
-        specialframe(13) = 9;
-        wait(20);
-        vcloadpcx("evil1.pcx", 0);
-        vcloadpcx("evil2.pcx", 3200);
-        switch (flags(641))
-        {
-          case (1):
-            for (x, 1, 5, 1)
-            {
-              vctblitimage(48, 64, 100, 32, 0);
-              wait(10);
-              vcclear();
-              vctblitimage(48, 64, 100, 32, 3200);
-              wait(10);
-              vcclear();
-            }
-            return; /*parse failure: NewParseExpression: Illegal opcode 11*/
-        }giveitem(/*parse failure: ParseOperandArg: Unknown op 0*/mapswitch("",/*parse failure: ParseOperandArg: Unknown op 0*/vctblitimage(48,96,100,32,0);wait(10);vcclear();vctblitimage(48,96,100,32,3200);wait(10);vcclear();return;return;/*parse failure: NewParseExpression: Illegal opcode 11*/return;/*parse failure: NewParseExpression: Illegal opcode 167*/giveitem(/*parse failure: ParseOperandArg: Unknown op 0*/mapswitch("",/*parse failure: ParseOperandArg: Unknown op 0*/vctblitimage(48,128,100,32,0);wait(10);vcclear();vctblitimage(48,128,100,32,3200);wait(10);vcclear();return;return;return;calleffect(62);specialframe(13)=0;callevent(21);if(/*ReturnIndex 00007e15*/flags(284)==1){
-          stext(0, "Evilchu evolves into Vilechu!", "", "");
-          flags(284) = 2;
-          flags(599) = 2500;
-          entity.chrindex(5) = 23;
-          specialframe(5) = 0;
-          flags(515) = 150;
-          flags(516) = 80;
-          flags(518) = 77;
-          flags(519) = 76;
-          flags(520) = 75;
-          flags(521) = 75;
-          flags(522) = 60;
-          flags(523) = 70;
-          flags(524) = 5;
-          flags(525) = 65;
-          flags(526) = 70;
-          flags(542) = 250;
-          flags(543) = 100;
-          flags(251) = 1;
-          return;
-          if (/*ReturnIndex 00007e50*/ flags() +)
-          { /*parse failure: NewParseExpression: Illegal opcode 32*/
-          }}
+        case (3):
+          for (x, 1, 5, 1)
+          {
+            vctblitimage(48, 128, 100, 32, 0);
+            wait(10);
+            vcclear();
+            vctblitimage(48, 128, 100, 32, 3200);
+            wait(10);
+            vcclear();
+          }
+      }
+      calleffect(62);
+      specialframe(13) = 0;
+      callevent(21);
+      if (flags(284) == 1)
+      {
+        stext(0, "Evilchu evolves into Vilechu!", "", "");
+        flags(284) = 2;
+        flags(599) = 2500;
+        entity.chrindex(5) = 23;
+        specialframe(5) = 0;
+        flags(515) = 150;
+        flags(516) = 80;
+        flags(518) = 77;
+        flags(519) = 76;
+        flags(520) = 75;
+        flags(521) = 75;
+        flags(522) = 60;
+        flags(523) = 70;
+        flags(524) = 5;
+        flags(525) = 65;
+        flags(526) = 70;
+        flags(542) = 250;
+        flags(543) = 100;
+        flags(251) = 1;
       }
     }
   }
-}
-}
-}
-}
-}
-event /*33*/
-{
-  redraw();
-  return;
-  b; /*parse failure: NewParseExpression: Illegal opcode 0*/
-  banner("Combat Only!", 1);
-  curmp(2) += 60;
-  if (/*ReturnIndex 00008090*/ flags(800) == 1)
+  event /*33*/
   {
-    textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-    if (/*ReturnIndex 00007ef4*/ flags(112) == 2 && flags(703) < 6)
+    if (flags(800) == 0)
     {
-      stext(0, "Not enough Spell Points!", "", "");
-      flags(112) = 1;
-      if (/*ReturnIndex 00007f29*/ flags(112) == 2 && flags(703) > 5)
+      banner("Combat Only!", 1);
+      curmp(2) += 60;
+    }
+    if (flags(800) == 1)
+    {
+      textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
+      if (flags(112) == 2 && flags(703) < 6)
+      {
+        stext(0, "Not enough Spell Points!", "", "");
+        flags(112) = 1;
+      }
+      if (flags(112) == 2 && flags(703) > 5)
       {
         flags(703) -= 6;
-        if (/*ReturnIndex 00007fc8*/ flags(112) != 2)
+      }
+      if (flags(112) != 2)
+      {
+        banner("Health Leech", 1);
+        callevent(14);
+        switch (flags(641))
         {
-          banner("Health Leech", 1);
-          callevent(14);
-          switch (flags(641))
-          {
-            case (1):
-              flags(107) = flags(598);
-              return; /*parse failure: NewParseExpression: Illegal opcode 11*/
-          }addcharacter(/*parse failure: ParseOperandArg: Unknown op 0*/return;return;/*parse failure: NewParseExpression: Illegal opcode 11*/return;/*parse failure: NewParseExpression: Illegal opcode 199*/addcharacter(/*parse failure: ParseOperandArg: Unknown op 0*/return;return;return;if(/*ReturnIndex 00008015*/flags(112)==2){
-            banner("Mega-Leech", 1);
-            flags(107) = flags(598) + flags(599) + flags(600);
-            palettemorph(0, 43, 0, 80, 63);}wait(100);palettemorph(0,0,0,0,63);for(z,1,flags(107),10){
-            curhp(2) += 1;}vcclear();callevent(18);
+          case (1): flags(107) = flags(598);
+          case (2): flags(107) = flags(599);
+          case (3): flags(107) = flags(600);
         }
       }
+      if (flags(112) == 2)
+      {
+        banner("Mega-Leech", 1);
+        flags(107) = flags(598) + flags(599) + flags(600);
+      }
+      palettemorph(0, 43, 0, 80, 63);
+      wait(100);
+      palettemorph(0, 0, 0, 0, 63);
+      for (z, 1, flags(107), 10)
+      {
+        curhp(2) += 1;
+      }
+      vcclear();
+      callevent();
+      banner("", ); /*parse failure: ParseExpression: Illegal opcode 0*/
     }
-  }
-}
-}
-}
-}

@@ -197,7 +197,7 @@ AssertCompileDecompile(const char *TestName)
   char TestFilename[TEMP_BUFFER_SIZE];
   sprintf_s(TestFilename, TEMP_BUFFER_SIZE, "test_data/%s.test", TestName);
 
-  buffer *TestFile = Load(TestFilename);
+  buffer *TestFile = LoadEntireFile(TestFilename);
   // Log("TestFile: %s\n", TestFile->Data);
 
   u8 *FileHead = TestFile->Data;

@@ -836,8 +836,7 @@ decompiler::ParseIf()
     Log("if%d\n", IfNum);
   }
 
-  u64 IfStart = C - ScriptBase;
-  DebugLog(MEDIUM, "ParseIf, Start %lld\n", IfStart);
+  DebugLog(MEDIUM, "ParseIf, Start 0x%x\n", IfAddress);
 
   ExpectOpCode(VC_GENERAL_IF);
   token *Head = AddToken("if", TT_IDENT);
@@ -854,23 +853,23 @@ decompiler::ParseIf()
     DisSaveAddress();
   }
 
-  u32 ReturnIndex = GetD();
-  // AddComment("/*ReturnIndex %08x*/", ReturnIndex);
-  AddressRefs[NumAddressRefs++] = ReturnIndex;
+  u32 ReturnAddress = GetUncorruptedAddress(GetD());
+  // AddComment("/*ReturnAddress %08x*/", ReturnAddress);
+  AddressRefs[NumAddressRefs++] = ReturnAddress;
   DebugLog(
       MEDIUM,
-      "ParseIf: NumTerms %lld, ReturnIndex %lld\n",
+      "ParseIf: NumTerms %lld, ReturnAddress 0x%x\n",
       NumTerms,
-      ReturnIndex);
+      ReturnAddress);
 
   if (Mode == DISASSEMBLE)
   {
-    DisD(ReturnIndex);
+    DisD(ReturnAddress);
     DisLogComments(".else");
     DisFlush();
   }
 
-  u8 *IfEnd = ScriptBase + ReturnIndex;
+  u8 *IfEnd = ScriptBase + ReturnAddress;
   if (C >= IfEnd)
   {
     // if (Mode == DISASSEMBLE)
@@ -909,41 +908,44 @@ decompiler::ParseIf()
   {
     DebugLog(HIGH, "ParseIf: Outer loop %lld\n", outer);
     outer++;
-    // NOTE(aen): WHILE detection. If GOTO is last expression in block and it
-    // points to the start, it's a WHILE. It could be a manually written IF/GOTO
-    // loop, but converting to WHILE is behavior-preserving.
-    u64 GotoAddress = *(u32 *)(C + 1);
-    // if (*C == VC_GOTO)
-    //   Log("GOTO C+5>=IfEnd? %d, GotoAddress==IfStart?\n",
-    //       C + 5 >= IfEnd,
-    //       GotoAddress == IfStart);
-    if (*C == VC_GOTO && C + 5 >= IfEnd && GotoAddress == IfStart)
+    if (*C == VC_GOTO && C + 5 >= IfEnd)
     {
-      // if (Mode == DISASSEMBLE)
-      // {
-      //   DisSaveAddress();
-      //   DisC(VC_GOTO);
-      //   DisLogComments(".goto if%d (while)", IfNum);
-      //   DisFlush();
-      // }
+      // NOTE(aen): WHILE detection. If GOTO is last expression in block and it
+      // points to the start, it's a WHILE. It could be a manually written
+      // IF/GOTO loop, but converting to WHILE is behavior-preserving.
+      u64 GotoAddress = GetUncorruptedAddress(*(u32 *)(C + 1));
+      // if (*C == VC_GOTO)
+      //   Log("GOTO C+5>=IfEnd? %d, GotoAddress==IfAddress?\n",
+      //       C + 5 >= IfEnd,
+      //       GotoAddress == IfAddress);
+      if (GotoAddress == IfAddress)
+      {
+        // if (Mode == DISASSEMBLE)
+        // {
+        //   DisSaveAddress();
+        //   DisC(VC_GOTO);
+        //   DisLogComments(".goto if%d (while)", IfNum);
+        //   DisFlush();
+        // }
 
-      Head->Text = "while";
-      Head->Length = 5;
-      // *C++;
+        Head->Text = "while";
+        Head->Length = 5;
+        // *C++;
 
-      // if (Mode == DISASSEMBLE)
-      //   DisSaveAddress();
+        // if (Mode == DISASSEMBLE)
+        //   DisSaveAddress();
 
-      // u32 Value = GetD();
+        // u32 Value = GetD();
 
-      // if (Mode == DISASSEMBLE)
-      // {
-      //   DisD(Value);
-      //   DisFlush();
-      // }
-      ParseGoto(/*EmitDecompilation*/ false);
+        // if (Mode == DISASSEMBLE)
+        // {
+        //   DisD(Value);
+        //   DisFlush();
+        // }
+        ParseGoto(/*EmitDecompilation*/ false);
 
-      break;
+        break;
+      }
     }
 
     ParseExpression();
@@ -1020,20 +1022,20 @@ decompiler::ParseGoto(b64 EmitDecompilation)
   if (Mode == DISASSEMBLE)
     DisSaveAddress();
 
-  u32 Address = GetD();
-  AddressRefs[NumAddressRefs++] = Address;
+  u32 GotoAddress = GetUncorruptedAddress(GetD());
+  AddressRefs[NumAddressRefs++] = GotoAddress;
   u64 ThisGoto = NumGotoRefs++;
-  GotoRefs[ThisGoto] = Address;
+  GotoRefs[ThisGoto] = GotoAddress;
 
   if (Mode == DISASSEMBLE)
   {
-    DisD(Address);
+    DisD(GotoAddress);
 
     b64 IsIf = false;
     u64 IfNum = 0;
     for (u64 N = 0; N < NumIfRefs; N++)
     {
-      if (IfRefs[N] == Address)
+      if (IfRefs[N] == GotoAddress)
       {
         IsIf = true;
         IfNum = N;
@@ -1267,7 +1269,7 @@ decompiler::ParseSwitch()
     if (Mode == DISASSEMBLE)
       DisSaveAddress();
 
-    u32 CaseEndAddress = GetD();
+    u32 CaseEndAddress = GetUncorruptedAddress(GetD());
     AddressRefs[NumAddressRefs++] = CaseEndAddress;
 
     u8 *End = ScriptBase + CaseEndAddress;
@@ -1538,9 +1540,11 @@ decompiler::ParseEvent(u64 Index, u8 *RetryAddress)
 
   DebugLog(MEDIUM, "\nParseEvent %d (of %d)\n", Index, NumScripts);
   CurrentScriptIndex = Index;
-  CurrentScriptBase = ScriptBase + ScriptOffsetTable[Index];
-  CurrentScriptEnd = ScriptBase + ScriptOffsetTable[Index + 1];
-  CurrentScriptLength = ScriptOffsetTable[Index + 1] - ScriptOffsetTable[Index];
+  u32 This = GetUncorruptedAddress(ScriptOffsetTable[Index]);
+  u32 Next = GetUncorruptedAddress(ScriptOffsetTable[Index + 1]);
+  CurrentScriptBase = ScriptBase + This;
+  CurrentScriptEnd = ScriptBase + Next;
+  CurrentScriptLength = Next - This;
   DebugLog(MEDIUM, "ParseEvent: CurrentScriptLength %d\n", CurrentScriptLength);
   C = CurrentScriptBase;
   if (RetryAddress)
@@ -1689,6 +1693,10 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
   for (u64 Index = 1; Index < NumScripts; Index++)
   {
     u8 *Head = ScriptBase + ScriptOffsetTable[Index];
+    // NOTE(aen): Every script (except the first one) should be immediately
+    // preceded by the end op-code of the previous script. If that's not true,
+    // we assume corruption and try to scan backward to the nearest one and
+    // assume that will be the correct starting point.
     if (Index && Head[-1] != 0xff)
     {
       u8 *P = Head - 1;
@@ -1696,19 +1704,26 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
         P--;
       if (P == ScriptBase)
       {
-        Log("/*Script %d has a corrupt offset. No 0xff byte found earlier.*/",
+        Log("/*Note: Offset for script index %d is corrupt. No 0xff byte found "
+            "earlier.*/",
             Index);
       }
       else
       {
-        u32 NearestEndByte = (u32)(Head - (P + 1));
+        // TODO(aen): Currently I'm assuming that there is one and only one
+        // point of corruption in a given offset table. May need to revisit this
+        // later if it turns out games other than PHAGE have crazier corruption.
+        // NOTE(aen): P will be 0xff, so P+1 is the "real" starting location.
+        ScriptCorruptionOffset = (u32)(Head - (P + 1));
+        ScriptCorruptionIndex = Index;
 
-        Log("/*Script %d has a corrupt offset. Rewinding all subsequent "
-            "offsets by %d bytes.*/",
+        Log("/* Note: Script %d offset is corrupt. 0xff found %d "
+            "bytes earlier.\n   Assuming everything is shifted forward by "
+            "this amount.*/\n",
             Index,
-            NearestEndByte);
-        for (u64 FixupIndex = Index; FixupIndex < NumScripts; FixupIndex++)
-          ScriptOffsetTable[FixupIndex] -= NearestEndByte;
+            ScriptCorruptionOffset);
+
+        break;
       }
     }
   }
@@ -1725,7 +1740,6 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
   DebugLog(
       MEDIUM, "Load: Scripts end %d, Total end %d\n", C - ScriptBase, DataSize);
 
-  // NOTE(aen): Validate script offsets
   for (int N = 0; N < NumScripts; N++)
   {
     u64 Current = ScriptOffsetTable[N];
@@ -1779,5 +1793,6 @@ Decompile(buffer *Input, buffer *Output, u64 MaxTokens, decomp_mode Mode)
 void
 Decompile(const char *Filename, buffer *Output, u64 MaxTokens, decomp_mode Mode)
 {
-  Decompile(Load(Filename), Output, MaxTokens, Mode);
+  buffer *Input = LoadEntireFile(Filename);
+  Decompile(Input, Output, MaxTokens, Mode);
 }
