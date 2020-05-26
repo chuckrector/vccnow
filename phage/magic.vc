@@ -1,24 +1,5 @@
 /* Note: Script 27 offset is corrupt. 0xff found 8 bytes earlier.
    Assuming everything is shifted forward by this amount.*/
-/*
-ParseIfTerm : C >= CurrentScriptEnd after parsing operand,
- bailing...[ParseFailure] ParseExpression : Illegal opcode 32 ParseIf
- : ParseFailure eject after ParseExpression ParseIf
- : ParseFailure eject after ParseExpression Parse failure
-       .Attempting to recover... Negative bytes left
- : -9. Skipping to next event... ParseIf
- : ParseFailure eject after ParseExpression Parse failure
-       .Attempting to recover... ParseFailure
- : Skipping past next 0xff byte Skipped Bytes ff Retry parsing the rest of
-       event 27 [ParseFailure] ParseExpression
- : Illegal opcode 0 Parse failure
-       .Attempting to recover... ParseFailure
- : Skipping past next 0xff byte Skipped Bytes 00 00 00 ff Retry parsing the
-       rest of event 27 [ParseFailure] ParseExpression
- : Illegal opcode 0 ParseIf
- : ParseFailure eject after ParseExpression Parse failure.Attempting to
-       recover... Negative bytes left
- : -4. Skipping to next event... */
 event /*0*/
 {
   if (flags(800) == 0)
@@ -2074,136 +2055,136 @@ event /*26*/
       vcclear();
       vcputpcx("mobvuua4.pcx", 81, 53);
       wait(40);
+    }
+    vcclear();
+    if (flags(112) == 2)
+    {
+      flags(107) = mag(13);
+      banner("Moobvuu Meteor", 1);
+      wait(20);
       vcclear();
-      if (flags(112) == 2)
+      vcputpcx("mobvuum1.pcx", 81, 53);
+      wait(10);
+      vcclear();
+      vcputpcx("mobvuum2.pcx", 81, 53);
+      wait(20);
+      vcclear();
+      vcputpcx("mobvuum3.pcx", 81, 53);
+      wait(30);
+      vcclear();
+      vcputpcx("mobvuum4.pcx", 81, 53);
+      wait(40);
+      vcclear();
+    }
+    if (flags(112) == 3)
+    {
+      banner("Bovine Anger", 1);
+      banner("Retribution!!!", 1);
+      flags(1001) += 1000;
+      flags(1002) += 1000;
+      flags(1003) += 1000;
+      flags(1004) += 1000;
+      flags(1005) += 1000;
+      flags(1006) += 1000;
+      flags(1007) += 1000;
+      flags(1008) += 1000;
+      wait(20);
+      vcclear();
+      vcputpcx("bovine1.pcx", 81, 53);
+      wait(10);
+      vcclear();
+      vcputpcx("bovine2.pcx", 81, 53);
+      wait(20);
+      vcclear();
+      vcputpcx("bovine3.pcx", 81, 53);
+      wait(30);
+      vcclear();
+      vcputpcx("bovine4.pcx", 81, 53);
+      wait(40);
+      vcclear();
+    }
+    if (flags(112) < 3)
+    {
+      if (flags(598) > 0)
       {
-        flags(107) = mag(13);
-        banner("Moobvuu Meteor", 1);
-        wait(20);
-        vcclear();
-        vcputpcx("mobvuum1.pcx", 81, 53);
-        wait(10);
-        vcclear();
-        vcputpcx("mobvuum2.pcx", 81, 53);
-        wait(20);
-        vcclear();
-        vcputpcx("mobvuum3.pcx", 81, 53);
-        wait(30);
-        vcclear();
-        vcputpcx("mobvuum4.pcx", 81, 53);
-        wait(40);
-        vcclear();
-        if (flags(112) == 3)
+        flags(601) = flags(107);
+        if (flags(601) <= flags(711))
         {
-          banner("Bovine Anger", 1);
-          banner("Retribution!!!", 1);
-          flags(1001) += 1000;
-          flags(1002) += 1000;
-          flags(1003) += 1000;
-          flags(1004) += 1000;
-          flags(1005) += 1000;
-          flags(1006) += 1000;
-          flags(1007) += 1000;
-          flags(1008) += 1000;
-          wait(20);
-          vcclear();
-          vcputpcx("bovine1.pcx", 81, 53);
-          wait(10);
-          vcclear();
-          vcputpcx("bovine2.pcx", 81, 53);
-          wait(20);
-          vcclear();
-          vcputpcx("bovine3.pcx", 81, 53);
-          wait(30);
-          vcclear();
-          vcputpcx("bovine4.pcx", 81, 53);
-          wait(40);
-          vcclear();
-          if (flags(112) < 3)
-          {
-            if (flags(598) > 0)
-            {
-              flags(601) = flags(107);
-              if (flags(601) <= flags(711))
-              {
-                flags(601) = 0;
-                if (flags(601) > flags(711))
-                {
-                  flags(601) -= flags(711);
-                  if (flags(601) >= flags(598))
-                  {
-                    vctextnum(48, 144, flags(598));
-                    flags(598) = 0;
-                    if (flags(601) < flags(598))
-                    {
-                      flags(598) -= flags(601);
-                      vctextnum(48, 80, flags(601));
-                      if (flags(599) > 0)
-                      {
-                        flags(601) = flags(107);
-                        if (flags(601) <= flags(713))
-                        {
-                          flags(601) = 0;
-                          if (flags(601) > flags(713))
-                          {
-                            flags(601) -= flags(713);
-                            if (flags(601) >= flags(599))
-                            {
-                              vctextnum(48, 144, flags(599));
-                              flags(599) = 0;
-                              if (flags(601) < flags(599))
-                              {
-                                flags(599) -= flags(601);
-                                vctextnum(48, 112, flags(601));
-                                if (flags(600) > 0)
-                                {
-                                  flags(601) = flags(107);
-                                  if (flags(601) <= flags(715))
-                                  {
-                                    flags(601) = 0;
-                                    if (flags(601) > flags(715))
-                                    {
-                                      flags(601) -= flags(715);
-                                      if (flags(601) >= flags(600))
-                                      {
-                                        vctextnum(48, 144, flags(600));
-                                        flags(600) = 0;
-                                        if (flags(601) < flags(600))
-                                        {
-                                          flags(600) -= flags(601);
-                                          vctextnum(48, 144, flags(601));
-                                          if (flags(598) == 0)
-                                          {
-                                            specialframe(7) = 29;
-                                            if (flags(599) == 0)
-                                            {
-                                              specialframe(5) = 29;
-                                              if (flags(600) == 0)
-                                              {
-                                                specialframe(6) = 29;
-                                                wait(50);
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+          flags(601) = 0;
+        }
+        if (flags(601) > flags(711))
+        {
+          flags(601) -= flags(711);
+        }
+        if (flags(601) >= flags(598))
+        {
+          vctextnum(48, 144, flags(598));
+          flags(598) = 0;
+        }
+        if (flags(601) < flags(598))
+        {
+          flags(598) -= flags(601);
+          vctextnum(48, 80, flags(601));
         }
       }
+      if (flags(599) > 0)
+      {
+        flags(601) = flags(107);
+        if (flags(601) <= flags(713))
+        {
+          flags(601) = 0;
+        }
+        if (flags(601) > flags(713))
+        {
+          flags(601) -= flags(713);
+        }
+        if (flags(601) >= flags(599))
+        {
+          vctextnum(48, 144, flags(599));
+          flags(599) = 0;
+        }
+        if (flags(601) < flags(599))
+        {
+          flags(599) -= flags(601);
+          vctextnum(48, 112, flags(601));
+        }
+      }
+      if (flags(600) > 0)
+      {
+        flags(601) = flags(107);
+        if (flags(601) <= flags(715))
+        {
+          flags(601) = 0;
+        }
+        if (flags(601) > flags(715))
+        {
+          flags(601) -= flags(715);
+        }
+        if (flags(601) >= flags(600))
+        {
+          vctextnum(48, 144, flags(600));
+          flags(600) = 0;
+        }
+        if (flags(601) < flags(600))
+        {
+          flags(600) -= flags(601);
+          vctextnum(48, 144, flags(601));
+        }
+      }
+      if (flags(598) == 0)
+      {
+        specialframe(7) = 29;
+      }
+      if (flags(599) == 0)
+      {
+        specialframe(5) = 29;
+      }
+      if (flags(600) == 0)
+      {
+        specialframe(6) = 29;
+      }
     }
+    wait(50);
     givexp(13, 5);
     if (flags(112) == 4)
     {
@@ -2222,456 +2203,453 @@ event /*26*/
       wait(40);
       vcclear();
       givexp(13, 45);
-      callevent(18);
     }
-    return;
-    if ()
+    callevent(18);
+  }
+}
+event /*27*/
+{
+  if (flags(800) == 0)
+  {
+    banner("Combat Only!", 1);
+  }
+  if (flags(855) == 1)
+  {
+    banner("Used up!", 1);
+  }
+  if (flags(800) == 1 && flags(855) == 0)
+  {
+    flags(607) = hit(4) + 40;
+    flags(607) += random(1, 5);
+    flags(607) += flags(250);
+    callevent(14);
+    specialframe(9) = 5;
+    wait(10);
+    specialframe(9) = 6;
+    wait(10);
+    specialframe(9) = 7;
+    wait(10);
+    specialframe(9) = 8;
+    wait(10);
+    specialframe(9) = 9;
+    wait(20);
+    banner("Drop: VenusShell", 1);
+    vcloadpcx("shell1.pcx", 0);
+    vcloadpcx("shell2.pcx", 1024);
+    vcloadpcx("shell3.pcx", 2048);
+    vcloadpcx("shell4.pcx", 3072);
+    switch (flags(643))
     {
-      flags() = ; /*parse failure: ParseExpression: Illegal opcode 32*/
-    }
-    event /*27*/
-    {if( flags(800){
-        return;
-        b; /*parse failure: ParseExpression: Illegal opcode 0*/
-        banner("Combat Only!", 1);
-        if (flags(855) == 1)
+      case (1):
+        soundeffect(22);
+        for (z, 1, 65, 8)
         {
-          banner("Used up!", 1);
+          vctblitimage(40, z, 32, 32, 0);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 2, 32, 32, 1024);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 4, 32, 32, 2048);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 6, 32, 32, 3072);
+          wait(1);
+          vcclear();
         }
-        if (flags(800) == 1 && flags(855) == 0)
+        vcputpcx("venus.pcx", 40, 65);
+        wait(50);
+        vcclear();
+      case (2):
+        soundeffect(22);
+        for (z, 1, 97, 8)
         {
-          flags(607) = hit(4) + 40;
-          flags(607) += random(1, 5);
-          flags(607) += flags(250);
-          callevent(14);
-          specialframe(9) = 5;
-          wait(10);
-          specialframe(9) = 6;
-          wait(10);
-          specialframe(9) = 7;
-          wait(10);
-          specialframe(9) = 8;
-          wait(10);
-          specialframe(9) = 9;
-          wait(20);
-          banner("Drop: VenusShell", 1);
-          vcloadpcx("shell1.pcx", 0);
-          vcloadpcx("shell2.pcx", 1024);
-          vcloadpcx("shell3.pcx", 2048);
-          vcloadpcx("shell4.pcx", 3072);
-          switch (flags(643))
-          {
-            case (1):
-              soundeffect(22);
-              for (z, 1, 65, 8)
-              {
-                vctblitimage(40, z, 32, 32, 0);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 2, 32, 32, 1024);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 4, 32, 32, 2048);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 6, 32, 32, 3072);
-                wait(1);
-                vcclear();
-              }
-              vcputpcx("venus.pcx", 40, 65);
-              wait(50);
-              vcclear();
-            case (2):
-              soundeffect(22);
-              for (z, 1, 97, 8)
-              {
-                vctblitimage(40, z, 32, 32, 0);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 2, 32, 32, 1024);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 4, 32, 32, 2048);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 6, 32, 32, 3072);
-                wait(1);
-                vcclear();
-              }
-              vcputpcx("venus.pcx", 40, 97);
-              wait(50);
-              vcclear();
-            case (3):
-              soundeffect(22);
-              for (z, 1, 129, 8)
-              {
-                vctblitimage(40, z, 32, 32, 0);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 2, 32, 32, 1024);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 4, 32, 32, 2048);
-                wait(1);
-                vcclear();
-                vctblitimage(40, z + 6, 32, 32, 3072);
-                wait(1);
-                vcclear();
-              }
-              vcputpcx("venus.pcx", 40, 129);
-              wait(50);
-              vcclear();
-          }
-          calleffect(61);
-          specialframe(9) = 0;
-          flags(855) = 1;
-          healall();
-          callevent(15);
-        }}
-    }
-  }
-  event /*28*/
-  {
-    if (flags(800) == 0)
-    {
-      banner("Combat Only!", 1);
-    }
-    if (flags(857) == 1)
-    {
-      banner("Used up!", 1);
-    }
-    if (flags(800) == 1 && flags(857) == 0)
-    {
-      specialframe(9) = 5;
-      wait(10);
-      specialframe(9) = 6;
-      wait(10);
-      specialframe(9) = 7;
-      wait(10);
-      specialframe(9) = 8;
-      wait(10);
-      specialframe(9) = 9;
-      wait(20);
-      banner("Drop: Big Foot", 1);
-      soundeffect(22);
-      vcloadpcx("footfall.pcx", 0);
-      for (x, 1, 97, 1)
-      {
-        vctblitimage(40, x, 48, 32, 0);
-        wait(1);
-        vcclear();
-      }
-      earthquake(5, 5, 50);
-      specialframe(9) = 0;
-      flags(857) = 1;
-      flags(722) = hit(4) + 200;
-      flags(722) += mag(4);
-      flags(722) += random(5, 75);
-      flags(643) = 7;
-      calleffect(62);
-      callevent(21);
-    }
-  }
-  event /*29*/
-  {
-    if (flags(800) == 0)
-    {
-      banner("Combat Only!", 1);
-      curmp(1) += 1;
-    }
-    if (flags(800) == 1)
-    {
-      specialframe(8) = 5;
-      wait(10);
-      specialframe(8) = 6;
-      wait(10);
-      specialframe(8) = 7;
-      wait(10);
-      specialframe(8) = 8;
-      wait(10);
-      specialframe(8) = 9;
-      wait(20);
-      banner("Learn", 1);
-      banner("XP is doubled!", 1);
-      curmp(1) = 0;
-      flags(509) += flags(509);
-      flags(522) += flags(522);
-      flags(535) += flags(535);
-      specialframe(8) = 0;
-    }
-  }
-  event /*30*/
-  {
-    if (flags(800) == 0)
-    {
-      banner("Combat Only!", 1);
-      curmp(2) += 35;
-    }
-    if (flags(800) == 1)
-    {
-      flags(603) = atk(2);
-      flags(603) += fer(2);
-      flags(603) += flags(603);
-      callevent(14);
-      banner("Dive Bomb", 1);
-      soundeffect(22);
-      entity.locy(13) = 20;
-      for (y, 1, 97, 2)
-      {
-        x = 161 - y;
-        vcputpcx("diver.pcx", x, y);
-        wait(1);
-        vcclear();
-      }
-      entity.locy(13) = 8;
-      calleffect(61);
-      callevent(15);
-      wait(25);
-    }
-  }
-  event /*31*/
-  {
-    if (flags(800) == 0)
-    {
-      banner("Combat Only!", 1);
-      curmp(5) += 65;
-    }
-    if (flags(800) == 1)
-    {
-      banner("Pep Rally", 1);
-      entity.chrindex(14) = 16;
-      for (x, 1, 8, 1)
-      {
-        vcclear();
-        vcputpcx("pepper.pcx", 81, 53);
-        wait(10);
-        vcclear();
-        vcputpcx("pepper2.pcx", 81, 53);
-        wait(10);
-      }
-      for (x, 1, 8, 1)
-      {
-        vcclear();
-        vcputpcx("pepper3.pcx", 81, 53);
-        wait(10);
-        vcclear();
-        vcputpcx("pepper4.pcx", 81, 53);
-        wait(10);
-      }
-      vcclear();
-      vcputpcx("pepper5.pcx", 81, 53);
-      wait(50);
-      vcclear();
-      vcputpcx("pepper6.pcx", 81, 53);
-      wait(10);
-      vcclear();
-      vcputpcx("pepper7.pcx", 81, 53);
-      wait(50);
-      for (x, 1, 8, 1)
-      {
-        vcclear();
-        vcputpcx("pepper3.pcx", 81, 53);
-        wait(10);
-        vcclear();
-        vcputpcx("pepper4.pcx", 81, 53);
-        wait(10);
-      }
-      vcclear();
-      vcputpcx("pepper8.pcx", 81, 53);
-      wait(100);
-      for (x, 1, 8, 1)
-      {
-        vcclear();
-        vcputpcx("pepper3.pcx", 81, 53);
-        wait(10);
-        vcclear();
-        vcputpcx("pepper4.pcx", 81, 53);
-        wait(10);
-      }
-      for (x, 1, 200, 1)
-      {
-        vcclear();
-        vcputpcx("plane2.pcx", 200 - x, 53);
-        wait(1);
-      }
-      for (x, 1, 8, 1)
-      {
-        vcclear();
-        vcputpcx("pepper3.pcx", 81, 53);
-        wait(10);
-        vcclear();
-        vcputpcx("pepper4.pcx", 81, 53);
-        wait(10);
-      }
-      vcclear();
-      vcputpcx("pepper9.pcx", 81, 53);
-      wait(200);
-      vcclear();
-      entity.chrindex(14) = 11;
-      wait(10);
-      callevent(14);
-      for (z, 1, 8, 1)
-      {
-        if (char(z))
-        {
-          flags(1000 + z) += maxhp(z);
-          flags(1000 + z) += fer(z);
-          flags(639 + z) = flags(644);
-          flags(629 + z) = 1;
-          flags(599 + z + z) += random(70, 310);
-          flags(599 + z + z) += 100;
-          flags(600 + z + z) += random(7, 10);
+          vctblitimage(40, z, 32, 32, 0);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 2, 32, 32, 1024);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 4, 32, 32, 2048);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 6, 32, 32, 3072);
+          wait(1);
+          vcclear();
         }
+        vcputpcx("venus.pcx", 40, 97);
+        wait(50);
+        vcclear();
+      case (3):
+        soundeffect(22);
+        for (z, 1, 129, 8)
+        {
+          vctblitimage(40, z, 32, 32, 0);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 2, 32, 32, 1024);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 4, 32, 32, 2048);
+          wait(1);
+          vcclear();
+          vctblitimage(40, z + 6, 32, 32, 3072);
+          wait(1);
+          vcclear();
+        }
+        vcputpcx("venus.pcx", 40, 129);
+        wait(50);
+        vcclear();
+    }
+    calleffect(61);
+    specialframe(9) = 0;
+    flags(855) = 1;
+    healall();
+    callevent(15);
+  }
+}
+event /*28*/
+{
+  if (flags(800) == 0)
+  {
+    banner("Combat Only!", 1);
+  }
+  if (flags(857) == 1)
+  {
+    banner("Used up!", 1);
+  }
+  if (flags(800) == 1 && flags(857) == 0)
+  {
+    specialframe(9) = 5;
+    wait(10);
+    specialframe(9) = 6;
+    wait(10);
+    specialframe(9) = 7;
+    wait(10);
+    specialframe(9) = 8;
+    wait(10);
+    specialframe(9) = 9;
+    wait(20);
+    banner("Drop: Big Foot", 1);
+    soundeffect(22);
+    vcloadpcx("footfall.pcx", 0);
+    for (x, 1, 97, 1)
+    {
+      vctblitimage(40, x, 48, 32, 0);
+      wait(1);
+      vcclear();
+    }
+    earthquake(5, 5, 50);
+    specialframe(9) = 0;
+    flags(857) = 1;
+    flags(722) = hit(4) + 200;
+    flags(722) += mag(4);
+    flags(722) += random(5, 75);
+    flags(643) = 7;
+    calleffect(62);
+    callevent(21);
+  }
+}
+event /*29*/
+{
+  if (flags(800) == 0)
+  {
+    banner("Combat Only!", 1);
+    curmp(1) += 1;
+  }
+  if (flags(800) == 1)
+  {
+    specialframe(8) = 5;
+    wait(10);
+    specialframe(8) = 6;
+    wait(10);
+    specialframe(8) = 7;
+    wait(10);
+    specialframe(8) = 8;
+    wait(10);
+    specialframe(8) = 9;
+    wait(20);
+    banner("Learn", 1);
+    banner("XP is doubled!", 1);
+    curmp(1) = 0;
+    flags(509) += flags(509);
+    flags(522) += flags(522);
+    flags(535) += flags(535);
+    specialframe(8) = 0;
+  }
+}
+event /*30*/
+{
+  if (flags(800) == 0)
+  {
+    banner("Combat Only!", 1);
+    curmp(2) += 35;
+  }
+  if (flags(800) == 1)
+  {
+    flags(603) = atk(2);
+    flags(603) += fer(2);
+    flags(603) += flags(603);
+    callevent(14);
+    banner("Dive Bomb", 1);
+    soundeffect(22);
+    entity.locy(13) = 20;
+    for (y, 1, 97, 2)
+    {
+      x = 161 - y;
+      vcputpcx("diver.pcx", x, y);
+      wait(1);
+      vcclear();
+    }
+    entity.locy(13) = 8;
+    calleffect(61);
+    callevent(15);
+    wait(25);
+  }
+}
+event /*31*/
+{
+  if (flags(800) == 0)
+  {
+    banner("Combat Only!", 1);
+    curmp(5) += 65;
+  }
+  if (flags(800) == 1)
+  {
+    banner("Pep Rally", 1);
+    entity.chrindex(14) = 16;
+    for (x, 1, 8, 1)
+    {
+      vcclear();
+      vcputpcx("pepper.pcx", 81, 53);
+      wait(10);
+      vcclear();
+      vcputpcx("pepper2.pcx", 81, 53);
+      wait(10);
+    }
+    for (x, 1, 8, 1)
+    {
+      vcclear();
+      vcputpcx("pepper3.pcx", 81, 53);
+      wait(10);
+      vcclear();
+      vcputpcx("pepper4.pcx", 81, 53);
+      wait(10);
+    }
+    vcclear();
+    vcputpcx("pepper5.pcx", 81, 53);
+    wait(50);
+    vcclear();
+    vcputpcx("pepper6.pcx", 81, 53);
+    wait(10);
+    vcclear();
+    vcputpcx("pepper7.pcx", 81, 53);
+    wait(50);
+    for (x, 1, 8, 1)
+    {
+      vcclear();
+      vcputpcx("pepper3.pcx", 81, 53);
+      wait(10);
+      vcclear();
+      vcputpcx("pepper4.pcx", 81, 53);
+      wait(10);
+    }
+    vcclear();
+    vcputpcx("pepper8.pcx", 81, 53);
+    wait(100);
+    for (x, 1, 8, 1)
+    {
+      vcclear();
+      vcputpcx("pepper3.pcx", 81, 53);
+      wait(10);
+      vcclear();
+      vcputpcx("pepper4.pcx", 81, 53);
+      wait(10);
+    }
+    for (x, 1, 200, 1)
+    {
+      vcclear();
+      vcputpcx("plane2.pcx", 200 - x, 53);
+      wait(1);
+    }
+    for (x, 1, 8, 1)
+    {
+      vcclear();
+      vcputpcx("pepper3.pcx", 81, 53);
+      wait(10);
+      vcclear();
+      vcputpcx("pepper4.pcx", 81, 53);
+      wait(10);
+    }
+    vcclear();
+    vcputpcx("pepper9.pcx", 81, 53);
+    wait(200);
+    vcclear();
+    entity.chrindex(14) = 11;
+    wait(10);
+    callevent(14);
+    for (z, 1, 8, 1)
+    {
+      if (char(z))
+      {
+        flags(1000 + z) += maxhp(z);
+        flags(1000 + z) += fer(z);
+        flags(639 + z) = flags(644);
+        flags(629 + z) = 1;
+        flags(599 + z + z) += random(70, 310);
+        flags(599 + z + z) += 100;
+        flags(600 + z + z) += random(7, 10);
       }
     }
   }
-  event /*32*/
+}
+event /*32*/
+{
+  if (flags(800) == 0)
   {
-    if (flags(800) == 0)
+    banner("Combat Only!", 1);
+    curmp(2) += 30;
+  }
+  if (flags(800) == 1)
+  {
+    textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
+    if (flags(112) == 2 && flags(703) < 3)
     {
-      banner("Combat Only!", 1);
-      curmp(2) += 30;
+      stext(0, "Not enough Spell Points!", "", "");
+      flags(112) = 1;
     }
-    if (flags(800) == 1)
+    if (flags(112) == 2 && flags(703) > 2)
     {
-      textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-      if (flags(112) == 2 && flags(703) < 3)
-      {
-        stext(0, "Not enough Spell Points!", "", "");
-        flags(112) = 1;
-      }
-      if (flags(112) == 2 && flags(703) > 2)
-      {
-        flags(703) -= 3;
-      }
+      flags(703) -= 3;
+    }
+    callevent(14);
+    flags(718) = mag(2);
+    if (flags(112) < 2)
+    {
+      banner("Evilshock", 1);
+    }
+    if (flags(112) == 2)
+    {
+      banner("True Evilshock", 1);
+      flags(718) += mag(2);
+      flags(718) += mag(2);
+    }
+    flags(718) += random(8, 85);
+    specialframe(13) = 5;
+    wait(10);
+    specialframe(13) = 6;
+    wait(10);
+    specialframe(13) = 7;
+    wait(10);
+    specialframe(13) = 8;
+    wait(10);
+    specialframe(13) = 9;
+    wait(20);
+    vcloadpcx("evil1.pcx", 0);
+    vcloadpcx("evil2.pcx", 3200);
+    switch (flags(641))
+    {
+      case (1):
+        for (x, 1, 5, 1)
+        {
+          vctblitimage(48, 64, 100, 32, 0);
+          wait(10);
+          vcclear();
+          vctblitimage(48, 64, 100, 32, 3200);
+          wait(10);
+          vcclear();
+        }
+      case (2):
+        for (x, 1, 5, 1)
+        {
+          vctblitimage(48, 96, 100, 32, 0);
+          wait(10);
+          vcclear();
+          vctblitimage(48, 96, 100, 32, 3200);
+          wait(10);
+          vcclear();
+        }
+      case (3):
+        for (x, 1, 5, 1)
+        {
+          vctblitimage(48, 128, 100, 32, 0);
+          wait(10);
+          vcclear();
+          vctblitimage(48, 128, 100, 32, 3200);
+          wait(10);
+          vcclear();
+        }
+    }
+    calleffect(62);
+    specialframe(13) = 0;
+    callevent(21);
+    if (flags(284) == 1)
+    {
+      stext(0, "Evilchu evolves into Vilechu!", "", "");
+      flags(284) = 2;
+      flags(599) = 2500;
+      entity.chrindex(5) = 23;
+      specialframe(5) = 0;
+      flags(515) = 150;
+      flags(516) = 80;
+      flags(518) = 77;
+      flags(519) = 76;
+      flags(520) = 75;
+      flags(521) = 75;
+      flags(522) = 60;
+      flags(523) = 70;
+      flags(524) = 5;
+      flags(525) = 65;
+      flags(526) = 70;
+      flags(542) = 250;
+      flags(543) = 100;
+      flags(251) = 1;
+    }
+  }
+}
+event /*33*/
+{
+  if (flags(800) == 0)
+  {
+    banner("Combat Only!", 1);
+    curmp(2) += 60;
+  }
+  if (flags(800) == 1)
+  {
+    textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
+    if (flags(112) == 2 && flags(703) < 6)
+    {
+      stext(0, "Not enough Spell Points!", "", "");
+      flags(112) = 1;
+    }
+    if (flags(112) == 2 && flags(703) > 5)
+    {
+      flags(703) -= 6;
+    }
+    if (flags(112) != 2)
+    {
+      banner("Health Leech", 1);
       callevent(14);
-      flags(718) = mag(2);
-      if (flags(112) < 2)
-      {
-        banner("Evilshock", 1);
-      }
-      if (flags(112) == 2)
-      {
-        banner("True Evilshock", 1);
-        flags(718) += mag(2);
-        flags(718) += mag(2);
-      }
-      flags(718) += random(8, 85);
-      specialframe(13) = 5;
-      wait(10);
-      specialframe(13) = 6;
-      wait(10);
-      specialframe(13) = 7;
-      wait(10);
-      specialframe(13) = 8;
-      wait(10);
-      specialframe(13) = 9;
-      wait(20);
-      vcloadpcx("evil1.pcx", 0);
-      vcloadpcx("evil2.pcx", 3200);
       switch (flags(641))
       {
-        case (1):
-          for (x, 1, 5, 1)
-          {
-            vctblitimage(48, 64, 100, 32, 0);
-            wait(10);
-            vcclear();
-            vctblitimage(48, 64, 100, 32, 3200);
-            wait(10);
-            vcclear();
-          }
-        case (2):
-          for (x, 1, 5, 1)
-          {
-            vctblitimage(48, 96, 100, 32, 0);
-            wait(10);
-            vcclear();
-            vctblitimage(48, 96, 100, 32, 3200);
-            wait(10);
-            vcclear();
-          }
-        case (3):
-          for (x, 1, 5, 1)
-          {
-            vctblitimage(48, 128, 100, 32, 0);
-            wait(10);
-            vcclear();
-            vctblitimage(48, 128, 100, 32, 3200);
-            wait(10);
-            vcclear();
-          }
-      }
-      calleffect(62);
-      specialframe(13) = 0;
-      callevent(21);
-      if (flags(284) == 1)
-      {
-        stext(0, "Evilchu evolves into Vilechu!", "", "");
-        flags(284) = 2;
-        flags(599) = 2500;
-        entity.chrindex(5) = 23;
-        specialframe(5) = 0;
-        flags(515) = 150;
-        flags(516) = 80;
-        flags(518) = 77;
-        flags(519) = 76;
-        flags(520) = 75;
-        flags(521) = 75;
-        flags(522) = 60;
-        flags(523) = 70;
-        flags(524) = 5;
-        flags(525) = 65;
-        flags(526) = 70;
-        flags(542) = 250;
-        flags(543) = 100;
-        flags(251) = 1;
+        case (1): flags(107) = flags(598);
+        case (2): flags(107) = flags(599);
+        case (3): flags(107) = flags(600);
       }
     }
+    if (flags(112) == 2)
+    {
+      banner("Mega-Leech", 1);
+      flags(107) = flags(598) + flags(599) + flags(600);
+    }
+    palettemorph(0, 43, 0, 80, 63);
+    wait(100);
+    palettemorph(0, 0, 0, 0, 63);
+    for (z, 1, flags(107), 10)
+    {
+      curhp(2) += 1;
+    }
+    vcclear();
+    callevent(18);
   }
-  event /*33*/
-  {
-    if (flags(800) == 0)
-    {
-      banner("Combat Only!", 1);
-      curmp(2) += 60;
-    }
-    if (flags(800) == 1)
-    {
-      textmenu(18, 18, 112, 1, "Normal Spell", "Powered Spell");
-      if (flags(112) == 2 && flags(703) < 6)
-      {
-        stext(0, "Not enough Spell Points!", "", "");
-        flags(112) = 1;
-      }
-      if (flags(112) == 2 && flags(703) > 5)
-      {
-        flags(703) -= 6;
-      }
-      if (flags(112) != 2)
-      {
-        banner("Health Leech", 1);
-        callevent(14);
-        switch (flags(641))
-        {
-          case (1): flags(107) = flags(598);
-          case (2): flags(107) = flags(599);
-          case (3): flags(107) = flags(600);
-        }
-      }
-      if (flags(112) == 2)
-      {
-        banner("Mega-Leech", 1);
-        flags(107) = flags(598) + flags(599) + flags(600);
-      }
-      palettemorph(0, 43, 0, 80, 63);
-      wait(100);
-      palettemorph(0, 0, 0, 0, 63);
-      for (z, 1, flags(107), 10)
-      {
-        curhp(2) += 1;
-      }
-      vcclear();
-      callevent();
-      banner("", ); /*parse failure: ParseExpression: Illegal opcode 0*/
-    }
+}
