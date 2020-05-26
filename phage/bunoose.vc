@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -120,7 +120,7 @@ event
     autooff();
   }
 }
-event
+event /*1*/
 {
   if (face(0) == 0)
   {
@@ -135,7 +135,7 @@ event
     mapswitch("overland.map", 114, 52, 0);
   }
 }
-event
+event /*2*/
 {
   stext(
       0,
@@ -158,8 +158,8 @@ event
     stext(4, "Buddy, you oughta go into", "the theater!", "");
   }
 }
-event { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
-event
+event /*3*/ { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event /*4*/
 {
   if (flags(266) == 0)
   {
@@ -207,7 +207,7 @@ event
   }
   stext(0, "Thank you for not telling!", "", "");
 }
-event
+event /*5*/
 {
   stext(
       0,
@@ -216,7 +216,7 @@ event
       "always full of new stuff,");
   stext(0, "so be sure to check back", "every so often!", "");
 }
-event
+event /*6*/
 {
   stext(
       0,
@@ -229,7 +229,7 @@ event
       "he might be able to turn",
       "it into a Drop Technique!");
 }
-event
+event /*7*/
 {
   stext(
       0,
@@ -248,24 +248,24 @@ event
       "precious iron for us...");
   stext(0, "Now iron's gettin' plenty", "scarce, and we don't do", "nothin'!");
 }
-event
+event /*8*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(25, 127, 0);
 }
-event
+event /*9*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(67, 127, 0);
 }
-event { warp(flags(109), flags(110), 0); }
-event { warp(107, 64, 0); }
-event { warp(115, 54, 0); }
-event { warp(117, 119, 0); }
-event { warp(108, 127, 0); }
-event
+event /*10*/ { warp(flags(109), flags(110), 0); }
+event /*11*/ { warp(107, 64, 0); }
+event /*12*/ { warp(115, 54, 0); }
+event /*13*/ { warp(117, 119, 0); }
+event /*14*/ { warp(108, 127, 0); }
+event /*15*/
 {
   stext(
       0,
@@ -294,7 +294,7 @@ event
       "in its buttocks! I smell fish!");
   stext(1, "Quick, run before he talks", "some more!", "");
 }
-event
+event /*16*/
 {
   stext(0, "We like to sell weapons!", "", "");
   if (flags(255) < 3)
@@ -315,7 +315,7 @@ event
       "selection! Come back again",
       "later and check!");
 }
-event
+event /*17*/
 {
   stext(0, "I've got *ITEMS!!!*", "", "");
   if (flags(255) < 3)
@@ -332,19 +332,19 @@ event
   }
   stext(0, "Ain't life grand! I'll", "have more *ITEMS* later!!!", "");
 }
-event
+event /*18*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(27, 151, 0);
 }
-event
+event /*19*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(108, 151, 0);
 }
-event
+event /*20*/
 {
   stext(
       0,
@@ -354,7 +354,7 @@ event
   stext(0, "not go in there... *You*", "know...", "");
   partymove("L1");
 }
-event
+event /*21*/
 {
   stext(
       0,
@@ -364,7 +364,7 @@ event
   stext(0, "Yeah! Arr!", "", "");
   partymove("D1");
 }
-event
+event /*22*/
 {
   face(13) = 0;
   prompt(
@@ -399,8 +399,11 @@ event
     stext(0, "Arr... Come back soon...", "", "");
   }
 }
-event { stext(0, "Arr... Don't ya be comin'", "back here, got me?", ""); }
-event
+event /*23*/
+{
+  stext(0, "Arr... Don't ya be comin'", "back here, got me?", "");
+}
+event /*24*/
 {
   stext(
       0,
@@ -419,7 +422,7 @@ event
       "kid who keeps telling me the");
   stext(0, "name of the town, and I live", "here!", "");
 }
-event
+event /*25*/
 {
   stext(
       0,
@@ -438,7 +441,7 @@ event
       "and is bored... Soon, he's");
   stext(0, "gonna make something big,", "I just know it!", "");
 }
-event
+event /*26*/
 {
   stext(
       0,
@@ -451,13 +454,13 @@ event
       "able to look at it!",
       "Whatever shall I do?");
 }
-event
+event /*27*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(26, 177, 0);
 }
-event
+event /*28*/
 {
   stext(0, "I'm a master of magic...", "", "");
   if (flags(270) == 0 && item(18) && flags(703) >= 20)
@@ -494,7 +497,7 @@ event
     }
   }
 }
-event
+event /*29*/
 {
   stext(0, "Lots of occult books...", "... ...", "");
   if (char(4))
@@ -502,7 +505,7 @@ event
     stext(4, "Hey, naughty magazines!", "", "");
   }
 }
-event
+event /*30*/
 {
   stext(
       0,
@@ -511,7 +514,7 @@ event
       "hours, and he gave me");
   stext(0, "something secret!", "", "");
 }
-event
+event /*31*/
 {
   stext(
       0,
@@ -525,7 +528,7 @@ event
       "care of the place in his");
   stext(0, "absence.", "", "");
 }
-event
+event /*32*/
 {
   stext(
       0,
@@ -563,7 +566,7 @@ event
       "time this heads to print. He",
       "is assumed Eaten In Action.");
 }
-event
+event /*33*/
 {
   stext(
       0,
@@ -582,7 +585,7 @@ event
       "have to explore a bit... He's");
   stext(0, "so picky! Such are wizards, I", "guess...", "");
 }
-event
+event /*34*/
 {
   stext(
       0,
@@ -662,7 +665,7 @@ event
         "you need them.");
   }
 }
-event
+event /*35*/
 {
   stext(
       0,
@@ -671,12 +674,12 @@ event
       "things! But he's nowhere near");
   stext(0, "as bad as the guy who runs", "the bait shop over there!", "");
 }
-event { stext(0, "Hey! Don't touch my worms!", "", ""); }
-event
+event /*36*/ { stext(0, "Hey! Don't touch my worms!", "", ""); }
+event /*37*/
 {
   stext(0, "I'm gonna buy the *shiny*", "bait! Fish love shiny stuff!", "");
 }
-event
+event /*38*/
 {
   stext(
       0,
@@ -689,8 +692,8 @@ event
       "remember to remove worms",
       "when eating, yes?");
 }
-event { mapswitch("vultmans.map", 52, 72, 0); }
-event
+event /*39*/ { mapswitch("vultmans.map", 52, 72, 0); }
+event /*40*/
 {
   if (flags(185) == 24)
   {
@@ -809,7 +812,7 @@ event
     mapswitch("vultmans.map", 52, 72, 0);
   }
 }
-event
+event /*41*/
 {
   stext(
       0,
@@ -825,11 +828,11 @@ event
     specialframe(char(4) - 1) = 0;
   }
 }
-event
+event /*42*/
 {
   stext(6, "GMW here! Guess what? This", "area is not open in this", "demo!");
 }
-event
+event /*43*/
 {
   stext(
       1,
@@ -838,8 +841,8 @@ event
       "what they're supposed to");
   stext(1, "represent...", "", "");
 }
-event { stext(1, "It's labeled 'Chemical X.'", "", ""); }
-event
+event /*44*/ { stext(1, "It's labeled 'Chemical X.'", "", ""); }
+event /*45*/
 {
   stext(1, "It's labeled 'Drink Me.'", "", "");
   if (char(4))
@@ -847,10 +850,10 @@ event
     stext(4, "Well *I* ain't gonna drink", "it! Nuh uh! No way!", "");
   }
 }
-event
+event /*46*/
 {
   stext(
       1, "These are reference materials.", "They're all in perfect order.", "");
 }
-event { warp(67, 151, 0); }
-event { warp(29, 85, 0); }
+event /*47*/ { warp(67, 151, 0); }
+event /*48*/ { warp(29, 85, 0); }

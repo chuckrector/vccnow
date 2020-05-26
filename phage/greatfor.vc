@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -8,7 +8,7 @@ event
     flags(x) = 0;
   }
 }
-event
+event /*1*/
 {
   if (flags(141) == 1)
   {
@@ -47,7 +47,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*2*/
 {
   if (flags(142) == 1)
   {
@@ -86,9 +86,9 @@ event
     changezone(x, y, 0);
   }
 }
-event { chainevent(1, 1); }
-event { chainevent(2, 39); }
-event
+event /*3*/ { chainevent(1, 1); }
+event /*4*/ { chainevent(2, 39); }
+event /*5*/
 {
   if (!flags(163))
   {
@@ -120,10 +120,10 @@ event
     }
   }
 }
-event { mapswitch("morefor.map", 172, 122, 0); }
-event { mapswitch("morefor.map", 48, 126, 0); }
-event { flags(163) = 0; }
-event
+event /*6*/ { mapswitch("morefor.map", 172, 122, 0); }
+event /*7*/ { mapswitch("morefor.map", 48, 126, 0); }
+event /*8*/ { flags(163) = 0; }
+event /*9*/
 {
   if (!char(3))
   {
@@ -143,10 +143,10 @@ event
     }
   }
 }
-event { mapswitch("flgrove.map", 19, 86, 0); }
-event { mapswitch("forruin.map", 4, 43, 0); }
-event { mapswitch("forruin.map", 97, 36, 0); }
-event
+event /*10*/ { mapswitch("flgrove.map", 19, 86, 0); }
+event /*11*/ { mapswitch("forruin.map", 4, 43, 0); }
+event /*12*/ { mapswitch("forruin.map", 97, 36, 0); }
+event /*13*/
 {
   banner("Battle!", 1);
   banner("1 Hivive", 1);
@@ -217,7 +217,7 @@ event
     mapswitch("skravbat.map", 1, 1, 0);
   }
 }
-event
+event /*14*/
 {
   banner("Battle!", 1);
   banner("3 Hermsters", 1);
@@ -288,7 +288,7 @@ event
     mapswitch("skravbat.map", 1, 1, 0);
   }
 }
-event
+event /*15*/
 {
   banner("Battle!", 1);
   banner("2 Mad Monkeys", 1);

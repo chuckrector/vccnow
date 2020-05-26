@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   if (flags(302) == 1)
@@ -7,16 +7,16 @@ event
     changezone(65, 55, 0);
   }
 }
-event
+event /*1*/
 {
   alterbtile(65, 55, 34, 1);
   changezone(65, 55, 0);
   giveitem(57);
   flags(302) = 1;
 }
-event { mapswitch("alontown.map", 75, 64, 0); }
-event { mapswitch("mtalon.map", 5, 95, 0); }
-event
+event /*2*/ { mapswitch("alontown.map", 75, 64, 0); }
+event /*3*/ { mapswitch("mtalon.map", 5, 95, 0); }
+event /*4*/
 {
   stext(1, "Aaagh! I've been cut!", "", "");
   for (x, 1, 8, 1)

@@ -1,10 +1,10 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
 }
-event {}
-event
+event /*1*/ {}
+event /*2*/
 {
   if (flags(2608) > 2)
   {
@@ -13,6 +13,7 @@ event
     {
       stext(0, "We sure showed that", "cheater, though!", "Heh heh heh!");
     }
+    return;
   }
   prompt(
       0,
@@ -81,7 +82,7 @@ event
     entitymove(6, "R1R6R9R6R4W100U6L4U4R2U6U6W100L2L9L9L7D3R1D3L4D5D5L1D3");
   }
 }
-event
+event /*3*/
 {
   if (entity.locx(6) == 25 && entity.locy(6) == 30)
   {
@@ -135,7 +136,7 @@ event
   entity.locy(6) = 0;
   mapswitch("graces.map", 26, 32, 0);
 }
-event
+event /*4*/
 {
   if (flags(2608) < 3)
   {
@@ -143,12 +144,12 @@ event
   }
   mapswitch("bundalo.map", 65, 102, 0);
 }
-event
+event /*5*/
 {
   soundeffect(18);
   alterbtile(51, 31, 88, 0);
 }
-event
+event /*6*/
 {
   soundeffect(18);
   alterftile(26, 19, 0, 0);

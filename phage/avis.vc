@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -60,14 +60,14 @@ event
     flags(148) = 1;
   }
 }
-event
+event /*1*/
 {
   flags(140) = 1;
   mapswitch("slots.map", 21, 26, 0);
 }
-event { mapswitch("overland.map", 48, 59, 0); }
-event { mapswitch("overland.map", 51, 59, 0); }
-event
+event /*2*/ { mapswitch("overland.map", 48, 59, 0); }
+event /*3*/ { mapswitch("overland.map", 51, 59, 0); }
+event /*4*/
 {
   stext(
       0,
@@ -82,8 +82,8 @@ event
       "strangers the name of their");
   stext(0, "towns for no reason!", "", "");
 }
-event { stext(0, "The master speaks words of", "infinite wisdom!", ""); }
-event
+event /*5*/ { stext(0, "The master speaks words of", "infinite wisdom!", ""); }
+event /*6*/
 {
   stext(0, "I had no purpose before I met", "the Frogarishi!", "");
   if (char(4))
@@ -91,7 +91,7 @@ event
     stext(4, "Now you just have no life!", "", "");
   }
 }
-event
+event /*7*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(1, "Oh no...", "", "");
@@ -109,8 +109,8 @@ event
   stext(0, "such as yourself! I prostrate", "myself before you!", "");
   stext(1, "Ummm... I gotta go!", "", "");
 }
-event { mapswitch("overland.map", 50, 61, 0); }
-event
+event /*8*/ { mapswitch("overland.map", 50, 61, 0); }
+event /*9*/
 {
   if (flags(256) < 2)
   {
@@ -143,7 +143,7 @@ event
     stext(0, "I'm gonna go home as soon", "as I'm finished packing up.", "");
   }
 }
-event
+event /*10*/
 {
   if (flags(145) == 1)
   {
@@ -238,7 +238,7 @@ event
     }
   }
 }
-event
+event /*11*/
 {
   stext(0, "I can't find my wallet!", "", "");
   if (gp < 30 && char(5))
@@ -283,7 +283,7 @@ event
     stext(5, "Oh, nothin'...", "", "");
   }
 }
-event
+event /*12*/
 {
   stext(
       0,
@@ -291,25 +291,25 @@ event
       "have been in my other pocket",
       "the whole time!");
 }
-event { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
-event
+event /*13*/ { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event /*14*/
 {
   stext(0, "Argh! I really have to go!", "What's taking 'im so long?", "");
 }
-event
+event /*15*/
 {
   stext(0, "I'm in here!", "", "");
   partymove("L1");
 }
-event { chainevent(17, 58, 81); }
-event
+event /*16*/ { chainevent(17, 58, 81); }
+event /*17*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(var(0), var(1), 0);
 }
-event { warp(flags(109), flags(110), 0); }
-event
+event /*18*/ { warp(flags(109), flags(110), 0); }
+event /*19*/
 {
   playmusic("enigma.mod");
   face(18) = 0;
@@ -346,7 +346,7 @@ event
   }
   playmusic("elekfunk.mod");
 }
-event
+event /*20*/
 {
   stext(
       0,
@@ -355,7 +355,7 @@ event
       "this counter 'fore I bust yo");
   stext(0, "ass good!", "", "");
 }
-event
+event /*21*/
 {
   face(21) = 0;
   stext(
@@ -379,7 +379,7 @@ event
         "pollens then!");
   }
 }
-event
+event /*22*/
 {
   face(20) = 0;
   stext(
@@ -396,8 +396,8 @@ event
       "very lucky, you might be able");
   stext(0, "to hire... that innkeeper.", "", "");
 }
-event { stext(0, "Only employees allowed back", "here!", ""); }
-event
+event /*23*/ { stext(0, "Only employees allowed back", "here!", ""); }
+event /*24*/
 {
   stext(
       0,
@@ -409,9 +409,9 @@ event
     stext(5, "Lemme see! Lemme see!", "I wanna see!", "");
   }
 }
-event { chainevent(17, 82, 82); }
-event { chainevent(17, 99, 82); }
-event
+event /*25*/ { chainevent(17, 82, 82); }
+event /*26*/ { chainevent(17, 99, 82); }
+event /*27*/
 {
   stext(
       0,
@@ -430,9 +430,9 @@ event
       "they have to the planet's");
   stext(0, "magical fields, which they", "instinctively tap while awake.", "");
 }
-event { chainevent(17, 13, 79); }
-event { chainevent(17, 35, 79); }
-event
+event /*28*/ { chainevent(17, 13, 79); }
+event /*29*/ { chainevent(17, 35, 79); }
+event /*30*/
 {
   stext(
       0,
@@ -441,7 +441,7 @@ event
       "there produces *incredible*");
   stext(0, "chocolate bunnies!", "", "");
 }
-event
+event /*31*/
 {
   if (flags(141) == 1)
   {
@@ -480,7 +480,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*32*/
 {
   if (flags(142) == 1)
   {
@@ -519,10 +519,10 @@ event
     changezone(x, y, 0);
   }
 }
-event { chainevent(31, 1); }
-event { chainevent(32, 39); }
-event { chainevent(31, 50); }
-event
+event /*33*/ { chainevent(31, 1); }
+event /*34*/ { chainevent(32, 39); }
+event /*35*/ { chainevent(31, 50); }
+event /*36*/
 {
   stext(
       0,
@@ -544,7 +544,7 @@ event
     stext(4, "Thank you, Mister History!", "", "");
   }
 }
-event
+event /*37*/
 {
   stext(
       0,

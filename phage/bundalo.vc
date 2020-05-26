@@ -1,10 +1,10 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
   flags(266) = 0;
 }
-event
+event /*1*/
 {
   stext(
       0,
@@ -20,7 +20,7 @@ event
       "it's my destiny to be the");
   stext(0, "King of Suede!", "", "");
 }
-event
+event /*2*/
 {
   stext(
       0,
@@ -39,7 +39,7 @@ event
       "Kreegah! Bundalo!");
   stext(1, "... ...", "", "");
 }
-event
+event /*3*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(
@@ -49,7 +49,7 @@ event
       "All he wants to do is");
   stext(0, "play video games!", "", "");
 }
-event
+event /*4*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(
@@ -82,20 +82,20 @@ event
   stext(1, "something purposeful the", "whole time!", "");
   stext(0, "No, that's not it.", "", "");
 }
-event
+event /*5*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(var(0), var(1), 0);
 }
-event { warp(flags(109), flags(110), 0); }
-event { callevent(5, 13, 90); }
-event { callevent(5, 42, 90); }
-event { callevent(5, 70, 90); }
-event { callevent(5, 13, 107); }
-event { callevent(5, 42, 107); }
-event { callevent(5, 70, 107); }
-event
+event /*6*/ { warp(flags(109), flags(110), 0); }
+event /*7*/ { callevent(5, 13, 90); }
+event /*8*/ { callevent(5, 42, 90); }
+event /*9*/ { callevent(5, 70, 90); }
+event /*10*/ { callevent(5, 13, 107); }
+event /*11*/ { callevent(5, 42, 107); }
+event /*12*/ { callevent(5, 70, 107); }
+event /*13*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(
@@ -104,7 +104,7 @@ event
       "I be only doing business with",
       "customers on other side!");
 }
-event
+event /*14*/
 {
   face(6) = 0;
   stext(0, "Kreegah! Bundalo!", "", "");
@@ -133,7 +133,7 @@ event
     stext(0, "Kreegah?", "", "");
   }
 }
-event
+event /*15*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   for (x, 1, 6, 1)
@@ -141,7 +141,7 @@ event
     stext(0, "Do you ever get that feeling", "of Deja Vu?", "");
   }
 }
-event
+event /*16*/
 {
   stext(
       1,
@@ -150,12 +150,12 @@ event
       "was there only to fulfill some");
   stext(1, "kind of running gag...", "", "");
 }
-event
+event /*17*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(0, "You can't kill me! I'm the", "mayor!", "");
 }
-event
+event /*18*/
 {
   stext(0, "Lost Woods path is:", "N, E, S, E, N, N!", "");
   if (char(4))
@@ -163,9 +163,9 @@ event
     stext(4, "Your advice is a bit late,", "pal!", "");
   }
 }
-event { mapswitch("graces.map", 23, 37, 0); }
-event { mapswitch("kreegah.map", 7, 37, 0); }
-event
+event /*19*/ { mapswitch("graces.map", 23, 37, 0); }
+event /*20*/ { mapswitch("kreegah.map", 7, 37, 0); }
+event /*21*/
 {
   if (!flags(163))
   {
@@ -184,10 +184,10 @@ event
     changezone(25, 13, 13);
   }
 }
-event { callevent(5, 32, 120); }
-event { flags(163) = 0; }
-event { stext(1, "Ow! Hot!", "", ""); }
-event
+event /*22*/ { callevent(5, 32, 120); }
+event /*23*/ { flags(163) = 0; }
+event /*24*/ { stext(1, "Ow! Hot!", "", ""); }
+event /*25*/
 {
   stext(0, "'Ieval Bestiary: Special", "Edition'", "");
   stext(
@@ -197,7 +197,7 @@ event
       "the ringing of bells, but");
   stext(0, "is docile if you can prove", "that you do not wish to fight.", "");
 }
-event
+event /*26*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(0, "I can do 1000 push-ups! See?", "", "");
@@ -207,13 +207,13 @@ event
   stext(0, "Look! No-handed!", "", "");
   stext(1, "Huh? How are you doing... oh.", "Ewww...", "");
 }
-event
+event /*27*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(0, "Wanna buy some used water?", "", "");
   stext(1, "Used water? That looks more", "like lemonade... oh.", "Ewww...");
 }
-event
+event /*28*/
 {
   stext(
       0,
@@ -281,7 +281,7 @@ event
     stext(5, "I always did admire that", "kerchief of his!", "");
   }
 }
-event
+event /*29*/
 {
   stext(
       0,
@@ -335,7 +335,7 @@ event
       "Aardvark remain corporeal,");
   stext(0, "and walk the multiverse to", "this day...", "");
 }
-event
+event /*30*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(

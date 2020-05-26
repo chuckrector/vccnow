@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   flags(801) = 7;
@@ -267,9 +267,9 @@ event
     flags(265) = 2;
   }
 }
-event { mapswitch("overland.map", 56, 98, 0); }
-event { mapswitch("overland.map", 61, 98, 0); }
-event
+event /*1*/ { mapswitch("overland.map", 56, 98, 0); }
+event /*2*/ { mapswitch("overland.map", 61, 98, 0); }
+event /*3*/
 {
   face(5) = 0;
   prompt(0, "Soft beds for just 35 gp!", "", "", 112, "No.", "Yes.");
@@ -297,7 +297,7 @@ event
     stext(0, "Awwww... Are you sure?", "", "");
   }
 }
-event
+event /*4*/
 {
   stext(
       0,
@@ -305,7 +305,7 @@ event
       "around behind the counter",
       "until I get off duty, OK?");
 }
-event
+event /*5*/
 {
   stext(0, "Would you like to learn my", "secret healing arts?", "");
   prompt(
@@ -335,7 +335,7 @@ event
     stext(0, "I'll still be here later!", "", "");
   }
 }
-event
+event /*6*/
 {
   stext(
       0,
@@ -344,7 +344,7 @@ event
       "sure is tough covering a");
   stext(0, "town with two entrances,", "so...", "");
 }
-event
+event /*7*/
 {
   stext(
       0,
@@ -357,8 +357,8 @@ event
       "before you, huh? Oh, and",
       "welcome to the Warrens!");
 }
-event { stext(0, "Princess Lagome is so...", "perfect! (Sigh!)", ""); }
-event
+event /*8*/ { stext(0, "Princess Lagome is so...", "perfect! (Sigh!)", ""); }
+event /*9*/
 {
   stext(
       0,
@@ -372,7 +372,7 @@ event
       "chocolate bunny in her");
   stext(0, "image! Boy, would I like", "to be there for that!", "");
 }
-event
+event /*10*/
 {
   stext(0, "I have incredible weapons", "for sale!", "");
   shop(13, 16, 17, 19, 32, 18);
@@ -395,7 +395,7 @@ event
     stext(4, "Dangit!", "", "");
   }
 }
-event
+event /*11*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(1, "And you would be...?", "", "");
@@ -415,7 +415,7 @@ event
   stext(0, "Don't confuse the issue!", "", "");
   stext(1, "I give up!", "", "");
 }
-event
+event /*12*/
 {
   prompt(
       0,
@@ -452,7 +452,7 @@ event
     stext(0, "Come back when you're ready...", "", "");
   }
 }
-event
+event /*13*/
 {
   stext(
       0,
@@ -461,7 +461,7 @@ event
       "people find him scary, but I");
   stext(0, "think that it just makes", "him... interesting...", "Tee hee!");
 }
-event
+event /*14*/
 {
   stext(
       0,
@@ -469,7 +469,7 @@ event
       "me ze willies! E's khot",
       "zis... akhzent! Y'know, mon?");
 }
-event
+event /*15*/
 {
   stext(
       0,
@@ -477,7 +477,7 @@ event
       "just adores her! Even that",
       "foreign mercenary, Mauser!");
 }
-event
+event /*16*/
 {
   stext(
       0,
@@ -486,7 +486,7 @@ event
       "I heard he might have");
   stext(0, "lived in the BPC!", "", "");
 }
-event
+event /*17*/
 {
   stext(
       0,
@@ -499,7 +499,7 @@ event
       "BPC was totally abandoned!",
       "... ... ... Wasn't it?");
 }
-event
+event /*18*/
 {
   stext(
       0,
@@ -517,7 +517,7 @@ event
       "body to die for... (drool!)",
       "Lagome... You must be mine!");
 }
-event
+event /*19*/
 {
   stext(
       0,
@@ -532,7 +532,7 @@ event
   stext(0, "NEEEEVEEEERRRR!!!!!!", "", "");
   stext(1, "I'm going to walk slowly", "away now...", "");
 }
-event
+event /*20*/
 {
   if (flags(265) < 2)
   {
@@ -547,7 +547,7 @@ event
     stext(0, "Hey, yeah, go on in!", "", "");
   }
 }
-event
+event /*21*/
 {
   if (flags(265) < 2)
   {
@@ -576,7 +576,7 @@ event
     }
   }
 }
-event
+event /*22*/
 {
   stext(0, "We've got items for sale!", "", "");
   shop(1, 2, 38, 39, 54, 55, 65, 53);
@@ -586,7 +586,7 @@ event
       "comments like the other",
       "item salespeople!");
 }
-event
+event /*23*/
 {
   stext(
       0,
@@ -594,7 +594,7 @@ event
       "sleeping quarters... Not",
       "much of interest in there!");
 }
-event
+event /*24*/
 {
   specialframe(15) = 0;
   stext(0, "I sell cheese!", "", "");
@@ -615,8 +615,8 @@ event
   stext(0, "Not at this *very* moment...", "", "");
   stext(1, "It figures...", "", "");
 }
-event { stext(0, ".........", "", ""); }
-event
+event /*25*/ { stext(0, ".........", "", ""); }
+event /*26*/
 {
   stext(
       0,
@@ -624,7 +624,7 @@ event
       "elite guardsmen! They're also",
       "completely mute.");
 }
-event
+event /*27*/
 {
   stext(
       0,
@@ -638,7 +638,7 @@ event
       "into it, yet there is nothing");
   stext(0, "there to stop them!", "", "");
 }
-event
+event /*28*/
 {
   if (flags(265) == 0)
   {
@@ -805,8 +805,8 @@ event
     }
   }
 }
-event { mapswitch("warrens.map", 31, 12, 0); }
-event
+event /*29*/ { mapswitch("warrens.map", 31, 12, 0); }
+event /*30*/
 {
   if (flags(265) > 1)
   {
@@ -818,8 +818,8 @@ event
     }
   }
 }
-event { mapswitch("lagome.map", 4, 33, 0); }
-event
+event /*31*/ { mapswitch("lagome.map", 4, 33, 0); }
+event /*32*/
 {
   if (entity.locx(16) == 84)
   {
@@ -828,7 +828,7 @@ event
     entitymove(17, "D1R1F0");
   }
 }
-event
+event /*33*/
 {
   stext(
       0,

@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(50);
@@ -27,7 +27,7 @@ event
   }
   cameratracking = 1;
 }
-event
+event /*1*/
 {
   specialframe(5) = 23;
   stext(0, "What?!?", "", "");

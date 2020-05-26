@@ -1,13 +1,13 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
   flags(801) = 9;
 }
-event { mapswitch("overland.map", 75, 52, 0); }
-event { mapswitch("overland.map", 79, 53, 0); }
-event { mapswitch("overland.map", 84, 52, 0); }
-event
+event /*1*/ { mapswitch("overland.map", 75, 52, 0); }
+event /*2*/ { mapswitch("overland.map", 79, 53, 0); }
+event /*3*/ { mapswitch("overland.map", 84, 52, 0); }
+event /*4*/
 {
   banner("Battle!", 1);
   banner("3 Shelldons", 1);
@@ -74,7 +74,7 @@ event
     mapswitch("sandbat.map", 1, 1, 0);
   }
 }
-event
+event /*5*/
 {
   banner("Battle!", 1);
   banner("2 Barrier Squid", 1);

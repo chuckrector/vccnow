@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -119,8 +119,8 @@ event
     flags(111) = 1;
   }
 }
-event { mapswitch("damfor.map", 57, 36, 0); }
-event
+event /*1*/ { mapswitch("damfor.map", 57, 36, 0); }
+event /*2*/
 {
   if (flags(180) == 0)
   {
@@ -131,7 +131,7 @@ event
     mapswitch("damcity2.map", 25, 55, 0);
   }
 }
-event
+event /*3*/
 {
   if (flags(141) == 1)
   {
@@ -170,5 +170,5 @@ event
     changezone(x, y, 0);
   }
 }
-event { chainevent(3, 2); }
-event { chainevent(3, 38); }
+event /*4*/ { chainevent(3, 2); }
+event /*5*/ { chainevent(3, 38); }

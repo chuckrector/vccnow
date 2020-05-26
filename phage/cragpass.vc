@@ -1,13 +1,16 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
 }
-event { stext(0, "Crag Mountain", "Furriers ---->", "<---- Cave of Roaches"); }
-event { stext(0, "Furriers", "Visitors welcome.", ""); }
-event { mapswitch("bugdung.map", 47, 73, 0); }
-event { mapswitch("overland.map", 52, 90, 0); }
-event
+event /*1*/
+{
+  stext(0, "Crag Mountain", "Furriers ---->", "<---- Cave of Roaches");
+}
+event /*2*/ { stext(0, "Furriers", "Visitors welcome.", ""); }
+event /*3*/ { mapswitch("bugdung.map", 47, 73, 0); }
+event /*4*/ { mapswitch("overland.map", 52, 90, 0); }
+event /*5*/
 {
   stext(
       0,
@@ -21,7 +24,7 @@ event
       "eastern wall! I ran so");
   stext(0, "quick, I never got to", "smush them all!", "");
 }
-event
+event /*6*/
 {
   stext(
       0,

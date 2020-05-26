@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -13,10 +13,10 @@ event
     entity.locy(7) = 43;
   }
 }
-event { mapswitch("gstones.map", 86, 136, 0); }
-event { mapswitch("overland.map", 101, 67, 0); }
-event { mapswitch("overland.map", 104, 67, 0); }
-event
+event /*1*/ { mapswitch("gstones.map", 86, 136, 0); }
+event /*2*/ { mapswitch("overland.map", 101, 67, 0); }
+event /*3*/ { mapswitch("overland.map", 104, 67, 0); }
+event /*4*/
 {
   if (flags(141) == 1)
   {
@@ -55,7 +55,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*5*/
 {
   if (flags(142) == 1)
   {
@@ -94,7 +94,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*6*/
 {
   if (flags(143) == 1)
   {
@@ -133,7 +133,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*7*/
 {
   if (flags(144) == 1)
   {
@@ -172,8 +172,8 @@ event
     changezone(x, y, 0);
   }
 }
-event { callevent(7, 46); }
-event
+event /*8*/ { callevent(7, 46); }
+event /*9*/
 {
   if (flags(144) == 1)
   {
@@ -225,7 +225,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*10*/
 {
   if (flags(143) == 1)
   {
@@ -319,7 +319,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*11*/
 {
   if (flags(142) == 1)
   {
@@ -413,9 +413,9 @@ event
     changezone(x, y, 0);
   }
 }
-event { callevent(6, 43); }
-event { callevent(6, 84); }
-event
+event /*12*/ { callevent(6, 43); }
+event /*13*/ { callevent(6, 84); }
+event /*14*/
 {
   banner("Battle!", 1);
   banner("1 Lepterodon", 1);
@@ -482,7 +482,7 @@ event
     mapswitch("sandbat.map", 1, 1, 0);
   }
 }
-event
+event /*15*/
 {
   banner("Battle!", 1);
   banner("2 Lake Krakens", 1);
@@ -549,7 +549,7 @@ event
     mapswitch("sandbat.map", 1, 1, 0);
   }
 }
-event
+event /*16*/
 {
   if (!item(6))
   {
@@ -565,7 +565,7 @@ event
     warp(73, 48, 0);
   }
 }
-event
+event /*17*/
 {
   stext(0, "Oh, you want to go back now?", "OK, let's go!", "");
   warp(56, 44, 0);

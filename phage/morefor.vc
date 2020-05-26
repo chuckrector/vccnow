@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -8,11 +8,11 @@ event
     flags(x) = 0;
   }
 }
-event { mapswitch("greatfor.map", 170, 3, 0); }
-event { mapswitch("greatfor.map", 9, 3, 0); }
-event { mapswitch("overland.map", 91, 105, 0); }
-event { mapswitch("overland.map", 69, 105, 0); }
-event
+event /*1*/ { mapswitch("greatfor.map", 170, 3, 0); }
+event /*2*/ { mapswitch("greatfor.map", 9, 3, 0); }
+event /*3*/ { mapswitch("overland.map", 91, 105, 0); }
+event /*4*/ { mapswitch("overland.map", 69, 105, 0); }
+event /*5*/
 {
   banner("Battle!", 1);
   banner("1 Wood Chucker", 1);
@@ -83,7 +83,7 @@ event
     mapswitch("skravbat.map", 1, 1, 0);
   }
 }
-event
+event /*6*/
 {
   if (flags(141) == 1)
   {
@@ -122,7 +122,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*7*/
 {
   if (flags(142) == 1)
   {
@@ -161,9 +161,9 @@ event
     changezone(x, y, 0);
   }
 }
-event { chainevent(6, 38); }
-event { chainevent(7, 65); }
-event
+event /*8*/ { chainevent(6, 38); }
+event /*9*/ { chainevent(7, 65); }
+event /*10*/
 {
   if (!flags(163))
   {
@@ -195,8 +195,8 @@ event
     }
   }
 }
-event { flags(163) = 0; }
-event
+event /*11*/ { flags(163) = 0; }
+event /*12*/
 {
   banner("Battle!", 1);
   banner("1 FootMaster", 1);

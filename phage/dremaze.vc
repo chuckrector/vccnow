@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(45);
   enforceanimation();
@@ -16,7 +16,7 @@ event
     flags(128) = 1;
   }
 }
-event
+event /*1*/
 {
   if (entity.locy(0) == 82)
   {
@@ -27,7 +27,7 @@ event
     warp(180, 13, 0);
   }
 }
-event
+event /*2*/
 {
   if (entity.locy(0) == 14)
   {
@@ -38,21 +38,21 @@ event
     warp(120, 81, 0);
   }
 }
-event { warp(79, 4, 1); }
-event { warp(80, 4, 1); }
-event { warp(48, 26, 1); }
-event { warp(48, 27, 1); }
-event { warp(170, 24, 1); }
-event { warp(148, 6, 1); }
-event { warp(149, 6, 1); }
-event
+event /*3*/ { warp(79, 4, 1); }
+event /*4*/ { warp(80, 4, 1); }
+event /*5*/ { warp(48, 26, 1); }
+event /*6*/ { warp(48, 27, 1); }
+event /*7*/ { warp(170, 24, 1); }
+event /*8*/ { warp(148, 6, 1); }
+event /*9*/ { warp(149, 6, 1); }
+event /*10*/
 {
   enablesave();
   banner("Save Point!", 2);
 }
-event { disablesave(); }
-event { warp(169, 82, 0); }
-event
+event /*11*/ { disablesave(); }
+event /*12*/ { warp(169, 82, 0); }
+event /*13*/
 {
   if (flags(127) == 0)
   {
@@ -66,8 +66,8 @@ event
     warp(125, 3, 0);
   }
 }
-event { warp(27, 80, 0); }
-event
+event /*14*/ { warp(27, 80, 0); }
+event /*15*/
 {
   x = entity.locx(var(0));
   y = entity.locy(var(0));
@@ -75,19 +75,19 @@ event
   entity.locx(var(0)) = var(0);
   entity.locy(var(0)) = var(0);
 }
-event { chainevent(15, 5); }
-event { chainevent(15, 6); }
-event { chainevent(15, 7); }
-event { chainevent(15, 8); }
-event { chainevent(15, 9); }
-event { chainevent(15, 10); }
-event { chainevent(15, 11); }
-event { chainevent(15, 12); }
-event { chainevent(15, 13); }
-event { chainevent(15, 14); }
-event { chainevent(15, 15); }
-event { chainevent(15, 16); }
-event
+event /*16*/ { chainevent(15, 5); }
+event /*17*/ { chainevent(15, 6); }
+event /*18*/ { chainevent(15, 7); }
+event /*19*/ { chainevent(15, 8); }
+event /*20*/ { chainevent(15, 9); }
+event /*21*/ { chainevent(15, 10); }
+event /*22*/ { chainevent(15, 11); }
+event /*23*/ { chainevent(15, 12); }
+event /*24*/ { chainevent(15, 13); }
+event /*25*/ { chainevent(15, 14); }
+event /*26*/ { chainevent(15, 15); }
+event /*27*/ { chainevent(15, 16); }
+event /*28*/
 {
   stext(0, "Greetings, Sam.", "", "");
   stext(1, "Who are you? What's your name?", "", "");

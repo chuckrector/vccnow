@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -160,7 +160,7 @@ event
   layervc = 1;
   chainevent(1);
 }
-event
+event /*1*/
 {
   face(5) = 0;
   face(6) = 0;
@@ -374,7 +374,7 @@ event
   flags(629) = 0;
   chainevent(2);
 }
-event
+event /*2*/
 {
   flags(629) = 1;
   if (flags(1021) > 0 && char(1) && curhp(1) > 0)
@@ -838,7 +838,7 @@ event
   }
   flags(628) = flags(705);
 }
-event
+event /*3*/
 {
   textmenu(4, 4, 112, 1, "Fight", "Run");
   if (flags(251) == 1 && flags(112) == 2)
@@ -914,7 +914,7 @@ event
   callevent(12);
   chainevent(13);
 }
-event
+event /*4*/
 {
   redraw();
   if (flags(630) == 0)
@@ -962,7 +962,7 @@ event
     }
   }
 }
-event
+event /*5*/
 {
   redraw();
   if (flags(631) == 0)
@@ -988,7 +988,7 @@ event
     }
   }
 }
-event
+event /*6*/
 {
   redraw();
   if (flags(632) == 0)
@@ -1014,7 +1014,7 @@ event
     }
   }
 }
-event
+event /*7*/
 {
   redraw();
   if (flags(633) == 0)
@@ -1040,7 +1040,7 @@ event
     }
   }
 }
-event
+event /*8*/
 {
   redraw();
   if (flags(634) == 0)
@@ -1071,7 +1071,7 @@ event
     }
   }
 }
-event
+event /*9*/
 {
   redraw();
   if (flags(635) == 0)
@@ -1104,7 +1104,7 @@ event
     }
   }
 }
-event
+event /*10*/
 {
   redraw();
   if (flags(636) == 0)
@@ -1133,7 +1133,7 @@ event
     }
   }
 }
-event
+event /*11*/
 {
   redraw();
   if (flags(637) == 0)
@@ -1159,7 +1159,7 @@ event
     }
   }
 }
-event
+event /*12*/
 {
   if (flags(598) > 0)
   {
@@ -1796,7 +1796,7 @@ event
   flags(636) = 0;
   flags(637) = 0;
 }
-event
+event /*13*/
 {
   if (curhp(1) == 0 && char(1))
   {
@@ -1848,79 +1848,79 @@ event
         givexp(x, flags(522));
         givexp(x, flags(535));
       }
-      flags(701) = random(1, 20);
-      if (flags(701) == 1)
-      {
-        giveitem(flags(513));
-      }
-      if (flags(701) > 1 && flags(701) < 9)
-      {
-        giveitem(flags(512));
-      }
-      givegp(flags(510));
-      givegp(flags(523));
-      givegp(flags(536));
-      flags(703) += flags(511);
-      flags(703) += flags(524);
-      flags(703) += flags(537);
-      vcclear();
-      layervc = 0;
-      flags(800) = 0;
-      flags(851) = 0;
-      flags(852) = 0;
-      flags(853) = 0;
-      flags(854) = 0;
-      flags(855) = 0;
-      flags(856) = 0;
-      flags(857) = 0;
-      flags(858) = 0;
-      flags(859) = 0;
-      flags(860) = 0;
-      wait(100);
-      if (flags(321) > 0)
-      {
-        stext(0, "There are moose following you!", "", "");
-      }
-      drawparty = 1;
-      flags(190) = 1;
-      if (flags(801) == 1)
-      {
-        mapswitch("damfor.map", flags(109), flags(110), 0);
-      }
-      if (flags(801) == 2)
-      {
-        mapswitch("packwood.map", flags(109), flags(110), 0);
-      }
-      if (flags(801) == 3)
-      {
-        mapswitch("orchard.map", flags(109), flags(110), 0);
-      }
-      if (flags(801) == 4)
-      {
-        mapswitch("greatfor.map", flags(109), flags(110), 0);
-      }
-      if (flags(801) == 5)
-      {
-        mapswitch("mtalon.map", flags(109), flags(110), 0);
-      }
-      if (flags(801) == 6)
-      {
-        mapswitch("overland.map", flags(109), flags(110), 0);
-      }
-      if (flags(801) == 7)
-      {
-        mapswitch("packtown.map", flags(109), flags(110), 0);
-      }
-      if (flags(801) == 8)
-      {
-        mapswitch("damcity.map", flags(109), flags(110), 0);
-      }
-      quit("You Win!");
-      chainevent(1);
     }
+    flags(701) = random(1, 20);
+    if (flags(701) == 1)
+    {
+      giveitem(flags(513));
+    }
+    if (flags(701) > 1 && flags(701) < 9)
+    {
+      giveitem(flags(512));
+    }
+    givegp(flags(510));
+    givegp(flags(523));
+    givegp(flags(536));
+    flags(703) += flags(511);
+    flags(703) += flags(524);
+    flags(703) += flags(537);
+    vcclear();
+    layervc = 0;
+    flags(800) = 0;
+    flags(851) = 0;
+    flags(852) = 0;
+    flags(853) = 0;
+    flags(854) = 0;
+    flags(855) = 0;
+    flags(856) = 0;
+    flags(857) = 0;
+    flags(858) = 0;
+    flags(859) = 0;
+    flags(860) = 0;
+    wait(100);
+    if (flags(321) > 0)
+    {
+      stext(0, "There are moose following you!", "", "");
+    }
+    drawparty = 1;
+    flags(190) = 1;
+    if (flags(801) == 1)
+    {
+      mapswitch("damfor.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 2)
+    {
+      mapswitch("packwood.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 3)
+    {
+      mapswitch("orchard.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 4)
+    {
+      mapswitch("greatfor.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 5)
+    {
+      mapswitch("mtalon.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 6)
+    {
+      mapswitch("overland.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 7)
+    {
+      mapswitch("packtown.map", flags(109), flags(110), 0);
+    }
+    if (flags(801) == 8)
+    {
+      mapswitch("damcity.map", flags(109), flags(110), 0);
+    }
+    quit("You Win!");
   }
+  chainevent(1);
 }
-event
+event /*14*/
 {
   if (flags(598) > 0 && flags(599) > 0 && flags(600) > 0)
   {
@@ -2193,7 +2193,7 @@ event
     }
   }
 }
-event
+event /*15*/
 {
   switch (flags(638))
   {
@@ -2482,7 +2482,7 @@ event
   vctextnum(245, 183, flags(703));
   redraw();
 }
-event
+event /*16*/
 {
   switch (flags(629))
   {
@@ -2766,7 +2766,7 @@ event
   vctextnum(245, 183, flags(703));
   redraw();
 }
-event
+event /*17*/
 {
   switch (flags(740))
   {
@@ -2780,7 +2780,7 @@ event
     case (8): entity.chrindex(11) = 17;
   }
 }
-event
+event /*18*/
 {
   vcclear();
   vcbox(240, 10, 314, 198);
@@ -2893,7 +2893,7 @@ event
   vctextnum(245, 183, flags(703));
   redraw();
 }
-event
+event /*19*/
 {
   textmenu(4, 4, 112, 1, "Fight", "Run");
   if (flags(251) == 1 && flags(112) == 2)
@@ -2958,7 +2958,7 @@ event
     }
   }
 }
-event
+event /*20*/
 {
   switch (flags(629))
   {
@@ -3242,7 +3242,7 @@ event
   vctextnum(245, 183, flags(703));
   redraw();
 }
-event
+event /*21*/
 {
   switch (flags(638))
   {
@@ -3531,7 +3531,7 @@ event
   vctextnum(245, 183, flags(703));
   redraw();
 }
-event
+event /*22*/
 {
   banner("Antler Thwack", 1);
   switch (flags(629))
@@ -3575,7 +3575,7 @@ event
   }
   calleffect(30, 11, 15);
 }
-event
+event /*23*/
 {
   banner("Moose Call", 1);
   switch (flags(629))
@@ -3601,7 +3601,7 @@ event
   }
   calleffect(32, 1, 20);
 }
-event
+event /*24*/
 {
   banner("Retreat", 1);
   switch (flags(629))
@@ -3627,4 +3627,4 @@ event
   }
   flags(321) += 1;
 }
-event {}
+event /*25*/ {}

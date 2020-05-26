@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -6,17 +6,17 @@ event
   flags(251) = 0;
   flags(284) = 0;
 }
-event
+event /*1*/
 {
   palettemorph(0, 0, 0, 0, 63);
   mapswitch("sewer1.map", 37, 2, 0);
 }
-event
+event /*2*/
 {
   palettemorph(0, 0, 0, 0, 63);
   mapswitch("seedcave.map", 27, 22, 0);
 }
-event
+event /*3*/
 {
   if (!flags(266))
   {
@@ -31,7 +31,7 @@ event
   }
   waitkeyup();
 }
-event
+event /*4*/
 {
   if (!flags(163))
   {
@@ -46,12 +46,12 @@ event
   }
   waitkeyup();
 }
-event
+event /*5*/
 {
   flags(163) = 0;
   flags(266) = 0;
 }
-event
+event /*6*/
 {
   banner("Battle!", 1);
   banner("1 Evilchu", 1);
@@ -119,8 +119,8 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event { palettemorph(0, 0, 0, 50, 63); }
-event
+event /*7*/ { palettemorph(0, 0, 0, 50, 63); }
+event /*8*/
 {
   banner("Battle!", 1);
   banner("1 Minor Aardvark", 1);
@@ -188,7 +188,7 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event
+event /*9*/
 {
   banner("Battle!", 1);
   banner("1 Wet Sarser", 1);
@@ -256,7 +256,7 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event
+event /*10*/
 {
   banner("Battle!", 1);
   banner("1 Banana Slug", 1);

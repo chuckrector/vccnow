@@ -1,9 +1,9 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
 }
-event
+event /*1*/
 {
   if (flags(134) == 0)
   {
@@ -42,7 +42,7 @@ event
     stext(0, "You're good! We have nothing", "left to give to you...", "");
   }
 }
-event
+event /*2*/
 {
   x = entity.locx(0);
   y = entity.locy(0);
@@ -67,7 +67,7 @@ event
   changezone(x, y, 2);
   wait(10);
 }
-event
+event /*3*/
 {
   x = entity.locx(0);
   y = entity.locy(0);
@@ -92,7 +92,7 @@ event
   changezone(x, y, 1);
   wait(10);
 }
-event
+event /*4*/
 {
   if (entity.locx(6) == 13 && entity.locy(6) == 75)
   {
@@ -107,7 +107,7 @@ event
     alterftile(16, 76, 0, 2);
   }
 }
-event
+event /*5*/
 {
   if (entity.locx(7) == 14 && entity.locy(7) == 54)
   {
@@ -122,7 +122,7 @@ event
     alterftile(12, 58, 0, 2);
   }
 }
-event
+event /*6*/
 {
   if (entity.locx(8) == 14 && entity.locy(8) == 23)
   {
@@ -135,5 +135,5 @@ event
     mapswitch("gblocks.map", 10, 94, 0);
   }
 }
-event { mapswitch("gblocks.map", 10, 94, 0); }
-event { mapswitch("packtown.map", 81, 43, 0); }
+event /*7*/ { mapswitch("gblocks.map", 10, 94, 0); }
+event /*8*/ { mapswitch("packtown.map", 81, 43, 0); }

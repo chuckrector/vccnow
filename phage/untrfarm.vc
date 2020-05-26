@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   flags(156) = 0;
@@ -15,7 +15,7 @@ event
     changezone(35, 54, 12);
   }
 }
-event
+event /*1*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0);
@@ -42,7 +42,7 @@ event
   flags(156) = 0;
   flags(157) = 1;
 }
-event
+event /*2*/
 {
   switch (flags(158))
   {
@@ -50,22 +50,22 @@ event
     case (31): alterbtile(flags(159), flags(160), flags(158), flags(156));
   }
 }
-event { warp(5, 5, 0); }
-event { warp(45, 24, 0); }
-event { warp(49, 8, 0); }
-event { warp(36, 16, 0); }
-event { warp(43, 32, 0); }
-event { warp(13, 6, 0); }
-event { warp(30, 58, 0); }
-event { warp(27, 2, 0); }
-event
+event /*3*/ { warp(5, 5, 0); }
+event /*4*/ { warp(45, 24, 0); }
+event /*5*/ { warp(49, 8, 0); }
+event /*6*/ { warp(36, 16, 0); }
+event /*7*/ { warp(43, 32, 0); }
+event /*8*/ { warp(13, 6, 0); }
+event /*9*/ { warp(30, 58, 0); }
+event /*10*/ { warp(27, 2, 0); }
+event /*11*/
 {
   flags(161) = 1;
   giveitem(24);
   alterbtile(35, 54, 34, 1);
   changezone(35, 54, 12);
 }
-event
+event /*12*/
 {
   flags(162) = 1;
   givegp(1000);
@@ -73,9 +73,9 @@ event
   alterbtile(25, 54, 34, 1);
   changezone(25, 54, 12);
 }
-event { banner("Empty!", 1); }
-event { mapswitch("farm.map", 13, 71, 0); }
-event
+event /*13*/ { banner("Empty!", 1); }
+event /*14*/ { mapswitch("farm.map", 13, 71, 0); }
+event /*15*/
 {
   banner("Battle!", 1);
   banner("1 Ankhteapot", 1);

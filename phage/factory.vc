@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -409,12 +409,12 @@ event
     alterbtile(28, 38, 783, 2);
   }
 }
-event
+event /*1*/
 {
   stext(
       1, "This is one of the famous", "Vultris Brand chocolate", "bunnies...");
 }
-event
+event /*2*/
 {
   stext(
       1, "This is one of the famous", "Vultris Brand chocolate", "bunnies...");
@@ -445,7 +445,7 @@ event
     stext(4, "I see their point...", "", "");
   }
 }
-event
+event /*3*/
 {
   if (flags(185) < 23)
   {
@@ -460,7 +460,7 @@ event
         "tearing through!");
   }
 }
-event
+event /*4*/
 {
   if (flags(185) < 23)
   {
@@ -479,7 +479,7 @@ event
         "gone! How exciting!");
   }
 }
-event
+event /*5*/
 {
   if (flags(185) < 23)
   {
@@ -490,7 +490,7 @@ event
     stext(0, "That chocolate bunny just", "winked at me! I swear!", "");
   }
 }
-event
+event /*6*/
 {
   if (flags(185) < 23)
   {
@@ -510,7 +510,7 @@ event
     }
   }
 }
-event
+event /*7*/
 {
   if (flags(185) < 23)
   {
@@ -525,7 +525,7 @@ event
         "she's not here!");
   }
 }
-event
+event /*8*/
 {
   if (flags(185) < 23)
   {
@@ -546,7 +546,7 @@ event
     }
   }
 }
-event
+event /*9*/
 {
   if (flags(185) < 23)
   {
@@ -604,9 +604,9 @@ event
     stext(0, "And over this way are the", "famous chocolate bunnies...", "");
   }
 }
-event { mapswitch("dactyl.map", 84, 37, 0); }
-event { mapswitch("clocks.map", 25, 134, 0); }
-event
+event /*10*/ { mapswitch("dactyl.map", 84, 37, 0); }
+event /*11*/ { mapswitch("clocks.map", 25, 134, 0); }
+event /*12*/
 {
   stext(
       0,
@@ -632,16 +632,16 @@ event
     banner("Pep Rally!", 1);
   }
 }
-event
+event /*13*/
 {
   stext(0, "A stock report for the", "Vultris Confectionery", "Company.");
 }
-event
+event /*14*/
 {
   stext(0, "Bookkeeping records.", "", "");
   stext(1, "Hey! Someone's been fudging", "these!", "");
 }
-event
+event /*15*/
 {
   stext(
       0,
@@ -654,19 +654,19 @@ event
       "with the long hair is my",
       "cousin Bobbio!");
 }
-event
+event /*16*/
 {
   stext(1, "We've got to catch Vultris!", "there's no time to go this", "way!");
   partymove("L1");
 }
-event
+event /*17*/
 {
   warp(entity.locx(0), entity.locy(0) + 10, 1);
   playmusic("frogvoic.xm");
   soundeffect(3);
 }
-event { stext(1, "It must have locked behind us!", "", ""); }
-event
+event /*18*/ { stext(1, "It must have locked behind us!", "", ""); }
+event /*19*/
 {
   if (flags(2500) == 0)
   {
@@ -675,8 +675,8 @@ event
     banner("M/F Bromide!", 1);
   }
 }
-event { stext(0, "Incredibly boring books.", "", ""); }
-event
+event /*20*/ { stext(0, "Incredibly boring books.", "", ""); }
+event /*21*/
 {
   if (flags(185) == 23)
   {
@@ -737,7 +737,7 @@ event
     specialframe(22) = 0;
   }
 }
-event
+event /*22*/
 {
   stext(0, "Aw, man! Vultris is gonna", "have someone's hide for this!", "");
 }

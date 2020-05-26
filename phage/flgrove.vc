@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -7,7 +7,7 @@ event
     flags(x) = 0;
   }
 }
-event
+event /*1*/
 {
   if (flags(141) == 1)
   {
@@ -46,7 +46,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*2*/
 {
   if (flags(142) == 1)
   {
@@ -85,7 +85,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*3*/
 {
   if (flags(143) == 1)
   {
@@ -124,7 +124,7 @@ event
     changezone(x, y, 0);
   }
 }
-event
+event /*4*/
 {
   if (flags(144) == 1)
   {
@@ -163,14 +163,14 @@ event
     changezone(x, y, 0);
   }
 }
-event { callevent(1, 1); }
-event { callevent(1, 2); }
-event { callevent(1, 50); }
-event { callevent(2, 38); }
-event { callevent(2, 39); }
-event { callevent(2, 65); }
-event { callevent(3, 66); }
-event { callevent(3, 69); }
-event { callevent(3, 53); }
-event { callevent(4, 77); }
-event { mapswitch("greatfor.map", 150, 104, 0); }
+event /*5*/ { callevent(1, 1); }
+event /*6*/ { callevent(1, 2); }
+event /*7*/ { callevent(1, 50); }
+event /*8*/ { callevent(2, 38); }
+event /*9*/ { callevent(2, 39); }
+event /*10*/ { callevent(2, 65); }
+event /*11*/ { callevent(3, 66); }
+event /*12*/ { callevent(3, 69); }
+event /*13*/ { callevent(3, 53); }
+event /*14*/ { callevent(4, 77); }
+event /*15*/ { mapswitch("greatfor.map", 150, 104, 0); }

@@ -1,5 +1,5 @@
-event { fadein(1); }
-event
+event /*0*/ { fadein(1); }
+event /*1*/
 {
   if (flags(113) == 0)
   {
@@ -56,7 +56,7 @@ event
     timer = 0;
   }
 }
-event
+event /*2*/
 {
   flags(112) = timer;
   if (flags(112) < 1000)
@@ -92,7 +92,7 @@ event
   entity.locy(6) = 1;
   warp(37, 30, 0);
 }
-event
+event /*3*/
 {
   flags(112) = timer;
   if (flags(112) < 1500)
@@ -124,7 +124,7 @@ event
   entity.locy(7) = 1;
   warp(37, 30, 0);
 }
-event
+event /*4*/
 {
   flags(112) = timer;
   if (flags(112) < 2000)
@@ -156,7 +156,7 @@ event
   layer1 = 1;
   warp(37, 30, 0);
 }
-event
+event /*5*/
 {
   if (flags(113) < 3)
   {

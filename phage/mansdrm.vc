@@ -1,11 +1,11 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
   disablesave();
   disablemenu();
 }
-event
+event /*1*/
 {
   stext(0, "Hello again, Sam...", "", "");
   specialframe(0) = 21;

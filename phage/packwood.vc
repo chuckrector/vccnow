@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
@@ -272,7 +272,7 @@ event
     flags(131) = 2;
   }
 }
-event
+event /*1*/
 {
   if (flags(130) < 3)
   {
@@ -280,7 +280,7 @@ event
   }
   mapswitch("overland.map", 32, 65, 0);
 }
-event
+event /*2*/
 {
   banner("Battle!", 1);
   banner("2 Pack Wolves", 1);
@@ -351,7 +351,7 @@ event
     mapswitch("snowbat.map", 1, 1, 0);
   }
 }
-event
+event /*3*/
 {
   if (flags(130) == 3)
   {
@@ -386,7 +386,7 @@ event
     flags(130) = 1;
   }
 }
-event
+event /*4*/
 {
   if (flags(131) == 0)
   {
@@ -408,7 +408,7 @@ event
     mapswitch("packwood.map", 42, 97, 1);
   }
 }
-event
+event /*5*/
 {
   if (flags(132) == 0)
   {
@@ -416,7 +416,7 @@ event
   }
   mapswitch("packtown.map", 31, 78, 0);
 }
-event
+event /*6*/
 {
   if (flags(133) == 0)
   {

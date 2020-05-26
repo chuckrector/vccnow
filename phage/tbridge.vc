@@ -1,9 +1,9 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
 }
-event
+event /*1*/
 {
   stext(
       0,
@@ -107,9 +107,9 @@ event
     stext(0, "Alas, I cannot depend upon", "the kindness of strangers...", "");
   }
 }
-event { mapswitch("overland.map", 100, 56, 0); }
-event { mapswitch("overland.map", 103, 56, 0); }
-event { playmusic("harmoniz.xm"); }
-event { playmusic("t-bach.xm"); }
-event { playmusic("seashore.xm"); }
-event { playmusic("ocean.xm"); }
+event /*2*/ { mapswitch("overland.map", 100, 56, 0); }
+event /*3*/ { mapswitch("overland.map", 103, 56, 0); }
+event /*4*/ { playmusic("harmoniz.xm"); }
+event /*5*/ { playmusic("t-bach.xm"); }
+event /*6*/ { playmusic("seashore.xm"); }
+event /*7*/ { playmusic("ocean.xm"); }

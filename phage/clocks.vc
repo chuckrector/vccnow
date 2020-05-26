@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -28,7 +28,7 @@ event
     changezone(154, 109, 0);
   }
 }
-event
+event /*1*/
 {
   flags(303) = 1;
   soundeffect(3);
@@ -36,7 +36,7 @@ event
   changezone(145, 73, 0);
   giveitem(91);
 }
-event
+event /*2*/
 {
   flags(304) = 1;
   soundeffect(3);
@@ -44,7 +44,7 @@ event
   changezone(147, 73, 0);
   giveitem(57);
 }
-event
+event /*3*/
 {
   flags(305) = 1;
   soundeffect(3);
@@ -52,7 +52,7 @@ event
   changezone(149, 73, 0);
   giveitem(92);
 }
-event
+event /*4*/
 {
   flags(306) = 1;
   soundeffect(3);
@@ -61,15 +61,15 @@ event
   banner("Found Morpheos", 1);
   banner("Bromide!", 1);
 }
-event
+event /*5*/
 {
   alterbtile(var(0), var(1), 734, 2);
   soundeffect(3);
   wait(100);
   alterbtile(var(0), var(1), 735, 2);
 }
-event {}
-event
+event /*6*/ {}
+event /*7*/
 {
   stext(
       0,
@@ -77,7 +77,7 @@ event
       "11 o'clock. Pull the lever",
       "to reset the clock.");
 }
-event
+event /*8*/
 {
   stext(
       0,
@@ -86,7 +86,7 @@ event
       "Pull the lever next to the");
   stext(0, "clock to reset it.", "", "");
 }
-event
+event /*9*/
 {
   stext(
       0,
@@ -95,7 +95,7 @@ event
       "Pull the lever next to the");
   stext(0, "clock to reset it.", "", "");
 }
-event
+event /*10*/
 {
   if (tileb == 709)
   {
@@ -134,7 +134,7 @@ event
     alterbtile(62, 127, 706, 0);
   }
 }
-event
+event /*11*/
 {
   if (tileb == 709)
   {
@@ -198,7 +198,7 @@ event
     alterbtile(112, 104, 706, 0);
   }
 }
-event
+event /*12*/
 {
   if (tileb == 711)
   {
@@ -296,47 +296,47 @@ event
     changezone(155, 77, 17);
   }
 }
-event
+event /*13*/
 {
   flags(307) = 7;
   entity.locx(5) = 55;
   entity.locy(5) = 123;
   callevent(5, 52, 123);
 }
-event
+event /*14*/
 {
   flags(308) = 5;
   entity.locx(6) = 103;
   entity.locy(6) = 99;
   callevent(5, 104, 100);
 }
-event
+event /*15*/
 {
   flags(309) = 7;
   entity.locx(7) = 107;
   entity.locy(7) = 99;
   callevent(5, 106, 100);
 }
-event
+event /*16*/
 {
   flags(310) = 4;
   entity.locx(8) = 141;
   entity.locy(8) = 75;
   callevent(5, 142, 76);
 }
-event
+event /*17*/
 {
   flags(311) = 10;
   entity.locx(9) = 153;
   entity.locy(9) = 73;
   callevent(5, 152, 76);
 }
-event
+event /*18*/
 {
   enablesave();
   healall();
   banner("Save Point!", 1);
 }
-event { disablesave(); }
-event { mapswitch("factory.map", 37, 61, 0); }
-event { mapswitch("stairway.map", 1, 35, 0); }
+event /*19*/ { disablesave(); }
+event /*20*/ { mapswitch("factory.map", 37, 61, 0); }
+event /*21*/ { mapswitch("stairway.map", 1, 35, 0); }

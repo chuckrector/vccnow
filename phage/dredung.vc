@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -6,7 +6,7 @@ event
   disablesave();
   stext(1, "Another dream?!? Maybe this", "time I'll get some answers...", "");
 }
-event
+event /*1*/
 {
   alterbtile(75, 55, 205, 2);
   alterbtile(74, 55, 371, 2);
@@ -93,7 +93,7 @@ event
   wait(10);
   changezone(69, 61, 0);
 }
-event
+event /*2*/
 {
   soundeffect(22);
   for (x, var(0), var(1), 1)
@@ -137,7 +137,7 @@ event
     }
   }
 }
-event
+event /*3*/
 {
   callevent(2, 147, 154, 117, 128);
   entity.locx(5) = 0;
@@ -147,13 +147,13 @@ event
   }
   stext(1, "I get the feeling I'm being", "shepherded by someone...", "");
 }
-event
+event /*4*/
 {
   callevent(2, 104, 117, 93, 94);
   changezone(103, 93, 0);
   changezone(103, 94, 0);
 }
-event
+event /*5*/
 {
   flags(107) = 2;
   for (x, 97, 89, -1)
@@ -182,17 +182,17 @@ event
         alterbtile(x, y, 57, 0);
         alterbtile(x, y + 1, 58, 0);
       }
-      wait(10);
     }
-    soundeffect(21);
-    earthquake(3, 3, 50);
-    for (x, 73, 79, 1)
-    {
-      changezone(88, x, 0);
-    }
+    wait(10);
+  }
+  soundeffect(21);
+  earthquake(3, 3, 50);
+  for (x, 73, 79, 1)
+  {
+    changezone(88, x, 0);
   }
 }
-event
+event /*6*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0);
@@ -225,7 +225,7 @@ event
   soundeffect(21);
   earthquake(3, 3, 50);
 }
-event
+event /*7*/
 {
   soundeffect(22);
   changezone(68, 54, 0);
@@ -258,7 +258,7 @@ event
   alterftile(69, 60, 0, 0);
   alterftile(69, 61, 0, 0);
 }
-event
+event /*8*/
 {
   stext(4, "Sam? Do you think I'm...", "superficial?", "");
   stext(4, "I know I must seem that way...", "", "");
@@ -303,7 +303,7 @@ event
   entity.locx(5) = 0;
   callevent(13);
 }
-event
+event /*9*/
 {
   stext(
       5,
@@ -367,7 +367,7 @@ event
   entity.locx(6) = 0;
   callevent(13);
 }
-event
+event /*10*/
 {
   stext(3, "I am immortal, Sam!", "", "");
   stext(3, "My flesh is metal, my blood,", "pure darkness.", "");
@@ -402,7 +402,7 @@ event
   entity.locx(7) = 0;
   callevent(13);
 }
-event
+event /*11*/
 {
   stext(
       2,
@@ -448,7 +448,7 @@ event
     stext(1, "my dream be somehow", "interacting with his?", "");
   }
 }
-event
+event /*12*/
 {
   stext(7, "Sam!?!", "", "");
   stext(7, "Ya little twerp! Ya gotta", "follow me *everywhere* I go?!?", "");
@@ -513,7 +513,7 @@ event
   entity.locx(9) = 0;
   callevent(13);
 }
-event
+event /*13*/
 {
   flags(286) += 1;
   if (flags(286) == 1)
@@ -526,23 +526,23 @@ event
         "dream be touching theirs?");
   }
 }
-event { mapswitch("dcircle.map", 28, 34, 0); }
-event
+event /*14*/ { mapswitch("dcircle.map", 28, 34, 0); }
+event /*15*/
 {
   alterbtile(124, 105, 205, 1);
   alterbtile(146, 104, 205, 1);
   stext(0, "Begone!", "", "");
   warp(142, 104, 0);
 }
-event { alterbtile(146, 104, 58, 0); }
-event { alterbtile(158, 106, 58, 0); }
-event { alterbtile(168, 100, 58, 0); }
-event { alterbtile(173, 86, 58, 0); }
-event { alterbtile(170, 92, 58, 0); }
-event { alterbtile(174, 81, 58, 0); }
-event { alterbtile(177, 101, 58, 0); }
-event { alterbtile(180, 69, 58, 0); }
-event
+event /*16*/ { alterbtile(146, 104, 58, 0); }
+event /*17*/ { alterbtile(158, 106, 58, 0); }
+event /*18*/ { alterbtile(168, 100, 58, 0); }
+event /*19*/ { alterbtile(173, 86, 58, 0); }
+event /*20*/ { alterbtile(170, 92, 58, 0); }
+event /*21*/ { alterbtile(174, 81, 58, 0); }
+event /*22*/ { alterbtile(177, 101, 58, 0); }
+event /*23*/ { alterbtile(180, 69, 58, 0); }
+event /*24*/
 {
   alterbtile(64, 66, 58, 0);
   stext(
@@ -551,7 +551,7 @@ event
       "if something is beckoning me",
       "back to the main path...");
 }
-event
+event /*25*/
 {
   if (entity.locx(11) < 57)
   {
@@ -563,7 +563,7 @@ event
   }
   wait(25);
 }
-event
+event /*26*/
 {
   if (entity.locy(11) < 99)
   {
@@ -575,7 +575,7 @@ event
   }
   wait(25);
 }
-event
+event /*27*/
 {
   if (entity.locx(11) > 46)
   {
@@ -587,7 +587,7 @@ event
   }
   wait(25);
 }
-event
+event /*28*/
 {
   if (entity.locy(11) > 87)
   {
@@ -599,19 +599,19 @@ event
   }
   wait(25);
 }
-event
+event /*29*/
 {
   alterbtile(entity.locx(11), entity.locy(11), 58, 0);
   entity.locx(11) = 1;
   entity.locy(11) = 1;
 }
-event
+event /*30*/
 {
   alterbtile(entity.locx(12), entity.locy(12), 58, 0);
   entity.locx(12) = 1;
   entity.locy(12) = 1;
 }
-event
+event /*31*/
 {
   if (entity.locx(0) > 158)
   {
@@ -625,10 +625,10 @@ event
     alterbtile(entity.locx(0) - 2, entity.locy(0), 371, 0);
   }
 }
-event
+event /*32*/
 {
   giveitem(90);
   alterbtile(64, 66, 205, 1);
   warp(65, 66, 0);
 }
-event { enablesave(); }
+event /*33*/ { enablesave(); }

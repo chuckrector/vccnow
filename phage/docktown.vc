@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
@@ -41,7 +41,7 @@ event
     entity.locy(6)++;
   }
 }
-event
+event /*1*/
 {
   if (flags(126) < 2)
   {
@@ -57,7 +57,7 @@ event
     stext(0, "Y'all have a nice day, hear?", "", "");
   }
 }
-event
+event /*2*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(1, "Oh for crying out loud!", "Is there one of you in every", "town?");
@@ -68,7 +68,7 @@ event
       "useful townsfolk wandering",
       "these towns?");
 }
-event
+event /*3*/
 {
   stext(
       0,
@@ -76,7 +76,7 @@ event
       "The back of the counter is",
       "being renovated!");
 }
-event
+event /*4*/
 {
   face(8) = 0;
   prompt(
@@ -172,7 +172,7 @@ event
     }
   }
 }
-event
+event /*5*/
 {
   if (flags(126) == 2)
   {
@@ -276,21 +276,21 @@ event
     stext(1, "Um.... Whatever you say, Rikk!", "... ...", "Let's go then!");
   }
 }
-event
+event /*6*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(66, 89, 0);
 }
-event { warp(flags(109), flags(110), 0); }
-event
+event /*7*/ { warp(flags(109), flags(110), 0); }
+event /*8*/
 {
   stext(0, "This is Carbera Town!", "", "");
   stext(4, "Why are you way out here?", "", "");
   stext(0, "My fans demanded it, so I'm", "on my World Tour!", "");
 }
-event { warp(44, 36, 0); }
-event
+event /*9*/ { warp(44, 36, 0); }
+event /*10*/
 {
   if (flags(126) < 3)
   {
@@ -340,7 +340,7 @@ event
     }
   }
 }
-event
+event /*11*/
 {
   stext(
       0,
@@ -353,7 +353,7 @@ event
       "in the Great Dam. I hope they",
       "weren't arrested. Arr...");
 }
-event
+event /*12*/
 {
   stext(
       0,
@@ -381,37 +381,37 @@ event
       "sailor to obtain pertinent");
   stext(0, "folklore from this region.", "", "");
 }
-event
+event /*13*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(68, 110, 0);
 }
-event
+event /*14*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(37, 89, 0);
 }
-event
+event /*15*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(10, 89, 0);
 }
-event
+event /*16*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(41, 110, 0);
 }
-event
+event /*17*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(10, 109, 0);
 }
-event
+event /*18*/
 {
   stext(
       0,
@@ -419,7 +419,7 @@ event
       "it's true what they say about",
       "owners and pets looking alike.");
 }
-event
+event /*19*/
 {
   stext(
       0,
@@ -427,7 +427,7 @@ event
       "true what they say about pets",
       "and owners looking alike.");
 }
-event
+event /*20*/
 {
   stext(
       0,
@@ -437,7 +437,7 @@ event
   stext(
       0, "They supposedly make this guy", "seem like a tolerant atheist!", "");
 }
-event
+event /*21*/
 {
   stext(
       0,
@@ -446,8 +446,8 @@ event
       "the Savannah Empire, so that");
   stext(0, "makes Lumin our emperor! We", "grow up knowing this stuff!", "");
 }
-event { stext(0, "Testify, brother! Right on!", "", ""); }
-event
+event /*22*/ { stext(0, "Testify, brother! Right on!", "", ""); }
+event /*23*/
 {
   stext(
       0,
@@ -461,7 +461,7 @@ event
       "have to go through the western");
   stext(0, "pass to reach us, and that's", "wolf territory, that is! Arr!", "");
 }
-event
+event /*24*/
 {
   stext(
       0,
@@ -485,7 +485,7 @@ event
         5, "You see what I had to deal", "with? I'm the only one left...", "");
   }
 }
-event
+event /*25*/
 {
   stext(
       0,
@@ -498,8 +498,8 @@ event
       "to the south. Ain't that a",
       "kick in the pants?");
 }
-event { mapswitch("overland.map", 34, 67, 0); }
-event
+event /*26*/ { mapswitch("overland.map", 34, 67, 0); }
+event /*27*/
 {
   stext(
       0,
@@ -507,24 +507,24 @@ event
       "like 'The Joy of Deep-Frying'",
       "and 'Special-Effects Laundry.'");
 }
-event
+event /*28*/
 {
   stext(0, "A horror novel.", "", "");
   stext(4, "A *bad* horror novel!", "", "");
 }
-event
+event /*29*/
 {
   stext(0, "We sell medicinal items and", "ice cream!", "");
   shop(1, 2, 38, 39, 49, 50, 54, 55);
   stext(0, "Have a nice day!", "", "");
 }
-event
+event /*30*/
 {
   stext(0, "We have lots of weapons!", "", "");
   shop(5, 25, 14, 40, 41);
   stext(0, "Remember: We're your one-stop", "killing shop!", "");
 }
-event
+event /*31*/
 {
   stext(
       0,

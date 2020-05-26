@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -408,10 +408,10 @@ event
     stext(1, "All right, let's go!", "", "");
   }
 }
-event { mapswitch("packwood.map", 5, 32, 0); }
-event { mapswitch("packwood.map", 46, 20, 0); }
-event { mapswitch("overland.map", 24, 57, 0); }
-event
+event /*1*/ { mapswitch("packwood.map", 5, 32, 0); }
+event /*2*/ { mapswitch("packwood.map", 46, 20, 0); }
+event /*3*/ { mapswitch("overland.map", 24, 57, 0); }
+event /*4*/
 {
   if (!flags(266))
   {
@@ -452,6 +452,6 @@ event
     }
   }
 }
-event { stext(0, "You kill leaders! Go away!", "", ""); }
-event { stext(0, "We hate you, evil ones!", "", ""); }
-event { mapswitch("gblocks.map", 10, 94, 0); }
+event /*5*/ { stext(0, "You kill leaders! Go away!", "", ""); }
+event /*6*/ { stext(0, "We hate you, evil ones!", "", ""); }
+event /*7*/ { mapswitch("gblocks.map", 10, 94, 0); }

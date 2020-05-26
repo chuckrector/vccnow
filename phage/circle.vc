@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -7,7 +7,7 @@ event
     flags(x) = 0;
   }
 }
-event
+event /*1*/
 {
   stext(
       0,
@@ -21,13 +21,13 @@ event
       "left, and we ghosts now use");
   stext(0, "its cave...", "", "");
 }
-event
+event /*2*/
 {
   stext(0, "No one knows who made these", "statues...", "Ugly, ain't they?");
 }
-event { mapswitch("overland.map", 51, 73, 0); }
-event { mapswitch("gslide.map", 17, 15, 0); }
-event
+event /*3*/ { mapswitch("overland.map", 51, 73, 0); }
+event /*4*/ { mapswitch("gslide.map", 17, 15, 0); }
+event /*5*/
 {
   if (flags(143) == 1)
   {
@@ -66,4 +66,4 @@ event
     changezone(x, y, 0);
   }
 }
-event { chainevent(5, 64); }
+event /*6*/ { chainevent(5, 64); }

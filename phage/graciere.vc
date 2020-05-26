@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
@@ -70,7 +70,7 @@ event
     autooff();
   }
 }
-event
+event /*1*/
 {
   stext(
       0,
@@ -86,7 +86,7 @@ event
   stext(
       0, "towns all over the world, and", "tell people their town names!", "");
 }
-event
+event /*2*/
 {
   stext(
       0,
@@ -132,25 +132,25 @@ event
       "saying...");
   stext(0, "Hey! Where are you going?", "", "");
 }
-event
+event /*3*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(var(0), var(1), 0);
 }
-event { warp(flags(109), flags(110), 0); }
-event { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
-event
+event /*4*/ { warp(flags(109), flags(110), 0); }
+event /*5*/ { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event /*6*/
 {
   flags(170) = 1;
   chainevent(3, 29, 105);
 }
-event
+event /*7*/
 {
   flags(170) = 0;
   chainevent(3, 30, 105);
 }
-event
+event /*8*/
 {
   if (flags(170) == 1)
   {
@@ -194,7 +194,7 @@ event
         "being, like I do!");
   }
 }
-event
+event /*9*/
 {
   stext(0, "Welcome! We stock many kinds", "of useful items!", "");
   shop(1, 2, 38, 39, 54, 55, 53);
@@ -205,8 +205,8 @@ event
       "what I end up doing for a");
   stext(0, "living! I don't even like", "items!", "");
 }
-event { chainevent(3, 51, 105); }
-event
+event /*10*/ { chainevent(3, 51, 105); }
+event /*11*/
 {
   if (entity.locx(0) == 13)
   {
@@ -254,7 +254,7 @@ event
     stext(0, "Our beds are as soft as any", "in the land!", "");
   }
 }
-event
+event /*12*/
 {
   stext(
       0,
@@ -262,7 +262,7 @@ event
       "back here! Please go to the",
       "front of the counter!");
 }
-event
+event /*13*/
 {
   flags(171) = 2;
   if (entity.locx(0) == 13)
@@ -309,8 +309,8 @@ event
   autooff();
   mapswitch("dreamgrs.map", 10, 15, 0);
 }
-event { chainevent(3, 12, 128); }
-event
+event /*14*/ { chainevent(3, 12, 128); }
+event /*15*/
 {
   if (flags(171) == 0)
   {
@@ -329,10 +329,11 @@ event
       entitymove(13, "R1F0");
       wait(25);
     }
+    return;
   }
   stext(0, "Today's petitioning is over.", "Come back tomorrow.", "");
 }
-event
+event /*16*/
 {
   stext(0, "I just love these old cannons!", "", "");
   if (char(4))
@@ -341,7 +342,7 @@ event
     stext(0, "Yup!", "", "");
   }
 }
-event
+event /*17*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(
@@ -355,7 +356,7 @@ event
   stext(
       1, "Wha? Oh, um, sorry about that.", "I'm afraid I don't. Sorry...", "");
 }
-event
+event /*18*/
 {
   if (char(4))
   {
@@ -364,14 +365,14 @@ event
     specialframe(char(4) - 1) = 0;
   }
 }
-event { mapswitch("overland.map", 83, 80, 0); }
-event
+event /*19*/ { mapswitch("overland.map", 83, 80, 0); }
+event /*20*/
 {
   stext(0, "Psst! Buddy! Wanna buy a large", "heavy object?", "");
   magicshop(3, 5);
   stext(0, "Remember, you never met me!", "", "");
 }
-event
+event /*21*/
 {
   stext(
       0,
@@ -380,7 +381,7 @@ event
       "miners out to the BPC and");
   stext(0, "reopen the mines there...", "", "");
 }
-event
+event /*22*/
 {
   stext(
       0,
@@ -388,14 +389,14 @@ event
       "came here to petition Lumin to",
       "let me set one up here!");
 }
-event
+event /*23*/
 {
   face(19) = 0;
   stext(0, "I love the view from up here!", "", "");
   face(19) = 1;
 }
-event { chainevent(3, 9, 105); }
-event
+event /*24*/ { chainevent(3, 9, 105); }
+event /*25*/
 {
   stext(
       0,
@@ -404,4 +405,4 @@ event
       "so they don't have a lot of");
   stext(0, "time to wander about out here!", "", "");
 }
-event { mapswitch("palace.map", 23, 18, 0); }
+event /*26*/ { mapswitch("palace.map", 23, 18, 0); }

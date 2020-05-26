@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -21,7 +21,7 @@ event
     alterbtile(23, 8, flags(138), 2);
   }
 }
-event
+event /*1*/
 {
   x = 0;
   y = 0;
@@ -68,7 +68,7 @@ event
     }
   }
 }
-event
+event /*2*/
 {
   if (flags(140) != 1)
   {
@@ -81,7 +81,7 @@ event
     stext(0, "We ghosts just love games!", "", "");
   }
 }
-event
+event /*3*/
 {
   x = random(1, 20);
   y = random(1, 20) + x;
@@ -272,12 +272,12 @@ event
     alterbtile(25, 8, 109, 1);
   }
 }
-event
+event /*4*/
 {
   volume = 100;
   mapswitch("avis.map", 48, 24, 0);
 }
-event
+event /*5*/
 {
   face(6) = 0;
   prompt(
@@ -469,7 +469,7 @@ event
     flags(154) = 0;
   }
 }
-event
+event /*6*/
 {
   stext(
       0,
@@ -477,7 +477,7 @@ event
       "table! If you'd like to play,",
       "just go to the other side!");
 }
-event
+event /*7*/
 {
   face(7) = 0;
   prompt(
@@ -554,7 +554,7 @@ event
     banner("Lost 20 gp!", 2);
   }
 }
-event
+event /*8*/
 {
   stext(
       0,
@@ -562,7 +562,7 @@ event
       "with me, just go to the other",
       "end of the table!");
 }
-event
+event /*9*/
 {
   stext(0, "May I take your order?", "", "");
   textmenu(
@@ -808,7 +808,7 @@ event
     }
   }
 }
-event
+event /*10*/
 {
   face(12) = 1;
   stext(0, "Hit me!", "", "");
@@ -847,12 +847,12 @@ event
   specialframe(8) = 0;
   specialframe(12) = 0;
 }
-event { stext(0, "I'm really not cut out for", "this job!", ""); }
-event
+event /*11*/ { stext(0, "I'm really not cut out for", "this job!", ""); }
+event /*12*/
 {
   stext(0, "That guy just doesn't know", "when he's found a bargain!", "");
 }
-event
+event /*13*/
 {
   for (x, 23, 28, 1)
   {
@@ -866,7 +866,7 @@ event
   }
   stext(0, "Please enjoy your time here", "at the casino!", "");
 }
-event
+event /*14*/
 {
   stext(
       0,
@@ -879,7 +879,7 @@ event
     stext(5, "Heh heh heh!", "Thanks for the advance notice.", "");
   }
 }
-event
+event /*15*/
 {
   stext(0, "Are they girls dressed as", "bunnies?", "");
   stext(0, "   or are they bunnies dressed", "   as girls?", "");
@@ -894,7 +894,7 @@ event
     specialframe(17) = 0;
   }
 }
-event
+event /*16*/
 {
   stext(0, "I'm a little busy right now!", "", "");
   face(18) = 0;
@@ -902,7 +902,7 @@ event
   stext(0, "I got 21 again! You lose!", "", "");
   specialframe(18) = 0;
 }
-event
+event /*17*/
 {
   stext(
       0,
@@ -914,7 +914,7 @@ event
   wait(50);
   specialframe(18) = 0;
 }
-event
+event /*18*/
 {
   stext(
       0,
@@ -929,6 +929,9 @@ event
   }
   specialframe(20) = 0;
 }
-event { stext(0, "Yngvie is a louse!", "", ""); }
-event { stext(0, "Pfaug! The beer here is weaker", "than goat-piss!", ""); }
-event { stext(0, "...", "", ""); }
+event /*19*/ { stext(0, "Yngvie is a louse!", "", ""); }
+event /*20*/
+{
+  stext(0, "Pfaug! The beer here is weaker", "than goat-piss!", "");
+}
+event /*21*/ { stext(0, "...", "", ""); }

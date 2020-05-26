@@ -1,17 +1,17 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
   flags(174) = 1;
 }
-event
+event /*1*/
 {
   flags(173) = tileb;
   entity.locx(6) = 14;
   entity.locy(6) = 8;
   alterbtile(17, 11, 15, 1);
 }
-event
+event /*2*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0);
@@ -56,7 +56,7 @@ event
     mapswitch("gslide.map", 17, 13, 0);
   }
 }
-event
+event /*3*/
 {
   if (flags(178) == 0)
   {
@@ -82,12 +82,12 @@ event
     flags(178) = 2;
   }
 }
-event
+event /*4*/
 {
   stext(0, "I've been tagged!", "", "");
   flags(179)++;
 }
-event
+event /*5*/
 {
   flags(173) = 0;
   flags(174) = 0;

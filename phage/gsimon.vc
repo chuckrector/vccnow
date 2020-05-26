@@ -1,11 +1,11 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
   flags(107) = 1;
   flags(112) = 0;
 }
-event
+event /*1*/
 {
   mapswitch("vultmans.map", 1, 3, 0);
   if (flags(4545) < 4)
@@ -13,7 +13,7 @@ event
     flags(4545) = 0;
   }
 }
-event
+event /*2*/
 {
   if (flags(107) == 2)
   {
@@ -107,7 +107,7 @@ event
     alterbtile(17, 34, 71, 0);
   }
 }
-event
+event /*3*/
 {
   soundeffect(7);
   if (flags(112) != 1 && flags(112) != 0)
@@ -122,7 +122,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*4*/
 {
   soundeffect(8);
   if (flags(112) != 2 && flags(112) != 0)
@@ -136,7 +136,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*5*/
 {
   soundeffect(16);
   if (flags(112) != 3 && flags(112) != 0)
@@ -150,7 +150,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*6*/
 {
   soundeffect(10);
   if (flags(112) != 4 && flags(112) != 0)
@@ -185,7 +185,7 @@ event
     flags(112) = 0;
   }
 }
-event
+event /*7*/
 {
   soundeffect(16);
   if (flags(112) != 1 && flags(112) != 0)
@@ -200,7 +200,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*8*/
 {
   soundeffect(8);
   if (flags(112) != 2 && flags(112) != 0)
@@ -214,7 +214,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*9*/
 {
   soundeffect(10);
   if (flags(112) != 3 && flags(112) != 0)
@@ -228,7 +228,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*10*/
 {
   soundeffect(7);
   if (flags(112) != 4 && flags(112) != 0)
@@ -263,7 +263,7 @@ event
     flags(112) = 0;
   }
 }
-event
+event /*11*/
 {
   soundeffect(8);
   callevent(2);
@@ -283,7 +283,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*12*/
 {
   soundeffect(10);
   callevent(2);
@@ -302,7 +302,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*13*/
 {
   soundeffect(16);
   callevent(2);
@@ -317,7 +317,7 @@ event
     flags(112)++;
   }
 }
-event
+event /*14*/
 {
   soundeffect(7);
   callevent(2);
@@ -358,7 +358,7 @@ event
     flags(112) = 0;
   }
 }
-event
+event /*15*/
 {
   stext(
       0,
@@ -398,7 +398,7 @@ event
     timer = 0;
   }
 }
-event
+event /*16*/
 {
   prompt(0, "Keep going?", "", "", 112, "No", "Yes");
   if (flags(112) == 1 && flags(4545) == 4)
@@ -433,7 +433,7 @@ event
     timer = 0;
   }
 }
-event
+event /*17*/
 {
   prompt(0, "Ready for the last course?", "", "", 112, "No", "Yes");
   if (flags(112) == 1 && flags(4545) == 4)

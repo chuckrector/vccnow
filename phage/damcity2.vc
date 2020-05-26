@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
@@ -29,11 +29,14 @@ event
     chainevent(25);
   }
 }
-event { warp(112, 34, 0); }
-event { warp(33, 36, 0); }
-event { mapswitch("fglade.map", 61, 19, 0); }
-event { stext(0, "Enjoy your stay at our", "incredibly prosperous city!", ""); }
-event
+event /*1*/ { warp(112, 34, 0); }
+event /*2*/ { warp(33, 36, 0); }
+event /*3*/ { mapswitch("fglade.map", 61, 19, 0); }
+event /*4*/
+{
+  stext(0, "Enjoy your stay at our", "incredibly prosperous city!", "");
+}
+event /*5*/
 {
   stext(
       0,
@@ -42,7 +45,7 @@ event
       "You shouldn't... do that!");
   stext(0, "The Master... doesn't like", "it...", "");
 }
-event
+event /*6*/
 {
   face(7) = 0;
   volume = 0;
@@ -94,7 +97,7 @@ event
   wait(200);
   volume = 100;
 }
-event
+event /*7*/
 {
   stext(
       0,
@@ -102,8 +105,8 @@ event
       "I'm making 15 gold an hour",
       "doing this! I'm gonna be rich!");
 }
-event { mapswitch("gpacman.map", 58, 3, 0); }
-event
+event /*8*/ { mapswitch("gpacman.map", 58, 3, 0); }
+event /*9*/
 {
   face(10) = 1;
   stext(
@@ -201,7 +204,7 @@ event
     }
   }
 }
-event
+event /*10*/
 {
   face(10) = 0;
   stext(0, "Hi! I'm Wally the Butcher!", "What would you like?", "");
@@ -240,7 +243,7 @@ event
     stext(0, "spar with him if you want.", "", "");
   }
 }
-event
+event /*11*/
 {
   stext(
       0,
@@ -249,14 +252,14 @@ event
       "counter. If you want to spar,");
   stext(0, "'The Cleav' is in the back.", "", "");
 }
-event
+event /*12*/
 {
   stext(0, "I *still* sell healing items!", "", "");
   shop(1, 2, 38, 39, 65, 53, 54, 55, 18, 58);
   stext(
       0, "Nobody respects the lowly", "'item'... I *really* hate", "this job!");
 }
-event
+event /*13*/
 {
   stext(0, "We sell the lowest-grade", "weapons at the cheapest rates!", "");
   shop(14, 62, 19, 35, 40, 41, 32, 64);
@@ -267,7 +270,7 @@ event
       "a way out from behind this");
   stext(0, "counter...", "", "");
 }
-event
+event /*14*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(
@@ -276,7 +279,7 @@ event
       "copyright violation if you",
       "keep that up...");
 }
-event
+event /*15*/
 {
   if (flags(336) != 1)
   {
@@ -311,29 +314,29 @@ event
         "a little bit... *you* know...");
   }
 }
-event { warp(28, 31, 0); }
-event { warp(159, 34, 0); }
-event
+event /*16*/ { warp(28, 31, 0); }
+event /*17*/ { warp(159, 34, 0); }
+event /*18*/
 {
   banner("Dam lvl. 1", 3);
   warp(129, 33, 0);
 }
-event
+event /*19*/
 {
   banner("Dam lvl. 2", 3);
   warp(189, 33, 0);
 }
-event
+event /*20*/
 {
   banner("Dam lvl. 2", 3);
   warp(189, 4, 0);
 }
-event
+event /*21*/
 {
   banner("Dam lvl. 3", 3);
   warp(189, 51, 0);
 }
-event
+event /*22*/
 {
   if (flags(115) == 0 && char(4))
   {
@@ -430,7 +433,7 @@ event
     flags(115) = 1;
   }
 }
-event
+event /*23*/
 {
   if (flags(116) == 0)
   {
@@ -438,7 +441,7 @@ event
     flags(116) = 1;
   }
 }
-event
+event /*24*/
 {
   if (item(31))
   {
@@ -448,7 +451,7 @@ event
     chainevent(25);
   }
 }
-event
+event /*25*/
 {
   alterbtile(171, 8, 338, 0);
   alterbtile(172, 8, 55, 0);
@@ -459,7 +462,7 @@ event
   alterftile(171, 5, 0, 0);
   alterftile(172, 5, 0, 0);
 }
-event
+event /*26*/
 {
   stext(
       0,
@@ -468,7 +471,7 @@ event
       "We suspect outside help, but");
   stext(0, "there aren't any leads...", "", "");
 }
-event
+event /*27*/
 {
   if (flags(118) == 0)
   {
@@ -539,7 +542,7 @@ event
     mapswitch("catac.map", 75, 13, 0);
   }
 }
-event
+event /*28*/
 {
   if (flags(118) == 0)
   {
@@ -547,8 +550,8 @@ event
     chainevent(27);
   }
 }
-event { mapswitch("catac.map", 74, 11, 0); }
-event
+event /*29*/ { mapswitch("catac.map", 74, 11, 0); }
+event /*30*/
 {
   stext(
       0,
@@ -557,7 +560,7 @@ event
       "boat, so I'm afraid I can't");
   stext(0, "offer you a ride right now...", "", "");
 }
-event
+event /*31*/
 {
   if (char(4))
   {
@@ -568,7 +571,7 @@ event
     stext(1, "These books are", "unintelligible!", "");
   }
 }
-event
+event /*32*/
 {
   stext(4, "Ah, my nest egg!", "", "");
   if (flags(123) == 1)
@@ -583,7 +586,7 @@ event
     flags(123) = 1;
   }
 }
-event
+event /*33*/
 {
   stext(
       0,
@@ -626,7 +629,7 @@ event
     stext(5, "Uncle Canteen must've been", "here, too!", "");
   }
 }
-event
+event /*34*/
 {
   stext(1, "Wow! A swimming pool! I'm", "gonna take a swim!", "");
   if (char(4))
@@ -653,7 +656,7 @@ event
         "I'll wait 'til later...");
   }
 }
-event
+event /*35*/
 {
   if (flags(124) == 0)
   {
@@ -668,7 +671,7 @@ event
     flags(124) = 1;
   }
 }
-event
+event /*36*/
 {
   stext(
       0,
@@ -691,7 +694,7 @@ event
         "fired from, right?");
   }
 }
-event
+event /*37*/
 {
   stext(
       1,
@@ -704,7 +707,7 @@ event
       "wonder what made it? Who'd",
       "want to break them out?");
 }
-event
+event /*38*/
 {
   if (flags(121) == 1)
   {
@@ -712,7 +715,7 @@ event
     stext(0, "Our cause lives on!", "", "");
   }
 }
-event
+event /*39*/
 {
   if (flags(121) == 1)
   {
@@ -724,13 +727,13 @@ event
         "and we will be vindicated!");
   }
 }
-event { stext(0, "Books on accounting.", "", ""); }
-event { stext(0, "Texts on architecture.", "", ""); }
-event
+event /*40*/ { stext(0, "Books on accounting.", "", ""); }
+event /*41*/ { stext(0, "Texts on architecture.", "", ""); }
+event /*42*/
 {
   stext(0, "A stock report for the Vultris", "Confectionary Company.", "");
 }
-event
+event /*43*/
 {
   prompt(
       0,
@@ -767,7 +770,7 @@ event
     stext(0, "I need more business...", "", "");
   }
 }
-event
+event /*44*/
 {
   if (flags(2613) == 20)
   {
@@ -911,17 +914,17 @@ event
       {
         flags(2626) = flags(2627);
       }
-      alterftile(151, 79, 0, 1);
-      alterftile(152, 79, 0, 1);
-      alterftile(153, 79, 0, 1);
-      alterftile(166, 79, 0, 1);
-      alterftile(167, 79, 0, 1);
-      alterftile(168, 79, 0, 1);
-      alterftile(169, 79, 0, 1);
     }
+    alterftile(151, 79, 0, 1);
+    alterftile(152, 79, 0, 1);
+    alterftile(153, 79, 0, 1);
+    alterftile(166, 79, 0, 1);
+    alterftile(167, 79, 0, 1);
+    alterftile(168, 79, 0, 1);
+    alterftile(169, 79, 0, 1);
   }
 }
-event
+event /*45*/
 {
   flags(2613) += 1;
   flags(112) = var(0);
@@ -1046,15 +1049,15 @@ event
   waitkeyup();
   changezone(entity.locx(0), 79, 20);
 }
-event { callevent(45, flags(2615)); }
-event { callevent(45, flags(2616)); }
-event { callevent(45, flags(2617)); }
-event { callevent(45, flags(2618)); }
-event { callevent(45, flags(2619)); }
-event { callevent(45, flags(2620)); }
-event { callevent(45, flags(2621)); }
-event { callevent(45, flags(2622)); }
-event { callevent(45, flags(2623)); }
-event { callevent(45, flags(2624)); }
-event { callevent(45, flags(2625)); }
-event { callevent(45, flags(2626)); }
+event /*46*/ { callevent(45, flags(2615)); }
+event /*47*/ { callevent(45, flags(2616)); }
+event /*48*/ { callevent(45, flags(2617)); }
+event /*49*/ { callevent(45, flags(2618)); }
+event /*50*/ { callevent(45, flags(2619)); }
+event /*51*/ { callevent(45, flags(2620)); }
+event /*52*/ { callevent(45, flags(2621)); }
+event /*53*/ { callevent(45, flags(2622)); }
+event /*54*/ { callevent(45, flags(2623)); }
+event /*55*/ { callevent(45, flags(2624)); }
+event /*56*/ { callevent(45, flags(2625)); }
+event /*57*/ { callevent(45, flags(2626)); }

@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -16,8 +16,8 @@ event
     alterftile(86, 23, 344, 2);
   }
 }
-event { mapswitch("overland.map", 54, 85, 0); }
-event
+event /*1*/ { mapswitch("overland.map", 54, 85, 0); }
+event /*2*/
 {
   if (flags(271) == 1)
   {
@@ -46,7 +46,7 @@ event
     flags(271) = 1;
   }
 }
-event
+event /*3*/
 {
   if (flags(185) < 10)
   {
@@ -98,7 +98,7 @@ event
     stext(1, "Hey, thanks!", "", "");
   }
 }
-event
+event /*4*/
 {
   stext(
       0,
@@ -116,7 +116,7 @@ event
       "year! I just hope the casting",
       "for the mold is painless!");
 }
-event
+event /*5*/
 {
   stext(
       0,
@@ -130,7 +130,7 @@ event
       "is 'cause he doesn't have a");
   stext(0, "wife... He must be lonely!", "", "");
 }
-event
+event /*6*/
 {
   stext(
       0,
@@ -148,7 +148,7 @@ event
       "half the town and joy to",
       "children all over the Empire!");
 }
-event
+event /*7*/
 {
   stext(
       0,
@@ -167,7 +167,7 @@ event
       "of his money was made legally?",
       "He's not the nicest guy.");
 }
-event
+event /*8*/
 {
   stext(0, "Sorry, I'm too busy to talk", "to some wandering stranger...", "");
   if (flags(185) < 24)
@@ -233,7 +233,7 @@ event
         "that lake in the mountains!");
   }
 }
-event
+event /*9*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(1, "Yes?", "", "");
@@ -242,7 +242,7 @@ event
   stext(0, "Oh yes I am! My parents", "forgot their contraceptives!", "");
   stext(1, "... Oh.", "Sorry.", "");
 }
-event
+event /*10*/
 {
   stext(
       0,
@@ -260,27 +260,27 @@ event
       "make an ice cream bar shaped",
       "like me!");
 }
-event { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
-event { warp(flags(109), flags(110), 0); }
-event
+event /*11*/ { stext(0, "Do you ever get that feeling", "of Deja Vu?", ""); }
+event /*12*/ { warp(flags(109), flags(110), 0); }
+event /*13*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(47, 112, 0);
 }
-event
+event /*14*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(77, 112, 0);
 }
-event
+event /*15*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(101, 112, 0);
 }
-event
+event /*16*/
 {
   face(18) = 0;
   prompt(0, "Wanna sleep here for just 35", "gp?", "", 112, "No.", "Yes.");
@@ -308,7 +308,7 @@ event
     stext(0, "See ya then!", "", "");
   }
 }
-event
+event /*17*/
 {
   stext(
       0,
@@ -333,7 +333,7 @@ event
       "selection! May death and",
       "blood rain upon your foes!");
 }
-event
+event /*18*/
 {
   stext(
       0,
@@ -355,7 +355,7 @@ event
   stext(
       0, "I'll have an even better", "stock of jun-- I mean", "items, later!");
 }
-event
+event /*19*/
 {
   stext(0, "Hey, yah! Hang around back", "here as much as ya want!", "");
   if (char(4))
@@ -363,7 +363,7 @@ event
     stext(4, "Huh? We can stay behind the", "counter? This is bizarre!", "");
   }
 }
-event
+event /*20*/
 {
   stext(
       0,
@@ -374,7 +374,7 @@ event
   stext(0, "    Don't listen to him, he's", "    completely deaf.", "");
   specialframe(20) = 0;
 }
-event
+event /*21*/
 {
   stext(0, "My husband's not only deaf,", "but he's an old coot, as well!", "");
   specialframe(19) = 21;
@@ -388,8 +388,8 @@ event
   specialframe(20) = 0;
   stext(0, "See?", "", "");
 }
-event { mapswitch("factory.map", 22, 93, 0); }
-event
+event /*22*/ { mapswitch("factory.map", 22, 93, 0); }
+event /*23*/
 {
   if (flags(185) < 10)
   {
@@ -412,7 +412,7 @@ event
     }
   }
 }
-event
+event /*24*/
 {
   if (flags(185) < 10)
   {
@@ -431,7 +431,7 @@ event
     stext(0, "Yeah? What do you want?", "", "");
   }
 }
-event
+event /*25*/
 {
   stext(
       0,
@@ -445,7 +445,7 @@ event
       "flames. It's more useful");
   stext(0, "than you'd think!", "", "");
 }
-event
+event /*26*/
 {
   if (flags(185) < 23)
   {

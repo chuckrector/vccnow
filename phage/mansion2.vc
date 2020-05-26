@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -1314,7 +1314,7 @@ event
     flags(185) = 30;
   }
 }
-event
+event /*1*/
 {
   if (flags(185) != 30)
   {
@@ -1482,7 +1482,7 @@ event
   alterbtile(97, 29, 61, 1);
   alterbtile(96, 29, 61, 1);
 }
-event
+event /*2*/
 {
   if (char(5))
   {
@@ -1502,8 +1502,8 @@ event
     stext(1, "cliched way to get past", "security possible on purpose!", "");
   }
 }
-event { warp(entity.locx(0) - 10, entity.locy(0) + 56, 0); }
-event
+event /*3*/ { warp(entity.locx(0) - 10, entity.locy(0) + 56, 0); }
+event /*4*/
 {
   warp(entity.locx(0) - 25, entity.locy(0) + 3, 0);
   if (flags(185) > 35)
@@ -1511,8 +1511,8 @@ event
     palettemorph(63, 20, 0, 40, 63);
   }
 }
-event { warp(entity.locx(0) + 25, entity.locy(0) - 3, 0); }
-event
+event /*5*/ { warp(entity.locx(0) + 25, entity.locy(0) - 3, 0); }
+event /*6*/
 {
   if (char(5))
   {
@@ -1533,7 +1533,7 @@ event
     mapswitch("vultmans.map", 51, 50, 0);
   }
 }
-event
+event /*7*/
 {
   warp(entity.locx(0) - 1, entity.locy(0) + 39, 0);
   entity.locx(16) = 51;
@@ -2030,8 +2030,8 @@ event
     }
   }
 }
-event { stext(1, "Ick!", "", ""); }
-event
+event /*8*/ { stext(1, "Ick!", "", ""); }
+event /*9*/
 {
   if (!flags(266))
   {
@@ -2042,17 +2042,17 @@ event
     stext(1, "It's not working! The wood", "just catches fire again!", "");
   }
 }
-event
+event /*10*/
 {
   stext(1, "Whoa! It's an inferno in", "there! I've got to go another", "way!");
   partymove("D1");
 }
-event
+event /*11*/
 {
   stext(1, "Bull! Come on!", "", "");
   stext(7, "I ain't goin' without my", "money!", "");
 }
-event
+event /*12*/
 {
   if (flags(185) > 34)
   {
@@ -2061,24 +2061,24 @@ event
     partymove("U1");
   }
 }
-event
+event /*13*/
 {
   warp(57, entity.locy(0) + 39, 0);
   palettemorph(63, 20, 0, 40, 63);
 }
-event
+event /*14*/
 {
   warp(61, entity.locy(0) - 39, 0);
   palettemorph(63, 20, 0, 40, 63);
 }
-event
+event /*15*/
 {
   if (flags(185) > 35)
   {
     mapswitch("mansdrm.map", 9, 8, 0);
   }
 }
-event
+event /*16*/
 {
   if (flags(185) == 36)
   {
@@ -2090,4 +2090,4 @@ event
         "out this way!");
   }
 }
-event { palettemorph(63, 20, 0, 40, 63); }
+event /*17*/ { palettemorph(63, 20, 0, 40, 63); }

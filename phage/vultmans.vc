@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -47,7 +47,7 @@ event
     palettemorph(10, 10, 35, 45, 43);
   }
 }
-event
+event /*1*/
 {
   if (char(1))
   {
@@ -59,7 +59,7 @@ event
     partymove("U1");
   }
 }
-event
+event /*2*/
 {
   if (char(1))
   {
@@ -84,7 +84,7 @@ event
     stext(5, "so let's see if there's some", "other way past!", "");
   }
 }
-event
+event /*3*/
 {
   if (char(1))
   {
@@ -104,7 +104,7 @@ event
     warp(53, 39, 0);
   }
 }
-event
+event /*4*/
 {
   stext(5, "Ya know, maybe I oughta bring", "the guys along after all...", "");
   specialframe(0) = 21;
@@ -116,7 +116,7 @@ event
   stext(5, "scared to even do this? Pull", "yourself together, Dingo!", "");
   specialframe(0) = 0;
 }
-event
+event /*5*/
 {
   stext(
       5, "Hmmm... I think I need to go", "farther north to find", "Vultris...");
@@ -138,7 +138,7 @@ event
     alterftile(138, 10, 797, 2);
   }
 }
-event
+event /*6*/
 {
   stext(5, "Hmmm... I think I've drifted", "a little off course...", "");
   prompt(
@@ -156,7 +156,7 @@ event
     palettemorph(10, 10, 35, 45, 43);
   }
 }
-event
+event /*7*/
 {
   prompt(
       5,
@@ -172,7 +172,7 @@ event
     mapswitch("mansion2.map", 112, 77, 0);
   }
 }
-event
+event /*8*/
 {
   curhp(5) = 1;
   flags(112) = random(1, 6);
@@ -191,7 +191,7 @@ event
           "like it!");
   }
 }
-event
+event /*9*/
 {
   banner("Battle!", 1);
   banner("1 Wet Sarser", 1);
@@ -258,7 +258,7 @@ event
     mapswitch("ventbat.map", 1, 1, 0);
   }
 }
-event
+event /*10*/
 {
   banner("Battle!", 1);
   banner("1 Tarantella", 1);
@@ -330,7 +330,7 @@ event
     mapswitch("ventbat.map", 1, 1, 0);
   }
 }
-event
+event /*11*/
 {
   if (flags(2588) == 0)
   {
@@ -344,19 +344,22 @@ event
     flags(2588) = 1;
   }
 }
-event { stext(5, "Huh... Some boiler room the", "old geezer's got!", ""); }
-event
+event /*12*/
+{
+  stext(5, "Huh... Some boiler room the", "old geezer's got!", "");
+}
+event /*13*/
 {
   stext(5, "Well, I guess I gotta get", "back to findin' the Seed!", "");
   warp(39, 28, 0);
 }
-event
+event /*14*/
 {
   stext(0, "Zzz...", "", "");
   stext(0, "*mmbl*... Nrf! Did I forget", "to reset it? *mmbl*...", "");
   stext(0, "Zzz...", "", "");
 }
-event
+event /*15*/
 {
   stext(5, "Gyaaah! That's the biggest", "dang spider I've ever seen!", "");
   stext(
@@ -365,7 +368,7 @@ event
       "Must've starved to death in",
       "here...");
 }
-event
+event /*16*/
 {
   stext(
       5,
@@ -376,8 +379,8 @@ event
   palettemorph(0, 0, 0, 0, 63);
   warp(94, 14, 0);
 }
-event { mapswitch("gsimon.map", 10, 13, 0); }
-event
+event /*17*/ { mapswitch("gsimon.map", 10, 13, 0); }
+event /*18*/
 {
   stext(
       0,
@@ -390,7 +393,7 @@ event
       "in the first four parts.",
       "The fifth is the repeat.");
 }
-event
+event /*19*/
 {
   stext(
       0,
@@ -403,7 +406,7 @@ event
       "is neither green nor",
       "contiguous with itself.");
 }
-event
+event /*20*/
 {
   stext(
       0,
@@ -416,7 +419,7 @@ event
       "each other, but blue and red",
       "are not.");
 }
-event
+event /*21*/
 {
   stext(0, "Leave me alone! I'm trying", "to sleep!", "Zzzz...");
   stext(0, "Zzzz...", "", "");
@@ -424,7 +427,7 @@ event
   stext(0, "*Mmbl*... Red is after green,", "but not fourth... *Mrmbl*...", "");
   stext(0, "Zzzz...", "", "");
 }
-event
+event /*22*/
 {
   if (flags(109) < 138)
   {
@@ -459,7 +462,7 @@ event
     }
   }
 }
-event
+event /*23*/
 {
   if (!char(1))
   {
@@ -481,12 +484,12 @@ event
     warp(136, 22, 0);
   }
 }
-event { warp(68, 66, 0); }
-event { callevent(22, 796); }
-event { callevent(22, 797); }
-event { callevent(22, 798); }
-event { callevent(22, 799); }
-event
+event /*24*/ { warp(68, 66, 0); }
+event /*25*/ { callevent(22, 796); }
+event /*26*/ { callevent(22, 797); }
+event /*27*/ { callevent(22, 798); }
+event /*28*/ { callevent(22, 799); }
+event /*29*/
 {
   flags(107) = 0;
   flags(112) = 0;
@@ -692,8 +695,8 @@ event
     mapswitch("mole1bat.map", 1, 1, 0);
   }
 }
-event { mapswitch("mansion2.map", 54, 32, 0); }
-event
+event /*30*/ { mapswitch("mansion2.map", 54, 32, 0); }
+event /*31*/
 {
   flags(109) = entity.locx(var(0));
   flags(110) = entity.locy(var(0));
@@ -745,10 +748,10 @@ event
   }
   wait(20);
 }
-event { callevent(31, 30); }
-event { callevent(31, 31); }
-event { callevent(31, 32); }
-event
+event /*32*/ { callevent(31, 30); }
+event /*33*/ { callevent(31, 31); }
+event /*34*/ { callevent(31, 32); }
+event /*35*/
 {
   if (char(5))
   {
@@ -764,8 +767,8 @@ event
     warp(9, 39, 0);
   }
 }
-event { warp(26, 66, 0); }
-event
+event /*36*/ { warp(26, 66, 0); }
+event /*37*/
 {
   if (char(5))
   {
@@ -790,8 +793,8 @@ event
     alterbtile(123, 45, (706 + flags(605)), flags(605));
   }
 }
-event { warp(77, 66, 0); }
-event
+event /*38*/ { warp(77, 66, 0); }
+event /*39*/
 {
   flags(601)++;
   if (flags(601) == 2)
@@ -815,7 +818,7 @@ event
   }
   callevent(43);
 }
-event
+event /*40*/
 {
   flags(601)++;
   if (flags(601) == 2)
@@ -839,7 +842,7 @@ event
   }
   callevent(43);
 }
-event
+event /*41*/
 {
   flags(602)++;
   if (flags(602) == 2)
@@ -858,7 +861,7 @@ event
   }
   callevent(43);
 }
-event
+event /*42*/
 {
   flags(601)++;
   if (flags(601) == 2)
@@ -882,7 +885,7 @@ event
   }
   callevent(43);
 }
-event
+event /*43*/
 {
   soundeffect(18);
   alterbtile(123, 40, (706 + flags(601)), flags(601));
@@ -891,8 +894,8 @@ event
   alterbtile(123, 44, (706 + flags(604)), flags(604));
   alterbtile(123, 45, (706 + flags(605)), flags(605));
 }
-event { warp(123, 46, 0); }
-event
+event /*44*/ { warp(123, 46, 0); }
+event /*45*/
 {
   flags(4962) = 2;
   stext(1, "Hey! There's a switch in here!", "", "");
@@ -901,7 +904,7 @@ event
   changezone(13, 35, 0);
   entity.locy(5) -= 2;
 }
-event
+event /*46*/
 {
   flags(4963) = 2;
   stext(1, "Hey! There's a switch in here!", "", "");
@@ -910,7 +913,7 @@ event
   changezone(47, 93, 0);
   entity.locy(6) += 2;
 }
-event
+event /*47*/
 {
   flags(4964) = 1;
   stext(1, "Hey! There's a switch in here!", "", "");
@@ -919,7 +922,7 @@ event
   changezone(130, 5, 0);
   entity.locy(7) += 2;
 }
-event
+event /*48*/
 {
   flags(4965) = 1;
   stext(1, "Hey! There's a switch in here!", "", "");
@@ -928,27 +931,27 @@ event
   changezone(123, 39, 0);
   entity.locy(8) -= 2;
 }
-event
+event /*49*/
 {
   alterbtile(53, 58, 706, 0);
   alterbtile(54, 58, 706, 0);
 }
-event
+event /*50*/
 {
   alterbtile(48, 58, 706, 0);
   alterbtile(49, 58, 706, 0);
 }
-event
+event /*51*/
 {
   warp(18, 11, 0);
   palettemorph(10, 10, 35, 45, 43);
 }
-event
+event /*52*/
 {
   warp(66, 50, 0);
   palettemorph(0, 0, 0, 0, 63);
 }
-event
+event /*53*/
 {
   if (char(5))
   {
@@ -969,15 +972,15 @@ event
         "hanging around in here...");
   }
 }
-event
+event /*54*/
 {
   enablesave();
   banner("Save point!", 1);
 }
-event { disablesave(); }
-event { warp(120, 71, 0); }
-event { warp(37, 50, 0); }
-event
+event /*55*/ { disablesave(); }
+event /*56*/ { warp(120, 71, 0); }
+event /*57*/ { warp(37, 50, 0); }
+event /*58*/
 {
   if (char(5))
   {
@@ -1002,8 +1005,8 @@ event
     alterbtile(48, 97, 792, 1);
   }
 }
-event { warp(35, 66, 0); }
-event
+event /*59*/ { warp(35, 66, 0); }
+event /*60*/
 {
   stext(
       0,
@@ -1011,7 +1014,7 @@ event
       "top and bottom red, and the",
       "rest blue...");
 }
-event
+event /*61*/
 {
   cameratracking = 0;
   flags(109) = entity.locx(0);

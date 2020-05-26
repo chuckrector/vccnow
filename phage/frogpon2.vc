@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   flags(151) = 0;
@@ -18,12 +18,12 @@ event
     face(11) = 1;
   }
 }
-event
+event /*1*/
 {
   stext(0, "'The Wit and Wisdom of GMW'", "", "");
   stext(1, "Hey, this book is full of", "blank pages!", "");
 }
-event
+event /*2*/
 {
   stext(
       0,
@@ -31,13 +31,13 @@ event
       "#1-7. These supposedly date",
       "back to the Colonization.");
 }
-event { stext(0, "These shelves are empty.", "", ""); }
-event
+event /*3*/ { stext(0, "These shelves are empty.", "", ""); }
+event /*4*/
 {
   stext(0, "'The Encyclopedia of Fungus'", "", "");
   stext(1, "The cure for insomnia!", "", "");
 }
-event
+event /*5*/
 {
   stext(0, "'The Complete Guide to Dust'", "", "");
   stext(1, "I refuse to read this!", "Uh uh, No way!", "");
@@ -52,7 +52,7 @@ event
     stext(4, "Yep. I'd rather die than read", "that thing!", "... <shudder>");
   }
 }
-event
+event /*6*/
 {
   stext(
       0,
@@ -67,7 +67,7 @@ event
   stext(0, "Ours was made by the great", "GMW...", "");
   stext(1, "What a shameless piece of", "self-insertion...", "");
 }
-event
+event /*7*/
 {
   stext(
       0,
@@ -80,7 +80,7 @@ event
       "this world, which they named",
       "Ieval...");
 }
-event
+event /*8*/
 {
   stext(
       0,
@@ -94,7 +94,7 @@ event
       "animal species with which to");
   stext(0, "share their knowledge...", "", "");
 }
-event
+event /*9*/
 {
   stext(
       0,
@@ -107,7 +107,7 @@ event
       "and new colonists stopped",
       "arriving from other worlds.");
 }
-event
+event /*10*/
 {
   stext(
       0,
@@ -121,7 +121,7 @@ event
       "intelligence. Did the humans");
   stext(0, "hope that we would continue", "where they left off?", "");
 }
-event
+event /*11*/
 {
   stext(
       0,
@@ -130,7 +130,7 @@ event
       "discontinued since trade with");
   stext(0, "the BPC stopped.", "", "");
 }
-event
+event /*12*/
 {
   stext(
       0,
@@ -159,7 +159,7 @@ event
       "made an entire nation");
   stext(0, "disappear?", "", "");
 }
-event
+event /*13*/
 {
   stext(
       0,
@@ -178,7 +178,7 @@ event
       "hoping to find lost human");
   stext(0, "technology.", "", "");
 }
-event
+event /*14*/
 {
   stext(
       0,
@@ -192,17 +192,17 @@ event
       "us intelligence. Why? They");
   stext(0, "were most likely wary of", "experimenting on their own", "kind...");
 }
-event { warp(112, 97, 0); }
-event { warp(83, 101, 0); }
-event { warp(45, 33, 0); }
-event { warp(16, 103, 0); }
-event { warp(54, 32, 0); }
-event { warp(55, 32, 0); }
-event { warp(78, 106, 0); }
-event { warp(46, 106, 0); }
-event { warp(38, 42, 0); }
-event { warp(39, 42, 0); }
-event
+event /*15*/ { warp(112, 97, 0); }
+event /*16*/ { warp(83, 101, 0); }
+event /*17*/ { warp(45, 33, 0); }
+event /*18*/ { warp(16, 103, 0); }
+event /*19*/ { warp(54, 32, 0); }
+event /*20*/ { warp(55, 32, 0); }
+event /*21*/ { warp(78, 106, 0); }
+event /*22*/ { warp(46, 106, 0); }
+event /*23*/ { warp(38, 42, 0); }
+event /*24*/ { warp(39, 42, 0); }
+event /*25*/
 {
   stext(0, "Sam! Where've you been?", "", "");
   stext(1, "I went out to find a", "Giant Lily Seed for the", "town!");
@@ -223,12 +223,12 @@ event
     stext(7, "I *am* right here, ya know!", "", "");
   }
 }
-event
+event /*26*/
 {
   stext(0, "This's the town of Frog Pond.", "...", "...");
   stext(0, "I'm gonna miss this place!", "", "");
 }
-event
+event /*27*/
 {
   stext(
       0,
@@ -257,7 +257,7 @@ event
       "sparsely on the plant, so as");
   stext(0, "not to inhibit its ability to", "photosynthesize.", "");
 }
-event
+event /*28*/
 {
   if (!flags(101))
   {
@@ -288,7 +288,7 @@ event
     flags(105) = 0;
   }
 }
-event
+event /*29*/
 {
   if (!flags(102))
   {
@@ -300,7 +300,7 @@ event
     flags(102) = 1;
   }
 }
-event
+event /*30*/
 {
   stext(0, "'Rootwalla'", "", "");
   stext(
@@ -309,7 +309,7 @@ event
       "who wants to be the ruler of",
       "the Savannah Empire.");
 }
-event
+event /*31*/
 {
   stext(0, "'Pride and Impertinence'", "", "");
   stext(
@@ -323,12 +323,12 @@ event
     stext(4, "This reviewer gives it two", "thumbs down. It stinks!", "");
   }
 }
-event
+event /*32*/
 {
   stext(0, "'The Complete Works of Edgar'", "", "");
   stext(1, "Burn a copy today!", "", "");
 }
-event
+event /*33*/
 {
   stext(
       0,
@@ -340,7 +340,7 @@ event
     stext(4, "Hey, yeah! Gimme cash!", "", "");
   }
 }
-event
+event /*34*/
 {
   stext(
       0,
@@ -368,7 +368,7 @@ event
       "power revealed in its awesome",
       "majesty...");
 }
-event
+event /*35*/
 {
   if (!flags(103))
   {
@@ -422,11 +422,11 @@ event
     flags(103) = 1;
   }
 }
-event { warp(158, 104, 0); }
-event { warp(83, 40, 0); }
-event { warp(126, 141, 0); }
-event { warp(104, 34, 0); }
-event
+event /*36*/ { warp(158, 104, 0); }
+event /*37*/ { warp(83, 40, 0); }
+event /*38*/ { warp(126, 141, 0); }
+event /*39*/ { warp(104, 34, 0); }
+event /*40*/
 {
   if (flags(104))
   {
@@ -483,13 +483,13 @@ event
     flags(104) = 1;
   }
 }
-event
+event /*41*/
 {
   stext(0, "I don't know what we're going", "to do...", "");
   face(15) = 0;
 }
-event { stext(0, "Look at the flower! It's all", "dried up!", ""); }
-event
+event /*42*/ { stext(0, "Look at the flower! It's all", "dried up!", ""); }
+event /*43*/
 {
   if (!flags(105))
   {
@@ -516,7 +516,7 @@ event
     partymove("L1");
   }
 }
-event
+event /*44*/
 {
   stext(
       0,
@@ -530,17 +530,17 @@ event
       "killed the last one long ago.");
   stext(0, "Only St.Lumin has seen one", "and lived to tell the tale.", "");
 }
-event
+event /*45*/
 {
   stext(0, "Kreegah! Bundalo!", "", "");
   stext(1, "Um... Yes?", "", "");
   stext(0, "I be Wild Willy Wonka!", "", "");
   stext(1, "Some things never change...", "", "");
 }
-event { warp(127, 119, 0); }
-event { warp(37, 61, 0); }
-event { stext(0, "I don't want to say goodbye to", "this town!", ""); }
-event
+event /*46*/ { warp(127, 119, 0); }
+event /*47*/ { warp(37, 61, 0); }
+event /*48*/ { stext(0, "I don't want to say goodbye to", "this town!", ""); }
+event /*49*/
 {
   stext(
       0,
@@ -553,7 +553,7 @@ event
       "Now I'm gonna be the baby in",
       "the family a while longer!");
 }
-event
+event /*50*/
 {
   stext(
       0,
@@ -563,7 +563,7 @@ event
   stext(
       0, "do better in the pond than", "they will in this place of", "death!");
 }
-event
+event /*51*/
 {
   stext(
       0,
@@ -571,8 +571,11 @@ event
       "shop lately? I'm worried that",
       "it'll sink into the pond...");
 }
-event { stext(0, "Periodicals, including 'The", "Frog Pond Gazette.'", ""); }
-event
+event /*52*/
+{
+  stext(0, "Periodicals, including 'The", "Frog Pond Gazette.'", "");
+}
+event /*53*/
 {
   stext(
       0,
@@ -581,7 +584,7 @@ event
       "over 1000 years ago, entitled");
   stext(0, "'The Dream Lord.'", "It's nearly illegible.", "");
 }
-event
+event /*54*/
 {
   stext(
       0,
@@ -595,7 +598,7 @@ event
       "manual labor, such as plowing");
   stext(0, "fields or acting as beasts of", "burden.", "");
 }
-event
+event /*55*/
 {
   stext(
       0,
@@ -623,7 +626,7 @@ event
       "to the present definition as",
       "'other intelligent beings.'");
 }
-event
+event /*56*/
 {
   stext(
       0,
@@ -632,7 +635,7 @@ event
       "is really strict about letting");
   stext(0, "others back here! I could get", "in trouble!", "");
 }
-event
+event /*57*/
 {
   stext(
       0,
@@ -640,7 +643,7 @@ event
       "scenic! Now it's getting kind",
       "of slimy and disgusting...");
 }
-event
+event /*58*/
 {
   face(24) = 0;
   prompt(0, "Rest here for just 10 gp!", "", "", 107, "No.", "Yes.");
@@ -668,9 +671,9 @@ event
     stext(0, "Maybe next time?", "", "");
   }
 }
-event { warp(18, 132, 0); }
-event { warp(123, 72, 0); }
-event
+event /*59*/ { warp(18, 132, 0); }
+event /*60*/ { warp(123, 72, 0); }
+event /*61*/
 {
   stext(
       1,
@@ -679,21 +682,21 @@ event
       "is breaking my heart!");
   stext(1, "I can't believe it's dying!", "", "");
 }
-event
+event /*62*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(48, 126, 0);
 }
-event { warp(flags(109), flags(110), 0); }
-event
+event /*63*/ { warp(flags(109), flags(110), 0); }
+event /*64*/
 {
   if (!flags(108))
   {
     stext(1, "The tadpoles are gone!", "", "");
   }
 }
-event
+event /*65*/
 {
   stext(
       0,
@@ -707,7 +710,7 @@ event
       "only last a limited time, so",
       "buy now!");
 }
-event
+event /*66*/
 {
   stext(
       0,
@@ -717,8 +720,8 @@ event
   shop(25, 40, 41);
   stext(0, "You'll defend me, right?", "", "");
 }
-event { mapswitch("overland.map", 44, 78, 0); }
-event
+event /*67*/ { mapswitch("overland.map", 44, 78, 0); }
+event /*68*/
 {
   stext(
       0,
@@ -732,7 +735,7 @@ event
       "Eventually it was banned, and");
   stext(0, "all offenders were put to", "death.", "");
 }
-event
+event /*69*/
 {
   stext(
       1,
@@ -740,7 +743,7 @@ event
       "something called 'Bambi Meets",
       "Godzilla.' It's very short...");
 }
-event
+event /*70*/
 {
   stext(1, "Hello?", "", "");
   wait(150);
@@ -761,16 +764,19 @@ event
   stext(1, "Never mind, I'll pass.", "", "");
   face(26) = 0;
 }
-event { stext(0, "A book entitled 'The Legend of", "the Bagel.'", ""); }
-event { stext(0, "A book entitled 'Mystical", "Party Zone.'", ""); }
-event { stext(0, "A book entitled 'Return of El", "Thirsto Diablo.'", ""); }
-event
+event /*71*/ { stext(0, "A book entitled 'The Legend of", "the Bagel.'", ""); }
+event /*72*/ { stext(0, "A book entitled 'Mystical", "Party Zone.'", ""); }
+event /*73*/
+{
+  stext(0, "A book entitled 'Return of El", "Thirsto Diablo.'", "");
+}
+event /*74*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(74, 128, 0);
 }
-event
+event /*75*/
 {
   stext(
       0,
@@ -798,7 +804,7 @@ event
       "herbivores would develop in a",
       "similar manner to the humans.");
 }
-event
+event /*76*/
 {
   stext(0, "These books are boring.", "", "");
   stext(
@@ -807,13 +813,13 @@ event
       "out on the prospect of coming",
       "up with more books...");
 }
-event
+event /*77*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0) + 1;
   warp(102, 136, 0);
 }
-event
+event /*78*/
 {
   stext(0, "Oh, you must be one of Bull's", "little friends!", "");
   specialframe(0) = 20;
@@ -856,7 +862,7 @@ event
     }
   }
 }
-event
+event /*79*/
 {
   stext(
       0,
@@ -875,7 +881,7 @@ event
       "are most common in wooded");
   stext(0, "areas.", "", "");
 }
-event
+event /*80*/
 {
   stext(
       0,
@@ -898,7 +904,7 @@ event
       "Great Forest, south of the",
       "Savannah Empire.");
 }
-event
+event /*81*/
 {
   stext(
       0,
@@ -917,7 +923,7 @@ event
       "for their ability to");
   stext(0, "reproduce asexually, and", "their love of swarm tactics.", "");
 }
-event
+event /*82*/
 {
   stext(
       0,
@@ -941,7 +947,7 @@ event
       "Barrier Squid prefer to use");
   stext(0, "force fields to ward off", "enemies while they attack.", "");
 }
-event
+event /*83*/
 {
   stext(
       0,
@@ -970,7 +976,7 @@ event
       "for a few seconds. Frogs must");
   stext(0, "choose their attack to fit the", "occasion.", "");
 }
-event
+event /*84*/
 {
   stext(
       0,
@@ -1004,7 +1010,7 @@ event
       "doing something, or if they");
   stext(0, "have a strong defense.", "", "");
 }
-event
+event /*85*/
 {
   stext(
       0,
@@ -1028,7 +1034,7 @@ event
       "he revealed that those weren't");
   stext(0, "marshmallows.", "", "");
 }
-event
+event /*86*/
 {
   stext(
       0,
@@ -1043,7 +1049,7 @@ event
   stext(
       0, "ago... What? You too, Sam?", "Wow... I'd never be that", "brave...");
 }
-event
+event /*87*/
 {
   stext(
       0,
@@ -1051,7 +1057,7 @@ event
       "'Wally the Warthog Visits",
       "Snake Land.'");
 }
-event
+event /*88*/
 {
   stext(
       0,
@@ -1065,7 +1071,7 @@ event
       "intrude on their mountainous");
   stext(0, "domain.", "", "");
 }
-event
+event /*89*/
 {
   stext(
       0,
@@ -1084,7 +1090,7 @@ event
       "coloration) are found");
   stext(0, "primarily in the valleys", "south of Frog Pond.", "");
 }
-event
+event /*90*/
 {
   stext(
       0,
@@ -1098,7 +1104,7 @@ event
       "correct color on them, these");
   stext(0, "flowers can be made to give", "up the items within.", "");
 }
-event
+event /*91*/
 {
   stext(
       0,
@@ -1112,7 +1118,7 @@ event
       "your magic! SP are hard to");
   stext(0, "come by, so make your choices", "wisely!", "");
 }
-event
+event /*92*/
 {
   stext(
       0,

@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   flags(801) = 1;
@@ -206,7 +206,7 @@ event
     enablemenu();
   }
 }
-event
+event /*1*/
 {
   if (flags(185) < 10)
   {
@@ -453,14 +453,14 @@ event
     mapswitch("Bullbat.map", 1, 1, 0);
   }
 }
-event { mapswitch("sewer2.map", 29, 2, 0); }
-event
+event /*2*/ { mapswitch("sewer2.map", 29, 2, 0); }
+event /*3*/
 {
   enablesave();
   banner("Save Point!", 1);
 }
-event { disablesave(); }
-event
+event /*4*/ { disablesave(); }
+event /*5*/
 {
   if (flags(289) == 0)
   {
@@ -471,7 +471,7 @@ event
     banner("Found cow bell!", 1);
   }
 }
-event
+event /*6*/
 {
   if (flags(185) < 8)
   {

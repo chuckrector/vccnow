@@ -1,9 +1,9 @@
-event
+event /*0*/
 {
   fadein(1);
   flags(801) = 5;
 }
-event
+event /*1*/
 {
   stext(0, "Security Alert!", "Forbidden zone stepped on!", "");
   flags(261) = 0;
@@ -78,7 +78,7 @@ event
     mapswitch("underbat.map", 1, 1, 0);
   }
 }
-event
+event /*2*/
 {
   flags(109) = entity.locx(0);
   flags(110) = entity.locy(0);
@@ -106,32 +106,32 @@ event
         changezone(flags(159), flags(160), 2);
       }
     }
-    warp(flags(109), flags(110), 1);
-    if (flags(261) == 2)
-    {
-      stext(0, "Blue is now safe to step on.", "", "");
-      flags(261) += 1;
-    }
-    if (flags(261) == 1)
-    {
-      stext(0, "Green is now safe to step on.", "", "");
-      flags(261) += 1;
-    }
-    if (flags(261) == 0)
-    {
-      stext(0, "Red is now safe to step on.", "", "");
-      flags(261) += 1;
-    }
-    if (flags(261) == 3)
-    {
-      flags(261) = 0;
-    }
+  }
+  warp(flags(109), flags(110), 1);
+  if (flags(261) == 2)
+  {
+    stext(0, "Blue is now safe to step on.", "", "");
+    flags(261) += 1;
+  }
+  if (flags(261) == 1)
+  {
+    stext(0, "Green is now safe to step on.", "", "");
+    flags(261) += 1;
+  }
+  if (flags(261) == 0)
+  {
+    stext(0, "Red is now safe to step on.", "", "");
+    flags(261) += 1;
+  }
+  if (flags(261) == 3)
+  {
+    flags(261) = 0;
   }
 }
-event { mapswitch("greatfor.map", 59, 21, 0); }
-event { mapswitch("greatfor.map", 37, 19, 0); }
-event { stext(0, "This keypad is broken.", "", ""); }
-event
+event /*3*/ { mapswitch("greatfor.map", 59, 21, 0); }
+event /*4*/ { mapswitch("greatfor.map", 37, 19, 0); }
+event /*5*/ { stext(0, "This keypad is broken.", "", ""); }
+event /*6*/
 {
   flags(112) = 0;
   prompt(0, "Do you want to jump down?", "", "", 112, "No", "Yes");
@@ -164,7 +164,7 @@ event
     }
   }
 }
-event
+event /*7*/
 {
   if (char(3))
   {

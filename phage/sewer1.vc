@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -24,7 +24,7 @@ event
     changezone(50, 37, 0);
   }
 }
-event
+event /*1*/
 {
   callevent(2);
   alterftile(48, 46, 0, 0);
@@ -36,7 +36,7 @@ event
   alterbtile(38, 49, 352, 1);
   changezone(38, 49, 0);
 }
-event
+event /*2*/
 {
   soundeffect(18);
   changezone(17, 52, 0);
@@ -50,11 +50,11 @@ event
   alterftile(28, 55, 0, 0);
   alterftile(28, 56, 0, 0);
 }
-event { warp(34, 75, 0); }
-event { warp(26, 99, 0); }
-event { mapswitch("overland.map", 41, 90, 0); }
-event { mapswitch("sewer2.map", 29, 35, 0); }
-event
+event /*3*/ { warp(34, 75, 0); }
+event /*4*/ { warp(26, 99, 0); }
+event /*5*/ { mapswitch("overland.map", 41, 90, 0); }
+event /*6*/ { mapswitch("sewer2.map", 29, 35, 0); }
+event /*7*/
 {
   banner("Battle!", 1);
   banner("1 Mini-Whale", 1);
@@ -121,7 +121,7 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event
+event /*8*/
 {
   banner("Battle!", 1);
   banner("1 Moby", 1);
@@ -188,7 +188,7 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event
+event /*9*/
 {
   banner("Battle!", 1);
   banner("2 Trippyweeds", 1);
@@ -256,7 +256,7 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event
+event /*10*/
 {
   banner("Battle!", 1);
   banner("2 B.Squirrels", 1);
@@ -324,7 +324,7 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event
+event /*11*/
 {
   banner("Battle!", 1);
   banner("3 Mediocre Gels", 1);
@@ -391,7 +391,7 @@ event
     mapswitch("sewerbat.map", 1, 1, 0);
   }
 }
-event
+event /*12*/
 {
   stext(
       0,
@@ -415,35 +415,35 @@ event
       "in here. You can go in,",
       "though, if you want.");
 }
-event
+event /*13*/
 {
   giveitem(53);
   flags(280) = 1;
   alterbtile(29, 18, 701, 2);
   changezone(29, 18, 0);
 }
-event
+event /*14*/
 {
   giveitem(86);
   flags(281) = 1;
   alterbtile(46, 37, 701, 2);
   changezone(46, 37, 0);
 }
-event
+event /*15*/
 {
   giveitem(57);
   flags(282) = 1;
   alterbtile(48, 37, 701, 2);
   changezone(48, 37, 0);
 }
-event
+event /*16*/
 {
   giveitem(87);
   flags(283) = 1;
   alterbtile(50, 37, 701, 2);
   changezone(50, 37, 0);
 }
-event
+event /*17*/
 {
   stext(
       0,
@@ -457,7 +457,7 @@ event
       "Thieves Beware the Curse!'");
   stext(0, "I figure it's a sham, but", "better safe than sorry, right?", "");
 }
-event
+event /*18*/
 {
   stext(
       0,
@@ -475,7 +475,7 @@ event
       "the nasties, but who'd want",
       "to do that?");
 }
-event
+event /*19*/
 {
   stext(
       0,

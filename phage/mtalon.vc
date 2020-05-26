@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -205,8 +205,8 @@ event
     autooff();
   }
 }
-event { mapswitch("aloncave.map", 67, 65, 0); }
-event
+event /*1*/ { mapswitch("aloncave.map", 67, 65, 0); }
+event /*2*/
 {
   if (flags(255) == 0)
   {
@@ -357,7 +357,7 @@ event
     mapswitch("duel.map", 1, 1, 0);
   }
 }
-event
+event /*3*/
 {
   banner("Battle!", 1);
   banner("3 Thunderducks", 1);
@@ -424,14 +424,14 @@ event
     mapswitch("cliffbat.map", 1, 1, 0);
   }
 }
-event
+event /*4*/
 {
   enablesave();
   flags(259) = 1;
   palettemorph(0, 0, 0, 0, 63);
   warp(22, 135, 0);
 }
-event
+event /*5*/
 {
   disablesave();
   flags(259) = 0;
@@ -439,7 +439,7 @@ event
   warp(24, 16, 0);
   palettemorph(10, 10, 35, 45, 43);
 }
-event
+event /*6*/
 {
   soundeffect(12);
   for (x, 1, 100, 2)
@@ -454,7 +454,7 @@ event
   }
   palettemorph(10, 10, 35, 45, 43);
 }
-event
+event /*7*/
 {
   palettemorph(10, 10, 35, 45, 43);
   if (flags(260) == 0)

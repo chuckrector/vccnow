@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
@@ -11,7 +11,7 @@ event
     entity.locy(7) = 60;
   }
 }
-event
+event /*1*/
 {
   warp(entity.locx(0), entity.locy(0), 1);
   alterftile(var(0), var(1), 0, 0);
@@ -22,7 +22,7 @@ event
   alterftile(var(0) - 1, var(1) + 1, 708, 0);
   alterftile(var(0), var(1) + 2, 716, 1);
 }
-event
+event /*2*/
 {
   warp(entity.locx(0), entity.locy(0), 1);
   alterftile(var(0), var(1), 706, 0);
@@ -33,17 +33,17 @@ event
   alterftile(var(0) - 1, var(1) + 1, 708, 1);
   alterftile(var(0), var(1) + 2, 716, 0);
 }
-event { callevent(1, 7, 28); }
-event { callevent(2, 7, 28); }
-event { callevent(1, 14, 19); }
-event { callevent(2, 14, 19); }
-event { callevent(1, 7, 10); }
-event { callevent(2, 7, 10); }
-event { callevent(1, 14, 3); }
-event { callevent(2, 14, 3); }
-event { mapswitch("clocks.map", 169, 78, 0); }
-event {}
-event
+event /*3*/ { callevent(1, 7, 28); }
+event /*4*/ { callevent(2, 7, 28); }
+event /*5*/ { callevent(1, 14, 19); }
+event /*6*/ { callevent(2, 14, 19); }
+event /*7*/ { callevent(1, 7, 10); }
+event /*8*/ { callevent(2, 7, 10); }
+event /*9*/ { callevent(1, 14, 3); }
+event /*10*/ { callevent(2, 14, 3); }
+event /*11*/ { mapswitch("clocks.map", 169, 78, 0); }
+event /*12*/ {}
+event /*13*/
 {
   if (flags(185) < 20)
   {
@@ -167,9 +167,9 @@ event
     }
   }
 }
-event { mapswitch("factory2.map", 173, 116, 0); }
-event { stext(0, "Zzzz...", "", ""); }
-event
+event /*14*/ { mapswitch("factory2.map", 173, 116, 0); }
+event /*15*/ { stext(0, "Zzzz...", "", ""); }
+event /*16*/
 {
   stext(
       0,
@@ -193,7 +193,7 @@ event
     specialframe(char(z) - 1) = 0;
   }
 }
-event
+event /*17*/
 {
   banner("Battle!", 1);
   banner("1 Tarantella", 1);

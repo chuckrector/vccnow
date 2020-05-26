@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
@@ -42,7 +42,7 @@ event
     getmagic(1, 30);
   }
 }
-event
+event /*1*/
 {
   prompt(0, "Hey, wanna play a game of", "stones?", "", 112, "No", "Yes");
   if (flags(112) == 0)
@@ -76,7 +76,7 @@ event
     layervc = 0;
   }
 }
-event
+event /*2*/
 {
   textmenu(4, 4, 112, 1, "Take 1", "Take 2", "Take 3");
   if (flags(112) > flags(272))
@@ -92,8 +92,8 @@ event
     banner("You lose!", 1);
   }
 }
-event {}
-event
+event /*3*/ {}
+event /*4*/
 {
   while (flags(272) > 0 && flags(272) < 28)
   {
@@ -160,7 +160,7 @@ event
     }
   }
 }
-event
+event /*5*/
 {
   if (face(0) == 0)
   {
@@ -183,21 +183,21 @@ event
     flags(274) = 4;
   }
 }
-event
+event /*6*/
 {
   if (face(0) == 2)
   {
     playmusic("fairy.mod");
   }
 }
-event
+event /*7*/
 {
   if (face(0) == 3)
   {
     playmusic("xeqtion.mod");
   }
 }
-event
+event /*8*/
 {
   if (flags(274) != 1)
   {
@@ -212,12 +212,12 @@ event
     changezone(17, 36, 0);
   }
 }
-event { warp(20, 36, 0); }
-event { warp(99, 29, 0); }
-event { warp(179, 77, 0); }
-event { warp(125, 6, 0); }
-event { mapswitch("biglake.map", 50, 18, 0); }
-event
+event /*9*/ { warp(20, 36, 0); }
+event /*10*/ { warp(99, 29, 0); }
+event /*11*/ { warp(179, 77, 0); }
+event /*12*/ { warp(125, 6, 0); }
+event /*13*/ { mapswitch("biglake.map", 50, 18, 0); }
+event /*14*/
 {
   flags(275) = 1;
   alterbtile(11, 39, 34, 2);
@@ -281,10 +281,10 @@ event
     stext(7, "D'oh!", "", "");
   }
 }
-event { soundeffect(7); }
-event { soundeffect(8); }
-event { soundeffect(16); }
-event
+event /*15*/ { soundeffect(7); }
+event /*16*/ { soundeffect(8); }
+event /*17*/ { soundeffect(16); }
+event /*18*/
 {
   if (flags(289) == 0)
   {
@@ -362,7 +362,7 @@ event
     stext(0, "Nothing happens!", "", "");
   }
 }
-event
+event /*19*/
 {
   flags(337) = 0;
   for (z, 5, 9, 1)

@@ -1,13 +1,13 @@
-event
+event /*0*/
 {
   enforceanimation();
   fadein(1);
 }
-event { warp(41, 92, 0); }
-event { warp(23, 5, 0); }
-event { mapswitch("graciere.map", 71, 24, 0); }
-event { stext(0, "What do you want?", "", ""); }
-event
+event /*1*/ { warp(41, 92, 0); }
+event /*2*/ { warp(23, 5, 0); }
+event /*3*/ { mapswitch("graciere.map", 71, 24, 0); }
+event /*4*/ { stext(0, "What do you want?", "", ""); }
+event /*5*/
 {
   stext(
       0,
@@ -15,11 +15,11 @@ event
       "which are off limits to you",
       "fellas.");
 }
-event
+event /*6*/
 {
   stext(0, "You are entering the throne", "room. Please be respectful.", "");
 }
-event
+event /*7*/
 {
   stext(
       0,
@@ -27,7 +27,7 @@ event
       "of the servants. No entrance",
       "to visitors.");
 }
-event
+event /*8*/
 {
   if (flags(185) == 1)
   {

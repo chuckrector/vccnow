@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   if (flags(114) < 4)
@@ -9,7 +9,7 @@ event
     alterftile(37, 19, 29, 0);
   }
 }
-event
+event /*1*/
 {
   alterftile(28, 10, 0, 0);
   alterftile(35, 8, 29, 0);
@@ -20,7 +20,7 @@ event
   }
   changezone(28, 10, 0);
 }
-event
+event /*2*/
 {
   alterftile(46, 10, 0, 0);
   alterftile(39, 12, 29, 0);
@@ -31,7 +31,7 @@ event
   }
   changezone(46, 10, 0);
 }
-event
+event /*3*/
 {
   alterftile(37, 1, 0, 0);
   alterftile(39, 8, 29, 0);
@@ -42,7 +42,7 @@ event
   }
   changezone(37, 1, 0);
 }
-event
+event /*4*/
 {
   alterftile(37, 19, 0, 0);
   alterftile(35, 12, 29, 0);
@@ -53,7 +53,7 @@ event
   }
   changezone(37, 19, 0);
 }
-event
+event /*5*/
 {
   for (x, 6, 10, 1)
   {
@@ -78,15 +78,15 @@ event
   changezone(37, 19, 4);
   flags(114) = 0;
 }
-event
+event /*6*/
 {
   if (flags(114) < 4)
   {
     warp(37, 16, 0);
   }
 }
-event { warp(37, 26, 0); }
-event
+event /*7*/ { warp(37, 26, 0); }
+event /*8*/
 {
   if (flags(114) == 5)
   {
@@ -116,7 +116,7 @@ event
     entity.locy(5) = 41;
   }
 }
-event
+event /*9*/
 {
   if (flags(114) < 4)
   {
@@ -131,7 +131,7 @@ event
     mapswitch("damcity2.map", 123, 36, 0);
   }
 }
-event
+event /*10*/
 {
   entity.locx(5) = 37;
   entity.locy(5) = 29;

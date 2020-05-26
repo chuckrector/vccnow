@@ -1,12 +1,12 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
   flags(801) = 3;
 }
-event { mapswitch("overland.map", 37, 47, 0); }
-event { mapswitch("farm.map", 47, 1, 0); }
-event
+event /*1*/ { mapswitch("overland.map", 37, 47, 0); }
+event /*2*/ { mapswitch("farm.map", 47, 1, 0); }
+event /*3*/
 {
   banner("Battle!", 1);
   banner("3 Skunkravens", 1);
@@ -73,4 +73,4 @@ event
     mapswitch("skravbat.map", 1, 1, 0);
   }
 }
-event { stext(0, "This is a filler spot.", "", ""); }
+event /*4*/ { stext(0, "This is a filler spot.", "", ""); }

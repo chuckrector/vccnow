@@ -1,4 +1,4 @@
-event
+event /*0*/
 {
   fadein(1);
   enforceanimation();
@@ -37,7 +37,7 @@ event
     mapswitch("docktown.map", 45, 15, 0);
   }
 }
-event
+event /*1*/
 {
   if (flags(180) == 0)
   {
@@ -48,17 +48,17 @@ event
     mapswitch("frogpon2.map", 197, 32, 0);
   }
 }
-event
+event /*2*/
 {
   flags(172) = 0;
   mapswitch("damfor.map", 10, 67, 0);
 }
-event { mapswitch("gcave.map", 37, 34, 0); }
-event { stext(0, "You'd need a machete to go any", "further.", ""); }
-event { mapswitch("docktown.map", 1, 40, 0); }
-event { mapswitch("packwood.map", 86, 169, 0); }
-event { mapswitch("packtown.map", 32, 19, 0); }
-event
+event /*3*/ { mapswitch("gcave.map", 37, 34, 0); }
+event /*4*/ { stext(0, "You'd need a machete to go any", "further.", ""); }
+event /*5*/ { mapswitch("docktown.map", 1, 40, 0); }
+event /*6*/ { mapswitch("packwood.map", 86, 169, 0); }
+event /*7*/ { mapswitch("packtown.map", 32, 19, 0); }
+event /*8*/
 {
   if (face(0) == 2)
   {
@@ -73,7 +73,7 @@ event
     mapswitch("avis.map", 71, 29, 0);
   }
 }
-event
+event /*9*/
 {
   if (face(0) == 0)
   {
@@ -81,13 +81,13 @@ event
   }
   mapswitch("farm.map", 28, 34, 0);
 }
-event { mapswitch("circle.map", 27, 33, 0); }
-event { mapswitch("graciere.map", 61, 71, 0); }
-event { stext(0, "Can't go there in this demo.", "", ""); }
-event { mapswitch("alontown.map", 70, 77, 0); }
-event { mapswitch("morefor.map", 178, 1, 0); }
-event { mapswitch("morefor.map", 49, 1, 0); }
-event
+event /*10*/ { mapswitch("circle.map", 27, 33, 0); }
+event /*11*/ { mapswitch("graciere.map", 61, 71, 0); }
+event /*12*/ { stext(0, "Can't go there in this demo.", "", ""); }
+event /*13*/ { mapswitch("alontown.map", 70, 77, 0); }
+event /*14*/ { mapswitch("morefor.map", 178, 1, 0); }
+event /*15*/ { mapswitch("morefor.map", 49, 1, 0); }
+event /*16*/
 {
   if (face(0) == 1)
   {
@@ -102,7 +102,7 @@ event
     mapswitch("beach.map", 137, 22, 0);
   }
 }
-event
+event /*17*/
 {
   stext(
       6,
@@ -117,8 +117,8 @@ event
   stext(6, "find out the answers to these", "questions and more!", "");
   mapswitch("endcred.map", 8, 9, 0);
 }
-event { stext(0, "There's a fence blocking this", "side.", ""); }
-event
+event /*18*/ { stext(0, "There's a fence blocking this", "side.", ""); }
+event /*19*/
 {
   if (face(0) != 2 && flags(185) < 10)
   {
@@ -137,7 +137,7 @@ event
     mapswitch("warren2.map", 1, 12, 0);
   }
 }
-event
+event /*20*/
 {
   banner("Battle!", 1);
   banner("1 Camelite", 1);
@@ -208,7 +208,7 @@ event
     mapswitch("overbat.map", 1, 1, 0);
   }
 }
-event
+event /*21*/
 {
   banner("Battle!", 1);
   banner("3 High_Rollers", 1);
@@ -279,11 +279,11 @@ event
     mapswitch("overbat.map", 1, 1, 0);
   }
 }
-event { mapswitch("bunoose.map", 54, 98, 0); }
-event { mapswitch("dactyl.map", 148, 52, 0); }
-event { mapswitch("biglake.map", 71, 9, 0); }
-event { mapswitch("biglake.map", 85, 9, 0); }
-event
+event /*22*/ { mapswitch("bunoose.map", 54, 98, 0); }
+event /*23*/ { mapswitch("dactyl.map", 148, 52, 0); }
+event /*24*/ { mapswitch("biglake.map", 71, 9, 0); }
+event /*25*/ { mapswitch("biglake.map", 85, 9, 0); }
+event /*26*/
 {
   if (face(0) == 2)
   {
@@ -294,10 +294,10 @@ event
     mapswitch("tbridge.map", 27, 14, 0);
   }
 }
-event { mapswitch("kreegah.map", 140, 47, 0); }
-event { mapswitch("kreegah.map", 3, 12, 0); }
-event { mapswitch("sewer1.map", 25, 114, 0); }
-event
+event /*27*/ { mapswitch("kreegah.map", 140, 47, 0); }
+event /*28*/ { mapswitch("kreegah.map", 3, 12, 0); }
+event /*29*/ { mapswitch("sewer1.map", 25, 114, 0); }
+event /*30*/
 {
   banner("Battle!", 1);
   banner("1 Anonymoose", 1);
@@ -368,9 +368,9 @@ event
     mapswitch("moosebat.map", 1, 1, 0);
   }
 }
-event { mapswitch("cragpass.map", 50, 90, 0); }
-event { mapswitch("bugdung.map", 47, 9, 0); }
-event
+event /*31*/ { mapswitch("cragpass.map", 50, 90, 0); }
+event /*32*/ { mapswitch("bugdung.map", 47, 9, 0); }
+event /*33*/
 {
   banner("Battle!", 1);
   flags(112) = random(1, 21);

@@ -1,1 +1,222 @@
-event{flags(151)=1;flags(200)=2;givexp(3,1);givexp(2,1);givexp(5,1);forceequip(1,5);getitem(1,2);getitem(1,2);getitem(4,2);getmagic(1,19);getmagic(2,20);getmagic(3,21);getmagic(4,22);getmagic(5,23);getmagic(6,24);getmagic(7,25);getmagic(8,26);getmagic(4,1);disablemenu();layer0=0;layer1=0;layervc=1;drawparty=0;redraw();fadein(30);for(y,0,325,1){if(y<200){vccentertext(50,"This is the beginning of a strange");}if(y>25&&y<225){vccentertext(65,"story... In a world of beasts, one");}if(y>50&&y<250){vccentertext(80,"small frog attempts to forge his");}if(y>75&&y<275){vccentertext(95,"destiny, and stumbles into something");}if(y>100&&y<300){vccentertext(110,"much stranger than he had ever");}if(y>125&&y<325){vccentertext(125,"imagined possible...");}wait(3);vcclear();}vcclear();fadeout(30);vccentertext(85,"We begin our tale");redraw();fadein(120);wait(100);vcclear();fadeout(120);vccentertext(110,"In a long-forgotten place...");redraw();fadein(120);wait(100);fadeout(120);layervc=0;layer0=1;layer1=1;drawparty=1;vcclear();redraw();fadein(30);fade=0;enforceanimation();flags(54)=2;wait(100);stext(1,"What's going on?","","");stext(1,"","Where am I?","");stext(1,"","","Why am I here?");stext(1,"I've got a bad feeling about","this... I guess I'm going to","have to follow this path if I");stext(1,"ever want to get home...","","");}event{fade=1;stext(0,"Sam...","","");entitymove(5,"R2");wait(50);stext(1,"Who are you?!?","","");stext(0,"I am the Dream Lord, Sam...","","");stext(0,"I have something to tell you,","Sam...","");stext(0,"","      Phage is coming.","");enablemenu();mapswitch("frogpond.MAP",0,0,0);}event{fade=1;addcharacter(5);removecharacter(1);enablemenu();flags(4091)=1;flags(336)=1;givegp(1000);mapswitch("gsimon.map",11,37,0);}event{fade=1;enablemenu();flags(501)=0;flags(502)=350;flags(503)=100;flags(504)=2500;flags(505)=22;flags(506)=23;flags(507)=24;flags(508)=25;flags(509)=12;flags(510)=300;flags(511)=5;flags(512)=65;flags(513)=65;flags(540)=350;flags(541)=100;flags(514)=1;flags(515)=350;flags(516)=100;flags(517)=2500;flags(518)=32;flags(519)=33;flags(520)=32;flags(521)=32;flags(522)=2;flags(523)=3;flags(524)=0;flags(525)=65;flags(526)=65;flags(542)=350;flags(543)=100;flags(527)=0;flags(528)=350;flags(529)=100;flags(530)=2500;flags(531)=22;flags(532)=23;flags(533)=24;flags(534)=25;flags(535)=12;flags(536)=0;flags(537)=5;flags(538)=65;flags(539)=65;flags(544)=350;flags(545)=100;addcharacter(5);addcharacter(4);addcharacter(6);addcharacter(2);getitem(1,2);getitem(1,2);forceequip(1,78);getitem(1,3);getitem(1,78);getitem(1,79);getitem(1,65);getmagic(4,1);getmagic(2,36);getmagic(4,2);getmagic(4,3);getmagic(4,5);getmagic(5,34);getmagic(4,7);getmagic(4,9);getmagic(4,17);getmagic(1,30);for(x,1,8,1){givexp(x,5000);}flags(998)=199;flags(999)=49;flags(703)=1000;flags(1001)=500;flags(1003)=500;givegp(100000);mapswitch("lspbat3.map",1,1,0);}event{flags(185)=23;flags(112)+=1;switch(flags(112)){case(1):playmusic("cc.xm");case(2):playmusic("fanfare.s3m");case(3):playmusic("f-castle.mod");case(4):playmusic("f-mountn.mod");case(5):playmusic("f-lagoon.mod");case(6):playmusic("f-pyramd.mod");case(7):playmusic("GYRATION.mod");case(8):playmusic("HeHasNoFace.s3m");case(9):playmusic("Invtro94.s3m");case(10):playmusic("malfunct.mod");case(11):playmusic("march.xm");case(10):playmusic("matkamies.mod");case(11):playmusic("metal3.mod");case(12):playmusic("mixboss.s3m");case(13):playmusic("nazgul.mod");case(14):playmusic("NIGHT13.xm");case(15):playmusic("NoNoise.mod");case(16):playmusic("SUNCASTS.xm");}}
+event /*0*/
+{
+  flags(151) = 1;
+  flags(200) = 2;
+  givexp(3, 1);
+  givexp(2, 1);
+  givexp(5, 1);
+  forceequip(1, 5);
+  getitem(1, 2);
+  getitem(1, 2);
+  getitem(4, 2);
+  getmagic(1, 19);
+  getmagic(2, 20);
+  getmagic(3, 21);
+  getmagic(4, 22);
+  getmagic(5, 23);
+  getmagic(6, 24);
+  getmagic(7, 25);
+  getmagic(8, 26);
+  getmagic(4, 1);
+  disablemenu();
+  layer0 = 0;
+  layer1 = 0;
+  layervc = 1;
+  drawparty = 0;
+  redraw();
+  fadein(30);
+  for (y, 0, 325, 1)
+  {
+    if (y < 200)
+    {
+      vccentertext(50, "This is the beginning of a strange");
+    }
+    if (y > 25 && y < 225)
+    {
+      vccentertext(65, "story... In a world of beasts, one");
+    }
+    if (y > 50 && y < 250)
+    {
+      vccentertext(80, "small frog attempts to forge his");
+    }
+    if (y > 75 && y < 275)
+    {
+      vccentertext(95, "destiny, and stumbles into something");
+    }
+    if (y > 100 && y < 300)
+    {
+      vccentertext(110, "much stranger than he had ever");
+    }
+    if (y > 125 && y < 325)
+    {
+      vccentertext(125, "imagined possible...");
+    }
+    wait(3);
+    vcclear();
+  }
+  vcclear();
+  fadeout(30);
+  vccentertext(85, "We begin our tale");
+  redraw();
+  fadein(120);
+  wait(100);
+  vcclear();
+  fadeout(120);
+  vccentertext(110, "In a long-forgotten place...");
+  redraw();
+  fadein(120);
+  wait(100);
+  fadeout(120);
+  layervc = 0;
+  layer0 = 1;
+  layer1 = 1;
+  drawparty = 1;
+  vcclear();
+  redraw();
+  fadein(30);
+  fade = 0;
+  enforceanimation();
+  flags(54) = 2;
+  wait(100);
+  stext(1, "What's going on?", "", "");
+  stext(1, "", "Where am I?", "");
+  stext(1, "", "", "Why am I here?");
+  stext(
+      1,
+      "I've got a bad feeling about",
+      "this... I guess I'm going to",
+      "have to follow this path if I");
+  stext(1, "ever want to get home...", "", "");
+}
+event /*1*/
+{
+  fade = 1;
+  stext(0, "Sam...", "", "");
+  entitymove(5, "R2");
+  wait(50);
+  stext(1, "Who are you?!?", "", "");
+  stext(0, "I am the Dream Lord, Sam...", "", "");
+  stext(0, "I have something to tell you,", "Sam...", "");
+  stext(0, "", "      Phage is coming.", "");
+  enablemenu();
+  mapswitch("frogpond.MAP", 0, 0, 0);
+}
+event /*2*/
+{
+  fade = 1;
+  addcharacter(5);
+  removecharacter(1);
+  enablemenu();
+  flags(4091) = 1;
+  flags(336) = 1;
+  givegp(1000);
+  mapswitch("gsimon.map", 11, 37, 0);
+}
+event /*3*/
+{
+  fade = 1;
+  enablemenu();
+  flags(501) = 0;
+  flags(502) = 350;
+  flags(503) = 100;
+  flags(504) = 2500;
+  flags(505) = 22;
+  flags(506) = 23;
+  flags(507) = 24;
+  flags(508) = 25;
+  flags(509) = 12;
+  flags(510) = 300;
+  flags(511) = 5;
+  flags(512) = 65;
+  flags(513) = 65;
+  flags(540) = 350;
+  flags(541) = 100;
+  flags(514) = 1;
+  flags(515) = 350;
+  flags(516) = 100;
+  flags(517) = 2500;
+  flags(518) = 32;
+  flags(519) = 33;
+  flags(520) = 32;
+  flags(521) = 32;
+  flags(522) = 2;
+  flags(523) = 3;
+  flags(524) = 0;
+  flags(525) = 65;
+  flags(526) = 65;
+  flags(542) = 350;
+  flags(543) = 100;
+  flags(527) = 0;
+  flags(528) = 350;
+  flags(529) = 100;
+  flags(530) = 2500;
+  flags(531) = 22;
+  flags(532) = 23;
+  flags(533) = 24;
+  flags(534) = 25;
+  flags(535) = 12;
+  flags(536) = 0;
+  flags(537) = 5;
+  flags(538) = 65;
+  flags(539) = 65;
+  flags(544) = 350;
+  flags(545) = 100;
+  addcharacter(5);
+  addcharacter(4);
+  addcharacter(6);
+  addcharacter(2);
+  getitem(1, 2);
+  getitem(1, 2);
+  forceequip(1, 78);
+  getitem(1, 3);
+  getitem(1, 78);
+  getitem(1, 79);
+  getitem(1, 65);
+  getmagic(4, 1);
+  getmagic(2, 36);
+  getmagic(4, 2);
+  getmagic(4, 3);
+  getmagic(4, 5);
+  getmagic(5, 34);
+  getmagic(4, 7);
+  getmagic(4, 9);
+  getmagic(4, 17);
+  getmagic(1, 30);
+  for (x, 1, 8, 1)
+  {
+    givexp(x, 5000);
+  }
+  flags(998) = 199;
+  flags(999) = 49;
+  flags(703) = 1000;
+  flags(1001) = 500;
+  flags(1003) = 500;
+  givegp(100000);
+  mapswitch("lspbat3.map", 1, 1, 0);
+}
+event /*4*/
+{
+  flags(185) = 23;
+  flags(112) += 1;
+  switch (flags(112))
+  {
+    case (1): playmusic("cc.xm");
+    case (2): playmusic("fanfare.s3m");
+    case (3): playmusic("f-castle.mod");
+    case (4): playmusic("f-mountn.mod");
+    case (5): playmusic("f-lagoon.mod");
+    case (6): playmusic("f-pyramd.mod");
+    case (7): playmusic("GYRATION.mod");
+    case (8): playmusic("HeHasNoFace.s3m");
+    case (9): playmusic("Invtro94.s3m");
+    case (10): playmusic("malfunct.mod");
+    case (11): playmusic("march.xm");
+    case (10): playmusic("matkamies.mod");
+    case (11): playmusic("metal3.mod");
+    case (12): playmusic("mixboss.s3m");
+    case (13): playmusic("nazgul.mod");
+    case (14): playmusic("NIGHT13.xm");
+    case (15): playmusic("NoNoise.mod");
+    case (16): playmusic("SUNCASTS.xm");
+  }
+}
