@@ -196,8 +196,6 @@ main(int ArgCount, char *ArgValues[])
           }
         }
 
-        if (!IsKnownExtension) {}
-
         buffer *Input = LoadEntireFile(InputFilename);
         buffer Output;
 
