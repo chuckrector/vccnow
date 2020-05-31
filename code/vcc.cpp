@@ -157,7 +157,7 @@ WriteOutput(const char *FilenameWithoutExtension)
     fseek(File, 68, 0);
     fread(&MapWidth, 1, 2, File);
     fread(&MapHeight, 1, 2, File);
-    fseek(File, 100 + (MapWidth * MapHeight * 5) + 7956, 0);
+    fseek(File, sizeof(v1map_header) + (MapWidth * MapHeight * 5) + 7956, 0);
     fread(&NumEntities, 1, 4, File);
     fseek(File, sizeof(v1entity) * NumEntities, 1);
     fread(&NumMovementScripts, 1, 1, File);
