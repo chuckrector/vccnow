@@ -4,6 +4,7 @@
 #include "log.hpp"
 #include "preproc.hpp"
 #include "util.hpp"
+#include "v1assets.hpp"
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -158,7 +159,7 @@ WriteOutput(const char *FilenameWithoutExtension)
     fread(&MapHeight, 1, 2, File);
     fseek(File, 100 + (MapWidth * MapHeight * 5) + 7956, 0);
     fread(&NumEntities, 1, 4, File);
-    fseek(File, 88 * NumEntities, 1);
+    fseek(File, sizeof(v1entity) * NumEntities, 1);
     fread(&NumMovementScripts, 1, 1, File);
     fread(&MovementScriptBufferSize, 1, 4, File);
     fseek(File, (NumMovementScripts * 4) + MovementScriptBufferSize, 1);
