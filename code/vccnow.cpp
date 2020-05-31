@@ -12,7 +12,7 @@
 #include "ricvc.cpp"
 #include "runtests.cpp"
 #include "util.cpp"
-#include "v1map.hpp"
+#include "v1assets.hpp"
 #include "v1vc_macro.cpp"
 #include "v1vc_parser.cpp"
 #include "v1vc_token.cpp"
@@ -175,7 +175,7 @@ main(int ArgCount, char *ArgValues[])
               Input->C = Input->Data + sizeof(v1map_header) +
                          (MapWidth * MapHeight * 5) + 7956;
               u32 NumEntities = Input->GetD();
-              Input->C += 88 * NumEntities;
+              Input->C += sizeof(v1entity) * NumEntities;
               u8 NumMovementScripts = *Input->C++;
               u32 MovementScriptBufferSize = Input->GetD();
               Input->C += (NumMovementScripts * 4) + MovementScriptBufferSize;
