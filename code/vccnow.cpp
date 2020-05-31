@@ -12,6 +12,7 @@
 #include "ricvc.cpp"
 #include "runtests.cpp"
 #include "util.cpp"
+#include "v1map.hpp"
 #include "v1vc_macro.cpp"
 #include "v1vc_parser.cpp"
 #include "v1vc_token.cpp"
@@ -133,13 +134,14 @@ main(int ArgCount, char *ArgValues[])
         break;
       }
 
-      case 'a':
-      case 'd':
-      case 'v':
-      case 'x':
+      case 'a': // disassemble
+      case 'd': // decompile
+      case 'v': // validate script offset table
+      case 'x': // extract compiled script from map
       {
         decomp_mode Mode = ModeArg == 'a' ? DISASSEMBLE : DECOMPILE;
 
+        buffer *Input = 0;
         buffer Output;
 
         char InputFilename[1024];
@@ -147,7 +149,7 @@ main(int ArgCount, char *ArgValues[])
         strcpy_s(InputFilename, 1024, FilenameArg);
         if (L > 9 && !strcmp(".compiled", FilenameArg + (L - 9)))
         {
-          Decompile(InputFilename, &Output, PRODUCTION_MAX_TOKENS, Mode);
+          Input = LoadEntireFile(InputFilename);
         }
         else
         {
@@ -162,38 +164,37 @@ main(int ArgCount, char *ArgValues[])
 
           if (Exist(InputFilename))
           {
-            // Log("Decompiling %s...\n", InputFilename);
-            buffer *B = LoadEntireFile(InputFilename);
+            Input = LoadEntireFile(InputFilename);
 
             if (IL > 4 && !strcmp(".map", InputFilename + (IL - 4)))
             {
-              // Log("Loaded %d bytes\n", B->Length);
-              B->C = B->Data + 68;
-              u16 MapWidth = B->GetW();
-              u16 MapHeight = B->GetW();
+              v1map_header *MapHeader = (v1map_header *)Input->Data;
+              u16 MapWidth = MapHeader->Width;
+              u16 MapHeight = MapHeader->Height;
               DebugLog(LOW, "Map Size: %dx%d\n", MapWidth, MapHeight);
-              B->C = B->Data + 100 + (MapWidth * MapHeight * 5) + 7956;
-              u32 NumEntities = B->GetD();
-              B->C += 88 * NumEntities;
-              u8 NumMovementScripts = *B->C++;
-              u32 MovementScriptBufferSize = B->GetD();
-              B->C += (NumMovementScripts * 4) + MovementScriptBufferSize;
+              Input->C = Input->Data + sizeof(v1map_header) +
+                         (MapWidth * MapHeight * 5) + 7956;
+              u32 NumEntities = Input->GetD();
+              Input->C += 88 * NumEntities;
+              u8 NumMovementScripts = *Input->C++;
+              u32 MovementScriptBufferSize = Input->GetD();
+              Input->C += (NumMovementScripts * 4) + MovementScriptBufferSize;
 
               // NOTE(aen): Scripts begin here.
-              u64 MapSize = B->C - B->Data;
+              u64 MapSize = Input->C - Input->Data;
               DebugLog(LOW, "MapSize %lld\n", MapSize);
-              DebugLog(LOW, "Length Before: %lld\n", B->Length);
-              B->Length -= MapSize;
-              DebugLog(LOW, "Length After: %lld\n", B->Length);
-              B->Data = B->C;
+              DebugLog(LOW, "Length Before: %lld\n", Input->Length);
+              Input->Length -= MapSize;
+              DebugLog(LOW, "Length After: %lld\n", Input->Length);
+              Input->Data = Input->C;
             }
 
             if (ModeArg == 'v')
             {
-              u32 NumScripts = B->GetD();
+              u32 NumScripts = Input->GetD();
               Log("Validating %d script offsets...\n", NumScripts);
-              u8 *ScriptBase = B->C + (NumScripts * 4);
-              u32 *Offset = (u32 *)B->C;
+              u8 *ScriptBase = Input->C + (NumScripts * 4);
+              u32 *Offset = (u32 *)Input->C;
               u32 *OffsetBase = Offset;
               if (*Offset)
                 Log("  Script index 0 must point to offset 0...FAIL. Points to "
@@ -254,29 +255,30 @@ main(int ArgCount, char *ArgValues[])
               Log("Generating %s...\n", TempTable);
               FILE *File;
               fopen_s(&File, TempTable, "wb+");
-              u8 *TableStart = B->C;
-              u32 NumScripts = B->GetD();
+              u8 *TableStart = Input->C;
+              u32 NumScripts = Input->GetD();
               u64 OffsetTableSize = 4 + (NumScripts * 4);
               fwrite(TableStart, 1, OffsetTableSize, File);
               fclose(File);
-              B->C = TableStart + OffsetTableSize;
-              B->Length -= OffsetTableSize;
+              Input->C = TableStart + OffsetTableSize;
+              Input->Length -= OffsetTableSize;
 
               Log("Generating %s...\n", TempCompiled);
               fopen_s(&File, TempCompiled, "wb+");
-              fwrite(B->C, 1, B->Length, File);
+              fwrite(Input->C, 1, Input->Length, File);
               fclose(File);
               Log("OK\n");
-            }
-            else
-            {
-              Decompile(B, &Output, PRODUCTION_MAX_TOKENS, Mode);
             }
           }
           else
           {
             Fail("File not found: %s\n", Output.Data);
           }
+        }
+
+        if (Input)
+        {
+          Decompile(Input, &Output, PRODUCTION_MAX_TOKENS, Mode);
         }
 
         Log("%.*s", Output.Length, Output.Data);

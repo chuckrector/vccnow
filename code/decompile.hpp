@@ -107,6 +107,36 @@ struct decompiler
   {
     u32 Result = Address;
 
+    // // TODO(aen): HACK FOR PHAGE'S MAGIC.VCS
+    // // Need to figure out what's really causing this. Does
+    // // the original VCC source have some bug which might
+    // // explain this wonky behavior? Or is it truly just
+    // // memory corruption?
+    // if (CurrentScriptIndex == 26)
+    // {
+    //   DebugLog(
+    //       LOW,
+    //       "\nChecking CurrentScriptIndex == 26, IfAddress 0x%x.\n",
+    //       Result);
+    //   if (Result >= 0x6433)
+    //   {
+    //     if (Result == 0x6433)
+    //     {
+    //       Result -= 4;
+    //     }
+    //     else // if (Result < 0x6ba1)
+    //     {
+    //       Result -= 8;
+    //     }
+    //     // else if (Result == 0x6ba1)
+    //     // {
+    //     //   // Result--; // -= 4;
+    //     // }
+    //   }
+
+    //   return Result;
+    // }
+
     // NOTE(aen): We can't backtrack from the first script, so we're out of
     // luck if it's corrupt. We also don't need to do any work if no script
     // offsets were found to be corrupt.

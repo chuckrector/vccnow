@@ -1735,7 +1735,12 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
   DebugLog(MEDIUM, "Last offset %d\n", LastOffset);
   u64 Size = DataSize;
   DebugLog(MEDIUM, "Last size %lld\n", Size);
+
+  // // TODO(aen): +4 IS HACK FOR PHAGE'S MAGIC.VCS
+  // ScriptOffsetTable[NumScripts] = (u32)(DataSize - HeaderSize) + 4;
+  // TODO(aen): +4 IS HACK FOR PHAGE'S MAGIC.VCS
   ScriptOffsetTable[NumScripts] = (u32)(DataSize - HeaderSize);
+
   DebugLog(MEDIUM, "Load: Final offset %d\n", ScriptOffsetTable[NumScripts]);
   DebugLog(
       MEDIUM, "Load: Scripts end %d, Total end %d\n", C - ScriptBase, DataSize);
