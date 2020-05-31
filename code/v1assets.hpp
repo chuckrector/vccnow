@@ -2,6 +2,7 @@
 #define V1ASSETS_HPP
 
 #include "types.hpp"
+#include "util.hpp"
 
 struct v1map_header
 {
@@ -18,10 +19,10 @@ struct v1map_header
   u16 StartY;
   u8 Hide;
   u8 Warp;
-  u16 Width;
-  u16 Height;
+  u16 MapWidth;
+  u16 MapHeight;
   u8 IsCompressed;
-  char Padding[27];
+  u8 Padding[27];
 };
 
 struct v1entity
@@ -37,7 +38,7 @@ struct v1entity
   u8 MovementPatternCode;
   u8 CanBeActivated;
   u8 CannotBeObstructed;
-  char Padding[3]; // 16
+  u8 Padding[3]; // 16
   u32 ActivationScript;
   u32 MovementScript; // 16+8=24
   u8 Speed;
@@ -67,41 +68,71 @@ struct v1entity
   char Description[20]; // 68+20=88
 };
 
-/*
-module.exports = {
-  version: T.u8,
-  vspFilename: T.stringFixed(13),
-  musicFilename: T.stringFixed(13),
-  layerControlFlag: T.u8,
-  parallax: {
-    mul: T.u8,
-    div: T.u8,
-  },
-  description: T.stringFixed(30),
-  showName: T.u8,
-  saveFlag: T.u8,
-  startX: T.u16,
-  startY: T.u16,
-  hide: T.u8,
-  warp: T.u8,
-  width: T.u16,
-  height: T.u16,
-  isCompressed: T.u8, // "not yet supported" in v1 source
-  padding: T.list(T.u8, 27),
-  layers: T.list(T.list(T.u16, ({record}) => record.width * record.height), 2),
-  obstructionLayer: T.list(T.u8, ({record}) => record.width * record.height),
-  zone: T.list(V1_ZONE, 128),
-  characterFilenames: T.list(T.stringFixed(13), 100),
-  entityCount: T.u32,
-  entities: T.list(V1_ENTITY, ({record}) => record.entityCount),
-  movementScriptCount: T.u8,
-  movementScriptBufferSize: T.u32,
-  movementScriptOffsets: T.list(T.u32, ({record}) =>
-record.movementScriptCount), movementScriptBuffer: T.list(T.u8, ({record}) =>
-record.movementScriptBufferSize), scriptCount: T.u32, scriptOffsets:
-T.list(T.u32, ({record}) => record.scriptCount), scriptBuffer: T.list(T.u8,
-({reader}) => reader.remaining),
+struct v1zone
+{
+  char Name[15];
+  u8 Padding0;
+  u16 CallEvent;
+  u8 Percent;
+  u8 Delay;
+  u8 AcceptAdjacentActivation;
+  char SaveDescription[30];
+  u8 Padding1; // 52
+};
+
+struct v1chr_filename
+{
+  char Filename[13];
+};
+
+#define V1MAP_NUM_TILE_LAYERS 2
+
+struct v1map
+{
+  v1map_header Header;
+  v1zone Zones[128];                // 128*52=6656
+  v1chr_filename ChrFilenames[100]; // 100*13=1300
+};
+
+int
+VERGE1MapLayerSizeInBytes(int Width, int Height)
+{
+  return Width * Height * sizeof(u16);
 }
-*/
+
+int
+VERGE1ObstructionLayerSizeInBytes(int Width, int Height)
+{
+  return Width * Height * sizeof(u8);
+}
+
+u32
+VERGE1MapScriptsOffset(u8 *Data)
+{
+  u8 *Start = Data;
+
+  v1map_header *H = (v1map_header *)Data;
+  Data += sizeof(v1map_header);
+
+  Data += VERGE1MapLayerSizeInBytes(H->MapWidth, H->MapHeight) *
+          V1MAP_NUM_TILE_LAYERS;
+  Data += VERGE1ObstructionLayerSizeInBytes(H->MapWidth, H->MapHeight);
+  Data += sizeof(v1map::Zones);
+  Data += sizeof(v1map::ChrFilenames);
+
+  u32 NumEntities = *(u32 *)Data;
+  Data += sizeof(u32);
+  Data += sizeof(v1entity) * NumEntities;
+
+  u8 NumMovementScripts = *Data++;
+  u32 MovementScriptsBufferSize = *(u32 *)Data;
+  Data += sizeof(u32);
+  Data += sizeof(u32) * NumMovementScripts; // NOTE(aen): Offset lookups
+  Data += MovementScriptsBufferSize;
+
+  u64 ResultU64 = Data - Start;
+  u32 Result = SafeTruncateU64(ResultU64);
+  return (Result);
+}
 
 #endif // V1ASSETS_HPP

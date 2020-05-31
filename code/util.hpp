@@ -33,4 +33,12 @@ void DumpHex(
     char *Indent = "\t");
 void FormatU64(u64 Num, char *Output);
 
+u32
+SafeTruncateU64(u64 Value)
+{
+  Assert(Value <= 0xffffffff);
+  u32 Result = (u32)Value;
+  return (Result);
+}
+
 #endif // UTIL_HPP

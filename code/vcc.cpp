@@ -132,11 +132,6 @@ WriteOutput(const char *FilenameWithoutExtension)
   Assert(FilenameWithoutExtension);
 
   FILE *File;
-  u16 MapWidth;
-  u16 MapHeight;
-  u32 NumEntities;
-  u8 NumMovementScripts;
-  u32 MovementScriptBufferSize;
 
   char NoExt[1024];
   char VcFilename[1024];
@@ -153,21 +148,15 @@ WriteOutput(const char *FilenameWithoutExtension)
 
   if (Exist(MapFilename))
   {
+    buffer *B = LoadEntireFile(MapFilename);
+    u32 ScriptsOffset = VERGE1MapScriptsOffset(B->Data);
     fopen_s(&File, MapFilename, "rb+");
-    fseek(File, 68, 0);
-    fread(&MapWidth, 1, 2, File);
-    fread(&MapHeight, 1, 2, File);
-    fseek(File, sizeof(v1map_header) + (MapWidth * MapHeight * 5) + 7956, 0);
-    fread(&NumEntities, 1, 4, File);
-    fseek(File, sizeof(v1entity) * NumEntities, 1);
-    fread(&NumMovementScripts, 1, 1, File);
-    fread(&MovementScriptBufferSize, 1, 4, File);
-    fseek(File, (NumMovementScripts * 4) + MovementScriptBufferSize, 1);
+    fseek(File, ScriptsOffset, 0);
   }
   else
   {
     char Temp[1024];
-    sprintf_s(Temp, 1024, "%s.compiled", NoExt);
+    sprintf_s(Temp, 1024, "%s.vcc", NoExt);
     printf("%s not found, falling back to %s\n", MapFilename, Temp);
 
     fopen_s(&File, Temp, "wb+");

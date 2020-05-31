@@ -59,8 +59,8 @@ main(int ArgCount, char *ArgValues[])
     Log("  vccnow <mode> <file>\n\n");
     Log("Modes:\n");
     Log("  a - disassemble\n");
-    Log("  c - compile (writes to file.compiled if no file.map found)\n");
-    Log("  d - decompile (can be file.map or file.compiled)\n");
+    Log("  c - compile (writes file.vcc [compiled vc] if no file.map found)\n");
+    Log("  d - decompile (can be file.map or file.vcc)\n");
     Log("  p - preprocess\n");
     Log("  t - tests (no file argument)\n");
     Log("  v - validate script offset table\n");
@@ -73,7 +73,7 @@ main(int ArgCount, char *ArgValues[])
     Log("  h - high debug logging\n\n");
     Log("Examples:\n");
     Log("  vccnow c test.vc\n");
-    Log("  vccnow al test.compiled\n");
+    Log("  vccnow al test.vcc\n");
     Log("  vccnow th\n");
     exit(-1);
   }
@@ -147,7 +147,7 @@ main(int ArgCount, char *ArgValues[])
         char InputFilename[1024];
         u64 L = strlen(FilenameArg);
         strcpy_s(InputFilename, 1024, FilenameArg);
-        if (L > 9 && !strcmp(".compiled", FilenameArg + (L - 9)))
+        if (L > 4 && !strcmp(".vcc", FilenameArg + (L - 4)))
         {
           Input = LoadEntireFile(InputFilename);
         }
@@ -168,25 +168,9 @@ main(int ArgCount, char *ArgValues[])
 
             if (IL > 4 && !strcmp(".map", InputFilename + (IL - 4)))
             {
-              v1map_header *MapHeader = (v1map_header *)Input->Data;
-              u16 MapWidth = MapHeader->Width;
-              u16 MapHeight = MapHeader->Height;
-              DebugLog(LOW, "Map Size: %dx%d\n", MapWidth, MapHeight);
-              Input->C = Input->Data + sizeof(v1map_header) +
-                         (MapWidth * MapHeight * 5) + 7956;
-              u32 NumEntities = Input->GetD();
-              Input->C += sizeof(v1entity) * NumEntities;
-              u8 NumMovementScripts = *Input->C++;
-              u32 MovementScriptBufferSize = Input->GetD();
-              Input->C += (NumMovementScripts * 4) + MovementScriptBufferSize;
-
-              // NOTE(aen): Scripts begin here.
-              u64 MapSize = Input->C - Input->Data;
-              DebugLog(LOW, "MapSize %lld\n", MapSize);
-              DebugLog(LOW, "Length Before: %lld\n", Input->Length);
-              Input->Length -= MapSize;
-              DebugLog(LOW, "Length After: %lld\n", Input->Length);
-              Input->Data = Input->C;
+              u32 ScriptsOffset = VERGE1MapScriptsOffset(Input->Data);
+              Input->Data = Input->C = Input->Data + ScriptsOffset;
+              Input->Length -= ScriptsOffset;
             }
 
             if (ModeArg == 'v')
@@ -246,14 +230,21 @@ main(int ArgCount, char *ArgValues[])
               }
 
               char TempTable[1024];
-              sprintf_s(TempTable, 1024, "%s.table", NoExt);
+              sprintf_s(TempTable, 1024, "%s.vcc-table", NoExt);
+              char TempData[1024];
+              sprintf_s(TempData, 1024, "%s.vcc-data", NoExt);
               char TempCompiled[1024];
-              sprintf_s(TempCompiled, 1024, "%s.compiled", NoExt);
+              sprintf_s(TempCompiled, 1024, "%s.vcc", NoExt);
 
               Log("Extracting compiled script from %s...\n", FilenameArg);
 
-              Log("Generating %s...\n", TempTable);
+              Log("Extracting %s...\n", TempCompiled);
               FILE *File;
+              fopen_s(&File, TempCompiled, "wb+");
+              fwrite(Input->C, 1, Input->Length, File);
+              fclose(File);
+
+              Log("  Generating %s...\n", TempTable);
               fopen_s(&File, TempTable, "wb+");
               u8 *TableStart = Input->C;
               u32 NumScripts = Input->GetD();
@@ -263,8 +254,8 @@ main(int ArgCount, char *ArgValues[])
               Input->C = TableStart + OffsetTableSize;
               Input->Length -= OffsetTableSize;
 
-              Log("Generating %s...\n", TempCompiled);
-              fopen_s(&File, TempCompiled, "wb+");
+              Log("  Generating %s...\n", TempData);
+              fopen_s(&File, TempData, "wb+");
               fwrite(Input->C, 1, Input->Length, File);
               fclose(File);
               Log("OK\n");
@@ -276,7 +267,7 @@ main(int ArgCount, char *ArgValues[])
           }
         }
 
-        if (Input)
+        if (Input && (ModeArg == 'a' || ModeArg == 'd'))
         {
           Decompile(Input, &Output, PRODUCTION_MAX_TOKENS, Mode);
         }
