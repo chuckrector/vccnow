@@ -141,130 +141,154 @@ main(int ArgCount, char *ArgValues[])
       {
         decomp_mode Mode = ModeArg == 'a' ? DISASSEMBLE : DECOMPILE;
 
-        buffer *Input = 0;
-        buffer Output;
-
         char InputFilename[1024];
         u64 L = strlen(FilenameArg);
         strcpy_s(InputFilename, 1024, FilenameArg);
-        if (L > 4 && !strcmp(".vcc", FilenameArg + (L - 4)))
+
+        b64 IsKnownExtension = false;
+        if (L > 4)
         {
-          Input = LoadEntireFile(InputFilename);
+          char *Ext = FilenameArg + (L - 4);
+          if (!strcmp(".map", Ext) || !strcmp(".vcs", Ext) ||
+              !strcmp(".vcc", Ext))
+          {
+            IsKnownExtension = true;
+          }
         }
-        else
+
+        if (!IsKnownExtension)
         {
-          if (L > 4 && !strcmp(".map", FilenameArg + (L - 4))) {}
-          else if (L > 4 && !strcmp(".vcs", FilenameArg + (L - 4)))
+          char Guess[1024];
+          sprintf_s(Guess, 1024, "%s.map", InputFilename);
+          if (Exist(Guess))
           {
-          }
-          else
-            strcpy_s(InputFilename + L, 1024, ".map");
-
-          u64 IL = strlen(InputFilename);
-
-          if (Exist(InputFilename))
-          {
-            Input = LoadEntireFile(InputFilename);
-
-            if (IL > 4 && !strcmp(".map", InputFilename + (IL - 4)))
-            {
-              u32 ScriptsOffset = VERGE1MapScriptsOffset(Input->Data);
-              Input->Data = Input->C = Input->Data + ScriptsOffset;
-              Input->Length -= ScriptsOffset;
-            }
-
-            if (ModeArg == 'v')
-            {
-              u32 NumScripts = Input->GetD();
-              Log("Validating %d script offsets...\n", NumScripts);
-              u8 *ScriptBase = Input->C + (NumScripts * 4);
-              u32 *Offset = (u32 *)Input->C;
-              u32 *OffsetBase = Offset;
-              if (*Offset)
-                Log("  Script index 0 must point to offset 0...FAIL. Points to "
-                    "%d\n",
-                    *Offset);
-              Offset++;
-              b64 HasFailed = false;
-              for (u64 Index = 1; Index < NumScripts; Index++)
-              {
-                u8 *Head = ScriptBase + *Offset++;
-                if (Head[-1] != 0xff)
-                {
-                  HasFailed = true;
-                  u8 *P = Head - 1;
-                  while (P != ScriptBase && *P != 0xff)
-                  {
-                    P--;
-                  }
-                  Log("  Script index %d...", Index);
-                  Log("FAIL. Found 0x%x (%d). ", Head[-1], Head[-1]);
-                  if (P == ScriptBase)
-                  {
-                    Log("    No preeding 0xff\n");
-                  }
-                  else
-                  {
-                    u64 NearestEndByte = Head - (P + 1);
-                    Log("    0xff found %d bytes earlier\n", NearestEndByte);
-                    // // NOTE(aen): Shift everything back. Temp theory
-                    // // validation...
-                    // for (u64 i = Index; i < NumScripts; i++)
-                    // {
-                    //   OffsetBase[i] -= (u32)NearestEndByte;
-                    // }
-                  }
-                }
-              }
-              if (!HasFailed)
-                Log("OK\n");
-            }
-            else if (ModeArg == 'x')
-            {
-              char NoExt[1024];
-              strcpy_s(NoExt, 1024, FilenameArg);
-              u64 L2 = strlen(NoExt);
-              if (L2 > 4 && !strcmp(".map", NoExt + (L2 - 4)))
-              {
-                NoExt[L2 - 4] = 0;
-              }
-
-              char TempTable[1024];
-              sprintf_s(TempTable, 1024, "%s.vcc-table", NoExt);
-              char TempData[1024];
-              sprintf_s(TempData, 1024, "%s.vcc-data", NoExt);
-              char TempCompiled[1024];
-              sprintf_s(TempCompiled, 1024, "%s.vcc", NoExt);
-
-              Log("Extracting compiled script from %s...\n", FilenameArg);
-
-              Log("Extracting %s...\n", TempCompiled);
-              FILE *File;
-              fopen_s(&File, TempCompiled, "wb+");
-              fwrite(Input->C, 1, Input->Length, File);
-              fclose(File);
-
-              Log("  Generating %s...\n", TempTable);
-              fopen_s(&File, TempTable, "wb+");
-              u8 *TableStart = Input->C;
-              u32 NumScripts = Input->GetD();
-              u64 OffsetTableSize = 4 + (NumScripts * 4);
-              fwrite(TableStart, 1, OffsetTableSize, File);
-              fclose(File);
-              Input->C = TableStart + OffsetTableSize;
-              Input->Length -= OffsetTableSize;
-
-              Log("  Generating %s...\n", TempData);
-              fopen_s(&File, TempData, "wb+");
-              fwrite(Input->C, 1, Input->Length, File);
-              fclose(File);
-              Log("OK\n");
-            }
+            strcpy_s(InputFilename, 1024, Guess);
+            IsKnownExtension = true;
           }
           else
           {
-            Fail("File not found: %s\n", Output.Data);
+            sprintf_s(Guess, 1024, "%s.vcs", InputFilename);
+            if (Exist(Guess))
+            {
+              strcpy_s(InputFilename, 1024, Guess);
+              IsKnownExtension = true;
+            }
+            else
+            {
+              sprintf_s(Guess, 1024, "%s.vcc", InputFilename);
+              if (Exist(Guess))
+              {
+                strcpy_s(InputFilename, 1024, Guess);
+                IsKnownExtension = true;
+              }
+              else
+              {
+                Fail(
+                    "Unknown file type, or file not found:\n"
+                    "    %s\nTried:\n"
+                    "    %s.map\n    %s.vcs\n    %s.vcc\n",
+                    FilenameArg,
+                    FilenameArg,
+                    FilenameArg,
+                    FilenameArg);
+              }
+            }
           }
+        }
+
+        if (!IsKnownExtension) {}
+
+        buffer *Input = LoadEntireFile(InputFilename);
+        buffer Output;
+
+        L = strlen(InputFilename);
+        if (L > 4 && !strcmp(".map", InputFilename + (L - 4)))
+        {
+          u32 ScriptsOffset = VERGE1MapScriptsOffset(Input->Data);
+          Input->Data = Input->C = Input->Data + ScriptsOffset;
+          Input->Length -= ScriptsOffset;
+        }
+
+        if (ModeArg == 'v')
+        {
+          u32 NumScripts = Input->GetD();
+          Log("Validating %d script offsets...\n", NumScripts);
+          u8 *ScriptBase = Input->C + (NumScripts * 4);
+          u32 *Offset = (u32 *)Input->C;
+          u32 *OffsetBase = Offset;
+          if (*Offset)
+            Log("  Script index 0 must point to offset 0...FAIL. Points to "
+                "%d\n",
+                *Offset);
+          Offset++;
+          b64 HasFailed = false;
+          for (u64 Index = 1; Index < NumScripts; Index++)
+          {
+            u8 *Head = ScriptBase + *Offset++;
+            if (Head[-1] != 0xff)
+            {
+              HasFailed = true;
+              u8 *P = Head - 1;
+              while (P != ScriptBase && *P != 0xff)
+              {
+                P--;
+              }
+              Log("  Script index %d...", Index);
+              Log("FAIL. Found 0x%x (%d). ", Head[-1], Head[-1]);
+              if (P == ScriptBase)
+              {
+                Log("    No preeding 0xff\n");
+              }
+              else
+              {
+                u64 NearestEndByte = Head - (P + 1);
+                Log("    0xff found %d bytes earlier\n", NearestEndByte);
+              }
+            }
+          }
+          if (!HasFailed)
+            Log("OK\n");
+        }
+        else if (ModeArg == 'x')
+        {
+          char NoExt[1024];
+          strcpy_s(NoExt, 1024, FilenameArg);
+          u64 L2 = strlen(NoExt);
+          if (L2 > 4 && !strcmp(".map", NoExt + (L2 - 4)))
+          {
+            NoExt[L2 - 4] = 0;
+          }
+
+          char TempTable[1024];
+          sprintf_s(TempTable, 1024, "%s.vcc-table", NoExt);
+          char TempData[1024];
+          sprintf_s(TempData, 1024, "%s.vcc-data", NoExt);
+          char TempCompiled[1024];
+          sprintf_s(TempCompiled, 1024, "%s.vcc", NoExt);
+
+          Log("Extracting compiled script from %s...\n", FilenameArg);
+
+          Log("Extracting %s...\n", TempCompiled);
+          FILE *File;
+          fopen_s(&File, TempCompiled, "wb+");
+          fwrite(Input->C, 1, Input->Length, File);
+          fclose(File);
+
+          Log("  Generating %s...\n", TempTable);
+          fopen_s(&File, TempTable, "wb+");
+          u8 *TableStart = Input->C;
+          u32 NumScripts = Input->GetD();
+          u64 OffsetTableSize = 4 + (NumScripts * 4);
+          fwrite(TableStart, 1, OffsetTableSize, File);
+          fclose(File);
+          Input->C = TableStart + OffsetTableSize;
+          Input->Length -= OffsetTableSize;
+
+          Log("  Generating %s...\n", TempData);
+          fopen_s(&File, TempData, "wb+");
+          fwrite(Input->C, 1, Input->Length, File);
+          fclose(File);
+          Log("OK\n");
         }
 
         if (Input && (ModeArg == 'a' || ModeArg == 'd'))
