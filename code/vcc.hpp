@@ -3,7 +3,7 @@
 
 #include "types.hpp"
 
-void PreStartupFiles(const char *FilenameWithoutExtension);
+void PreStartupFiles(char *FilenameWithoutExtension);
 void PostStartupFiles();
 void WriteOutput(const char *FilenameWithoutExtension);
 void WriteEffectOutput();

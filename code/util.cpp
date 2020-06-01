@@ -126,3 +126,40 @@ FormatU64(u64 Num, char *Output)
   while (L--)
     *T2-- = *T1--;
 }
+
+char *
+StringFindLast(char *String, char *This)
+{
+  char *Result = 0;
+
+  u64 StringLength = strlen(String);
+  u64 ThisLength = strlen(This);
+
+  if (ThisLength < StringLength)
+  {
+    char *C = String + StringLength - ThisLength;
+    while (C != String)
+    {
+      if (!memcmp(C, This, ThisLength))
+      {
+        Result = C;
+        break;
+      }
+
+      --C;
+    }
+  }
+
+  return (Result);
+}
+
+b64
+StringEndsWith(char *String, char *Suffix)
+{
+  b64 Result = false;
+
+  char *Found = StringFindLast(String, Suffix);
+  Result = (Found != 0);
+
+  return (Result);
+}

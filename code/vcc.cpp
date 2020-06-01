@@ -20,11 +20,11 @@ PostStartupFiles()
 }
 
 void
-PreStartupFiles(const char *FilenameWithoutExtension)
+PreStartupFiles(char *FilenameWithoutExtension)
 {
   strcpy_s(TempBuffer, TEMP_BUFFER_SIZE, FilenameWithoutExtension);
   u64 L = strlen(TempBuffer);
-  if (L > 3 && !strcmp(".vc", FilenameWithoutExtension + (L - 3))) {}
+  if (StringEndsWith(FilenameWithoutExtension, ".vc")) {}
   else
     strcpy_s(TempBuffer + strlen(TempBuffer), TEMP_BUFFER_SIZE, ".vc");
   CompileGuy.BasePath = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
@@ -60,7 +60,7 @@ WriteScriptOffsetTableToBuffer(buffer *Output)
 {
   // Log("WriteScriptOffsetTableToBuffer\n");
   u32 *P = (u32 *)Output->Data;
-  *P++ = (u32)GlobalNumScripts;
+  *P++ = SafeTruncateU64(GlobalNumScripts);
   memcpy(P, GlobalScriptOffsetTable, 4 * GlobalNumScripts);
   Output->Length = 4 + (4 * GlobalNumScripts);
 }
@@ -138,10 +138,10 @@ WriteOutput(const char *FilenameWithoutExtension)
   char MapFilename[1024];
 
   strcpy_s(NoExt, 1024, FilenameWithoutExtension);
-  u64 L = strlen(NoExt);
-  if (L > 3 && !strcmp(".vc", NoExt + (L - 3)))
+  char *VCExtension = StringFindLast(NoExt, ".vc");
+  if (VCExtension)
   {
-    NoExt[L - 3] = 0;
+    *VCExtension = 0;
   }
   sprintf_s(VcFilename, "%s.vc", NoExt);
   sprintf_s(MapFilename, "%s.map", NoExt);

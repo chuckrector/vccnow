@@ -1368,8 +1368,8 @@ ProcessEvent()
   // printf("*** ProcessEvent\n");
   Expect("{");
   GlobalInEvent = 1;
-  GlobalScriptOffsetTable[GlobalNumScripts] =
-      (u32)(CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
+  GlobalScriptOffsetTable[GlobalNumScripts] = SafeTruncateU64(
+      CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
   GlobalNumScripts++;
 
   while (1)

@@ -39,9 +39,7 @@ decompiler::DisSaveAddress(char Marker)
   DisMarker = Marker;
   DisRefCheck(); // NOTE(aen): May override marker
   u64 Address0 = C - ScriptBase;
-  if (Address0 >= 0xffffffff)
-    Fail("Address is larger than 32-bit: %d %x\n", Address0, Address0);
-  DisAddress = (u32)Address0;
+  DisAddress = SafeTruncateU64(Address0);
 }
 
 void
@@ -1714,7 +1712,7 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
         // point of corruption in a given offset table. May need to revisit this
         // later if it turns out games other than PHAGE have crazier corruption.
         // NOTE(aen): P will be 0xff, so P+1 is the "real" starting location.
-        ScriptCorruptionOffset = (u32)(Head - (P + 1));
+        ScriptCorruptionOffset = SafeTruncateU64(Head - (P + 1));
         ScriptCorruptionIndex = Index;
 
         Log("/* Note: Script %d offset is corrupt. 0xff found %d "
@@ -1737,9 +1735,9 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
   DebugLog(MEDIUM, "Last size %lld\n", Size);
 
   // // TODO(aen): +4 IS HACK FOR PHAGE'S MAGIC.VCS
-  // ScriptOffsetTable[NumScripts] = (u32)(DataSize - HeaderSize) + 4;
+  // ScriptOffsetTable[NumScripts] = SafeTruncate((DataSize - HeaderSize) + 4);
   // TODO(aen): +4 IS HACK FOR PHAGE'S MAGIC.VCS
-  ScriptOffsetTable[NumScripts] = (u32)(DataSize - HeaderSize);
+  ScriptOffsetTable[NumScripts] = SafeTruncateU64(DataSize - HeaderSize);
 
   DebugLog(MEDIUM, "Load: Final offset %d\n", ScriptOffsetTable[NumScripts]);
   DebugLog(

@@ -142,20 +142,11 @@ main(int ArgCount, char *ArgValues[])
         decomp_mode Mode = ModeArg == 'a' ? DISASSEMBLE : DECOMPILE;
 
         char InputFilename[1024];
-        u64 L = strlen(FilenameArg);
         strcpy_s(InputFilename, 1024, FilenameArg);
 
-        b64 IsKnownExtension = false;
-        if (L > 4)
-        {
-          char *Ext = FilenameArg + (L - 4);
-          if (!strcmp(".map", Ext) || !strcmp(".vcs", Ext) ||
-              !strcmp(".vcc", Ext))
-          {
-            IsKnownExtension = true;
-          }
-        }
-
+        b64 IsKnownExtension = StringEndsWith(FilenameArg, ".map") ||
+                               StringEndsWith(FilenameArg, ".vcs") ||
+                               StringEndsWith(FilenameArg, ".vcc");
         if (!IsKnownExtension)
         {
           char Guess[1024];
@@ -199,8 +190,7 @@ main(int ArgCount, char *ArgValues[])
         buffer *Input = LoadEntireFile(InputFilename);
         buffer Output;
 
-        L = strlen(InputFilename);
-        if (L > 4 && !strcmp(".map", InputFilename + (L - 4)))
+        if (StringEndsWith(InputFilename, ".map"))
         {
           u32 ScriptsOffset = VERGE1MapScriptsOffset(Input->Data);
           Input->Data = Input->C = Input->Data + ScriptsOffset;
@@ -251,10 +241,11 @@ main(int ArgCount, char *ArgValues[])
         {
           char NoExt[1024];
           strcpy_s(NoExt, 1024, FilenameArg);
-          u64 L2 = strlen(NoExt);
-          if (L2 > 4 && !strcmp(".map", NoExt + (L2 - 4)))
+
+          char *MAPExtension = StringFindLast(NoExt, ".map");
+          if (MAPExtension)
           {
-            NoExt[L2 - 4] = 0;
+            *MAPExtension = 0;
           }
 
           char TempTable[1024];
