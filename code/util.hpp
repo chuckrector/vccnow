@@ -21,12 +21,12 @@ mem_pool TempPool;
 void InitTempPool();
 char *NewTempBuffer(u64 Size);
 
-b64 Exist(const char *Filename);
+b64 Exist(char *Filename);
 u64 FileSize(FILE *File);
-buffer *LoadEntireFile(const char *Filename);
-void SetPath(const char *Filename, char *Path, u64 PathLength);
+buffer *LoadEntireFile(char *Filename);
+void SetPath(char *Filename, char *Path, u64 PathLength);
 void DumpHex(
-    const char *Title,
+    char *Title,
     u8 *Buffer,
     u64 Length,
     u64 Limit = 8 * 8,

@@ -126,7 +126,7 @@ WriteScriptOutput()
 }
 
 void
-WriteOutput(const char *FilenameWithoutExtension)
+WriteOutput(char *FilenameWithoutExtension)
 {
   // Log("WriteOutput %s\n", FilenameWithoutExtension);
   Assert(FilenameWithoutExtension);

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 void
-Fail(const char *Format, ...)
+Fail(char *Format, ...)
 {
   printf("FAIL\n");
   va_list Args;
@@ -17,7 +17,7 @@ Fail(const char *Format, ...)
 }
 
 void
-Log(const char *Format, ...)
+Log(char *Format, ...)
 {
   va_list Args;
   va_start(Args, Format);
@@ -26,7 +26,7 @@ Log(const char *Format, ...)
 }
 
 void
-DebugLog(DebugLevel_e Level, const char *Format, ...)
+DebugLog(DebugLevel_e Level, char *Format, ...)
 {
   if (Level > DebugLevel)
     return;

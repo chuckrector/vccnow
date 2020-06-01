@@ -51,7 +51,7 @@ token::IsNumber()
   return Type == TT_NUMBER;
 }
 b64
-token::IsMatch(const char *S, u64 SLength)
+token::IsMatch(char *S, u64 SLength)
 {
   return SLength == Length && !memcmp(S, Text, Length);
 }
@@ -194,7 +194,7 @@ token_list::IsToken(char Char)
 }
 
 b64
-token_list::IsToken(const char *CheckText, u64 Length)
+token_list::IsToken(char *CheckText, u64 Length)
 {
   return Length == AtToken()->Length &&
          !memcmp(CheckText, AtToken()->Text, Length);
@@ -230,7 +230,7 @@ token_list::ExpectToken(char Char, char Backup)
 }
 
 void
-token_list::ExpectToken(const char *CheckText, u64 Length)
+token_list::ExpectToken(char *CheckText, u64 Length)
 {
   token *Token = AtToken();
   if (Length == Token->Length && !memcmp(Token->Text, CheckText, Length))

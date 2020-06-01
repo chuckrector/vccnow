@@ -73,7 +73,7 @@
          ModPosition(RW)
  */
 
-const char *GlobalStaticFunctionList[] = {
+char *GlobalStaticFunctionList[] = {
     "MAPSWITCH",
     "WARP",
     "ADDCHARACTER",
@@ -179,7 +179,7 @@ const char *GlobalStaticFunctionList[] = {
     "PLAYVAS"};
 // 103
 
-const char *GlobalStaticVar0List[] = {
+char *GlobalStaticVar0List[] = {
     "A",
     "B",
     "C",
@@ -255,7 +255,7 @@ const char *GlobalStaticVar0List[] = {
     "VCLAYERWRITE",
     "MODPOSITION"};
 
-const char *GlobalStaticVar1List[] = {
+char *GlobalStaticVar1List[] = {
     "FLAGS",
     "FACING",
     "CHAR",
@@ -315,7 +315,7 @@ const char *GlobalStaticVar1List[] = {
     "CHARSTATUS",
     "SPELL"};
 
-const char *GlobalStaticVar2List[] =
+char *GlobalStaticVar2List[] =
     {"RANDOM", "SCREEN", "ITEMS", "CANEQUIP", "CHOOSECHAR", "OBS", "SPELLS"};
 
 char GlobalStaticVar0WriteList[] =

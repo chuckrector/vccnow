@@ -6,10 +6,10 @@
 #define NUM_VARS1 58
 #define NUM_VARS2 7
 
-const char *GlobalStaticFunctionList[];
-const char *GlobalStaticVar0List[];
-const char *GlobalStaticVar1List[];
-const char *GlobalStaticVar2List[];
+char *GlobalStaticFunctionList[];
+char *GlobalStaticVar0List[];
+char *GlobalStaticVar1List[];
+char *GlobalStaticVar2List[];
 char GlobalStaticVar0WriteList[];
 char GlobalStaticVar1WriteList[];
 char GlobalStaticVar2WriteList[];

@@ -71,8 +71,8 @@ struct compile_guy
   u64 NumGotos = 0;
 
   b64 IsInEvent = 0;
-  b64 IsExternalGarbage = 0;          // TODO(aen): Is this really what it is?
-  const char *TopLevelScriptType = 0; // NOTE(aen): EFFECT, SCRIPT, EVENT
+  b64 IsExternalGarbage = 0;    // TODO(aen): Is this really what it is?
+  char *TopLevelScriptType = 0; // NOTE(aen): EFFECT, SCRIPT, EVENT
   u64 LibraryFunctionIndex = 0;
 };
 
@@ -86,18 +86,18 @@ u8 CharTypeLookup[256];
 void InitCharTypeLookup();
 
 b64 IsCharType(u64 C, u64 Type);
-void err(const char *str);
+void err(char *str);
 void EmitOperand();
 void ProcessGoto();
 void EmitD(u64 w);
 void EmitC(u64 c);
-void Expect(const char *str);
-b64 NextIs(const char *str);
+void Expect(char *str);
+b64 NextIs(char *str);
 void GetString();
-void EmitString(const char *str);
+void EmitString(char *str);
 void CompileToBuffer(
     u64 Type,
-    const char *Input,
+    char *Input,
     u8 *Output,
     u64 OutputLength,
     u64 *GeneratedByteCount);

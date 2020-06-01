@@ -19,7 +19,7 @@ NewTempBuffer(u64 L)
 }
 
 b64
-Exist(const char *Filename)
+Exist(char *Filename)
 {
   FILE *f;
 
@@ -44,7 +44,7 @@ FileSize(FILE *File)
 }
 
 buffer *
-LoadEntireFile(const char *Filename)
+LoadEntireFile(char *Filename)
 {
   // Log("Load %s...\n", Filename);
   if (!Exist(Filename))
@@ -68,7 +68,7 @@ LoadEntireFile(const char *Filename)
 }
 
 void
-SetPath(const char *Filename, char *Path, u64 PathLength)
+SetPath(char *Filename, char *Path, u64 PathLength)
 {
   char FullPath[_MAX_PATH];
   _fullpath(FullPath, Filename, _MAX_PATH);
@@ -82,7 +82,7 @@ SetPath(const char *Filename, char *Path, u64 PathLength)
 }
 
 void
-DumpHex(const char *Title, u8 *Buffer, u64 Length, u64 Limit, char *Indent)
+DumpHex(char *Title, u8 *Buffer, u64 Length, u64 Limit, char *Indent)
 {
   Log("%s\n%s", Title, Indent);
   if (!Length)

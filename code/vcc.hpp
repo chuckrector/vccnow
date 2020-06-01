@@ -5,7 +5,7 @@
 
 void PreStartupFiles(char *FilenameWithoutExtension);
 void PostStartupFiles();
-void WriteOutput(const char *FilenameWithoutExtension);
+void WriteOutput(char *FilenameWithoutExtension);
 void WriteEffectOutput();
 void WriteMagicOutput();
 void WriteScriptOutput();

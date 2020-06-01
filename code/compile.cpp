@@ -37,7 +37,7 @@ u64 GlobalLines = 1;
 // Compilation-state flags
 b64 GlobalInEvent = 0;
 b64 GlobalInExternal = 0;
-const char *GlobalScriptToken;
+char *GlobalScriptToken;
 u64 GlobalFunctionIndex;
 u64 GlobalNumLabels = 0;
 u64 GlobalNumGotos = 0;
@@ -45,7 +45,7 @@ u64 GlobalNumGotos = 0;
 // ================================ Code =================================
 
 void
-err(const char *String)
+err(char *String)
 {
   FILE *File;
 
@@ -63,7 +63,7 @@ err(const char *String)
 }
 
 b64
-TokenIs(const char *String)
+TokenIs(char *String)
 {
   if (!strcmp(String, GlobalToken))
     return 1;
@@ -511,7 +511,7 @@ GetToken()
 }
 
 b64
-NextIs(const char *String)
+NextIs(char *String)
 {
   u8 *Pointer;
   // char tt, tst;
@@ -544,7 +544,7 @@ NextIs(const char *String)
 }
 
 void
-Expect(const char *String)
+Expect(char *String)
 {
   // printf("Expect %s\n", str);
   FILE *File;
@@ -613,7 +613,7 @@ EmitD(u64 Value)
 }
 
 void
-EmitString(const char *str)
+EmitString(char *str)
 {
   u64 Index;
 
@@ -1546,7 +1546,7 @@ Parse()
 void
 CompileToBuffer(
     u64 Type,
-    const char *Input,
+    char *Input,
     u8 *Output,
     u64 OutputLimit,
     u64 *GeneratedByteCount)

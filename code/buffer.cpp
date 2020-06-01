@@ -24,7 +24,7 @@ NewBuffer(u8 *Data, u64 Length)
 }
 
 buffer *
-NewBuffer(const char *S)
+NewBuffer(char *S)
 {
   return NewBuffer((u8 *)S, strlen(S));
 }

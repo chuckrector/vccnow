@@ -17,13 +17,13 @@ struct parser
   void ToTokenList(token_list *TokenList);
 
   parser();
-  parser(const char *S);
+  parser(char *S);
   parser(buffer *B);
 
-  void Reset(const char *S);
+  void Reset(char *S);
   void Reset(buffer *B);
-  void CalcPath(const char *Filename);
-  void Load(const char *Filename);
+  void CalcPath(char *Filename);
+  void Load(char *Filename);
 
   b64 IsWhite();
   b64 IsLetter();
@@ -34,10 +34,10 @@ struct parser
   u8 *End();
   b64 AtEnd();
   b64 AtText(char Char);
-  b64 AtText(const char *Text, u64 Length);
+  b64 AtText(char *Text, u64 Length);
   void Expect(char Char);
-  void Expect(const char *Text, u64 Length);
-  void SkipPast(const char *Text, u64 Length);
+  void Expect(char *Text, u64 Length);
+  void SkipPast(char *Text, u64 Length);
   void SkipWhite();
 
   void Next(s64 Delta = 1); // NOTE(aen): Important for line/col tracking

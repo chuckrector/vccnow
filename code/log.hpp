@@ -1,8 +1,8 @@
 #ifndef LOG_HPP
 #define LOG_HPP
 
-void Fail(const char *Format, ...);
-void Log(const char *Format, ...);
+void Fail(char *Format, ...);
+void Log(char *Format, ...);
 
 enum DebugLevel_e
 {
@@ -13,6 +13,6 @@ enum DebugLevel_e
 };
 
 DebugLevel_e DebugLevel = NONE;
-void DebugLog(DebugLevel_e Level, const char *Format, ...);
+void DebugLog(DebugLevel_e Level, char *Format, ...);
 
 #endif // LOG_HPP

@@ -13,9 +13,9 @@
 void
 TestMacroParsing(
     token_list *TokenList,
-    const char *ExpectedName,
+    char *ExpectedName,
     token_list *ExpectedParamList,
-    const char *ExpectedExpansion)
+    char *ExpectedExpansion)
 {
   macro *Macro = NewMacro();
   Macro->ParseFrom(TokenList);
@@ -94,7 +94,7 @@ ParseHexCodes(buffer *Input, buffer *Output)
     while (*In && *In > ' ')
       In++;
     // Log("Parsing: %c %d\n", *Head, *Head);
-    u8 Code = (u8)strtol((const char *)Head, NULL, 16);
+    u8 Code = (u8)strtol((char *)Head, NULL, 16);
     // Log("Saving hex code %02x\n", Code);
     Output->Data[N++] = Code;
     In = SkipWhite(In);
@@ -144,7 +144,7 @@ AssertBytes(char *Buffer, u64 GeneratedByteCount, buffer *HexCodeString)
 
 // void
 // AssertCompile(
-//     const char *Text,
+//     char *Text,
 //     buffer *CompiledOutput,
 //     u64 CompiledOutputLimit,
 //     buffer *HexCodeString)
@@ -190,7 +190,7 @@ ParseTestSection(u8 *Head, u8 *End)
 }
 
 void
-AssertCompileDecompile(const char *TestName)
+AssertCompileDecompile(char *TestName)
 {
   Log("[Test] %s...", TestName);
 
@@ -316,10 +316,8 @@ AssertCompileDecompile(const char *TestName)
   if (!BothEmpty)
   {
     b64 LengthsMatch = Decompiled.Length == Output.Length;
-    b64 IsMatch = !memcmp(
-        (const char *)Decompiled.Data,
-        (const char *)Output.Data,
-        Output.Length);
+    b64 IsMatch =
+        !memcmp((char *)Decompiled.Data, (char *)Output.Data, Output.Length);
     if (LengthsMatch && IsMatch) {}
     else
     {
@@ -450,7 +448,7 @@ TestPools()
 }
 
 void
-TestFormatU64(u64 Num, const char *Expect)
+TestFormatU64(u64 Num, char *Expect)
 {
   char Output[1024];
   FormatU64(Num, Output);

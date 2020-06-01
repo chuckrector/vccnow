@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 parser::parser() {}
-parser::parser(const char *S) { Reset(NewBuffer(S)); }
+parser::parser(char *S) { Reset(NewBuffer(S)); }
 parser::parser(buffer *B) { Reset(B); }
 
 // NOTE(aen): Tokenizes from the current C, wherever that lies
@@ -104,7 +104,7 @@ parser::ToTokenList(token_list *TokenList)
 }
 
 void
-parser::CalcPath(const char *Filename)
+parser::CalcPath(char *Filename)
 {
   // Log("CalcPath: %s\n", Filename);
   if (!Path)
@@ -114,7 +114,7 @@ parser::CalcPath(const char *Filename)
 }
 
 void
-parser::Load(const char *Filename)
+parser::Load(char *Filename)
 {
   CalcPath(Filename);
 
@@ -131,7 +131,7 @@ parser::Load(const char *Filename)
 }
 
 void
-parser::Reset(const char *S)
+parser::Reset(char *S)
 {
   Reset(NewBuffer(S));
 }
@@ -220,13 +220,13 @@ parser::AtText(char Char)
   return !AtEnd() && *C == Char;
 }
 b64
-parser::AtText(const char *Text, u64 L)
+parser::AtText(char *Text, u64 L)
 {
   return !AtEnd() && C + L <= End() && !memcmp(C, Text, L);
 }
 
 void
-parser::SkipPast(const char *Text, u64 L)
+parser::SkipPast(char *Text, u64 L)
 {
   u8 *Head = C;
 
@@ -288,7 +288,7 @@ parser::Expect(char Char)
 }
 
 void
-parser::Expect(const char *Text, u64 L)
+parser::Expect(char *Text, u64 L)
 {
   if (AtText(Text, L))
     Next(L);

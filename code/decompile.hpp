@@ -175,7 +175,7 @@ struct decompiler
   char DisByteCodes[TEMP_BUFFER_SIZE];
   char DisComments[TEMP_BUFFER_SIZE];
   void DisSaveAddress(char Marker = ' ');
-  void DisLogComments(const char *Format, ...);
+  void DisLogComments(char *Format, ...);
   void DisFlush();
   void DisD(u32 Value);
   void DisW(u16 Value);
@@ -202,7 +202,7 @@ struct decompiler
   token *AddComment(char *Format, ...);
 
   void Init(buffer *Buffer, u64 MaxTokens, decomp_mode M);
-  void Load(const char *Filename);
+  void Load(char *Filename);
   void ToTokenList(token_list *TokenList);
   void Parse();
   void ParseBlock(u8 *End = 0, b64 EmitReturns = true);

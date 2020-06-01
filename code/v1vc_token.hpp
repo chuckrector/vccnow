@@ -31,7 +31,7 @@ struct token
   b64 IsNumber();
   b64 IsIdent();
   b64 IsMatch(token *Token);
-  b64 IsMatch(const char *S, u64 SLen);
+  b64 IsMatch(char *S, u64 SLen);
   void ToString(char *Output, u64 OutputLength, u64 MaxTextLength = 20);
 };
 
@@ -56,11 +56,11 @@ struct token_list
   token *AtToken();
   b64 AtEnd();
   b64 IsToken(char C);
-  b64 IsToken(const char *Text, u64 L);
+  b64 IsToken(char *Text, u64 L);
   b64 IsIdent();
   b64 IsNumber();
   void ExpectToken(char C, char Backup = 0);
-  void ExpectToken(const char *Text, u64 L);
+  void ExpectToken(char *Text, u64 L);
   void ExpectTokenType(TokenType_e Type);
 
   // NOTE(aen): DryRun is for calculating needed output buffer size

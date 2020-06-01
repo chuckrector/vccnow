@@ -43,7 +43,7 @@ decompiler::DisSaveAddress(char Marker)
 }
 
 void
-decompiler::DisLogComments(const char *Format, ...)
+decompiler::DisLogComments(char *Format, ...)
 {
   va_list Args;
   va_start(Args, Format);
@@ -86,7 +86,7 @@ decompiler::AddTokenD(u32 Value)
 // NOTE(aen): Return is never actually reached as a lib function because it
 // emits the 255 end marker. It's kept in here so that the correct numbering is
 // maintained.
-const char *VCLibFuncs[] = {
+char *VCLibFuncs[] = {
     "MapSwitch:snnn",
     "Warp:nnn",
     "AddCharacter:n",
@@ -1794,7 +1794,7 @@ Decompile(buffer *Input, buffer *Output, u64 MaxTokens, decomp_mode Mode)
 }
 
 void
-Decompile(const char *Filename, buffer *Output, u64 MaxTokens, decomp_mode Mode)
+Decompile(char *Filename, buffer *Output, u64 MaxTokens, decomp_mode Mode)
 {
   buffer *Input = LoadEntireFile(Filename);
   Decompile(Input, Output, MaxTokens, Mode);
