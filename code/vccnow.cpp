@@ -103,7 +103,7 @@ main(int ArgCount, char *ArgValues[])
       case 'c':
       {
         char *FilenameNoExt = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
-        strcpy_s(FilenameNoExt, TEMP_BUFFER_SIZE, FilenameArg);
+        StringCopy(FilenameArg, FilenameNoExt);
 
         int CompileType = COMPILE_TYPE_MAP;
         if (!strcmp(FilenameNoExt, "effects"))
@@ -143,7 +143,7 @@ main(int ArgCount, char *ArgValues[])
         decomp_mode Mode = ModeArg == 'a' ? DISASSEMBLE : DECOMPILE;
 
         char InputFilename[1024];
-        strcpy_s(InputFilename, 1024, FilenameArg);
+        StringCopy(FilenameArg, InputFilename);
 
         b64 IsKnownExtension = StringEndsWith(FilenameArg, ".map") ||
                                StringEndsWith(FilenameArg, ".vcs") ||
@@ -154,7 +154,7 @@ main(int ArgCount, char *ArgValues[])
           sprintf_s(Guess, 1024, "%s.map", InputFilename);
           if (Exist(Guess))
           {
-            strcpy_s(InputFilename, 1024, Guess);
+            StringCopy(Guess, InputFilename);
             IsKnownExtension = true;
           }
           else
@@ -162,7 +162,7 @@ main(int ArgCount, char *ArgValues[])
             sprintf_s(Guess, 1024, "%s.vcs", InputFilename);
             if (Exist(Guess))
             {
-              strcpy_s(InputFilename, 1024, Guess);
+              StringCopy(Guess, InputFilename);
               IsKnownExtension = true;
             }
             else
@@ -170,7 +170,7 @@ main(int ArgCount, char *ArgValues[])
               sprintf_s(Guess, 1024, "%s.vcc", InputFilename);
               if (Exist(Guess))
               {
-                strcpy_s(InputFilename, 1024, Guess);
+                StringCopy(Guess, InputFilename);
                 IsKnownExtension = true;
               }
               else
@@ -241,7 +241,7 @@ main(int ArgCount, char *ArgValues[])
         else if (ModeArg == 'x')
         {
           char NoExt[1024];
-          strcpy_s(NoExt, 1024, FilenameArg);
+          StringCopy(FilenameArg, NoExt);
 
           char *MAPExtension = StringFindLast(NoExt, ".map");
           if (MAPExtension)

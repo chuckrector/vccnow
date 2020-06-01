@@ -23,13 +23,13 @@ PostStartupFiles()
 void
 PreStartupFiles(char *FilenameWithoutExtension)
 {
-  strcpy_s(TempBuffer, TEMP_BUFFER_SIZE, FilenameWithoutExtension);
+  StringCopy(FilenameWithoutExtension, TempBuffer);
   u64 L = StringLength(TempBuffer);
   if (StringEndsWith(FilenameWithoutExtension, ".vc")) {}
   else
-    strcpy_s(TempBuffer + StringLength(TempBuffer), TEMP_BUFFER_SIZE, ".vc");
+    StringCopy(".vc", TempBuffer + StringLength(TempBuffer));
   CompileGuy.BasePath = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
-  strcpy_s(CompileGuy.BasePath, TEMP_BUFFER_SIZE, TempBuffer);
+  StringCopy(TempBuffer, CompileGuy.BasePath);
 
   u8 *P = (u8 *)NewTempBuffer(WORKING_MEMORY_TOTAL_SIZE);
   CompileGuy.WorkingMemory = P;
@@ -138,7 +138,7 @@ WriteOutput(char *FilenameWithoutExtension)
   char VcFilename[1024];
   char MapFilename[1024];
 
-  strcpy_s(NoExt, 1024, FilenameWithoutExtension);
+  StringCopy(FilenameWithoutExtension, NoExt);
   char *VCExtension = StringFindLast(NoExt, ".vc");
   if (VCExtension)
   {
