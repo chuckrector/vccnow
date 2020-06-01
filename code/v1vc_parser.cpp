@@ -222,7 +222,7 @@ parser::AtText(char Char)
 b64
 parser::AtText(char *Text, u64 L)
 {
-  return !AtEnd() && C + L <= End() && !memcmp(C, Text, L);
+  return !AtEnd() && C + L <= End() && MemMatches(C, (u8 *)Text, L);
 }
 
 void

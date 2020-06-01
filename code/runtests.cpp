@@ -21,7 +21,7 @@ TestMacroParsing(
   macro *Macro = NewMacro();
   Macro->ParseFrom(TokenList);
   Assert(Macro->Token->Length == StringLength(ExpectedName));
-  Assert(!memcmp(Macro->Token->Text, ExpectedName, Macro->Token->Length));
+  Assert(MemMatches(Macro->Token->Text, ExpectedName, Macro->Token->Length));
   if (ExpectedParamList)
   {
     Assert(Macro->ParamList.NumTokens == ExpectedParamList->NumTokens);
@@ -33,7 +33,7 @@ TestMacroParsing(
       Assert(StringsMatch(A->Text, B->Text, A->Length));
     }
     u64 MinifiedLength = Macro->Expansion.Minify((u8 *)TempBuffer);
-    Assert(!memcmp(TempBuffer, ExpectedExpansion, MinifiedLength));
+    Assert(MemMatches(TempBuffer, ExpectedExpansion, MinifiedLength));
   }
 }
 
@@ -45,7 +45,7 @@ ExpectTokenList(token_list *TokenList, u64 NumTokens, char *TokenTextList[])
   for (u64 i = 0; i < NumTokens; i++)
   {
     token *Token = TokenList->Get(i);
-    Assert(!memcmp(TokenTextList[i], Token->Text, Token->Length));
+    Assert(MemMatches(TokenTextList[i], Token->Text, Token->Length));
   }
 }
 
@@ -180,7 +180,7 @@ ParseTestSection(u8 *Head, u8 *End)
       // Log("Skip: c '%c' (%d), %s\n", *C, *C, C);
       // TODO(aen): Guard against access violation at end of file
       // C + 3 < End // This doesn't seem to be accurate
-      if (*C && !memcmp(C, "//", 2))
+      if (*C && MemMatches(C, (u8 *)"//", 2))
       {
         // Log("ScriptEnd found\n");
         return C;
@@ -318,7 +318,7 @@ AssertCompileDecompile(char *TestName)
   {
     b64 LengthsMatch = Decompiled.Length == Output.Length;
     b64 IsMatch =
-        !memcmp((char *)Decompiled.Data, (char *)Output.Data, Output.Length);
+        MemMatches((char *)Decompiled.Data, (char *)Output.Data, Output.Length);
     if (LengthsMatch && IsMatch) {}
     else
     {
@@ -479,6 +479,15 @@ RunTests()
   Assert(!StringsMatch("foo", "fo"));
   Assert(!StringsMatch("fo", "foo"));
   Assert(StringsMatch("foo", "fo", 2));
+
+  Log("[Test] MemMatches\n");
+  Assert(MemMatches("", "", 1));
+  Assert(MemMatches("foo", "foo", 3));
+  Assert(!MemMatches("foo", "bar", 3));
+  Assert(!MemMatches("foo", "fo", 3));
+  Assert(!MemMatches("fo", "foo", 3));
+  Assert(MemMatches("foo", "fo", 2));
+  Assert(MemMatches("a\0b", "a\0b", 3));
 
   Log("[Test] StringToUpperCase\n");
   char TempLower[1024];

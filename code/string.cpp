@@ -1,4 +1,5 @@
 #include "string.hpp"
+#include "mem.hpp"
 
 u64
 StringLength(char *String)
@@ -28,7 +29,7 @@ StringFindLast(char *Str, char *This)
     char *C = Str + StrLength - ThisLength;
     while (C != Str)
     {
-      if (!memcmp(C, This, ThisLength))
+      if (MemMatches(C, This, ThisLength))
       {
         Result = C;
         break;

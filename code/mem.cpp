@@ -41,3 +41,30 @@ MemLeft(mem_pool *Pool)
 {
   return Pool->Size - Pool->Used;
 }
+
+b64
+MemMatches(u8 *A, u8 *B, u64 Length)
+{
+  b64 Result;
+
+  while (*A == *B)
+  {
+    if (!--Length)
+    {
+      break;
+    }
+
+    ++A;
+    ++B;
+  }
+
+  Result = (*A == *B);
+
+  return (Result);
+}
+
+b64
+MemMatches(char *A, char *B, u64 Length)
+{
+  return MemMatches((u8 *)A, (u8 *)B, Length);
+}

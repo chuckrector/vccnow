@@ -53,13 +53,13 @@ token::IsNumber()
 b64
 token::IsMatch(char *S, u64 SLength)
 {
-  return SLength == Length && !memcmp(S, Text, Length);
+  return SLength == Length && MemMatches(S, Text, Length);
 }
 b64
 token::IsMatch(token *Token)
 {
   return Type == Token->Type && Length == Token->Length &&
-         !memcmp(Text, Token->Text, Length);
+         MemMatches(Text, Token->Text, Length);
 }
 
 void
@@ -197,7 +197,7 @@ b64
 token_list::IsToken(char *CheckText, u64 Length)
 {
   return Length == AtToken()->Length &&
-         !memcmp(CheckText, AtToken()->Text, Length);
+         MemMatches(CheckText, AtToken()->Text, Length);
 }
 
 b64
@@ -233,7 +233,7 @@ void
 token_list::ExpectToken(char *CheckText, u64 Length)
 {
   token *Token = AtToken();
-  if (Length == Token->Length && !memcmp(Token->Text, CheckText, Length))
+  if (Length == Token->Length && MemMatches(Token->Text, CheckText, Length))
   {
     NextToken();
     return;

@@ -30,5 +30,7 @@ void ResetPool(mem_pool *Pool);
 void *New_(mem_pool *Pool, u64 Size);
 #define PoolBase(Index) ((u8 *)AllMem + (POOL_SIZE * (Index)))
 u64 MemLeft(mem_pool *Pool);
+b64 MemMatches(u8 *A, u8 *B, u64 Length);
+b64 MemMatches(char *A, char *B, u64 Length);
 
 #endif // MEM_HPP
