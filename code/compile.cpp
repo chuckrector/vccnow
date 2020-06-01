@@ -141,7 +141,8 @@ CheckLibFunc()
 
   GlobalTokenNumericValue = 0;
 
-  if (strlen(GlobalToken) == 1 && GlobalToken[0] > 64 && GlobalToken[0] < 91)
+  if (StringLength(GlobalToken) == 1 && GlobalToken[0] > 64 &&
+      GlobalToken[0] < 91)
   {
     GlobalTokenType = IDENTIFIER;
     GlobalTokenNumericValue = GlobalToken[0] - 64;

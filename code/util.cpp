@@ -107,7 +107,7 @@ FormatU64(u64 Num, char *Output)
 {
   char Temp[1024];
   sprintf_s(Temp, 1024, "%lld", Num);
-  u64 L = strlen(Temp);
+  u64 L = StringLength(Temp);
   u64 NumCommas = (L - 1) / 3;
   Output[L + NumCommas] = 0;
   for (u64 i = 0; i < L + NumCommas; i++)
@@ -125,41 +125,4 @@ FormatU64(u64 Num, char *Output)
   }
   while (L--)
     *T2-- = *T1--;
-}
-
-char *
-StringFindLast(char *String, char *This)
-{
-  char *Result = 0;
-
-  u64 StringLength = strlen(String);
-  u64 ThisLength = strlen(This);
-
-  if (ThisLength < StringLength)
-  {
-    char *C = String + StringLength - ThisLength;
-    while (C != String)
-    {
-      if (!memcmp(C, This, ThisLength))
-      {
-        Result = C;
-        break;
-      }
-
-      --C;
-    }
-  }
-
-  return (Result);
-}
-
-b64
-StringEndsWith(char *String, char *Suffix)
-{
-  b64 Result = false;
-
-  char *Found = StringFindLast(String, Suffix);
-  Result = (Found != 0);
-
-  return (Result);
 }

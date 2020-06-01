@@ -19,7 +19,7 @@ TestMacroParsing(
 {
   macro *Macro = NewMacro();
   Macro->ParseFrom(TokenList);
-  Assert(Macro->Token->Length == strlen(ExpectedName));
+  Assert(Macro->Token->Length == StringLength(ExpectedName));
   Assert(!memcmp(Macro->Token->Text, ExpectedName, Macro->Token->Length));
   if (ExpectedParamList)
   {
@@ -286,7 +286,7 @@ AssertCompileDecompile(char *TestName)
   //     PreprocessedVC, &CompiledOutput, TEMP_BUFFER_SIZE, &HexCodeStrings);
   // Log("Compiled output length %d\n", CompiledOutput.Length);
   // Log("Decompiled length %d\n", Decompiled.Length);
-  // Log("Generated length %d\n", strlen(Temp));
+  // Log("Generated length %d\n", StringLength(Temp));
   //=========
 
   buffer ScriptOffsetTable;
@@ -380,7 +380,7 @@ TestPools()
     }
 
     char *BufferString = "Hello!";
-    u64 BufferLen = strlen(BufferString) + 1;
+    u64 BufferLen = StringLength(BufferString) + 1;
     u64 NewBufferCount = POOL_SIZE / sizeof(buffer);
     FormatU64(NewBufferCount, FancyString);
     Log("\tNewBuffer x%s\n", FancyString);

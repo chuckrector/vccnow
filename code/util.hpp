@@ -32,7 +32,6 @@ void DumpHex(
     u64 Limit = 8 * 8,
     char *Indent = "\t");
 void FormatU64(u64 Num, char *Output);
-
 u32
 SafeTruncateU64(u64 Value)
 {
@@ -40,5 +39,7 @@ SafeTruncateU64(u64 Value)
   u32 Result = (u32)Value;
   return (Result);
 }
+
+u32 SafeTruncateU64(u64 Value);
 
 #endif // UTIL_HPP

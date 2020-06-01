@@ -26,7 +26,7 @@ NewBuffer(u8 *Data, u64 Length)
 buffer *
 NewBuffer(char *S)
 {
-  return NewBuffer((u8 *)S, strlen(S));
+  return NewBuffer((u8 *)S, StringLength(S));
 }
 
 u16

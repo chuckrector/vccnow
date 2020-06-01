@@ -3,6 +3,7 @@
 #include "compile.hpp"
 #include "log.hpp"
 #include "preproc.hpp"
+#include "string.hpp"
 #include "util.hpp"
 #include "v1assets.hpp"
 #include <malloc.h>
@@ -23,10 +24,10 @@ void
 PreStartupFiles(char *FilenameWithoutExtension)
 {
   strcpy_s(TempBuffer, TEMP_BUFFER_SIZE, FilenameWithoutExtension);
-  u64 L = strlen(TempBuffer);
+  u64 L = StringLength(TempBuffer);
   if (StringEndsWith(FilenameWithoutExtension, ".vc")) {}
   else
-    strcpy_s(TempBuffer + strlen(TempBuffer), TEMP_BUFFER_SIZE, ".vc");
+    strcpy_s(TempBuffer + StringLength(TempBuffer), TEMP_BUFFER_SIZE, ".vc");
   CompileGuy.BasePath = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
   strcpy_s(CompileGuy.BasePath, TEMP_BUFFER_SIZE, TempBuffer);
 

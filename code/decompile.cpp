@@ -25,7 +25,7 @@ int OpNest = 0;
 char *
 NewString(char *OriginalString)
 {
-  u64 L = strlen(OriginalString);
+  u64 L = StringLength(OriginalString);
   char *S = NewList(&TokenPool, L + 1, char);
   memcpy(S, OriginalString, L);
   S[L] = 0;
@@ -1371,7 +1371,7 @@ decompiler::AddToken(char *Text, u64 L, TokenType_e Type)
 token *
 decompiler::AddToken(char *Text, TokenType_e Type)
 {
-  u64 L = strlen(Text);
+  u64 L = StringLength(Text);
   // Log("AddToken: strlen %s\n", Text);
   return AddToken(Text, L, Type);
 }
@@ -1384,7 +1384,7 @@ decompiler::AddIdent(char *S, u64 L)
 token *
 decompiler::AddIdent(char *Text)
 {
-  return AddIdent(Text, strlen(Text));
+  return AddIdent(Text, StringLength(Text));
 }
 token *
 decompiler::AddSymbol(char *Text)
@@ -1502,7 +1502,7 @@ decompiler::DisD(u32 Value)
       P[1],
       P[2],
       P[3]);
-  u64 L = strlen(DisTemp);
+  u64 L = StringLength(DisTemp);
   memcpy(DisByteCodesP, DisTemp, L);
   DisByteCodesP += L;
 }
@@ -1512,7 +1512,7 @@ decompiler::DisW(u16 Value)
 {
   u8 *P = (u8 *)&Value;
   sprintf_s(DisTemp, TEMP_BUFFER_SIZE, "%02x %02x ", P[0], P[1]);
-  u64 L = strlen(DisTemp);
+  u64 L = StringLength(DisTemp);
   memcpy(DisByteCodesP, DisTemp, L);
   DisByteCodesP += L;
 }
@@ -1522,7 +1522,7 @@ decompiler::DisC(u8 Value)
 {
   sprintf_s(DisTemp, TEMP_BUFFER_SIZE, "%02x ", Value);
   // Log("DisC %d\n", Value);
-  u64 L = strlen(DisTemp);
+  u64 L = StringLength(DisTemp);
   // Log("DisC L %d\n", L);
   memcpy(DisByteCodesP, DisTemp, L);
   DisByteCodesP += L;

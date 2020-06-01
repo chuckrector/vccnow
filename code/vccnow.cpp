@@ -11,6 +11,7 @@
 #include "preproc.cpp"
 #include "ricvc.cpp"
 #include "runtests.cpp"
+#include "string.cpp"
 #include "util.cpp"
 #include "v1assets.hpp"
 #include "v1vc_macro.cpp"
