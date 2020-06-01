@@ -479,6 +479,15 @@ RunTests()
   Assert(!StringsMatch("foo", "fo"));
   Assert(!StringsMatch("fo", "foo"));
 
+  Log("[Test] StringToUpperCase\n");
+  char TempLower[1024];
+  StringCopy("foo", TempLower);
+  StringToUpperCase(TempLower);
+  Assert(StringsMatch("FOO", TempLower));
+  StringCopy("foo\0bar", TempLower);
+  StringToUpperCase(TempLower);
+  Assert(StringsMatch("FOO", TempLower));
+
   TestPools();
 
   Log("[Test] AtEnd, C, Next...");

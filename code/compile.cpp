@@ -244,7 +244,7 @@ GetIdentifier()
     Index++;
   }
   GlobalToken[Index] = 0;
-  _strupr_s(GlobalToken, 2048);
+  StringToUpperCase(GlobalToken);
   CheckLibFunc();
   SearchVarList();
 }
