@@ -20,7 +20,6 @@
 #include "vcc.hpp"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 // ============================== Variables ==============================
 
@@ -522,7 +521,7 @@ NextIs(char *String)
   // tt = GlobalTokenType;
   // tst = GlobalTokenSubType;
   NumericValue = GlobalTokenNumericValue;
-  memcpy(GlobalLastToken, GlobalToken, 2048);
+  MemCopy((u8 *)GlobalToken, (u8 *)GlobalLastToken, 2048);
   GetToken();
   CompileGuy.C = Pointer;
   GlobalLines = oGlobalLines;
@@ -537,7 +536,7 @@ NextIs(char *String)
   {
     Index = 0;
   }
-  memcpy(GlobalToken, GlobalLastToken, 2048);
+  MemCopy((u8 *)GlobalLastToken, (u8 *)GlobalToken, 2048);
   return Index;
 }
 
@@ -785,7 +784,10 @@ HandleExpression()
   }
   if (NextIs(":"))
   {
-    memcpy(GlobalLabels[GlobalNumLabels].Identifier, GlobalLastToken, 40);
+    MemCopy(
+        (u8 *)GlobalLastToken,
+        (u8 *)GlobalLabels[GlobalNumLabels].Identifier,
+        40);
     GlobalLabels[GlobalNumLabels].Position =
         (u8 *)(CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
     if (CompileGuy.IsVerbose)
@@ -1344,7 +1346,7 @@ ProcessGoto()
 {
   EmitC(GOTO);
   GetToken();
-  memcpy(&GlobalGotos[GlobalNumGotos].Identifier, GlobalToken, 40);
+  MemCopy((u8 *)GlobalToken, (u8 *)GlobalGotos[GlobalNumGotos].Identifier, 40);
   if (CompileGuy.IsVerbose)
   {
     printf(
@@ -1432,7 +1434,10 @@ ProcessEvent()
     }
     if (GlobalTokenType != FUNCTION && NextIs(":"))
     {
-      memcpy(GlobalLabels[GlobalNumLabels].Identifier, GlobalLastToken, 40);
+      MemCopy(
+          (u8 *)GlobalLastToken,
+          (u8 *)GlobalLabels[GlobalNumLabels].Identifier,
+          40);
       GlobalLabels[GlobalNumLabels].Position =
           (u8 *)(CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
       if (CompileGuy.IsVerbose)
@@ -1575,7 +1580,7 @@ CompileToBuffer(
         GeneratedLength,
         OutputLimit);
 
-  memcpy(Output, CompileGuy.GeneratedCode, GeneratedLength);
+  MemCopy(CompileGuy.GeneratedCode, Output, GeneratedLength);
   Output[GeneratedLength] = 0;
 }
 

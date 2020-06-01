@@ -12,7 +12,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define LETTER 1
 #define DIGIT 2

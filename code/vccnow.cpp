@@ -81,7 +81,7 @@ main(int ArgCount, char *ArgValues[])
 
   // NOTE(aen): This is the only memory used by the entire app.
   AllMem = malloc(ALL_MEM_SIZE);
-  memset(AllMem, 0, ALL_MEM_SIZE);
+  MemSet((u8 *)AllMem, 0, ALL_MEM_SIZE);
 
   InitTempPool();
   TempBuffer = NewTempBuffer(TEMP_BUFFER_SIZE);

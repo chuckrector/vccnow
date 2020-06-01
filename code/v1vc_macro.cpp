@@ -104,7 +104,10 @@ macro::ParseFrom(token_list *TokenList)
       char *Output = TempBuffer;
       for (u64 i = 0; i < ParamList.NumTokens; i++)
       {
-        memcpy(Output, ParamList.Get(i)->Text, ParamList.Get(i)->Length);
+        MemCopy(
+            (u8 *)ParamList.Get(i)->Text,
+            (u8 *)Output,
+            ParamList.Get(i)->Length);
         Output += ParamList.Get(i)->Length;
       }
       *Output = 0;

@@ -32,5 +32,7 @@ void *New_(mem_pool *Pool, u64 Size);
 u64 MemLeft(mem_pool *Pool);
 b64 MemMatches(u8 *A, u8 *B, u64 Length);
 b64 MemMatches(char *A, char *B, u64 Length);
+u8 *MemCopy(u8 *Source, u8 *Dest, u64 Length);
+u8 *MemSet(u8 *Dest, u8 Value, u64 Length);
 
 #endif // MEM_HPP

@@ -8,7 +8,6 @@
 #include "v1vc_token.hpp"
 #include "vcc.hpp"
 #include <stdlib.h>
-#include <string.h>
 
 // NOTE(aen): Token list index should be pointing at the head of a macro
 void
@@ -213,7 +212,7 @@ AssertCompileDecompile(char *TestName)
   if (VCLength < 0 || VCLength > 10000)
     Fail("VCLength out of bounds: %d\n", VCLength);
   VC.Data = (u8 *)NewTempBuffer(VCLength + 1);
-  memcpy(VC.Data, FileHead, VCLength);
+  MemCopy(FileHead, VC.Data, VCLength);
   VC.Length = VCLength;
   VC.Data[VCLength] = 0;
   // Log("VCData %s\n", VC.Data);
@@ -299,10 +298,10 @@ AssertCompileDecompile(char *TestName)
   buffer FullBinary;
   u64 FullBinaryLength = ScriptOffsetTable.Length + CompiledOutput.Length;
   FullBinary.Data = (u8 *)NewTempBuffer(FullBinaryLength);
-  memcpy(FullBinary.Data, ScriptOffsetTable.Data, ScriptOffsetTable.Length);
-  memcpy(
-      FullBinary.Data + ScriptOffsetTable.Length,
+  MemCopy(ScriptOffsetTable.Data, FullBinary.Data, ScriptOffsetTable.Length);
+  MemCopy(
       CompiledOutput.Data,
+      FullBinary.Data + ScriptOffsetTable.Length,
       CompiledOutput.Length);
   FullBinary.Length = FullBinaryLength;
   // DumpHex("Full Binary Hex", FullBinary.Data, FullBinary.Length);

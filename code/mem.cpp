@@ -68,3 +68,29 @@ MemMatches(char *A, char *B, u64 Length)
 {
   return MemMatches((u8 *)A, (u8 *)B, Length);
 }
+
+u8 *
+MemCopy(u8 *Source, u8 *Dest, u64 Length)
+{
+  u8 *Result = Dest;
+
+  while (Length--)
+  {
+    *Dest++ = *Source++;
+  }
+
+  return (Result);
+}
+
+u8 *
+MemSet(u8 *Dest, u8 Value, u64 Length)
+{
+  u8 *Result = Dest;
+
+  while (Length--)
+  {
+    *Dest++ = Value;
+  }
+
+  return (Result);
+}

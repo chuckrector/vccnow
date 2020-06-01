@@ -9,7 +9,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 int Nest = 0;
 int OpNest = 0;
@@ -27,7 +26,7 @@ NewString(char *OriginalString)
 {
   u64 L = StringLength(OriginalString);
   char *S = NewList(&TokenPool, L + 1, char);
-  memcpy(S, OriginalString, L);
+  MemCopy((u8 *)OriginalString, (u8 *)S, L);
   S[L] = 0;
   return S;
 }
@@ -68,8 +67,8 @@ decompiler::DisFlush()
   PrevDisMarker = ' ';
   DisMarker = ' ';
   DisAddress = 0xffffffff;
-  memset(DisByteCodes, 0, TEMP_BUFFER_SIZE);
-  memset(DisComments, 0, TEMP_BUFFER_SIZE);
+  MemSet((u8 *)DisByteCodes, 0, TEMP_BUFFER_SIZE);
+  MemSet((u8 *)DisComments, 0, TEMP_BUFFER_SIZE);
   DisByteCodesP = DisByteCodes;
 }
 
@@ -1503,7 +1502,7 @@ decompiler::DisD(u32 Value)
       P[2],
       P[3]);
   u64 L = StringLength(DisTemp);
-  memcpy(DisByteCodesP, DisTemp, L);
+  MemCopy((u8 *)DisTemp, (u8 *)DisByteCodesP, L);
   DisByteCodesP += L;
 }
 
@@ -1513,7 +1512,7 @@ decompiler::DisW(u16 Value)
   u8 *P = (u8 *)&Value;
   sprintf_s(DisTemp, TEMP_BUFFER_SIZE, "%02x %02x ", P[0], P[1]);
   u64 L = StringLength(DisTemp);
-  memcpy(DisByteCodesP, DisTemp, L);
+  MemCopy((u8 *)DisTemp, (u8 *)DisByteCodesP, L);
   DisByteCodesP += L;
 }
 
@@ -1524,7 +1523,7 @@ decompiler::DisC(u8 Value)
   // Log("DisC %d\n", Value);
   u64 L = StringLength(DisTemp);
   // Log("DisC L %d\n", L);
-  memcpy(DisByteCodesP, DisTemp, L);
+  MemCopy((u8 *)DisTemp, (u8 *)DisByteCodesP, L);
   DisByteCodesP += L;
 }
 
@@ -1664,9 +1663,9 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
   NumIfRefs = 0;
   IfRefs = NewList(&TempPool, 1000, u64);
 
-  memset(DisTemp, 0, TEMP_BUFFER_SIZE);
-  memset(DisByteCodes, 0, TEMP_BUFFER_SIZE);
-  memset(DisComments, 0, TEMP_BUFFER_SIZE);
+  MemSet((u8 *)DisTemp, 0, TEMP_BUFFER_SIZE);
+  MemSet((u8 *)DisByteCodes, 0, TEMP_BUFFER_SIZE);
+  MemSet((u8 *)DisComments, 0, TEMP_BUFFER_SIZE);
 
   Data = Buffer->Data;
   DataSize = Buffer->Length;
@@ -1681,7 +1680,7 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
   if (NumScripts < 0 || NumScripts > 100)
     Fail("Scripts negative or >100: %d\n", NumScripts);
   ScriptOffsetTable = (u32 *)NewTempBuffer(sizeof(u32 *) * (NumScripts + 1));
-  memcpy(ScriptOffsetTable, C, NumScripts * 4);
+  MemCopy(C, (u8 *)ScriptOffsetTable, NumScripts * 4);
   C += NumScripts * 4;
 
   ScriptBase = C;

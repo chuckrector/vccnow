@@ -9,7 +9,6 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 void
 PostStartupFiles()
@@ -62,7 +61,7 @@ WriteScriptOffsetTableToBuffer(buffer *Output)
   // Log("WriteScriptOffsetTableToBuffer\n");
   u32 *P = (u32 *)Output->Data;
   *P++ = SafeTruncateU64(GlobalNumScripts);
-  memcpy(P, GlobalScriptOffsetTable, 4 * GlobalNumScripts);
+  MemCopy((u8 *)GlobalScriptOffsetTable, (u8 *)P, 4 * GlobalNumScripts);
   Output->Length = 4 + (4 * GlobalNumScripts);
 }
 

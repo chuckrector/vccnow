@@ -3,7 +3,6 @@
 #include "mem.hpp"
 #include "util.hpp"
 #include <stdlib.h>
-#include <string.h>
 
 // -----------------------------------------------------------------------------
 
@@ -275,7 +274,7 @@ token_list::Minify(u8 *Out, b64 ForceSpaces, b64 DryRun)
     // Token->Debug();
     if (!DryRun)
     {
-      memcpy(Out + N, Token->Text, Token->Length);
+      MemCopy((u8 *)Token->Text, Out + N, Token->Length);
       if (Token->IsIdent())
       {
         // int inner = 0;

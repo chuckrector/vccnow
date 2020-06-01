@@ -3,7 +3,6 @@
 
 #include "mem.hpp"
 #include "types.hpp"
-#include <string.h>
 
 #define PRODUCTION_MAX_TOKENS 30000
 
