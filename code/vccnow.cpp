@@ -97,7 +97,7 @@ main(int ArgCount, char *ArgValues[])
     u8 ModeArg = ArgValues[1][0];
     switch (ModeArg)
     {
-      case 'c':
+      case 'c': // compile
       {
         char *FilenameNoExt = (char *)NewTempBuffer(TEMP_BUFFER_SIZE);
         StringCopy(FilenameArg, FilenameNoExt);
@@ -137,8 +137,6 @@ main(int ArgCount, char *ArgValues[])
       case 'v': // validate script offset table
       case 'x': // extract compiled script from map
       {
-        decomp_mode Mode = ModeArg == 'a' ? DISASSEMBLE : DECOMPILE;
-
         char InputFilename[1024];
         StringCopy(FilenameArg, InputFilename);
 
@@ -195,100 +193,109 @@ main(int ArgCount, char *ArgValues[])
           Input->Length -= ScriptsOffset;
         }
 
-        if (ModeArg == 'v')
+        switch (ModeArg)
         {
-          u32 NumScripts = Input->GetD();
-          Log("Validating %d script offsets...\n", NumScripts);
-          u8 *ScriptBase = Input->C + (NumScripts * 4);
-          u32 *Offset = (u32 *)Input->C;
-          u32 *OffsetBase = Offset;
-          if (*Offset)
-            Log("  Script index 0 must point to offset 0...FAIL. Points to "
-                "%d\n",
-                *Offset);
-          Offset++;
-          b64 HasFailed = false;
-          for (u64 Index = 1; Index < NumScripts; Index++)
+          case 'v': // validate script offset table
           {
-            u8 *Head = ScriptBase + *Offset++;
-            if (Head[-1] != 0xff)
+            u32 NumScripts = Input->GetD();
+            Log("Validating %d script offsets...\n", NumScripts);
+            u8 *ScriptBase = Input->C + (NumScripts * 4);
+            u32 *Offset = (u32 *)Input->C;
+            u32 *OffsetBase = Offset;
+            if (*Offset)
+              Log("  Script index 0 must point to offset 0...FAIL. Points to "
+                  "%d\n",
+                  *Offset);
+            Offset++;
+            b64 HasFailed = false;
+            for (u64 Index = 1; Index < NumScripts; Index++)
             {
-              HasFailed = true;
-              u8 *P = Head - 1;
-              while (P != ScriptBase && *P != 0xff)
+              u8 *Head = ScriptBase + *Offset++;
+              if (Head[-1] != 0xff)
               {
-                P--;
-              }
-              Log("  Script index %d...", Index);
-              Log("FAIL. Found 0x%x (%d). ", Head[-1], Head[-1]);
-              if (P == ScriptBase)
-              {
-                Log("    No preeding 0xff\n");
-              }
-              else
-              {
-                u64 NearestEndByte = Head - (P + 1);
-                Log("    0xff found %d bytes earlier\n", NearestEndByte);
+                HasFailed = true;
+                u8 *P = Head - 1;
+                while (P != ScriptBase && *P != 0xff)
+                {
+                  P--;
+                }
+                Log("  Script index %d...", Index);
+                Log("FAIL. Found 0x%x (%d). ", Head[-1], Head[-1]);
+                if (P == ScriptBase)
+                {
+                  Log("    No preeding 0xff\n");
+                }
+                else
+                {
+                  u64 NearestEndByte = Head - (P + 1);
+                  Log("    0xff found %d bytes earlier\n", NearestEndByte);
+                }
               }
             }
+            if (!HasFailed)
+            {
+              Log("OK\n");
+            }
+            break;
           }
-          if (!HasFailed)
-            Log("OK\n");
-        }
-        else if (ModeArg == 'x')
-        {
-          char NoExt[1024];
-          StringCopy(FilenameArg, NoExt);
-
-          char *MAPExtension = StringFindLast(NoExt, ".map");
-          if (MAPExtension)
+          case 'x': // extract compiled script from map
           {
-            *MAPExtension = 0;
+            char NoExt[1024];
+            StringCopy(FilenameArg, NoExt);
+
+            char *MAPExtension = StringFindLast(NoExt, ".map");
+            if (MAPExtension)
+            {
+              *MAPExtension = 0;
+            }
+
+            char TempTable[1024];
+            sprintf_s(TempTable, 1024, "%s.vcc-table", NoExt);
+            char TempData[1024];
+            sprintf_s(TempData, 1024, "%s.vcc-data", NoExt);
+            char TempCompiled[1024];
+            sprintf_s(TempCompiled, 1024, "%s.vcc", NoExt);
+
+            Log("Extracting compiled script from %s...\n", FilenameArg);
+
+            Log("Extracting %s...\n", TempCompiled);
+            FILE *File;
+            fopen_s(&File, TempCompiled, "wb+");
+            fwrite(Input->C, 1, Input->Length, File);
+            fclose(File);
+
+            Log("  Generating %s...\n", TempTable);
+            fopen_s(&File, TempTable, "wb+");
+            u8 *TableStart = Input->C;
+            u32 NumScripts = Input->GetD();
+            u64 OffsetTableSize = 4 + (NumScripts * 4);
+            fwrite(TableStart, 1, OffsetTableSize, File);
+            fclose(File);
+            Input->C = TableStart + OffsetTableSize;
+            Input->Length -= OffsetTableSize;
+
+            Log("  Generating %s...\n", TempData);
+            fopen_s(&File, TempData, "wb+");
+            fwrite(Input->C, 1, Input->Length, File);
+            fclose(File);
+            Log("OK\n");
+            break;
           }
-
-          char TempTable[1024];
-          sprintf_s(TempTable, 1024, "%s.vcc-table", NoExt);
-          char TempData[1024];
-          sprintf_s(TempData, 1024, "%s.vcc-data", NoExt);
-          char TempCompiled[1024];
-          sprintf_s(TempCompiled, 1024, "%s.vcc", NoExt);
-
-          Log("Extracting compiled script from %s...\n", FilenameArg);
-
-          Log("Extracting %s...\n", TempCompiled);
-          FILE *File;
-          fopen_s(&File, TempCompiled, "wb+");
-          fwrite(Input->C, 1, Input->Length, File);
-          fclose(File);
-
-          Log("  Generating %s...\n", TempTable);
-          fopen_s(&File, TempTable, "wb+");
-          u8 *TableStart = Input->C;
-          u32 NumScripts = Input->GetD();
-          u64 OffsetTableSize = 4 + (NumScripts * 4);
-          fwrite(TableStart, 1, OffsetTableSize, File);
-          fclose(File);
-          Input->C = TableStart + OffsetTableSize;
-          Input->Length -= OffsetTableSize;
-
-          Log("  Generating %s...\n", TempData);
-          fopen_s(&File, TempData, "wb+");
-          fwrite(Input->C, 1, Input->Length, File);
-          fclose(File);
-          Log("OK\n");
+          // TODO(aen): Maybe less confusing to split these up.
+          case 'a': // disassemble
+          case 'd': // decompile
+          {
+            decomp_mode Mode = ModeArg == 'a' ? DISASSEMBLE : DECOMPILE;
+            Decompile(Input, &Output, PRODUCTION_MAX_TOKENS, Mode);
+            Log("%.*s", Output.Length, Output.Data);
+            break;
+          }
         }
-
-        if (Input && (ModeArg == 'a' || ModeArg == 'd'))
-        {
-          Decompile(Input, &Output, PRODUCTION_MAX_TOKENS, Mode);
-        }
-
-        Log("%.*s", Output.Length, Output.Data);
 
         break;
       }
 
-      case 'p':
+      case 'p': // preprocess
       {
         parser Parser;
         Parser.Load(FilenameArg);
