@@ -65,10 +65,7 @@ err(char *String)
 b64
 TokenIs(char *String)
 {
-  if (!strcmp(String, GlobalToken))
-    return 1;
-  else
-    return 0;
+  return StringsMatch(String, GlobalToken);
 }
 
 void
@@ -166,7 +163,7 @@ CheckLibFunc()
   Index = 0;
   while (Index < NUM_FUNCS)
   {
-    if (!strcmp(GlobalStaticFunctionList[Index], GlobalToken))
+    if (StringsMatch(GlobalStaticFunctionList[Index], GlobalToken))
       break;
     Index++;
   }
@@ -187,7 +184,7 @@ SearchVarList()
   Index = 0;
   while (Index < NUM_VARS0)
   {
-    if (!strcmp(GlobalStaticVar0List[Index], GlobalToken))
+    if (StringsMatch(GlobalStaticVar0List[Index], GlobalToken))
       break;
     Index++;
   }
@@ -201,7 +198,7 @@ SearchVarList()
   Index = 0;
   while (Index < NUM_VARS1)
   {
-    if (!strcmp(GlobalStaticVar1List[Index], GlobalToken))
+    if (StringsMatch(GlobalStaticVar1List[Index], GlobalToken))
       break;
     Index++;
   }
@@ -215,7 +212,7 @@ SearchVarList()
   Index = 0;
   while (Index < NUM_VARS2)
   {
-    if (!strcmp(GlobalStaticVar2List[Index], GlobalToken))
+    if (StringsMatch(GlobalStaticVar2List[Index], GlobalToken))
       break;
     Index++;
   }
@@ -532,7 +529,7 @@ NextIs(char *String)
   GlobalTokenNumericValue = NumericValue;
   // tst = GlobalTokenSubType; // TODO(aen): Is this a bug? Intended to restore?
   // tt = GlobalTokenType;
-  if (!strcmp(String, GlobalToken))
+  if (StringsMatch(String, GlobalToken))
   {
     Index = 1;
   }
@@ -551,7 +548,7 @@ Expect(char *String)
   FILE *File;
 
   GetToken();
-  if (!strcmp(String, GlobalToken))
+  if (StringsMatch(String, GlobalToken))
   {
     // printf("Expect END %s\n", str);
     return;
@@ -1466,7 +1463,7 @@ GetLabelAddr(char *String)
 
   for (Index = 0; Index < GlobalNumLabels; Index++)
   {
-    if (!strcmp(String, GlobalLabels[Index].Identifier))
+    if (StringsMatch(String, GlobalLabels[Index].Identifier))
     {
       return GlobalLabels[Index].Position;
     }

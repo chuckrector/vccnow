@@ -106,11 +106,11 @@ main(int ArgCount, char *ArgValues[])
         StringCopy(FilenameArg, FilenameNoExt);
 
         int CompileType = COMPILE_TYPE_MAP;
-        if (!strcmp(FilenameNoExt, "effects"))
+        if (StringsMatch(FilenameNoExt, "effects"))
           CompileType = COMPILE_TYPE_EFFECT;
-        if (!strcmp(FilenameNoExt, "magic"))
+        if (StringsMatch(FilenameNoExt, "magic"))
           CompileType = COMPILE_TYPE_MAGIC;
-        if (!strcmp(FilenameNoExt, "startup"))
+        if (StringsMatch(FilenameNoExt, "startup"))
           CompileType = COMPILE_TYPE_STARTUP;
 
         if (!CompileGuy.IsQuiet)

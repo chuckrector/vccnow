@@ -1,6 +1,7 @@
 #include "compile.hpp"
 #include "decompile.hpp"
 #include "log.hpp"
+#include "string.hpp"
 #include "util.hpp"
 #include "v1vc_macro.hpp"
 #include "v1vc_parser.hpp"
@@ -348,7 +349,7 @@ AssertCompileDecompile(char *TestName)
   // token_list TLC;
   // ExpandMacros(&ML, &TLB, &TLC);
   // TLC.Minify((u8 *)TempBuffer);
-  // Assert(!strcmp(TempBuffer, "event{a=flags[123];}"));
+  // Assert(StringsMatch(TempBuffer, "event{a=flags[123];}"));
 
   // Log("[Test] Compile\n");
   // AssertCompile("event{}", "ff");
@@ -388,7 +389,7 @@ TestPools()
     {
       buffer *B = NewBuffer((u8 *)BufferString, BufferLen);
       Assert(B->Length == 7);
-      Assert(!strcmp((char *)B->Data, BufferString));
+      Assert(StringsMatch((char *)B->Data, BufferString));
     }
 
     u64 NewTokenCount = TOKEN_POOL_SIZE / sizeof(token);
@@ -452,7 +453,7 @@ TestFormatU64(u64 Num, char *Expect)
 {
   char Output[1024];
   FormatU64(Num, Output);
-  Assert(!strcmp(Expect, Output));
+  Assert(StringsMatch(Expect, Output));
 }
 
 void
@@ -470,6 +471,13 @@ RunTests()
   TestFormatU64(1234567, "1,234,567");
   TestFormatU64(12345678, "12,345,678");
   TestFormatU64(123456789, "123,456,789");
+
+  Log("[Test] StringsMatch\n");
+  Assert(StringsMatch("", ""));
+  Assert(StringsMatch("foo", "foo"));
+  Assert(!StringsMatch("foo", "bar"));
+  Assert(!StringsMatch("foo", "fo"));
+  Assert(!StringsMatch("fo", "foo"));
 
   TestPools();
 
@@ -586,7 +594,7 @@ RunTests()
       &TokenListDefExpansionWithoutMacros,
       &TokenListDefExpansion);
   TokenListDefExpansion.Minify((u8 *)TempBuffer);
-  Assert(!strcmp("event{callscript(3,11,22,33,44);}", TempBuffer));
+  Assert(StringsMatch("event{callscript(3,11,22,33,44);}", TempBuffer));
   Log("OK\n");
 
   AssertCompileDecompile("000_empty");
