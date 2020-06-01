@@ -61,12 +61,18 @@ StringCopy(char *Source, char *Dest)
 }
 
 b64
-StringsMatch(char *A, char *B)
+StringsMatch(char *A, char *B, u64 Limit)
 {
   b64 Result;
+  u64 Counter = 0;
 
   while (*A && *A == *B)
   {
+    if (Limit && ++Counter >= Limit)
+    {
+      break;
+    }
+
     ++A;
     ++B;
   }

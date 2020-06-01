@@ -30,7 +30,7 @@ TestMacroParsing(
       token *A = Macro->ParamList.Get(i);
       token *B = ExpectedParamList->Get(i);
       Assert(A->Length == B->Length);
-      Assert(!strncmp(A->Text, B->Text, A->Length));
+      Assert(StringsMatch(A->Text, B->Text, A->Length));
     }
     u64 MinifiedLength = Macro->Expansion.Minify((u8 *)TempBuffer);
     Assert(!memcmp(TempBuffer, ExpectedExpansion, MinifiedLength));
@@ -478,6 +478,7 @@ RunTests()
   Assert(!StringsMatch("foo", "bar"));
   Assert(!StringsMatch("foo", "fo"));
   Assert(!StringsMatch("fo", "foo"));
+  Assert(StringsMatch("foo", "fo", 2));
 
   Log("[Test] StringToUpperCase\n");
   char TempLower[1024];
