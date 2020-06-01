@@ -18,8 +18,6 @@
 #include "op_codes.hpp"
 #include "util.hpp"
 #include "vcc.hpp"
-#include <stdio.h>
-#include <stdlib.h>
 
 // ============================== Variables ==============================
 

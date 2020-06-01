@@ -7,7 +7,6 @@
 #include "v1vc_parser.hpp"
 #include "v1vc_token.hpp"
 #include "vcc.hpp"
-#include <stdlib.h>
 
 // NOTE(aen): Token list index should be pointing at the head of a macro
 void

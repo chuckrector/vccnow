@@ -3,7 +3,6 @@
 #include "log.hpp"
 #include "mem.hpp"
 #include "util.hpp"
-#include <stdlib.h>
 
 // -----------------------------------------------------------------------------
 

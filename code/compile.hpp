@@ -2,7 +2,6 @@
 #define COMPILE_HPP
 
 #include "types.hpp"
-#include <stdbool.h>
 
 #define WORKING_MEMORY_TOTAL_SIZE (1024 * 1024)
 #define WORKING_MEMORY_BLOCK_SIZE (1024 * 128)

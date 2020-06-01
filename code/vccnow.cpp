@@ -19,9 +19,6 @@
 #include "v1vc_token.cpp"
 #include "vcc.cpp"
 
-#include <malloc.h>
-#include <stdlib.h>
-
 #define BUILD 1
 
 int

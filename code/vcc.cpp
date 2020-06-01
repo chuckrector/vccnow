@@ -6,9 +6,6 @@
 #include "string.hpp"
 #include "util.hpp"
 #include "v1assets.hpp"
-#include <malloc.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 void
 PostStartupFiles()

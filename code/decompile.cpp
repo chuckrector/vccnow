@@ -6,8 +6,6 @@
 #include "util.hpp"
 #include "v1vc_token.hpp"
 #include <stdarg.h>
-#include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 int Nest = 0;

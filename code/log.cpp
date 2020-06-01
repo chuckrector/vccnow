@@ -1,8 +1,6 @@
 #include "log.hpp"
 #include "types.hpp"
 #include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 void
 Fail(char *Format, ...)

@@ -7,11 +7,6 @@
 #include "v1vc_parser.hpp"
 #include "v1vc_token.hpp"
 #include "vcc.hpp"
-#include <fcntl.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 #define LETTER 1
 #define DIGIT 2

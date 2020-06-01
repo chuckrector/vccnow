@@ -1,7 +1,6 @@
 #include "v1vc_parser.hpp"
 #include "compile.hpp"
 #include "v1vc_token.hpp"
-#include <stdlib.h>
 
 parser::parser() {}
 parser::parser(char *S) { Reset(NewBuffer(S)); }
