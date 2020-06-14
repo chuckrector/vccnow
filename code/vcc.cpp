@@ -33,8 +33,7 @@ PreStartupFiles(char *FilenameWithoutExtension)
   CompileGuy.GeneratedCode = P + WORKING_MEMORY_BLOCK_SIZE;
   CompileGuy.DataPreproc = P + (WORKING_MEMORY_BLOCK_SIZE * 2);
 
-  FILE *File;
-  fopen_s(&File, TempBuffer, "rb");
+  FILE *File = fopen(TempBuffer, "rb");
   if (!File)
   {
     if (!CompileGuy.IsQuiet)
@@ -66,9 +65,8 @@ void
 WriteMagicOutput()
 {
   printf("WriteMagicOutput\n");
-  FILE *f;
 
-  fopen_s(&f, "magic.vcs", "wb");
+  FILE *f = fopen("magic.vcs", "wb");
   fwrite(&GlobalNumScripts, 1, 4, f);
   fwrite(GlobalScriptOffsetTable, 4, GlobalNumScripts, f);
   fwrite(
@@ -86,9 +84,8 @@ void
 WriteEffectOutput()
 {
   printf("WriteEffectOutput\n");
-  FILE *f;
 
-  fopen_s(&f, "effects.vcs", "wb");
+  FILE* f = fopen("effects.vcs", "wb");
   fwrite(&GlobalNumScripts, 1, 4, f);
   fwrite(GlobalScriptOffsetTable, 4, GlobalNumScripts, f);
   fwrite(
@@ -106,9 +103,8 @@ void
 WriteScriptOutput()
 {
   printf("WriteScriptOutput\n");
-  FILE *f;
 
-  fopen_s(&f, "startup.vcs", "wb");
+  FILE* f = fopen("startup.vcs", "wb");
   fwrite(&GlobalNumScripts, 1, 4, f);
   fwrite(&GlobalScriptOffsetTable, 4, GlobalNumScripts, f);
   fwrite(
@@ -140,23 +136,23 @@ WriteOutput(char *FilenameWithoutExtension)
   {
     *VCExtension = 0;
   }
-  sprintf_s(VcFilename, "%s.vc", NoExt);
-  sprintf_s(MapFilename, "%s.map", NoExt);
+  snprintf(VcFilename, sizeof(VcFilename), "%s.vc", NoExt);
+  snprintf(MapFilename, sizeof(MapFilename), "%s.map", NoExt);
 
   if (Exist(MapFilename))
   {
     buffer *B = LoadEntireFile(MapFilename);
     u32 ScriptsOffset = VERGE1MapScriptsOffset(B->Data);
-    fopen_s(&File, MapFilename, "rb+");
+    File = fopen(MapFilename, "rb+");
     fseek(File, ScriptsOffset, 0);
   }
   else
   {
     char Temp[1024];
-    sprintf_s(Temp, 1024, "%s.vcc", NoExt);
+    snprintf(Temp, 1024, "%s.vcc", NoExt);
     printf("%s not found, falling back to %s\n", MapFilename, Temp);
 
-    fopen_s(&File, Temp, "wb+");
+    File = fopen(Temp, "wb+");
   }
 
   u64 NumCompiledBytes =

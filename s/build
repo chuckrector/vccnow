@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -ex
+
+ROOT=`dirname $0`/..
+
+FLAGS='-Wno-writable-strings -Wno-null-dereference'
+
+clang++ -std=c++14 $FLAGS $ROOT/code/vccnow.cpp -o $ROOT/vccnow

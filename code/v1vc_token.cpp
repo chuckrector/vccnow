@@ -83,8 +83,6 @@ token::ToString(char *Output, u64 OutputLength, u64 MaxTextLength)
 void
 token::Debug()
 {
-  if (Length < 0)
-    Fail("Token length is negative! %d Exiting...\n", Length);
   Log("Token@%d:%d: %.*s (%d)\n", Line, Column, Length, Text, Length);
 }
 

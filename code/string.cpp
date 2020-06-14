@@ -57,7 +57,7 @@ char *
 StringCopy(char *Source, char *Dest)
 {
   char *Result = Dest;
-  while (*Dest++ = *Source++) {}
+  while ((*Dest++ = *Source++)) {}
   return (Result);
 }
 

@@ -211,7 +211,7 @@ ParseMacros(
         // Log("Parent path %s\n", Parent->Path);
         if (!Parent->Path)
           Fail("Cannot #include from in-memory parser atm\n");
-        sprintf_s(
+        snprintf(
             TempBuffer,
             TEMP_BUFFER_SIZE,
             "%s%.*s",

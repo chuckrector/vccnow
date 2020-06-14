@@ -1,3 +1,8 @@
+#if !defined(WIN32)
+#include <limits.h>
+#include <stdlib.h>
+#endif
+
 #include "util.hpp"
 #include "log.hpp"
 #include "mem.hpp"
@@ -20,9 +25,7 @@ NewTempBuffer(u64 L)
 b64
 Exist(char *Filename)
 {
-  FILE *f;
-
-  fopen_s(&f, Filename, "rb");
+  FILE *f = fopen(Filename, "rb");
   if (f)
   {
     fclose(f);
@@ -48,8 +51,7 @@ LoadEntireFile(char *Filename)
   // Log("Load %s...\n", Filename);
   if (!Exist(Filename))
     Fail("Error: File does not exist: %s\n", Filename);
-  FILE *File;
-  fopen_s(&File, Filename, "rb");
+  FILE *File = fopen(Filename, "rb");
   if (!File)
     Fail("Error: Unable to open file %s\n", Filename);
   u64 L = FileSize(File);
@@ -69,6 +71,7 @@ LoadEntireFile(char *Filename)
 void
 SetPath(char *Filename, char *Path, u64 PathLength)
 {
+#if defined(WIN32)
   char FullPath[_MAX_PATH];
   _fullpath(FullPath, Filename, _MAX_PATH);
 
@@ -77,7 +80,12 @@ SetPath(char *Filename, char *Path, u64 PathLength)
   _splitpath_s(
       FullPath, Drive, _MAX_DRIVE, Directory, _MAX_PATH, NULL, 0, NULL, 0);
 
-  sprintf_s(Path, PathLength, "%s%s", Drive, Directory);
+  snprintf(Path, PathLength, "%s%s", Drive, Directory);
+#else
+  char out[PATH_MAX];
+  realpath(Filename, out);
+  snprintf(Path, PathLength, "%s", out);
+#endif
 }
 
 void
@@ -105,7 +113,7 @@ void
 FormatU64(u64 Num, char *Output)
 {
   char Temp[1024];
-  sprintf_s(Temp, 1024, "%lld", Num);
+  snprintf(Temp, 1024, "%lld", Num);
   u64 L = StringLength(Temp);
   u64 NumCommas = (L - 1) / 3;
   Output[L + NumCommas] = 0;

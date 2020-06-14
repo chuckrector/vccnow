@@ -75,7 +75,7 @@ token *
 decompiler::AddTokenD(u32 Value)
 {
   // Log("AddTokenD %d\n", Value);
-  sprintf_s(TempNumber, TEMP_BUFFER_SIZE, "%d", Value);
+  snprintf(TempNumber, TEMP_BUFFER_SIZE, "%d", Value);
 
   return AddToken(NewString(TempNumber), TT_NUMBER);
 }
@@ -355,7 +355,7 @@ decompiler::ParseString()
   u8 *Start = C;
   while (*C++) {}
   // Log("ParseString: final '%c' %d\n", *C, *C);
-  sprintf_s(TempBuffer, TEMP_BUFFER_SIZE, "\"%s\"", Start);
+  snprintf(TempBuffer, TEMP_BUFFER_SIZE, "\"%s\"", Start);
   AddToken(NewString(TempBuffer), TT_STRING);
 
   if (Mode == DISASSEMBLE)
@@ -496,7 +496,7 @@ decompiler::ParseOperandPrimitive()
         DisSaveAddress();
 
       // Log("ParseOperandPrimitive: IMMEDIATE\n");
-      *C++;
+      C++;
       if (Mode == DISASSEMBLE)
       {
         DisC(VC_OP_IMMEDIATE);
@@ -557,7 +557,7 @@ decompiler::ParseOperand()
     if (*C == VC_OP_GROUP)
     {
       // Log("ParseOperand: GROUP\n");
-      *C++;
+      C++;
 
       AddSymbol("(");
       if (Mode == DISASSEMBLE)
@@ -610,7 +610,7 @@ decompiler::ParseOperand()
         }
 
         DebugLog(MEDIUM, "ParseOperand: END\n");
-        *C++;
+        C++;
         OpNest--;
 
         return;
@@ -1491,7 +1491,7 @@ void
 decompiler::DisD(u32 Value)
 {
   u8 *P = (u8 *)&Value;
-  sprintf_s(
+  snprintf(
       DisTemp,
       TEMP_BUFFER_SIZE,
       "%02x %02x %02x %02x ",
@@ -1508,7 +1508,7 @@ void
 decompiler::DisW(u16 Value)
 {
   u8 *P = (u8 *)&Value;
-  sprintf_s(DisTemp, TEMP_BUFFER_SIZE, "%02x %02x ", P[0], P[1]);
+  snprintf(DisTemp, TEMP_BUFFER_SIZE, "%02x %02x ", P[0], P[1]);
   u64 L = StringLength(DisTemp);
   MemCopy((u8 *)DisTemp, (u8 *)DisByteCodesP, L);
   DisByteCodesP += L;
@@ -1517,7 +1517,7 @@ decompiler::DisW(u16 Value)
 void
 decompiler::DisC(u8 Value)
 {
-  sprintf_s(DisTemp, TEMP_BUFFER_SIZE, "%02x ", Value);
+  snprintf(DisTemp, TEMP_BUFFER_SIZE, "%02x ", Value);
   // Log("DisC %d\n", Value);
   u64 L = StringLength(DisTemp);
   // Log("DisC L %d\n", L);
@@ -1553,7 +1553,7 @@ decompiler::ParseEvent(u64 Index, u8 *RetryAddress)
   {
     AddIdent("event");
     char Num[TEMP_BUFFER_SIZE];
-    sprintf_s(Num, TEMP_BUFFER_SIZE, "/*%lld*/", Index);
+    snprintf(Num, TEMP_BUFFER_SIZE, "/*%lld*/", Index);
     AddSymbol(NewString(Num));
     AddSymbol("{");
   }
@@ -1675,7 +1675,7 @@ decompiler::Init(buffer *Buffer, u64 MaxTokens, decomp_mode M)
 
   NumScripts = GetD();
   DebugLog(MEDIUM, "NumScripts %d\n", NumScripts);
-  if (NumScripts < 0 || NumScripts > 100)
+  if (NumScripts > 100)
     Fail("Scripts negative or >100: %d\n", NumScripts);
   ScriptOffsetTable = (u32 *)NewTempBuffer(sizeof(u32 *) * (NumScripts + 1));
   MemCopy(C, (u8 *)ScriptOffsetTable, NumScripts * 4);
