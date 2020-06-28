@@ -1,3 +1,7 @@
+#if !defined(WIN32)
+#include <libgen.h>
+#endif
+
 #include "v1vc_parser.hpp"
 #include "compile.hpp"
 #include "v1vc_token.hpp"
@@ -118,14 +122,20 @@ parser::Load(char *Filename)
   CalcPath(Filename);
 
   // NOTE(aen): Filename could be a relative path. Strip out the filename
+#if defined(WIN32)
   char FilenameOnly[_MAX_PATH];
   char ExtOnly[_MAX_EXT];
   _splitpath_s(
       Filename, NULL, 0, NULL, 0, FilenameOnly, _MAX_PATH, ExtOnly, _MAX_PATH);
 
-  sprintf_s(
+  snprintf(
       TempBuffer, TEMP_BUFFER_SIZE, "%s%s%s", Path, FilenameOnly, ExtOnly);
-  buffer *Buffer = ::LoadEntireFile(TempBuffer);
+
+  char* bareName = TempBuffer;
+#else
+  char* bareName = basename(Filename);
+#endif
+  buffer *Buffer = ::LoadEntireFile(bareName);
   Reset(Buffer);
 }
 

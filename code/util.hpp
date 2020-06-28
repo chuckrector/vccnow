@@ -4,6 +4,7 @@
 #include "buffer.hpp"
 #include "types.hpp"
 #include <stdio.h>
+#include <cassert>
 
 #define Assert(Expression)                                                     \
   if (!(Expression))                                                           \
@@ -12,8 +13,14 @@
         __FILE__,                                                              \
         __LINE__,                                                              \
         #Expression);                                                          \
-    *(int *)0 = 0;                                                             \
+    assert(Expression);                                                        \
   }
+
+#if !defined(WIN32)
+constexpr int _MAX_PATH = 1024;
+constexpr int _MAX_DRIVE = 1024;
+constexpr int _MAX_EXT = 1024;
+#endif
 
 #define TEMP_BUFFER_SIZE (1024)
 char *TempBuffer = 0;

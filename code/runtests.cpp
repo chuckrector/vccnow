@@ -194,7 +194,7 @@ AssertCompileDecompile(char *TestName)
   Log("[Test] %s...", TestName);
 
   char TestFilename[TEMP_BUFFER_SIZE];
-  sprintf_s(TestFilename, TEMP_BUFFER_SIZE, "test_data/%s.test", TestName);
+  snprintf(TestFilename, TEMP_BUFFER_SIZE, "test_data/%s.test", TestName);
 
   buffer *TestFile = LoadEntireFile(TestFilename);
   // Log("TestFile: %s\n", TestFile->Data);
@@ -208,7 +208,7 @@ AssertCompileDecompile(char *TestName)
   // Log("B\n");
   buffer VC;
   u64 VCLength = SectionEnd - FileHead;
-  if (VCLength < 0 || VCLength > 10000)
+  if (VCLength > 10000)
     Fail("VCLength out of bounds: %d\n", VCLength);
   VC.Data = (u8 *)NewTempBuffer(VCLength + 1);
   MemCopy(FileHead, VC.Data, VCLength);

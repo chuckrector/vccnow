@@ -146,7 +146,7 @@ main(int ArgCount, char *ArgValues[])
         if (!IsKnownExtension)
         {
           char Guess[1024];
-          sprintf_s(Guess, 1024, "%s.map", InputFilename);
+          snprintf(Guess, 1024, "%s.map", InputFilename);
           if (Exist(Guess))
           {
             StringCopy(Guess, InputFilename);
@@ -154,7 +154,7 @@ main(int ArgCount, char *ArgValues[])
           }
           else
           {
-            sprintf_s(Guess, 1024, "%s.vcs", InputFilename);
+            snprintf(Guess, 1024, "%s.vcs", InputFilename);
             if (Exist(Guess))
             {
               StringCopy(Guess, InputFilename);
@@ -162,7 +162,7 @@ main(int ArgCount, char *ArgValues[])
             }
             else
             {
-              sprintf_s(Guess, 1024, "%s.vcc", InputFilename);
+              snprintf(Guess, 1024, "%s.vcc", InputFilename);
               if (Exist(Guess))
               {
                 StringCopy(Guess, InputFilename);
@@ -250,22 +250,22 @@ main(int ArgCount, char *ArgValues[])
             }
 
             char TempTable[1024];
-            sprintf_s(TempTable, 1024, "%s.vcc-table", NoExt);
+            snprintf(TempTable, 1024, "%s.vcc-table", NoExt);
             char TempData[1024];
-            sprintf_s(TempData, 1024, "%s.vcc-data", NoExt);
+            snprintf(TempData, 1024, "%s.vcc-data", NoExt);
             char TempCompiled[1024];
-            sprintf_s(TempCompiled, 1024, "%s.vcc", NoExt);
+            snprintf(TempCompiled, 1024, "%s.vcc", NoExt);
 
             Log("Extracting compiled script from %s...\n", FilenameArg);
 
             Log("Extracting %s...\n", TempCompiled);
             FILE *File;
-            fopen_s(&File, TempCompiled, "wb+");
+            File = fopen(TempCompiled, "wb+");
             fwrite(Input->C, 1, Input->Length, File);
             fclose(File);
 
             Log("  Generating %s...\n", TempTable);
-            fopen_s(&File, TempTable, "wb+");
+            File = fopen(TempTable, "wb+");
             u8 *TableStart = Input->C;
             u32 NumScripts = Input->GetD();
             u64 OffsetTableSize = 4 + (NumScripts * 4);
@@ -275,7 +275,7 @@ main(int ArgCount, char *ArgValues[])
             Input->Length -= OffsetTableSize;
 
             Log("  Generating %s...\n", TempData);
-            fopen_s(&File, TempData, "wb+");
+            File = fopen(TempData, "wb+");
             fwrite(Input->C, 1, Input->Length, File);
             fclose(File);
             Log("OK\n");

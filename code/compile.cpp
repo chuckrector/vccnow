@@ -50,7 +50,7 @@ err(char *String)
     printf("%s (%lld) \n", String, GlobalLines);
   if (CompileGuy.IsQuiet)
   {
-    fopen_s(&File, "error.txt", "w");
+    File = fopen("error.txt", "w");
     fprintf(File, "%s (%lld)\n", String, GlobalLines);
     fclose(File);
   }
@@ -557,7 +557,7 @@ Expect(char *String)
   }
   if (CompileGuy.IsQuiet)
   {
-    fopen_s(&File, "error.txt", "w");
+    File = fopen("error.txt", "w");
     fprintf(
         File,
         "error: %s expected, %s got (%lld) \n",
@@ -792,7 +792,7 @@ HandleExpression()
     {
       printf(
           "label %s found on line %lld, "
-          "CompileGuy.GeneratedCodeLocation: %lld. \n",
+          "CompileGuy.GeneratedCodeLocation: %ld. \n",
           GlobalLastToken,
           GlobalLines,
           CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
@@ -1349,7 +1349,7 @@ ProcessGoto()
   {
     printf(
         "GOTO tagged on line %lld at "
-        "CompileGuy.GeneratedCodeLocation %lld, label %s. \n",
+        "CompileGuy.GeneratedCodeLocation %ld, label %s. \n",
         GlobalLines,
         CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode,
         GlobalToken);
@@ -1442,7 +1442,7 @@ ProcessEvent()
       {
         printf(
             "label %s found on line %lld, "
-            "CompileGuy.GeneratedCodeLocation: %lld. \n",
+            "CompileGuy.GeneratedCodeLocation: %ld. \n",
             GlobalLastToken,
             GlobalLines,
             CompileGuy.GeneratedCodeLocation - CompileGuy.GeneratedCode);
@@ -1472,7 +1472,7 @@ GetLabelAddr(char *String)
     }
   }
 
-  sprintf_s(GlobalToken, 2048, "Undefined label %s.", String);
+  snprintf(GlobalToken, 2048, "Undefined label %s.", String);
   err(GlobalToken);
   return 0;
 }
@@ -1493,7 +1493,7 @@ ResolveGotos()
     {
       printf(
           "resolving goto %lld (%s) as %s at "
-          "CompileGuy.GeneratedCodeLocation %lld. \n",
+          "CompileGuy.GeneratedCodeLocation %ld. \n",
           Index,
           GlobalGotos[Index].Identifier,
           LabelAddress,
